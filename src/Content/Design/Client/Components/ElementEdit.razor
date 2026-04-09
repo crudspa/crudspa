@@ -1,0 +1,98 @@
+<div>
+    @if (!MultimediaSettingsHandled)
+    {
+        <Modal Model="Model.BoxModel"
+               TopMargin="4em"
+               Width="34em"
+               Title="Element Settings">
+            <Content>
+                <div class="c-tabbed-panes">
+                    <ul class="tabs">
+                        <li class="@(ActiveElementSettingsTab.IsBasically(StylesTab) ? "selected" : String.Empty)"
+                            @onclick="() => SetElementSettingsTab(StylesTab)">
+                            Styles
+                        </li>
+                        <li class="@(ActiveElementSettingsTab.IsBasically(SizingTab) ? "selected" : String.Empty)"
+                            @onclick="() => SetElementSettingsTab(SizingTab)">
+                            Sizing
+                        </li>
+                    </ul>
+                    <div class="panes match-tab-color">
+                        <div class="@(ActiveElementSettingsTab.IsBasically(StylesTab) ? String.Empty : "c-hide")">
+                            <div class="c-padding-tiny">
+                                <BoxEditor Model="Model.BoxModel" />
+                            </div>
+                        </div>
+                        <div class="@(ActiveElementSettingsTab.IsBasically(SizingTab) ? String.Empty : "c-hide")">
+                            <div class="c-padding-tiny">
+                                <ItemEditor Model="Model.ItemModel" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Content>
+            <Buttons>
+                <ButtonCore Text="Close"
+                            ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                            Clicked="() => HideElementSettings()" />
+            </Buttons>
+        </Modal>
+    }
+    <div class="c-element-editor">
+        <div class="element-title">@(Model.SelectedElementType is null ? "Element" : Model.SelectedElementType.Name)</div>
+        <div class="element-fields">
+            @if (!MultimediaSettingsHandled)
+            {
+                <Wrapped Alignment="Wrapped.Alignments.Top">
+                    <div class="element-settings-block star">
+                        <Field Label="Element Settings"
+                               Size="Field.Sizes.Full"
+                               Container="Field.Containers.Div">
+                            <Wrapped NoWrap="true">
+                                <Padding Size="Padding.Sizes.Tiny"
+                                         Direction="Padding.Directions.Vertical">
+                                    <Padding Size="Padding.Sizes.Small"
+                                             Direction="Padding.Directions.Right">
+                                        <ButtonEdit Transparent="true"
+                                                    Disabled="ReadOnly"
+                                                    Clicked="() => OpenElementSettings()" />
+                                    </Padding>
+                                </Padding>
+                                <div class="star c-parenthetical c-padding-micro-vert">
+                                    @SettingsDescription
+                                </div>
+                            </Wrapped>
+                        </Field>
+                        @if (Model.SelectedElementType?.IconCssClass.HasSomething() == true)
+                        {
+                            <div class="element-settings-icon"
+                                 aria-hidden="true">
+                                <span class="@Model.SelectedElementType.IconCssClass"></span>
+                            </div>
+                        }
+                    </div>
+                </Wrapped>
+            }
+            @if (Model.SelectedElementType is not null && Model.SelectedElementType.SupportsInteraction == true)
+            {
+                <Field Label="Interaction"
+                       Size="Field.Sizes.Full"
+                       Container="Field.Containers.Div">
+                    <Wrapped NoWrap="true">
+                        <Checkbox Label="Require Interaction"
+                                  ReadOnly="ReadOnly"
+                                  @bind-Value="Model.Element.RequireInteraction" />
+                    </Wrapped>
+                </Field>
+            }
+            @if (Model.SelectedElementType is not null)
+            {
+                <ElementDesignPlugin TypeName="@Model.SelectedElementType.EditorView"
+                                     ReadOnly="ReadOnly"
+                                     Element="@Model.Element"
+                                     @ref="Model.DesignComponent"
+                                     @key="Model.Element" />
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,144 @@
+﻿<Waiter Model="Model">
+    <div class="c-padding-medium-hor">
+        @if (Model.Game is not null)
+        {
+            <div class="c-shadowed-binder">
+                @switch (Model.State)
+                {
+                    case GameDisplayModel.States.Intro:
+
+                        <div class="ces-game-intro c-overlay-parent c-stack center">
+
+                            <AudioPlayer AudioFile="Model.IntroAudioFile"
+                                         PlayText="Listen"
+                                         StopText="Listen"
+                                         PlayIcon="c-icon-volume-high"
+                                         StopIcon="c-icon-volume-high"
+                                         MediaPlayed="HandleIntroAudioPlayed">
+                            </AudioPlayer>
+
+                            <div class="ces-game-brain c-padding-medium">
+                                <div class="c-image-div ces-game-brain-image"
+                                     style="@Model.BrainStyle">
+                                </div>
+                            </div>
+
+                            <div class="stately">Welcome</div>
+
+                            <h2>See how big you can make your brain!</h2>
+
+                            <p>
+                                Pay close attention because every answer you get right will make your brain grow bigger.
+                                But every question you get wrong will make your brain get smaller.
+                            </p>
+
+                            <button class="c-margin-medium"
+                                    @onclick="() => Model.Start()">
+                                <div class="c-button primary c-padding-large-hor">
+                                    <div class="text">Start</div>
+                                </div>
+                            </button>
+
+                        </div>
+
+                        break;
+
+                    case GameDisplayModel.States.Activity:
+
+                        <div class="ces-progress-meter">
+                            <div class="foreground"
+                                 style="width: @($"{Model.CompletionPercentage:N2}")%;">
+                            </div>
+                        </div>
+
+                        <div class="ces-game-brain c-padding-medium">
+                            <div class="c-image-div ces-game-brain-image"
+                                 style="@Model.BrainStyle">
+                            </div>
+                        </div>
+
+                        @if (Model.CurrentGameActivityModel is not null)
+                        {
+                            <ActivityDisplayPlugin TypeName="@Model.CurrentGameActivityModel.GameActivity.Activity!.ActivityTypeDisplayView"
+                                                   Activity="@Model.CurrentGameActivityModel.GameActivity.Activity"
+                                                   ActivityCompleted="@Model.CurrentGameActivityModel.HandleActivityCompleted"
+                                                   AssignmentBatchId="@Model.CurrentGameActivityModel.GameActivity.Activity.Assignment.AssignmentBatchId"
+                                                   @ref="Model.CurrentGameActivityModel.ActivityDisplay" />
+                        }
+
+                        break;
+
+                    case GameDisplayModel.States.Correct:
+
+                        <div class="ces-game-correct c-overlay-parent c-stack center">
+
+                            <div class="ces-game-brain c-padding-medium">
+                                <div class="c-image-div ces-game-brain-image"
+                                     style="@Model.BrainStyle">
+                                </div>
+                            </div>
+
+                            <h2 class="c-margin-medium-hor">You did it! Look at that brain grow!</h2>
+
+                            <button class="c-margin-large"
+                                    @onclick="() => Model.MoveNext()">
+                                <div class="c-button primary c-padding-large-hor">
+                                    <div class="text">Next</div>
+                                </div>
+                            </button>
+                        </div>
+
+                        break;
+
+                    case GameDisplayModel.States.Incorrect:
+
+                        <div class="ces-game-incorrect c-overlay-parent c-stack center">
+
+                            <div class="ces-game-brain c-padding-medium">
+                                <div class="c-image-div ces-game-brain-image"
+                                     style="@Model.BrainStyle">
+                                </div>
+                            </div>
+
+                            <h2 class="c-margin-medium-hor">Mistakes also help you learn!</h2>
+
+                            <button class="c-margin-large"
+                                    @onclick="() => Model.MoveNext()">
+                                <div class="c-button primary c-padding-large-hor">
+                                    <div class="text">Next</div>
+                                </div>
+                            </button>
+                        </div>
+
+                        break;
+
+                    case GameDisplayModel.States.Survey:
+
+                        <div class="ces-game-survey c-overlay-parent c-stack center">
+
+                            <h2>@(Model.SurveyModel.CurrentStep.Question)</h2>
+                            <p>@(Model.SurveyModel.CurrentStep.Prompt)</p>
+
+                            <div class="c-wrap center">
+                                @foreach (var choice in Model.SurveyModel.CurrentStep.Choices)
+                                {
+                                    <a class="c-button vertical large c-margin-medium"
+                                       @onclick="() => Model.RecordSurveySelection(choice.Id!.Value)">
+                                        <div class="icon">
+                                            @(new MarkupString($"&#{choice.Character};"))
+                                        </div>
+                                        <div class="text">@(choice.Text)</div>
+                                    </a>
+                                }
+                            </div>
+
+                        </div>
+
+                        break;
+                }
+            </div>
+        }
+
+    </div>
+
+</Waiter>

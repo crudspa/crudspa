@@ -1,0 +1,145 @@
+﻿<Waiter Model="Model">
+    <div class="c-full-height">
+        @if (Model.Unit is not null)
+        {
+            @if (Model.Unit.ChildUnits.HasItems())
+            {
+                <div class="c-wrap center">
+                    @foreach (var unit in Model.Unit.ChildUnits)
+                    {
+                        <a class="c-button vertical large c-margin-medium"
+                           @onclick="() => Model.GoToUnit(unit.Id)">
+                            <div class="icon">
+                                <Image ImageFile="unit.Image"
+                                       Width="240" />
+                            </div>
+                            <div class="text"
+                                 style="width: 240px;">
+                                @(unit.Title)
+                            </div>
+                        </a>
+                    }
+                </div>
+            }
+
+            <div class="c-wrap center top">
+                @foreach (var lesson in Model.Unit.LessonSummaries)
+                {
+                    <a class="c-button vertical c-margin-small ces-book-button"
+                       @onclick="() => Model.GoToLesson(lesson.Id)">
+                        <div class="icon">
+                            <Image ImageFile="lesson.Image"
+                                   Width="180" />
+                        </div>
+                        <div class="stars"
+                             style="width: 180px;">
+                            @foreach (var objective in lesson.Objectives)
+                            {
+                                @if (objective.Progress.TimesCompleted == 0)
+                                {
+                                    <img src="/api/education/student/images/star-empty"
+                                         alt="Incomplete" />
+                                }
+                                else
+                                {
+                                    <img src="/api/education/student/images/star-filled"
+                                         alt="Completed" />
+                                }
+                            }
+                        </div>
+                        <div class="title"
+                             style="width: 180px;">
+                            @(lesson.Title)
+                        </div>
+                    </a>
+                }
+                @foreach (var unitBook in Model.Unit.UnitBookSummaries.Where(x => x.Book!.HasMap == true || x.Book!.HasPreface == true || x.Book.HasContent == true || x.Book.Games.HasItems() || x.Book.Modules.HasItems()))
+                {
+                    <a class="c-button vertical c-margin-small ces-book-button"
+                       @onclick="() => Model.GoToBook(unitBook.BookId)">
+                        <div class="icon">
+                            <Image ImageFile="unitBook.Book!.CoverImage"
+                                   Width="180" />
+                        </div>
+                        <div class="stars"
+                             style="width: 180px;">
+                            @if (unitBook.Book.HasMap == true)
+                            {
+                                if (unitBook.Book.Progress.MapCompletedCount == 0)
+                                {
+                                    <img src="/api/education/student/images/star-empty"
+                                         alt="Incomplete" />
+                                }
+                                else
+                                {
+                                    <img src="/api/education/student/images/star-filled"
+                                         alt="Completed" />
+                                }
+                            }
+                            @if (unitBook.Book.HasPreface == true)
+                            {
+                                if (unitBook.Book.Progress.PrefaceCompletedCount == 0)
+                                {
+                                    <img src="/api/education/student/images/star-empty"
+                                         alt="Incomplete" />
+                                }
+                                else
+                                {
+                                    <img src="/api/education/student/images/star-filled"
+                                         alt="Completed" />
+                                }
+                            }
+                            @if (unitBook.Book.HasContent == true)
+                            {
+                                if (unitBook.Book.Progress.ContentCompletedCount == 0)
+                                {
+                                    <img src="/api/education/student/images/star-empty"
+                                         alt="Incomplete" />
+                                }
+                                else
+                                {
+                                    <img src="/api/education/student/images/star-filled"
+                                         alt="Completed" />
+                                }
+                            }
+                            @foreach (var game in unitBook.Book.Games)
+                            {
+                                if (game.Progress.GameCompletedCount == 0)
+                                {
+                                    <img src="/api/education/student/images/star-empty"
+                                         alt="Incomplete" />
+                                }
+                                else
+                                {
+                                    <img src="/api/education/student/images/star-filled"
+                                         alt="Completed" />
+                                }
+                            }
+                            @foreach (var module in unitBook.Book.Modules)
+                            {
+                                if (module.Progress.ModuleCompletedCount == 0)
+                                {
+                                    <img src="/api/education/student/images/star-empty"
+                                         alt="Incomplete" />
+                                }
+                                else
+                                {
+                                    <img src="/api/education/student/images/star-filled"
+                                         alt="Completed" />
+                                }
+                            }
+                        </div>
+                        <div class="title"
+                             style="width: 180px;">
+                            @(unitBook.Book.Title)
+                        </div>
+                        <div class="author"
+                             style="width: 180px;">
+                            by @(unitBook.Book.Author)
+                        </div>
+                    </a>
+                }
+            </div>
+        }
+    </div>
+</Waiter>

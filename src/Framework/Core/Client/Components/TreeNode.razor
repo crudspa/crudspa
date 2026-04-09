@@ -1,0 +1,36 @@
+﻿<div class="node">
+    <div class="body">
+        <div class="expander"
+             @onclick="() => Node.Toggle()">
+            @if (Node.Children.IsEmpty())
+            {
+                <span class="nothing c-icon-chevron-right"></span>
+            }
+            else
+            {
+                @if (Node.Expanded == true)
+                {
+                    <span class="c-icon-chevron-down"></span>
+                }
+                else
+                {
+                    <span class="c-icon-chevron-right"></span>
+                }
+            }
+        </div>
+        <div class="name @(Node.Selected == true ? "selected" : String.Empty)"
+             @onclick="() => SelectionChanged.InvokeAsync(Node.Id)">
+            @Node.Name
+        </div>
+    </div>
+    @if (Node.Children.HasItems() && Node.Expanded == true)
+    {
+        <div class="children">
+            @foreach (var child in Node.Children)
+            {
+                <TreeNode Node="child"
+                          SelectionChanged="id => SelectionChanged.InvokeAsync(id)" />
+            }
+        </div>
+    }
+</div>

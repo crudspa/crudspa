@@ -1,0 +1,93 @@
+﻿<Toolbar>
+    <Left>
+        @if (Model.ReadOnly)
+        {
+            <ButtonEdit Clicked="() => Model.Edit()"
+                        Disabled="!Model.IsNew" />
+            <Padding Size="Padding.Sizes.Tiny"
+                     Direction="Padding.Directions.Horizontal">
+                <ButtonGroup>
+                    <ButtonCore Clicked="() => Model.CopyJob()"
+                                IconClass="c-icon-copy"
+                                Text="Copy" />
+                    <ButtonCore Clicked="() => Model.RepeatJob()"
+                                IconClass="c-icon-redo2"
+                                Text="Repeat" />
+                </ButtonGroup>
+            </Padding>
+        }
+        else
+        {
+            <ButtonGroup>
+                <ButtonSave Clicked="HandleSaveClicked" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            </ButtonGroup>
+        }
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped>
+                <Field Label="Job Type"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown LookupValues="Model.JobTypes"
+                              ReadOnly="Model.ReadOnly"
+                              Value="Model.Entity.TypeId"
+                              ValueChanged="value => Model.SetJobType(value)" />
+                </Field>
+                <Field Label="Device"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown LookupValues="Model.DeviceNames"
+                              ReadOnly="Model.ReadOnly"
+                              AllowNull="true"
+                              NullText="[Any]"
+                              @bind-Value="Model.Entity.DeviceId" />
+                </Field>
+            </Wrapped>
+            @if (Model.SelectedJobType is not null)
+            {
+                <CascadingValue Name="ReadOnly"
+                                Value="Model.ReadOnly">
+                    <JobDesignPlugin TypeName="@Model.SelectedJobType.EditorView"
+                                     ConfigJson="@Model.Entity.Config"
+                                     @ref="DesignComponent" />
+                </CascadingValue>
+            }
+        </Padding>
+    }
+</Waiter>
+@if (!Model.IsNew && Model.Entity is not null)
+{
+    <BatchSection Title="Status">
+        <Wrapped Alignment="Wrapped.Alignments.Top">
+            <Field Size="Field.Sizes.MediumSmall">
+                <Labeled Width="4em"
+                         Label="Added"
+                         DateTimeOffsetValue="Model.Entity.Added" />
+                <Labeled Width="4em"
+                         Label="Started"
+                         DateTimeOffsetValue="Model.Entity.Started" />
+                <Labeled Width="4em"
+                         Label="Ended"
+                         DateTimeOffsetValue="Model.Entity.Ended" />
+            </Field>
+            <Field>
+                <Labeled CssClass="status"
+                         Width="5em"
+                         Label="Status">
+                    <StatusDisplay Name="@(Model.Entity.StatusName)"
+                                   ColorClass="@Model.Entity.StatusCssClass" />
+                </Labeled>
+                <Labeled Width="5em"
+                         Label="Device"
+                         StringValue="@(Model.Entity.DeviceName)" />
+                <Labeled Width="5em"
+                         Label="Schedule"
+                         StringValue="@(Model.Entity.ScheduleName)" />
+            </Field>
+        </Wrapped>
+    </BatchSection>
+}

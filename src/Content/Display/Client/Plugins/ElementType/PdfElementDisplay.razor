@@ -1,0 +1,21 @@
+@if (PdfElement.FileFile.Id is not null)
+{
+    <ButtonGroup>
+        <button @onclick="() => EventBus.Publish(new ViewPdf { Id = PdfElement.FileFile.Id.GetValueOrDefault() })">
+            <div class="c-button primary">
+                <div class="icon">
+                    <span class="c-icon-file-pdf"></span>
+                </div>
+                <div class="text">View PDF</div>
+            </div>
+        </button>
+        <a class="c-button cancel"
+           href="@DownloadUrl"
+           target="_blank">
+            <div class="text">Download</div>
+            <div class="icon">
+                <span class="c-icon-cloud-download"></span>
+            </div>
+        </a>
+    </ButtonGroup>
+}

@@ -1,0 +1,535 @@
+$bodyBackgroundColor: var(--body-background-color) !default;
+$bodyFontFamily: var(--body-font-family) !default;
+$bodyFontSize: var(--body-font-size) !default;
+$bodyFontWeight: var(--body-font-weight) !default;
+$bodyForegroundColor: var(--body-foreground-color) !default;
+
+$windowBackgroundColor: var(--window-background-color) !default;
+$windowForegroundColor: var(--window-foreground-color) !default;
+
+$accent1BackgroundColor: var(--accent1-background-color) !default;
+$accent1ForegroundColor: var(--accent1-foreground-color) !default;
+
+$buttonBackgroundColor: var(--button-background-color) !default;
+$buttonForegroundColor: var(--button-foreground-color) !default;
+
+$cancelBackgroundColor: var(--cancel-background-color) !default;
+$cancelForegroundColor: var(--cancel-foreground-color) !default;
+$createBackgroundColor: var(--create-background-color) !default;
+$createForegroundColor: var(--create-foreground-color) !default;
+$destroyBackgroundColor: var(--destroy-background-color) !default;
+$destroyForegroundColor: var(--destroy-foreground-color) !default;
+$editBackgroundColor: var(--edit-background-color) !default;
+$editForegroundColor: var(--edit-foreground-color) !default;
+$moveBackgroundColor: var(--move-background-color) !default;
+$moveForegroundColor: var(--move-foreground-color) !default;
+$saveBackgroundColor: var(--save-background-color) !default;
+$saveForegroundColor: var(--save-foreground-color) !default;
+$viewBackgroundColor: var(--view-background-color) !default;
+$viewForegroundColor: var(--view-foreground-color) !default;
+
+$alertBorderRadius: var(--alert-border-radius) !default;
+
+$errorBackgroundColor: var(--error-background-color) !default;
+$errorForegroundColor: var(--error-foreground-color) !default;
+$lockBackgroundColor: var(--lock-background-color) !default;
+$lockForegroundColor: var(--lock-foreground-color) !default;
+$successBackgroundColor: var(--success-background-color) !default;
+$successForegroundColor: var(--success-foreground-color) !default;
+$tipBackgroundColor: var(--tip-background-color) !default;
+$tipForegroundColor: var(--tip-foreground-color) !default;
+$warningBackgroundColor: var(--warning-background-color) !default;
+$warningForegroundColor: var(--warning-foreground-color) !default;
+$contentDraftBackgroundColor: var(--content-draft-background-color) !default;
+$contentDraftForegroundColor: var(--content-draft-foreground-color) !default;
+$contentCompleteBackgroundColor: var(--content-complete-background-color) !default;
+$contentCompleteForegroundColor: var(--content-complete-foreground-color) !default;
+$contentRetiredBackgroundColor: var(--content-retired-background-color) !default;
+$contentRetiredForegroundColor: var(--content-retired-foreground-color) !default;
+$contentDraftHoverBackgroundColor: var(--content-draft-hover-background-color) !default;
+$contentDraftHoverForegroundColor: var(--content-draft-hover-foreground-color) !default;
+$contentCompleteHoverBackgroundColor: var(--content-complete-hover-background-color) !default;
+$contentCompleteHoverForegroundColor: var(--content-complete-hover-foreground-color) !default;
+$contentRetiredHoverBackgroundColor: var(--content-retired-hover-background-color) !default;
+$contentRetiredHoverForegroundColor: var(--content-retired-hover-foreground-color) !default;
+$contentDraftReadOnlyBackgroundColor: var(--content-draft-read-only-background-color) !default;
+$contentDraftReadOnlyForegroundColor: var(--content-draft-read-only-foreground-color) !default;
+$contentCompleteReadOnlyBackgroundColor: var(--content-complete-read-only-background-color) !default;
+$contentCompleteReadOnlyForegroundColor: var(--content-complete-read-only-foreground-color) !default;
+$contentRetiredReadOnlyBackgroundColor: var(--content-retired-read-only-background-color) !default;
+$contentRetiredReadOnlyForegroundColor: var(--content-retired-read-only-foreground-color) !default;
+$contentStatusSelectedReadOnlyBackgroundColor: var(--content-status-selected-read-only-background-color) !default;
+$contentStatusSelectedReadOnlyForegroundColor: var(--content-status-selected-read-only-foreground-color) !default;
+
+$defaultBorderColor: var(--default-border-color) !default;
+$defaultBoxShadowColor: var(--default-box-shadow-color) !default;
+$defaultBoxShadow: var(--default-box-shadow) !default;
+$defaultHoverTransition: var(--default-hover-transition) !default;
+
+$overlayBackgroundColor: var(--overlay-background-color) !default;
+$obscureColor: var(--obscure-color) !default;
+$waitingBallsColor: var(--waiting-balls-color) !default;
+$buttonFeatureBorderColor: var(--button-feature-border-color) !default;
+$buttonFeatureForegroundColor: var(--button-feature-foreground-color) !default;
+$buttonFeatureHoverForegroundColor: var(--button-feature-hover-foreground-color) !default;
+$sortableDraggingBackgroundColor: var(--sortable-dragging-background-color) !default;
+$metadataForegroundColor: var(--metadata-foreground-color) !default;
+
+$headingMargin: var(--heading-margin) !default;
+$headingPadding: var(--heading-padding) !default;
+
+$h1FontFamily: var(--h1-font-family) !default;
+$h1FontSize: var(--h1-font-size) !default;
+$h1FontWeight: var(--h1-font-weight) !default;
+$h1ForegroundColor: var(--h1-foreground-color) !default;
+
+$h2FontFamily: var(--h2-font-family) !default;
+$h2FontSize: var(--h2-font-size) !default;
+$h2FontWeight: var(--h2-font-weight) !default;
+$h2ForegroundColor: var(--h2-foreground-color) !default;
+
+$h3FontFamily: var(--h3-font-family) !default;
+$h3FontSize: var(--h3-font-size) !default;
+$h3FontWeight: var(--h3-font-weight) !default;
+$h3ForegroundColor: var(--h3-foreground-color) !default;
+
+$h4FontFamily: var(--h4-font-family) !default;
+$h4FontSize: var(--h4-font-size) !default;
+$h4FontWeight: var(--h4-font-weight) !default;
+$h4ForegroundColor: var(--h4-foreground-color) !default;
+
+$paragraphLineHeight: var(--paragraph-line-height) !default;
+$paragraphMargin: var(--paragraph-margin) !default;
+$paragraphPadding: var(--paragraph-padding) !default;
+
+$codeFontFamily: var(--code-font-family) !default;
+$codeFontWeight: var(--code-font-weight) !default;
+
+$hyperlinkForegroundColor: var(--hyperlink-foreground-color) !default;
+$hyperlinkHoverForegroundColor: var(--hyperlink-hover-foreground-color) !default;
+$hyperlinkDisabledForegroundColor: var(--hyperlink-disabled-foreground-color) !default;
+$hyperlinkDecoration: var(--hyperlink-decoration) !default;
+$hyperlinkFontWeight: var(--hyperlink-font-weight) !default;
+
+$labelFontFamily: var(--label-font-family) !default;
+$labelFontSize: var(--label-font-size) !default;
+$labelFontWeight: var(--label-font-weight) !default;
+$labelForegroundColor: var(--label-foreground-color) !default;
+$labelButtonHoverColor: var(--label-button-hover-color) !default;
+$labelForegroundColorMuted: var(--label-foreground-color-muted) !default;
+$postMetadataForegroundColor: var(--post-metadata-foreground-color) !default;
+
+$inputBackgroundColor: var(--input-background-color) !default;
+$inputBorderColor: var(--input-border-color) !default;
+$inputBorderRadius: var(--input-border-radius) !default;
+$inputBorderStyle: var(--input-border-style) !default;
+$inputBorderWidth: var(--input-border-width) !default;
+$inputButtonBackgroundColor: var(--input-button-background-color) !default;
+$inputButtonForegroundColor: var(--input-button-foreground-color) !default;
+$inputButtonHoverBackgroundColor: var(--input-button-hover-background-color) !default;
+$inputButtonHoverBorderColor: var(--input-button-hover-border-color) !default;
+$inputButtonHoverForegroundColor: var(--input-button-hover-foreground-color) !default;
+$inputFocusedBorderColor: var(--input-focused-border-color) !default;
+$inputFocusedBoxShadow: var(--input-focused-box-shadow) !default;
+$inputHoverBorderColor: var(--input-hover-border-color) !default;
+$inputFontFamily: var(--input-font-family) !default;
+$inputFontSize: var(--input-font-size) !default;
+$inputFontWeight: var(--input-font-weight) !default;
+$inputForegroundColor: var(--input-foreground-color) !default;
+$inputPlaceholderColor: var(--input-placeholder-color) !default;
+$inputReadOnlyBackgroundColor: var(--input-read-only-background-color) !default;
+$inputReadOnlyBorderColor: var(--input-read-only-border-color) !default;
+$inputReadOnlyForegroundColor: var(--input-read-only-foreground-color) !default;
+
+$inputButtonDisabledBackgroundColor: var(--input-button-disabled-background-color) !default;
+$inputButtonDisabledForegroundColor: var(--input-button-disabled-foreground-color) !default;
+
+$buttonBorderColor: var(--button-border-color) !default;
+$buttonBorderRadius: var(--button-border-radius) !default;
+$buttonTextFontSize: var(--button-text-font-size) !default;
+$buttonTextFontStyle: var(--button-text-font-style) !default;
+$buttonTextFontWeight: var(--button-text-font-weight) !default;
+$buttonTextTransform: var(--button-text-transform) !default;
+$buttonTextFontFamily: var(--button-text-font-family) !default;
+$buttonHoverBackgroundColor: var(--button-hover-background-color) !default;
+$buttonHoverBorderColor: var(--button-hover-border-color) !default;
+$buttonHoverForegroundColor: var(--button-hover-foreground-color) !default;
+$buttonIconFontSize: var(--button-icon-font-size) !default;
+
+$buttonCancelBackgroundColor: var(--button-cancel-background-color) !default;
+$buttonCancelForegroundColor: var(--button-cancel-foreground-color) !default;
+$buttonCancelHoverBackgroundColor: var(--button-cancel-hover-background-color) !default;
+$buttonCreateBackgroundColor: var(--button-create-background-color) !default;
+$buttonCreateForegroundColor: var(--button-create-foreground-color) !default;
+$buttonCreateHoverBackgroundColor: var(--button-create-hover-background-color) !default;
+$buttonDestroyBackgroundColor: var(--button-destroy-background-color) !default;
+$buttonDestroyForegroundColor: var(--button-destroy-foreground-color) !default;
+$buttonDestroyHoverBackgroundColor: var(--button-destroy-hover-background-color) !default;
+$buttonEditBackgroundColor: var(--button-edit-background-color) !default;
+$buttonEditForegroundColor: var(--button-edit-foreground-color) !default;
+$buttonEditHoverBackgroundColor: var(--button-edit-hover-background-color) !default;
+$buttonMoveBackgroundColor: var(--button-move-background-color) !default;
+$buttonMoveForegroundColor: var(--button-move-foreground-color) !default;
+$buttonMoveHoverBackgroundColor: var(--button-move-hover-background-color) !default;
+$buttonSaveBackgroundColor: var(--button-save-background-color) !default;
+$buttonSaveForegroundColor: var(--button-save-foreground-color) !default;
+$buttonSaveHoverBackgroundColor: var(--button-save-hover-background-color) !default;
+$buttonViewBackgroundColor: var(--button-view-background-color) !default;
+$buttonViewForegroundColor: var(--button-view-foreground-color) !default;
+$buttonViewHoverBackgroundColor: var(--button-view-hover-background-color) !default;
+
+$buttonDisabledBackgroundColor: var(--button-disabled-background-color) !default;
+$buttonDisabledBorderColor: var(--button-disabled-border-color) !default;
+$buttonDisabledForegroundColor: var(--button-disabled-foreground-color) !default;
+$buttonMediaBackgroundColor: var(--button-media-background-color) !default;
+$buttonMediaForegroundColor: var(--button-media-foreground-color) !default;
+$buttonMediaHoverBackgroundColor: var(--button-media-hover-background-color) !default;
+$buttonMediaPlayingHoverBackgroundColor: var(--button-media-playing-hover-background-color) !default;
+$primaryHoverBackgroundColor: var(--primary-hover-background-color) !default;
+$reversedHoverBackgroundColor: var(--reversed-hover-background-color) !default;
+$buttonPressedBackgroundColor: var(--button-pressed-background-color) !default;
+$buttonPressedBorderColor: var(--button-pressed-border-color) !default;
+$buttonPressedForegroundColor: var(--button-pressed-foreground-color) !default;
+$buttonTransparentBorderColor: var(--button-transparent-border-color) !default;
+$buttonTransparentForegroundColor: var(--button-transparent-foreground-color) !default;
+$buttonTransparentHoverBorderColor: var(--button-transparent-hover-border-color) !default;
+$buttonTransparentHoverForegroundColor: var(--button-transparent-hover-foreground-color) !default;
+
+$windowBorder: var(--window-border) !default;
+$windowBoxShadow: var(--window-box-shadow) !default;
+$windowTitleBackgroundColor: var(--window-title-background-color) !default;
+$windowTitleBorderColor: var(--window-title-border-color) !default;
+$windowTitleBorderWidth: var(--window-title-border-width) !default;
+$windowTitleButtonBackgroundColor: var(--window-title-button-background-color) !default;
+$windowTitleForegroundColor: var(--window-title-foreground-color) !default;
+$windowTitleButtonForegroundColor: var(--window-title-button-foreground-color) !default;
+$windowTitleButtonHoverBackgroundColor: var(--window-title-button-hover-background-color) !default;
+$windowTitleButtonHoverForegroundColor: var(--window-title-button-hover-foreground-color) !default;
+$windowTitleFontFamily: var(--window-title-font-family) !default;
+$windowTitleFontSize: var(--window-title-font-size) !default;
+$windowTitleFontStyle: var(--window-title-font-style) !default;
+$windowTitleFontWeight: var(--window-title-font-weight) !default;
+$windowTitleTextPadding: var(--window-title-text-padding) !default;
+$windowTitleTextTransform: var(--window-title-text-transform) !default;
+$windowTitleVerticalPadding: var(--window-title-vertical-padding) !default;
+
+$modalTitleFontFamily: var(--modal-title-font-family) !default;
+$modalTitleBackgroundColor: var(--modal-title-background-color) !default;
+$modalTitleForegroundColor: var(--modal-title-foreground-color) !default;
+$modalTitleBorderColor: var(--modal-title-border-color) !default;
+$modalTitleBorderWidth: var(--modal-title-border-width) !default;
+$modalTitleButtonBackgroundColor: var(--modal-title-button-background-color) !default;
+$modalTitleButtonForegroundColor: var(--modal-title-button-foreground-color) !default;
+$modalTitleButtonHoverBackgroundColor: var(--modal-title-button-hover-background-color) !default;
+$modalTitleButtonHoverForegroundColor: var(--modal-title-button-hover-foreground-color) !default;
+$modalTitleFontSize: var(--modal-title-font-size) !default;
+$modalTitleFontWeight: var(--modal-title-font-weight) !default;
+$modalTitlePadding: var(--modal-title-padding) !default;
+$modalBackgroundColor: var(--modal-background-color) !default;
+$modalForegroundColor: var(--modal-foreground-color) !default;
+$modalBorder: var(--modal-border) !default;
+$modalBorderRadius: var(--modal-border-radius) !default;
+$modalBoxShadow: var(--modal-box-shadow) !default;
+
+$headerBackgroundColor: var(--header-background-color) !default;
+$headerForegroundColor: var(--header-foreground-color) !default;
+$headerBorderColor: var(--header-border-color) !default;
+$headerBorderWidth: var(--header-border-width) !default;
+$headerBoxShadow: var(--header-box-shadow) !default;
+$headerButtonBackgroundColor: var(--header-button-background-color) !default;
+$headerButtonForegroundColor: var(--header-button-foreground-color) !default;
+$headerButtonHoverBackgroundColor: var(--header-button-hover-background-color) !default;
+$headerButtonHoverForegroundColor: var(--header-button-hover-foreground-color) !default;
+$headerButtonBorderColor: var(--header-button-border-color) !default;
+$headerHyperlinkColor: var(--header-hyperlink-color) !default;
+$headerHyperlinkHoverColor: var(--header-hyperlink-hover-color) !default;
+$headerMenuButtonColor: var(--header-menu-button-color) !default;
+$headerMenuButtonHoverColor: var(--header-menu-button-hover-color) !default;
+$headerContactImageBackgroundColor: var(--header-contact-image-background-color) !default;
+$headerContactImageForegroundColor: var(--header-contact-image-foreground-color) !default;
+$headerContactImageBorderColor: var(--header-contact-image-border-color) !default;
+$headerContactImageHoverBackgroundColor: var(--header-contact-image-hover-background-color) !default;
+$headerContactNameForegroundColor: var(--header-contact-name-foreground-color) !default;
+
+$footerBackgroundColor: var(--footer-background-color) !default;
+$footerBorderColor: var(--footer-border-color) !default;
+$footerBorderWidth: var(--footer-border-width) !default;
+$footerBoxShadow: var(--footer-box-shadow) !default;
+$footerFontFamily: var(--footer-font-family) !default;
+$footerFontSize: var(--footer-font-size) !default;
+$footerFontWeight: var(--footer-font-weight) !default;
+$footerForegroundColor: var(--footer-foreground-color) !default;
+$footerMargin: var(--footer-margin) !default;
+$footerPadding: var(--footer-padding) !default;
+$footerHyperlinkColor: var(--footer-hyperlink-color) !default;
+$footerHyperlinkHoverColor: var(--footer-hyperlink-hover-color) !default;
+
+$verticalTreeBackgroundColor: var(--vertical-tree-background-color) !default;
+$verticalTreeBorderColor: var(--vertical-tree-border-color) !default;
+$verticalTreeBorderStyle: var(--vertical-tree-border-style) !default;
+$verticalTreeBorderWidth: var(--vertical-tree-border-width) !default;
+$verticalTreeBoxShadow: var(--vertical-tree-box-shadow) !default;
+
+$verticalNodeBackgroundColor: var(--vertical-node-background-color) !default;
+$verticalNodeBorderBottom: var(--vertical-node-border-bottom) !default;
+$verticalNodeBorderLeft: var(--vertical-node-border-left) !default;
+$verticalNodeBorderRight: var(--vertical-node-border-right) !default;
+$verticalNodeBorderTop: var(--vertical-node-border-top) !default;
+$verticalNodeForegroundColor: var(--vertical-node-foreground-color) !default;
+$verticalNodeCloseButtonForegroundColor: var(--vertical-node-close-button-foreground-color) !default;
+$verticalNodeCloseButtonHoverForegroundColor: var(--vertical-node-close-button-hover-foreground-color) !default;
+$verticalNodeFontFamily: var(--vertical-node-font-family) !default;
+$verticalNodeFontSize: var(--vertical-node-font-size) !default;
+$verticalNodeFontStyle: var(--vertical-node-font-style) !default;
+$verticalNodeFontWeight: var(--vertical-node-font-weight) !default;
+$verticalNodeSelectedBackgroundColor: var(--vertical-node-selected-background-color) !default;
+$verticalNodeSelectedBorderBottom: var(--vertical-node-selected-border-bottom) !default;
+$verticalNodeSelectedBorderLeft: var(--vertical-node-selected-border-left) !default;
+$verticalNodeSelectedBorderRight: var(--vertical-node-selected-border-right) !default;
+$verticalNodeSelectedBorderTop: var(--vertical-node-selected-border-top) !default;
+$verticalNodeSelectedBoxShadow: var(--vertical-node-selected-box-shadow) !default;
+$verticalNodeSelectedForegroundColor: var(--vertical-node-selected-foreground-color) !default;
+$verticalNodeHoverBackgroundColor: var(--vertical-node-hover-background-color) !default;
+$verticalNodeHoverForegroundColor: var(--vertical-node-hover-foreground-color) !default;
+
+$horizontalTreeBackgroundColor: var(--horizontal-tree-background-color) !default;
+$horizontalTreeBoxShadow: var(--horizontal-tree-box-shadow) !default;
+
+$horizontalNodeBackgroundColor: var(--horizontal-node-background-color) !default;
+$horizontalNodeForegroundColor: var(--horizontal-node-foreground-color) !default;
+$horizontalNodeForegroundColorMuted: var(--horizontal-node-foreground-color-muted) !default;
+$horizontalNodeCloseButtonForegroundColor: var(--horizontal-node-close-button-foreground-color) !default;
+$horizontalNodeCloseButtonHoverForegroundColor: var(--horizontal-node-close-button-hover-foreground-color) !default;
+$horizontalNodeFontFamily: var(--horizontal-node-font-family) !default;
+$horizontalNodeFontSize: var(--horizontal-node-font-size) !default;
+$horizontalNodeFontStyle: var(--horizontal-node-font-style) !default;
+$horizontalNodeFontWeight: var(--horizontal-node-font-weight) !default;
+$horizontalNodeSelectedBackgroundColor: var(--horizontal-node-selected-background-color) !default;
+$horizontalNodeSelectedBoxShadow: var(--horizontal-node-selected-box-shadow) !default;
+$horizontalNodeSelectedForegroundColor: var(--horizontal-node-selected-foreground-color) !default;
+$horizontalNodeHoverBackgroundColor: var(--horizontal-node-hover-background-color) !default;
+$horizontalNodeHoverForegroundColor: var(--horizontal-node-hover-foreground-color) !default;
+
+$tabHeaderBorderWidth: var(--tab-header-border-width) !default;
+$tabBackgroundColor: var(--tab-background-color) !default;
+$tabBorderColor: var(--tab-border-color) !default;
+$tabFontFamily: var(--tab-font-family) !default;
+$tabFontSize: var(--tab-font-size) !default;
+$tabFontStyle: var(--tab-font-style) !default;
+$tabFontWeight: var(--tab-font-weight) !default;
+$tabForegroundColor: var(--tab-foreground-color) !default;
+$tabHoverBackgroundColor: var(--tab-hover-background-color) !default;
+$tabHoverForegroundColor: var(--tab-hover-foreground-color) !default;
+$tabMargin: var(--tab-margin) !default;
+$tabHorizontalPadding: var(--tab-horizontal-padding) !default;
+$tabSelectedBackgroundColor: var(--tab-selected-background-color) !default;
+$tabSelectedBorderColor: var(--tab-selected-border-color) !default;
+$tabSelectedForegroundColor: var(--tab-selected-foreground-color) !default;
+$tabTextTransform: var(--tab-text-transform) !default;
+$tabVerticalPadding: var(--tab-vertical-padding) !default;
+
+$filtersBackgroundColor: var(--filters-background-color) !default;
+$filtersForegroundColor: var(--filters-foreground-color) !default;
+$filtersBorderColor: var(--filters-border-color) !default;
+$filtersBorderRadius: var(--filters-border-radius) !default;
+$elementChildBackgroundColor: var(--element-child-background-color) !default;
+
+$resultAlternateRowBackgroundColor: var(--result-alternate-row-background-color) !default;
+$resultAlternateRowPulseBackgroundColor: var(--result-alternate-row-pulse-background-color) !default;
+$resultBackgroundColor: var(--result-background-color) !default;
+$resultPulseBackgroundColor: var(--result-pulse-background-color) !default;
+$resultTitleFontFamily: var(--result-title-font-family) !default;
+$resultTitleFontSize: var(--result-title-font-size) !default;
+$resultTitleFontWeight: var(--result-title-font-weight) !default;
+$resultTitleForegroundColor: var(--result-title-foreground-color) !default;
+$resultTitleMetadataBackgroundColor: var(--result-title-metadata-background-color) !default;
+$resultTitleMetadataForegroundColor: var(--result-title-metadata-foreground-color) !default;
+$resultTitleMetadataFontSize: var(--result-title-metadata-font-size) !default;
+$resultTitleMetadataFontStyle: var(--result-title-metadata-font-style) !default;
+$resultIconColor: var(--result-icon-color) !default;
+$resultLabelFontFamily: var(--result-label-font-family) !default;
+$resultLabelFontSize: var(--result-label-font-size) !default;
+$resultLabelFontWeight: var(--result-label-font-weight) !default;
+$resultLabelForegroundColor: var(--result-label-foreground-color) !default;
+
+$sectionHeadingForegroundColor: var(--section-heading-foreground-color) !default;
+$sectionHeadingFontFamily: var(--section-heading-font-family) !default;
+$sectionHeadingBorder: var(--section-heading-border) !default;
+$sectionHeadingFontSize: var(--section-heading-font-size) !default;
+$sectionHeadingFontWeight: var(--section-heading-font-weight) !default;
+
+$contextMenuBackgroundColor: var(--context-menu-background-color) !default;
+$contextMenuBorder: var(--context-menu-border) !default;
+$contextMenuBoxShadow: var(--context-menu-box-shadow) !default;
+$contextMenuForegroundColor: var(--context-menu-foreground-color) !default;
+$contextMenuItemBackgroundColor: var(--context-menu-item-background-color) !default;
+$contextMenuItemFontFamily: var(--context-menu-item-font-family) !default;
+$contextMenuItemFontSize: var(--context-menu-item-font-size) !default;
+$contextMenuItemFontStyle: var(--context-menu-item-font-style) !default;
+$contextMenuItemFontWeight: var(--context-menu-item-font-weight) !default;
+$contextMenuItemGroupTitleBackgroundColor: var(--context-menu-item-group-title-background-color) !default;
+$contextMenuItemGroupTitleForegroundColor: var(--context-menu-item-group-title-foreground-color) !default;
+$contextMenuItemLinkDisabledForegroundColor: var(--context-menu-item-link-disabled-foreground-color) !default;
+$contextMenuItemLinkForegroundColor: var(--context-menu-item-link-foreground-color) !default;
+$contextMenuItemLinkHoverBackgroundColor: var(--context-menu-item-link-hover-background-color) !default;
+$contextMenuItemLinkHoverForegroundColor: var(--context-menu-item-link-hover-foreground-color) !default;
+
+$treeNodeSelectedBackgroundColor: var(--tree-node-selected-background-color) !default;
+$treeNodeSelectedForegroundColor: var(--tree-node-selected-foreground-color) !default;
+$treeNodeHoverBackgroundColor: var(--tree-node-hover-background-color) !default;
+$treeNodeHoverForegroundColor: var(--tree-node-hover-foreground-color) !default;
+
+$binderBackgroundColor: var(--binder-background-color) !default;
+$binderBorderRadius: var(--binder-border-radius) !default;
+$binderBoxShadow: var(--binder-box-shadow) !default;
+$binderForegroundColor: var(--binder-foreground-color) !default;
+$binderMargin: var(--binder-margin) !default;
+$binderMaxWidth: var(--binder-max-width) !default;
+
+$pageBackgroundColor: var(--page-background-color) !default;
+$pageBorderRadius: var(--page-border-radius) !default;
+$pageForegroundColor: var(--page-foreground-color) !default;
+
+$elementPadding: var(--element-padding) !default;
+
+$progressBarHeight: var(--progress-bar-height) !default;
+$progressBarFillBackgroundColor: var(--progress-bar-fill-background-color) !default;
+
+$waiterBackgroundColor: var(--waiter-background-color) !default;
+$waiterBorderRadius: var(--waiter-border-radius) !default;
+$waiterForegroundColor: var(--waiter-foreground-color) !default;
+$windowBackgroundColorTransparent: var(--window-background-color-transparent) !default;
+
+$accent1BackgroundColorLight25: var(--accent1-background-color-light25) !default;
+$rzBase300: var(--rz-base300) !default;
+$rzBase500: var(--rz-base500) !default;
+$rzBase600: var(--rz-base600) !default;
+$rzBase700: var(--rz-base700) !default;
+$rzDangerDark: var(--rz-danger-dark) !default;
+$rzDangerDarker: var(--rz-danger-darker) !default;
+$rzDangerLight: var(--rz-danger-light) !default;
+$rzDangerLighter: var(--rz-danger-lighter) !default;
+$rzValidatorShadowColor: var(--rz-validator-shadow-color) !default;
+$rzInfoDark: var(--rz-info-dark) !default;
+$rzInfoDarker: var(--rz-info-darker) !default;
+$rzInfoLight: var(--rz-info-light) !default;
+$rzInfoLighter: var(--rz-info-lighter) !default;
+$rzPrimaryDark: var(--rz-primary-dark) !default;
+$rzPrimaryDarker: var(--rz-primary-darker) !default;
+$rzPrimaryLight: var(--rz-primary-light) !default;
+$rzPrimaryLighter: var(--rz-primary-lighter) !default;
+$rzSecondary: var(--rz-secondary) !default;
+$rzSecondaryDark: var(--rz-secondary-dark) !default;
+$rzSecondaryDarker: var(--rz-secondary-darker) !default;
+$rzSecondaryLight: var(--rz-secondary-light) !default;
+$rzSecondaryLighter: var(--rz-secondary-lighter) !default;
+$rzSuccessDark: var(--rz-success-dark) !default;
+$rzSuccessDarker: var(--rz-success-darker) !default;
+$rzSuccessLight: var(--rz-success-light) !default;
+$rzSuccessLighter: var(--rz-success-lighter) !default;
+$rzTextTertiaryColor: var(--rz-text-tertiary-color) !default;
+$rzWarningDark: var(--rz-warning-dark) !default;
+$rzWarningDarker: var(--rz-warning-darker) !default;
+$rzWarningLight: var(--rz-warning-light) !default;
+$rzWarningLighter: var(--rz-warning-lighter) !default;
+$scrollbarColor: var(--scrollbar-color) !default;
+
+$textMessageInboundBackgroundColor: var(--text-message-inbound-background-color) !default;
+$textMessageInboundForegroundColor: var(--text-message-inbound-foreground-color) !default;
+$textMessageInboundMetadataColor: var(--text-message-inbound-metadata-color) !default;
+$textMessageOutboundBackgroundColor: var(--text-message-outbound-background-color) !default;
+$textMessageOutboundForegroundColor: var(--text-message-outbound-foreground-color) !default;
+$textMessageOutboundMetadataColor: var(--text-message-outbound-metadata-color) !default;
+
+/* Sizing and Spacing */
+$screenMin: 10em !default;
+$screenTiny: 20em !default;
+$screenSmall: 30em !default;
+$screenMedium: 40em !default;
+$screenLarge: 50em !default;
+$screenWide: 60em !default;
+$screenMax: 75em !default;
+
+$fieldPico: var(--field-pico) !default;
+$fieldNano: var(--field-nano) !default;
+$fieldMicro: var(--field-micro) !default;
+$fieldMin: var(--field-min) !default;
+$fieldTinier: var(--field-tinier) !default;
+$fieldTiny: var(--field-tiny) !default;
+$fieldSmall: var(--field-small) !default;
+$fieldMediumSmall: var(--field-medium-small) !default;
+$fieldMedium: var(--field-medium) !default;
+$fieldMediumLarge: var(--field-medium-large) !default;
+$fieldLarge: var(--field-large) !default;
+$fieldLarger: var(--field-larger) !default;
+$fieldWide: var(--field-wide) !default;
+$fieldMax: var(--field-max) !default;
+
+$spacingMicroScreenMin: var(--spacing-micro-screen-min) !default;
+$spacingMicroScreenMicro: var(--spacing-micro-screen-micro) !default;
+$spacingMicroScreenSmall: var(--spacing-micro-screen-small) !default;
+$spacingMicroScreenMedium: var(--spacing-micro-screen-medium) !default;
+$spacingMicroScreenLarge: var(--spacing-micro-screen-large) !default;
+$spacingMicroScreenWide: var(--spacing-micro-screen-wide) !default;
+$spacingMicroScreenMax: var(--spacing-micro-screen-max) !default;
+
+$spacingTinyScreenMin: var(--spacing-tiny-screen-min) !default;
+$spacingTinyScreenTiny: var(--spacing-tiny-screen-tiny) !default;
+$spacingTinyScreenSmall: var(--spacing-tiny-screen-small) !default;
+$spacingTinyScreenMedium: var(--spacing-tiny-screen-medium) !default;
+$spacingTinyScreenLarge: var(--spacing-tiny-screen-large) !default;
+$spacingTinyScreenWide: var(--spacing-tiny-screen-wide) !default;
+$spacingTinyScreenMax: var(--spacing-tiny-screen-max) !default;
+
+$spacingSmallScreenMin: var(--spacing-small-screen-min) !default;
+$spacingSmallScreenTiny: var(--spacing-small-screen-tiny) !default;
+$spacingSmallScreenSmall: var(--spacing-small-screen-small) !default;
+$spacingSmallScreenMedium: var(--spacing-small-screen-medium) !default;
+$spacingSmallScreenLarge: var(--spacing-small-screen-large) !default;
+$spacingSmallScreenWide: var(--spacing-small-screen-wide) !default;
+$spacingSmallScreenMax: var(--spacing-small-screen-max) !default;
+
+$spacingMediumScreenMin: var(--spacing-medium-screen-min) !default;
+$spacingMediumScreenTiny: var(--spacing-medium-screen-tiny) !default;
+$spacingMediumScreenSmall: var(--spacing-medium-screen-small) !default;
+$spacingMediumScreenMedium: var(--spacing-medium-screen-medium) !default;
+$spacingMediumScreenLarge: var(--spacing-medium-screen-large) !default;
+$spacingMediumScreenWide: var(--spacing-medium-screen-wide) !default;
+$spacingMediumScreenMax: var(--spacing-medium-screen-max) !default;
+
+$spacingLargeScreenMin: var(--spacing-large-screen-min) !default;
+$spacingLargeScreenTiny: var(--spacing-large-screen-tiny) !default;
+$spacingLargeScreenSmall: var(--spacing-large-screen-small) !default;
+$spacingLargeScreenMedium: var(--spacing-large-screen-medium) !default;
+$spacingLargeScreenLarge: var(--spacing-large-screen-large) !default;
+$spacingLargeScreenWide: var(--spacing-large-screen-wide) !default;
+$spacingLargeScreenMax: var(--spacing-large-screen-max) !default;
+
+$htmlMinFontSize: var(--html-min-font-size) !default;
+$htmlTinyFontSize: var(--html-tiny-font-size) !default;
+$htmlSmallFontSize: var(--html-small-font-size) !default;
+$htmlMediumFontSize: var(--html-medium-font-size) !default;
+$htmlLargeFontSize: var(--html-large-font-size) !default;
+$htmlWideFontSize: var(--html-wide-font-size) !default;
+$htmlMaxFontSize: var(--html-max-font-size) !default;
+
+$custom1FontFamily: var(--custom1-font-family) !default;
+$custom1FontSize: var(--custom1-font-size) !default;
+$custom1FontWeight: var(--custom1-font-weight) !default;
+
+$custom2FontFamily: var(--custom2-font-family) !default;
+$custom2FontSize: var(--custom2-font-size) !default;
+$custom2FontWeight: var(--custom2-font-weight) !default;
+
+$custom3FontFamily: var(--custom3-font-family) !default;
+$custom3FontSize: var(--custom3-font-size) !default;
+$custom3FontWeight: var(--custom3-font-weight) !default;
+
+$custom4FontFamily: var(--custom4-font-family) !default;
+$custom4FontSize: var(--custom4-font-size) !default;
+$custom4FontWeight: var(--custom4-font-weight) !default;
+
+$choiceButtonBackgroundColor: var(--choice-button-background-color) !default;
+$choiceButtonForegroundColor: var(--choice-button-foreground-color) !default;
+$choiceButtonHoverBackgroundColor: var(--choice-button-hover-background-color) !default;
+$buttonBorderColorStudent: var(--button-border-color-student) !default;

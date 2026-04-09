@@ -1,0 +1,31 @@
+﻿<Waiter Model="Model">
+    @if (Model.Portal is not null)
+    {
+        @if (Model.Portal.Tracks.IsEmpty())
+        {
+            <NoRecords EntityName="tracks" />
+        }
+        else
+        {
+            @foreach (var track in Model.Portal.Tracks)
+            {
+                <div class="c-card c-padding-medium-top c-padding-small-bottom">
+                    <div class="values">
+                        <div class="title">
+                            <a @onclick="() => Model.GoToTrack(track.Id)">@(track.Title)</a>
+                        </div>
+                        @if (track.Description is not null)
+                        {
+                            <UserHtml Html="@(track.Description)"
+                                      CssClass="c-padding-small" />
+                        }
+                    </div>
+                    @*<div class="buttons">
+                        Completed: 0 / 10
+                    </div>
+                    *@
+                </div>
+            }
+        }
+    }
+</Waiter>

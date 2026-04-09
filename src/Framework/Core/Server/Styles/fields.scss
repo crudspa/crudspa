@@ -1,0 +1,363 @@
+﻿/// <reference path="defaults.scss" />
+
+.c-vert-field-padding {
+    padding-bottom: .75em;
+    padding-top: .5em;
+}
+
+.c-vert-field-padding-and-margin {
+    @extend .c-vert-field-padding;
+    margin-bottom: 1em;
+}
+
+.c-field {
+    @extend .c-padding-small-hor;
+    @extend .c-vert-field-padding;
+
+    .label-container {
+        @extend .c-nowrap;
+
+        .label {
+            flex: 1 1 auto;
+        }
+    }
+
+    .label {
+        @extend .c-label;
+
+        &.input-spacing {
+            @extend .c-input-padding;
+            margin-bottom: 1em;
+            margin-top: .25em;
+        }
+
+        &.tight-vert {
+            padding-bottom: 0;
+        }
+
+        &.extra-vert {
+            padding-bottom: .25em;
+        }
+
+        &.loose-vert {
+            padding-bottom: 1em;
+        }
+
+        &.tight-bottom {
+            margin-bottom: 0;
+        }
+    }
+
+    .parenthetical {
+        @extend .c-label;
+        @extend .c-parenthetical;
+        margin-left: 2em;
+    }
+
+    &.horizontal {
+        @extend .c-nowrap;
+        padding: 0 1em 0 0;
+
+        .label {
+            @extend .c-label;
+            padding-right: .75em;
+        }
+    }
+
+    &.c-checkbox .label {
+        padding-bottom: .5em;
+    }
+
+    .c-radio {
+        margin-bottom: .75em;
+    }
+
+    &.no-margin {
+        margin: 0;
+        padding: 0;
+    }
+
+    &.tight-vert {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    &.tight-top {
+        margin-top: 0;
+        padding-top: 0;
+    }
+
+    &.tight-bottom {
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    &.tight-left {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    &.tight-right {
+        padding-right: 0;
+        margin-right: 0;
+    }
+
+    &.tight-hor {
+        padding-left: 0;
+        margin-left: 0;
+        padding-right: 0;
+        margin-right: 0;
+    }
+
+    &.pico {
+        @extend .c-pico;
+    }
+
+    &.nano {
+        @extend .c-nano;
+    }
+
+    &.micro {
+        @extend .c-micro;
+    }
+
+    &.min {
+        @extend .c-min;
+    }
+
+    &.tinier {
+        @extend .c-tinier;
+    }
+
+    &.tiny {
+        @extend .c-tiny;
+    }
+
+    &.small {
+        @extend .c-small;
+    }
+
+    &.medium-small {
+        @extend .c-medium-small;
+    }
+
+    &.medium {
+        @extend .c-medium;
+    }
+
+    &.medium-large {
+        @extend .c-medium-large;
+    }
+
+    &.large {
+        @extend .c-large;
+    }
+
+    &.larger {
+        @extend .c-larger;
+    }
+
+    &.wide {
+        @extend .c-wide;
+    }
+
+    &.max {
+        @extend .c-max;
+    }
+
+    &.min-tiny {
+        @extend .c-min-tiny;
+    }
+
+    &.min-small {
+        @extend .c-min-small;
+    }
+
+    &.min-medium {
+        @extend .c-min-medium;
+    }
+
+    &.full {
+        @extend .c-full;
+    }
+
+    &.star {
+        @extend .c-star;
+        @extend .c-min-medium;
+    }
+}
+
+.c-label-with-buttons {
+    @extend .c-nowrap;
+    align-items: center;
+
+    > .label {
+        @extend .c-label;
+        flex: 0 0 3em;
+    }
+
+    &.right > .label {
+        flex: 1 0 3em;
+    }
+
+    > .label-buttons {
+
+        .label-button {
+            display: inline-flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            color: $labelForegroundColor;
+
+            &:hover {
+                color: $labelButtonHoverColor;
+            }
+
+            .text {
+                padding: .5em;
+                text-align: left;
+            }
+
+            .icon {
+                font-size: 1.2em;
+            }
+        }
+    }
+}
+
+.c-pane-link {
+    padding: .125em 0;
+    line-height: 1.25;
+
+    .separator {
+        color: $defaultBorderColor;
+        padding: 0 .375em;
+    }
+}
+
+.c-labeled-html {
+    padding: .0625em 0;
+
+    .label {
+        @extend .c-label;
+        color: $resultLabelForegroundColor;
+        font-weight: $resultLabelFontWeight;
+        padding: .0625em 0 .125em 0;
+    }
+
+    .value {
+        padding: .5em 0 .25em 0;
+    }
+}
+
+.c-labeled {
+    align-items: first baseline;
+    cursor: default;
+    display: flex;
+    flex-flow: row nowrap;
+    padding: .0625em 0;
+
+    .label {
+        @extend .c-label;
+        color: $resultLabelForegroundColor;
+        font-weight: $resultLabelFontWeight;
+        padding: .0625em 0;
+        user-select: auto;
+    }
+
+    .value {
+
+        ul,
+        li {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            line-height: 1.15;
+            padding: .0625em 0 .275em 0;
+        }
+
+        &.colored {
+            background-color: #222;
+            color: #f6f6f6;
+            padding: 0 1em;
+        }
+    }
+}
+
+.c-labeled.status {
+    align-items: center;
+
+    .c-status-display {
+        border: 0;
+        border-radius: 0;
+        display: inline-block;
+        font-size: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+        padding: 0 1em;
+    }
+}
+
+.c-status-display {
+    background-color: $filtersBackgroundColor;
+    border: 1px solid $defaultBorderColor;
+    border-radius: $alertBorderRadius;
+    color: $filtersForegroundColor;
+    display: inline-flex;
+    font-size: .925em;
+    font-weight: $resultLabelFontWeight;
+    line-height: 1;
+    padding: .375em .75em;
+    white-space: nowrap;
+
+    &.content-draft {
+        background-color: $contentDraftBackgroundColor;
+        border-color: $contentDraftBackgroundColor;
+        color: $contentDraftForegroundColor;
+    }
+
+    &.content-complete {
+        background-color: $contentCompleteBackgroundColor;
+        border-color: $contentCompleteBackgroundColor;
+        color: $contentCompleteForegroundColor;
+    }
+
+    &.content-retired {
+        background-color: $contentRetiredBackgroundColor;
+        border-color: $contentRetiredBackgroundColor;
+        color: $contentRetiredForegroundColor;
+    }
+
+    &.status-pending {
+        background-color: $tipBackgroundColor;
+        border-color: $tipBackgroundColor;
+        color: $tipForegroundColor;
+    }
+
+    &.status-running {
+        background-color: $warningBackgroundColor;
+        border-color: $warningBackgroundColor;
+        color: $warningForegroundColor;
+    }
+
+    &.status-completed {
+        background-color: $successBackgroundColor;
+        border-color: $successBackgroundColor;
+        color: $successForegroundColor;
+    }
+
+    &.status-failed {
+        background-color: $errorBackgroundColor;
+        border-color: $errorBackgroundColor;
+        color: $errorForegroundColor;
+    }
+
+    &.status-canceled {
+        background-color: $lockBackgroundColor;
+        border-color: $lockBackgroundColor;
+        color: $lockForegroundColor;
+    }
+}

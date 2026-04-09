@@ -1,0 +1,8 @@
+﻿<textarea class="@(HeightClass) @(Code ? "code" : String.Empty)"
+          disabled="@ReadOnly"
+          placeholder="@Placeholder"
+          spellcheck="@(!Code && Spellcheck ? "true" : "false")"
+          @bind="@Value"
+          @bind:event="oninput"
+          @bind:after="() => ValueChanged.InvokeAsync(Value)">
+</textarea>

@@ -1,0 +1,28 @@
+@using Crudspa.Content.Display.Client.Extensions
+<a class="c-button c-content-button @(Button.Box.BoxClasses()) @ButtonClass"
+   href="@(ButtonPath)"
+   target="@(Button.Internal == true ? null : "_blank")"
+   style="@(Button.Box.BoxStyles())"
+   @onclick="HandleClick">
+
+    @if (ShowLeadingGraphic)
+    {
+        <div class="@GraphicClass">
+            @GraphicContent
+        </div>
+    }
+
+    @if (HasText)
+    {
+        <div class="text">
+            @(Button.Text)
+        </div>
+    }
+
+    @if (ShowTrailingGraphic)
+    {
+        <div class="@GraphicClass">
+            @GraphicContent
+        </div>
+    }
+</a>

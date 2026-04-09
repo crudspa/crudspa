@@ -1,0 +1,27 @@
+<PageTitle>@(Navigator.AppTitle)</PageTitle>
+<SplashScreen />
+<ErrorRecover>
+    @if (PortalRun is not null)
+    {
+        <RadzenComponents />
+
+        <RootModalsCore PortalRun="PortalRun"
+                        ImageViewerModel="ImageViewerModel"
+                        PdfViewerModel="PdfViewerModel" />
+
+        <NavigationDisplayPlugin TypeName="@PortalRun.NavigationTypeDisplayView"
+                                 Portal="PortalRun">
+            <Branding>
+                <a @onclick="() => Navigator.GoToRoot()">
+                    <div class="image">
+                        <img src="_content/Crudspa.Samples.Catalog.Client/Banner-Catalog.png"
+                             alt="Catalog" />
+                    </div>
+                </a>
+            </Branding>
+            <AuthViews>
+                <SignInCatalogName Portal="PortalRun" />
+            </AuthViews>
+        </NavigationDisplayPlugin>
+    }
+</ErrorRecover>

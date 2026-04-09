@@ -1,0 +1,39 @@
+<Many Model="Model"
+      T="SchoolYearModel"
+      EntityName="School Year"
+      SaveRequested="id => Model.Save(id)"
+      CancelRequested="id => Model.Cancel(id)"
+      DeleteRequested="id => Model.Delete(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Medium">
+            <Labeled Width="5em"
+                     Label="Starts"
+                     DateOnlyValue="@context.SchoolYear.Starts" />
+            <Labeled Width="5em"
+                     Label="Ends"
+                     DateOnlyValue="@context.SchoolYear.Ends" />
+        </Field>
+    </ReadView>
+    <EditView>
+        <Wrapped>
+            <Field Label="Name"
+                   Size="Field.Sizes.Medium">
+                <TextBox ReadOnly="@false"
+                         MaxLength="25"
+                         @bind-Value="context.SchoolYear.Name" />
+            </Field>
+            <Field Label="Starts"
+                   Size="Field.Sizes.Tiny">
+                <DatePicker ReadOnly="@false"
+                            Format="d"
+                            @bind-Value="context.SchoolYear.Starts" />
+            </Field>
+            <Field Label="Ends"
+                   Size="Field.Sizes.Tiny">
+                <DatePicker ReadOnly="@false"
+                            Format="d"
+                            @bind-Value="context.SchoolYear.Ends" />
+            </Field>
+        </Wrapped>
+    </EditView>
+</Many>

@@ -1,0 +1,36 @@
+<RadzenDropDown TValue="Guid?"
+                Data="@LookupValues"
+                TextProperty="Name"
+                ValueProperty="Id"
+                Disabled="@ReadOnly"
+                Placeholder="@NullText"
+                AllowClear="@AllowNull"
+                AllowFiltering="true"
+                FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                FilterOperator="StringFilterOperator.Contains"
+                FilterAsYouType="true"
+                FilterDelay="125"
+                FilterPlaceholder="Filter icons..."
+                AllowVirtualization="true"
+                PageSize="80"
+                VirtualizationOverscanCount="3"
+                PopupStyle="max-height: min(32rem, 70vh); width: min(40rem, 92vw);"
+                Value="Value"
+                ValueChanged="value => ValueChanged.InvokeAsync(value)">
+    <ValueTemplate Context="context">
+        <div class="c-nowrap">
+            <span class="@context.CssClass"
+                  style="font-size: 1.25em; margin: 0 .75em 0 .25em;">
+            </span>
+            @context.Name
+        </div>
+    </ValueTemplate>
+    <Template Context="context">
+        <div class="c-nowrap">
+            <span class="@context.CssClass"
+                  style="font-size: 1.25em; margin: 0 .75em 0 .25em;">
+            </span>
+            @context.Name
+        </div>
+    </Template>
+</RadzenDropDown>

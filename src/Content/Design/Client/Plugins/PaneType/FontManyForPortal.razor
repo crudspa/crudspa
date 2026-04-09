@@ -1,0 +1,35 @@
+<Many Model="Model"
+      T="FontModel"
+      EntityName="Font"
+      SaveRequested="id => Model.Save(id)"
+      CancelRequested="id => Model.Cancel(id)"
+      DeleteRequested="id => Model.Delete(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Unspecified">
+            <style>
+                @@font-face {
+                    font-family: @($"'{context.Font.Name}'");
+                    src: url('@context.Font.FileFile.FetchUrl()');
+                }
+            </style>
+            <p style="font-size: 1.25em; font-family: @($"'{context.Font.Name}', system-ui, sans-serif;")">The quick brown fox jumps over the lazy dog.</p>
+        </Field>
+    </ReadView>
+    <EditView>
+        <Wrapped>
+            <Field Label="Name"
+                   Size="Field.Sizes.Medium">
+                <TextBox ReadOnly="@false"
+                         MaxLength="75"
+                         @bind-Value="context.Font.Name" />
+            </Field>
+            <Field Label="File"
+                   Size="Field.Sizes.Larger"
+                   Container="Field.Containers.Div">
+                <FontUploader ReadOnly="@false"
+                              Required="true"
+                              FontFile="context.Font.FileFile" />
+            </Field>
+        </Wrapped>
+    </EditView>
+</Many>

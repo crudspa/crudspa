@@ -1,0 +1,29 @@
+<List Model="Model"
+      T="MembershipModel"
+      EntityName="Membership"
+      UrlPrefix="@($"{Path}/membership")"
+      DeleteRequested="id => Model.Delete(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Unspecified">
+            <LabeledHtml Label="Description"
+                         HtmlValue="@context.Membership.Description" />
+            <Labeled Width="6em"
+                     Label="Supports Opt Out"
+                     BooleanValue="@context.Membership.SupportsOptOut" />
+        </Field>
+    </ReadView>
+    <PaneLinks>
+        <PaneLink Href="@($"{Path}/membership-{context.Membership.Id:D}?pane=members")"
+                  Text="Members"
+                  Count="context.Membership.MemberCount" />
+        <PaneLink Href="@($"{Path}/membership-{context.Membership.Id:D}?pane=emails")"
+                  Text="Emails"
+                  Count="context.Membership.EmailCount" />
+        <PaneLink Href="@($"{Path}/membership-{context.Membership.Id:D}?pane=templates")"
+                  Text="Templates"
+                  Count="context.Membership.EmailTemplateCount" />
+        <PaneLink Href="@($"{Path}/membership-{context.Membership.Id:D}?pane=tokens")"
+                  Text="Tokens"
+                  Count="context.Membership.TokenCount" />
+    </PaneLinks>
+</List>

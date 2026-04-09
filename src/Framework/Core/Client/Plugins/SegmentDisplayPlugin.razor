@@ -1,0 +1,43 @@
+﻿@namespace Crudspa.Framework.Core.Client.Plugins
+@PluginFragment
+
+@code
+{
+    [Parameter, EditorRequired] public String? TypeName { get; set; } = String.Empty;
+    [Parameter] public String? Path { get; set; }
+    [Parameter] public Guid? Id { get; set; }
+    [Parameter] public IEnumerable<NavPane>? Panes { get; set; }
+    [Parameter] public String? ConfigJson { get; set; }
+
+    public Object? Instance { get; private set; }
+
+    private RenderFragment PluginFragment => builder =>
+    {
+        if (TypeName.HasNothing())
+            throw new("TypeName was not supplied.");
+
+        var pluginType = Type.GetType(TypeName)
+            ?? throw new($"Component type '{TypeName}' not found.");
+
+        if (!typeof(ISegmentDisplay).IsAssignableFrom(pluginType))
+            throw new($"Interface '{nameof(ISegmentDisplay)}' is not implemented by the component '{TypeName}'.");
+
+        builder.OpenComponent(0, pluginType);
+
+        if (Path.HasSomething())
+            builder.AddAttribute(1, nameof(ISegmentDisplay.Path), Path);
+
+        if (Id.HasSomething())
+            builder.AddAttribute(2, nameof(ISegmentDisplay.Id), Id);
+
+        if (Panes is not null)
+            builder.AddAttribute(3, nameof(ISegmentDisplay.Panes), Panes);
+
+        if (ConfigJson.HasSomething())
+            builder.AddAttribute(4, nameof(ISegmentDisplay.ConfigJson), ConfigJson);
+
+        builder.AddComponentReferenceCapture(5, component => Instance = component);
+
+        builder.CloseComponent();
+    };
+}

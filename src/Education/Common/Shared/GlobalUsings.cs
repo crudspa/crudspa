@@ -1,0 +1,14 @@
+global using Crudspa.Content.Display.Shared.Contracts.Behavior;
+global using Crudspa.Content.Display.Shared.Contracts.Data;
+global using Crudspa.Content.Display.Shared.Contracts.Events;
+global using Crudspa.Education.Common.Shared.Contracts.Behavior;
+global using Crudspa.Education.Common.Shared.Contracts.Data;
+global using Crudspa.Education.Common.Shared.Contracts.Events;
+global using Crudspa.Framework.Core.Shared;
+global using Crudspa.Framework.Core.Shared.BaseClasses;
+global using Crudspa.Framework.Core.Shared.Contracts.Behavior;
+global using Crudspa.Framework.Core.Shared.Contracts.Data;
+global using Crudspa.Framework.Core.Shared.Contracts.Events;
+global using Crudspa.Framework.Core.Shared.Extensions;
+global using System.Collections.ObjectModel;
+global using System.ComponentModel;

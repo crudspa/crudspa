@@ -1,0 +1,100 @@
+@if (ChildContent is not null
+    || BooleanValue.HasValue
+    || DateTimeOffsetValue.HasValue
+    || DateOnlyValue.HasValue
+    || TimeOnlyValue.HasValue
+    || DecimalValue.HasValue
+    || IntegerValue.HasValue
+    || SingleValue.HasValue
+    || StringValue.HasSomething())
+{
+    <div class="c-labeled @CssClass">
+        <div class="label"
+             style="width: @Width; min-width: @Width;">
+            @Label
+        </div>
+        <div class="value @ComputedValueClass"
+             style="@(ExpectNoSpaces ? "word-break: break-all;" : String.Empty)">
+            @if (ChildContent is not null)
+            {
+                @ChildContent
+            }
+            else if (BooleanValue.HasValue)
+            {
+                <div style="margin-top: .1875em;">
+                    <span class="@(BooleanValue.Value ? "c-icon-check-square" : "c-icon-square")"></span>
+                </div>
+            }
+            else if (DateTimeOffsetValue.HasValue)
+            {
+                @(DateTimeString)
+            }
+            else if (DateOnlyValue.HasValue)
+            {
+                @(DateOnlyValue)
+            }
+            else if (TimeOnlyValue.HasValue)
+            {
+                @if (ValuePrefix.HasSomething())
+                {
+                    @ValuePrefix
+                }
+                @(TimeOnlyValue.Value.ToString(TimeFormat))
+                @if (ValueSuffix.HasSomething())
+                {
+                    @ValueSuffix
+                }
+            }
+            else if (DecimalValue.HasValue)
+            {
+                @if (ValuePrefix.HasSomething())
+                {
+                    @ValuePrefix
+                }
+                @(DecimalValue.Value.ToString(NumberFormat))
+                @if (ValueSuffix.HasSomething())
+                {
+                    @ValueSuffix
+                }
+            }
+            else if (SingleValue.HasValue)
+            {
+                @if (ValuePrefix.HasSomething())
+                {
+                    @ValuePrefix
+                }
+                @(SingleValue.Value.ToString(NumberFormat))
+                @if (ValueSuffix.HasSomething())
+                {
+                    @ValueSuffix
+                }
+            }
+            else if (IntegerValue.HasValue)
+            {
+                @if (ValuePrefix.HasSomething())
+                {
+                    @ValuePrefix
+                }
+                @(IntegerValue.Value.ToString(NumberFormat))
+                @if (ValueSuffix.HasSomething())
+                {
+                    @ValueSuffix
+                }
+            }
+            else if (StringValue.HasSomething())
+            {
+                if (StringUrl.HasSomething())
+                {
+                    <a href="@(StringUrl)"
+                       target="@(StringUrl.StartsWith("http") ? "_blank" : null)">
+                        @(StringValue)
+                    </a>
+                }
+                else
+                {
+                    @(StringValue)
+                }
+            }
+        </div>
+    </div>
+}

@@ -1,0 +1,189 @@
+@if (Contact is not null)
+{
+    <Wrapped>
+        <Field Label="First Name"
+               Size="Field.Sizes.Medium">
+            <TextBox ReadOnly="@ReadOnly"
+                     MaxLength="75"
+                     @bind-Value="Contact.FirstName" />
+        </Field>
+        <Field Label="Last Name"
+               Size="Field.Sizes.Medium">
+            <TextBox ReadOnly="@ReadOnly"
+                     MaxLength="75"
+                     @bind-Value="Contact.LastName" />
+        </Field>
+        <Field Label="Time Zone"
+               Size="Field.Sizes.MediumLarge">
+            <TimeZonePicker ReadOnly="@ReadOnly"
+                            @bind-Value="Contact.TimeZoneId" />
+        </Field>
+    </Wrapped>
+    @ChildContent
+    <BatchSection Title="User Account">
+        <HeadingPanel>
+            @if (User is not null && User.MaySignIn != true)
+            {
+                <ButtonCore Disabled="@ReadOnly"
+                            ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                            Text="Add"
+                            IconClass="c-icon-plus"
+                            Clicked="() => User.MaySignIn = true" />
+            }
+        </HeadingPanel>
+        <ChildContent>
+            @if (User is not null && User.MaySignIn == true)
+            {
+                <Padding Size="Padding.Sizes.Small"
+                         Direction="Padding.Directions.Vertical">
+                    <Wrapped NoWrap="true">
+                        <Wrapped Alignment="Wrapped.Alignments.Top"
+                                 Star="true">
+                            <Field Label="Username"
+                                   Size="Field.Sizes.MediumLarge">
+                                <TextBox ReadOnly="@ReadOnly"
+                                         MaxLength="75"
+                                         @bind-Value="User.Username" />
+                            </Field>
+                            <Field Label="Options"
+                                   Container="Field.Containers.Div">
+                                <Wrapped NoWrap="true">
+                                    <Checkbox Label="Reset Password"
+                                              ReadOnly="@ReadOnly"
+                                              @bind-Value="User.ResetPassword" />
+                                </Wrapped>
+                            </Field>
+                            @if (User.Roles.Count > 0)
+                            {
+                                <Field Size="Field.Sizes.MediumLarge"
+                                       Label="Roles"
+                                       Container="Field.Containers.Div">
+                                    <CheckedList Selectables="User.Roles"
+                                                 ReadOnly="@ReadOnly" />
+                                </Field>
+                            }
+                        </Wrapped>
+                        <Padding Size="Padding.Sizes.Small"
+                                 Direction="Padding.Directions.Right">
+                            <ButtonCore IconClass="c-icon-trash2"
+                                        ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                                        Clicked="() => User.MaySignIn = false"
+                                        Disabled="@ReadOnly" />
+                        </Padding>
+                    </Wrapped>
+                </Padding>
+            }
+            else
+            {
+                <Padding Size="Padding.Sizes.Medium"
+                         Direction="Padding.Directions.All">
+                    <Stacked Alignment="Stacked.Alignments.Center">
+                        <em>None</em>
+                    </Stacked>
+                </Padding>
+            }
+        </ChildContent>
+    </BatchSection>
+    <BatchSection Title="Email">
+        <HeadingPanel>
+            <ButtonAdd Disabled="@ReadOnly"
+                       Transparent="true"
+                       Clicked="() => AddEmail()">
+            </ButtonAdd>
+        </HeadingPanel>
+        <ChildContent>
+            <Batch Model="EmailModel"
+                   ReadOnly="@ReadOnly"
+                   NoRecordsText="None">
+                <EditView>
+                    <Padding Size="Padding.Sizes.Small"
+                             Direction="Padding.Directions.Vertical"
+                             @key="context">
+                        <Wrapped NoWrap="true">
+                            <Wrapped Star="true">
+                                <Field Label="Address"
+                                       Size="Field.Sizes.MediumLarge">
+                                    <TextBox ReadOnly="@ReadOnly"
+                                             MaxLength="75"
+                                             @bind-Value="context.Email" />
+                                </Field>
+                            </Wrapped>
+                        </Wrapped>
+                    </Padding>
+                </EditView>
+            </Batch>
+        </ChildContent>
+    </BatchSection>
+    <BatchSection Title="Phone">
+        <HeadingPanel>
+            <ButtonAdd Disabled="@ReadOnly"
+                       Transparent="true"
+                       Clicked="() => AddPhone()">
+            </ButtonAdd>
+        </HeadingPanel>
+        <ChildContent>
+            <Batch Model="PhoneModel"
+                   ReadOnly="@ReadOnly"
+                   NoRecordsText="None">
+                <EditView>
+                    <Padding Size="Padding.Sizes.Small"
+                             Direction="Padding.Directions.Vertical"
+                             @key="context">
+                        <Wrapped NoWrap="true">
+                            <Wrapped Star="true">
+                                <Field Label="Phone Number"
+                                       Size="Field.Sizes.Tiny">
+                                    <MaskedTextBox ReadOnly="@ReadOnly"
+                                                   Mask="(***) ***-****"
+                                                   CharacterPattern="[0-9]"
+                                                   Placeholder="(000) 000-0000"
+                                                   @bind-Value="@context.Phone" />
+                                </Field>
+                                <Field Label="Ext."
+                                       Size="Field.Sizes.Min">
+                                    <TextBox ReadOnly="@ReadOnly"
+                                             MaxLength="10"
+                                             @bind-Value="context.Extension" />
+                                </Field>
+                                <Field Label="Options"
+                                       Container="Field.Containers.Div">
+                                    <Wrapped NoWrap="true">
+                                        <Checkbox Label="Supports SMS"
+                                                  ReadOnly="@ReadOnly"
+                                                  @bind-Value="context.SupportsSms" />
+                                    </Wrapped>
+                                </Field>
+                            </Wrapped>
+                        </Wrapped>
+                    </Padding>
+                </EditView>
+            </Batch>
+        </ChildContent>
+    </BatchSection>
+    <BatchSection Title="Postal">
+        <HeadingPanel>
+            <ButtonAdd Disabled="@ReadOnly"
+                       Transparent="true"
+                       Clicked="() => AddPostal()">
+            </ButtonAdd>
+        </HeadingPanel>
+        <ChildContent>
+            <Batch Model="PostalModel"
+                   ReadOnly="@ReadOnly"
+                   NoRecordsText="None">
+                <EditView>
+                    <Padding Size="Padding.Sizes.Small"
+                             Direction="Padding.Directions.Vertical"
+                             @key="context">
+                        <Wrapped NoWrap="true">
+                            <Wrapped Star="true">
+                                <UsaPostalEdit ReadOnly="@ReadOnly"
+                                               UsaPostal="context.Postal" />
+                            </Wrapped>
+                        </Wrapped>
+                    </Padding>
+                </EditView>
+            </Batch>
+        </ChildContent>
+    </BatchSection>
+}

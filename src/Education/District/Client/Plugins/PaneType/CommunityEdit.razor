@@ -1,0 +1,87 @@
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+            }
+            else
+            {
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            }
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Modal Model="Model.AddStewardsModel"
+               Title="Add Stewards"
+               Width="32em"
+               TopMargin="2em">
+            <Content>
+                <CheckedList Selectables="Model.SelectableStewards" />
+            </Content>
+            <Buttons>
+                <ButtonOk Clicked="() => Model.AddStewards()" />
+                <ButtonCancel Clicked="() => Model.AddStewardsModel.Hide()" />
+            </Buttons>
+        </Modal>
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Name"
+                       Size="Field.Sizes.Large">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="100"
+                             @bind-Value="Model.Entity.Name" />
+                </Field>
+            </Wrapped>
+
+            <BatchSection Title="Stewards">
+                <HeadingPanel>
+                    <ButtonAdd EntityName="Stewards"
+                               Disabled="Model.ReadOnly"
+                               Transparent="true"
+                               Clicked="() => Model.ShowSelectableStewards()">
+                    </ButtonAdd>
+                </HeadingPanel>
+                <ChildContent>
+                    @if (Model.Entity.CommunityStewards.Count == 0)
+                    {
+                        <Padding Size="Padding.Sizes.Medium"
+                                 Direction="Padding.Directions.All">
+                            <Stacked Alignment="Stacked.Alignments.Center">
+                                <em>None</em>
+                            </Stacked>
+                        </Padding>
+                    }
+                    @foreach (var steward in Model.Entity.CommunityStewards.OrderBy(x => x.Name))
+                    {
+                        <Padding Direction="Padding.Directions.Horizontal"
+                                 Size="Padding.Sizes.Small">
+                            <Border Direction="Border.Directions.Bottom">
+                                <Padding Direction="Padding.Directions.Vertical"
+                                         Size="Padding.Sizes.Tiny">
+                                    <Padding Direction="Padding.Directions.Horizontal"
+                                             Size="Padding.Sizes.Small">
+                                        <Wrapped NoWrap="true">
+                                            <div class="star">
+                                                <a href="@(Path.Parent())/district-contact-@(steward.DistrictContactId)">@(steward.Name)</a>
+                                            </div>
+                                            <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Transparent"
+                                                         Disabled="Model.ReadOnly">
+                                                <BatchMenuItems RemoveClicked="() => Model.RemoveSteward(steward.Id)" />
+                                            </ContextMenu>
+                                        </Wrapped>
+                                    </Padding>
+                                </Padding>
+                            </Border>
+                        </Padding>
+                    }
+                </ChildContent>
+            </BatchSection>
+        </Padding>
+    }
+</Waiter>

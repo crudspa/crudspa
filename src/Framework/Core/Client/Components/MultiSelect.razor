@@ -1,0 +1,10 @@
+﻿@using G = System.Collections.Generic
+<RadzenDropDown AllowClear="false"
+                AllowSelectAll="false"
+                Chips="true"
+                Data="LookupValues"
+                Multiple="true"
+                TextProperty="Name"
+                Value="SelectedValues"
+                ValueChanged="(G.List<Guid?> list) => SelectedValuesChanged.InvokeAsync(list)"
+                ValueProperty="Id" />

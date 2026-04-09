@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>Crudspa.Education.Provider.Server</AssemblyName>
+    <RootNamespace>Crudspa.Education.Provider.Server</RootNamespace>
+    <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Content\Design\Server\Server.csproj" />
+    <ProjectReference Include="..\..\Common\Server\Server.csproj" />
+    <ProjectReference Include="..\Shared\Shared.csproj" />
+    <ProjectReference Include="..\..\..\Framework\Jobs\Server\Server.csproj" />
+    <ProjectReference Include="..\..\..\Framework\Jobs\Shared\Shared.csproj" />
+  </ItemGroup>
+</Project>

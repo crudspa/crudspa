@@ -1,0 +1,91 @@
+<ManyOrderables Model="Model"
+                T="ShirtOptionModel"
+                EntityName="Shirt Option"
+                SaveRequested="id => Model.Save(id)"
+                CancelRequested="id => Model.Cancel(id)"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Star">
+            <Labeled Width="6em"
+                     Label="SKU Base"
+                     StringValue="@context.ShirtOption.SkuBase" />
+            <Labeled Width="6em"
+                     Label="Price"
+                     SingleValue="@context.ShirtOption.Price"
+                     NumberFormat="#,##0.00"
+                     ValuePrefix="$" />
+        </Field>
+        <Field Size="Field.Sizes.Full">
+            <LabeledRelations Label="Sizes"
+                              Width="6em"
+                              Selectables="context.ShirtOption.Sizes"
+                              All="context.ShirtOption.AllSizes" />
+        </Field>
+    </ReadView>
+    <EditView>
+        <Wrapped Alignment="Wrapped.Alignments.Top">
+            <Field Label="SKU Base"
+                   Size="Field.Sizes.Large">
+                <TextBox ReadOnly="@false"
+                         MaxLength="40"
+                         @bind-Value="context.ShirtOption.SkuBase" />
+            </Field>
+            <Field Label="Price"
+                   Size="Field.Sizes.Small">
+                <NumericTextBox ReadOnly="@false"
+                                Format="#,##0.00"
+                                Prefix="$"
+                                @bind-Value="context.ShirtOption.Price" />
+            </Field>
+        </Wrapped>
+        @if (context.SelectingColor)
+        {
+            <Wrapped>
+                <Field Label="Color"
+                       Size="Field.Sizes.Wide">
+                    <Wrapped NoWrap="true">
+                        <Dropdown ReadOnly="@false"
+                                  LookupValues="Model.ColorNames"
+                                  @bind-Value="context.ShirtOption.ColorId" />
+                        <ButtonGroup Margin="ButtonGroup.Margins.TinyHor">
+                            <ButtonCore IconClass="c-icon-check"
+                                        Clicked="() => Model.Save(context.Id)" />
+                            <ButtonCore IconClass="c-icon-cross"
+                                        ButtonStyle="ButtonCore.ButtonStyles.Cancel"
+                                        Clicked="() => context.CancelColorSelection()" />
+                        </ButtonGroup>
+                    </Wrapped>
+                </Field>
+            </Wrapped>
+        }
+        else
+        {
+            <Wrapped>
+                <Field Label="Color"
+                       Size="Field.Sizes.Larger">
+                    <Wrapped NoWrap="true">
+                        <TextBox ReadOnly="@true"
+                                 @bind-Value="context.ShirtOption.ColorName" />
+                        <ButtonGroup Margin="ButtonGroup.Margins.TinyHor">
+                            <ButtonCore IconClass="c-icon-pencil"
+                                        Clicked="() => context.StartColorSelection()" />
+                        </ButtonGroup>
+                    </Wrapped>
+                </Field>
+            </Wrapped>
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Sizes"
+                       Size="Field.Sizes.Large"
+                       Container="Field.Containers.Div">
+                    <BoolRadio TrueLabel="All"
+                               FalseLabel="Specific"
+                               @bind-SelectedValue="context.ShirtOption.AllSizes" />
+                    <CheckedList ReadOnly="context.ShirtOption.AllSizes == true"
+                                 Selectables="context.ShirtOption.Sizes" />
+                </Field>
+            </Wrapped>
+        }
+    </EditView>
+</ManyOrderables>

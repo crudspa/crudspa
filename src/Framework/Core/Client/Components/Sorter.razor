@@ -1,0 +1,38 @@
+<div class="c-field">
+    <div class="c-label-with-buttons">
+        <div class="label">Sort</div>
+        <div class="label-buttons">
+            <button @onclick="HandleAscendingChanged">
+                <div class="label-button">
+                    <div class="icon">
+                        @if (Ascending == true)
+                        {
+                            <span class="c-icon-chevron-up"></span>
+                        }
+                        else
+                        {
+                            <span class="c-icon-chevron-down"></span>
+                        }
+                    </div>
+                </div>
+            </button>
+        </div>
+    </div>
+    <div class="c-wrap"
+         style="max-width: 100%;">
+        @foreach (var sort in Sorts)
+        {
+            <div class="c-radio">
+                <input id="@(InstanceId)-@(sort)"
+                       name="@(InstanceId)"
+                       type="radio"
+                       checked="@(Selected.IsBasically(sort))"
+                       @onchange="() => HandleSortChanged(sort)">
+                <label for="@(InstanceId)-@(sort)"
+                       class="label">
+                    @(sort)
+                </label>
+            </div>
+        }
+    </div>
+</div>

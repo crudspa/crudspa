@@ -1,0 +1,68 @@
+<Toolbar>
+    <Left>
+        @if (Model.ReadOnly)
+        {
+            <ButtonEdit Clicked="() => Model.Edit()" />
+        }
+        else
+        {
+            <ButtonGroup>
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            </ButtonGroup>
+        }
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Title"
+                       Size="Field.Sizes.Wide">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="150"
+                             @bind-Value="Model.Entity.Title" />
+                </Field>
+                <Field Label="Status"
+                       Size="Field.Sizes.Unspecified">
+                    <StatusEdit ReadOnly="Model.ReadOnly"
+                                LookupValues="Model.ContentStatusNames"
+                                ColorClassFrom="ContentStatusColors.For"
+                                @bind-Value="Model.Entity.StatusId" />
+                </Field>
+                <Field Label="Author"
+                       Size="Field.Sizes.Wide">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="150"
+                             @bind-Value="Model.Entity.Author" />
+                </Field>
+                <Field Label="Published"
+                       Size="Field.Sizes.Tiny">
+                    <DatePicker ReadOnly="Model.ReadOnly"
+                                Format="d"
+                                @bind-Value="Model.Entity.Published" />
+                </Field>
+                <Field Label="Revised"
+                       Size="Field.Sizes.Tiny">
+                    <DatePicker ReadOnly="Model.ReadOnly"
+                                Format="d"
+                                @bind-Value="Model.Entity.Revised" />
+                </Field>
+                <Field Label="Comments"
+                       Size="Field.Sizes.Medium">
+                    <EnumDropdown ReadOnly="Model.ReadOnly"
+                                  TEnum="Post.CommentRules"
+                                  @bind-SelectedValue="Model.Entity.CommentRule" />
+                </Field>
+                <Field Label="Page Type"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown ReadOnly="Model.ReadOnly"
+                              LookupValues="Model.PageTypeNames"
+                              @bind-Value="Model.Entity.Page.TypeId" />
+                </Field>
+            </Wrapped>
+        </Padding>
+    }
+</Waiter>

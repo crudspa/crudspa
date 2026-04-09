@@ -1,0 +1,15 @@
+create table [Education].[Report] (
+    [Id] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [PortalId] uniqueidentifier not null,
+    [IconId] uniqueidentifier not null,
+    [DisplayView] nvarchar(150) not null,
+    [Name] nvarchar(75) not null,
+    [Description] nvarchar(max) not null,
+    [PermissionId] uniqueidentifier null,
+    [Ordinal] int not null,
+    constraint [PK_Education_Report] primary key clustered ([Id]),
+    constraint [FK_Education_Report_Portal] foreign key ([PortalId]) references [Framework].[Portal] ([Id]),
+    constraint [FK_Education_Report_Icon] foreign key ([IconId]) references [Framework].[Icon] ([Id]),
+    constraint [FK_Education_Report_Permission] foreign key ([PermissionId]) references [Framework].[Permission] ([Id]),
+);

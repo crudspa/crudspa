@@ -1,0 +1,13 @@
+﻿<Waiter Model="Model">
+    @if (Model.Chapter is not null)
+    {
+        <Padding Direction="Padding.Directions.Horizontal"
+                 Size="Padding.Sizes.Medium">
+            <BinderDisplayPlugin Path="@Path"
+                                 Id="@Model.Chapter.BinderId"
+                                 TypeName="@Model.Chapter.BinderDisplayView"
+                                 BinderCompleted="() => Model.HandleBinderCompleted()"
+                                 Shadowed="true" />
+        </Padding>
+    }
+</Waiter>

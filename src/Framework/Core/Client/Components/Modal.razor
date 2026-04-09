@@ -1,0 +1,34 @@
+@if (Model is not null && Model.Visible)
+{
+    <div id="@($"{Model.Id:D}")"
+         class="@(ModalClasses)"
+         style="z-index: @(ZIndex);">
+        <div class="window"
+             style="@(WindowStyles)">
+            @if (Model.Title.HasSomething())
+            {
+                <div class="title">
+                    <div class="text">@Model.Title</div>
+                    <div class="close-button">
+                        <a @onclick="() => Model.Hide()">
+                            <span class="c-icon-cross"></span>
+                        </a>
+                    </div>
+                </div>
+            }
+            <Waiter Model="Model">
+                <div class="content @(NoPadding ? "no-padding" : String.Empty)">
+                    @Content
+                </div>
+                @if (Buttons is not null)
+                {
+                    <div class="well center">
+                        <div class="buttons">
+                            @Buttons
+                        </div>
+                    </div>
+                }
+            </Waiter>
+        </div>
+    </div>
+}

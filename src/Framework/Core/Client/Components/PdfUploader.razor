@@ -1,0 +1,100 @@
+@using Microsoft.AspNetCore.Components.Forms
+
+<div class="c-uploader"
+     disabled="@ReadOnly">
+
+    <div class="header">
+
+        <div class="icon">
+            <span class="c-icon-file-pdf"></span>
+        </div>
+
+        <div class="name">
+            @if (PdfFile.Name.HasSomething())
+            {
+                @if (PdfFile.Id.HasSomething())
+                {
+                    <a href="/api/framework/core/pdf-file/fetch?id=@($"{PdfFile.Id:D}")&download=true&original=true"
+                       target="_blank">
+                        @(PdfFile.Name)
+                    </a>
+                }
+                else
+                {
+                    @(PdfFile.Name)
+                }
+            }
+            else
+            {
+                <span class="none">None</span>
+            }
+        </div>
+
+        @if (!ReadOnly)
+        {
+            <div class="buttons">
+                <button @onclick="Clear"
+                        disabled="@ReadOnly">
+                    <div class="c-button transparent">
+                        <div class="icon">
+                            <span class="c-icon-trash2"></span>
+                        </div>
+                    </div>
+                </button>
+            </div>
+        }
+
+    </div>
+
+    @if (!ReadOnly)
+    {
+        <div class="c-full">
+            <Field Label="File"
+                   Size="Field.Sizes.Full"
+                   Padding="Field.Paddings.TightHor">
+
+                <div class="c-pdf-uploader">
+
+                    <div class="c-nowrap picker">
+
+                        <label class="c-button"
+                               for="@($"input{InstanceId:N}")">
+                            Browse...
+                        </label>
+
+                        <div class="c-padding-small-hor">
+                            Browse or drop files here
+                        </div>
+
+                        <InputFile id="@($"input{InstanceId:N}")"
+                                   accept="@Accept"
+                                   disabled="@ReadOnly"
+                                   OnChange="HandleFileChanged"
+                                   @key="InstanceId" />
+                    </div>
+
+                    @if (PdfFile.Name.HasSomething() && PdfFile.Id is null)
+                    {
+                        <div class="c-wrap c-padding-small-vert">
+                            <div class="star">
+                                @if (PdfFile.UploadProgress > 0)
+                                {
+                                    <div class="progress-bar-wrapper">
+                                        <div class="progress-bar"
+                                             style="width: @($"{PdfFile.UploadProgress}%")">
+                                            <span class="progress-text">Uploading...</span>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="status-text">@(PdfFile.UploadStatus)</div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            </Field>
+        </div>
+    }
+</div>

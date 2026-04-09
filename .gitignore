@@ -1,0 +1,68 @@
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+*.lock.json
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+build/
+[Bb]in/
+[Oo]bj/
+packages/
+*.pdb
+
+# MSTest
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Visual Studio cache/options directory
+.vs/
+
+# ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# SQL Server files
+*.mdf
+*.ldf
+*.jfm
+*.dbmdl
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Redis data
+Redis*.dat
+
+# npm
+node_modules/
+
+# NuGet Files
+*.nupkg
+*.nuget.props
+*.nuget.targets
+
+# SSMS
+FontsAndColorsBackup*.vssettings
+
+# Tools for Apache Cordova
+src/Ui/*Taco/bld
+src/Ui/*Taco/platforms
+src/Ui/*Taco/simulation
+
+# Others
+*.Cache
+ClientBin/
+~$*
+*~
+Wasm/Properties/launchSettings.json

@@ -1,0 +1,25 @@
+@if (Primary)
+{
+    <Waiter Model="Model">
+        <div style="min-height: @(Model.Waiting ? "16rem" : "0");">
+            <link rel="stylesheet"
+                  href="@Href"
+                  @onload="HandleLoaded"
+                  @onerror="HandleError"
+                  @key="Href" />
+
+            @if (!Model.Waiting && _ready)
+            {
+                <div class="@Class">
+                    @ChildContent
+                </div>
+            }
+        </div>
+    </Waiter>
+}
+else
+{
+    <div class="@Class">
+        @ChildContent
+    </div>
+}

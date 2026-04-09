@@ -1,0 +1,31 @@
+﻿@namespace Crudspa.Framework.Jobs.Client.Plugins
+@PluginFragment
+
+@code
+{
+    [Parameter, EditorRequired] public String? TypeName { get; set; } = String.Empty;
+    [Parameter] public String? ConfigJson { get; set; }
+
+    public Object? Instance { get; private set; }
+
+    private RenderFragment PluginFragment => builder =>
+    {
+        if (TypeName.HasNothing())
+            throw new("TypeName was not supplied.");
+
+        var pluginType = Type.GetType(TypeName)
+            ?? throw new($"Component type '{TypeName}' not found.");
+
+        if (!typeof(IJobDesign).IsAssignableFrom(pluginType))
+            throw new($"Interface '{nameof(IJobDesign)}' is not implemented by the component '{TypeName}'.");
+
+        builder.OpenComponent(0, pluginType);
+
+        if (ConfigJson.HasSomething())
+            builder.AddAttribute(1, nameof(IJobDesign.ConfigJson), ConfigJson);
+
+        builder.AddComponentReferenceCapture(2, component => Instance = component);
+
+        builder.CloseComponent();
+    };
+}

@@ -1,0 +1,30 @@
+﻿@if (MoveUpClicked.HasDelegate)
+{
+    <MenuItem Text="Move Up"
+              Icon="c-icon-chevron-up"
+              Clicked="MoveUpClicked" />
+}
+@if (MoveDownClicked.HasDelegate)
+{
+    <MenuItem Text="Move Down"
+              Icon="c-icon-chevron-down"
+              Clicked="MoveDownClicked" />
+}
+@if (MoveLeftClicked.HasDelegate)
+{
+    <MenuItem Text="Move Left"
+              Icon="c-icon-chevron-left"
+              Clicked="MoveLeftClicked" />
+}
+@if (MoveRightClicked.HasDelegate)
+{
+    <MenuItem Text="Move Right"
+              Icon="c-icon-chevron-right"
+              Clicked="MoveRightClicked" />
+}
+@if (RemoveClicked.HasDelegate)
+{
+    <MenuItem Text="Remove"
+              Icon="c-icon-trash2"
+              Clicked="RemoveClicked" />
+}

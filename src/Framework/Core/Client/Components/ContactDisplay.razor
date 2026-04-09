@@ -1,0 +1,50 @@
+@if (Contact is not null)
+{
+    <Field Size="Field.Sizes.Larger">
+        <Labeled Width="6em"
+                 Label="Time Zone"
+                 StringValue="@(Contact.TimeZoneId)" />
+        @if (User is not null && User.MaySignIn == true)
+        {
+            <Labeled Width="6em"
+                     Label="Username"
+                     StringValue="@(User.Username)"
+                     ExpectNoSpaces="true" />
+            <Labeled Width="6em"
+                     Label="Reset Pwd"
+                     BooleanValue="User.ResetPassword" />
+            <LabeledSelections Width="6em"
+                               Label="Roles"
+                               Selectables="User.Roles" />
+        }
+    </Field>
+
+    @ChildContent
+
+    @if (Contact.Emails.Count > 0 || Contact.Phones.Count > 0 || Contact.Postals.Count > 0)
+    {
+        <Field Size="Field.Sizes.Unspecified">
+            @foreach (var email in Contact.Emails)
+            {
+                <Labeled Width="6em"
+                         Label="Email"
+                         StringValue="@(email.Email)"
+                         ExpectNoSpaces="true" />
+            }
+
+            @foreach (var phone in Contact.Phones)
+            {
+                <Labeled Width="6em"
+                         Label="Phone"
+                         StringValue="@(phone.Phone)" />
+            }
+
+            @foreach (var postal in Contact.Postals)
+            {
+                <Labeled Width="6em"
+                         Label="Postal"
+                         StringValue="@(postal.Postal.StreetAddress)" />
+            }
+        </Field>
+    }
+}

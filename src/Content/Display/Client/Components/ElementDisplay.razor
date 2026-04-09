@@ -1,0 +1,47 @@
+@using Crudspa.Content.Display.Client.Extensions
+@using Crudspa.Content.Display.Client.Models
+<div @key="Model.Element"
+     id="box@($"{Model.Element.Id:N}")"
+     class="c-element @(Model.Element.Box.BoxClasses())"
+     style="@ElementStyles()">
+
+    @if (Model.Element.ElementType?.DisplayView is not null)
+    {
+        @if (Model.Element.ElementType!.SupportsInteraction == true && Model.Element.RequireInteraction == true)
+        {
+            <div class="c-nowrap">
+
+                <div class="completion">&nbsp;</div>
+
+                <div class="star">
+                    <ElementDisplayPlugin TypeName="@Model.Element.ElementType.DisplayView"
+                                          ElementModel="@Model" />
+                </div>
+                <div class="completion">
+                    <div class="status-icon">
+                        @switch (Model.CompletionStatus)
+                        {
+                            case ElementDisplayModel.CompletionStatuses.Error:
+                                <img src="/api/content/display/images/exclamation"
+                                     alt="Error" />
+                                break;
+                            case ElementDisplayModel.CompletionStatuses.Incomplete:
+                                <img src="/api/content/display/images/check-empty"
+                                     alt="Incomplete" />
+                                break;
+                            case ElementDisplayModel.CompletionStatuses.Complete:
+                                <img src="/api/content/display/images/check-filled"
+                                     alt="Complete" />
+                                break;
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <ElementDisplayPlugin TypeName="@Model.Element.ElementType.DisplayView"
+                                  ElementModel="@Model" />
+        }
+    }
+</div>

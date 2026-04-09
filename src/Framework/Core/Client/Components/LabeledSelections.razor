@@ -1,0 +1,21 @@
+﻿<div class="c-labeled">
+    <div class="label"
+         style="width: @Width; min-width: @Width;">
+        @Label
+    </div>
+    <div class="value">
+        <ul>
+            @if (Selectables.Count(x => x.Selected == true) == 0)
+            {
+                <li>None</li>
+            }
+            else
+            {
+                foreach (var selectable in Selectables.Where(x => x.Selected == true))
+                {
+                    <li>@(selectable.Name)</li>
+                }
+            }
+        </ul>
+    </div>
+</div>

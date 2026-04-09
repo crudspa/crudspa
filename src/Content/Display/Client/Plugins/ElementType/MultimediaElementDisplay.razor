@@ -1,0 +1,42 @@
+@using Crudspa.Content.Display.Client.Extensions
+<div @key="MultimediaElement"
+     style="@(MultimediaElement.Container.ContainerStyles())">
+
+    @foreach (var multimediaItem in MultimediaItems)
+    {
+        <div id="box@($"{multimediaItem.Id:N}")"
+             class="@(multimediaItem.Box.BoxClasses())"
+             style="@(multimediaItem.Item.ItemStyles()) @(multimediaItem.Box.BoxStyles())">
+
+            @switch (multimediaItem.MediaTypeIndex)
+            {
+                case MultimediaItem.MediaTypes.Audio:
+                    <AudioPlayer AudioFile="multimediaItem.AudioFile"
+                                 PlayText="Listen"
+                                 StopText="Listen"
+                                 PlayIcon="c-icon-volume-high"
+                                 StopIcon="c-icon-volume-high"
+                                 MediaPlayed="HandleAudioPlayed" />
+                    break;
+
+                case MultimediaItem.MediaTypes.Button:
+                    <ButtonDisplay Button="multimediaItem.Button"
+                                   ButtonClicked="HandleButtonClicked" />
+                    break;
+
+                case MultimediaItem.MediaTypes.Image:
+                    <Image ImageFile="multimediaItem.ImageFile" />
+                    break;
+
+                case MultimediaItem.MediaTypes.Text:
+                    <UserHtml Html="@(multimediaItem.Text!)" />
+                    break;
+
+                case MultimediaItem.MediaTypes.Video:
+                    <VideoPlayer VideoFile="multimediaItem.VideoFile"
+                                 MediaPlayed="HandleVideoPlayed" />
+                    break;
+            }
+        </div>
+    }
+</div>

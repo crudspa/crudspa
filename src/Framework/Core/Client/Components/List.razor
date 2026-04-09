@@ -1,0 +1,80 @@
+@typeparam T
+<Toolbar>
+    <Left>
+        @if (ShowFilter)
+        {
+            <Field Size="Field.Sizes.Medium"
+                   Padding="Field.Paddings.None">
+                <TextBox Placeholder="Filter..."
+                         Value="@Model.Filter"
+                         ValueChanged="filter => Model.HandleFilterChanged(filter)" />
+            </Field>
+        }
+    </Left>
+    <Right>
+        <ButtonGroup>
+            @if (ShowAdd)
+            {
+                <ButtonAdd EntityName="@EntityName"
+                           Clicked="AddNew" />
+            }
+            <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Create">
+                <MenuItem Type="MenuItem.Types.Refresh"
+                          Clicked="() => Model.Refresh()" />
+                @if (ToolbarMenuItems is not null)
+                {
+                    @ToolbarMenuItems
+                }
+            </ContextMenu>
+        </ButtonGroup>
+    </Right>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Modals is not null)
+    {
+        @Modals
+    }
+    @if (Model.Cards.IsEmpty())
+    {
+        <NoRecords EntityName="@EntityName.PluralizeNaively().ToLower()" />
+    }
+    else
+    {
+        @foreach (var card in Model.Cards.OrderBy(x => x.SortIndex))
+        {
+            <Card Model="card"
+                  @key="card.Entity"
+                  Title="@card.Entity.Name"
+                  ShowPaneLinks="@(PaneLinks is not null)"
+                  SupportsDelete="true"
+                  DeleteRequested="() => DeleteRequested.InvokeAsync(card.Entity.Id)">
+                <Values>
+                    @ReadView(card.Entity)
+                </Values>
+                <PaneLinks>
+                    @if (PaneLinks is not null)
+                    {
+                        @PaneLinks!(card.Entity)
+                    }
+                </PaneLinks>
+                <Buttons>
+                    @if (ShowView)
+                    {
+                        <ButtonView Href="@($"{UrlPrefix}-{card.Entity.Id:D}{UrlSuffix}")" />
+                    }
+                    @if (ShowDelete || CardMenuItems is not null)
+                    {
+                        <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.View">
+                            <MenuItem Type="MenuItem.Types.Delete"
+                                      Clicked="() => card.ConfirmationModel.Visible = true" />
+                            @if (CardMenuItems is not null)
+                            {
+                                @CardMenuItems(card.Entity)
+                            }
+                        </ContextMenu>
+                    }
+                </Buttons>
+            </Card>
+        }
+    }
+</Waiter>

@@ -1,0 +1,18 @@
+create table [Framework].[VideoFile] (
+    [Id] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [BlobId] uniqueidentifier not null,
+    [Name] nvarchar(150) not null,
+    [Format] nvarchar(10) not null,
+    [Width] int null,
+    [Height] int null,
+    [OptimizedStatus] int default(0) not null,
+    [OptimizedBlobId] uniqueidentifier null,
+    [OptimizedFormat] nvarchar(10) null,
+    [OptimizedBatchId] uniqueidentifier null,
+    [PosterBlobId] uniqueidentifier null,
+    [PosterFormat] nvarchar(10) null,
+    constraint [PK_Framework_VideoFile] primary key clustered ([Id]),
+);

@@ -1,0 +1,57 @@
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+            }
+            else
+            {
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            }
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Title"
+                       Size="Field.Sizes.Wide">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="150"
+                             @bind-Value="Model.Entity.Title" />
+                </Field>
+                <Field Label="Status"
+                       Size="Field.Sizes.Unspecified">
+                    <StatusEdit ReadOnly="Model.ReadOnly"
+                                LookupValues="Model.ContentStatusNames"
+                                ColorClassFrom="ContentStatusColors.For"
+                                @bind-Value="Model.Entity.StatusId" />
+                </Field>
+                <Field Label="Author"
+                       Size="Field.Sizes.Wide">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="150"
+                             @bind-Value="Model.Entity.Author" />
+                </Field>
+                <Field Label="Description"
+                       Size="Field.Sizes.Full"
+                       Container="Field.Containers.Div">
+                    <HtmlEditor ReadOnly="Model.ReadOnly"
+                                @bind-Value="Model.Entity.Description" />
+                </Field>
+                <Field Label="Image"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <ImageUploader ReadOnly="Model.ReadOnly"
+                                   Required="false"
+                                   ImageFile="Model.Entity.ImageFile" />
+                </Field>
+            </Wrapped>
+        </Padding>
+    }
+</Waiter>

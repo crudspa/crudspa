@@ -1,0 +1,62 @@
+@if (HasAudio)
+{
+    <audio id="@($"{InstanceId:D}-{AudioFile!.Id:D}")"
+           src="@SourceUrl"
+           class="@(ShowNative && !Hidden ? String.Empty : "hidden")"
+           preload="@(AutoPlay ? "auto" : "metadata")"
+           controls="@ShowNative"
+           playsinline>
+    </audio>
+
+    @if (!Hidden && !ShowNative)
+    {
+        @if (Unplayable)
+        {
+            <div class="c-error-colors">
+                Audio could not be loaded.
+            </div>
+        }
+        else if (!Playing)
+        {
+            <button @onclick="Play">
+                <div class="c-button media @(Compact ? "circle small" : String.Empty)">
+                    @if (PlayText.HasNothing() && !Compact)
+                    {
+                        <div class="text"
+                             style="padding-left: 0; padding-right: 0;">
+                            &nbsp;
+                        </div>
+                    }
+                    <div class="icon">
+                        <span class="@PlayIcon"></span>
+                    </div>
+                    @if (PlayText.HasSomething() && !Compact)
+                    {
+                        <div class="text">@PlayText</div>
+                    }
+                </div>
+            </button>
+        }
+        else
+        {
+            <button @onclick="Stop">
+                <div class="c-button media playing @(Compact ? "circle small" : String.Empty)">
+                    @if (StopText.HasNothing() && !Compact)
+                    {
+                        <div class="text"
+                             style="padding-left: 0; padding-right: 0;">
+                            &nbsp;
+                        </div>
+                    }
+                    <div class="icon">
+                        <span class="@StopIcon"></span>
+                    </div>
+                    @if (StopText.HasSomething() && !Compact)
+                    {
+                        <div class="text">@StopText</div>
+                    }
+                </div>
+            </button>
+        }
+    }
+}

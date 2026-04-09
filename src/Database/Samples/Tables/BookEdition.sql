@@ -1,0 +1,17 @@
+create table [Samples].[BookEdition] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [BookId] uniqueidentifier not null,
+    [FormatId] uniqueidentifier not null,
+    [Sku] nvarchar(40) not null,
+    [Price] real not null,
+    [ReleasedOn] date null,
+    [InPrint] bit default(1) not null,
+    [Ordinal] int not null,
+    constraint [PK_Samples_BookEdition] primary key clustered ([Id]),
+    constraint [FK_Samples_BookEdition_Book] foreign key ([BookId]) references [Samples].[Book] ([Id]),
+    constraint [FK_Samples_BookEdition_Format] foreign key ([FormatId]) references [Samples].[Format] ([Id]),
+);

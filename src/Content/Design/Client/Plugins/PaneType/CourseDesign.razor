@@ -1,0 +1,22 @@
+﻿@using Crudspa.Content.Display.Shared.Contracts.Config.PaneType
+<Waiter Model="Model">
+    @if (Model.Courses.HasItems())
+    {
+        <Wrapped Alignment="Wrapped.Alignments.Top">
+            <Field Label="Course ID"
+                   Size="Field.Sizes.Large"
+                   Container="Field.Containers.Div">
+                <EnumRadio TEnum="CourseConfig.IdSources"
+                           @bind-SelectedValue="@Model.Config.IdSource"
+                           RadioCssClass="tight-bottom"
+                           ReadOnly="@ReadOnly" />
+                @if (Model.Config.IdSource == CourseConfig.IdSources.SpecificCourse)
+                {
+                    <Dropdown LookupValues="Model.Courses"
+                              ReadOnly="@ReadOnly"
+                              @bind-Value="Model.Config.CourseId" />
+                }
+            </Field>
+        </Wrapped>
+    }
+</Waiter>

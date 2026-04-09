@@ -1,0 +1,10 @@
+@if (Model.Entity is not null)
+{
+    <PageListForBinder Id="Model.Entity.Binder.Id"
+                       Path="@Path"
+                       AddPage="AddPage"
+                       FetchPages="binderId => CourseService.FetchPages(new(new() { CourseId = Model.Entity.Id }))"
+                       FetchPage="pageId => CourseService.FetchPage(new(new() { CourseId = Model.Entity.Id, Page = new() { Id = pageId } }))"
+                       RemovePage="pageId => CourseService.RemovePage(new(new() { CourseId = Model.Entity.Id, Page = new() { Id = pageId } }))"
+                       SavePageOrder="pages => CourseService.SavePageOrder(new(new() { CourseId = Model.Entity.Id, Pages = pages }))" />
+}

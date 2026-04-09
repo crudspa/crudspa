@@ -1,0 +1,69 @@
+﻿<div class="c-full c-centered c-overlay-parent">
+
+    @if (Model.Activity.ContextAudioFile.Id.HasSomething())
+    {
+        <Padding Size="Padding.Sizes.Small">
+            <AudioPlayer AudioFile="Model.Activity.ContextAudioFile"
+                         PlayText="Listen"
+                         StopText="Listen"
+                         PlayIcon="c-icon-volume-high"
+                         StopIcon="c-icon-volume-high"
+                         MediaPlayed="HandleContextAudioPlayed">
+            </AudioPlayer>
+        </Padding>
+    }
+
+    @if (AssignmentBatchId.HasValue)
+    {
+        <h2>@(Model.Activity.ContentAreaAppNavText)</h2>
+    }
+
+    @if (Model.Activity.ContextText.HasSomething())
+    {
+        <div class="cec-context-text">
+            @(Model.Activity.ContextText)
+        </div>
+    }
+
+    @if (!Model.Bouncing)
+    {
+        <button @onclick="() => Model.Start()">
+            <div class="c-button primary c-padding-large-hor">
+                <div class="text">Start</div>
+            </div>
+        </button>
+    }
+    else
+    {
+        <button @onclick="() => Model.Stop()">
+            <div class="c-button secondary c-padding-large-hor">
+                <div class="text">Stop</div>
+            </div>
+        </button>
+    }
+
+    <div class="c-wrap center c-padding-medium-vert"
+         style="min-height: 16em;">
+
+        @foreach (var option in Model.Options)
+        {
+            <button class="cec-catch-choice c-margin-small"
+                    style="@(option.PositionStyle)"
+                    @onclick="() => Model.SelectChoice(option.Choice.Id!.Value)"
+                    @key="option.Choice.Id">
+                <div class="button-content c-button center @(option.StateClass)"
+                     style="position: relative;">
+                    <ImageDiv Width="160"
+                              ImageFile="Model.Activity.ContextImageFile" />
+                    <AudioPlayer Hidden="true"
+                                 AudioFile="option.Choice.AudioFile"
+                                 @ref="option.AudioPlayerElement" />
+                    <div class="catch-text">
+                        @(option.Choice.Text)
+                    </div>
+                </div>
+            </button>
+        }
+    </div>
+
+</div>

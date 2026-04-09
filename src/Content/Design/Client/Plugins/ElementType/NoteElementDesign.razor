@@ -1,0 +1,57 @@
+﻿<Wrapped Alignment="Wrapped.Alignments.Top">
+    <Field Label="Note - Instructions"
+           Size="Field.Sizes.Full">
+        <MultilineTextBox Height="MultilineTextBox.Heights.Average"
+                          ReadOnly="ReadOnly"
+                          @bind-Value="Note.Instructions" />
+    </Field>
+    <Field Label="Note - Image"
+           Size="Field.Sizes.Large"
+           Container="Field.Containers.Div">
+        <ImageUploader ReadOnly="ReadOnly"
+                       Required="false"
+                       Width="360"
+                       ImageFile="Note.ImageFileFile" />
+    </Field>
+    <Field Label="Options"
+           Container="Field.Containers.Div">
+        <Wrapped NoWrap="true">
+            <Checkbox Label="Require Text"
+                      ReadOnly="ReadOnly"
+                      @bind-Value="Note.RequireText" />
+            <Checkbox Label="Require Image Selection"
+                      ReadOnly="ReadOnly"
+                      @bind-Value="Note.RequireImageSelection" />
+        </Wrapped>
+    </Field>
+</Wrapped>
+@if (Note.RequireImageSelection == true)
+{
+    <BatchSection Title="Image Choices">
+        <HeadingPanel>
+            <ButtonAdd EntityName="Choice"
+                       Disabled="ReadOnly"
+                       Transparent="true"
+                       Clicked="AddImageChoice">
+            </ButtonAdd>
+        </HeadingPanel>
+        <ChildContent>
+            <Batch Model="ImageChoicesModel"
+                   ReadOnly="ReadOnly">
+                <EditView>
+                    <Wrapped Alignment="Wrapped.Alignments.Top"
+                             @key="context">
+                        <Field Label="Image"
+                               Size="Field.Sizes.Larger"
+                               Container="Field.Containers.Div">
+                            <ImageUploader ReadOnly="ReadOnly"
+                                           Required="true"
+                                           Width="160"
+                                           ImageFile="context.ImageFile" />
+                        </Field>
+                    </Wrapped>
+                </EditView>
+            </Batch>
+        </ChildContent>
+    </BatchSection>
+}

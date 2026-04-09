@@ -1,0 +1,30 @@
+﻿<Waiter Model="Model">
+    @if (Model.Blogs is not null)
+    {
+        @if (Model.Blogs.HasNothing())
+        {
+            <NoRecords EntityName="blogs" />
+        }
+        else
+        {
+            @foreach (var blog in Model.Blogs)
+            {
+                <div class="c-card c-padding-medium-top c-padding-small-bottom">
+                    <div class="values">
+                        <div class="title">
+                            <a @onclick="() => Model.GoToBlog(blog.Id)">@(blog.Title)</a>
+                        </div>
+                        <div class="c-padding-small">
+                            @(blog.Author)
+                        </div>
+                        @if (blog.Description is not null)
+                        {
+                            <UserHtml Html="@(blog.Description)"
+                                      CssClass="c-padding-small" />
+                        }
+                    </div>
+                </div>
+            }
+        }
+    }
+</Waiter>

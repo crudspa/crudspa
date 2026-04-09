@@ -1,0 +1,78 @@
+﻿/// <reference path="defaults.scss" />
+
+.c-code {
+    font-family: $codeFontFamily;
+    font-weight: $codeFontWeight;
+    font-size: .875em;
+    white-space: pre;
+}
+
+.c-large-text {
+    font-size: 1.25em;
+}
+
+.c-multiline-text {
+    white-space: pre-line;
+}
+
+.c-custom-font1 {
+    font-family: $custom1FontFamily;
+
+    h1, h2, h3, h4, h5, h6, p {
+        font-family: inherit;
+    }
+}
+
+.c-custom-font2 {
+    font-family: $custom2FontFamily;
+
+    h1, h2, h3, h4, h5, h6, p {
+        font-family: inherit;
+    }
+}
+
+.c-custom-font3 {
+    font-family: $custom3FontFamily;
+
+    h1, h2, h3, h4, h5, h6, p {
+        font-family: inherit;
+    }
+}
+
+.c-custom-font4 {
+    font-family: $custom4FontFamily;
+
+    h1, h2, h3, h4, h5, h6, p {
+        font-family: inherit;
+    }
+}
+
+.c-box-text {
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--c-box-foreground-color);
+        line-height: var(--c-box-heading-line-height);
+    }
+
+    p {
+        color: var(--c-box-foreground-color);
+        line-height: var(--c-box-paragraph-line-height);
+    }
+
+    .c-user-content,
+    .rz-html-editor-content {
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: var(--c-box-foreground-color);
+            line-height: var(--c-box-heading-line-height);
+        }
+
+        p,
+        li,
+        blockquote {
+            color: var(--c-box-foreground-color);
+            line-height: var(--c-box-paragraph-line-height);
+        }
+    }
+}

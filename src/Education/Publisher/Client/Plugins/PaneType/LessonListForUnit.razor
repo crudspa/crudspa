@@ -1,0 +1,43 @@
+<ListOrderables Model="Model"
+                T="LessonModel"
+                EntityName="Lesson"
+                UrlPrefix="@($"{Path}/lesson")"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Unspecified">
+            <Image ImageFile="context.Lesson.ImageFile"
+                   Width="160" />
+        </Field>
+        <Field Size="Field.Sizes.Unspecified">
+            <Labeled CssClass="status"
+                     Width="8em"
+                     Label="Status">
+                <StatusDisplay Id="@context.Lesson.StatusId"
+                               Name="@context.Lesson.StatusName"
+                               ColorClassFrom="ContentStatusColors.For" />
+            </Labeled>
+            <Labeled Width="8em"
+                     Label="Requires"
+                     StringValue="@context.Lesson.RequiresAchievementTitle" />
+            <Labeled Width="8em"
+                     Label="Generates"
+                     StringValue="@context.Lesson.GeneratesAchievementTitle" />
+            <Labeled Width="8em"
+                     Label="Sequential"
+                     BooleanValue="@context.Lesson.RequireSequentialCompletion" />
+            <Labeled Width="8em"
+                     Label="Treatment"
+                     BooleanValue="@context.Lesson.Treatment" />
+            <Labeled Width="8em"
+                     Label="Control"
+                     BooleanValue="@context.Lesson.Control" />
+        </Field>
+    </ReadView>
+    <PaneLinks>
+        <PaneLink Href="@($"{Path}/lesson-{context.Lesson.Id:D}?pane=objectives")"
+                  Text="Objectives"
+                  Count="context.Lesson.ObjectiveCount" />
+    </PaneLinks>
+</ListOrderables>

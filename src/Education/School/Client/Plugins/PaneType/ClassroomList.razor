@@ -1,0 +1,29 @@
+<List Model="Model"
+      T="ClassroomModel"
+      EntityName="Classroom"
+      UrlPrefix="@($"{Path}/classroom")"
+      DeleteRequested="id => Model.Delete(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Small">
+            <Labeled Width="5em"
+                     Label="Subject"
+                     StringValue="@(context.Classroom.TypeName)" />
+            <Labeled Width="5em"
+                     Label="Grade"
+                     StringValue="@(context.Classroom.GradeName)" />
+            <LabeledBatch Label="Teachers"
+                          Width="5em"
+                          Items="context.Classroom.ClassroomTeachers.OrderBy(x => x.Name)"
+                          Context="item">
+                <ReadView>
+                    @(item.Name)
+                </ReadView>
+            </LabeledBatch>
+        </Field>
+    </ReadView>
+    <PaneLinks>
+        <PaneLink Href="@($"{Path}/classroom-{context.Classroom.Id:D}")"
+                  Text="Students"
+                  Count="context.Classroom.ClassroomStudentCount" />
+    </PaneLinks>
+</List>

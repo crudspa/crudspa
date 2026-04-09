@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="4000"
+   height="600"
+   viewBox="0 0 1058.3333 158.75"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   sodipodi:docname="Logo-Mark-Colored.svg"
+   xml:space="preserve"
+   inkscape:export-filename="..\Exports\Logo-Mark-Colored.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.26604893"
+     inkscape:cx="2080.4444"
+     inkscape:cy="881.41681"
+     inkscape:window-width="2259"
+     inkscape:window-height="1353"
+     inkscape:window-x="860"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer5"
+     inkscape:export-bgcolor="#ffffff00" /><defs
+     id="defs1"><style
+       id="style1"><![CDATA[
+      :root {
+        color-scheme: light dark;
+        --crudspa-wordmark-fill: #24292f;
+        --crudspa-plus-fill: #57606a;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --crudspa-wordmark-fill: #f0f6fc;
+          --crudspa-plus-fill: #8b949e;
+        }
+      }
+    ]]></style></defs><g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="Build"
+     style="display:inline"><g
+       id="g7"
+       transform="translate(0,-2.2499842e-5)"><path
+         id="path8"
+         style="display:inline;fill:#468966;fill-opacity:1;stroke:none;stroke-width:5.78605;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:5.2;stroke-dasharray:none;stroke-opacity:1"
+         d="m 176.00929,33.701259 23.5984,2.082188 28.42068,43.543523 h -23.3062 z m 52.01908,45.626523 -28.42068,43.543518 -23.5984,2.08219 28.71288,-45.625708 z"
+         inkscape:label="right-bracket" /><path
+         id="path1"
+         style="display:inline;fill:#225378;fill-opacity:1;stroke-width:10.0465;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:5.2"
+         inkscape:label="cylinder"
+         d="M 126.86889,33.264375 A 44.270238,15.320926 0 0 0 82.608163,48.262265 44.373559,14.168578 0 0 0 126.86889,61.473807 44.373559,14.168578 0 0 0 171.12962,48.262265 44.270238,15.320926 0 0 0 126.86889,33.264375 Z M 82.59888,57.36473 v 22.675225 a 44.373559,14.168578 0 0 0 44.27001,13.257151 44.373559,14.168578 0 0 0 44.27,-13.257151 V 57.36473 a 46.658661,16.147504 0 0 1 -44.27,11.047421 A 46.658661,16.147504 0 0 1 82.59888,57.36473 Z m 0,31.823698 V 110.1326 a 44.270238,15.320926 0 0 0 -4.03e-4,0.0323 44.270238,15.320926 0 0 0 44.270413,15.32077 44.270238,15.320926 0 0 0 44.27041,-15.32077 44.270238,15.320926 0 0 0 -4.1e-4,-0.0311 V 89.188389 a 46.658661,16.147504 0 0 1 -44.27,11.047011 46.658661,16.147504 0 0 1 -44.27001,-11.047011 z" /><path
+         id="path7"
+         style="display:inline;fill:#468966;fill-opacity:1;stroke:none;stroke-width:5.78605;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:5.2;stroke-dasharray:none;stroke-opacity:1"
+         d="M 77.65175,33.701259 54.053483,35.783447 25.632965,79.32697 H 48.939024 Z M 25.632965,79.327782 54.053483,122.8713 77.65175,124.95349 48.939024,79.327782 Z"
+         inkscape:label="left-bracket"
+         inkscape:export-filename="Logo-Black.png"
+         inkscape:export-xdpi="96"
+         inkscape:export-ydpi="96" /></g><text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:153.228px;font-family:Hubballi;-inkscape-font-specification:Hubballi;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;opacity:1;fill:var(--crudspa-wordmark-fill);fill-opacity:1;stroke-width:17.8765;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:5.2"
+       x="278.08826"
+       y="120.36348"
+       id="text3"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Hubballi;-inkscape-font-specification:Hubballi;fill:var(--crudspa-wordmark-fill);fill-opacity:1;stroke-width:17.8765"
+         x="278.08826"
+         y="120.36348"
+         id="tspan6">CRUD</tspan></text><text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:153.228px;font-family:Hubballi;-inkscape-font-specification:Hubballi;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;opacity:1;fill:var(--crudspa-wordmark-fill);fill-opacity:1;stroke-width:17.8765;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:5.2"
+       x="706.58032"
+       y="120.36348"
+       id="text4"><tspan
+         sodipodi:role="line"
+         id="tspan4"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Hubballi;-inkscape-font-specification:Hubballi;fill:var(--crudspa-wordmark-fill);fill-opacity:1;stroke-width:17.8765"
+         x="706.58032"
+         y="120.36348">SPA</tspan></text><text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:105.745px;font-family:Hubballi;-inkscape-font-specification:Hubballi;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;opacity:1;fill:var(--crudspa-plus-fill);fill-opacity:1;stroke:none;stroke-width:2.11667;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:5.2;stroke-dasharray:none;stroke-opacity:1"
+       x="644.25427"
+       y="107.4503"
+       id="text5"><tspan
+         sodipodi:role="line"
+         id="tspan5"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Hubballi;-inkscape-font-specification:Hubballi;fill:var(--crudspa-plus-fill);fill-opacity:1;stroke:none;stroke-width:2.11667;stroke-dasharray:none;stroke-opacity:1"
+         x="644.25427"
+         y="107.4503">+</tspan></text><text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:153.228px;font-family:Hubballi;-inkscape-font-specification:Hubballi;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:none;opacity:0.25;fill:#000000;fill-opacity:1;stroke-width:17.8765;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:5.2"
+       x="278.12106"
+       y="120.36348"
+       id="text1"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Hubballi;-inkscape-font-specification:Hubballi;fill:#000000;fill-opacity:1;stroke-width:17.8765"
+         x="278.12106"
+         y="120.36348">CRUD+SPA</tspan></text></g><g
+     inkscape:label="Guides"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline" /></svg>

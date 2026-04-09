@@ -1,0 +1,77 @@
+<Many Model="Model"
+      T="UnitLicenseModel"
+      EntityName="Unit"
+      SaveRequested="id => Model.Save(id)"
+      CancelRequested="id => Model.Cancel(id)"
+      DeleteRequested="id => Model.Delete(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Unspecified">
+            <LabeledRelations Label="Books"
+                              Width="6em"
+                              Selectables="context.UnitLicense.Books"
+                              All="context.UnitLicense.AllBooks" />
+            <LabeledRelations Label="Lessons"
+                              Width="6em"
+                              Selectables="context.UnitLicense.Lessons"
+                              All="context.UnitLicense.AllLessons" />
+        </Field>
+    </ReadView>
+    <EditView>
+        @if (context.SelectingUnit)
+        {
+            <Wrapped>
+                <Field Label="Unit"
+                       Size="Field.Sizes.Wide">
+                    <Wrapped NoWrap="true">
+                        <Dropdown ReadOnly="@false"
+                                  LookupValues="Model.UnitNames"
+                                  @bind-Value="context.UnitLicense.UnitId" />
+                        <ButtonGroup Margin="ButtonGroup.Margins.TinyHor">
+                            <ButtonCore IconClass="c-icon-check"
+                                        Clicked="() => Model.Save(context.Id)" />
+                            <ButtonCore IconClass="c-icon-cross"
+                                        ButtonStyle="ButtonCore.ButtonStyles.Cancel"
+                                        Clicked="() => context.CancelUnitSelection()" />
+                        </ButtonGroup>
+                    </Wrapped>
+                </Field>
+            </Wrapped>
+        }
+        else
+        {
+            <Wrapped>
+                <Field Label="Unit"
+                       Size="Field.Sizes.Larger">
+                    <Wrapped NoWrap="true">
+                        <TextBox ReadOnly="@true"
+                                 @bind-Value="context.UnitLicense.UnitTitle" />
+                        <ButtonGroup Margin="ButtonGroup.Margins.TinyHor">
+                            <ButtonCore IconClass="c-icon-pencil"
+                                        Clicked="() => context.StartUnitSelection()" />
+                        </ButtonGroup>
+                    </Wrapped>
+                </Field>
+            </Wrapped>
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Books"
+                       Size="Field.Sizes.Large"
+                       Container="Field.Containers.Div">
+                    <BoolRadio TrueLabel="All"
+                               FalseLabel="Specific"
+                               @bind-SelectedValue="context.UnitLicense.AllBooks" />
+                    <CheckedList ReadOnly="context.UnitLicense.AllBooks == true"
+                                 Selectables="context.UnitLicense.Books" />
+                </Field>
+                <Field Label="Lessons"
+                       Size="Field.Sizes.Large"
+                       Container="Field.Containers.Div">
+                    <BoolRadio TrueLabel="All"
+                               FalseLabel="Specific"
+                               @bind-SelectedValue="context.UnitLicense.AllLessons" />
+                    <CheckedList ReadOnly="context.UnitLicense.AllLessons == true"
+                                 Selectables="context.UnitLicense.Lessons" />
+                </Field>
+            </Wrapped>
+        }
+    </EditView>
+</Many>

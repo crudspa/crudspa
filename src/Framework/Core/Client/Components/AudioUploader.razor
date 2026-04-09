@@ -1,0 +1,115 @@
+@using Microsoft.AspNetCore.Components.Forms
+
+<div class="c-uploader"
+     disabled="@ReadOnly">
+
+    <div class="header">
+
+        <div class="icon">
+            <span class="c-icon-file-audio"></span>
+        </div>
+
+        <div class="name">
+            @if (AudioFile.Name.HasSomething())
+            {
+                @if (AudioFile.Id.HasSomething())
+                {
+                    <a href="/api/framework/core/audio-file/fetch?id=@($"{AudioFile.Id:D}")&download=true&original=true"
+                       target="_blank">
+                        @(AudioFile.Name)
+                    </a>
+                }
+                else
+                {
+                    @(AudioFile.Name)
+                }
+            }
+            else
+            {
+                <span class="none">None</span>
+            }
+        </div>
+
+        @if (!ReadOnly)
+        {
+            <div class="buttons">
+                <button @onclick="Clear"
+                        disabled="@ReadOnly">
+                    <div class="c-button transparent">
+                        <div class="icon">
+                            <span class="c-icon-trash2"></span>
+                        </div>
+                    </div>
+                </button>
+            </div>
+        }
+
+    </div>
+
+    @if (AudioFile.Id.HasSomething())
+    {
+        <div class="player">
+            <AudioPlayer AudioFile="AudioFile" />
+        </div>
+    }
+    else if (AudioFile.UploadPreview.HasSomething())
+    {
+        <div class="preview-audio">
+            <audio controls
+                   preload="metadata"
+                   src="@AudioFile.UploadPreview" />
+        </div>
+    }
+
+    @if (!ReadOnly)
+    {
+        <div class="c-full">
+            <Field Label="File"
+                   Size="Field.Sizes.Full"
+                   Padding="Field.Paddings.TightHor">
+
+                <div class="c-audio-uploader">
+
+                    <div class="c-nowrap picker">
+
+                        <label class="c-button"
+                               for="@($"input{InstanceId:N}")">
+                            Browse...
+                        </label>
+
+                        <div class="c-padding-small-hor">
+                            Browse or drop files here
+                        </div>
+
+                        <InputFile id="@($"input{InstanceId:N}")"
+                                   accept="@Accept"
+                                   disabled="@ReadOnly"
+                                   OnChange="HandleFileChanged"
+                                   @key="InstanceId" />
+                    </div>
+
+                    @if (AudioFile.Name.HasSomething() && AudioFile.Id is null)
+                    {
+                        <div class="c-wrap c-padding-small-vert">
+                            <div class="star">
+                                @if (AudioFile.UploadProgress > 0)
+                                {
+                                    <div class="progress-bar-wrapper">
+                                        <div class="progress-bar"
+                                             style="width: @($"{AudioFile.UploadProgress}%")">
+                                            <span class="progress-text">Uploading...</span>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="status-text">@(AudioFile.UploadStatus)</div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            </Field>
+        </div>
+    }
+</div>

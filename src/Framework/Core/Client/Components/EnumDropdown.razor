@@ -1,0 +1,12 @@
+﻿@typeparam TEnum
+<select @onchange="HandleValueChanged"
+        disabled="@ReadOnly">
+    @foreach (var value in Enum.GetValues(typeof(TEnum)))
+    {
+        var enumValue = (TEnum)value;
+        <option value="@(enumValue)"
+                selected="@(SelectedValue.Equals(enumValue))">
+            @(enumValue.ToString()!.InsertSpaces())
+        </option>
+    }
+</select>

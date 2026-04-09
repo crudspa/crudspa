@@ -1,0 +1,176 @@
+<Waiter Model="Model">
+    <Modal Model="Model.BulkModel"
+           Title="Bulk Assignment"
+           Width="36em"
+           TopMargin="1em">
+        <Content>
+            @if (Model.BulkModel.Completed)
+            {
+                <div class="c-centered">
+                    <div class="icon"
+                         style="font-size: 4em; font-weight: bold;">
+                        <span class="c-icon-checkmark-circle c-color-success"></span>
+                    </div>
+                    <div>
+                        <h2>Success!</h2>
+                        <p>@(Model.BulkModel.Assignment.RecordsAdded) assignments were added, and @(Model.BulkModel.Assignment.RecordsUpdated) were updated.</p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <Wrapped Alignment="Wrapped.Alignments.Top">
+                    <Field Label="Scope"
+                           Container="Field.Containers.Div">
+                        <EnumRadio TEnum="AssessmentAssignmentBulk.Scopes"
+                                   @bind-SelectedValue="@Model.BulkModel.Assignment.Scope" />
+                    </Field>
+                    @if (Model.BulkModel.Assignment.Scope == AssessmentAssignmentBulk.Scopes.Community)
+                    {
+                        <Field Label="Community"
+                               Size="Field.Sizes.Large">
+                            <Dropdown LookupValues="Model.BulkModel.CommunityNames"
+                                      AllowNull="true"
+                                      NullText="Select..."
+                                      @bind-Value="Model.BulkModel.Assignment.CommunityId" />
+                        </Field>
+                    }
+                    @if (Model.BulkModel.Assignment.Scope is AssessmentAssignmentBulk.Scopes.School or AssessmentAssignmentBulk.Scopes.Classroom)
+                    {
+                        <Field Label="School"
+                               Size="Field.Sizes.Large">
+                            <Dropdown LookupValues="Model.BulkModel.SchoolNames"
+                                      AllowNull="true"
+                                      NullText="Select..."
+                                      Value="Model.BulkModel.Assignment.SchoolId"
+                                      ValueChanged="id => Model.BulkModel.HandleSchoolChanged(id)" />
+                        </Field>
+                    }
+                    @if (Model.BulkModel.Assignment.Scope == AssessmentAssignmentBulk.Scopes.Classroom)
+                    {
+                        <Field Label="Classroom"
+                               Size="Field.Sizes.Large">
+                            <Dropdown LookupValues="Model.BulkModel.ClassroomNames"
+                                      AllowNull="true"
+                                      NullText="Select..."
+                                      @bind-Value="Model.BulkModel.Assignment.ClassroomId" />
+                        </Field>
+                    }
+                    <Field Label="Assessment"
+                           Size="Field.Sizes.Larger">
+                        <Dropdown LookupValues="Model.BulkModel.AssessmentNames"
+                                  AllowNull="true"
+                                  NullText="Select..."
+                                  @bind-Value="Model.BulkModel.Assignment.AssessmentId" />
+                    </Field>
+                    <Field Label="Start After"
+                           Size="Field.Sizes.Small">
+                        <DateTimePicker @bind-Value="Model.BulkModel.Assignment.StartAfter" />
+                    </Field>
+                    <Field Label="End Before"
+                           Size="Field.Sizes.Small">
+                        <DateTimePicker @bind-Value="Model.BulkModel.Assignment.EndBefore" />
+                    </Field>
+                    <Field Label="Action"
+                           Container="Field.Containers.Div">
+                        <EnumRadio TEnum="AssessmentAssignmentBulk.Actions"
+                                   @bind-SelectedValue="@Model.BulkModel.Assignment.Action" />
+                    </Field>
+                </Wrapped>
+            }
+        </Content>
+        <Buttons>
+            @if (!Model.BulkModel.Completed)
+            {
+                <ButtonOk OkText="Assign"
+                          Clicked="() => Model.BulkModel.BulkAssign()" />
+                <ButtonCancel Clicked="() => Model.BulkModel.Hide()" />
+            }
+            else
+            {
+                <ButtonCore Text="Close"
+                            Clicked="() => Model.BulkModel.Hide()" />
+            }
+        </Buttons>
+    </Modal>
+    <Filters>
+        <Fields>
+            <Field Label="Assessment"
+                   Size="Field.Sizes.Medium">
+                <MultiSelect LookupValues="Model.AssessmentNames"
+                             @bind-SelectedValues="Model.Search.Assessments" />
+            </Field>
+            <Sorter Sorts="Model.Sorts"
+                    @bind-Selected="Model.Search.Sort.Field"
+                    @bind-Ascending="Model.Search.Sort.Ascending" />
+        </Fields>
+        <Buttons>
+            <ButtonAdd EntityName="Assignment"
+                       Clicked="AddNew" />
+            <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Create">
+                <MenuItem Text="Bulk Assign..."
+                          Icon="c-icon-papers"
+                          Clicked="() => Model.BulkModel.Show()" />
+                <MenuItem Type="MenuItem.Types.Reset"
+                          Clicked="() => Model.Reset()" />
+                <MenuItem Type="MenuItem.Types.Refresh"
+                          Clicked="() => Model.Refresh()" />
+            </ContextMenu>
+        </Buttons>
+    </Filters>
+</Waiter>
+@if (Model.Cards.IsEmpty())
+{
+    <NoRecords EntityName="assessments" />
+}
+else
+{
+    @foreach (var card in Model.Cards)
+    {
+        <Card Model="card"
+              Title="@card.Entity.Name"
+              SupportsDelete="true"
+              DeleteRequested="() => Model.Delete(card.Entity.Id)">
+            <Values>
+                <Field Size="Field.Sizes.MediumLarge">
+                    <Labeled Width="7em"
+                             Label="Assessment"
+                             StringValue="@(card.Entity.AssessmentName)" />
+                    <Labeled Width="7em"
+                             Label="Start After"
+                             DateTimeOffsetValue="card.Entity.StartAfter" />
+                    <Labeled Width="7em"
+                             Label="End Before"
+                             DateTimeOffsetValue="card.Entity.EndBefore" />
+                </Field>
+                <Field Size="Field.Sizes.Unspecified">
+                    <Labeled Width="7em"
+                             Label="Started"
+                             DateTimeOffsetValue="card.Entity.Started" />
+                    <Labeled Width="7em"
+                             Label="Completed"
+                             DateTimeOffsetValue="card.Entity.Completed" />
+                    <Labeled Width="7em"
+                             Label="Terminated"
+                             DateTimeOffsetValue="card.Entity.Terminated" />
+                    <Labeled Width="7em"
+                             Label="Parts"
+                             StringValue="@card.Entity.PartsProgress" />
+                    <Labeled Width="7em"
+                             Label="Questions"
+                             StringValue="@card.Entity.QuestionsProgress" />
+                </Field>
+            </Values>
+            <Buttons>
+                <ButtonView Href="@($"{Path}/assessment-assignment-{card.Entity.Id:D}")" />
+                <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.View">
+                    <MenuItem Type="MenuItem.Types.Delete"
+                              Clicked="() => Model.ShowConfirmation(card.Entity.Id)" />
+                </ContextMenu>
+            </Buttons>
+        </Card>
+    }
+
+    <Pager Paged="Model.Search.Paged"
+           PageNumberChanged="Model.HandlePageNumberChanged" />
+}

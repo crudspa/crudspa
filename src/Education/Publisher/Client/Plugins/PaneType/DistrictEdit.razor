@@ -1,0 +1,44 @@
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+            }
+            else
+            {
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            }
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <OrganizationEdit ReadOnly="Model.ReadOnly"
+                              Organization="Model.Entity.Organization"
+                              PermissionNames="Model.PermissionNames">
+                <UsaPostalEdit ReadOnly="Model.ReadOnly"
+                               UsaPostal="Model.Entity.UsaPostal">
+                    <Wrapped Alignment="Wrapped.Alignments.Top">
+                        <Field Label="Student Id Number Label"
+                               Size="Field.Sizes.Medium">
+                            <TextBox ReadOnly="Model.ReadOnly"
+                                     MaxLength="50"
+                                     @bind-Value="Model.Entity.StudentIdNumberLabel" />
+                        </Field>
+                        <Field Label="Assessment Explainer"
+                               Size="Field.Sizes.Full">
+                            <MultilineTextBox ReadOnly="Model.ReadOnly"
+                                              Height="MultilineTextBox.Heights.Tall"
+                                              @bind-Value="Model.Entity.AssessmentExplainer" />
+                        </Field>
+                    </Wrapped>
+                </UsaPostalEdit>
+            </OrganizationEdit>
+        </Padding>
+    }
+</Waiter>

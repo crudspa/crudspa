@@ -1,0 +1,11 @@
+@if (Activity.ActivityTypeDisplayView.HasSomething())
+{
+    <div class="c-shadowed-binder">
+        <div class="c-padding-medium-all">
+            <div @key="Version">
+                <ActivityDisplayPlugin TypeName="@Activity.ActivityTypeDisplayView"
+                                       Activity="Activity" />
+            </div>
+        </div>
+    </div>
+}

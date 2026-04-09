@@ -1,0 +1,45 @@
+@typeparam T
+<div class="c-card @(Tight ? "tight" : String.Empty) @(Model.Hidden ? "c-hide" : String.Empty)"
+     @key="Model.Entity">
+    @if (SupportsDelete)
+    {
+        <Modal Model="Model.ConfirmationModel">
+            <Content>
+                <Padding Direction="Padding.Directions.Top"
+                         Size="Padding.Sizes.Small">
+                    Are you sure you want to delete @(Model.Entity.Name.HasSomething() ? $"'{Model.Entity.Name}'" : "this item")?
+                </Padding>
+            </Content>
+            <Buttons>
+                <ButtonDelete Clicked="DeleteRequested" />
+                <ButtonCancel Clicked="() => Model.ConfirmationModel.Hide()" />
+            </Buttons>
+        </Modal>
+    }
+    <div class="values">
+        @if (Container == Containers.TitleAndWrappedValues)
+        {
+            @if (Title.HasSomething())
+            {
+                <div class="title">@Title</div>
+            }
+
+            <div class="c-wrap top">
+                @Values
+            </div>
+        }
+        else
+        {
+            @Values
+        }
+    </div>
+    @if (ShowPaneLinks && PaneLinks is not null)
+    {
+        <div class="pane-links">
+            @PaneLinks
+        </div>
+    }
+    <div class="buttons">
+        @Buttons
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+            }
+            else
+            {
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            }
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <OrganizationEdit ReadOnly="Model.ReadOnly"
+                              Organization="Model.Entity.Organization"
+                              PermissionNames="Model.PermissionNames">
+                <UsaPostalEdit ReadOnly="Model.ReadOnly"
+                               UsaPostal="Model.Entity.UsaPostal">
+                    <Wrapped Alignment="Wrapped.Alignments.Top">
+                        <Field Label="Key"
+                               Size="Field.Sizes.Unspecified">
+                            <TextBox ReadOnly="Model.ReadOnly"
+                                     MaxLength="100"
+                                     @bind-Value="Model.Entity.Key" />
+                        </Field>
+                        <Field Label="Community"
+                               Size="Field.Sizes.Unspecified">
+                            <Dropdown ReadOnly="Model.ReadOnly"
+                                      AllowNull="true"
+                                      NullText="[None]"
+                                      LookupValues="Model.CommunityNames"
+                                      @bind-Value="Model.Entity.CommunityId" />
+                        </Field>
+                    </Wrapped>
+                    <Wrapped>
+                        <Field Label="Options"
+                               Container="Field.Containers.Div">
+                            <Wrapped NoWrap="true">
+                                <Checkbox Label="Treatment"
+                                          ReadOnly="Model.ReadOnly"
+                                          @bind-Value="Model.Entity.Treatment" />
+                            </Wrapped>
+                        </Field>
+                    </Wrapped>
+                </UsaPostalEdit>
+            </OrganizationEdit>
+        </Padding>
+    }
+</Waiter>

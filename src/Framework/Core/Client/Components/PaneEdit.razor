@@ -1,0 +1,87 @@
+﻿<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                @if (Model.HasDesigner)
+                {
+                    <ButtonEdit Clicked="() => Model.Edit()" />
+                }
+
+                @if (!Model.IsNew)
+                {
+                    <ButtonCore Text="Move..."
+                                IconClass="c-icon-move"
+                                ButtonStyle="ButtonCore.ButtonStyles.Move"
+                                Clicked="() => MoveModel.ShowModal(Model.Entity?.Id, Model.Entity?.SegmentId)" />
+                }
+            }
+            else
+            {
+                <ButtonSave Clicked="() => HandleSaveClicked()" />
+                <ButtonCancel Clicked="() => Model.Refresh()" />
+            }
+        </ButtonGroup>
+    </Left>
+    <Right>
+        @if (Model.Entity is not null)
+        {
+            <div class="c-parenthetical">
+                <strong>Pane Type:</strong> @(Model.Entity.TypeName ?? "[Unknown]")
+            </div>
+        }
+    </Right>
+</Toolbar>
+<Waiter Model="Model">
+    <Modal Model="MoveModel"
+           Width="26em"
+           TopMargin="1em"
+           Title="Move Pane">
+        <Content>
+            @if (MoveModel.Portals.HasItems())
+            {
+                <Padding Direction="Padding.Directions.Horizontal"
+                         Size="Padding.Sizes.Tiny">
+                    <Padding Direction="Padding.Directions.Bottom"
+                             Size="Padding.Sizes.Small">
+                        Select the destination segment:
+                    </Padding>
+                </Padding>
+
+                <Tree Items="MoveModel.Portals"
+                      @bind-SelectedId="MoveModel.MoveToId" />
+            }
+        </Content>
+        <Buttons>
+            <ButtonOk OkText="Move"
+                      Clicked="() => HandleMoveClicked()" />
+            <ButtonCancel Clicked="() => MoveModel.Hide()" />
+        </Buttons>
+    </Modal>
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            @if (Model.HasDesigner)
+            {
+                <PaneDesignPlugin TypeName="@Model.Entity.TypeEditorView"
+                                  PaneId="@Model.Entity.Id"
+                                  Path="@Path"
+                                  ConfigJson="@Model.Entity.ConfigJson"
+                                  ReadOnly="@Model.ReadOnly"
+                                  ConfigUpdated="@HandleConfigUpdated"
+                                  @ref="DesignComponent"
+                                  @key="Model.Entity" />
+            }
+            else
+            {
+                <Padding Size="Padding.Sizes.Medium"
+                         Direction="Padding.Directions.All">
+                    <Stacked Alignment="Stacked.Alignments.Center">
+                        <em>Pane type has no configurable options.</em>
+                    </Stacked>
+                </Padding>
+            }
+        </Padding>
+    }
+</Waiter>

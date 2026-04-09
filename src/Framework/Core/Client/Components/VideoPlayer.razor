@@ -1,0 +1,16 @@
+@namespace Crudspa.Framework.Core.Client.Components
+
+@if (VideoFile?.Id is not null)
+{
+    <div id="@($"{InstanceId:D}")"
+         style="position:relative; @(DivStyles)">
+        <video id="@($"{InstanceId:D}-{VideoFile.Id:D}")"
+               class="@(CssClass)"
+               src="@VideoUrl"
+               preload="@PreloadMode"
+               controls
+               style="display:block; width:100%; height:auto; aspect-ratio:@(AspectRatioStyle); object-fit:contain; background:#000; min-width:0; min-height:0;"
+               @attributes="VideoAttributes">
+        </video>
+    </div>
+}

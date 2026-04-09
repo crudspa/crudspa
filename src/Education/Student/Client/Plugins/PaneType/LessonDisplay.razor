@@ -1,0 +1,30 @@
+﻿<Waiter Model="Model">
+    <div class="c-stack center">
+        @if (Model.GuideModel is not null)
+        {
+            <Guide Model="Model.GuideModel"
+                   ShowGuideFields="true"
+                   ShowNotebookButton="true"
+                   AutoPlay="true" />
+        }
+        @if (Model.Lesson is not null)
+        {
+            @foreach (var objective in Model.Lesson.Objectives)
+            {
+                <a class="c-button large c-margin-small"
+                   @onclick="() => Model.GoToObjective(objective.Id)"
+                   disabled="@objective.Locked">
+                    <div class="text"
+                         style="padding-left: 3em; padding-right: 3em;">
+                        @(objective.Title)
+                    </div>
+                    <div class="icon padded">
+                        <Image ImageFile="objective.TrophyImage"
+                               Width="60"
+                               Obscured="@(objective.Progress.TimesCompleted == 0)" />
+                    </div>
+                </a>
+            }
+        }
+    </div>
+</Waiter>

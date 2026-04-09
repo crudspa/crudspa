@@ -1,0 +1,72 @@
+/// <reference path="../../../../Framework/Core/Server/Styles/defaults.scss" />
+
+@import "content-display";
+
+.c-vertical-navigation,
+.c-horizontal-navigation,
+.c-stack-navigation {
+    > .header .branding .image {
+        padding-block: calc(#{$spacingTinyScreenMin} * 2);
+        width: 18em;
+
+        @media (min-width: $screenTiny) {
+            padding-block: calc(#{$spacingTinyScreenTiny} * 2);
+        }
+
+        @media (min-width: $screenSmall) {
+            padding-block: calc(#{$spacingTinyScreenSmall} * 2);
+        }
+
+        @media (min-width: $screenMedium) {
+            padding-block: calc(#{$spacingTinyScreenMedium} * 2);
+        }
+
+        @media (min-width: $screenLarge) {
+            padding-block: calc(#{$spacingTinyScreenLarge} * 2);
+        }
+
+        @media (min-width: $screenWide) {
+            padding-block: calc(#{$spacingTinyScreenWide} * 2);
+        }
+
+        @media (min-width: $screenMax) {
+            padding-block: calc(#{$spacingTinyScreenMax} * 2);
+        }
+
+        @media (max-width: $screenMedium) {
+            width: 14em;
+        }
+    }
+}
+
+.c-horizontal-navigation {
+    > .header .horizontal-tree > ul > .level1 > .node {
+        > .link {
+            position: relative;
+
+            &::after {
+                content: "";
+                position: absolute;
+                left: 1em;
+                right: 1em;
+                bottom: 0.35em;
+                height: 0.25rem;
+                border-radius: 999px;
+                background-color: transparent;
+                transition: background-color 0.12s linear;
+                pointer-events: none;
+            }
+        }
+
+        &:hover > .link::after,
+        &:focus-within > .link::after {
+            background-color: #cccccc;
+        }
+
+        &.selected > .link::after,
+        &.selected:hover > .link::after,
+        &.selected:focus-within > .link::after {
+            background-color: currentColor;
+        }
+    }
+}

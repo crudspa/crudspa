@@ -1,0 +1,37 @@
+﻿<div class="c-full c-centered">
+
+    @if (Model.Activity.ContextAudioFile.Id.HasSomething())
+    {
+        <Padding Size="Padding.Sizes.Small">
+            <AudioPlayer AudioFile="Model.Activity.ContextAudioFile"
+                         PlayText="Listen"
+                         StopText="Listen"
+                         PlayIcon="c-icon-volume-high"
+                         StopIcon="c-icon-volume-high"
+                         MediaPlayed="HandleContextAudioPlayed">
+            </AudioPlayer>
+        </Padding>
+    }
+
+    @if (AssignmentBatchId.HasValue)
+    {
+        <h2>@(Model.Activity.ContentAreaAppNavText)</h2>
+    }
+
+    @if (Model.Activity.ContextText.HasSomething())
+    {
+        <div class="cec-context-text">
+            @(Model.Activity.ContextText)
+        </div>
+    }
+
+    <div class="c-wrap center c-padding-medium-vert">
+
+        @foreach (var option in Model.Options)
+        {
+            <ChoiceButton Model="option"
+                          Clicked="() => Model.SelectOption(option.Choice.Id)" />
+        }
+    </div>
+
+</div>

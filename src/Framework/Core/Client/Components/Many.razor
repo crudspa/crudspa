@@ -1,0 +1,62 @@
+@typeparam T
+<Toolbar>
+    <Left>
+        @if (ShowFilter)
+        {
+            <Field Size="Field.Sizes.Medium"
+                   Padding="Field.Paddings.None">
+                <TextBox Placeholder="Filter..."
+                         Value="@Model.Filter"
+                         ValueChanged="filter => Model.HandleFilterChanged(filter)" />
+            </Field>
+        }
+    </Left>
+    <Right>
+        <ButtonGroup>
+            @if (SupportsCreate)
+            {
+                <ButtonAdd EntityName="@EntityName"
+                           Clicked="() => Model.Create()" />
+            }
+            <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Create">
+                <MenuItem Type="MenuItem.Types.Refresh"
+                          Clicked="() => Model.Refresh()" />
+                @if (ToolbarMenuItems is not null)
+                {
+                    @ToolbarMenuItems
+                }
+            </ContextMenu>
+        </ButtonGroup>
+    </Right>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Modals is not null)
+    {
+        @Modals
+    }
+    @if (Model.Forms.IsEmpty())
+    {
+        <NoRecords EntityName="@EntityName.PluralizeNaively().ToLower()" />
+    }
+    else
+    {
+        @foreach (var form in Model.Forms.OrderBy(x => x.SortIndex))
+        {
+            <Form Model="form"
+                  @key="form.Entity"
+                  Title="@form.Entity.Name"
+                  SupportsDelete="SupportsDelete"
+                  SaveRequested="() => SaveRequested.InvokeAsync(form.Entity.Id)"
+                  CancelRequested="() => CancelRequested.InvokeAsync(form.Entity.Id)"
+                  DeleteRequested="() => DeleteRequested.InvokeAsync(form.Entity.Id)"
+                  ReadViewContainer="ReadViewContainer">
+                <ReadView>
+                    @ReadView(form.Entity)
+                </ReadView>
+                <EditView>
+                    @EditView(form.Entity)
+                </EditView>
+            </Form>
+        }
+    }
+</Waiter>

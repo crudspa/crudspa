@@ -1,0 +1,56 @@
+﻿@if (Organization is not null)
+{
+    <Wrapped>
+        <Field Label="Name"
+               Size="Field.Sizes.Medium">
+            <TextBox ReadOnly="@ReadOnly"
+                     MaxLength="75"
+                     @bind-Value="Organization.Name" />
+        </Field>
+        <Field Label="Time Zone"
+               Size="Field.Sizes.MediumLarge">
+            <TimeZonePicker ReadOnly="@ReadOnly"
+                            @bind-Value="Organization.TimeZoneId" />
+        </Field>
+    </Wrapped>
+    @ChildContent
+    <BatchSection Title="Roles">
+        <HeadingPanel>
+            <ButtonAdd Disabled="@ReadOnly"
+                       Transparent="true"
+                       Clicked="() => AddRole()">
+            </ButtonAdd>
+        </HeadingPanel>
+        <ChildContent>
+            <Batch Model="RolesModel"
+                   ReadOnly="@ReadOnly"
+                   AllowReordering="false"
+                   NoRecordsText="None">
+                <EditView>
+                    <Padding Size="Padding.Sizes.Small"
+                             Direction="Padding.Directions.Vertical"
+                             @key="context">
+                        <Wrapped NoWrap="true">
+                            <Wrapped Star="true"
+                                     Alignment="Wrapped.Alignments.Top">
+                                <Field Label="Name"
+                                       Size="Field.Sizes.Medium">
+                                    <TextBox ReadOnly="@ReadOnly"
+                                             MaxLength="75"
+                                             @bind-Value="context.Name" />
+                                </Field>
+                                <Field Size="Field.Sizes.Medium"
+                                       Label="Permissions"
+                                       Container="Field.Containers.Div">
+                                    <CheckedList ReadOnly="@ReadOnly"
+                                                 Height="CheckedList.Heights.Average"
+                                                 Selectables="context.Permissions" />
+                                </Field>
+                            </Wrapped>
+                        </Wrapped>
+                    </Padding>
+                </EditView>
+            </Batch>
+        </ChildContent>
+    </BatchSection>
+}

@@ -1,0 +1,52 @@
+@page
+@inject IHostEnvironment HostEnvironment
+@inject IServerConfigService ConfigService
+@{
+    var config = ConfigService.Fetch();
+    var build = config.BuildNumber;
+    if (HostEnvironment.IsDevelopment())
+        build = $"{build}-{System.IO.File.GetLastWriteTime(System.IO.Path.Combine(HostEnvironment.ContentRootPath, "Styles", "samples-catalog.scss")).Ticks}";
+}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <base href="/" />
+        <link rel="stylesheet"
+              href="/api/framework/core/css/fetch?build=@(build)" />
+        <link rel="icon"
+              href="_content/Crudspa.Samples.Catalog.Client/favicon.ico?build=@(build)" />
+        <link rel="icon"
+              type="image/png"
+              sizes="16x16"
+              href="_content/Crudspa.Samples.Catalog.Client/favicon-16.png?build=@(build)" />
+        <link rel="icon"
+              type="image/png"
+              sizes="32x32"
+              href="_content/Crudspa.Samples.Catalog.Client/favicon-32.png?build=@(build)" />
+        <link rel="icon"
+              type="image/png"
+              sizes="48x48"
+              href="_content/Crudspa.Samples.Catalog.Client/favicon-48.png?build=@(build)" />
+        <link rel="apple-touch-icon"
+              sizes="180x180"
+              href="_content/Crudspa.Samples.Catalog.Client/favicon-180.png?build=@(build)" />
+        <link rel="icon"
+              type="image/png"
+              sizes="192x192"
+              href="_content/Crudspa.Samples.Catalog.Client/favicon-192.png?build=@(build)" />
+        <link rel="icon"
+              type="image/png"
+              sizes="512x512"
+              href="_content/Crudspa.Samples.Catalog.Client/favicon-512.png?build=@(build)" />
+        <script src="_content/Radzen.Blazor/Radzen.Blazor.js?build=@(build)"></script>
+        <script src="_content/Crudspa.Framework.Core.Client/interop.js?build=@(build)"></script>
+    </head>
+    <body>
+        <div id="app">
+        </div>
+        <script src="_framework/blazor.webassembly.js?build=@(build)"></script>
+    </body>
+</html>

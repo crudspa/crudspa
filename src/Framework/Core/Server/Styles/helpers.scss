@@ -1,0 +1,335 @@
+﻿/// <reference path="defaults.scss" />
+
+.c-hide {
+    display: none !important;
+}
+
+.c-fixed-width {
+    margin: 0 auto;
+    max-width: 75em;
+    width: 100%;
+}
+
+.c-full-height {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    height: 100%;
+}
+
+.c-centered {
+    text-align: center;
+}
+
+.c-mobile-only {
+    display: none;
+
+    @media (max-width: $screenMedium) {
+        display: block;
+    }
+}
+
+.c-desktop-only {
+    display: block;
+
+    @media (max-width: $screenMedium) {
+        display: none;
+    }
+}
+
+.c-form-alerts {
+    margin: 2em 0 0 0;
+}
+
+.c-alternate-row {
+    background-color: $resultAlternateRowBackgroundColor;
+}
+
+.c-record-details {
+    align-items: flex-start;
+    display: flex;
+    flex-flow: row wrap;
+    line-height: $paragraphLineHeight;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.c-lock-reason {
+    @extend .c-nowrap;
+    color: #777;
+
+    .icon {
+        font-size: 1.75em;
+        padding: 0 .25em 0 0;
+    }
+
+    .text {
+        font-style: italic;
+        padding: .5em .5em .5em 0;
+    }
+}
+
+.c-flex-table {
+    @extend .c-margin-small-all;
+    overflow-x: auto;
+
+    .row {
+        display: flex;
+        flex-flow: row nowrap;
+        padding: .375em 0;
+        align-items: center;
+
+        &.header {
+            font-weight: bold;
+        }
+
+        &.tight {
+            padding: 0 0;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        .positive {
+            color: green;
+        }
+
+        .negative {
+            color: red;
+        }
+    }
+
+    .total {
+        background-color: $filtersBackgroundColor;
+    }
+}
+
+.c-shadowed {
+    box-shadow: $defaultBoxShadow;
+}
+
+.c-parenthetical {
+    color: $postMetadataForegroundColor;
+    font-weight: normal;
+    font-size: .875em;
+}
+
+.c-switchboard {
+    text-align: center;
+
+    .switchboard-option {
+        @extend .c-border-bottom;
+        padding: 2em 0 3em 0;
+
+        h4 {
+            font-weight: normal;
+            padding: 0 .5em .5em .5em;
+        }
+
+        a {
+            box-shadow: 0 0 .5em rgba(0, 0, 0, .25);
+            font-size: 1.15em;
+        }
+
+        &.first {
+            padding-top: 1em;
+        }
+
+        &.last {
+            border-bottom: 1px solid transparent;
+            padding-bottom: 1em;
+        }
+    }
+}
+
+.c-metadata {
+    font-style: italic;
+    margin: .25em;
+    color: $metadataForegroundColor;
+}
+
+.c-phone-field {
+    @extend .c-nowrap;
+    // width settings are a hack for Firefox
+    .number {
+        flex: 2 1 1em;
+        min-width: 9em;
+        max-width: 9em;
+    }
+
+    .extension {
+        flex: 1 1 1em;
+        min-width: 6em;
+        max-width: 6em;
+
+        input {
+            border-left-width: 0;
+        }
+    }
+}
+
+.c-not-selectable {
+    user-select: none;
+    text-decoration: none;
+
+    a {
+        text-decoration: none;
+        user-select: none;
+
+        &,
+        &:link,
+        &:active,
+        &:visited {
+            text-decoration: none;
+        }
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+.c-outlinable {
+    border: 1px solid transparent;
+
+    &.error {
+        border: 1px solid $errorBackgroundColor;
+    }
+}
+
+.c-optional {
+    color: $postMetadataForegroundColor;
+    font-weight: normal;
+}
+
+.c-dropdown-container {
+    background-color: $inputBackgroundColor;
+    border-color: $inputFocusedBorderColor;
+    box-shadow: $defaultBoxShadow;
+}
+
+.c-background-cover {
+    background-position: center center;
+    background-size: cover;
+}
+
+.c-photo-and-text {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+
+    @media (max-width: $screenLarge) {
+        flex-flow: column nowrap;
+    }
+
+    .photo {
+        align-self: center;
+        padding: 1em 2em;
+    }
+
+    .text {
+        padding: 1em 2em;
+    }
+}
+
+.c-circle {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.c-image-div {
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+}
+
+.c-big-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    text-align: center;
+    z-index: 300;
+
+    .close-button {
+        position: absolute;
+        top: 2em;
+        right: 2em;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, .6);
+        z-index: 1000000;
+
+        > a,
+        > a:link,
+        > a:active,
+        > a:hover,
+        > a:visited {
+            color: #eee;
+            text-decoration: none;
+
+            span {
+                font-size: 2.5em;
+            }
+        }
+    }
+
+    .image {
+
+        img,
+        video {
+            height: auto;
+            padding: 1em;
+            width: 100%;
+        }
+    }
+}
+
+.c-color-error {
+    color: $errorBackgroundColor;
+}
+
+.c-color-success {
+    color: $successBackgroundColor;
+}
+
+.c-color-content-draft {
+    color: $contentDraftBackgroundColor;
+}
+
+.c-color-content-complete {
+    color: $contentCompleteBackgroundColor;
+}
+
+.c-color-content-retired {
+    color: $contentRetiredBackgroundColor;
+}
+
+.c-error-colors {
+    background-color: $errorBackgroundColor;
+    color: $errorForegroundColor;
+}
+
+.c-content-draft-colors {
+    background-color: $contentDraftBackgroundColor;
+    color: $contentDraftForegroundColor;
+}
+
+.c-content-complete-colors {
+    background-color: $contentCompleteBackgroundColor;
+    color: $contentCompleteForegroundColor;
+}
+
+.c-content-retired-colors {
+    background-color: $contentRetiredBackgroundColor;
+    color: $contentRetiredForegroundColor;
+}

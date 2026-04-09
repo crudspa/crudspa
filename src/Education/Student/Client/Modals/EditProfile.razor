@@ -1,0 +1,25 @@
+﻿@if (Model.Student is not null)
+{
+    <Wrapped Alignment="Wrapped.Alignments.Top">
+        <Field Label="Name"
+               Size="Field.Sizes.Medium">
+            <TextBox MaxLength="75"
+                     @bind-Value="Model.Student.PreferredName" />
+        </Field>
+        <Field Label="Avatar"
+               Size="Field.Sizes.Full"
+               Container="Field.Containers.Div">
+            <div class="ces-avatar-options">
+                @foreach (var avatar in Model.AvatarStrings)
+                {
+                    <div class="option @(avatar.Equals(Model.Student.AvatarString) ? "selected" : String.Empty)"
+                         @onclick="() => Model.SelectAvatar(avatar)">
+                        <span class="icon">
+                            @avatar
+                        </span>
+                    </div>
+                }
+            </div>
+        </Field>
+    </Wrapped>
+}

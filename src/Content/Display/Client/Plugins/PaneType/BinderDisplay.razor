@@ -1,0 +1,9 @@
+﻿<Waiter Model="Model">
+    @if (Model.BinderType is not null)
+    {
+        <BinderDisplayPlugin Id="@Id"
+                             Path="@Path"
+                             ConfigJson="@ConfigJson"
+                             TypeName="@Model.BinderType.DisplayView" />
+    }
+</Waiter>

@@ -1,0 +1,58 @@
+<Toolbar>
+    <Left>
+        @if (Model.ReadOnly)
+        {
+            <ButtonEdit Clicked="() => Model.Edit()" />
+        }
+        else
+        {
+            <ButtonGroup>
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            </ButtonGroup>
+        }
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Key"
+                       Size="Field.Sizes.Medium">
+                    <TextBox ReadOnly="true"
+                             MaxLength="75"
+                             @bind-Value="Model.Entity.Key" />
+                </Field>
+                <Field Label="Title"
+                       Size="Field.Sizes.Wide">
+                    <TextBox ReadOnly="true"
+                             MaxLength="75"
+                             @bind-Value="Model.Entity.Title" />
+                </Field>
+            </Wrapped>
+            @if (Features.Count > 0)
+            {
+                <BatchSection Title="Features">
+                    <Padding Size="Padding.Sizes.Small">
+                        <Wrapped Alignment="Wrapped.Alignments.Top">
+                            @foreach (var feature in Features)
+                            {
+                                <Padding Direction="Padding.Directions.Right"
+                                         Size="Padding.Sizes.Small">
+                                    <Padding Direction="Padding.Directions.Bottom"
+                                             Size="Padding.Sizes.Small">
+                                        <ButtonFeature Href="@($"{Path}/{feature.Key}")"
+                                                       Text="@(feature.Title ?? String.Empty)"
+                                                       IconClass="@(feature.IconCssClass)" />
+                                    </Padding>
+                                </Padding>
+                            }
+                        </Wrapped>
+                    </Padding>
+                </BatchSection>
+            }
+        </Padding>
+    }
+</Waiter>

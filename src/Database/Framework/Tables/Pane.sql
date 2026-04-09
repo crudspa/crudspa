@@ -1,0 +1,18 @@
+create table [Framework].[Pane] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [Key] nvarchar(75) null,
+    [Title] nvarchar(150) null,
+    [SegmentId] uniqueidentifier not null,
+    [TypeId] uniqueidentifier not null,
+    [PermissionId] uniqueidentifier null,
+    [ConfigJson] nvarchar(max) null,
+    [Ordinal] int not null,
+    constraint [PK_Framework_Pane] primary key clustered ([Id]),
+    constraint [FK_Framework_Pane_Segment] foreign key ([SegmentId]) references [Framework].[Segment] ([Id]),
+    constraint [FK_Framework_Pane_Type] foreign key ([TypeId]) references [Framework].[PaneType] ([Id]),
+    constraint [FK_Framework_Pane_Permission] foreign key ([PermissionId]) references [Framework].[Permission] ([Id]),
+);

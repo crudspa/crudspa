@@ -1,0 +1,331 @@
+@if (Model is not null)
+{
+    @if (Portal.AllowSignIn == true)
+    {
+        <Modal Model="Model"
+               Width="26em"
+               TopMargin="3em">
+            <Content>
+                @switch (Model.State)
+                {
+                    case SignInEmailTfaModel.States.EnterCredentials:
+
+                        <div class="c-padding-small-hor c-nowrap">
+                            <div class="star">
+                                <h2>Sign In</h2>
+                            </div>
+                        </div>
+
+                        <form @onsubmit="() => Model.CheckCredentials()">
+
+                            <div class="c-padding-small-vert">
+
+                                <div class="c-wrap">
+                                    <label class="c-field medium-large">
+                                        <div class="label">Username / Email</div>
+                                        <input type="text"
+                                               class="c-input"
+                                               maxlength="75"
+                                               @bind="Model.Username" />
+                                    </label>
+                                    <label class="c-field medium-large">
+                                        <div class="label">Password</div>
+                                        <input type="password"
+                                               class="c-input"
+                                               @bind="Model.Password" />
+                                    </label>
+                                    <div class="c-stack">
+                                        <label class="c-field c-checkbox tight-top tight-bottom">
+                                            <input type="checkbox"
+                                                   @bind="Model.RememberMe" />
+                                            <div class="label">Remember me</div>
+                                        </label>
+                                        <label class="c-field c-checkbox tight-top">
+                                            <input type="checkbox"
+                                                   @bind="Model.KeepMeSignedIn" />
+                                            <div class="label">Keep me signed in</div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="well center">
+                                <div class="buttons">
+                                    <button type="submit">
+                                        <div class="c-button large save">
+                                            <div class="text">Sign In</div>
+                                        </div>
+                                    </button>
+                                    <button @onclick="Model.Hide"
+                                            type="button">
+                                        <div class="c-button large cancel">
+                                            <div class="text">Cancel</div>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </form>
+
+                        <div class="links">
+                            <div class="step">
+                                <a @onclick="Model.ShowResetPassword">Reset password</a>
+                            </div>
+                            <div class="step">
+                                <a @onclick="Model.ShowEnterCode">Enter one-time access code</a>
+                            </div>
+                        </div>
+
+                        break;
+
+                    case SignInEmailTfaModel.States.EnterCode:
+
+                        <div class="c-padding-small-hor">
+                            <h2>Enter Code</h2>
+                        </div>
+
+                        <div class="c-padding-small-hor">
+                            <p>Enter the one-time access code from your email inbox.</p>
+                        </div>
+
+                        <form @onsubmit="Model.EnterCode">
+
+                            <div class="c-wrap c-padding-small-vert">
+
+                                <label class="c-field medium-large">
+                                    <div class="label">Username / Email</div>
+                                    <input type="text"
+                                           class="c-input"
+                                           maxlength="75"
+                                           @bind="Model.Username" />
+                                </label>
+                                <label class="c-field medium-large">
+                                    <div class="label">Access Code</div>
+                                    <input class="c-input"
+                                           @bind="Model.AccessCode" />
+                                </label>
+                            </div>
+                            <div class="c-stack">
+                                <label class="c-field c-checkbox tight-top tight-bottom">
+                                    <input type="checkbox"
+                                           @bind="Model.RememberMe" />
+                                    <div class="label">Remember me</div>
+                                </label>
+                                <label class="c-field c-checkbox tight-top">
+                                    <input type="checkbox"
+                                           @bind="Model.KeepMeSignedIn" />
+                                    <div class="label">Keep me signed in</div>
+                                </label>
+                            </div>
+
+                            <div class="well center">
+                                <div class="buttons">
+                                    <button type="submit">
+                                        <div class="c-button large save">
+                                            <div class="text">Enter Code</div>
+                                        </div>
+                                    </button>
+                                    <button @onclick="Model.Hide"
+                                            type="button">
+                                        <div class="c-button large cancel">
+                                            <div class="text">Cancel</div>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="links">
+                            <div class="step">
+                                <a @onclick="Model.ShowResetPassword">Reset password</a>
+                            </div>
+                            <div class="step">
+                                <a @onclick="Model.ShowEnterCredentials">Log in</a>
+                            </div>
+                        </div>
+
+                        break;
+
+                    case SignInEmailTfaModel.States.ResetPassword:
+
+                        <div class="c-padding-small-hor">
+                            <h2>Reset Password</h2>
+                        </div>
+
+                        <div class="c-padding-small-hor">
+                            <p>Enter your username and we'll send you a one-time access code via email.</p>
+                        </div>
+
+                        <form @onsubmit="Model.ResetPassword">
+
+                            <div class="c-wrap c-padding-small-vert">
+                                <label class="c-field medium-large">
+                                    <div class="label">Username / Email</div>
+                                    <input type="text"
+                                           class="c-input"
+                                           maxlength="75"
+                                           @bind="Model.Username" />
+                                </label>
+                            </div>
+
+                            <div class="well center">
+                                <div class="buttons">
+                                    <button type="submit">
+                                        <div class="c-button large create">
+                                            <div class="text">Reset Password</div>
+                                        </div>
+                                    </button>
+                                    <button @onclick="Model.Hide"
+                                            type="button">
+                                        <div class="c-button large cancel">
+                                            <div class="text">Cancel</div>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="links">
+                            <div class="step">
+                                Already have a code? <a @onclick="Model.ShowEnterCode">Enter code</a>
+                            </div>
+                            <div class="step">
+                                Have your password? <a @onclick="Model.ShowEnterCredentials">Log in</a>
+                            </div>
+                        </div>
+
+                        break;
+
+                    case SignInEmailTfaModel.States.ChangePassword:
+
+                        <div class="c-padding-small-hor">
+                            <h2>Change Password</h2>
+                        </div>
+                        <div class="c-padding-small-hor">
+                            <p>Passwords must be at least 12 characters long.</p>
+                        </div>
+
+                        <form @onsubmit="Model.ChangePassword">
+
+                            <div class="c-wrap c-padding-small-vert">
+                                <label class="c-field medium-large">
+                                    <div class="label">New Password</div>
+                                    <input type="password"
+                                           class="c-input"
+                                           autocomplete="new-password"
+                                           @bind="Model.NewPassword" />
+                                </label>
+                                <label class="c-field medium-large">
+                                    <div class="label">Confirm</div>
+                                    <input type="password"
+                                           class="c-input"
+                                           autocomplete="new-password"
+                                           @bind="Model.ConfirmPassword" />
+                                </label>
+                            </div>
+                            <div class="well center">
+                                <div class="buttons">
+                                    <button type="submit">
+                                        <div class="c-button large save">
+                                            <div class="text">Save</div>
+                                        </div>
+                                    </button>
+                                    @if (!Model.ResetOnEntry)
+                                    {
+                                        <button @onclick="Model.Hide"
+                                                type="button">
+                                            <div class="c-button large cancel">
+                                                <div class="text">Close</div>
+                                            </div>
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+
+                        </form>
+
+                        break;
+
+                    case SignInEmailTfaModel.States.SignOut:
+
+                        <div class="c-padding-small-hor">
+                            <h2>Sign Out</h2>
+                        </div>
+
+                        <p class="c-padding-small-vert c-centered">
+                            Are you sure you want to sign out?
+                        </p>
+
+                        <div class="well center">
+                            <div class="buttons">
+                                <button @onclick="Model.SignOut">
+                                    <div class="c-button large destroy">
+                                        <div class="text">Sign Out</div>
+                                    </div>
+                                </button>
+                                <button @onclick="Model.Hide"
+                                        type="button">
+                                    <div class="c-button large cancel">
+                                        <div class="text">Cancel</div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        break;
+                }
+            </Content>
+        </Modal>
+    }
+
+    @if (Portal.AllowSignIn == true || LeftPanel is not null || MenuItems is not null)
+    {
+        <div class="auth-bar">
+            <div class="c-padding-small-hor c-nowrap">
+                @if (LeftPanel is not null)
+                {
+                    @LeftPanel
+                }
+                @if (!SessionState.IsSignedIn)
+                {
+                    <div class="signed-out">
+                        @if (Portal.AllowSignIn == true)
+                        {
+                            <button @onclick="() => Model.ShowEnterCredentials()">
+                                <div class="c-button">
+                                    <div class="text">Sign In</div>
+                                </div>
+                            </button>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="signed-in">
+                        <div class="contact-name">
+                            @(SessionState.Session.User?.Contact.Name)
+                        </div>
+                        <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.User">
+                            <MenuItem Type="MenuItem.Types.Custom"
+                                      Text="Account Settings"
+                                      Icon="c-icon-cog2"
+                                      Clicked="() => Model.ShowAccountSettings()" />
+                            @if (MenuItems is not null)
+                            {
+                                @MenuItems
+                            }
+                            <MenuItem Type="MenuItem.Types.Custom"
+                                      Text="Change Password"
+                                      Icon="c-icon-lock"
+                                      Clicked="() => Model.ShowChangePassword()" />
+                            <MenuItem Type="MenuItem.Types.Custom"
+                                      Text="Sign Out"
+                                      Icon="c-icon-exit"
+                                      Clicked="() => Model.ShowSignOut()" />
+                        </ContextMenu>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+}

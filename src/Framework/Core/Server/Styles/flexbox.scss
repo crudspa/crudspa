@@ -1,0 +1,177 @@
+﻿/// <reference path="defaults.scss" />
+
+.c-star {
+    flex: 1 1 0%;
+    min-width: 0;
+}
+
+.c-wrap {
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+
+    &.top {
+        align-items: flex-start;
+    }
+
+    &.center {
+        justify-content: center;
+    }
+
+    &.bottom {
+        align-items: flex-end;
+    }
+
+    &.right {
+        justify-content: flex-end;
+    }
+
+    .star {
+        @extend .c-star;
+    }
+}
+
+.c-nowrap {
+    align-items: center;
+    display: flex;
+    flex-flow: row nowrap;
+
+    &.top {
+        align-items: flex-start;
+    }
+
+    &.bottom {
+        align-items: flex-end;
+    }
+
+    &.center {
+        justify-content: center;
+    }
+
+    &.right {
+        justify-content: flex-end;
+    }
+
+    .star {
+        @extend .c-star;
+    }
+}
+
+.c-nowrap-top {
+    @extend .c-nowrap;
+    align-items: flex-start;
+}
+
+.c-nowrap-baseline {
+    align-items: last baseline;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.c-stack {
+    align-items: flex-start;
+    display: flex;
+    flex-flow: column wrap;
+
+    &.center {
+        align-items: center;
+    }
+
+    &.right {
+        align-items: flex-end;
+    }
+
+    &.self-top {
+        align-self: flex-start;
+    }
+}
+
+.c-stretched-vertically {
+    display: flex;
+    flex: 1 0 auto;
+    flex-flow: column nowrap;
+    height: 100%;
+
+    &.centered {
+        justify-content: center;
+    }
+}
+
+.c-centered-vertically-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.c-two-panes {
+    align-items: center;
+    display: flex;
+    flex-flow: column nowrap;
+    width: 100%;
+
+    @media (min-width: $screenMax) {
+        flex-flow: row nowrap;
+    }
+
+    &.top {
+        align-items: flex-start;
+    }
+
+    .left {
+        flex: 1 0 auto;
+
+        .b-button-group {
+            justify-content: center;
+        }
+
+        @media (min-width: $screenMax) {
+            flex: 1 1 50%;
+
+            .b-button-group {
+                justify-content: flex-start;
+            }
+        }
+    }
+
+    .right {
+        flex: 1 0 auto;
+
+        .b-button-group {
+            justify-content: center;
+        }
+
+        @media (min-width: $screenMax) {
+            flex: 1 1 50%;
+
+            .b-button-group {
+                justify-content: flex-end;
+            }
+        }
+    }
+
+    .right-and-centered {
+        flex: 1 0 auto;
+        align-items: center;
+
+        .b-button-group {
+            justify-content: center;
+        }
+
+        @media (min-width: $screenMax) {
+            flex: 1 1 50%;
+            text-align: right;
+
+            .b-button-group {
+                justify-content: flex-end;
+            }
+        }
+    }
+
+    .top {
+        align-self: flex-start;
+    }
+
+    .c-button-group {
+        @extend .c-padding-small-all;
+    }
+}

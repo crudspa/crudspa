@@ -1,0 +1,9 @@
+﻿<button @onclick="() => Clicked.InvokeAsync()"
+        disabled="@Disabled">
+    <div class="c-button @(Transparent ? "transparent bordered" : "create")">
+        <div class="icon">
+            <span class="c-icon-plus"></span>
+        </div>
+        <div class="text">@Text @EntityName</div>
+    </div>
+</button>

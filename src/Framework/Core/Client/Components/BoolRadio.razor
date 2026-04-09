@@ -1,0 +1,26 @@
+﻿<div class="@(Orientation == Orientations.Horizontal ? "c-wrap top" : "c-stack")">
+    <div class="c-radio @RadioCssClass">
+        <input type="radio"
+               disabled="@ReadOnly"
+               checked="@(SelectedValue)"
+               @onchange="() => OnValueChanged(true)"
+               name="@($"{InstanceId:D}")"
+               id="@($"{InstanceId:D}-true")">
+        <label for="@($"{InstanceId:D}-true")"
+               class="label">
+            @TrueLabel
+        </label>
+    </div>
+    <div class="c-radio @RadioCssClass">
+        <input type="radio"
+               disabled="@ReadOnly"
+               checked="@(!SelectedValue)"
+               @onchange="() => OnValueChanged(false)"
+               name="@($"{InstanceId:D}")"
+               id="@($"{InstanceId:D}-false")">
+        <label for="@($"{InstanceId:D}-false")"
+               class="label">
+            @FalseLabel
+        </label>
+    </div>
+</div>

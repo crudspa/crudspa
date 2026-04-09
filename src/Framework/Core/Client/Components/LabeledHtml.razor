@@ -1,0 +1,13 @@
+﻿@if (HtmlValue.HasSomething())
+{
+    <div class="c-labeled-html">
+        @if (HideLabel != true)
+        {
+            <div class="label">
+                @Label
+            </div>
+        }
+        <UserHtml Html="@(HtmlValue!)"
+                  CssClass="value" />
+    </div>
+}

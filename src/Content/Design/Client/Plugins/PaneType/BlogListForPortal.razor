@@ -1,0 +1,36 @@
+<List Model="Model"
+      T="BlogModel"
+      EntityName="Blog"
+      UrlPrefix="@($"{Path}/blog")"
+      DeleteRequested="id => Model.Delete(id)">
+    <ReadView>
+        @if (context.Blog.ImageFile.Id.HasSomething())
+        {
+            <Field Size="Field.Sizes.Unspecified">
+                <Image ImageFile="context.Blog.ImageFile"
+                       Width="160" />
+            </Field>
+        }
+        <Field Size="Field.Sizes.Medium">
+            <Labeled CssClass="status"
+                     Width="5em"
+                     Label="Status">
+                <StatusDisplay Id="@context.Blog.StatusId"
+                               Name="@context.Blog.StatusName"
+                               ColorClassFrom="ContentStatusColors.For" />
+            </Labeled>
+            <Labeled Width="5em"
+                     Label="Author"
+                     StringValue="@context.Blog.Author" />
+        </Field>
+        <Field Size="Field.Sizes.Unspecified">
+            <LabeledHtml Label="Description"
+                         HtmlValue="@context.Blog.Description" />
+        </Field>
+    </ReadView>
+    <PaneLinks>
+        <PaneLink Href="@($"{Path}/blog-{context.Blog.Id:D}?pane=posts")"
+                  Text="Posts"
+                  Count="context.Blog.PostCount" />
+    </PaneLinks>
+</List>

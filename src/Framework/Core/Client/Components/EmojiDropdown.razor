@@ -1,0 +1,28 @@
+﻿<RadzenDropDown TValue="String"
+                TItem="Emoji"
+                Data="LookupValues"
+                TextProperty="Name"
+                ValueProperty="Character"
+                Disabled="@ReadOnly"
+                Placeholder="@NullText"
+                AllowClear="@AllowNull"
+                AllowFiltering="false"
+                Value="Value"
+                ValueChanged="HandleValueChanged">
+    <ValueTemplate Context="emoji">
+        <div class="c-nowrap">
+            <span style="margin: 0 .75em 0 .25em;">
+                @emoji.Character
+            </span>
+            @emoji.Name
+        </div>
+    </ValueTemplate>
+    <Template Context="emoji">
+        <div class="c-nowrap">
+            <span style="margin: 0 .75em 0 .25em;">
+                @emoji.Character
+            </span>
+            @emoji.Name
+        </div>
+    </Template>
+</RadzenDropDown>

@@ -1,0 +1,12 @@
+﻿@inherits ErrorBoundaryBase
+@if (ShowError)
+{
+    <div class="c-error-colors"
+         style="width: 100%; text-align: center; padding: 1em 2em; margin: 1em 0;">
+        Error: @(CurrentException?.Message ?? "Unexpected error.")
+    </div>
+}
+else
+{
+    @ChildContent
+}

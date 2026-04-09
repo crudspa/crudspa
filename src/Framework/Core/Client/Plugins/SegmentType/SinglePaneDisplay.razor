@@ -1,0 +1,10 @@
+﻿@if (Pane is not null)
+{
+    <ErrorRecover>
+        <PaneDisplayPlugin TypeName="@Pane.TypeDisplayView"
+                           Path="@Path"
+                           Id="@Pane.Id"
+                           IsNew="@Pane.IsNew"
+                           ConfigJson="@Pane.ConfigJson" />
+    </ErrorRecover>
+}

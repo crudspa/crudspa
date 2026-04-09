@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>Crudspa.Education.Student.Server</AssemblyName>
+    <RootNamespace>Crudspa.Education.Student.Server</RootNamespace>
+    <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Embedded\Images\Blackboard.svg" />
+    <None Remove="Embedded\Images\Books.svg" />
+    <None Remove="Embedded\Images\Brain-360.png" />
+    <None Remove="Embedded\Images\Brain.png" />
+    <None Remove="Embedded\Images\Certificate.svg" />
+    <None Remove="Embedded\Images\Diploma.svg" />
+    <None Remove="Embedded\Images\Owl.svg" />
+    <None Remove="Embedded\Images\Star-Empty.svg" />
+    <None Remove="Embedded\Images\Star-Filled.svg" />
+    <None Remove="Embedded\Images\Starburst.svg" />
+    <None Remove="Embedded\Images\Summer.svg" />
+    <None Remove="Embedded\Images\Trophy-Bronze.svg" />
+    <None Remove="Embedded\Images\Trophy-Diamond.svg" />
+    <None Remove="Embedded\Images\Trophy-Gold.svg" />
+    <None Remove="Embedded\Images\Trophy-Platinum.svg" />
+    <None Remove="Embedded\Images\Trophy-Silver.svg" />
+    <None Remove="Embedded\Images\Trophy.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Styles\**\*.scss" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Embedded\Images\Blackboard.svg" />
+    <EmbeddedResource Include="Embedded\Images\Books.svg" />
+    <EmbeddedResource Include="Embedded\Images\Brain-360.png" />
+    <EmbeddedResource Include="Embedded\Images\Brain.png" />
+    <EmbeddedResource Include="Embedded\Images\Certificate.svg" />
+    <EmbeddedResource Include="Embedded\Images\Diploma.svg" />
+    <EmbeddedResource Include="Embedded\Images\Star-Empty.svg" />
+    <EmbeddedResource Include="Embedded\Images\Star-Filled.svg" />
+    <EmbeddedResource Include="Embedded\Images\Starburst.svg" />
+    <EmbeddedResource Include="Embedded\Images\Summer.svg" />
+    <EmbeddedResource Include="Embedded\Images\Trophy-Gold.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Server\Server.csproj" />
+    <ProjectReference Include="..\Shared\Shared.csproj" />
+  </ItemGroup>
+</Project>

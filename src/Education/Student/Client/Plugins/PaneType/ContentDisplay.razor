@@ -1,0 +1,31 @@
+﻿<Waiter Model="Model">
+    <div class="c-margin-large c-stack">
+        @if (Model.BookContent is not null)
+        {
+            @foreach (var chapter in Model.BookContent.Chapters)
+            {
+                <button @onclick="() => Model.GoToChapter(chapter.Id)">
+                    <div class="c-button c-margin-tiny-vert">
+                        <div class="text">
+                            @(chapter.Title)
+                        </div>
+                        <div class="c-element-completion">
+                            <div class="status-icon">
+                                @if (chapter.Progress.TimesCompleted == 0)
+                                {
+                                    <img src="/api/content/display/images/check-empty"
+                                         alt="Incomplete" />
+                                }
+                                else
+                                {
+                                    <img src="/api/content/display/images/check-filled"
+                                         alt="Complete" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </button>
+            }
+        }
+    </div>
+</Waiter>

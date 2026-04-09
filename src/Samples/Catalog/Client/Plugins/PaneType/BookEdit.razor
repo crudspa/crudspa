@@ -1,0 +1,149 @@
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+            }
+            else
+            {
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            }
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="ISBN"
+                       Size="Field.Sizes.Small">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="20"
+                             @bind-Value="Model.Entity.Isbn" />
+                </Field>
+                <Field Label="Title"
+                       Size="Field.Sizes.Wide">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="160"
+                             @bind-Value="Model.Entity.Title" />
+                </Field>
+                <Field Label="Author"
+                       Size="Field.Sizes.Large">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="120"
+                             @bind-Value="Model.Entity.Author" />
+                </Field>
+                <Field Label="Genre"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown ReadOnly="Model.ReadOnly"
+                              LookupValues="Model.GenreNames"
+                              @bind-Value="Model.Entity.GenreId" />
+                </Field>
+                <Field Label="Pages"
+                       Size="Field.Sizes.Tiny">
+                    <NumericTextBox ReadOnly="Model.ReadOnly"
+                                    @bind-Value="Model.Entity.Pages" />
+                </Field>
+                <Field Label="Price"
+                       Size="Field.Sizes.Tiny">
+                    <NumericTextBox ReadOnly="Model.ReadOnly"
+                                    Format="#,##0.00"
+                                    Prefix="$"
+                                    @bind-Value="Model.Entity.Price" />
+                </Field>
+                <Field Label="Summary"
+                       Size="Field.Sizes.Full"
+                       Container="Field.Containers.Div">
+                    <HtmlEditor ReadOnly="Model.ReadOnly"
+                                @bind-Value="Model.Entity.Summary" />
+                </Field>
+                <Field Label="Cover Image"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <ImageUploader ReadOnly="Model.ReadOnly"
+                                   Required="false"
+                                   ImageFile="Model.Entity.CoverImageFile" />
+                </Field>
+                <Field Label="Sample PDF"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <PdfUploader ReadOnly="Model.ReadOnly"
+                                 Required="false"
+                                 PdfFile="Model.Entity.SamplePdfFile" />
+                </Field>
+                <Field Label="Preview Audio File"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <AudioUploader ReadOnly="Model.ReadOnly"
+                                   Required="false"
+                                   AudioFile="Model.Entity.PreviewAudioFileFile" />
+                </Field>
+                <Field Size="Field.Sizes.Wide"
+                       Label="Tags"
+                       Container="Field.Containers.Div">
+                    <CheckedList ReadOnly="Model.ReadOnly"
+                                 Selectables="Model.Entity.Tags" />
+                </Field>
+            </Wrapped>
+        </Padding>
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <BatchSection Title="Book Editions">
+                <HeadingPanel>
+                    <ButtonAdd EntityName="Book Edition"
+                               Disabled="Model.ReadOnly"
+                               Transparent="true"
+                               Clicked="() => Model.AddBookEdition()">
+                    </ButtonAdd>
+                </HeadingPanel>
+                <ChildContent>
+                    <Batch Model="Model.BookEditionsModel"
+                           ReadOnly="Model.ReadOnly">
+                        <EditView>
+                            <Wrapped Alignment="Wrapped.Alignments.Top"
+                                     @key="context">
+                                <Field Label="Format"
+                                       Size="Field.Sizes.Larger">
+                                    <Dropdown ReadOnly="Model.ReadOnly"
+                                              LookupValues="Model.FormatNames"
+                                              @bind-Value="context.FormatId" />
+                                </Field>
+                                <Field Label="Sku"
+                                       Size="Field.Sizes.Larger">
+                                    <TextBox ReadOnly="Model.ReadOnly"
+                                             MaxLength="40"
+                                             @bind-Value="context.Sku" />
+                                </Field>
+                                <Field Label="Price"
+                                       Size="Field.Sizes.Small">
+                                    <NumericTextBox ReadOnly="Model.ReadOnly"
+                                                    Format="#,##0.00"
+                                                    Prefix="$"
+                                                    @bind-Value="context.Price" />
+                                </Field>
+                                <Field Label="Released On"
+                                       Size="Field.Sizes.Medium">
+                                    <DatePicker ReadOnly="Model.ReadOnly"
+                                                Format="d"
+                                                @bind-Value="context.ReleasedOn" />
+                                </Field>
+                                <Field Label="Options"
+                                       Container="Field.Containers.Div">
+                                    <Wrapped NoWrap="true">
+                                        <Checkbox Label="In Print"
+                                                  ReadOnly="Model.ReadOnly"
+                                                  @bind-Value="context.InPrint" />
+                                    </Wrapped>
+                                </Field>
+                            </Wrapped>
+                        </EditView>
+                    </Batch>
+                </ChildContent>
+            </BatchSection>
+        </Padding>
+    }
+</Waiter>

@@ -1,0 +1,15 @@
+global using Crudspa.Framework.Core.Shared;
+global using Crudspa.Framework.Core.Shared.BaseClasses;
+global using Crudspa.Framework.Core.Shared.Contracts.Behavior;
+global using Crudspa.Framework.Core.Shared.Contracts.Data;
+global using Crudspa.Framework.Core.Shared.Contracts.Events;
+global using Crudspa.Framework.Core.Shared.Extensions;
+global using System.Collections;
+global using System.Collections.ObjectModel;
+global using System.ComponentModel;
+global using System.Globalization;
+global using System.Reflection;
+global using System.Runtime.CompilerServices;
+global using System.Security.Cryptography;
+global using System.Text;
+global using System.Text.Json;

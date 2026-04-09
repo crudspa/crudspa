@@ -1,0 +1,30 @@
+<ListOrderables Model="Model"
+                T="VocabQuestionModel"
+                EntityName="Question"
+                UrlPrefix="@($"{Path}/vocab-question")"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Tiny">
+            <Labeled Width="7em"
+                     Label="Is Preview"
+                     BooleanValue="@context.VocabQuestion.IsPreview" />
+            <Labeled Width="7em"
+                     Label="Page Break"
+                     BooleanValue="@context.VocabQuestion.PageBreakBefore" />
+        </Field>
+        <Field Size="Field.Sizes.Unspecified">
+            <LabeledBatch Label="Choices"
+                          Width="5em"
+                          Items="context.VocabQuestion.VocabChoices.OrderBy(x => x.Ordinal)"
+                          Context="item">
+                <ReadView>
+                    <span style="@(item.IsCorrect == true ? "font-weight: bold;" : String.Empty)">
+                        @(item.Word)
+                    </span>
+                </ReadView>
+            </LabeledBatch>
+        </Field>
+    </ReadView>
+</ListOrderables>

@@ -1,0 +1,297 @@
+@using Crudspa.Content.Display.Client.Extensions
+
+<div class="c-shape-preview @(Tall ? "tall" : "wide")">
+    @if (OrderedElements.HasItems())
+    {
+        <div class="c-shape-surface @(Section.Box.BoxClasses()) @PreviewBoxClasses(Section.Box)"
+             style="@SectionStyles()">
+            @foreach (var element in OrderedElements)
+            {
+                <div class="c-shape-node @(element.Box.BoxClasses()) @PreviewBoxClasses(element.Box)"
+                     style="@ElementStyles(element)">
+                    <div class="c-shape-node-body">
+                        @RenderElementBody(element)
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="c-shape-empty">
+            <div class="c-shape-empty-icon">
+                <span class="c-icon-shape"></span>
+            </div>
+            <div class="c-shape-empty-copy">Start from scratch</div>
+        </div>
+    }
+</div>
+<style>
+    .c-shape-preview {
+        display: flex;
+        width: 100%;
+        padding: 1rem;
+        border: 1px solid #d3d3d3;
+        border-radius: .5rem;
+        background-color: #fafafa;
+        overflow: hidden;
+    }
+
+    .c-shape-preview,
+    .c-shape-preview * {
+        box-sizing: border-box;
+    }
+
+    .c-shape-preview.wide {
+        aspect-ratio: 16 / 7;
+    }
+
+    .c-shape-preview.tall {
+        aspect-ratio: 4 / 7;
+    }
+
+    .c-shape-surface {
+        display: flex;
+        flex: 1 1 auto;
+        min-width: 0;
+        min-height: 0;
+        color: #565656;
+    }
+
+    .c-shape-node {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        min-width: 0;
+        min-height: 0;
+        overflow: visible;
+        transition: background-color .15s ease, box-shadow .15s ease;
+    }
+
+    .c-shape-node-body {
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+        min-width: 0;
+        min-height: 0;
+        overflow: hidden;
+        border-radius: inherit;
+    }
+
+    .c-shape-surface.preview-chrome,
+    .c-shape-node.preview-chrome {
+        background-color: rgba(255, 255, 255, .72);
+    }
+
+    .c-shape-surface.preview-shadowed,
+    .c-shape-node.preview-shadowed {
+        background-color: rgba(255, 255, 255, .88);
+    }
+
+    .c-shape-flow {
+        display: flex;
+        flex: 1 1 auto;
+        min-width: 0;
+        min-height: 0;
+    }
+
+    .c-shape-copy {
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+        justify-content: center;
+        gap: .25rem;
+        min-width: 0;
+        min-height: 0;
+    }
+
+    .c-shape-copy.quote {
+        position: relative;
+        padding-left: .55rem;
+    }
+
+    .c-shape-copy.quote::before {
+        content: "\"";
+        position: absolute;
+        top: -.15rem;
+        left: 0;
+        color: #b3b3b3;
+        font-size: 1.2rem;
+        line-height: 1;
+    }
+
+    .c-shape-line {
+        height: .3rem;
+        border-radius: 999px;
+        background-color: currentColor;
+        opacity: .28;
+    }
+
+    .c-shape-line.display {
+        height: .42rem;
+        opacity: .44;
+    }
+
+    .c-shape-line.heading {
+        height: .36rem;
+        opacity: .38;
+    }
+
+    .c-shape-line.meta {
+        height: .24rem;
+        opacity: .22;
+    }
+
+    .c-shape-line.bullet {
+        height: .26rem;
+        opacity: .25;
+    }
+
+    .c-shape-media,
+    .c-shape-fallback {
+        display: flex;
+        flex: 1 1 auto;
+        min-width: 0;
+        min-height: 0;
+        height: auto;
+        max-height: 100%;
+        align-items: center;
+        justify-content: center;
+        border: 1px dashed #c9c9c9;
+        border-radius: .6rem;
+        background-color: rgba(255, 255, 255, .6);
+        color: #7d7d7d;
+        overflow: hidden;
+    }
+
+    .c-shape-media.image {
+        align-self: stretch;
+        flex: 0 0 auto;
+        min-height: 4.5rem;
+        max-height: 9rem;
+    }
+
+    .c-shape-media.video {
+        align-self: stretch;
+        flex: 0 0 auto;
+        min-height: 5rem;
+        max-height: 10rem;
+    }
+
+    .c-shape-media.document,
+    .c-shape-media.note {
+        flex: 0 0 auto;
+        min-height: 3rem;
+        max-height: 7rem;
+    }
+
+    .c-shape-media.audio {
+        min-height: 2.25rem;
+        max-height: 100%;
+        justify-content: flex-start;
+        gap: .45rem;
+        padding: 0 .75rem;
+    }
+
+    .c-shape-media .icon,
+    .c-shape-fallback .icon {
+        font-size: 1.15rem;
+        opacity: .85;
+    }
+
+    .c-shape-media.audio .wave {
+        display: flex;
+        align-items: end;
+        gap: .14rem;
+    }
+
+    .c-shape-media.audio .bar {
+        width: .18rem;
+        border-radius: 999px;
+        background-color: currentColor;
+        opacity: .5;
+    }
+
+    .c-shape-media.audio .bar.a {
+        height: .55rem;
+    }
+
+    .c-shape-media.audio .bar.b {
+        height: .9rem;
+    }
+
+    .c-shape-media.audio .bar.c {
+        height: .7rem;
+    }
+
+    .c-shape-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: .35rem;
+        min-height: 1.65rem;
+        max-width: 100%;
+        font-size: .84em;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .c-shape-button .graphic {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+    }
+
+    .c-shape-button .graphic.icon {
+        font-size: .7em;
+        opacity: .85;
+    }
+
+    .c-shape-button.shape-square {
+        min-width: 4.2em;
+        min-height: 4.2em;
+    }
+
+    .c-shape-button.shape-square.with-text {
+        flex-direction: column;
+        white-space: normal;
+    }
+
+    .c-shape-button.shape-square .graphic {
+        font-size: 1.5em;
+    }
+
+    .c-shape-button .text {
+        padding: .35em .45em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .c-shape-button.shape-square .text {
+        text-align: center;
+    }
+
+    .c-shape-empty {
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: .65rem;
+        min-width: 0;
+        min-height: 0;
+        border: 1px dashed #cfcfcf;
+        border-radius: .5rem;
+        color: #7d7d7d;
+    }
+
+    .c-shape-empty-icon {
+        font-size: 1.5rem;
+        opacity: .75;
+    }
+
+    .c-shape-empty-copy {
+        font-size: .85rem;
+    }
+</style>

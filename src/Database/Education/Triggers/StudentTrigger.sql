@@ -1,0 +1,76 @@
+create trigger [Education].[StudentTrigger] on [Education].[Student]
+    for update
+as
+
+insert [Education].[Student] (
+     Id
+    ,VersionOf
+    ,Updated
+    ,UpdatedBy
+    ,IsDeleted
+    ,ResearchId
+    ,ContactId
+    ,UserId
+    ,FamilyId
+    ,StatusId
+    ,SecretCode
+    ,GenderId
+    ,GradeId
+    ,AssessmentTypeGroupId
+    ,AssessmentLevelGroupId
+    ,ConditionGroupId
+    ,GoalSettingGroupId
+    ,PersonalizationGroupId
+    ,ContentGroupId
+    ,AudioGenderId
+    ,ChallengeLevelId
+    ,MoreSample
+    ,TextSample
+    ,PreferredName
+    ,AvatarGraphicId
+    ,AvatarColor
+    ,AvatarCharacter
+    ,AvatarString
+    ,TermsAccepted
+    ,IdNumber
+    ,CreatedBySchool
+    ,DeletedBySchool
+    ,IsTestAccount
+    ,ResearchGroupId
+)
+select
+     newid()
+    ,deleted.Id
+    ,deleted.Updated
+    ,deleted.UpdatedBy
+    ,deleted.IsDeleted
+    ,deleted.ResearchId
+    ,deleted.ContactId
+    ,deleted.UserId
+    ,deleted.FamilyId
+    ,deleted.StatusId
+    ,deleted.SecretCode
+    ,deleted.GenderId
+    ,deleted.GradeId
+    ,deleted.AssessmentTypeGroupId
+    ,deleted.AssessmentLevelGroupId
+    ,deleted.ConditionGroupId
+    ,deleted.GoalSettingGroupId
+    ,deleted.PersonalizationGroupId
+    ,deleted.ContentGroupId
+    ,deleted.AudioGenderId
+    ,deleted.ChallengeLevelId
+    ,deleted.MoreSample
+    ,deleted.TextSample
+    ,deleted.PreferredName
+    ,deleted.AvatarGraphicId
+    ,deleted.AvatarColor
+    ,deleted.AvatarCharacter
+    ,deleted.AvatarString
+    ,deleted.TermsAccepted
+    ,deleted.IdNumber
+    ,deleted.CreatedBySchool
+    ,deleted.DeletedBySchool
+    ,deleted.IsTestAccount
+    ,deleted.ResearchGroupId
+from deleted

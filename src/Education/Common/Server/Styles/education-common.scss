@@ -1,0 +1,692 @@
+/// <reference path="../../../../Framework/Core/Server/Styles/defaults.scss" />
+
+@import "content-display";
+
+$colorActivityChoiceDefaultBackground: $choiceButtonBackgroundColor;
+$colorActivityChoiceDefaultText: $choiceButtonForegroundColor;
+$colorActivityChoiceSelectedBackground: #bccde0;
+$colorActivityChoiceSelectedText: #1e1e1e;
+$colorActivityChoiceValidBackground: #6b8e61;
+$colorActivityChoiceValidForeground: #fff;
+$colorActivityChoiceInvalidBackground: #a51c30;
+$colorActivityChoiceInvalidForeground: #fff;
+$colorActivityChoiceHiddenBackground: #f3f3f1;
+$colorActivityChoiceHiddenForeground: transparent;
+$colorActivityChoiceLockedBackground: #dddddd;
+$colorActivityChoiceLockedForeground: #666666;
+
+button:not([disabled]):hover .c-button,
+.c-button:not([disabled]):hover {
+
+    &.default {
+        background-color: $choiceButtonHoverBackgroundColor;
+    }
+
+    &.selected {
+        background-color: darken($colorActivityChoiceSelectedBackground, 5%);
+    }
+
+    &.valid {
+        background-color: darken($colorActivityChoiceValidBackground, 5%);
+    }
+
+    &.invalid {
+        background-color: darken($colorActivityChoiceInvalidBackground, 5%);
+    }
+
+    &.hidden {
+        background-color: darken($colorActivityChoiceHiddenBackground, 5%);
+    }
+
+    &.locked {
+        background-color: darken($colorActivityChoiceLockedBackground, 5%);
+    }
+}
+
+.cec-activity-wrapper {
+    display: grid;
+    place-items: center;
+    min-height: 14em;
+}
+
+.cec-context-text {
+    @extend .c-padding-medium-vert;
+    font-size: 1.125em;
+    text-align: center;
+    white-space: pre-line;
+
+    &.tight {
+        @extend .c-padding-small-vert;
+    }
+}
+
+.cec-choice {
+    background-color: $colorActivityChoiceDefaultBackground;
+    color: $colorActivityChoiceDefaultText;
+
+    &.squared {
+        border-radius: 0.25em;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+
+        .text {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+
+    &.default {
+        background-color: $colorActivityChoiceDefaultBackground;
+
+        .text {
+            color: $colorActivityChoiceDefaultText;
+        }
+    }
+
+    &.empty {
+        background-color: transparent;
+
+        .text {
+            color: $colorActivityChoiceDefaultText;
+
+            &:before {
+                content: "\a0\a0\a0\a0\a0\a0\a0\a0\a0\a0\a0\a0\a0\a0\a0\a0\a0";
+            }
+        }
+    }
+
+    &.selected {
+        background-color: $colorActivityChoiceSelectedBackground;
+
+        .text {
+            color: $colorActivityChoiceSelectedText;
+        }
+    }
+
+    &.valid {
+        background-color: $colorActivityChoiceValidBackground;
+
+        .text {
+            color: $colorActivityChoiceValidForeground;
+        }
+    }
+
+    &.invalid {
+        background-color: $colorActivityChoiceInvalidBackground;
+
+        .text {
+            color: $colorActivityChoiceInvalidForeground;
+        }
+    }
+
+    &.hidden {
+        background-color: $colorActivityChoiceHiddenBackground;
+
+        .text {
+            color: $colorActivityChoiceHiddenForeground;
+        }
+    }
+
+    &.locked {
+        background-color: $colorActivityChoiceLockedBackground;
+
+        .text {
+            color: $colorActivityChoiceLockedForeground;
+        }
+    }
+}
+
+.cec-completion-status {
+    padding: 0 .25em 0 1.5em;
+
+    &.tight {
+        padding: 0 0 0 .125em;
+        margin-top: .125em;
+        margin-right: -.5em;
+    }
+
+    img {
+        width: 1.625em;
+    }
+}
+
+.cec-pic-button {
+    height: 10em;
+    width: 10em;
+    padding: 0.5em;
+}
+
+.cec-catch-choice {
+
+    .button-content {
+        @extend .cec-choice;
+        @extend .cec-pic-button;
+
+        .catch-text {
+            background-color: rgba(255, 255, 255, 0.875);
+            color: $colorActivityChoiceDefaultText;
+            font-family: $buttonTextFontFamily;
+            font-weight: $buttonTextFontWeight;
+            left: 0;
+            padding: .5em;
+            position: absolute;
+            text-align: center;
+            top: 4em;
+            width: 100%;
+        }
+    }
+}
+
+.cec-vocab-question {
+    @extend .c-padding-small;
+    @extend .c-padding-medium-bottom;
+    border: 2px solid transparent;
+
+    &.invalid {
+        border: 2px solid $colorActivityChoiceInvalidBackground;
+    }
+
+    .question {
+        @extend .c-wrap;
+
+        .number {
+            @extend .c-padding-tiny-right;
+        }
+
+        .text {
+            @extend .c-margin-small-vert;
+
+            .word {
+                font-weight: bold;
+                text-decoration: underline;
+            }
+        }
+
+        button {
+            @extend .c-margin-small-hor;
+        }
+    }
+
+    .choices {
+        @extend .c-wrap;
+        justify-content: space-around;
+
+        .c-button.media {
+            background-color: $choiceButtonBackgroundColor;
+            color: $choiceButtonForegroundColor;
+            border-width: 2px;
+        }
+
+        .choice {
+            background-color: $choiceButtonBackgroundColor;
+            color: $choiceButtonForegroundColor;
+            border-width: 2px;
+
+            .text {
+                &.correct {
+                    text-decoration: underline;
+                }
+            }
+
+            &.default {
+                border-color: #eee;
+
+                &:hover {
+                    background-color: transparent;
+                    border-color: #ddd;
+                }
+            }
+
+            &.selected {
+                border-color: dodgerblue;
+
+                &:hover {
+                    background-color: transparent;
+                }
+            }
+
+            &.valid {
+                border-color: $colorActivityChoiceValidBackground;
+
+                &:hover {
+                    background-color: transparent;
+                    cursor: default;
+                }
+            }
+
+            &.invalid {
+                border-color: $colorActivityChoiceInvalidBackground;
+
+                &:hover {
+                    background-color: transparent;
+                    cursor: default;
+                }
+            }
+        }
+    }
+}
+
+.cec-assessment-question {
+    @extend .c-padding-small-vert;
+    border: 2px solid transparent;
+
+    &.invalid {
+        border: 2px solid $colorActivityChoiceInvalidBackground;
+    }
+
+    .number {
+        @extend .c-padding-tiny-right;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    .question {
+        @extend .c-nowrap;
+        @extend .c-padding-small-bottom;
+        align-items: flex-start;
+
+        .audio {
+            @extend .c-margin-small;
+            flex: 1 0 2.5em;
+        }
+
+        button {
+            @extend .c-margin-small-hor;
+        }
+    }
+
+    .choices {
+        @extend .c-stack;
+        @extend .c-padding-medium-hor;
+
+        .choice {
+            @extend .c-nowrap;
+            @extend .c-padding-tiny-vert;
+
+            .letter {
+                @extend .c-padding-tiny-right;
+            }
+
+            .c-button.media {
+                background-color: $choiceButtonBackgroundColor;
+                color: $choiceButtonForegroundColor;
+                border-width: 2px;
+            }
+
+            .choice-button {
+                background-color: $choiceButtonBackgroundColor;
+                color: $choiceButtonForegroundColor;
+                border-width: 2px;
+
+                .text {
+                    flex: 1 1 auto;
+
+                    &.correct {
+                        text-decoration: underline;
+                    }
+                }
+
+                &.default {
+                    border-color: #eee;
+
+                    &:hover {
+                        background-color: transparent;
+                        border-color: #ddd;
+                    }
+                }
+
+                &.selected {
+                    border-color: dodgerblue;
+
+                    &:hover {
+                        background-color: transparent;
+                    }
+                }
+
+                &.valid {
+                    border-color: $colorActivityChoiceValidBackground;
+
+                    &:hover {
+                        background-color: transparent;
+                        cursor: default;
+                    }
+                }
+
+                &.invalid {
+                    border-color: $colorActivityChoiceInvalidBackground;
+
+                    &:hover {
+                        background-color: transparent;
+                        cursor: default;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.cec-right-pane {
+    border-left: 2px solid #ccc;
+
+    &.no-border {
+        border-left: unset;
+    }
+}
+
+.cec-concept-map {
+
+    .central-concept {
+        @extend .c-padding-medium;
+        border: 2px solid $defaultBorderColor;
+        border-radius: 50%;
+        color: transparent;
+        font-size: 3em;
+        text-align: center;
+        -webkit-text-stroke: 1px #111;
+    }
+
+    .choices {
+        @extend .c-padding-medium-vert;
+
+        .choice {
+            @extend .c-border;
+            @extend .c-margin-small-all;
+            background-color: $colorActivityChoiceDefaultBackground;
+            max-width: 24em;
+            z-index: 100;
+        }
+    }
+
+    .line {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+
+        svg {
+            height: 100%;
+            width: 100%;
+
+            line {
+                stroke: $defaultBorderColor;
+            }
+        }
+    }
+}
+
+.cec-revealed {
+    animation: c-kf-fade-in 1s ease-in;
+}
+
+.cec-post-view {
+
+    .content {
+        align-items: center;
+        display: flex;
+        flex-flow: row wrap;
+
+        .audio {
+            flex-basis: 20em;
+        }
+
+        .image {
+            flex-basis: 20em;
+        }
+
+        .pdf {
+            flex-basis: 20em;
+            text-align: center;
+
+            .thumbnail {
+                span {
+                    color: $metadataForegroundColor;
+                    font-size: 6em;
+                }
+            }
+        }
+
+        .video {
+            flex-basis: 20em;
+        }
+
+        .body-area {
+            flex: 1 1 20em;
+
+            .innovators-fields {
+                color: $metadataForegroundColor;
+                font-style: italic;
+            }
+
+            .text {
+                @extend .c-user-content;
+            }
+
+            .clipped-text {
+                @extend .c-user-content;
+                min-height: 4em;
+                max-height: 12em;
+                overflow: hidden;
+                position: relative;
+
+                &:after {
+                    content: "";
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 25%;
+                    background: linear-gradient(to bottom, $windowBackgroundColorTransparent, $windowBackgroundColor 100%);
+                }
+            }
+        }
+    }
+
+    .gutter {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        padding-top: .5em;
+        padding-bottom: .5em;
+
+        .left, .right {
+            flex: 1;
+            min-width: 20em;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        .metadata {
+            color: $metadataForegroundColor;
+            font-size: .9em;
+        }
+
+        .reactions {
+            align-items: flex-end;
+            display: flex;
+            flex-flow: row nowrap;
+
+            .my-reaction {
+                flex: 0;
+
+                .c-button {
+                    padding: 0 .25em .5em .25em;
+
+                    .text {
+                        align-items: flex-end;
+                        display: flex;
+                        flex-flow: row nowrap;
+                        line-height: 1;
+                        padding: 0;
+
+                        span {
+                            display: flex;
+                            align-items: flex-end;
+                        }
+
+                        .none {
+                            font-size: 2.25em;
+                            padding-left: .125em;
+                            padding-right: .125em;
+                        }
+
+                        .emoji {
+                            font-size: 1.5em;
+                            padding: .375em .25em .125em .25em;
+                        }
+
+                        .arrow {
+                            font-size: .675em;
+                        }
+                    }
+                }
+            }
+
+            .reaction-counts {
+                display: flex;
+                flex-flow: row wrap;
+                flex: 1;
+
+                .reaction-count {
+                    display: flex;
+                    flex-flow: row nowrap;
+                }
+            }
+        }
+    }
+}
+
+.cec-comment {
+    border-bottom: 1px solid $defaultBorderColor;
+    border-left: 3px solid $defaultBorderColor;
+}
+
+$reportBodyBackgroundColor: #ffffff00 !default;
+$reportBodyFontFamily: $bodyFontFamily !default;
+$reportBodyFontSize: 1em !default;
+$reportBodyFontWeight: 400 !default;
+$reportBodyForegroundColor: #00439f !default;
+
+$reportTitleFontFamily: $reportBodyFontFamily !default;
+$reportTitleFontSize: 3.33em !default;
+$reportTitleFontWeight: 700 !default;
+$reportTitleForegroundColor: #00439f !default;
+
+$reportH1FontFamily: $reportBodyFontFamily !default;
+$reportH1FontSize: 2.5em !default;
+$reportH1FontWeight: 700 !default;
+$reportH1ForegroundColor: #00439f !default;
+
+$reportH2FontFamily: $reportBodyFontFamily !default;
+$reportH2FontSize: 2.5em !default;
+$reportH2FontWeight: 300 !default;
+$reportH2ForegroundColor: #00439f !default;
+
+$reportParagraphFontFamily: $reportBodyFontFamily !default;
+$reportParagraphFontSize: 0.75em !default;
+$reportParagraphFontWeight: 200 !default;
+$reportParagraphForegroundColor: #00439f !default;
+
+$reportHyperlinkFontFamily: $reportParagraphFontFamily !default;
+$reportHyperlinkFontSize: 0.75em !default;
+$reportHyperlinkFontWeight: 200 !default;
+$reportHyperlinkForegroundColor: #00439f !default;
+
+$reportFooterBackgroundColor: #ffffff00 !default;
+$reportFooterForegroundColor: $reportBodyForegroundColor !default;
+
+.cec-embedded-report {
+    @extend .c-padding-medium-hor;
+    @extend .c-padding-medium-bottom;
+
+    table {
+        border-collapse: collapse;
+
+        tr {
+            border-bottom: 1px solid $defaultBorderColor;
+
+            &.header {
+                border-bottom-width: 2px;
+            }
+        }
+
+        th, td {
+            padding: .5em 1em .5em 0;
+        }
+    }
+
+    body {
+        background-color: $reportBodyBackgroundColor;
+        color: $reportBodyForegroundColor;
+        font-family: $reportBodyFontFamily;
+        font-size: $reportBodyFontSize;
+        font-weight: $reportBodyFontWeight;
+        margin: 0;
+    }
+
+    .title {
+        font-family: $reportTitleFontFamily;
+        font-size: $reportTitleFontSize;
+        font-weight: $reportTitleFontWeight;
+        color: $reportTitleForegroundColor;
+    }
+
+    h1 {
+        font-family: $reportH1FontFamily;
+        font-size: $reportH1FontSize;
+        font-weight: $reportH1FontWeight;
+        color: $reportH1ForegroundColor;
+    }
+
+    h2 {
+        font-family: $reportH2FontFamily;
+        font-size: $reportH2FontSize;
+        font-weight: $reportH2FontWeight;
+        color: $reportParagraphForegroundColor;
+    }
+
+    p {
+        font-family: $reportParagraphFontFamily;
+        font-size: $reportParagraphFontSize;
+        font-weight: $reportParagraphFontWeight;
+        color: $reportH2ForegroundColor;
+    }
+
+    a {
+        background-image: linear-gradient(to bottom, transparent, transparent 50%, #fee7a7 50%, #fee7a7);
+        background-size: 100% 15px;
+        background-position: 0 100%;
+        background-repeat: no-repeat;
+        color: $reportHyperlinkForegroundColor;
+        font-family: $reportHyperlinkFontFamily;
+        font-size: $reportHyperlinkFontSize;
+        font-weight: $reportHyperlinkFontWeight;
+        text-decoration: none;
+    }
+
+    .table {
+        background-color: transparent;
+    }
+
+    .footer {
+        background-color: $reportFooterBackgroundColor;
+        background-size: 100% auto;
+        background-position: left center;
+        color: $reportFooterForegroundColor;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .logo {
+        height: auto;
+        margin-left: 0px;
+        width: 400px;
+    }
+}

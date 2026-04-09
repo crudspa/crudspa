@@ -1,0 +1,67 @@
+/// <reference path="../../../../Framework/Core/Server/Styles/defaults.scss" />
+
+@import "framework-core";
+
+.c-content-button {
+    gap: .5em;
+    min-width: 0;
+    text-align: center;
+
+    .graphic {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+        line-height: 1;
+    }
+
+    .graphic.icon {
+        font-size: calc(var(--button-text-font-size) * 1.15);
+    }
+
+    .graphic.image img {
+        display: block;
+        width: 2.15rem;
+        height: 2.15rem;
+        object-fit: contain;
+    }
+
+    &.shape-square {
+        min-width: 5.25em;
+        min-height: 5.25em;
+    }
+
+    &.shape-square.with-text {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .graphic.icon {
+            font-size: calc(var(--button-text-font-size) * 2.25);
+        }
+
+        .graphic.image img {
+            width: 3.5rem;
+            height: 3.5rem;
+        }
+
+        .text {
+            padding-top: 0;
+            text-align: center;
+        }
+    }
+
+    &.shape-square.without-text {
+        aspect-ratio: 1 / 1;
+        padding: .75em;
+
+        .graphic.icon {
+            font-size: calc(var(--button-text-font-size) * 2.4);
+        }
+
+        .graphic.image img {
+            width: 3.75rem;
+            height: 3.75rem;
+        }
+    }
+}

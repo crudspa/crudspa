@@ -1,0 +1,45 @@
+﻿<div class="c-achievement c-padding-small">
+
+    @if (Model.ContactAchievement is not null)
+    {
+        <div class="c-stack center">
+
+            <div class="title">
+                <h2>@(Model.ContactAchievement.Achievement.Title)</h2>
+            </div>
+
+            @if (Model.ContactAchievement.Achievement.Description.HasSomething())
+            {
+                <UserHtml Html="@(Model.ContactAchievement.Achievement.Description)"
+                          CssClass="description" />
+            }
+
+            <div class="trophy">
+                <Image ImageFile="Model.ContactAchievement.Achievement.ImageFile"
+                       Width="192" />
+            </div>
+
+            @if (Model.HasUnlocks)
+            {
+                <div class="unlocks-header">
+                    <h3>Items Unlocked</h3>
+                </div>
+
+                <div class="unlocked-item">
+                    @foreach (var track in Model.ContactAchievement.Unlocks.Tracks)
+                    {
+                        <p>
+                            <strong>Track:</strong> @(track.Title)
+                        </p>
+                    }
+                    @foreach (var course in Model.ContactAchievement.Unlocks.Courses)
+                    {
+                        <p>
+                            <strong>Course:</strong> @(course.Title)
+                        </p>
+                    }
+                </div>
+            }
+        </div>
+    }
+</div>

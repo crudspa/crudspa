@@ -1,0 +1,53 @@
+﻿@if (MyAchievementsModel is not null)
+{
+    <Modal Model="MyAchievementsModel"
+           TopMargin="6em"
+           Width="36em"
+           Title="My Achievements">
+        <Content>
+            <MyAchievements Model="MyAchievementsModel" />
+        </Content>
+    </Modal>
+}
+@if (AchievementModel is not null)
+{
+    <Modal Model="AchievementModel"
+           TopMargin="6em"
+           Width="36em"
+           Title="@AchievementModel.Title">
+        <Content>
+            <Achievement Model="AchievementModel" />
+        </Content>
+    </Modal>
+}
+@if (ImageViewerModel is not null)
+{
+    <Modal Model="ImageViewerModel"
+           Sizing="Modal.ModalSizing.Fluid"
+           Title="View Image">
+        <Content>
+            <ImageViewer Model="ImageViewerModel" />
+        </Content>
+    </Modal>
+}
+@if (PdfViewerModel is not null)
+{
+    <Modal Model="PdfViewerModel"
+           Sizing="Modal.ModalSizing.Full"
+           Title="View PDF">
+        <Content>
+            <PdfViewer Model="PdfViewerModel" />
+        </Content>
+    </Modal>
+}
+@if (NotebookModel is not null)
+{
+    <Modal Model="NotebookModel"
+           TopMargin="8em"
+           Width="32em"
+           Scope="Modal.ModalScope.Global">
+        <Content>
+            <Notebook Model="NotebookModel" />
+        </Content>
+    </Modal>
+}

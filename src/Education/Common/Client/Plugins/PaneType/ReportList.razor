@@ -1,0 +1,33 @@
+<Waiter Model="Model">
+    @if (Model.Cards.IsEmpty())
+    {
+        <NoRecords EntityName="reports" />
+    }
+    else
+    {
+        @foreach (var card in Model.Cards.OrderBy(x => x.SortIndex))
+        {
+            <Card Model="card"
+                  Title="@card.Entity.Name">
+                <Values>
+                    <Wrapped NoWrap="true"
+                             Alignment="Wrapped.Alignments.Center">
+                        <Padding Size="Padding.Sizes.Tiny">
+                            <Field Size="Field.Sizes.Unspecified"
+                                   Container="Field.Containers.Div">
+                                <span class="c-item-icon @(card.Entity.Report.IconCssClass)"></span>
+                            </Field>
+                        </Padding>
+                        <Field Size="Field.Sizes.Unspecified"
+                               Container="Field.Containers.Div">
+                            @(card.Entity.Report.Description)
+                        </Field>
+                    </Wrapped>
+                </Values>
+                <Buttons>
+                    <ButtonView Href="@($"{Path}/report-{card.Entity.Id:D}")" />
+                </Buttons>
+            </Card>
+        }
+    }
+</Waiter>

@@ -1,0 +1,34 @@
+<Toolbar>
+    <Left>
+        @if (Model.ReadOnly)
+        {
+            <ButtonEdit Clicked="() => Model.Edit()" />
+        }
+        else
+        {
+            <ButtonGroup>
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            </ButtonGroup>
+        }
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                @foreach (var relation in Model.Entity.Relations)
+                {
+                    <Field Size="Field.Sizes.Medium"
+                           Label="@relation.Name"
+                           Container="Field.Containers.Div">
+                        <CheckedList Selectables="relation.Selections"
+                                     ReadOnly="Model.ReadOnly" />
+                    </Field>
+                }
+            </Wrapped>
+        </Padding>
+    }
+</Waiter>

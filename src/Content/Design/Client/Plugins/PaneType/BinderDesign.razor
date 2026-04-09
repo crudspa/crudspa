@@ -1,0 +1,12 @@
+﻿<Waiter Model="Model">
+    @if (Model.Config.BinderId is not null)
+    {
+        <PageListForBinder Path="@Path"
+                           Id="Model.Config.BinderId"
+                           AddPage="AddPage"
+                           FetchPages="FetchPages"
+                           FetchPage="FetchPage"
+                           RemovePage="RemovePage"
+                           SavePageOrder="SavePageOrder" />
+    }
+</Waiter>

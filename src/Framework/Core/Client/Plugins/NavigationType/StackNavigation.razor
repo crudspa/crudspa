@@ -1,0 +1,47 @@
+﻿@namespace Crudspa.Framework.Core.Client.Plugins.NavigationType
+@inherits NavigationBase
+
+@if (Navigator.Initialized)
+{
+    <div class="c-stack-navigation"
+         style="@Styles"
+         @onclick="HandleClick">
+
+        <div class="header">
+            <div class="menu-button">
+                <button type="button"
+                        @onclick="() => Navigator.Close()">
+                    <div class="c-button circle">
+                        <div class="icon">
+                            <div class="c-icon-arrow-left"></div>
+                        </div>
+                    </div>
+                </button>
+            </div>
+
+            <div class="branding">
+                @Branding
+            </div>
+
+            @AuthViews
+        </div>
+
+        <div class="main">
+            @foreach (var view in Navigator.OpenViews)
+            {
+                <div class="c-window @(view.Visible ? String.Empty : "c-hide")"
+                     @key="view.Path">
+                    <div class="content">
+                        <SegmentDisplayPlugin TypeName="@view.View"
+                                              Path="@view.Path"
+                                              Id="@view.Id"
+                                              Panes="@view.Panes"
+                                              ConfigJson="@view.ConfigJson" />
+                    </div>
+                </div>
+            }
+
+            @Footer
+        </div>
+    </div>
+}

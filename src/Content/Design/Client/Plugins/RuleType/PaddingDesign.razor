@@ -1,0 +1,26 @@
+﻿<Stacked Alignment="Stacked.Alignments.Center">
+    <div>
+        <Field Label="Top"
+               Size="Field.Sizes.Min">
+            <TextBox @bind-Value="Config.Top" />
+        </Field>
+    </div>
+    <div>
+        <Wrapped NoWrap="true">
+            <Field Label="Left"
+                   Size="Field.Sizes.Min">
+                <TextBox @bind-Value="Config.Left" />
+            </Field>
+            <Field Label="Right"
+                   Size="Field.Sizes.Min">
+                <TextBox @bind-Value="Config.Right" />
+            </Field>
+        </Wrapped>
+    </div>
+    <div>
+        <Field Label="Bottom"
+               Size="Field.Sizes.Min">
+            <TextBox @bind-Value="Config.Bottom" />
+        </Field>
+    </div>
+</Stacked>

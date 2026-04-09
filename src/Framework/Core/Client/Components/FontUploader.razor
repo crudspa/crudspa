@@ -1,0 +1,100 @@
+@using Microsoft.AspNetCore.Components.Forms
+
+<div class="c-uploader"
+     disabled="@ReadOnly">
+
+    <div class="header">
+
+        <div class="icon">
+            <span class="c-icon-file-empty"></span>
+        </div>
+
+        <div class="name">
+            @if (FontFile.Name.HasSomething())
+            {
+                @if (FontFile.Id.HasSomething())
+                {
+                    <a href="@FontFile.FetchUrl(download: true)"
+                       target="_blank">
+                        @(FontFile.Name)
+                    </a>
+                }
+                else
+                {
+                    @(FontFile.Name)
+                }
+            }
+            else
+            {
+                <span class="none">None</span>
+            }
+        </div>
+
+        @if (!ReadOnly)
+        {
+            <div class="buttons">
+                <button @onclick="Clear"
+                        disabled="@ReadOnly">
+                    <div class="c-button transparent">
+                        <div class="icon">
+                            <span class="c-icon-trash2"></span>
+                        </div>
+                    </div>
+                </button>
+            </div>
+        }
+
+    </div>
+
+    @if (!ReadOnly)
+    {
+        <div class="c-full">
+            <Field Label="File"
+                   Size="Field.Sizes.Full"
+                   Padding="Field.Paddings.TightHor">
+
+                <div class="c-font-uploader">
+
+                    <div class="c-nowrap picker">
+
+                        <label class="c-button"
+                               for="@($"input{InstanceId:N}")">
+                            Browse...
+                        </label>
+
+                        <div class="c-padding-small-hor">
+                            Browse or drop files here
+                        </div>
+
+                        <InputFile id="@($"input{InstanceId:N}")"
+                                   accept="@Accept"
+                                   disabled="@ReadOnly"
+                                   OnChange="HandleFileChanged"
+                                   @key="InstanceId" />
+                    </div>
+
+                    @if (FontFile.Name.HasSomething() && FontFile.Id is null)
+                    {
+                        <div class="c-wrap c-padding-small-vert">
+                            <div class="star">
+                                @if (FontFile.UploadProgress > 0)
+                                {
+                                    <div class="progress-bar-wrapper">
+                                        <div class="progress-bar"
+                                             style="width: @($"{FontFile.UploadProgress}%")">
+                                            <span class="progress-text">Uploading...</span>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="status-text">@(FontFile.UploadStatus)</div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            </Field>
+        </div>
+    }
+</div>

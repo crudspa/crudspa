@@ -1,0 +1,410 @@
+<ThemePreview PortalId="TargetPortalId"
+              Version="PreviewVersion"
+              @key="PreviewVersion">
+<div class="c-padding-medium-all c-fixed-width"
+     style="font-size: 1rem;">
+<div class="c-binder c-shadowed-binder">
+<div class="c-page">
+<div class="c-padding-medium-all">
+<div class="c-window-title">
+    <div class="text">Style Preview</div>
+    <div class="close-button">
+        <a>
+            <span class="c-icon-cross"></span>
+        </a>
+    </div>
+</div>
+
+<Padding Direction="Padding.Directions.Bottom"
+         Size="Padding.Sizes.Small">
+    <div class="c-centered">
+        <p>Use this sample to review how portal styles land across common framework components and content surfaces.</p>
+        <a href="#">Sample link styling</a>
+    </div>
+</Padding>
+
+<Padding Direction="Padding.Directions.Bottom"
+         Size="Padding.Sizes.Small">
+    <Border>
+        <Padding Size="Padding.Sizes.Medium">
+            <h2>Content sample</h2>
+            <UserHtml Html="FormattedHtml" />
+
+            <Padding Direction="Padding.Directions.Top"
+                     Size="Padding.Sizes.Small">
+                <LabeledHtml Label="Supporting note"
+                             HtmlValue="SupportingHtml" />
+            </Padding>
+
+            <Padding Direction="Padding.Directions.Top"
+                     Size="Padding.Sizes.Small">
+                <h4>Custom font samples</h4>
+                <div class="c-custom-font1">
+                    <p>Custom Font 1 sample.</p>
+                </div>
+                <div class="c-custom-font2">
+                    <p>Custom Font 2 sample.</p>
+                </div>
+                <div class="c-custom-font3">
+                    <p>Custom Font 3 sample.</p>
+                </div>
+                <div class="c-custom-font4">
+                    <p>Custom Font 4 sample.</p>
+                </div>
+            </Padding>
+        </Padding>
+    </Border>
+</Padding>
+
+<Toolbar Border="Toolbar.Borders.Bottom">
+    <Left>
+        <Field Label="Quick Search"
+               Size="Field.Sizes.Medium"
+               Padding="Field.Paddings.None">
+            <SearchTextBox @bind-Value="QuickSearchText" />
+        </Field>
+    </Left>
+    <Right>
+        <ButtonGroup>
+            <ButtonAdd EntityName="Item"
+                       Clicked="HandlePreviewButtonClicked" />
+            <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Create">
+                <MenuItem Type="MenuItem.Types.Refresh"
+                          Clicked="HandlePreviewButtonClicked" />
+                <MenuItem Text="Export"
+                          Icon="c-icon-download"
+                          Clicked="HandlePreviewButtonClicked" />
+            </ContextMenu>
+        </ButtonGroup>
+    </Right>
+</Toolbar>
+
+<Padding Direction="Padding.Directions.Top"
+         Size="Padding.Sizes.Small">
+    <Filters>
+        <Fields>
+            <Field Label="Search"
+                   Size="Field.Sizes.Medium">
+                <SearchTextBox @bind-Value="SearchText" />
+            </Field>
+            <Field Label="Content Type"
+                   Size="Field.Sizes.Medium">
+                <ComboBox LookupValues="ContentTypeOptions"
+                          @bind-Value="SelectedContentTypeId" />
+            </Field>
+            <Field Label="Publish Date"
+                   Size="Field.Sizes.Small">
+                <DatePicker Format="d"
+                            @bind-Value="PublishDate" />
+            </Field>
+            <Field Label="Priority"
+                   Size="Field.Sizes.Small">
+                <NumericTextBox T="Int32?"
+                                @bind-Value="Priority" />
+            </Field>
+            <Sorter Sorts="SortOptions"
+                    @bind-Selected="SelectedSort"
+                    @bind-Ascending="SortAscending" />
+        </Fields>
+        <Buttons>
+            <ButtonCore Text="Search"
+                        IconClass="c-icon-magnifier"
+                        IconPosition="ButtonCore.IconPositions.Right"
+                        Clicked="HandlePreviewButtonClicked" />
+            <ContextMenu>
+                <MenuItem Type="MenuItem.Types.Reset"
+                          Clicked="HandlePreviewButtonClicked" />
+                <MenuItem Type="MenuItem.Types.Refresh"
+                          Clicked="HandlePreviewButtonClicked" />
+            </ContextMenu>
+        </Buttons>
+    </Filters>
+</Padding>
+
+<div class="c-tabbed-panes c-margin-medium-top">
+    <ul class="tabs">
+        <li class="selected">Form Layout</li>
+        <li>Results</li>
+        <li>Reports</li>
+    </ul>
+    <div class="panes">
+        <div class="c-padding-medium-all">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Content Title"
+                       Size="Field.Sizes.Wide">
+                    <TextBox @bind-Value="ContentTitle" />
+                </Field>
+                <Field Label="Status"
+                       Size="Field.Sizes.Unspecified">
+                    <StatusEdit LookupValues="PreviewContentStatusOptions"
+                                ColorClassFrom="ContentStatusColors.For"
+                                @bind-Value="PreviewContentStatusId" />
+                </Field>
+                <Field Label="Workflow"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <Radio LookupValues="WorkflowOptions"
+                           @bind-Value="SelectedWorkflowId" />
+                </Field>
+                <Field Label="Channels"
+                       Size="Field.Sizes.Large"
+                       Container="Field.Containers.Div">
+                    <MultiSelect LookupValues="ChannelOptions"
+                                 @bind-SelectedValues="SelectedChannelIds" />
+                </Field>
+                <Field Label="Show in Navigation"
+                       Size="Field.Sizes.Medium"
+                       Container="Field.Containers.Div">
+                    <BoolRadio @bind-SelectedValue="ShowInNavigation"
+                               TrueLabel="Yes"
+                               FalseLabel="No" />
+                </Field>
+                <Field Label="Highlight Color"
+                       Size="Field.Sizes.Small"
+                       Container="Field.Containers.Div">
+                    <ColorPicker @bind-Value="HighlightColor" />
+                </Field>
+                <Field Label="Audience Segments"
+                       Size="Field.Sizes.Large"
+                       Container="Field.Containers.Div">
+                    <CheckedList Selectables="AudienceOptions"
+                                 Height="CheckedList.Heights.Average" />
+                </Field>
+                <Field Label="Preferences"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <Wrapped NoWrap="true">
+                        <Checkbox Label="Featured"
+                                  @bind-Value="IsFeatured" />
+                        <Checkbox Label="Searchable"
+                                  @bind-Value="IsSearchable" />
+                    </Wrapped>
+                </Field>
+                <Field Label="Summary"
+                       Size="Field.Sizes.Full">
+                    <MultilineTextBox Height="MultilineTextBox.Heights.Average"
+                                      @bind-Value="Summary" />
+                </Field>
+                <Field Label="Read-only Field"
+                       Size="Field.Sizes.Medium">
+                    <TextBox Value="System generated value"
+                             ReadOnly="true" />
+                </Field>
+                <Field Label="Read-only Rich Text"
+                       Size="Field.Sizes.Full">
+                    <HtmlEditor Value="ReadOnlyRichText"
+                                ReadOnly="true"
+                                DisplayHeight="10em" />
+                </Field>
+                <Field Label="Editable Rich Text"
+                       Size="Field.Sizes.Full">
+                    <HtmlEditor @bind-Value="EditableRichText"
+                                EditorHeight="10em" />
+                </Field>
+            </Wrapped>
+        </div>
+    </div>
+</div>
+
+<Padding Direction="Padding.Directions.Vertical"
+         Size="Padding.Sizes.Small">
+    <Wrapped Alignment="Wrapped.Alignments.Top">
+        <Padding Direction="Padding.Directions.Right"
+                 Size="Padding.Sizes.Small">
+            <Padding Direction="Padding.Directions.Bottom"
+                     Size="Padding.Sizes.Small">
+                <ButtonSave Clicked="HandlePreviewButtonClicked" />
+            </Padding>
+        </Padding>
+        <Padding Direction="Padding.Directions.Right"
+                 Size="Padding.Sizes.Small">
+            <Padding Direction="Padding.Directions.Bottom"
+                     Size="Padding.Sizes.Small">
+                <ButtonEdit Clicked="HandlePreviewButtonClicked" />
+            </Padding>
+        </Padding>
+        <Padding Direction="Padding.Directions.Right"
+                 Size="Padding.Sizes.Small">
+            <Padding Direction="Padding.Directions.Bottom"
+                     Size="Padding.Sizes.Small">
+                <ButtonCore Text="Move"
+                            IconClass="c-icon-move"
+                            Clicked="HandlePreviewButtonClicked"
+                            ButtonStyle="ButtonCore.ButtonStyles.Move" />
+            </Padding>
+        </Padding>
+        <Padding Direction="Padding.Directions.Right"
+                 Size="Padding.Sizes.Small">
+            <Padding Direction="Padding.Directions.Bottom"
+                     Size="Padding.Sizes.Small">
+                <ButtonCore Text="View"
+                            IconClass="c-icon-eye"
+                            Clicked="HandlePreviewButtonClicked"
+                            ButtonStyle="ButtonCore.ButtonStyles.View" />
+            </Padding>
+        </Padding>
+        <Padding Direction="Padding.Directions.Right"
+                 Size="Padding.Sizes.Small">
+            <Padding Direction="Padding.Directions.Bottom"
+                     Size="Padding.Sizes.Small">
+                <ButtonAdd EntityName="Collection"
+                           Clicked="HandlePreviewButtonClicked" />
+            </Padding>
+        </Padding>
+        <Padding Direction="Padding.Directions.Right"
+                 Size="Padding.Sizes.Small">
+            <Padding Direction="Padding.Directions.Bottom"
+                     Size="Padding.Sizes.Small">
+                <ButtonDelete Clicked="HandlePreviewButtonClicked" />
+            </Padding>
+        </Padding>
+        <Padding Direction="Padding.Directions.Right"
+                 Size="Padding.Sizes.Small">
+            <Padding Direction="Padding.Directions.Bottom"
+                     Size="Padding.Sizes.Small">
+                <ButtonCancel Clicked="HandlePreviewButtonClicked" />
+            </Padding>
+        </Padding>
+        <Padding Direction="Padding.Directions.Right"
+                 Size="Padding.Sizes.Small">
+            <Padding Direction="Padding.Directions.Bottom"
+                     Size="Padding.Sizes.Small">
+                <ButtonCore Text="Disabled"
+                            Clicked="HandlePreviewButtonClicked"
+                            Disabled="true" />
+            </Padding>
+        </Padding>
+    </Wrapped>
+</Padding>
+
+<div class="c-padding-medium-top">
+    <div class="c-window c-shadowed">
+        <div class="c-window-title">
+            <div class="text">Results and cards</div>
+            <div class="close-button">
+                <a>
+                    <span class="c-icon-cross"></span>
+                </a>
+            </div>
+        </div>
+        <div class="content c-padding-medium-all">
+            <div class="c-card c-margin-medium-bottom">
+                <div class="values">
+                    <div class="title">
+                        Featured content item
+                        <span class="metadata">
+                            <StatusDisplay Id="ActivePreviewContentStatus.Id"
+                                           Name="ActivePreviewContentStatus.Name"
+                                           ColorClassFrom="ContentStatusColors.For" />
+                        </span>
+                    </div>
+                    <div class="c-wrap top">
+                        <Field Size="Field.Sizes.MediumLarge">
+                            <Labeled Label="Owner"
+                                     Width="6em"
+                                     StringValue="Content Team" />
+                            <Labeled CssClass="status"
+                                     Label="Status"
+                                     Width="6em">
+                                <StatusDisplay Id="ActivePreviewContentStatus.Id"
+                                               Name="ActivePreviewContentStatus.Name"
+                                               ColorClassFrom="ContentStatusColors.For" />
+                            </Labeled>
+                        </Field>
+                        <Field Size="Field.Sizes.MediumSmall">
+                            <Labeled Label="Priority"
+                                     Width="6em"
+                                     IntegerValue="Priority" />
+                            <Labeled Label="Featured"
+                                     Width="6em"
+                                     BooleanValue="IsFeatured" />
+                        </Field>
+                    </div>
+                </div>
+                <div class="pane-links">
+                    <PaneLink Href="#"
+                              Text="Details"
+                              Count="3" />
+                </div>
+                <div class="buttons">
+                    <ButtonCore Text="Open"
+                                IconClass="c-icon-eye"
+                                Clicked="HandlePreviewButtonClicked"
+                                ButtonStyle="ButtonCore.ButtonStyles.View" />
+                    <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.View">
+                        <MenuItem Text="Duplicate"
+                                  Icon="c-icon-copy"
+                                  Clicked="HandlePreviewButtonClicked" />
+                        <MenuItem Type="MenuItem.Types.Refresh"
+                                  Clicked="HandlePreviewButtonClicked" />
+                        <MenuItem Type="MenuItem.Types.Delete"
+                                  Clicked="HandlePreviewButtonClicked" />
+                    </ContextMenu>
+                </div>
+            </div>
+
+            <NoRecords EntityName="results" />
+        </div>
+    </div>
+</div>
+
+<div class="c-padding-medium-top">
+    <div class="c-alerts">
+        @foreach (var previewAlert in PreviewAlerts)
+        {
+            <div class="alert">
+                <div class="bubble @previewAlert.TypeCss">
+                    <div class="icon">
+                        <span class="@previewAlert.IconCss"></span>
+                    </div>
+                    <div class="text">@previewAlert.Message</div>
+                    <div class="dismiss">
+                        <a>
+                            <span class="c-icon-cross"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="cec-embedded-report c-margin-medium-top">
+    <div class="title">Embedded report preview</div>
+    <h1>Engagement summary</h1>
+    <h2>Monthly snapshot</h2>
+    <p>Report typography and report-specific color styles appear here.</p>
+    <a>Open report details</a>
+    <table class="c-margin-medium-top">
+        <tr class="header">
+            <th>Channel</th>
+            <th>Views</th>
+            <th>Conversion</th>
+        </tr>
+        <tr>
+            <td>Homepage</td>
+            <td>242</td>
+            <td>86%</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>198</td>
+            <td>91%</td>
+        </tr>
+    </table>
+    <div class="footer c-margin-medium-top">
+        <div>Analytics Feed</div>
+        <div>Updated today</div>
+    </div>
+</div>
+
+<div class="c-footer c-margin-medium-top">
+    <div class="content">
+        <p>Footer content with <a href="#">footer link styling</a> and the portal footer palette.</p>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</ThemePreview>

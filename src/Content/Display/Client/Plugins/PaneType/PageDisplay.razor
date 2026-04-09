@@ -1,0 +1,54 @@
+@using Crudspa.Content.Display.Client.Extensions
+@if (Model.Page is not null)
+{
+    @if (PortalId.HasValue)
+    {
+        <ThemePreview PortalId="PortalId">
+            <div id="box@($"{Model.Page.Id:N}")"
+                 @key="Model.Page"
+                 class="c-page @(Model.Page.Box.BoxClasses())"
+                 style="@(Model.Page.Box.BoxStyles())">
+
+                @if (Model.Page.ShowGuide == true || Model.Page.ShowNotebook == true)
+                {
+                    @if (Model.GuideModel is not null)
+                    {
+                        <Guide Model="Model.GuideModel"
+                               ShowGuideFields="Model.Page.ShowGuide == true"
+                               ShowNotebookButton="Model.Page.ShowNotebook == true"
+                               AutoPlay="true" />
+                    }
+                }
+                @foreach (var section in Model.Page.Sections)
+                {
+                    <SectionDisplay Section="section"
+                                    @key="section" />
+                }
+            </div>
+        </ThemePreview>
+    }
+    else
+    {
+        <div id="box@($"{Model.Page.Id:N}")"
+             @key="Model.Page"
+             class="c-page @(Model.Page.Box.BoxClasses())"
+             style="@(Model.Page.Box.BoxStyles())">
+
+            @if (Model.Page.ShowGuide == true || Model.Page.ShowNotebook == true)
+            {
+                @if (Model.GuideModel is not null)
+                {
+                    <Guide Model="Model.GuideModel"
+                           ShowGuideFields="Model.Page.ShowGuide == true"
+                           ShowNotebookButton="Model.Page.ShowNotebook == true"
+                           AutoPlay="true" />
+                }
+            }
+            @foreach (var section in Model.Page.Sections)
+            {
+                <SectionDisplay Section="section"
+                                @key="section" />
+            }
+        </div>
+    }
+}

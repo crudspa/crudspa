@@ -1,0 +1,7 @@
+﻿@if (Model.ActivityTypes.HasItems())
+{
+    <ActivityEdit Model="Model.ActivityEditModel"
+                  ActivityTypes="Model.ActivityTypes"
+                  ContentAreaNames="Model.ContentAreaNames"
+                  PreviewPortalId="PortalIds.Student" />
+}

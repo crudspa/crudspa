@@ -1,0 +1,37 @@
+﻿<Waiter Model="Model">
+    <div class="c-full-height">
+        @if (Model.Assessments.Count > 0)
+        {
+            <div class="c-wrap center">
+                <a class="c-button vertical large c-margin-medium"
+                   @onclick="() => Model.GoToAssessments()">
+                    <div class="icon">
+                        <img style="width: 240px;"
+                             src="/api/education/student/images/diploma"
+                             alt="Assessments" />
+                    </div>
+                    <div class="text"
+                         style="width: 240px;">
+                        Assessments
+                    </div>
+                </a>
+            </div>
+        }
+        <div class="c-wrap center">
+            @foreach (var unit in Model.Units)
+            {
+                <a class="c-button vertical large c-margin-medium"
+                   @onclick="() => Model.GoToUnit(unit.Id)">
+                    <div class="icon">
+                        <Image ImageFile="unit.Image"
+                               Width="240" />
+                    </div>
+                    <div class="text"
+                         style="width: 240px;">
+                        @(unit.Title)
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+</Waiter>

@@ -1,0 +1,16 @@
+create table [Education].[ActivityMediaPlay] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [MediaPlayId] uniqueidentifier not null,
+    [AssignmentBatchId] uniqueidentifier null,
+    [ActivityId] uniqueidentifier null,
+    [ActivityChoiceId] uniqueidentifier null,
+    constraint [PK_Education_ActivityMediaPlay] primary key clustered ([Id]),
+    constraint [FK_Education_ActivityMediaPlay_MediaPlay] foreign key ([MediaPlayId]) references [Framework].[MediaPlay] ([Id]),
+    constraint [FK_Education_ActivityMediaPlay_AssignmentBatch] foreign key ([AssignmentBatchId]) references [Education].[AssignmentBatch] ([Id]),
+    constraint [FK_Education_ActivityMediaPlay_Activity] foreign key ([ActivityId]) references [Education].[Activity] ([Id]),
+    constraint [FK_Education_ActivityMediaPlay_ActivityChoice] foreign key ([ActivityChoiceId]) references [Education].[ActivityChoice] ([Id]),
+);

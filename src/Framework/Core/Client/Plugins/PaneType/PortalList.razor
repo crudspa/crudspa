@@ -1,0 +1,33 @@
+<List Model="Model"
+      T="PortalModel"
+      EntityName="Portal"
+      UrlPrefix="@($"{Path}/portal")"
+      ShowAdd="false"
+      ShowDelete="false">
+    <ReadView>
+        @if (!context.Features.IsEmpty())
+        {
+            <Padding Direction="Padding.Directions.Top"
+                     Size="Padding.Sizes.Medium">
+                <Padding Direction="Padding.Directions.Horizontal"
+                         Size="Padding.Sizes.Small">
+
+                    <Wrapped Alignment="Wrapped.Alignments.Top">
+                        @foreach (var feature in context.Features)
+                        {
+                            <Padding Direction="Padding.Directions.Right"
+                                     Size="Padding.Sizes.Small">
+                                <Padding Direction="Padding.Directions.Bottom"
+                                         Size="Padding.Sizes.Small">
+                                    <ButtonFeature Href="@($"{Path}/portal-{context.Portal.Id:D}/{feature.Key}")"
+                                                   Text="@(feature.Title ?? String.Empty)"
+                                                   IconClass="@(feature.IconCssClass)" />
+                                </Padding>
+                            </Padding>
+                        }
+                    </Wrapped>
+                </Padding>
+            </Padding>
+        }
+    </ReadView>
+</List>

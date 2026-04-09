@@ -1,0 +1,20 @@
+@using Microsoft.AspNetCore.Components.Forms
+<Wrapped NoWrap="true">
+    <InputFile id="@InputId"
+               style="display:none"
+               @ref="FileInputReference"
+               OnChange="HandleFileSelected" />
+    <input type="text"
+           class="c-input"
+           disabled="@ReadOnly"
+           placeholder="Select a file..."
+           @bind="FileName" />
+    @if (!ReadOnly)
+    {
+        <label for="@InputId"
+               class="c-button primary"
+               style="cursor:pointer;">
+            <span class="text">&hellip;</span>
+        </label>
+    }
+</Wrapped>

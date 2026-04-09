@@ -1,0 +1,1 @@
+create schema [SamplesComposer] authorization [dbo]

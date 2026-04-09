@@ -1,0 +1,7 @@
+﻿@if (Model.VideoElement.FileFile.Id is not null)
+{
+    <VideoPlayer VideoFile="Model.VideoElement.FileFile"
+                 AutoPlay="Model.VideoElement.AutoPlay"
+                 Poster="Model.VideoElement.Poster"
+                 MediaPlayed="HandleVideoPlayed" />
+}

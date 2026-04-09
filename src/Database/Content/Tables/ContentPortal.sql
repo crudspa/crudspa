@@ -1,0 +1,16 @@
+create table [Content].[ContentPortal] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [PortalId] uniqueidentifier not null,
+    [MaxWidth] nvarchar(10) null,
+    [StyleRevision] int default(0) not null,
+    [BrandingImageId] uniqueidentifier null,
+    [FooterPageId] uniqueidentifier null,
+    constraint [PK_Content_ContentPortal] primary key clustered ([Id]),
+    constraint [FK_Content_ContentPortal_Portal] foreign key ([PortalId]) references [Framework].[Portal] ([Id]),
+    constraint [FK_Content_ContentPortal_BrandingImage] foreign key ([BrandingImageId]) references [Framework].[ImageFile] ([Id]),
+    constraint [FK_Content_ContentPortal_FooterPage] foreign key ([FooterPageId]) references [Content].[Page] ([Id]),
+);

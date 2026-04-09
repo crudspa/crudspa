@@ -1,0 +1,12 @@
+﻿<div class="c-checked-list @(WidthClass) @(HeightClass)"
+     disabled="@(ReadOnly)">
+    <label>
+        <div class="label"></div>
+    </label>
+    @foreach (var selectable in Selectables)
+    {
+        <Checkbox Label="@(selectable.Name)"
+                  ReadOnly="ReadOnly"
+                  @bind-Value="selectable.Selected" />
+    }
+</div>

@@ -1,0 +1,136 @@
+/// <reference path="defaults.scss" />
+
+.c-context-menu {
+    position: relative;
+    z-index: 500;
+
+    .menu-items {
+        animation: c-kf-fade-in .1s ease-in;
+        background-color: $contextMenuBackgroundColor;
+        border: $contextMenuBorder;
+        box-shadow: $contextMenuBoxShadow;
+        min-width: max-content;
+        position: absolute;
+        right: 0;
+        top: 1.25em;
+        z-index: 550;
+
+        &.to-side {
+            right: 3.5em;
+            top: -1.25em;
+        }
+
+        &.no-border {
+            border: none;
+        }
+
+        &.tight {
+            top: 0.25em;
+        }
+
+        &.so-tight {
+            top: 0;
+        }
+
+        .toolbar {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+        }
+
+        .none {
+            cursor: pointer;
+            padding: .5em .25em;
+            text-align: center;
+            width: 9em;
+        }
+
+        .emojis {
+            align-items: center;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
+            padding: .25em;
+            width: 9em;
+
+            .emoji {
+                cursor: pointer;
+                font-size: 1.5em;
+                padding: .25em;
+                flex: 0 0 33.33%;
+                text-align: center;
+            }
+        }
+
+        .menu-item {
+            background-color: $contextMenuItemBackgroundColor;
+            display: flex;
+            flex-flow: row nowrap;
+
+            &.starts-group {
+                border-top: 1px solid $defaultBorderColor;
+            }
+
+            .group-title {
+                background-color: $contextMenuItemGroupTitleBackgroundColor;
+                color: $contextMenuItemGroupTitleForegroundColor;
+                min-width: 16em;
+                padding: .75em .25em;
+                text-align: center;
+            }
+
+            .link {
+                align-items: center;
+                color: $contextMenuItemLinkForegroundColor;
+                display: flex;
+                flex-flow: row nowrap;
+                flex: 1 1 auto;
+                min-width: 0;
+                text-decoration: none !important;
+
+                &:link,
+                &:active,
+                &:visited {
+                    color: $contextMenuItemLinkForegroundColor;
+                }
+
+                &:hover {
+                    background-color: $contextMenuItemLinkHoverBackgroundColor;
+                    color: $contextMenuItemLinkHoverForegroundColor;
+                }
+
+                &[disabled] {
+                    color: $contextMenuItemLinkDisabledForegroundColor;
+                }
+
+                .icon {
+                    font-size: 1.25em;
+                    margin: .25em .75em;
+
+                    &.pull-up {
+                        margin-top: 0;
+                        margin-bottom: .5em;
+                    }
+
+                    &.push-down {
+                        margin-top: .5em;
+                        margin-bottom: 0;
+                    }
+
+                    span {
+                        display: block;
+                    }
+                }
+
+                .text {
+                    font-family: $contextMenuItemFontFamily;
+                    font-weight: $contextMenuItemFontWeight;
+                    font-size: $contextMenuItemFontSize;
+                    font-style: $contextMenuItemFontStyle;
+                    padding: .75em 2.5em .75em 0;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,35 @@
+﻿/// <reference path="defaults.scss" />
+
+.c-border-top {
+    border-top: 1px solid $defaultBorderColor;
+}
+
+.c-border-right {
+    border-right: 1px solid $defaultBorderColor;
+}
+
+.c-border-bottom {
+    border-bottom: 1px solid $defaultBorderColor;
+}
+
+.c-border-left {
+    border-left: 1px solid $defaultBorderColor;
+}
+
+.c-border,
+.c-border-all {
+    @extend .c-border-top;
+    @extend .c-border-right;
+    @extend .c-border-bottom;
+    @extend .c-border-left;
+}
+
+.c-border-vert {
+    @extend .c-border-top;
+    @extend .c-border-bottom;
+}
+
+.c-border-hor {
+    @extend .c-border-right;
+    @extend .c-border-left;
+}

@@ -1,0 +1,23 @@
+﻿@if (Model.MadeProgress is not null)
+{
+    <div class="ces-progress-made c-stack center">
+
+        <h2>@(Model.MadeProgress.Title)</h2>
+
+        <div class="image">
+            <div class="image-div @(Model.Visible ? "animated" : String.Empty)"
+                 style="background-image: url('@(Model.MadeProgress.ImageUrl)')">
+            </div>
+        </div>
+
+        <p class="s-progress-text">@(Model.MadeProgress.Description)</p>
+
+        <button class="button"
+                @onclick="() => Model.Hide()">
+            <div class="c-button primary">
+                <div class="text">OK</div>
+            </div>
+        </button>
+
+    </div>
+}

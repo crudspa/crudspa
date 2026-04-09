@@ -1,0 +1,27 @@
+<ListOrderables Model="Model"
+                T="GameSectionModel"
+                EntityName="Section"
+                UrlPrefix="@($"{Path}/game-section")"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Unspecified">
+            <Labeled CssClass="status"
+                     Width="5em"
+                     Label="Status">
+                <StatusDisplay Id="@context.GameSection.StatusId"
+                               Name="@context.GameSection.StatusName"
+                               ColorClassFrom="ContentStatusColors.For" />
+            </Labeled>
+            <Labeled Width="5em"
+                     Label="Type"
+                     StringValue="@context.GameSection.TypeName" />
+        </Field>
+    </ReadView>
+    <PaneLinks>
+        <PaneLink Href="@($"{Path}/game-section-{context.GameSection.Id:D}?pane=activities")"
+                  Text="Activities"
+                  Count="context.GameSection.GameActivityCount" />
+    </PaneLinks>
+</ListOrderables>

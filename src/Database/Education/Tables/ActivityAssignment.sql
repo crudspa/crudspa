@@ -1,0 +1,17 @@
+create table [Education].[ActivityAssignment] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [AssignmentBatchId] uniqueidentifier null,
+    [ActivityId] uniqueidentifier not null,
+    [Started] datetimeoffset(7) null,
+    [Finished] datetimeoffset(7) null,
+    [StatusId] uniqueidentifier null,
+    [Ordinal] int not null,
+    constraint [PK_Education_ActivityAssignment] primary key clustered ([Id]),
+    constraint [FK_Education_ActivityAssignment_AssignmentBatch] foreign key ([AssignmentBatchId]) references [Education].[AssignmentBatch] ([Id]),
+    constraint [FK_Education_ActivityAssignment_Activity] foreign key ([ActivityId]) references [Education].[Activity] ([Id]),
+    constraint [FK_Education_ActivityAssignment_Status] foreign key ([StatusId]) references [Education].[ActivityAssignmentStatus] ([Id]),
+);

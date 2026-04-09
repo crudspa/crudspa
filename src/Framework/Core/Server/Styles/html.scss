@@ -1,0 +1,311 @@
+﻿/// <reference path="defaults.scss" />
+
+*, *:active, *:focus {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+    -webkit-tap-highlight-color: transparent !important;
+    outline: none !important;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: $htmlMinFontSize;
+    touch-action: manipulation;
+
+    @media (min-width: $screenTiny) {
+        font-size: $htmlTinyFontSize;
+    }
+
+    @media (min-width: $screenSmall) {
+        font-size: $htmlSmallFontSize;
+    }
+
+    @media (min-width: $screenMedium) {
+        font-size: $htmlMediumFontSize;
+    }
+
+    @media (min-width: $screenLarge) {
+        font-size: $htmlLargeFontSize;
+    }
+
+    @media (min-width: $screenWide) {
+        font-size: $htmlWideFontSize;
+    }
+
+    @media (min-width: $screenMax) {
+        font-size: $htmlMaxFontSize;
+    }
+}
+
+body {
+    background-color: $bodyBackgroundColor;
+    color: $bodyForegroundColor;
+    font-family: $bodyFontFamily;
+    font-size: $bodyFontSize;
+    font-weight: $bodyFontWeight;
+    text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    line-height: 1.125;
+    margin: $headingMargin;
+    padding: $headingPadding;
+
+    a {
+        text-decoration: none;
+    }
+
+    &.tight {
+        margin: 0;
+        padding: 0;
+    }
+
+    &.padded-top {
+        margin-top: 0;
+        padding-top: 1em;
+    }
+}
+
+h1 {
+    color: $h1ForegroundColor;
+    font-family: $h1FontFamily;
+    font-size: $h1FontSize;
+    font-weight: $h1FontWeight;
+}
+
+h2 {
+    color: $h2ForegroundColor;
+    font-family: $h2FontFamily;
+    font-size: $h2FontSize;
+    font-weight: $h2FontWeight;
+}
+
+h3 {
+    color: $h3ForegroundColor;
+    font-family: $h3FontFamily;
+    font-size: $h3FontSize;
+    font-weight: $h3FontWeight;
+}
+
+h4 {
+    color: $h4ForegroundColor;
+    font-family: $h4FontFamily;
+    font-size: $h4FontSize;
+    font-weight: $h4FontWeight;
+}
+
+button {
+    cursor: pointer;
+    font-family: $buttonTextFontFamily;
+}
+
+input,
+optgroup,
+select,
+textarea {
+    font-family: $inputFontFamily;
+    font-size: $inputFontSize;
+}
+
+.c-paragraph {
+    line-height: $paragraphLineHeight;
+    margin: $paragraphMargin;
+    padding: $paragraphPadding;
+}
+
+p {
+    @extend .c-paragraph;
+    min-height: 1em;
+}
+
+img,
+svg {
+    max-width: 100%;
+    width: auto;
+}
+
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+pre,
+fieldset,
+form,
+th,
+td {
+    margin: 0;
+    padding: 0;
+}
+
+ul,
+ol {
+    line-height: $paragraphLineHeight;
+    padding-left: 1.125em;
+
+    li {
+        padding-left: .5em;
+    }
+}
+
+a {
+    color: $hyperlinkForegroundColor;
+    display: inline-block;
+    font-weight: $hyperlinkFontWeight;
+    outline-width: 0;
+    text-decoration: $hyperlinkDecoration;
+
+    &:visited {
+        color: $hyperlinkForegroundColor;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:hover,
+    &:active {
+        color: $hyperlinkHoverForegroundColor;
+        text-decoration: underline;
+    }
+
+    &[disabled],
+    &.disabled {
+        color: $hyperlinkDisabledForegroundColor;
+        cursor: default;
+    }
+
+    img {
+        border: none;
+    }
+}
+
+button {
+    background-color: transparent;
+    border: 0;
+    display: inline-flex;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    outline: none;
+
+    &[disabled] {
+        cursor: default;
+    }
+}
+
+label {
+    cursor: pointer;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.c-label {
+    color: $labelForegroundColor;
+    font-family: $labelFontFamily;
+    font-size: $labelFontSize;
+    font-weight: $labelFontWeight;
+    user-select: none;
+
+    &.normal-weight,
+    .normal-weight {
+        font-weight: normal;
+    }
+
+    &.not-clickable {
+        cursor: default;
+    }
+
+    &.disabled {
+        color: $labelForegroundColorMuted;
+    }
+}
+
+blockquote {
+    margin: 0;
+    padding: 1.5em;
+}
+
+textarea {
+    @extend .c-input;
+    height: auto;
+    max-width: 100%;
+    overflow: auto;
+    resize: vertical;
+
+    &.mini {
+        min-height: 2em;
+    }
+
+    &.short {
+        min-height: 4em;
+    }
+
+    &.average {
+        min-height: 6em;
+    }
+
+    &.tall {
+        min-height: 10em;
+    }
+
+    &.tallx2 {
+        min-height: 20em;
+    }
+
+    &.tallx3 {
+        min-height: 30em;
+    }
+
+    &.tallx4 {
+        min-height: 40em;
+    }
+
+    &.code {
+        @extend .c-code;
+    }
+}
+
+textarea[rows] {
+    height: auto;
+}
+
+select {
+    @extend .c-input;
+    padding: .435em;
+    width: 100%;
+}
+
+code {
+    font-family: $codeFontFamily;
+    font-weight: $codeFontWeight;
+}
+
+audio {
+    &.hidden {
+        position: absolute;
+        left: -9999px;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+    }
+}
+
+video {
+    height: auto;
+    width: 100%;
+}
+
+::placeholder {
+    color: $inputPlaceholderColor !important;
+}

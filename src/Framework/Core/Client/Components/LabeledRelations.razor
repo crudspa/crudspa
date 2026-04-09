@@ -1,0 +1,12 @@
+﻿@if (All is not null && All == true)
+{
+    <Labeled Width="@Width"
+             Label="@Label"
+             StringValue="All" />
+}
+else
+{
+    <LabeledSelections Width="@Width"
+                       Label="@Label"
+                       Selectables="@Selectables" />
+}

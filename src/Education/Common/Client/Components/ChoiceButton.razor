@@ -1,0 +1,18 @@
+﻿<div class="c-button-group c-margin-small">
+    <button @onclick="() => Clicked.InvokeAsync()"
+            disabled="@Disabled">
+        <div class="cec-choice c-button @(Model.StateClass)">
+            <div class="text">@(Model.Choice.Text)</div>
+        </div>
+    </button>
+    @if (Model.Choice.AudioFile?.Id is not null)
+    {
+        <AudioPlayer AudioFile="Model.Choice.AudioFile"
+                     PlayText="@null"
+                     StopText="@null"
+                     PlayIcon="c-icon-volume-high"
+                     StopIcon="c-icon-volume-high"
+                     MediaPlayed="mediaPlay => MediaPlayed.InvokeAsync(mediaPlay)">
+        </AudioPlayer>
+    }
+</div>

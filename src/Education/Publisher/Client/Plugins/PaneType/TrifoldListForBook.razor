@@ -1,0 +1,28 @@
+<ListOrderables Model="Model"
+                T="TrifoldModel"
+                EntityName="Trifold"
+                UrlPrefix="@($"{Path}/trifold")"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Unspecified">
+            <Labeled CssClass="status"
+                     Width="8em"
+                     Label="Status">
+                <StatusDisplay Id="@context.Trifold.StatusId"
+                               Name="@context.Trifold.StatusName"
+                               ColorClassFrom="ContentStatusColors.For" />
+            </Labeled>
+            <Labeled Width="8em"
+                     Label="Requires"
+                     StringValue="@context.Trifold.RequiresAchievementTitle" />
+            <Labeled Width="8em"
+                     Label="Generates"
+                     StringValue="@context.Trifold.GeneratesAchievementTitle" />
+            <Labeled Width="8em"
+                     Label="Type"
+                     StringValue="@context.Trifold.Binder.TypeName" />
+        </Field>
+    </ReadView>
+</ListOrderables>

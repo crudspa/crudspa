@@ -1,0 +1,31 @@
+﻿@namespace Crudspa.Framework.Core.Client.Plugins
+@PluginFragment
+
+@code
+{
+    [Parameter, EditorRequired] public String? TypeName { get; set; } = String.Empty;
+    [Parameter, EditorRequired] public Guid? Id { get; set; }
+
+    public Object? Instance { get; private set; }
+
+    private RenderFragment PluginFragment => builder =>
+    {
+        if (TypeName.HasNothing())
+            throw new("TypeName was not supplied.");
+
+        var pluginType = Type.GetType(TypeName)
+            ?? throw new($"Component type '{TypeName}' not found.");
+
+        if (!typeof(IReportDisplay).IsAssignableFrom(pluginType))
+            throw new($"Interface '{nameof(IReportDisplay)}' is not implemented by the component '{TypeName}'.");
+
+        builder.OpenComponent(0, pluginType);
+
+        if (Id.HasSomething())
+            builder.AddAttribute(1, nameof(IReportDisplay.Id), Id);
+
+        builder.AddComponentReferenceCapture(2, component => Instance = component);
+
+        builder.CloseComponent();
+    };
+}

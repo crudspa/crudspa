@@ -1,0 +1,22 @@
+﻿@using Crudspa.Content.Display.Shared.Contracts.Config.PaneType
+<Waiter Model="Model">
+    @if (Model.Tracks.HasItems())
+    {
+        <Wrapped Alignment="Wrapped.Alignments.Top">
+            <Field Label="Track ID"
+                   Size="Field.Sizes.Large"
+                   Container="Field.Containers.Div">
+                <EnumRadio TEnum="TrackConfig.IdSources"
+                           @bind-SelectedValue="@Model.Config.IdSource"
+                           RadioCssClass="tight-bottom"
+                           ReadOnly="@ReadOnly" />
+                @if (Model.Config.IdSource == TrackConfig.IdSources.SpecificTrack)
+                {
+                    <Dropdown LookupValues="Model.Tracks"
+                              ReadOnly="@ReadOnly"
+                              @bind-Value="Model.Config.TrackId" />
+                }
+            </Field>
+        </Wrapped>
+    }
+</Waiter>

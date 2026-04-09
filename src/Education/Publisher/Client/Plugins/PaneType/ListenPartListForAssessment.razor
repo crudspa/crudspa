@@ -1,0 +1,27 @@
+<ListOrderables Model="Model"
+                T="ListenPartModel"
+                EntityName="Listen Part"
+                UrlPrefix="@($"{Path}/listen-part")"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Full">
+            <LabeledHtml Label="Passage Instructions Text"
+                         HtmlValue="@context.ListenPart.PassageInstructionsText" />
+        </Field>
+        <Field Size="Field.Sizes.Full">
+            <LabeledHtml Label="Preview Instructions Text"
+                         HtmlValue="@context.ListenPart.PreviewInstructionsText" />
+        </Field>
+        <Field Size="Field.Sizes.Full">
+            <LabeledHtml Label="Questions Instructions Text"
+                         HtmlValue="@context.ListenPart.QuestionsInstructionsText" />
+        </Field>
+    </ReadView>
+    <PaneLinks>
+        <PaneLink Href="@($"{Path}/listen-part-{context.ListenPart.Id:D}?pane=questions")"
+                  Text="Questions"
+                  Count="context.ListenPart.ListenQuestionCount" />
+    </PaneLinks>
+</ListOrderables>

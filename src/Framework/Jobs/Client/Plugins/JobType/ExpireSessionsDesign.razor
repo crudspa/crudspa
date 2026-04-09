@@ -1,0 +1,12 @@
+@if (Config is not null)
+{
+    <Wrapped>
+        <Field Label="Session Length In Days"
+               Container="Field.Containers.Div">
+            <div class="c-tiny">
+                <NumericTextBox ReadOnly="ReadOnly"
+                                @bind-Value="Config.SessionLengthInDays" />
+            </div>
+        </Field>
+    </Wrapped>
+}

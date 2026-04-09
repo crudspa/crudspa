@@ -1,0 +1,76 @@
+<Waiter Model="Model">
+    <Filters>
+        <Fields>
+            <Field Label="Search"
+                   Size="Field.Sizes.Medium">
+                <SearchTextBox @bind-Value="Model.Search.Text" />
+            </Field>
+            <Field Label="District"
+                   Size="Field.Sizes.Large">
+                <MultiSelect LookupValues="Model.DistrictNames"
+                             @bind-SelectedValues="Model.Search.Districts" />
+            </Field>
+            <Sorter Sorts="Model.Sorts"
+                    @bind-Selected="Model.Search.Sort.Field"
+                    @bind-Ascending="Model.Search.Sort.Ascending" />
+        </Fields>
+        <Buttons>
+            <ButtonAdd EntityName="Forum"
+                       Clicked="AddNew" />
+            <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Create">
+                <MenuItem Type="MenuItem.Types.Reset"
+                          Clicked="() => Model.Reset()" />
+                <MenuItem Type="MenuItem.Types.Refresh"
+                          Clicked="() => Model.Refresh()" />
+            </ContextMenu>
+        </Buttons>
+    </Filters>
+</Waiter>
+@if (Model.Cards.IsEmpty())
+{
+    <NoRecords EntityName="forums" />
+}
+else
+{
+    @foreach (var card in Model.Cards)
+    {
+        <Card Model="card"
+              Title="@card.Entity.Name"
+              SupportsDelete="true"
+              DeleteRequested="() => Model.Delete(card.Entity.Id)">
+            <Values>
+                <Field Size="Field.Sizes.Unspecified">
+                    <LabeledHtml Label="Description"
+                                 HtmlValue="@card.Entity.Description" />
+                    <Labeled Width="7em"
+                             Label="Template"
+                             StringValue="@card.Entity.BodyTemplateName" />
+                    <Labeled Width="7em"
+                             Label="District"
+                             StringValue="@card.Entity.DistrictName" />
+                    <Labeled Width="7em"
+                             Label="School"
+                             StringValue="@card.Entity.SchoolName" />
+                    <Labeled Width="7em"
+                             Label="Innovators"
+                             BooleanValue="card.Entity.InnovatorsOnly" />
+                </Field>
+            </Values>
+            <PaneLinks>
+                <PaneLink Href="@($"{Path}/forum-{card.Entity.Id:D}?pane=posts")"
+                          Text="Posts"
+                          Count="card.Entity.PostCount" />
+            </PaneLinks>
+            <Buttons>
+                <ButtonView Href="@($"{Path}/forum-{card.Entity.Id:D}")" />
+                <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.View">
+                    <MenuItem Type="MenuItem.Types.Delete"
+                              Clicked="() => Model.ShowConfirmation(card.Entity.Id)" />
+                </ContextMenu>
+            </Buttons>
+        </Card>
+    }
+
+    <Pager Paged="Model.Search.Paged"
+           PageNumberChanged="Model.HandlePageNumberChanged" />
+}

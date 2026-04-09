@@ -1,0 +1,32 @@
+@namespace Crudspa.Content.Design.Client.Plugins
+@PluginFragment
+
+@code
+{
+    [Parameter, EditorRequired] public String? TypeName { get; set; } = String.Empty;
+    [Parameter] public SectionElement Element { get; set; } = null!;
+    [Parameter] public Boolean ReadOnly { get; set; }
+
+    public Object? Instance { get; private set; }
+
+    private RenderFragment PluginFragment => builder =>
+    {
+        if (TypeName.HasNothing())
+            throw new("TypeName was not supplied.");
+
+        var pluginType = Type.GetType(TypeName)
+            ?? throw new($"Component type '{TypeName}' not found.");
+
+        if (!typeof(IElementDesign).IsAssignableFrom(pluginType))
+            throw new($"Interface '{nameof(IElementDesign)}' is not implemented by the component '{TypeName}'.");
+
+        builder.OpenComponent(0, pluginType);
+
+        builder.AddAttribute(1, nameof(IElementDesign.Element), Element);
+        builder.AddAttribute(2, nameof(ReadOnly), ReadOnly);
+
+        builder.AddComponentReferenceCapture(3, component => Instance = component);
+
+        builder.CloseComponent();
+    };
+}

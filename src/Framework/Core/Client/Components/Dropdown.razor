@@ -1,0 +1,17 @@
+﻿<select @onchange="HandleValueChanged"
+        disabled="@ReadOnly">
+    @if (AllowNull)
+    {
+        <option value="">@NullText</option>
+    }
+    @if (LookupValues.HasItems())
+    {
+        @foreach (var named in LookupValues)
+        {
+            <option value="@named.Id"
+                    selected="@(named.Id == Value)">
+                @named.Name
+            </option>
+        }
+    }
+</select>

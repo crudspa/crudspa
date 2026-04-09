@@ -1,0 +1,94 @@
+<Waiter Model="Model">
+    <Filters>
+        <Fields>
+            <Field Label="Search"
+                   Size="Field.Sizes.Medium">
+                <SearchTextBox @bind-Value="Model.Search.Text" />
+            </Field>
+            <Field Label="Genre"
+                   Size="Field.Sizes.Medium">
+                <MultiSelect LookupValues="Model.GenreNames"
+                             @bind-SelectedValues="Model.Search.Genres" />
+            </Field>
+            <Field Label="Rating"
+                   Size="Field.Sizes.Medium">
+                <MultiSelect LookupValues="Model.RatingNames"
+                             @bind-SelectedValues="Model.Search.Ratings" />
+            </Field>
+            <Field Label="Released"
+                   Size="Field.Sizes.Medium">
+                <DateFilter Range="Model.Search.ReleasedRange" />
+            </Field>
+            <Sorter Sorts="Model.Sorts"
+                    @bind-Selected="Model.Search.Sort.Field"
+                    @bind-Ascending="Model.Search.Sort.Ascending" />
+        </Fields>
+        <Buttons>
+            <ButtonAdd EntityName="Movie"
+                       Clicked="AddNew" />
+            <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Create">
+                <MenuItem Type="MenuItem.Types.Reset"
+                          Clicked="() => Model.Reset()" />
+                <MenuItem Type="MenuItem.Types.Refresh"
+                          Clicked="() => Model.Refresh()" />
+            </ContextMenu>
+        </Buttons>
+    </Filters>
+</Waiter>
+@if (Model.Cards.IsEmpty())
+{
+    <NoRecords EntityName="movies" />
+}
+else
+{
+    @foreach (var card in Model.Cards)
+    {
+        <Card Model="card"
+              Title="@card.Entity.Name"
+              SupportsDelete="true"
+              DeleteRequested="() => Model.Delete(card.Entity.Id)">
+            <Values>
+                <Field Size="Field.Sizes.Unspecified">
+                    <Image ImageFile="card.Entity.PosterImageFile"
+                           Width="160" />
+                </Field>
+                <Field Size="Field.Sizes.Star">
+                    <Labeled Width="5.5em"
+                             Label="Genre"
+                             StringValue="@card.Entity.GenreName" />
+                    <Labeled Width="5.5em"
+                             Label="Rating"
+                             StringValue="@card.Entity.RatingName" />
+                    <Labeled Width="5.5em"
+                             Label="Released"
+                             DateTimeOffsetValue="@card.Entity.Released" />
+                    <Labeled Width="5.5em"
+                             Label="Runtime"
+                             IntegerValue="@card.Entity.RuntimeMin" />
+                    <Labeled Width="5.5em"
+                             Label="Score"
+                             SingleValue="@card.Entity.Score" />
+                </Field>
+                <Field Size="Field.Sizes.Full">
+                    <LabeledHtml Label="Summary"
+                                 HtmlValue="@card.Entity.Summary" />
+                </Field>
+            </Values>
+            <PaneLinks>
+                <PaneLink Href="@($"{Path}/movie-{card.Entity.Id:D}?pane=credits")"
+                          Text="Credits"
+                          Count="card.Entity.MovieCreditCount" />
+            </PaneLinks>
+            <Buttons>
+                <ButtonView Href="@($"{Path}/movie-{card.Entity.Id:D}")" />
+                <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.View">
+                    <MenuItem Type="MenuItem.Types.Delete"
+                              Clicked="() => Model.ShowConfirmation(card.Entity.Id)" />
+                </ContextMenu>
+            </Buttons>
+        </Card>
+    }
+
+    <Pager Paged="Model.Search.Paged"
+           PageNumberChanged="Model.HandlePageNumberChanged" />
+}

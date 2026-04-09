@@ -1,0 +1,13 @@
+<Padding Direction="Padding.Directions.Horizontal"
+         Size="Padding.Sizes.Tiny">
+    <Padding Direction="Padding.Directions.Bottom"
+             Size="Padding.Sizes.Small">
+        @Prompt
+    </Padding>
+</Padding>
+
+@if (Items.HasItems())
+{
+    <Tree Items="Items"
+          @bind-SelectedId="SelectedId" />
+}

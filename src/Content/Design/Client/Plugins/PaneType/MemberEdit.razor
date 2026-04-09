@@ -1,0 +1,49 @@
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+            }
+            else
+            {
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            }
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Status"
+                       Size="Field.Sizes.Unspecified">
+                    <EnumRadio ReadOnly="Model.ReadOnly"
+                               TEnum="Member.Statuses"
+                               @bind-SelectedValue="Model.Entity.Status" />
+                </Field>
+            </Wrapped>
+        </Padding>
+        @if (Model.Entity.TokenValues.HasSomething())
+        {
+            <BatchSection Title="Token Values">
+                <HeadingPanel>
+                    <div class="info c-padding-small-right">Values are updated by an automated job</div>
+                </HeadingPanel>
+                <ChildContent>
+                    <Field Size="Field.Sizes.Unspecified">
+                        @foreach (var tokenValue in Model.Entity.TokenValues)
+                        {
+                            <Labeled Width="8em"
+                                     Label="@tokenValue.TokenKey"
+                                     StringValue="@tokenValue.Value" />
+                        }
+                    </Field>
+                </ChildContent>
+            </BatchSection>
+        }
+    }
+</Waiter>

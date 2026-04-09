@@ -1,0 +1,79 @@
+@using Crudspa.Content.Display.Client.Extensions
+<Waiter Model="Model">
+    @if (Model.Binder is not null)
+    {
+        <div class="@(Shadowed ? "c-shadowed-binder" : "c-binder")">
+            <div id="@($"{Model.Binder.Id:D}")">
+                @if (Model.Page is not null)
+                {
+                    <div id="box@($"{Model.Page.Id:N}")"
+                         class="c-page @(Model.Page.Box.BoxClasses())"
+                         style="@(Model.Page.Box.BoxStyles())"
+                         @key="Model.Page">
+                        @if (Model.Page.ShowGuide == true || Model.Page.ShowNotebook == true)
+                        {
+                            <div class="c-stack center">
+                                @if (Model.GuideModel is not null)
+                                {
+                                    <Guide Model="Model.GuideModel"
+                                           ShowGuideFields="Model.Page.ShowGuide == true"
+                                           ShowNotebookButton="Model.Page.ShowNotebook == true"
+                                           AutoPlay="true" />
+                                }
+                            </div>
+                        }
+                        @foreach (var section in Model.Page.Sections)
+                        {
+                            <SectionDisplay Section="section"
+                                            ElementDisplayModelsChanged="models => HandleSectionDisplayModelsChanged(section, models)"
+                                            @key="section" />
+                        }
+                    </div>
+                    <Padding Size="Padding.Sizes.Small">
+                        <Wrapped NoWrap="true">
+                            @if (Model.PageCount > 1)
+                            {
+                                <ButtonCore Clicked="Back"
+                                            Disabled="@(!Model.CanMoveBack)"
+                                            IconClass="c-icon-chevron-left"
+                                            Text="Back" />
+                            }
+                            <div class="star">
+                                @if (Model.IsValidating)
+                                {
+                                    <div class="page-count">
+                                        <Wrapped Alignment="Wrapped.Alignments.Center">
+                                            <img src="/api/content/display/images/exclamation"
+                                                 alt="Error"
+                                                 style="width: 1.625em; margin-right: 1em;" />
+                                            <div>@Model.ValidationText</div>
+                                        </Wrapped>
+                                    </div>
+                                }
+                                else if (Model.PageCount > 1)
+                                {
+                                    <div class="page-count">
+                                        @(Model.PositionText)
+                                    </div>
+                                }
+                            </div>
+                            @if (Model.CanMoveNext && Model.PageCount > 1)
+                            {
+                                <ButtonCore Clicked="Next"
+                                            IconClass="c-icon-chevron-right"
+                                            IconPosition="ButtonCore.IconPositions.Right"
+                                            Text="Next" />
+                            }
+                            else if (!Model.CanMoveNext && Model.PageCount > 0)
+                            {
+                                <ButtonCore Clicked="Finish"
+                                            Text="Finish!"
+                                            ButtonStyle="ButtonCore.ButtonStyles.Primary" />
+                            }
+                        </Wrapped>
+                    </Padding>
+                }
+            </div>
+        </div>
+    }
+</Waiter>

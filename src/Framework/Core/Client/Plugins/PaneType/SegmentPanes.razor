@@ -1,0 +1,49 @@
+﻿@using Crudspa.Framework.Core.Shared.Contracts.Config.SegmentType
+@if (Model.Entity is not null)
+{
+    @if (Model.IsSinglePaneType)
+    {
+        @if (Model.SinglePane is not null)
+        {
+            <PaneEdit Path="@Path"
+                      Id="@Model.SinglePane.Id"
+                      @key="Model.SinglePane" />
+        }
+    }
+    else if (Model.IsTabbedPanesType)
+    {
+        <div class="c-tabbed-panes @(Model.TabbedPanesConfig.Orientation == TabbedPanesConfig.Orientations.Vertical ? "vertical" : String.Empty)">
+            <ul class="tabs secondary">
+                @foreach (var pane in Model.OrderedPanes)
+                {
+                    <li class="@(Model.ActivePaneKey.IsBasically(pane.Key) ? "selected" : String.Empty)"
+                        @onclick="() => Model.SetActivePane(pane.Key)">
+                        @pane.Title
+                    </li>
+                }
+            </ul>
+            <div class="panes">
+                @foreach (var pane in Model.OrderedPanes)
+                {
+                    @if (Model.IsPaneLoaded(pane.Key))
+                    {
+                        <div class="@(Model.ActivePaneKey.IsBasically(pane.Key) ? String.Empty : "c-hide")">
+                            <PaneEdit Id="@pane.Id"
+                                      Path="@Path"
+                                      @key="pane" />
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        @foreach (var pane in Model.OrderedPanes)
+        {
+            <PaneEdit Id="@pane.Id"
+                      Path="@Path"
+                      @key="pane" />
+        }
+    }
+}

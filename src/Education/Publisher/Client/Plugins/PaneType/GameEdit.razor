@@ -1,0 +1,79 @@
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+            }
+            else
+            {
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            }
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Key"
+                       Size="Field.Sizes.Medium">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="75"
+                             @bind-Value="Model.Entity.Key" />
+                </Field>
+                <Field Label="Title"
+                       Size="Field.Sizes.Medium">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="75"
+                             @bind-Value="Model.Entity.Title" />
+                </Field>
+                <Field Label="Status"
+                       Size="Field.Sizes.Unspecified">
+                    <StatusEdit ReadOnly="Model.ReadOnly"
+                                LookupValues="Model.ContentStatusNames"
+                                ColorClassFrom="ContentStatusColors.For"
+                                @bind-Value="Model.Entity.StatusId" />
+                </Field>
+                <Field Label="Icon"
+                       Size="Field.Sizes.Medium">
+                    <IconDropdown LookupValues="Model.Icons"
+                                  ReadOnly="Model.ReadOnly"
+                                  AllowNull="false"
+                                  @bind-Value="Model.Entity.IconId" />
+                </Field>
+                <Field Label="Grade"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown ReadOnly="Model.ReadOnly"
+                              LookupValues="Model.GradeNames"
+                              @bind-Value="Model.Entity.GradeId" />
+                </Field>
+                <Field Label="Assessment Level"
+                       Size="Field.Sizes.Unspecified">
+                    <Radio ReadOnly="Model.ReadOnly"
+                           LookupValues="Model.AssessmentLevelNames"
+                           @bind-Value="Model.Entity.AssessmentLevelId" />
+                </Field>
+                <Field Label="Requires Achievement"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown ReadOnly="Model.ReadOnly"
+                              AllowNull="true"
+                              NullText="[None]"
+                              LookupValues="Model.AchievementNames"
+                              @bind-Value="Model.Entity.RequiresAchievementId" />
+                </Field>
+                <Field Label="Generates Achievement"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown ReadOnly="Model.ReadOnly"
+                              AllowNull="true"
+                              NullText="[None]"
+                              LookupValues="Model.AchievementNames"
+                              @bind-Value="Model.Entity.GeneratesAchievementId" />
+                </Field>
+            </Wrapped>
+        </Padding>
+    }
+</Waiter>

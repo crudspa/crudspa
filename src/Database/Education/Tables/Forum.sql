@@ -1,0 +1,18 @@
+create table [Education].[Forum] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [Name] nvarchar(75) not null,
+    [Description] nvarchar(max) not null,
+    [BodyTemplateId] uniqueidentifier not null,
+    [Pinned] bit default(0) not null,
+    [DistrictId] uniqueidentifier null,
+    [SchoolId] uniqueidentifier null,
+    [InnovatorsOnly] bit default(0) not null,
+    constraint [PK_Education_Forum] primary key clustered ([Id]),
+    constraint [FK_Education_Forum_BodyTemplate] foreign key ([BodyTemplateId]) references [Education].[BodyTemplate] ([Id]),
+    constraint [FK_Education_Forum_District] foreign key ([DistrictId]) references [Education].[District] ([Id]),
+    constraint [FK_Education_Forum_School] foreign key ([SchoolId]) references [Education].[School] ([Id]),
+);

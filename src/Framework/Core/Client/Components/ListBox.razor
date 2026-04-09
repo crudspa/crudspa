@@ -1,0 +1,35 @@
+@typeparam TItem where TItem : class, INamed
+
+<RadzenListBox TValue="Guid?"
+               TItem="TItem"
+               Data="@LookupValues"
+               TextProperty="Name"
+               ValueProperty="Id"
+               Disabled="@ReadOnly"
+               AllowFiltering="@AllowFiltering"
+               FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+               FilterOperator="StringFilterOperator.Contains"
+               FilterAsYouType="true"
+               FilterDelay="125"
+               Style="@Style"
+               Value="Value"
+               ValueChanged="HandleValueChanged">
+    <Template Context="context">
+        @if (Template is not null)
+        {
+            @Template(context)
+        }
+        else
+        {
+            <div style="display: flex; flex-direction: column; gap: .2rem; white-space: normal;">
+                <div>@GetName(context)</div>
+                @if (HasDescription(context))
+                {
+                    <div class="c-parenthetical">
+                        @GetDescription(context)
+                    </div>
+                }
+            </div>
+        }
+    </Template>
+</RadzenListBox>

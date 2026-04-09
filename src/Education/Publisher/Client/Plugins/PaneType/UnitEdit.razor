@@ -1,0 +1,116 @@
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+            }
+            else
+            {
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            }
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Title"
+                       Size="Field.Sizes.Wide">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="75"
+                             @bind-Value="Model.Entity.Title" />
+                </Field>
+                <Field Label="Status"
+                       Size="Field.Sizes.Unspecified">
+                    <StatusEdit ReadOnly="Model.ReadOnly"
+                                LookupValues="Model.ContentStatusNames"
+                                ColorClassFrom="ContentStatusColors.For"
+                                @bind-Value="Model.Entity.StatusId" />
+                </Field>
+                <Field Label="Grade"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown ReadOnly="Model.ReadOnly"
+                              LookupValues="Model.GradeNames"
+                              @bind-Value="Model.Entity.GradeId" />
+                </Field>
+                <Field Label="Parent"
+                       Size="Field.Sizes.Large">
+                    <Dropdown ReadOnly="Model.ReadOnly"
+                              AllowNull="true"
+                              NullText="[None]"
+                              LookupValues="Model.UnitNames"
+                              @bind-Value="Model.Entity.ParentId" />
+                </Field>
+                <Field Label="Requires Achievement"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown ReadOnly="Model.ReadOnly"
+                              AllowNull="true"
+                              NullText="[None]"
+                              LookupValues="Model.AchievementNames"
+                              @bind-Value="Model.Entity.RequiresAchievementId" />
+                </Field>
+                <Field Label="Generates Achievement"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown ReadOnly="Model.ReadOnly"
+                              AllowNull="true"
+                              NullText="[None]"
+                              LookupValues="Model.AchievementNames"
+                              @bind-Value="Model.Entity.GeneratesAchievementId" />
+                </Field>
+                <Field Label="Image"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <ImageUploader ReadOnly="Model.ReadOnly"
+                                   Required="true"
+                                   Width="480"
+                                   ImageFile="Model.Entity.ImageFile" />
+                </Field>
+                <Field Label="Guide Text"
+                       Size="Field.Sizes.Full">
+                    <MultilineTextBox ReadOnly="Model.ReadOnly"
+                                      Height="MultilineTextBox.Heights.Tall"
+                                      @bind-Value="Model.Entity.GuideText" />
+                </Field>
+                <Field Label="Guide Audio"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <AudioUploader ReadOnly="Model.ReadOnly"
+                                   Required="false"
+                                   AudioFile="Model.Entity.GuideAudioFile" />
+                </Field>
+                <Field Label="Intro Audio"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <AudioUploader ReadOnly="Model.ReadOnly"
+                                   Required="false"
+                                   AudioFile="Model.Entity.IntroAudioFile" />
+                </Field>
+                <Field Label="Song Audio"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <AudioUploader ReadOnly="Model.ReadOnly"
+                                   Required="false"
+                                   AudioFile="Model.Entity.SongAudioFile" />
+                </Field>
+            </Wrapped>
+            <Wrapped>
+                <Field Label="Options"
+                       Container="Field.Containers.Div">
+                    <Wrapped NoWrap="true">
+                        <Checkbox Label="Treatment"
+                                  ReadOnly="Model.ReadOnly"
+                                  @bind-Value="Model.Entity.Treatment" />
+                        <Checkbox Label="Control"
+                                  ReadOnly="Model.ReadOnly"
+                                  @bind-Value="Model.Entity.Control" />
+                    </Wrapped>
+                </Field>
+            </Wrapped>
+        </Padding>
+    }
+</Waiter>

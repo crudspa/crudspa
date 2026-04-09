@@ -1,0 +1,14 @@
+﻿<Waiter Model="Model">
+    @if (Model.Trifold is not null)
+    {
+        <Padding Direction="Padding.Directions.Horizontal"
+                 Size="Padding.Sizes.Medium">
+            <BinderDisplayPlugin Path="@Path"
+                                 Id="Model.Trifold.BinderId"
+                                 TypeName="@Model.Trifold.BinderDisplayView"
+                                 BinderCompleted="() => Model.HandleBinderCompleted()"
+                                 GuideImage="Model.Trifold.GuideImage"
+                                 Shadowed="true" />
+        </Padding>
+    }
+</Waiter>

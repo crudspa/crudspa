@@ -1,0 +1,15 @@
+create table [Samples].[MovieCredit] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [MovieId] uniqueidentifier not null,
+    [Name] nvarchar(120) not null,
+    [Part] nvarchar(120) not null,
+    [Billing] int null,
+    [Headliner] bit default(0) not null,
+    [Ordinal] int not null,
+    constraint [PK_Samples_MovieCredit] primary key clustered ([Id]),
+    constraint [FK_Samples_MovieCredit_Movie] foreign key ([MovieId]) references [Samples].[Movie] ([Id]),
+);

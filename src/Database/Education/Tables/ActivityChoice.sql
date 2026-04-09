@@ -1,0 +1,18 @@
+create table [Education].[ActivityChoice] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [ActivityId] uniqueidentifier not null,
+    [Text] nvarchar(max) null,
+    [AudioFileId] uniqueidentifier null,
+    [ImageFileId] uniqueidentifier null,
+    [IsCorrect] bit default(0) not null,
+    [ColumnOrdinal] int null,
+    [Ordinal] int not null,
+    constraint [PK_Education_ActivityChoice] primary key clustered ([Id]),
+    constraint [FK_Education_ActivityChoice_Activity] foreign key ([ActivityId]) references [Education].[Activity] ([Id]),
+    constraint [FK_Education_ActivityChoice_AudioFile] foreign key ([AudioFileId]) references [Framework].[AudioFile] ([Id]),
+    constraint [FK_Education_ActivityChoice_ImageFile] foreign key ([ImageFileId]) references [Framework].[ImageFile] ([Id]),
+);

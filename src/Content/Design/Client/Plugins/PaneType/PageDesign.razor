@@ -1,0 +1,46 @@
+﻿<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        @if (Model.BoxModel is not null)
+        {
+            <Modal Model="Model.BoxModel"
+                   TopMargin="4em"
+                   Width="34em"
+                   Title="Page Settings">
+                <Content>
+                    <BoxEditor Model="Model.BoxModel" />
+                </Content>
+                <Buttons>
+                    <ButtonCore Text="Close"
+                                ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                                Clicked="() => Model.BoxModel.Hide()" />
+                </Buttons>
+            </Modal>
+            <Field Label="Page Settings"
+                   Size="Field.Sizes.Full"
+                   Container="Field.Containers.Div">
+                <Wrapped NoWrap="true"
+                         Alignment="Wrapped.Alignments.Center">
+                    <Padding Size="Padding.Sizes.Tiny"
+                             Direction="Padding.Directions.Vertical">
+
+                        <Padding Size="Padding.Sizes.Small"
+                                 Direction="Padding.Directions.Right">
+                            <ButtonCore Text="Edit"
+                                        IconClass="c-icon-pencil"
+                                        Disabled="@ReadOnly"
+                                        ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                                        Clicked="() => Model.BoxModel.Show()" />
+                        </Padding>
+                    </Padding>
+                    <div class="star c-parenthetical c-padding-micro-vert">
+                        @(Model.BoxModel.Description)
+                    </div>
+                </Wrapped>
+            </Field>
+        }
+
+        <PageSectionsForPane Path="@Path"
+                             Id="Model.Entity.Id" />
+    }
+</Waiter>

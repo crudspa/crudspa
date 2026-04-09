@@ -1,0 +1,53 @@
+﻿<div class="c-full c-centered">
+
+    @if (Model.Activity.ContextAudioFile.Id.HasSomething())
+    {
+        <Padding Size="Padding.Sizes.Small">
+            <AudioPlayer AudioFile="Model.Activity.ContextAudioFile"
+                         PlayText="Listen"
+                         StopText="Listen"
+                         PlayIcon="c-icon-volume-high"
+                         StopIcon="c-icon-volume-high"
+                         MediaPlayed="HandleContextAudioPlayed">
+            </AudioPlayer>
+        </Padding>
+    }
+
+    @if (AssignmentBatchId.HasValue)
+    {
+        <h2>@(Model.Activity.ContentAreaAppNavText)</h2>
+    }
+
+    @if (Model.Activity.ContextText.HasSomething())
+    {
+        <div class="cec-context-text">
+            @(Model.Activity.ContextText)
+        </div>
+    }
+
+    @if (Model.Activity.ContextImageFile.Id.HasSomething())
+    {
+        <div class="cec-context-image">
+            <Image ImageFile="Model.Activity.ContextImageFile" />
+        </div>
+    }
+
+    <div class="c-wrap center c-padding-medium-vert">
+        <Field Label="@Model.Activity.ExtraText"
+               Size="Field.Sizes.Full">
+            <MultilineTextBox ReadOnly="Model.Saved"
+                              Height="MultilineTextBox.Heights.Average"
+                              @bind-Value="Model.TextInput" />
+        </Field>
+        @if (Model.Saved)
+        {
+            <ButtonEdit Clicked="Model.EditTextInput" />
+        }
+        else
+        {
+            <ButtonSave Clicked="Model.RecordTextInput"
+                        Text="Submit" />
+        }
+    </div>
+
+</div>

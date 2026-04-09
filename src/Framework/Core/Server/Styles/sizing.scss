@@ -1,0 +1,177 @@
+﻿/// <reference path="defaults.scss" />
+
+.c-min-pico {
+    min-width: $fieldPico;
+}
+
+.c-min-nano {
+    min-width: $fieldNano;
+}
+
+.c-min-micro {
+    min-width: $fieldMicro;
+}
+
+.c-min-min {
+    min-width: $fieldMin;
+}
+
+.c-min-tinier {
+    min-width: $fieldTinier;
+}
+
+.c-min-tiny {
+    min-width: $fieldTiny;
+}
+
+.c-min-small {
+    min-width: $fieldSmall;
+}
+
+.c-min-medium {
+    min-width: $fieldMedium;
+}
+
+.c-pico {
+    min-width: $fieldPico;
+    width: $fieldPico;
+}
+
+.c-nano {
+    min-width: $fieldNano;
+    width: $fieldNano;
+}
+
+.c-micro {
+    min-width: $fieldMicro;
+    width: $fieldMicro;
+}
+
+.c-min {
+    min-width: $fieldMin;
+    width: $fieldMin;
+}
+
+.c-tinier {
+    min-width: $fieldTinier;
+    width: $fieldTinier;
+}
+
+.c-tiny {
+    min-width: $fieldTiny;
+    width: $fieldTiny;
+}
+
+.c-small {
+    min-width: $fieldSmall;
+    width: $fieldSmall;
+}
+
+.c-medium-small {
+    min-width: $fieldMediumSmall;
+    width: $fieldMediumSmall;
+}
+
+.c-medium {
+    min-width: $fieldMedium;
+    width: $fieldMedium;
+}
+
+.c-medium-large {
+    min-width: $fieldMediumLarge;
+    width: $fieldMediumLarge;
+}
+
+.c-large {
+    min-width: $fieldLarge;
+    width: $fieldLarge;
+}
+
+.c-larger {
+    min-width: $fieldLarger;
+    width: $fieldLarger;
+}
+
+.c-wide {
+    min-width: $fieldWide;
+    width: $fieldWide;
+}
+
+.c-max {
+    min-width: $fieldMax;
+    width: $fieldMax;
+}
+
+.c-full {
+    width: 100%;
+}
+
+.c-max-width-36 {
+    max-width: 18em;
+
+    @media (min-width: 20em) {
+        max-width: 24em;
+    }
+
+    @media (min-width: 24em) {
+        max-width: 27em;
+    }
+
+    @media (min-width: 28em) {
+        max-width: 31.5em;
+    }
+
+    @media (min-width: 32em) {
+        max-width: 36em;
+    }
+}
+
+.c-rectangle-3x2-36w {
+    height: 12em;
+    width: 18em;
+
+    @media (min-width: 20em) {
+        height: 16em;
+        width: 24em;
+    }
+
+    @media (min-width: 24em) {
+        height: 18em;
+        width: 27em;
+    }
+
+    @media (min-width: 28em) {
+        height: 21em;
+        width: 31.5em;
+    }
+
+    @media (min-width: 32em) {
+        height: 24em;
+        width: 36em;
+    }
+}
+
+.c-rectangle-2x3-36w {
+    height: 27em;
+    width: 18em;
+
+    @media (min-width: 20em) {
+        height: 36em;
+        width: 24em;
+    }
+
+    @media (min-width: 24em) {
+        height: 42em;
+        width: 28em;
+    }
+
+    @media (min-width: 28em) {
+        height: 48em;
+        width: 32em;
+    }
+
+    @media (min-width: 32em) {
+        height: 54em;
+        width: 36em;
+    }
+}

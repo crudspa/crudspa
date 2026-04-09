@@ -1,0 +1,7 @@
+﻿<Waiter Model="Model">
+    @if (Model.Post?.PageId is not null)
+    {
+        <PageDisplay Path="@Path"
+                     Id="Model.Post.PageId" />
+    }
+</Waiter>

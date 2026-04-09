@@ -1,0 +1,11 @@
+global using Crudspa.Framework.Core.Shared;
+global using Crudspa.Framework.Core.Shared.BaseClasses;
+global using Crudspa.Framework.Core.Shared.Contracts.Behavior;
+global using Crudspa.Framework.Core.Shared.Contracts.Data;
+global using Crudspa.Framework.Core.Shared.Contracts.Events;
+global using Crudspa.Framework.Core.Shared.Extensions;
+global using Crudspa.Samples.Catalog.Shared.Contracts.Behavior;
+global using Crudspa.Samples.Catalog.Shared.Contracts.Data;
+global using Crudspa.Samples.Catalog.Shared.Contracts.Events;
+global using System.Collections.ObjectModel;
+global using System.ComponentModel;

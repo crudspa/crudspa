@@ -1,0 +1,15 @@
+create table [Education].[DistrictContact] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [DistrictId] uniqueidentifier not null,
+    [ContactId] uniqueidentifier not null,
+    [UserId] uniqueidentifier null,
+    [Title] nvarchar(50) null,
+    constraint [PK_Education_DistrictContact] primary key clustered ([Id]),
+    constraint [FK_Education_DistrictContact_District] foreign key ([DistrictId]) references [Education].[District] ([Id]),
+    constraint [FK_Education_DistrictContact_Contact] foreign key ([ContactId]) references [Framework].[Contact] ([Id]),
+    constraint [FK_Education_DistrictContact_User] foreign key ([UserId]) references [Framework].[User] ([Id]),
+);

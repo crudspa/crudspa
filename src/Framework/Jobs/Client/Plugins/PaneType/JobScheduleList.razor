@@ -1,0 +1,39 @@
+<List Model="Model"
+      T="JobScheduleModel"
+      EntityName="Schedule"
+      UrlPrefix="@($"{Path}/job-schedule")"
+      DeleteRequested="id => Model.Delete(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Medium">
+            <Labeled Width="5em"
+                     Label="Next Run"
+                     DateTimeOffsetValue="context.JobSchedule.NextRun" />
+            @if (context.JobSchedule.LastRun.HasValue)
+            {
+                <Labeled Width="5em"
+                         Label="Last Run"
+                         DateTimeOffsetValue="context.JobSchedule.LastRun" />
+            }
+            @if (context.JobSchedule.LastStatus.HasSomething())
+            {
+                <Labeled CssClass="status"
+                         Width="5em"
+                         Label="Status">
+                    <StatusDisplay Name="@(context.JobSchedule.LastStatus)"
+                                   ColorClass="@context.JobSchedule.LastStatusCssClass" />
+                </Labeled>
+            }
+        </Field>
+        <Field Size="Field.Sizes.Unspecified">
+            <Labeled Width="5em"
+                     Label="Job"
+                     StringValue="@(context.JobDescription)" />
+            <Labeled Width="5em"
+                     Label="Device"
+                     StringValue="@(context.JobSchedule.DeviceName)" />
+            <Labeled Width="5em"
+                     Label="Schedule"
+                     StringValue="@(context.ScheduleDescription)" />
+        </Field>
+    </ReadView>
+</List>

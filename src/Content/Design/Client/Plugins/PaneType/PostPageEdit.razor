@@ -1,0 +1,49 @@
+<Border Direction="Border.Directions.Top">
+    <Waiter Model="Model">
+        @if (Model.Entity is not null)
+        {
+            @if (Model.BoxModel is not null)
+            {
+                <Modal Model="Model.BoxModel"
+                       TopMargin="4em"
+                       Width="34em"
+                       Title="Page Settings">
+                    <Content>
+                        <BoxEditor Model="Model.BoxModel" />
+                    </Content>
+                    <Buttons>
+                        <ButtonOk Clicked="() => Model.Save()" />
+                        <ButtonCancel Clicked="() => Model.Refresh()" />
+                    </Buttons>
+                </Modal>
+                <Padding Size="Padding.Sizes.Small"
+                         Direction="Padding.Directions.Top">
+                    <Field Label="Page Settings"
+                           Size="Field.Sizes.Full"
+                           Container="Field.Containers.Div">
+                        <Wrapped NoWrap="true">
+                            <Padding Size="Padding.Sizes.Tiny"
+                                     Direction="Padding.Directions.Vertical">
+                                <Padding Size="Padding.Sizes.Small"
+                                         Direction="Padding.Directions.Right">
+                                    <ButtonEdit Transparent="true"
+                                                Clicked="() => Model.BoxModel.Show()" />
+                                </Padding>
+                            </Padding>
+                            <div class="star c-parenthetical c-padding-micro-vert">
+                                @(Model.BoxModel.Description)
+                            </div>
+                        </Wrapped>
+                    </Field>
+                </Padding>
+            }
+
+            @if (Model.Page is not null)
+            {
+                <PostPageSections Path="@Path"
+                                  PostId="Id"
+                                  PageId="Model.Page.Id" />
+            }
+        }
+    </Waiter>
+</Border>

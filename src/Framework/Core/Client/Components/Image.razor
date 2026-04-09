@@ -1,0 +1,41 @@
+﻿@namespace Crudspa.Framework.Core.Client.Components
+
+@if (ImageFile?.Id is not null)
+{
+    <div id="@($"{InstanceId:D}")"
+         style="position:relative; @(DivStyles)">
+        @if (Obscured)
+        {
+            <div class="c-obscure"></div>
+        }
+
+        @if (HyperlinkUrl.HasSomething())
+        {
+            <a href="@HyperlinkUrl"
+               target="@(HyperlinkUrl.StartsWith("http") ? "_blank" : null)"
+               @onclick="HandleHyperlinkClicked"
+               aria-label="@(ImageFile.Caption ?? ImageFile.Name ?? String.Empty)"
+               style="display:block;">
+                <img class="@(Shadowed ? "c-shadowed" : String.Empty) @(CssClass)"
+                     alt="@(ImageFile.Caption ?? ImageFile.Name ?? String.Empty)"
+                     src="@ImgSrc"
+                     srcset="@ImgSrcSet"
+                     sizes="@ImgSizes"
+                     draggable="false"
+                     style="display:block; width:100%; height:auto; min-width:0; min-height:0;"
+                     @attributes="ImgAttributes" />
+            </a>
+        }
+        else
+        {
+            <img class="@(Shadowed ? "c-shadowed" : String.Empty) @(CssClass)"
+                 alt="@(ImageFile.Caption ?? ImageFile.Name ?? String.Empty)"
+                 src="@ImgSrc"
+                 srcset="@ImgSrcSet"
+                 sizes="@ImgSizes"
+                 draggable="false"
+                 style="display:block; width:100%; height:auto; min-width:0; min-height:0;"
+                 @attributes="ImgAttributes" />
+        }
+    </div>
+}

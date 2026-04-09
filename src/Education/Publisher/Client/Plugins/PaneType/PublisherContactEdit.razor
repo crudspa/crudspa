@@ -1,0 +1,33 @@
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+                @if (Model.Entity?.User is not null && Model.Entity.User.MaySignIn == true)
+                {
+                    <ButtonCore Text="Send Access Code"
+                                IconClass="c-icon-paper-plane"
+                                Clicked="() => Model.SendAccessCode()" />
+                }
+            }
+            else
+            {
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            }
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <ContactEdit ReadOnly="Model.ReadOnly"
+                         Contact="Model.Entity.Contact"
+                         User="Model.Entity.User">
+            </ContactEdit>
+        </Padding>
+    }
+</Waiter>

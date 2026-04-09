@@ -1,0 +1,16 @@
+create table [Content].[Notepage] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [NotebookId] uniqueidentifier not null,
+    [NoteId] uniqueidentifier not null,
+    [Text] nvarchar(max) null,
+    [SelectedImageFileId] uniqueidentifier null,
+    [Ordinal] int not null,
+    constraint [PK_Content_Notepage] primary key clustered ([Id]),
+    constraint [FK_Content_Notepage_Notebook] foreign key ([NotebookId]) references [Content].[Notebook] ([Id]),
+    constraint [FK_Content_Notepage_Note] foreign key ([NoteId]) references [Content].[NoteElement] ([Id]),
+    constraint [FK_Content_Notepage_SelectedImageFile] foreign key ([SelectedImageFileId]) references [Framework].[ImageFile] ([Id]),
+);

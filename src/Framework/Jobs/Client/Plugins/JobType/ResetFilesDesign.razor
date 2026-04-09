@@ -1,0 +1,19 @@
+﻿<Wrapped>
+    <Field Label="Reset:"
+           Container="Field.Containers.Div">
+        <Stacked Alignment="Stacked.Alignments.Default">
+            <Checkbox Label="Audio optimization outputs"
+                      ReadOnly="ReadOnly"
+                      @bind-Value="Model.Config.OptimizedAudioFiles" />
+            <Checkbox Label="Image optimization outputs"
+                      ReadOnly="ReadOnly"
+                      @bind-Value="Model.Config.OptimizedImageFiles" />
+            <Checkbox Label="Image captions"
+                      ReadOnly="ReadOnly"
+                      @bind-Value="Model.Config.ImageCaptions" />
+            <Checkbox Label="Video optimization outputs"
+                      ReadOnly="ReadOnly"
+                      @bind-Value="Model.Config.OptimizedVideoFiles" />
+        </Stacked>
+    </Field>
+</Wrapped>

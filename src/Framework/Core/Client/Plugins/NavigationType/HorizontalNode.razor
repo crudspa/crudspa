@@ -1,0 +1,65 @@
+﻿<div class="node @(Screen.Visible ? "selected" : String.Empty)">
+
+    <a class="link"
+       href="@(Screen.Path + Screen.Query)">
+        @if (Screen.Icon.HasSomething())
+        {
+            <div class="icon">
+                <span class="@(Screen.Icon)"></span>
+            </div>
+        }
+        <div class="text">@Screen.Title</div>
+    </a>
+
+    @if (!Screen.Fixed)
+    {
+        <div class="close-button">
+            <a @onclick="() => NodeClosed.InvokeAsync(Screen.Path)">
+                <span class="c-icon-cross"></span>
+            </a>
+        </div>
+    }
+
+    @if (Level == 2 && Screen.Children.HasItems())
+    {
+        <div class="expand-button">
+            <a @onclick="() => Model.Toggle()">&#x25BC;</a>
+        </div>
+    }
+</div>
+
+<ul class="child-tree level@(Level) @(Model.Visible ? String.Empty : "hidden")">
+    @foreach (var child in Screen.Children)
+    {
+        <li class="level@(Level)">
+            <HorizontalNode Screen="@child"
+                            Level="@(Level + 1)"
+                            NodeClosed="@NodeClosed" />
+        </li>
+    }
+</ul>
+
+@code {
+    private void HandleModelChanged(Object? sender, PropertyChangedEventArgs args) => InvokeAsync(StateHasChanged);
+
+    [Parameter, EditorRequired] public Screen Screen { get; set; } = null!;
+    [Parameter, EditorRequired] public Int32 Level { get; set; }
+    [Parameter] public EventCallback<String> NodeClosed { get; set; }
+
+    [Inject] public IClickService ClickService { get; set; } = null!;
+
+    public MenuModel Model { get; set; } = null!;
+
+    protected override Task OnInitializedAsync()
+    {
+        Model = new(ClickService);
+        Model.PropertyChanged += HandleModelChanged;
+        return Task.CompletedTask;
+    }
+
+    public void Dispose()
+    {
+        Model.PropertyChanged -= HandleModelChanged;
+        Model.Dispose();
+    }
+}

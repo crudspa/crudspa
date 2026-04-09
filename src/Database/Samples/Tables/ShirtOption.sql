@@ -1,0 +1,16 @@
+create table [Samples].[ShirtOption] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [ShirtId] uniqueidentifier not null,
+    [ColorId] uniqueidentifier not null,
+    [SkuBase] nvarchar(40) not null,
+    [Price] real not null,
+    [AllSizes] bit default(1) not null,
+    [Ordinal] int not null,
+    constraint [PK_Samples_ShirtOption] primary key clustered ([Id]),
+    constraint [FK_Samples_ShirtOption_Shirt] foreign key ([ShirtId]) references [Samples].[Shirt] ([Id]),
+    constraint [FK_Samples_ShirtOption_Color] foreign key ([ColorId]) references [Samples].[Color] ([Id]),
+);

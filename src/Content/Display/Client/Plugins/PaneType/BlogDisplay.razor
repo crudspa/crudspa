@@ -1,0 +1,22 @@
+﻿<Waiter Model="Model">
+    @if (Model.Blog is not null)
+    {
+        @if (Model.Blog.Posts.IsEmpty())
+        {
+            <NoRecords EntityName="posts" />
+        }
+        else
+        {
+            @foreach (var post in Model.Blog.Posts)
+            {
+                <div class="c-card c-padding-medium-top c-padding-small-bottom">
+                    <div class="values">
+                        <div class="title c-padding-small-top">
+                            <a @onclick="() => Model.GoToPost(post.Id)">@(post.Title)</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }
+</Waiter>

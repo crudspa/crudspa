@@ -1,0 +1,85 @@
+<ListOrderables Model="Model"
+                T="SegmentModel"
+                EntityName="Segment"
+                UrlPrefix="@($"{Path}/segment")"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <Modals>
+        <Modal Model="MoveModel"
+               Width="26em"
+               TopMargin="1em"
+               Title="Move Segment">
+            <Content>
+                <Padding Direction="Padding.Directions.Horizontal"
+                         Size="Padding.Sizes.Tiny">
+                    <Padding Direction="Padding.Directions.Bottom"
+                             Size="Padding.Sizes.Small">
+                        Select the new parent segment:
+                    </Padding>
+                </Padding>
+                @if (MoveModel.Portals.HasItems())
+                {
+                    <Tree Items="MoveModel.Portals"
+                          @bind-SelectedId="MoveModel.MoveToId" />
+                }
+            </Content>
+            <Buttons>
+                <ButtonOk OkText="Move"
+                          Clicked="() => MoveModel.MoveSegment()" />
+                <ButtonCancel Clicked="() => MoveModel.Hide()" />
+            </Buttons>
+        </Modal>
+    </Modals>
+    <ReadView>
+        <Field Size="Field.Sizes.Large">
+            <Labeled Width="8em"
+                     Label="Key"
+                     StringValue="@context.Segment.Key" />
+            <Labeled CssClass="status"
+                     Width="8em"
+                     Label="Status">
+                <StatusDisplay Id="@context.Segment.StatusId"
+                               Name="@context.Segment.StatusName"
+                               ColorClassFrom="ContentStatusColors.For" />
+            </Labeled>
+            <Labeled Width="8em"
+                     Label="Permission"
+                     StringValue="@context.EffectivePermissionName" />
+            <Labeled Width="8em"
+                     Label="Type"
+                     StringValue="@context.Segment.TypeName" />
+        </Field>
+        <Field Size="Field.Sizes.Unspecified">
+            <Labeled Width="8em"
+                     Label="Fixed"
+                     BooleanValue="@context.Segment.Fixed" />
+            <Labeled Width="8em"
+                     Label="Requires ID"
+                     BooleanValue="@context.Segment.RequiresId" />
+            <Labeled Width="8em"
+                     Label="Recursive"
+                     BooleanValue="@context.Segment.Recursive" />
+            <Labeled Width="8em"
+                     Label="All Licenses"
+                     BooleanValue="@context.Segment.AllLicenses" />
+        </Field>
+    </ReadView>
+    <PaneLinks>
+        <PaneLink Href="@($"{Path}/segment-{context.Segment.Id:D}?pane=details")"
+                  Text="Panes"
+                  Count="context.Segment.PaneCount" />
+        <PaneLink Href="@($"{Path}/segment-{context.Segment.Id:D}?pane=content")"
+                  Text="Content"
+                  Count="context.Segment.PaneCount" />
+        <PaneLink Href="@($"{Path}/segment-{context.Segment.Id:D}?pane=segments")"
+                  Text="Segments"
+                  Count="context.Segment.SegmentCount" />
+    </PaneLinks>
+    <CardMenuItems>
+        <MenuItem Type="MenuItem.Types.Custom"
+                  Text="Move..."
+                  Icon="c-icon-move"
+                  Clicked="() => MoveModel.ShowModal(context.Segment.Id)" />
+    </CardMenuItems>
+</ListOrderables>

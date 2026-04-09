@@ -1,0 +1,64 @@
+<Many Model="Model"
+      T="DistrictLicenseModel"
+      EntityName="District"
+      SaveRequested="id => Model.Save(id)"
+      CancelRequested="id => Model.Cancel(id)"
+      DeleteRequested="id => Model.Delete(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Unspecified">
+            <LabeledRelations Label="Schools"
+                              Width="6em"
+                              Selectables="context.DistrictLicense.Schools"
+                              All="context.DistrictLicense.AllSchools" />
+        </Field>
+    </ReadView>
+    <EditView>
+        @if (context.SelectingDistrict)
+        {
+            <Wrapped>
+                <Field Label="District"
+                       Size="Field.Sizes.Wide">
+                    <Wrapped NoWrap="true">
+                        <Dropdown ReadOnly="@false"
+                                  LookupValues="Model.DistrictNames"
+                                  @bind-Value="context.DistrictLicense.DistrictId" />
+                        <ButtonGroup Margin="ButtonGroup.Margins.TinyHor">
+                            <ButtonCore IconClass="c-icon-check"
+                                        Clicked="() => Model.Save(context.Id)" />
+                            <ButtonCore IconClass="c-icon-cross"
+                                        ButtonStyle="ButtonCore.ButtonStyles.Cancel"
+                                        Clicked="() => context.CancelDistrictSelection()" />
+                        </ButtonGroup>
+                    </Wrapped>
+                </Field>
+            </Wrapped>
+        }
+        else
+        {
+            <Wrapped>
+                <Field Label="District"
+                       Size="Field.Sizes.Larger">
+                    <Wrapped NoWrap="true">
+                        <TextBox ReadOnly="@true"
+                                 @bind-Value="context.DistrictLicense.DistrictName" />
+                        <ButtonGroup Margin="ButtonGroup.Margins.TinyHor">
+                            <ButtonCore IconClass="c-icon-pencil"
+                                        Clicked="() => context.StartDistrictSelection()" />
+                        </ButtonGroup>
+                    </Wrapped>
+                </Field>
+            </Wrapped>
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Schools"
+                       Size="Field.Sizes.Large"
+                       Container="Field.Containers.Div">
+                    <BoolRadio TrueLabel="All"
+                               FalseLabel="Specific"
+                               @bind-SelectedValue="context.DistrictLicense.AllSchools" />
+                    <CheckedList ReadOnly="context.DistrictLicense.AllSchools == true"
+                                 Selectables="context.DistrictLicense.Schools" />
+                </Field>
+            </Wrapped>
+        }
+    </EditView>
+</Many>

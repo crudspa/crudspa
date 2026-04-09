@@ -1,0 +1,42 @@
+﻿@typeparam T
+@if (Model.Entities.Count == 0)
+{
+    <Padding Size="Padding.Sizes.Medium"
+             Direction="Padding.Directions.All">
+        <Stacked Alignment="Stacked.Alignments.Center">
+            <em>@NoRecordsText</em>
+        </Stacked>
+    </Padding>
+}
+@foreach (var entity in Model.Entities.OrderBy(x => x.Ordinal))
+{
+    <Padding Direction="Padding.Directions.Vertical"
+             Size="Padding.Sizes.Tiny">
+        <Wrapped NoWrap="true">
+            <div id="@($"{entity.Id:D}")"
+                 @key="entity"
+                 class="star">
+                @EditView(entity)
+            </div>
+            <div class="c-padding-tiny-right">
+                @if (AllowReordering)
+                {
+                    <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Transparent"
+                                 Disabled="ReadOnly"
+                                 HideBorder="true">
+                        <BatchMenuItems MoveUpClicked="() => Model.MoveUp(entity.Id)"
+                                        MoveDownClicked="() => Model.MoveDown(entity.Id)"
+                                        RemoveClicked="() => Model.Remove(entity.Id)" />
+                    </ContextMenu>
+                }
+                else
+                {
+                    <ButtonCore IconClass="c-icon-trash2"
+                                ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                                Clicked="() => Model.Remove(entity.Id)"
+                                Disabled="@ReadOnly" />
+                }
+            </div>
+        </Wrapped>
+    </Padding>
+}

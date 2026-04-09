@@ -1,0 +1,64 @@
+﻿@inherits NavigationBase
+@if (Navigator.Initialized)
+{
+    <div class="c-vertical-navigation"
+         style="@Styles"
+         @onclick="HandleClick">
+
+        <div class="header">
+            <div class="menu-button">
+                <a @onclick="() => Navigator.NavigationVisible = !Navigator.NavigationVisible">
+                    <span class="@(Navigator.NavigationVisible ? "c-icon-chevron-up" : "c-icon-menu")"></span>
+                </a>
+            </div>
+            <div class="branding">
+                @Branding
+            </div>
+            @AuthViews
+        </div>
+
+        <div class="main">
+
+            <div class="vertical-tree @(Navigator.NavigationVisible ? String.Empty : "hidden")"
+                 role="navigation">
+                <ul>
+                    @foreach (var screen in Navigator.Screens)
+                    {
+                        <li class="level1">
+                            <VerticalNode Screen="@screen"
+                                          Level="2"
+                                          NodeClosed="@HandleNodeClosed" />
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            @foreach (var view in Navigator.OpenViews)
+            {
+                <div class="c-window @(view.Visible ? String.Empty : "c-hide")"
+                     @key="view.Path">
+                    <div class="c-window-title">
+                        <div class="text">@(view.Title)</div>
+                        <div class="close-button">
+                            @if (!view.Fixed)
+                            {
+                                <a @onclick="() => Navigator.Close(view.Path!)">
+                                    <span class="c-icon-cross"></span>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                    <div class="content">
+                        <SegmentDisplayPlugin TypeName="@view.View"
+                                              Path="@view.Path"
+                                              Id="@view.Id"
+                                              Panes="@view.Panes"
+                                              ConfigJson="@view.ConfigJson" />
+                    </div>
+                </div>
+            }
+
+        </div>
+        @Footer
+    </div>
+}

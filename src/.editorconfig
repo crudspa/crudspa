@@ -1,0 +1,20 @@
+root = true
+[*]
+end_of_line = crlf
+trim_trailing_whitespace = true
+insert_final_newline = false
+
+[*.{css,csv,markdown,md,ps1,scss,sln,slnx,tsv,txt,yml,yaml}]
+insert_final_newline = true
+
+[*.{md,markdown}]
+trim_trailing_whitespace = false
+
+[*.{cs,vb}]
+indent_style = space
+indent_size = 4
+tab_width = 4
+dotnet_diagnostic.CA1873.severity = none
+
+[**/Client/**]
+dotnet_diagnostic.CA1816.severity = none

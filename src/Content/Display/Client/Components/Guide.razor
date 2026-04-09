@@ -1,0 +1,49 @@
+﻿@using Crudspa.Content.Display.Client.Contracts.Events
+<div class="c-guide c-nowrap">
+
+    @if (ShowGuideFields)
+    {
+        <div>
+            <Image ImageFile="Model.Image"
+                   Width="90" />
+        </div>
+
+        <div class="star quote c-nowrap @(Model.Text.HasNothing() && Model.Audio?.Id is null ? "transparent" : String.Empty)">
+            <div class="star text">
+                @(Model.Text)
+            </div>
+            @if (Model.Audio?.Id is not null)
+            {
+                <div>
+                    <AudioPlayer AudioFile="Model.Audio"
+                                 PlayText="@null"
+                                 StopText="@null"
+                                 PlayIcon="c-icon-volume-high"
+                                 StopIcon="c-icon-volume-high"
+                                 AutoPlay="@AutoPlay" />
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="star">
+            &nbsp;
+        </div>
+    }
+
+    @if (ShowNotebookButton)
+    {
+        <div>
+            <button @onclick="() => EventBus.Publish(new OpenNotebook())">
+                <div class="c-button">
+                    <div class="icon"
+                         style="padding: .375em 0 .125em 0; width: 2em;">
+                        <img src="/api/content/display/images/notebook"
+                             alt="Notebook" />
+                    </div>
+                </div>
+            </button>
+        </div>
+    }
+</div>

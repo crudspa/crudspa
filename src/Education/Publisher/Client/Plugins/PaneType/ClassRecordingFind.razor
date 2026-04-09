@@ -1,0 +1,68 @@
+<Waiter Model="Model">
+    <Filters>
+        <Fields>
+            <Field Label="Search"
+                   Size="Field.Sizes.Medium">
+                <SearchTextBox @bind-Value="Model.Search.Text" />
+            </Field>
+            <Field Label="Uploaded"
+                   Size="Field.Sizes.Medium">
+                <DateFilter Range="Model.Search.UploadedRange" />
+            </Field>
+            <Sorter Sorts="Model.Sorts"
+                    @bind-Selected="Model.Search.Sort.Field"
+                    @bind-Ascending="Model.Search.Sort.Ascending" />
+        </Fields>
+        <Buttons>
+            <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Create">
+                <MenuItem Type="MenuItem.Types.Reset"
+                          Clicked="() => Model.Reset()" />
+                <MenuItem Type="MenuItem.Types.Refresh"
+                          Clicked="() => Model.Refresh()" />
+            </ContextMenu>
+        </Buttons>
+    </Filters>
+</Waiter>
+@if (Model.Cards.IsEmpty())
+{
+    <NoRecords EntityName="recordings" />
+}
+else
+{
+    @foreach (var card in Model.Cards)
+    {
+        <Card Model="card"
+              Title="@card.Entity.Uploaded.ToLocalTime(SessionState.TimeZoneId).GetValueOrDefault(DateTimeOffset.Now).ToString("g")">
+            <Values>
+                <Field Size="Field.Sizes.Large">
+                    <AudioPlayer AudioFile="card.Entity.AudioFileFile"
+                                 Control="AudioPlayer.Controls.Native" />
+                    <Image ImageFile="card.Entity.ImageFile"
+                           Width="240" />
+                </Field>
+                <Field Size="Field.Sizes.Unspecified">
+                    <Labeled Width="6em"
+                             Label="Teacher"
+                             StringValue="@card.Entity.SchoolContact.Contact.Name" />
+                    <Labeled Width="6em"
+                             Label="School"
+                             StringValue="@card.Entity.OrganizationName" />
+                    <Labeled Width="6em"
+                             Label="Category"
+                             StringValue="@card.Entity.CategoryName" />
+                    <Labeled Width="6em"
+                             Label="Unit"
+                             IntegerValue="@card.Entity.Unit" />
+                    <Labeled Width="6em"
+                             Label="Lesson"
+                             IntegerValue="@card.Entity.Lesson" />
+                    <LabeledHtml Label="Notes"
+                                 HtmlValue="@card.Entity.TeacherNotes" />
+                </Field>
+            </Values>
+        </Card>
+    }
+
+    <Pager Paged="Model.Search.Paged"
+           PageNumberChanged="Model.HandlePageNumberChanged" />
+}

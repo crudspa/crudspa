@@ -1,0 +1,49 @@
+<ManyOrderables Model="Model"
+                T="UnitBookModel"
+                EntityName="Book"
+                SaveRequested="id => Model.Save(id)"
+                CancelRequested="id => Model.Cancel(id)"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Unspecified">
+            <Image ImageFile="context.UnitBook.BookCoverImage"
+                   Width="160" />
+        </Field>
+        <Field Size="Field.Sizes.Unspecified">
+            <Labeled Width="8em"
+                     Label="Key"
+                     StringValue="@context.UnitBook.BookKey"
+                     StringUrl="@($"/books/book-{context.UnitBook.BookId:D}")" />
+            <Labeled Width="8em"
+                     Label="Treatment"
+                     BooleanValue="@context.UnitBook.Treatment" />
+            <Labeled Width="8em"
+                     Label="Control"
+                     BooleanValue="@context.UnitBook.Control" />
+        </Field>
+    </ReadView>
+    <EditView>
+        <Wrapped>
+            <Field Label="Book"
+                   Size="Field.Sizes.Full">
+                <Dropdown ReadOnly="@false"
+                          LookupValues="Model.BookNames"
+                          @bind-Value="context.UnitBook.BookId" />
+            </Field>
+
+        </Wrapped>
+        <Wrapped>
+            <Field Label="Options"
+                   Container="Field.Containers.Div">
+                <Wrapped NoWrap="true">
+                    <Checkbox Label="Treatment"
+                              @bind-Value="context.UnitBook.Treatment" />
+                    <Checkbox Label="Control"
+                              @bind-Value="context.UnitBook.Control" />
+                </Wrapped>
+            </Field>
+        </Wrapped>
+    </EditView>
+</ManyOrderables>

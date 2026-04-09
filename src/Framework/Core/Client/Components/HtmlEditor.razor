@@ -1,0 +1,78 @@
+@if (ReadOnly)
+{
+    <div class="c-html-editor-read-only">
+        @if (Value.HasSomething())
+        {
+            <div class="content"
+                 style="@(DisplayHeight.HasSomething() ? $"max-height: {DisplayHeight}; overflow-y: auto;" : String.Empty)">
+                <UserHtml Html="@(Value!)" />
+            </div>
+        }
+        else
+        {
+            <div class="content"
+                 style="@(DisplayHeight.HasSomething() ? $"max-height: {DisplayHeight}; overflow-y: auto;" : String.Empty)">
+                @((MarkupString)"<p><em>None</em></p>")
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="c-overlay-parent c-user-content c-html-editor">
+        <Modal Model="InsertTokenModel"
+               TopMargin="4em"
+               Width="24em"
+               Title="Insert Token">
+            <Content>
+                <select @bind="InsertTokenModel.SelectedToken"
+                        class="rz-input">
+                    @foreach (var token in Tokens)
+                    {
+                        <option value="@token">@token</option>
+                    }
+                </select>
+            </Content>
+            <Buttons>
+                <ButtonOk Clicked="AddToken" />
+                <ButtonCancel Clicked="InsertTokenModel.Hide" />
+            </Buttons>
+        </Modal>
+        <RadzenHtmlEditor Style="@($"height: {EditorHeight};")"
+                          Value="@EditorValue"
+                          ValueChanged="HandleValueChanged"
+                          Execute="HandleExecute"
+                          Paste="HandlePaste"
+                          @ref="EditorComponent">
+            <RadzenHtmlEditorUndo />
+            <RadzenHtmlEditorRedo />
+            <RadzenHtmlEditorSeparator />
+            <RadzenHtmlEditorFormatBlock />
+            <RadzenHtmlEditorSeparator />
+            <RadzenHtmlEditorBold />
+            <RadzenHtmlEditorItalic />
+            <RadzenHtmlEditorUnderline />
+            <RadzenHtmlEditorRemoveFormat />
+            <RadzenHtmlEditorSeparator />
+            <RadzenHtmlEditorColor />
+            <RadzenHtmlEditorBackground />
+            <RadzenHtmlEditorSeparator />
+            <RadzenHtmlEditorAlignLeft />
+            <RadzenHtmlEditorAlignCenter />
+            <RadzenHtmlEditorAlignRight />
+            <RadzenHtmlEditorSeparator />
+            <RadzenHtmlEditorUnorderedList />
+            <RadzenHtmlEditorOrderedList />
+            <RadzenHtmlEditorSeparator />
+            <RadzenHtmlEditorLink />
+            <RadzenHtmlEditorUnlink />
+            @if (Tokens.HasItems())
+            {
+                <RadzenHtmlEditorSeparator />
+                <RadzenHtmlEditorCustomTool CommandName="InsertToken"
+                                            Title="Insert Token"
+                                            Icon="token" />
+            }
+        </RadzenHtmlEditor>
+    </div>
+}

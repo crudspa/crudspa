@@ -1,0 +1,28 @@
+﻿<Waiter Model="Model">
+    <div class="c-wrap center">
+        @foreach (var assessment in Model.Assessments)
+        {
+            <a class="c-button vertical large c-margin-medium"
+               @onclick="() => Model.GoToAssessment(assessment.Id)">
+                <div class="icon">
+                    @if (assessment.ImageFile?.Id is null)
+                    {
+                        <img style="width: 240px;"
+                             src="/api/education/student/images/certificate"
+                             alt="@(assessment.AssessmentName)" />
+                    }
+                    else
+                    {
+                        <Image ImageFile="assessment.ImageFile"
+                               Width="240"
+                               Shadowed="false" />
+                    }
+                </div>
+                <div class="text"
+                     style="width: 240px;">
+                    @(assessment.AssessmentName)
+                </div>
+            </a>
+        }
+    </div>
+</Waiter>

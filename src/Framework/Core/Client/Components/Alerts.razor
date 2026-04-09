@@ -1,0 +1,41 @@
+﻿@if (Items.HasItems())
+{
+    <div class="c-alerts">
+        @foreach (var alert in Items)
+        {
+            <div class="alert"
+                 role="alert"
+                 aria-live="assertive">
+                <div class="bubble @(alert.Type.ToString().ToLower())">
+                    <div class="icon">
+                        <span class="@alert.Icon"></span>
+                    </div>
+                    <div class="text">
+                        @if (alert.Message.HasSomething())
+                        {
+                            @(new MarkupString(alert.Message!))
+                        }
+                        @if (alert.Errors.HasItems())
+                        {
+                            <ul>
+                                @foreach (var error in alert.Errors.Where(x => x.Message.HasSomething()))
+                                {
+                                    <li>@(new MarkupString(error.Message!))</li>
+                                }
+                            </ul>
+                        }
+                    </div>
+                    @if (alert.Dismissible)
+                    {
+                        <div class="dismiss">
+                            <a aria-label="Dismiss alert"
+                               @onclick="() => Items.Remove(alert)">
+                                <span class="c-icon-cross"></span>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+}

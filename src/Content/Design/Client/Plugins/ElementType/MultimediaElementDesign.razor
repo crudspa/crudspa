@@ -1,0 +1,235 @@
+@if (ContainerModel is not null)
+{
+    <div class="c-overlay-parent">
+        <Modal Model="ElementBoxModel"
+               TopMargin="4em"
+               Width="34em"
+               Title="Element Settings">
+            <Content>
+                <div class="c-tabbed-panes">
+                    <ul class="tabs">
+                        <li class="@(ActiveElementSettingsTab.IsBasically(ElementStylesTab) ? "selected" : String.Empty)"
+                            @onclick="() => SetElementSettingsTab(ElementStylesTab)">
+                            Styles
+                        </li>
+                        <li class="@(ActiveElementSettingsTab.IsBasically(ElementSizingTab) ? "selected" : String.Empty)"
+                            @onclick="() => SetElementSettingsTab(ElementSizingTab)">
+                            Sizing
+                        </li>
+                        <li class="@(ActiveElementSettingsTab.IsBasically(ElementLayoutTab) ? "selected" : String.Empty)"
+                            @onclick="() => SetElementSettingsTab(ElementLayoutTab)">
+                            Layout
+                        </li>
+                    </ul>
+                    <div class="panes match-tab-color">
+                        <div class="@(ActiveElementSettingsTab.IsBasically(ElementStylesTab) ? String.Empty : "c-hide")">
+                            <div class="c-padding-tiny">
+                                <BoxEditor Model="ElementBoxModel" />
+                            </div>
+                        </div>
+                        <div class="@(ActiveElementSettingsTab.IsBasically(ElementSizingTab) ? String.Empty : "c-hide")">
+                            <div class="c-padding-tiny">
+                                <ItemEditor Model="ElementItemModel" />
+                            </div>
+                        </div>
+                        <div class="@(ActiveElementSettingsTab.IsBasically(ElementLayoutTab) ? String.Empty : "c-hide")">
+                            <div class="c-padding-tiny">
+                                <ContainerEditor Model="ContainerModel" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Content>
+            <Buttons>
+                <ButtonCore Text="Close"
+                            ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                            Clicked="() => HideElementSettings()" />
+            </Buttons>
+        </Modal>
+        <Wrapped Alignment="Wrapped.Alignments.Top">
+            <div class="element-settings-block star">
+                <Field Label="Element Settings"
+                       Size="Field.Sizes.Full"
+                       Container="Field.Containers.Div">
+                    <Wrapped NoWrap="true">
+                        <Padding Size="Padding.Sizes.Tiny"
+                                 Direction="Padding.Directions.Vertical">
+                            <Padding Size="Padding.Sizes.Small"
+                                     Direction="Padding.Directions.Right">
+                                <ButtonEdit Transparent="true"
+                                            Disabled="ReadOnly"
+                                            Clicked="() => OpenElementSettings()" />
+                            </Padding>
+                        </Padding>
+                        <div class="star c-parenthetical c-padding-micro-vert">
+                            @SettingsDescription
+                        </div>
+                    </Wrapped>
+                </Field>
+                @if (Element.ElementType?.IconCssClass.HasSomething() == true)
+                {
+                    <div class="element-settings-icon"
+                         aria-hidden="true">
+                        <span class="@Element.ElementType.IconCssClass"></span>
+                    </div>
+                }
+            </div>
+        </Wrapped>
+        <BatchSection Title="Media Items">
+            <HeadingPanel>
+                <ButtonAdd EntityName="Media Item"
+                           Disabled="ReadOnly"
+                           Transparent="true"
+                           Clicked="() => AddMultimediaItemModel.Show()">
+                </ButtonAdd>
+            </HeadingPanel>
+            <ChildContent>
+                <Modal Model="AddMultimediaItemModel"
+                       Title="Add Media Item"
+                       Width="36em"
+                       TopMargin="1em">
+                    <Content>
+                        <div class="c-element-type-chooser">
+                            @foreach (var mediaType in MediaTypes)
+                            {
+                                <button type="button"
+                                        disabled="@ReadOnly"
+                                        @onclick="() => AddMultimediaItem(mediaType)">
+                                    <div class="c-button transparent bordered vertical c-element-type-choice">
+                                        <div class="icon">
+                                            <span class="@GetMediaTypeIconClass(mediaType)"></span>
+                                        </div>
+                                        <div class="text">@GetMediaTypeName(mediaType)</div>
+                                    </div>
+                                </button>
+                            }
+                        </div>
+                    </Content>
+                    <Buttons>
+                        <ButtonCore Text="Close"
+                                    ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                                    Clicked="() => AddMultimediaItemModel.Hide()" />
+                    </Buttons>
+                </Modal>
+                <Batch Model="MultimediaItemsBatchModel"
+                       ReadOnly="ReadOnly"
+                       NoRecordsText="Add at least one media item.">
+                    <EditView>
+                        <div class="c-element-child"
+                             @key="context">
+                            <div class="child-title">Media Item</div>
+                            <div class="child-fields">
+                                <div class="c-overlay-parent">
+                                    <Modal Model="context.BoxModel"
+                                           TopMargin="4em"
+                                           Width="34em"
+                                           Title="Item Settings">
+                                        <Content>
+                                            <div class="c-tabbed-panes">
+                                                <ul class="tabs">
+                                                    <li class="@(context.ActiveTab.IsBasically(ItemStylesTab) ? "selected" : String.Empty)"
+                                                        @onclick="() => SetItemSettingsTab(context, ItemStylesTab)">
+                                                        Styles
+                                                    </li>
+                                                    <li class="@(context.ActiveTab.IsBasically(ItemSizingTab) ? "selected" : String.Empty)"
+                                                        @onclick="() => SetItemSettingsTab(context, ItemSizingTab)">
+                                                        Sizing
+                                                    </li>
+                                                </ul>
+                                                <div class="panes match-tab-color">
+                                                    <div class="@(context.ActiveTab.IsBasically(ItemStylesTab) ? String.Empty : "c-hide")">
+                                                        <div class="c-padding-tiny">
+                                                            <BoxEditor Model="context.BoxModel" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="@(context.ActiveTab.IsBasically(ItemSizingTab) ? String.Empty : "c-hide")">
+                                                        <div class="c-padding-tiny">
+                                                            <ItemEditor Model="context.ItemModel" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Content>
+                                        <Buttons>
+                                            <ButtonCore Text="Close"
+                                                        ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                                                        Clicked="() => HideItemSettings(context)" />
+                                        </Buttons>
+                                    </Modal>
+                                    <Wrapped Alignment="Wrapped.Alignments.Top">
+                                        <Field Label="Item Settings"
+                                               Size="Field.Sizes.Full"
+                                               Container="Field.Containers.Div">
+                                            <Wrapped NoWrap="true">
+                                                <Padding Size="Padding.Sizes.Tiny"
+                                                         Direction="Padding.Directions.Vertical">
+                                                    <Padding Size="Padding.Sizes.Small"
+                                                             Direction="Padding.Directions.Right">
+                                                        <ButtonEdit Transparent="true"
+                                                                    Disabled="ReadOnly"
+                                                                    Clicked="() => OpenItemSettings(context)" />
+                                                    </Padding>
+                                                </Padding>
+                                                <div class="star c-parenthetical c-padding-micro-vert">
+                                                    @GetItemSettingsDescription(context)
+                                                </div>
+                                            </Wrapped>
+                                        </Field>
+                                        @switch (context.MultimediaItem.MediaTypeIndex)
+                                        {
+                                            case MultimediaItem.MediaTypes.Audio:
+                                                <Field Label="Audio"
+                                                       Size="Field.Sizes.Larger"
+                                                       Container="Field.Containers.Div">
+                                                    <AudioUploader Required="false"
+                                                                   ReadOnly="ReadOnly"
+                                                                   AudioFile="context.MultimediaItem.AudioFile" />
+                                                </Field>
+                                                break;
+
+                                            case MultimediaItem.MediaTypes.Button:
+                                                <ButtonEditor Model="context.ButtonModel"
+                                                              ReadOnly="ReadOnly" />
+                                                break;
+
+                                            case MultimediaItem.MediaTypes.Image:
+                                                <Field Label="Image"
+                                                       Size="Field.Sizes.Larger"
+                                                       Container="Field.Containers.Div">
+                                                    <ImageUploader Required="false"
+                                                                   ReadOnly="ReadOnly"
+                                                                   Width="480"
+                                                                   ImageFile="context.MultimediaItem.ImageFile" />
+                                                </Field>
+                                                break;
+
+                                            case MultimediaItem.MediaTypes.Text:
+                                                <Field Label="Text"
+                                                       Size="Field.Sizes.Full"
+                                                       Container="Field.Containers.Div">
+                                                    <HtmlEditor @bind-Value="context.MultimediaItem.Text"
+                                                                ReadOnly="ReadOnly" />
+                                                </Field>
+                                                break;
+
+                                            case MultimediaItem.MediaTypes.Video:
+                                                <Field Label="Video"
+                                                       Size="Field.Sizes.Full"
+                                                       Container="Field.Containers.Div">
+                                                    <VideoUploader Required="false"
+                                                                   ReadOnly="ReadOnly"
+                                                                   VideoFile="context.MultimediaItem.VideoFile" />
+                                                </Field>
+                                                break;
+                                        }
+                                    </Wrapped>
+                                </div>
+
+                            </div>
+                        </div>
+                    </EditView>
+                </Batch>
+            </ChildContent>
+        </BatchSection>
+    </div>
+}

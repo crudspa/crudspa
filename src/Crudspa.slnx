@@ -1,0 +1,86 @@
+<Solution>
+  <Folder Name="/Content/" />
+  <Folder Name="/Content/Design/">
+    <Project Path="Content/Design/Client/Client.csproj" />
+    <Project Path="Content/Design/Server/Server.csproj" />
+    <Project Path="Content/Design/Shared/Shared.csproj" />
+  </Folder>
+  <Folder Name="/Content/Display/">
+    <Project Path="Content/Display/Client/Client.csproj" />
+    <Project Path="Content/Display/Server/Server.csproj" />
+    <Project Path="Content/Display/Shared/Shared.csproj" />
+  </Folder>
+  <Folder Name="/Content/Jobs/">
+    <Project Path="Content/Jobs/Client/Client.csproj" />
+    <Project Path="Content/Jobs/Server/Server.csproj" />
+    <Project Path="Content/Jobs/Shared/Shared.csproj" />
+  </Folder>
+  <Folder Name="/Education/" />
+  <Folder Name="/Education/Common/">
+    <Project Path="Education/Common/Client/Client.csproj" />
+    <Project Path="Education/Common/Server/Server.csproj" />
+    <Project Path="Education/Common/Shared/Shared.csproj" />
+  </Folder>
+  <Folder Name="/Education/District/">
+    <Project Path="Education/District/Client/Client.csproj" />
+    <Project Path="Education/District/Server/Server.csproj" />
+    <Project Path="Education/District/Shared/Shared.csproj" />
+  </Folder>
+  <Folder Name="/Education/Provider/">
+    <Project Path="Education/Provider/Client/Client.csproj" />
+    <Project Path="Education/Provider/Server/Server.csproj" />
+    <Project Path="Education/Provider/Shared/Shared.csproj" />
+  </Folder>
+  <Folder Name="/Education/Publisher/">
+    <Project Path="Education/Publisher/Client/Client.csproj" />
+    <Project Path="Education/Publisher/Server/Server.csproj" />
+    <Project Path="Education/Publisher/Shared/Shared.csproj" />
+  </Folder>
+  <Folder Name="/Education/School/">
+    <Project Path="Education/School/Client/Client.csproj" />
+    <Project Path="Education/School/Server/Server.csproj" />
+    <Project Path="Education/School/Shared/Shared.csproj" />
+  </Folder>
+  <Folder Name="/Education/Student/">
+    <Project Path="Education/Student/Client/Client.csproj" />
+    <Project Path="Education/Student/Server/Server.csproj" />
+    <Project Path="Education/Student/Shared/Shared.csproj" />
+  </Folder>
+  <Folder Name="/Framework/" />
+  <Folder Name="/Framework/Core/">
+    <Project Path="Framework/Core/Client/Client.csproj" />
+    <Project Path="Framework/Core/Server/Server.csproj" />
+    <Project Path="Framework/Core/Shared/Shared.csproj" />
+  </Folder>
+  <Folder Name="/Framework/Jobs/">
+    <Project Path="Framework/Jobs/Client/Client.csproj" />
+    <Project Path="Framework/Jobs/Server/Server.csproj" />
+    <Project Path="Framework/Jobs/Shared/Shared.csproj" />
+  </Folder>
+  <Folder Name="/Samples/" />
+  <Folder Name="/Samples/Catalog/">
+    <Project Path="Samples/Catalog/Client/Client.csproj" />
+    <Project Path="Samples/Catalog/Server/Server.csproj" />
+    <Project Path="Samples/Catalog/Shared/Shared.csproj" />
+    <Project Path="Samples/Catalog/Wasm/Wasm.csproj" />
+  </Folder>
+  <Folder Name="/Samples/Composer/">
+    <Project Path="Samples/Composer/Client/Client.csproj" />
+    <Project Path="Samples/Composer/Server/Server.csproj" />
+    <Project Path="Samples/Composer/Shared/Shared.csproj" />
+    <Project Path="Samples/Composer/Wasm/Wasm.csproj" />
+  </Folder>
+  <Folder Name="/Samples/Consumer/">
+    <Project Path="Samples/Consumer/Client/Client.csproj" />
+    <Project Path="Samples/Consumer/Server/Server.csproj" />
+    <Project Path="Samples/Consumer/Shared/Shared.csproj" />
+    <Project Path="Samples/Consumer/Wasm/Wasm.csproj" />
+  </Folder>
+  <Folder Name="/Samples/Jobs/">
+    <Project Path="Samples/Jobs/Engine/Engine.csproj" />
+  </Folder>
+  <Project Path="Database/Database.sqlproj" Id="22534f8f-829c-42ca-9b24-b67bba6ac548">
+    <Build />
+    <Deploy />
+  </Project>
+</Solution>

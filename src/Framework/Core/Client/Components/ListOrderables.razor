@@ -1,0 +1,113 @@
+@typeparam T
+@if (Model.Reordering)
+{
+    <Toolbar>
+        <Left>
+            <ButtonGroup>
+                <ButtonSave Clicked="() => Model.SaveReordering()" />
+                <ButtonCancel Clicked="() => Model.CancelReordering()" />
+            </ButtonGroup>
+            <Padding Direction="Padding.Directions.Horizontal"
+                     Size="Padding.Sizes.Small">
+                <div class="c-stretched-vertically centered">
+                    <em>Save your changes once reordering is complete.</em>
+                </div>
+            </Padding>
+        </Left>
+    </Toolbar>
+}
+else
+{
+    <Toolbar>
+        <Left>
+            @if (ShowFilter)
+            {
+                <Field Size="Field.Sizes.Medium"
+                       Padding="Field.Paddings.None">
+                    <TextBox Placeholder="Filter..."
+                             Value="@Model.Filter"
+                             ValueChanged="filter => Model.HandleFilterChanged(filter)" />
+                </Field>
+            }
+        </Left>
+        <Right>
+            <ButtonGroup>
+                @if (ShowAdd)
+                {
+                    <ButtonAdd EntityName="@EntityName"
+                               Clicked="AddNew" />
+                }
+                <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Create">
+                    <MenuItem Type="MenuItem.Types.Refresh"
+                              Clicked="() => Model.Refresh()" />
+                    <MenuItem Type="MenuItem.Types.Reorder"
+                              Clicked="() => Model.Reorder()" />
+                    @if (ToolbarMenuItems is not null)
+                    {
+                        @ToolbarMenuItems
+                    }
+                </ContextMenu>
+            </ButtonGroup>
+        </Right>
+    </Toolbar>
+}
+<Waiter Model="Model">
+    @if (Modals is not null)
+    {
+        @Modals
+    }
+    @if (Model.Cards.IsEmpty())
+    {
+        <NoRecords EntityName="@EntityName.PluralizeNaively().ToLower()" />
+    }
+    else
+    {
+        @foreach (var card in Model.Cards.OrderBy(x => x.SortIndex))
+        {
+            <Card Model="card"
+                  @key="card.Entity"
+                  Title="@card.Entity.Name"
+                  ShowPaneLinks="@(PaneLinks is not null)"
+                  Container="ReadViewContainer"
+                  SupportsDelete="true"
+                  Tight="Tight"
+                  DeleteRequested="() => DeleteRequested.InvokeAsync(card.Entity.Id)">
+                <Values>
+                    @ReadView(card.Entity)
+                </Values>
+                <PaneLinks>
+                    @if (PaneLinks is not null)
+                    {
+                        @PaneLinks!(card.Entity)
+                    }
+                </PaneLinks>
+                <Buttons>
+                    @if (Model.Reordering)
+                    {
+                        <ButtonUp Clicked="() => MoveUpRequested.InvokeAsync(card.Entity.Id)" />
+                        <ButtonDown Clicked="() => MoveDownRequested.InvokeAsync(card.Entity.Id)" />
+                    }
+                    else
+                    {
+                        @if (ShowView)
+                        {
+                            <ButtonView Href="@BuildUrl(card.Entity.Id)" />
+                        }
+
+                        @if (ShowDelete || CardMenuItems is not null)
+                        {
+                            <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.View">
+                                <MenuItem Type="MenuItem.Types.Delete"
+                                          Clicked="() => card.ConfirmationModel.Visible = true" />
+                                @if (CardMenuItems is not null)
+                                {
+                                    @CardMenuItems(card.Entity)
+                                }
+                            </ContextMenu>
+                        }
+                    }
+                </Buttons>
+            </Card>
+        }
+    }
+</Waiter>

@@ -1,0 +1,39 @@
+<ListOrderables Model="Model"
+                T="TrackModel"
+                EntityName="Track"
+                UrlPrefix="@($"{Path}/track")"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Full">
+            <LabeledHtml Label="Description"
+                         HtmlValue="@context.Track.Description" />
+        </Field>
+        <Field Size="Field.Sizes.Medium">
+            <Labeled CssClass="status"
+                     Width="6em"
+                     Label="Status">
+                <StatusDisplay Id="@context.Track.StatusId"
+                               Name="@context.Track.StatusName"
+                               ColorClassFrom="ContentStatusColors.For" />
+            </Labeled>
+            <Labeled Width="6em"
+                     Label="Sequential"
+                     BooleanValue="@context.Track.RequireSequentialCompletion" />
+        </Field>
+        <Field Size="Field.Sizes.Unspecified">
+            <Labeled Width="6em"
+                     Label="Requires"
+                     StringValue="@context.Track.RequiresAchievementTitle" />
+            <Labeled Width="6em"
+                     Label="Generates"
+                     StringValue="@context.Track.GeneratesAchievementTitle" />
+        </Field>
+    </ReadView>
+    <PaneLinks>
+        <PaneLink Href="@($"{Path}/track-{context.Track.Id:D}?pane=courses")"
+                  Text="Courses"
+                  Count="context.Track.CourseCount" />
+    </PaneLinks>
+</ListOrderables>

@@ -1,0 +1,18 @@
+namespace Crudspa.Content.Design.Server.Sproxies;
+
+public static class PdfInsert
+{
+    public static async Task<Guid?> Execute(SqlConnection connection, SqlTransaction? transaction, Guid? sessionId, PdfElement pdf)
+    {
+        await using var command = new SqlCommand();
+        command.CommandText = "ContentDesign.PdfInsert";
+
+        command.AddParameter("@SessionId", sessionId);
+        command.AddParameter("@ElementId", pdf.ElementId);
+        command.AddParameter("@FileId", pdf.FileFile.Id);
+
+        var output = command.AddOutputParameter("@Id");
+        await command.Execute(connection, transaction);
+        return (Guid?)output.Value;
+    }
+}

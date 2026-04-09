@@ -1,0 +1,182 @@
+﻿<div class="ces-student-achievement c-padding-small">
+
+    <div class="c-nowrap top">
+        <div style="width: 4em;">
+            &nbsp;
+        </div>
+        <div class="star window-title">
+            <h2>You've earned a trophy!</h2>
+        </div>
+        <div class="close-button"
+             style="width: 4em;">
+            <a @onclick="() => Model.Hide()">
+                <span class="c-icon-cross"></span>
+            </a>
+        </div>
+    </div>
+
+    @if (Model.StudentAchievement is not null)
+    {
+        <div class="c-stack center">
+
+            <div class="achievement-title">
+                <h2>@(Model.StudentAchievement.Achievement.Title)</h2>
+            </div>
+
+            <div class="achievement-trophy">
+                <Image ImageFile="Model.StudentAchievement.Achievement.TrophyImage"
+                       CssClass="@(Model.StudentAchievement.IsNew ? "animated" : String.Empty)"
+                       Width="240" />
+            </div>
+
+            <div class="achievement-rarity">
+                <p>@(Model.StudentAchievement.Achievement.RarityName)</p>
+            </div>
+
+            @if (Model.HasUnlocks)
+            {
+                <div class="unlocks-header">
+                    <h3>Items Unlocked</h3>
+                </div>
+
+                <div class="c-wrap center top">
+
+                    @foreach (var book in Model.StudentAchievement.Unlocks.Books)
+                    {
+                        <a class="c-button vertical c-margin-small unlock-button"
+                           @onclick="() => Model.GoToBook(book.UnitId, book.Id)">
+                            <div class="icon">
+                                <Image ImageFile="book.BookCoverImage"
+                                       Width="160" />
+                            </div>
+                            <div class="title">
+                                @(book.Title)
+                            </div>
+                            <div class="type">
+                                Book
+                            </div>
+                        </a>
+                    }
+
+                    @foreach (var game in Model.StudentAchievement.Unlocks.Games)
+                    {
+                        <a class="c-button vertical c-margin-small unlock-button"
+                           @onclick="() => Model.GoToGame(game.UnitId, game.BookId, game.Id)">
+                            <div class="icon">
+                                <Image ImageFile="game.BookCoverImage"
+                                       Width="160" />
+                            </div>
+                            <div class="title">
+                                @(game.BookTitle)
+                            </div>
+                            <div class="type">
+                                Game
+                            </div>
+                        </a>
+                    }
+
+                    @foreach (var lesson in Model.StudentAchievement.Unlocks.Lessons)
+                    {
+                        <a class="c-button vertical c-margin-small unlock-button"
+                           @onclick="() => Model.GoToLesson(lesson.UnitId, lesson.Id)">
+                            <div class="icon">
+                                <Image ImageFile="lesson.Image"
+                                       Width="160" />
+                            </div>
+                            <div class="title">
+                                @(lesson.Title)
+                            </div>
+                            <div class="type">
+                                Lesson
+                            </div>
+                        </a>
+                    }
+
+                    @foreach (var module in Model.StudentAchievement.Unlocks.Modules)
+                    {
+                        <a class="c-button vertical c-margin-small unlock-button"
+                           @onclick="() => Model.GoToModule(module.UnitId, module.BookId, module.Id)">
+                            <div class="icon">
+                                <Image ImageFile="module.BookCoverImage"
+                                       Width="160" />
+                            </div>
+                            <div class="title">
+                                @(module.Title)
+                            </div>
+                            <div class="type">
+                                Module
+                            </div>
+                        </a>
+                    }
+
+                    @foreach (var objective in Model.StudentAchievement.Unlocks.Objectives)
+                    {
+                        <a class="c-button vertical c-margin-small unlock-button"
+                           @onclick="() => Model.GoToObjective(objective.UnitId, objective.LessonId, objective.Id)">
+                            <div class="icon">
+                                @if (objective.TrophyImage.Id is not null)
+                                {
+                                    <Image ImageFile="objective.TrophyImage"
+                                           Width="160" />
+                                }
+                                else
+                                {
+                                    <Image ImageFile="objective.UnitImage"
+                                           Width="160" />
+                                }
+                            </div>
+                            <div class="title">
+                                @(objective.Title)
+                            </div>
+                            <div class="type">
+                                Objective
+                            </div>
+                        </a>
+                    }
+
+                    @foreach (var trifold in Model.StudentAchievement.Unlocks.Trifolds)
+                    {
+                        <a class="c-button vertical c-margin-small unlock-button"
+                           @onclick="() => Model.GoToTrifold(trifold.UnitId, trifold.BookId, trifold.Id)">
+                            <div class="icon">
+                                <Image ImageFile="trifold.BookCoverImage"
+                                       Width="160" />
+                            </div>
+                            <div class="title">
+                                @(trifold.Title)
+                            </div>
+                            <div class="type">
+                                Concept Map
+                            </div>
+                        </a>
+                    }
+
+                    @foreach (var unit in Model.StudentAchievement.Unlocks.Units)
+                    {
+                        <a class="c-button vertical c-margin-small unlock-button"
+                           @onclick="() => Model.GoToUnit(unit.Id)">
+                            <div class="icon">
+                                <Image ImageFile="unit.Image"
+                                       Width="160" />
+                            </div>
+                            <div class="title">
+                                @(unit.Title)
+                            </div>
+                            <div class="type">
+                                Unit
+                            </div>
+                        </a>
+                    }
+
+                </div>
+            }
+
+            <button class="bottom-button"
+                    @onclick="() => Model.Hide()">
+                <div class="c-button primary">
+                    <div class="text">Close</div>
+                </div>
+            </button>
+        </div>
+    }
+</div>

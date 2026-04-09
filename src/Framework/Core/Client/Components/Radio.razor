@@ -1,0 +1,32 @@
+<div class="@WrapperClass">
+    @if (AllowNull)
+    {
+        <div class="c-radio @RadioClass">
+            <input type="radio"
+                   disabled="@ReadOnly"
+                   checked="@(Value is null)"
+                   id="@(InstanceId)-null"
+                   name="@InstanceId"
+                   @onchange="() => HandleRadioChanged(null)">
+            <label for="@(InstanceId)-null"
+                   class="label">
+                @NullText
+            </label>
+        </div>
+    }
+    @foreach (var named in LookupValues)
+    {
+        <div class="c-radio @RadioClass">
+            <input type="radio"
+                   disabled="@ReadOnly"
+                   checked="@Value.Equals(named.Id)"
+                   id="@(InstanceId)-@(named.Id)"
+                   name="@InstanceId"
+                   @onchange="() => HandleRadioChanged(named.Id)">
+            <label for="@(InstanceId)-@(named.Id)"
+                   class="label">
+                @named.Name
+            </label>
+        </div>
+    }
+</div>

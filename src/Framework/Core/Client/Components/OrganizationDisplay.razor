@@ -1,0 +1,9 @@
+﻿@if (Organization is not null)
+{
+    <Field Size="Field.Sizes.Larger">
+        <Labeled Width="6em"
+                 Label="Time Zone"
+                 StringValue="@(Organization.TimeZoneId)" />
+    </Field>
+    @ChildContent
+}

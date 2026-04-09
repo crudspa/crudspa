@@ -1,0 +1,15 @@
+﻿<Padding Size="Padding.Sizes.Small">
+    <Wrapped>
+        <div>
+            <Labeled Width="6em"
+                     Label="Background"
+                     StringValue="@Config.Background" />
+            <Labeled Width="6em"
+                     Label="Foreground"
+                     StringValue="@Config.Foreground" />
+        </div>
+        <div style="background-color: @(Config.Background); height: 1.5em; width: 8em; margin: .125em 2em; text-align: center; padding-top: .125em;">
+            <span style="color: @(Config.Foreground); font-weight: 600;">Sample</span>
+        </div>
+    </Wrapped>
+</Padding>

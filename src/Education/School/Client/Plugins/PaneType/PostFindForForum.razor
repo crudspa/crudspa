@@ -1,0 +1,137 @@
+@using Post = Crudspa.Education.School.Shared.Contracts.Data.Post
+<Waiter Model="Model">
+    <Filters>
+        <Fields>
+            <Field Label="Search"
+                   Size="Field.Sizes.Medium">
+                <SearchTextBox @bind-Value="Model.Search.Text" />
+            </Field>
+            <Field Label="Grade"
+                   Size="Field.Sizes.Medium">
+                <MultiSelect LookupValues="Model.GradeNames"
+                             @bind-SelectedValues="Model.Search.Grades" />
+            </Field>
+            <Field Label="Subject"
+                   Size="Field.Sizes.Medium">
+                <MultiSelect LookupValues="Model.ClassroomTypeNames"
+                             @bind-SelectedValues="Model.Search.Subjects" />
+            </Field>
+            <Sorter Sorts="Model.Sorts"
+                    @bind-Selected="Model.Search.Sort.Field"
+                    @bind-Ascending="Model.Search.Sort.Ascending" />
+        </Fields>
+        <Buttons>
+            <ButtonAdd EntityName="Post"
+                       Clicked="AddNew" />
+            <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Create">
+                <MenuItem Type="MenuItem.Types.Reset"
+                          Clicked="() => Model.Reset()" />
+                <MenuItem Type="MenuItem.Types.Refresh"
+                          Clicked="() => Model.Refresh()" />
+            </ContextMenu>
+        </Buttons>
+    </Filters>
+</Waiter>
+@if (Model.Cards.IsEmpty())
+{
+    <NoRecords EntityName="posts" />
+}
+else
+{
+    @foreach (var card in Model.Cards)
+    {
+        <Card Model="card"
+              Title="@($"Post by {card.Entity.ByFirstName} {card.Entity.ByLastName}")"
+              SupportsDelete="true"
+              DeleteRequested="() => Model.Delete(card.Entity.Id)"
+              Container="Card<Post>.Containers.None">
+            <Values>
+                <div class="cec-post-view">
+                    <div class="content">
+                        @if (card.Entity.AudioFile.Id.HasSomething())
+                        {
+                            <div class="audio c-padding-small">
+                                <audio src="/api/framework/core/audio-file/fetch?id=@($"{card.Entity.AudioFile.Id:D}")"
+                                       style="width: 274px;"
+                                       preload="auto"
+                                       controls>
+                                </audio>
+                            </div>
+                        }
+                        @if (card.Entity.ImageFile.Id.HasSomething())
+                        {
+                            <div class="image c-padding-small">
+                                <Image ImageFile="card.Entity.ImageFile"
+                                       Shadowed="true"
+                                       Width="274" />
+                            </div>
+                        }
+                        @if (card.Entity.PdfFile.Id.HasSomething())
+                        {
+                            <div class="pdf c-padding-small">
+                                <div class="thumbnail"
+                                     style="width: 274px;">
+                                    <span class="c-icon-file-pdf"></span>
+                                </div>
+                            </div>
+                        }
+                        @if (card.Entity.VideoFile.Id.HasSomething())
+                        {
+                            <div class="video c-padding-small">
+                                <video src="/api/framework/core/video-file/fetch?id=@($"{card.Entity.VideoFile.Id:D}")"
+                                       class="c-shadowed"
+                                       style="width: 274px;"
+                                       preload="auto"
+                                       controls>
+                                </video>
+                            </div>
+                        }
+                        <div class="body-area">
+                            <div class="innovators-fields c-padding-small">
+                                @(card.Entity.Type.GetLabel()) | @(card.Entity.GradeName) | @(card.Entity.SubjectName)
+                            </div>
+                            <UserHtml Html="@(card.Entity.Body!)"
+                                      CssClass="clipped-text c-padding-small" />
+                            <div class="gutter c-padding-small-hor">
+                                <div class="left metadata">
+                                    @(card.Entity.ByFirstName) @(card.Entity.ByLastName?.Substring(0, 1)).
+                                    @if (card.Entity.Edited is null)
+                                    {
+                                        @($" posted on {card.Entity.Posted.ToLocalTime(SessionState.TimeZoneId):g}")
+                                    }
+                                    else
+                                    {
+                                        @($" edited on {card.Entity.Edited.ToLocalTime(SessionState.TimeZoneId):g}")
+                                    }
+                                </div>
+                                <div class="right metadata">
+                                    @if (card.Entity.CommentCount.HasValue && card.Entity.CommentCount.Value == 1)
+                                    {
+                                        <span>1 comment</span>
+                                    }
+                                    else
+                                    {
+                                        <span>@(card.Entity.CommentCount.GetValueOrDefault()) comments</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Values>
+            <Buttons>
+                <ButtonView Href="@($"{Path}/post-{card.Entity.Id:D}")" />
+                @if (card.Entity.ById.Equals(SessionState.ContactId))
+                {
+                    <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.View">
+                        <MenuItem Type="MenuItem.Types.Delete"
+                                  Clicked="() => Model.ShowConfirmation(card.Entity.Id)" />
+                    </ContextMenu>
+                }
+            </Buttons>
+        </Card>
+    }
+
+    <Pager Paged="Model.Search.Paged"
+           PageNumberChanged="Model.HandlePageNumberChanged" />
+}

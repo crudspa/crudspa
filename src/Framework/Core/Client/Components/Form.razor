@@ -1,0 +1,55 @@
+@typeparam T
+<div id="@($"{Model.Entity.Id:D}")"
+     @key="Model.Entity">
+    @if (Model.ReadOnly)
+    {
+        <Card T="T"
+              Model="Model"
+              Title="@Model.Entity.Name"
+              SupportsDelete="SupportsDelete"
+              DeleteRequested="DeleteRequested"
+              Container="ReadViewContainer"
+              Tight="Tight">
+            <Values>
+                @ReadView
+            </Values>
+            <Buttons>
+                @if (Model.Reordering)
+                {
+                    <ButtonUp Clicked="MoveUpRequested" />
+                    <ButtonDown Clicked="MoveDownRequested" />
+                }
+                else
+                {
+                    <ButtonEdit Clicked="HandleEditClicked" />
+                    @if (SupportsDelete)
+                    {
+                        <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Edit">
+                            <MenuItem Type="MenuItem.Types.Delete"
+                                      Clicked="() => Model.ConfirmationModel.Show()" />
+                        </ContextMenu>
+                    }
+                }
+            </Buttons>
+        </Card>
+    }
+    else
+    {
+        <Toolbar Border="Toolbar.Borders.None">
+            <Left>
+                <ButtonGroup>
+                    <ButtonSave Clicked="HandleSaveRequested" />
+                    <ButtonCancel Clicked="HandleCancelRequested" />
+                </ButtonGroup>
+            </Left>
+        </Toolbar>
+        <Waiter Model="Model">
+            <Margin Size="Margin.Sizes.Small"
+                    Direction="Margin.Directions.Vertical">
+                <div class="c-edit-form">
+                    @EditView
+                </div>
+            </Margin>
+        </Waiter>
+    }
+</div>

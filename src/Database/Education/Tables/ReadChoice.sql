@@ -1,0 +1,17 @@
+create table [Education].[ReadChoice] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [ReadQuestionId] uniqueidentifier not null,
+    [Text] nvarchar(max) not null,
+    [IsCorrect] bit default(0) not null,
+    [ImageFileId] uniqueidentifier null,
+    [AudioFileId] uniqueidentifier null,
+    [Ordinal] int not null,
+    constraint [PK_Education_ReadChoice] primary key clustered ([Id]),
+    constraint [FK_Education_ReadChoice_ReadQuestion] foreign key ([ReadQuestionId]) references [Education].[ReadQuestion] ([Id]),
+    constraint [FK_Education_ReadChoice_ImageFile] foreign key ([ImageFileId]) references [Framework].[ImageFile] ([Id]),
+    constraint [FK_Education_ReadChoice_AudioFile] foreign key ([AudioFileId]) references [Framework].[AudioFile] ([Id]),
+);

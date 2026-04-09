@@ -1,0 +1,9 @@
+﻿<Waiter Model="Model">
+    @if (Model.Course is not null)
+    {
+        <BinderDisplayPlugin Path="@Path"
+                             Id="Model.Course.Binder.Id"
+                             TypeName="@Model.Course.Binder.DisplayView"
+                             BinderCompleted="() => Model.HandleBinderCompleted()" />
+    }
+</Waiter>

@@ -1,0 +1,15 @@
+create table [Framework].[UsaPostal] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [RecipientName] nvarchar(75) null,
+    [BusinessName] nvarchar(75) null,
+    [StreetAddress] nvarchar(150) null,
+    [City] nvarchar(50) null,
+    [StateId] uniqueidentifier null,
+    [PostalCode] nvarchar(10) null,
+    constraint [PK_Framework_UsaPostal] primary key clustered ([Id]),
+    constraint [FK_Framework_UsaPostal_State] foreign key ([StateId]) references [Framework].[UsaState] ([Id]),
+);

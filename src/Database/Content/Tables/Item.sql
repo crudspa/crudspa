@@ -1,0 +1,18 @@
+create table [Content].[Item] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [BasisId] uniqueidentifier not null,
+    [BasisAmount] nvarchar(10) null,
+    [Grow] nvarchar(10) not null,
+    [Shrink] nvarchar(10) not null,
+    [AlignSelfId] uniqueidentifier not null,
+    [MaxWidth] nvarchar(10) null,
+    [MinWidth] nvarchar(10) null,
+    [Width] nvarchar(10) null,
+    constraint [PK_Content_Item] primary key clustered ([Id]),
+    constraint [FK_Content_Item_Basis] foreign key ([BasisId]) references [Content].[Basis] ([Id]),
+    constraint [FK_Content_Item_AlignSelf] foreign key ([AlignSelfId]) references [Content].[AlignSelf] ([Id]),
+);

@@ -1,0 +1,48 @@
+<Toolbar>
+    <Left>
+        @if (Model.ReadOnly)
+        {
+            <ButtonEdit Clicked="() => Model.Edit()" />
+        }
+        else
+        {
+            <ButtonGroup>
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            </ButtonGroup>
+        }
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model?.Entity?.Contact is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped>
+                <Field Label="Username"
+                       Size="Field.Sizes.Large">
+                    <TextBox ReadOnly="@Model.ReadOnly"
+                             MaxLength="75"
+                             @bind-Value="Model.Entity.Username" />
+                </Field>
+                <Field Label="First Name"
+                       Size="Field.Sizes.Medium">
+                    <TextBox ReadOnly="@Model.ReadOnly"
+                             MaxLength="75"
+                             @bind-Value="Model.Entity.Contact.FirstName" />
+                </Field>
+                <Field Label="Last Name"
+                       Size="Field.Sizes.Medium">
+                    <TextBox ReadOnly="@Model.ReadOnly"
+                             MaxLength="75"
+                             @bind-Value="Model.Entity.Contact.LastName" />
+                </Field>
+                <Field Label="Time Zone"
+                       Size="Field.Sizes.MediumLarge">
+                    <TimeZonePicker ReadOnly="Model.ReadOnly"
+                                    @bind-Value="Model.Entity.Contact.TimeZoneId" />
+                </Field>
+            </Wrapped>
+        </Padding>
+    }
+</Waiter>

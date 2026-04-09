@@ -1,0 +1,535 @@
+$bodyBackgroundColor: #e6e6e6 !default;
+$bodyFontFamily: system-ui, sans-serif !default;
+$bodyFontSize: 1em !default;
+$bodyFontWeight: 400 !default;
+$bodyForegroundColor: #222 !default;
+
+$windowBackgroundColor: #eee !default;
+$windowForegroundColor: #222 !default;
+
+$accent1BackgroundColor: #225378 !default;
+$accent1ForegroundColor: #f6f6f6 !default;
+
+$buttonBackgroundColor: #386180 !default;
+$buttonForegroundColor: #f6f6f6 !default;
+
+$cancelBackgroundColor: #f6f6f6 !default;
+$cancelForegroundColor: #666 !default;
+$createBackgroundColor: #468966 !default;
+$createForegroundColor: #f6f6f6 !default;
+$destroyBackgroundColor: #94090d !default;
+$destroyForegroundColor: #f6f6f6 !default;
+$editBackgroundColor: #4c718d !default;
+$editForegroundColor: #f6f6f6 !default;
+$moveBackgroundColor: #6a88a0 !default;
+$moveForegroundColor: #f6f6f6 !default;
+$saveBackgroundColor: #468966 !default;
+$saveForegroundColor: #f6f6f6 !default;
+$viewBackgroundColor: #386180 !default;
+$viewForegroundColor: #f6f6f6 !default;
+
+$alertBorderRadius: .25em !default;
+
+$errorBackgroundColor: #94090d !default;
+$errorForegroundColor: #f6f6f6 !default;
+$lockBackgroundColor: #ddd !default;
+$lockForegroundColor: #555 !default;
+$successBackgroundColor: #468966 !default;
+$successForegroundColor: #f6f6f6 !default;
+$tipBackgroundColor: #faf7b1 !default;
+$tipForegroundColor: #222 !default;
+$warningBackgroundColor: #c66d2a !default;
+$warningForegroundColor: #f6f6f6 !default;
+$contentDraftBackgroundColor: $lockBackgroundColor !default;
+$contentDraftForegroundColor: $lockForegroundColor !default;
+$contentCompleteBackgroundColor: $successBackgroundColor !default;
+$contentCompleteForegroundColor: $successForegroundColor !default;
+$contentRetiredBackgroundColor: $warningBackgroundColor !default;
+$contentRetiredForegroundColor: $warningForegroundColor !default;
+$contentDraftHoverBackgroundColor: darken($contentDraftBackgroundColor, 5%) !default;
+$contentDraftHoverForegroundColor: $contentDraftForegroundColor !default;
+$contentCompleteHoverBackgroundColor: rgba($contentCompleteBackgroundColor, .18) !default;
+$contentCompleteHoverForegroundColor: $contentCompleteBackgroundColor !default;
+$contentRetiredHoverBackgroundColor: rgba($contentRetiredBackgroundColor, .18) !default;
+$contentRetiredHoverForegroundColor: $contentRetiredBackgroundColor !default;
+
+$defaultBorderColor: #ccc !default;
+$defaultBoxShadowColor: #00000040 !default;
+$defaultBoxShadow: .2em .2em .5em $defaultBoxShadowColor !default;
+$defaultHoverTransition: background-color .1s, border-color .1s, color .1s linear !default;
+
+$overlayBackgroundColor: rgba(0, 0, 0, 0.125) !default;
+$obscureColor: rgba(243,243,241,.75) !default;
+$waitingBallsColor: lighten($accent1BackgroundColor, 25%) !default;
+$buttonFeatureBorderColor: rgba($accent1BackgroundColor, .65) !default;
+$buttonFeatureForegroundColor: darken($accent1BackgroundColor, 7.5%) !default;
+$buttonFeatureHoverForegroundColor: darken($accent1BackgroundColor, 12.5%) !default;
+$sortableDraggingBackgroundColor: rgba($accent1BackgroundColor, 0.1) !default;
+$metadataForegroundColor: #888 !default;
+
+$headingMargin: .5em 0 0 0 !default;
+$headingPadding: .5em 0 !default;
+
+$h1FontFamily: system-ui, sans-serif !default;
+$h1FontSize: 2.25em !default;
+$h1FontWeight: 400 !default;
+$h1ForegroundColor: #111111 !default;
+
+$h2FontFamily: system-ui, sans-serif !default;
+$h2FontSize: 1.75em !default;
+$h2FontWeight: 400 !default;
+$h2ForegroundColor: #111111 !default;
+
+$h3FontFamily: system-ui, sans-serif !default;
+$h3FontSize: 1.4em !default;
+$h3FontWeight: 400 !default;
+$h3ForegroundColor: #111111 !default;
+
+$h4FontFamily: system-ui, sans-serif !default;
+$h4FontSize: 1.25em !default;
+$h4FontWeight: 400 !default;
+$h4ForegroundColor: #111111 !default;
+
+$paragraphLineHeight: 1.5 !default;
+$paragraphMargin: 1.25em 0 !default;
+$paragraphPadding: 0 !default;
+
+$codeFontFamily: Consolas, "Ubuntu Mono", "Lucida Console", "Courier New", monospace !default;
+$codeFontWeight: 400 !default;
+
+$hyperlinkForegroundColor: #225378 !default;
+$hyperlinkHoverForegroundColor: lighten($hyperlinkForegroundColor, 10%) !default;
+$hyperlinkDisabledForegroundColor: #ccc !default;
+$hyperlinkDecoration: underline !default;
+$hyperlinkFontWeight: 400 !default;
+
+$labelFontFamily: system-ui, sans-serif !default;
+$labelFontSize: 1.075em !default;
+$labelFontWeight: 600 !default;
+$labelForegroundColor: #222 !default;
+$labelButtonHoverColor: darken($labelForegroundColor, 10%) !default;
+$labelForegroundColorMuted: lighten($labelForegroundColor, 25%) !default;
+$postMetadataForegroundColor: lighten($labelForegroundColor, 37.5%) !default;
+
+$inputBackgroundColor: #fff !default;
+$inputBorderColor: $defaultBorderColor !default;
+$inputBorderRadius: 0 !default;
+$inputBorderStyle: solid !default;
+$inputBorderWidth: 1px !default;
+$inputButtonBackgroundColor: #eee !default;
+$inputButtonForegroundColor: #444 !default;
+$inputButtonHoverBackgroundColor: #ddd !default;
+$inputButtonHoverBorderColor: #999 !default;
+$inputButtonHoverForegroundColor: #222 !default;
+$inputFocusedBorderColor: #aaa !default;
+$inputFocusedBoxShadow: 0 0 .5em #aaa !default;
+$inputHoverBorderColor: darken($inputBorderColor, 10%) !default;
+$inputFontFamily: system-ui, sans-serif !default;
+$inputFontSize: 1em !default;
+$inputFontWeight: 400 !default;
+$inputForegroundColor: #000 !default;
+$inputPlaceholderColor: #ccc !default;
+$inputReadOnlyBackgroundColor: #eee !default;
+$inputReadOnlyBorderColor: transparentize($defaultBorderColor, 0.675) !default;
+$inputReadOnlyForegroundColor: #222 !default;
+
+$inputButtonDisabledBackgroundColor: $inputReadOnlyBackgroundColor !default;
+$inputButtonDisabledForegroundColor: darken($inputButtonDisabledBackgroundColor, 10%) !default;
+
+$buttonBorderColor: #acacac !default;
+$buttonBorderRadius: .5em !default;
+$buttonTextFontSize: .925em !default;
+$buttonTextFontStyle: none !default;
+$buttonTextFontWeight: 400 !default;
+$buttonTextTransform: none !default;
+$buttonTextFontFamily: system-ui, sans-serif !default;
+$buttonHoverBackgroundColor: darken($buttonBackgroundColor, 6.25%) !default;
+$buttonHoverBorderColor: darken($buttonBorderColor, 6.25%) !default;
+$buttonHoverForegroundColor: lighten($buttonForegroundColor, 6.25%) !default;
+$buttonIconFontSize: 1.0675em !default;
+
+$buttonCancelBackgroundColor: $cancelBackgroundColor !default;
+$buttonCancelForegroundColor: $cancelForegroundColor !default;
+$buttonCancelHoverBackgroundColor: darken($buttonCancelBackgroundColor, 5%) !default;
+$buttonCreateBackgroundColor: $createBackgroundColor !default;
+$buttonCreateForegroundColor: $createForegroundColor !default;
+$buttonCreateHoverBackgroundColor: darken($buttonCreateBackgroundColor, 5%) !default;
+$buttonDestroyBackgroundColor: $destroyBackgroundColor !default;
+$buttonDestroyForegroundColor: $destroyForegroundColor !default;
+$buttonDestroyHoverBackgroundColor: darken($buttonDestroyBackgroundColor, 5%) !default;
+$buttonEditBackgroundColor: $editBackgroundColor !default;
+$buttonEditForegroundColor: $editForegroundColor !default;
+$buttonEditHoverBackgroundColor: darken($buttonEditBackgroundColor, 5%) !default;
+$buttonMoveBackgroundColor: $buttonCancelBackgroundColor !default;
+$buttonMoveForegroundColor: $buttonCancelForegroundColor !default;
+$buttonMoveHoverBackgroundColor: darken($buttonMoveBackgroundColor, 5%) !default;
+$buttonSaveBackgroundColor: $saveBackgroundColor !default;
+$buttonSaveForegroundColor: $saveForegroundColor !default;
+$buttonSaveHoverBackgroundColor: darken($buttonSaveBackgroundColor, 5%) !default;
+$buttonViewBackgroundColor: $viewBackgroundColor !default;
+$buttonViewForegroundColor: $viewForegroundColor !default;
+$buttonViewHoverBackgroundColor: darken($buttonViewBackgroundColor, 5%) !default;
+
+$buttonDisabledBackgroundColor: #cccccc !default;
+$buttonDisabledBorderColor: #cccccc !default;
+$buttonDisabledForegroundColor: #a6adb4 !default;
+$contentDraftReadOnlyBackgroundColor: mix($contentDraftBackgroundColor, $inputButtonDisabledBackgroundColor, 45%) !default;
+$contentDraftReadOnlyForegroundColor: mix($contentDraftForegroundColor, $buttonDisabledForegroundColor, 35%) !default;
+$contentCompleteReadOnlyBackgroundColor: mix($contentCompleteBackgroundColor, $inputButtonDisabledBackgroundColor, 45%) !default;
+$contentCompleteReadOnlyForegroundColor: mix($contentCompleteForegroundColor, $buttonDisabledForegroundColor, 35%) !default;
+$contentRetiredReadOnlyBackgroundColor: mix($contentRetiredBackgroundColor, $inputButtonDisabledBackgroundColor, 45%) !default;
+$contentRetiredReadOnlyForegroundColor: mix($contentRetiredForegroundColor, $buttonDisabledForegroundColor, 35%) !default;
+$contentStatusSelectedReadOnlyBackgroundColor: mix($accent1BackgroundColor, $inputButtonDisabledBackgroundColor, 45%) !default;
+$contentStatusSelectedReadOnlyForegroundColor: mix($accent1ForegroundColor, $buttonDisabledForegroundColor, 35%) !default;
+$buttonMediaBackgroundColor: #f3f3f1 !default;
+$buttonMediaForegroundColor: #4e84c4 !default;
+$buttonMediaHoverBackgroundColor: darken($buttonMediaBackgroundColor, 5%) !default;
+$buttonMediaPlayingHoverBackgroundColor: darken($buttonMediaForegroundColor, 5%) !default;
+$primaryHoverBackgroundColor: darken($accent1BackgroundColor, 5%) !default;
+$reversedHoverBackgroundColor: darken($buttonForegroundColor, 5%) !default;
+$buttonPressedBackgroundColor: darken($buttonBackgroundColor, 12.5%) !default;
+$buttonPressedBorderColor: darken($buttonBorderColor, 12.5%) !default;
+$buttonPressedForegroundColor: lighten($buttonForegroundColor, 12.5%) !default;
+$buttonTransparentBorderColor: transparent !default;
+$buttonTransparentForegroundColor: $buttonBackgroundColor !default;
+$buttonTransparentHoverBorderColor: lighten($buttonTransparentForegroundColor, 5%) !default;
+$buttonTransparentHoverForegroundColor: darken($buttonBackgroundColor, 12.5%) !default;
+
+$windowBorder: 1px solid $defaultBorderColor !default;
+$windowBoxShadow: none !default;
+$windowTitleBackgroundColor: #225378 !default;
+$windowTitleBorderColor: #888 !default;
+$windowTitleBorderWidth: 1px !default;
+$windowTitleButtonBackgroundColor: transparent !default;
+$windowTitleForegroundColor: #eee !default;
+$windowTitleButtonForegroundColor: $windowTitleForegroundColor !default;
+$windowTitleButtonHoverBackgroundColor: transparent !default;
+$windowTitleButtonHoverForegroundColor: lighten($windowTitleForegroundColor, 10%) !default;
+$windowTitleFontFamily: system-ui, sans-serif !default;
+$windowTitleFontSize: 1.5em !default;
+$windowTitleFontStyle: none !default;
+$windowTitleFontWeight: 400 !default;
+$windowTitleTextPadding: .25em 0 !default;
+$windowTitleTextTransform: none !default;
+$windowTitleVerticalPadding: .25em !default;
+
+$modalTitleFontFamily: $windowTitleFontFamily !default;
+$modalTitleBackgroundColor: #225378 !default;
+$modalTitleForegroundColor: #eeeeee !default;
+$modalTitleBorderColor: $windowTitleBorderColor !default;
+$modalTitleBorderWidth: $windowTitleBorderWidth !default;
+$modalTitleButtonBackgroundColor: $windowTitleButtonBackgroundColor !default;
+$modalTitleButtonForegroundColor: $windowTitleButtonForegroundColor !default;
+$modalTitleButtonHoverBackgroundColor: $windowTitleButtonHoverBackgroundColor !default;
+$modalTitleButtonHoverForegroundColor: $windowTitleButtonHoverForegroundColor !default;
+$modalTitleFontSize: 1.25em !default;
+$modalTitleFontWeight: 400 !default;
+$modalTitlePadding: .25em 0 !default;
+$modalBackgroundColor: #eeeeee !default;
+$modalForegroundColor: #222222 !default;
+$modalBorder: $windowBorder !default;
+$modalBorderRadius: unset !default;
+$modalBoxShadow: .75em .75em .5em $defaultBoxShadowColor !default;
+
+$headerBackgroundColor: $bodyBackgroundColor !default;
+$headerForegroundColor: $bodyForegroundColor !default;
+$headerBorderColor: $headerBackgroundColor !default;
+$headerBorderWidth: 0 !default;
+$headerBoxShadow: none !default;
+$headerButtonBackgroundColor: $buttonBackgroundColor !default;
+$headerButtonForegroundColor: $buttonForegroundColor !default;
+$headerButtonHoverBackgroundColor: $buttonHoverBackgroundColor !default;
+$headerButtonHoverForegroundColor: $buttonHoverForegroundColor !default;
+$headerButtonBorderColor: $buttonBorderColor !default;
+$headerHyperlinkColor: $headerForegroundColor !default;
+$headerHyperlinkHoverColor: lighten($headerHyperlinkColor, 10%) !default;
+$headerMenuButtonColor: $headerForegroundColor !default;
+$headerMenuButtonHoverColor: darken($headerForegroundColor, 10%) !default;
+$headerContactImageBackgroundColor: $windowTitleBackgroundColor !default;
+$headerContactImageForegroundColor: $windowTitleForegroundColor !default;
+$headerContactImageBorderColor: $headerContactImageBackgroundColor !default;
+$headerContactImageHoverBackgroundColor: darken($headerContactImageBackgroundColor, 5%) !default;
+$headerContactNameForegroundColor: $headerForegroundColor !default;
+
+$footerBackgroundColor: #ccc !default;
+$footerBorderColor: $defaultBorderColor !default;
+$footerBorderWidth: 0 !default;
+$footerBoxShadow: none !default;
+$footerFontFamily: system-ui, sans-serif !default;
+$footerFontSize: .875em !default;
+$footerFontWeight: 400 !default;
+$footerForegroundColor: #666 !default;
+$footerMargin: 0 0 0 0 !default;
+$footerPadding: .5em !default;
+$footerHyperlinkColor: #444 !default;
+$footerHyperlinkHoverColor: #222 !default;
+
+$verticalTreeBackgroundColor: #e6e6e6 !default;
+$verticalTreeBorderColor: transparent !default;
+$verticalTreeBorderStyle: none !default;
+$verticalTreeBorderWidth: 0 !default;
+$verticalTreeBoxShadow: none !default;
+
+$verticalNodeBackgroundColor: #ffffff !default;
+$verticalNodeBorderBottom: 1px solid $defaultBorderColor !default;
+$verticalNodeBorderLeft: 8px solid darken($verticalNodeBackgroundColor, 25%) !default;
+$verticalNodeBorderRight: 1px solid $defaultBorderColor !default;
+$verticalNodeBorderTop: 1px solid $defaultBorderColor !default;
+$verticalNodeForegroundColor: #333 !default;
+$verticalNodeCloseButtonForegroundColor: lighten($verticalNodeForegroundColor, 50%) !default;
+$verticalNodeCloseButtonHoverForegroundColor: $verticalNodeForegroundColor !default;
+$verticalNodeFontFamily: system-ui, sans-serif !default;
+$verticalNodeFontSize: 1.125em !default;
+$verticalNodeFontStyle: none !default;
+$verticalNodeFontWeight: 400 !default;
+$verticalNodeSelectedBackgroundColor: #e2e7ea !default;
+$verticalNodeSelectedBorderBottom: 1px solid $defaultBorderColor !default;
+$verticalNodeSelectedBorderLeft: 8px solid $accent1BackgroundColor !default;
+$verticalNodeSelectedBorderRight: 1px solid $defaultBorderColor !default;
+$verticalNodeSelectedBorderTop: 1px solid $defaultBorderColor !default;
+$verticalNodeSelectedBoxShadow: none !default;
+$verticalNodeSelectedForegroundColor: #143146 !default;
+$verticalNodeHoverBackgroundColor: #f1f3f4 !default;
+$verticalNodeHoverForegroundColor: #111 !default;
+
+$horizontalTreeBackgroundColor: $bodyBackgroundColor !default;
+$horizontalTreeBoxShadow: none !default;
+
+$horizontalNodeBackgroundColor: transparent !default;
+$horizontalNodeForegroundColor: #333 !default;
+$horizontalNodeForegroundColorMuted: lighten($horizontalNodeForegroundColor, 25%) !default;
+$horizontalNodeCloseButtonForegroundColor: lighten($horizontalNodeForegroundColor, 50%) !default;
+$horizontalNodeCloseButtonHoverForegroundColor: $horizontalNodeForegroundColor !default;
+$horizontalNodeFontFamily: system-ui, sans-serif !default;
+$horizontalNodeFontSize: 1.125em !default;
+$horizontalNodeFontStyle: none !default;
+$horizontalNodeFontWeight: 700 !default;
+$horizontalNodeSelectedBackgroundColor: transparent !default;
+$horizontalNodeSelectedBoxShadow: none !default;
+$horizontalNodeSelectedForegroundColor: darken($accent1BackgroundColor, 12.5%) !default;
+$horizontalNodeHoverBackgroundColor: transparent !default;
+$horizontalNodeHoverForegroundColor: $horizontalNodeSelectedForegroundColor !default;
+
+$tabHeaderBorderWidth: 6px !default;
+$tabBackgroundColor: #eeeeee !default;
+$tabBorderColor: $defaultBorderColor !default;
+$tabFontFamily: system-ui, sans-serif !default;
+$tabFontSize: 1.03125em !default;
+$tabFontStyle: normal !default;
+$tabFontWeight: 400 !default;
+$tabForegroundColor: #444 !default;
+$tabHoverBackgroundColor: darken($tabBackgroundColor, 10%) !default;
+$tabHoverForegroundColor: darken($tabForegroundColor, 10%) !default;
+$tabMargin: 0 !default;
+$tabHorizontalPadding: .5em 2em !default;
+$tabSelectedBackgroundColor: desaturate(lighten($accent1BackgroundColor, 60%), 40%) !default;
+$tabSelectedBorderColor: $accent1BackgroundColor !default;
+$tabSelectedForegroundColor: darken($accent1BackgroundColor, 12.5%) !default;
+$tabTextTransform: none !default;
+$tabVerticalPadding: 1em .5em !default;
+
+$filtersBackgroundColor: #dddddd !default;
+$filtersForegroundColor: #222 !default;
+$filtersBorderColor: $defaultBorderColor !default;
+$filtersBorderRadius: 0 !default;
+$elementChildBackgroundColor: $windowBackgroundColor !default;
+
+$resultAlternateRowBackgroundColor: $windowBackgroundColor !default;
+$resultAlternateRowPulseBackgroundColor: darken($resultAlternateRowBackgroundColor, 20%) !default;
+$resultBackgroundColor: $windowBackgroundColor !default;
+$resultPulseBackgroundColor: #aaa !default;
+$resultTitleFontFamily: $bodyFontFamily !default;
+$resultTitleFontSize: 1.25em !default;
+$resultTitleFontWeight: 600 !default;
+$resultTitleForegroundColor: #222 !default;
+$resultTitleMetadataBackgroundColor: transparent !default;
+$resultTitleMetadataForegroundColor: $metadataForegroundColor !default;
+$resultTitleMetadataFontSize: .8em !default;
+$resultTitleMetadataFontStyle: italic !default;
+$resultIconColor: #ccc !default;
+$resultLabelFontFamily: system-ui, sans-serif !default;
+$resultLabelFontSize: 1em !default;
+$resultLabelFontWeight: 600 !default;
+$resultLabelForegroundColor: #777 !default;
+
+$sectionHeadingForegroundColor: $windowForegroundColor !default;
+$sectionHeadingFontFamily: $h4FontFamily system-ui, sans-serif !default;
+$sectionHeadingBorder: 1px solid $defaultBorderColor !default;
+$sectionHeadingFontSize: 1.4em !default;
+$sectionHeadingFontWeight: 400 !default;
+
+$contextMenuBackgroundColor: #eee !default;
+$contextMenuBorder: $modalBorder !default;
+$contextMenuBoxShadow: $modalBoxShadow !default;
+$contextMenuForegroundColor: #222 !default;
+$contextMenuItemBackgroundColor: $contextMenuBackgroundColor !default;
+$contextMenuItemFontFamily: $buttonTextFontFamily !default;
+$contextMenuItemFontSize: 1em !default;
+$contextMenuItemFontStyle: normal !default;
+$contextMenuItemFontWeight: 400 !default;
+$contextMenuItemGroupTitleBackgroundColor: $windowTitleBackgroundColor !default;
+$contextMenuItemGroupTitleForegroundColor: $windowTitleForegroundColor !default;
+$contextMenuItemLinkDisabledForegroundColor: $hyperlinkDisabledForegroundColor !default;
+$contextMenuItemLinkForegroundColor: $contextMenuForegroundColor !default;
+$contextMenuItemLinkHoverBackgroundColor: darken($contextMenuItemBackgroundColor, 10%) !default;
+$contextMenuItemLinkHoverForegroundColor: darken($contextMenuItemLinkForegroundColor, 10%) !default;
+
+$treeNodeSelectedBackgroundColor: desaturate(lighten($accent1BackgroundColor, 60%), 40%) !default;
+$treeNodeSelectedForegroundColor: darken($accent1BackgroundColor, 12.5%) !default;
+$treeNodeHoverBackgroundColor: mix($inputBackgroundColor, $treeNodeSelectedBackgroundColor) !default;
+$treeNodeHoverForegroundColor: #111 !default;
+
+$binderBackgroundColor: #fff !default;
+$binderBorderRadius: 1em !default;
+$binderBoxShadow: .75em .75em .5em $defaultBoxShadowColor !default;
+$binderForegroundColor: #222222 !default;
+$binderMargin: 0 auto !default;
+$binderMaxWidth: 69em !default;
+
+$pageBackgroundColor: #fff !default;
+$pageBorderRadius: 0 !default;
+$pageForegroundColor: #222 !default;
+
+$elementPadding: .75em !default;
+
+$progressBarHeight: 1.5em !default;
+$progressBarFillBackgroundColor: $accent1BackgroundColor !default;
+
+$waiterBackgroundColor: $windowBackgroundColor !default;
+$waiterBorderRadius: unset !default;
+$waiterForegroundColor: $windowForegroundColor !default;
+$windowBackgroundColorTransparent: rgba($windowBackgroundColor, 0) !default;
+
+$accent1BackgroundColorLight25: lighten($accent1BackgroundColor, 25%) !default;
+$rzBase300: darken($windowBackgroundColor, 4%) !default;
+$rzBase500: darken($defaultBorderColor, 18%) !default;
+$rzBase600: darken($defaultBorderColor, 32%) !default;
+$rzBase700: darken($defaultBorderColor, 46%) !default;
+$rzDangerDark: darken($errorBackgroundColor, 16%) !default;
+$rzDangerDarker: darken($errorBackgroundColor, 24%) !default;
+$rzDangerLight: lighten($errorBackgroundColor, 16%) !default;
+$rzDangerLighter: rgba($errorBackgroundColor, .16) !default;
+$rzValidatorShadowColor: rgba($errorBackgroundColor, .3) !default;
+$rzInfoDark: darken($hyperlinkForegroundColor, 16%) !default;
+$rzInfoDarker: darken($hyperlinkForegroundColor, 24%) !default;
+$rzInfoLight: lighten($hyperlinkForegroundColor, 16%) !default;
+$rzInfoLighter: rgba($hyperlinkForegroundColor, .16) !default;
+$rzPrimaryDark: darken($accent1BackgroundColor, 16%) !default;
+$rzPrimaryDarker: darken($accent1BackgroundColor, 24%) !default;
+$rzPrimaryLight: lighten($accent1BackgroundColor, 16%) !default;
+$rzPrimaryLighter: rgba($accent1BackgroundColor, .16) !default;
+$rzSecondary: $accent1BackgroundColorLight25 !default;
+$rzSecondaryDark: darken($rzSecondary, 16%) !default;
+$rzSecondaryDarker: darken($rzSecondary, 24%) !default;
+$rzSecondaryLight: lighten($rzSecondary, 16%) !default;
+$rzSecondaryLighter: rgba($rzSecondary, .16) !default;
+$rzSuccessDark: darken($successBackgroundColor, 16%) !default;
+$rzSuccessDarker: darken($successBackgroundColor, 24%) !default;
+$rzSuccessLight: lighten($successBackgroundColor, 16%) !default;
+$rzSuccessLighter: rgba($successBackgroundColor, .16) !default;
+$rzTextTertiaryColor: lighten($bodyForegroundColor, 25%) !default;
+$rzWarningDark: darken($warningBackgroundColor, 16%) !default;
+$rzWarningDarker: darken($warningBackgroundColor, 24%) !default;
+$rzWarningLight: lighten($warningBackgroundColor, 16%) !default;
+$rzWarningLighter: rgba($warningBackgroundColor, .16) !default;
+$scrollbarColor: darken($bodyForegroundColor, 25%) !default;
+
+$textMessageInboundBackgroundColor: #ddd !default;
+$textMessageInboundForegroundColor: #222 !default;
+$textMessageInboundMetadataColor: $metadataForegroundColor !default;
+$textMessageOutboundBackgroundColor: #4e84c4 !default;
+$textMessageOutboundForegroundColor: #eee !default;
+$textMessageOutboundMetadataColor: darken($textMessageOutboundForegroundColor, 12.5%) !default;
+
+/* Sizing and Spacing */
+$screenMin: 10em !default;
+$screenTiny: 20em !default;
+$screenSmall: 30em !default;
+$screenMedium: 40em !default;
+$screenLarge: 50em !default;
+$screenWide: 60em !default;
+$screenMax: 75em !default;
+
+$fieldPico: 2.5em !default;
+$fieldNano: 4em !default;
+$fieldMicro: 6em !default;
+$fieldMin: 8em !default;
+$fieldTinier: 10em !default;
+$fieldTiny: 12em !default;
+$fieldSmall: 16em !default;
+$fieldMediumSmall: 18em !default;
+$fieldMedium: 20em !default;
+$fieldMediumLarge: 24em !default;
+$fieldLarge: 28em !default;
+$fieldLarger: 34em !default;
+$fieldWide: 40em !default;
+$fieldMax: 52em !default;
+
+$spacingMicroScreenMin: .125rem !default;
+$spacingMicroScreenMicro: .125rem !default;
+$spacingMicroScreenSmall: .15rem !default;
+$spacingMicroScreenMedium: .175rem !default;
+$spacingMicroScreenLarge: .2rem !default;
+$spacingMicroScreenWide: .225rem !default;
+$spacingMicroScreenMax: .25rem !default;
+
+$spacingTinyScreenMin: .125rem !default;
+$spacingTinyScreenTiny: .25rem !default;
+$spacingTinyScreenSmall: .3rem !default;
+$spacingTinyScreenMedium: .35rem !default;
+$spacingTinyScreenLarge: .4rem !default;
+$spacingTinyScreenWide: .45rem !default;
+$spacingTinyScreenMax: .5rem !default;
+
+$spacingSmallScreenMin: .25rem !default;
+$spacingSmallScreenTiny: .4rem !default;
+$spacingSmallScreenSmall: .6rem !default;
+$spacingSmallScreenMedium: .7rem !default;
+$spacingSmallScreenLarge: .8rem !default;
+$spacingSmallScreenWide: .9rem !default;
+$spacingSmallScreenMax: 1rem !default;
+
+$spacingMediumScreenMin: .5rem !default;
+$spacingMediumScreenTiny: .75rem !default;
+$spacingMediumScreenSmall: 1rem !default;
+$spacingMediumScreenMedium: 1.25rem !default;
+$spacingMediumScreenLarge: 1.5rem !default;
+$spacingMediumScreenWide: 1.75rem !default;
+$spacingMediumScreenMax: 2rem !default;
+
+$spacingLargeScreenMin: 1rem !default;
+$spacingLargeScreenTiny: 1.5rem !default;
+$spacingLargeScreenSmall: 2rem !default;
+$spacingLargeScreenMedium: 2.5rem !default;
+$spacingLargeScreenLarge: 3rem !default;
+$spacingLargeScreenWide: 3.5rem !default;
+$spacingLargeScreenMax: 4rem !default;
+
+$htmlMinFontSize: .7em !default;
+$htmlTinyFontSize: .7em !default;
+$htmlSmallFontSize: .75em !default;
+$htmlMediumFontSize: .8em !default;
+$htmlLargeFontSize: .85em !default;
+$htmlWideFontSize: .9em !default;
+$htmlMaxFontSize: .95em !default;
+
+$custom1FontFamily: system-ui, sans-serif !default;
+$custom1FontSize: 1em !default;
+$custom1FontWeight: 400 !default;
+
+$custom2FontFamily: system-ui, sans-serif !default;
+$custom2FontSize: 1em !default;
+$custom2FontWeight: 400 !default;
+
+$custom3FontFamily: system-ui, sans-serif !default;
+$custom3FontSize: 1em !default;
+$custom3FontWeight: 400 !default;
+
+$custom4FontFamily: system-ui, sans-serif !default;
+$custom4FontSize: 1em !default;
+$custom4FontWeight: 400 !default;
+
+$choiceButtonBackgroundColor: #f3f3f1 !default;
+$choiceButtonForegroundColor: #1e1e1e !default;
+$choiceButtonHoverBackgroundColor: darken($choiceButtonBackgroundColor, 5%) !default;
+$buttonBorderColorStudent: darken($buttonBackgroundColor, 12.5%) !default;

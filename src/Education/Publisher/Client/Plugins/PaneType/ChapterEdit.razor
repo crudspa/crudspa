@@ -1,0 +1,37 @@
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+            }
+            else
+            {
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            }
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Title"
+                       Size="Field.Sizes.Medium">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="75"
+                             @bind-Value="Model.Entity.Title" />
+                </Field>
+                <Field Label="Type"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown ReadOnly="Model.ReadOnly"
+                              LookupValues="Model.BinderTypeNames"
+                              @bind-Value="Model.Entity.Binder.TypeId" />
+                </Field>
+            </Wrapped>
+        </Padding>
+    }
+</Waiter>

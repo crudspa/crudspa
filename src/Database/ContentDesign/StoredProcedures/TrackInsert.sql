@@ -1,0 +1,72 @@
+create proc [ContentDesign].[TrackInsert] (
+     @SessionId uniqueidentifier
+    ,@PortalId uniqueidentifier
+    ,@Title nvarchar(75)
+    ,@StatusId uniqueidentifier
+    ,@Description nvarchar(max)
+    ,@RequiresAchievementId uniqueidentifier
+    ,@GeneratesAchievementId uniqueidentifier
+    ,@RequireSequentialCompletion bit
+    ,@Id uniqueidentifier output
+) as
+
+declare @organizationId uniqueidentifier = (
+    select top 1 userTable.OrganizationId
+    from [Framework].[User-Active] userTable
+        inner join [Framework].[Session-Active] session on session.UserId = userTable.Id
+    where session.Id = @SessionId
+)
+
+set @Id = newid()
+declare @now datetimeoffset = sysdatetimeoffset()
+
+set nocount on
+set xact_abort on
+begin transaction
+
+declare @ordinal int = (select count(1) from [Content].[Track-Active] where PortalId = @PortalId)
+
+insert [Content].[Track] (
+     Id
+    ,VersionOf
+    ,Updated
+    ,UpdatedBy
+    ,PortalId
+    ,Title
+    ,StatusId
+    ,Description
+    ,RequiresAchievementId
+    ,GeneratesAchievementId
+    ,RequireSequentialCompletion
+    ,Ordinal
+)
+values (
+     @Id
+    ,@Id
+    ,@now
+    ,@SessionId
+    ,@PortalId
+    ,@Title
+    ,@StatusId
+    ,@Description
+    ,@RequiresAchievementId
+    ,@GeneratesAchievementId
+    ,@RequireSequentialCompletion
+    ,@ordinal
+)
+
+if not exists (
+    select 1
+    from [Content].[Track-Active] track
+        inner join [Framework].[Portal-Active] portal on track.PortalId = portal.Id
+        inner join [Framework].[Organization-Active] organization on portal.OwnerId = organization.Id
+    where track.Id = @Id
+        and organization.Id = @organizationId
+)
+begin
+    rollback transaction
+    raiserror('Tenancy check failed', 16, 1)
+    return
+end
+
+commit transaction

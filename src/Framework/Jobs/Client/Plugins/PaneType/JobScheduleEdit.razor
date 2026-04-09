@@ -1,0 +1,149 @@
+@using Crudspa.Framework.Jobs.Shared.Extensions
+<Toolbar>
+    <Left>
+        @if (Model.ReadOnly)
+        {
+            <ButtonEdit Clicked="() => Model.Edit()" />
+        }
+        else
+        {
+            <ButtonGroup>
+                <ButtonSave Clicked="HandleSaveClicked" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            </ButtonGroup>
+        }
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Top">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Name"
+                       Size="Field.Sizes.Large">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="50"
+                             @bind-Value="Model.Entity.Name" />
+                </Field>
+                <Field Label="Type"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown LookupValues="Model.JobTypes"
+                              ReadOnly="Model.ReadOnly"
+                              Value="Model.Entity.TypeId"
+                              ValueChanged="value => Model.SetJobType(value)" />
+                </Field>
+                <Field Label="Device"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown LookupValues="Model.DeviceNames"
+                              ReadOnly="Model.ReadOnly"
+                              AllowNull="true"
+                              NullText="[Any]"
+                              @bind-Value="Model.Entity.DeviceId" />
+                </Field>
+            </Wrapped>
+            @if (Model.SelectedJobType is not null)
+            {
+                <CascadingValue Name="ReadOnly"
+                                Value="Model.ReadOnly">
+                    <JobDesignPlugin TypeName="@Model.SelectedJobType.EditorView"
+                                     ConfigJson="@Model.Entity.Config"
+                                     @ref="EditorComponent" />
+                </CascadingValue>
+            }
+        </Padding>
+        <BatchSection Title="Schedule">
+            <Padding Size="Padding.Sizes.Small"
+                     Direction="Padding.Directions.Vertical">
+                <Wrapped Alignment="Wrapped.Alignments.Top">
+                    <Field Label="Repeat Every"
+                           Size="Field.Sizes.Tinier">
+                        <NumericTextBox ReadOnly="Model.ReadOnly"
+                                        @bind-Value="Model.Entity.RecurrenceAmount" />
+                    </Field>
+                    <Field Label="Interval"
+                           Size="Field.Sizes.Unspecified">
+                        <EnumRadio TEnum="JobSchedule.RecurrenceIntervals"
+                                   ReadOnly="Model.ReadOnly"
+                                   @bind-SelectedValue="Model.Entity.RecurrenceInterval" />
+                    </Field>
+                    <Field Label="Recurrence Pattern"
+                           Size="Field.Sizes.Unspecified">
+                        <EnumRadio TEnum="JobSchedule.RecurrencePatterns"
+                                   ReadOnly="Model.ReadOnly"
+                                   @bind-SelectedValue="Model.Entity.RecurrencePattern" />
+                    </Field>
+                    @if (Model.Entity.RecurrencePattern == JobSchedule.RecurrencePatterns.SpecificTime)
+                    {
+                        @if (Model.Entity.RecurrenceInterval is JobSchedule.RecurrenceIntervals.Month)
+                        {
+                            <Field Label="Day"
+                                   Size="Field.Sizes.Min">
+                                <NumericTextBox ReadOnly="Model.ReadOnly"
+                                                @bind-Value="Model.Entity.Day" />
+                            </Field>
+                        }
+
+                        @if (Model.Entity.RecurrenceInterval is JobSchedule.RecurrenceIntervals.Week)
+                        {
+                            <Field Label="Day"
+                                   Size="Field.Sizes.Tinier">
+                                <EnumDropdown TEnum="JobSchedule.DayOfWeeks"
+                                              ReadOnly="Model.ReadOnly"
+                                              @bind-SelectedValue="Model.Entity.DayOfWeek" />
+                            </Field>
+                        }
+
+                        @if (Model.Entity.RecurrenceInterval is JobSchedule.RecurrenceIntervals.Month or JobSchedule.RecurrenceIntervals.Week or JobSchedule.RecurrenceIntervals.Day)
+                        {
+                            <Field Label="Hour"
+                                   Size="Field.Sizes.Min">
+                                <NumericTextBox ReadOnly="Model.ReadOnly"
+                                                @bind-Value="Model.Entity.Hour" />
+                            </Field>
+                        }
+
+                        @if (Model.Entity.RecurrenceInterval is JobSchedule.RecurrenceIntervals.Month or JobSchedule.RecurrenceIntervals.Week or JobSchedule.RecurrenceIntervals.Day or JobSchedule.RecurrenceIntervals.Hour)
+                        {
+                            <Field Label="Minute"
+                                   Size="Field.Sizes.Min">
+                                <NumericTextBox ReadOnly="Model.ReadOnly"
+                                                @bind-Value="Model.Entity.Minute" />
+                            </Field>
+                        }
+
+                        @if (Model.Entity.RecurrenceInterval is JobSchedule.RecurrenceIntervals.Month or JobSchedule.RecurrenceIntervals.Week or JobSchedule.RecurrenceIntervals.Day or JobSchedule.RecurrenceIntervals.Hour or JobSchedule.RecurrenceIntervals.Minute)
+                        {
+                            <Field Label="Second"
+                                   Size="Field.Sizes.Min">
+                                <NumericTextBox ReadOnly="Model.ReadOnly"
+                                                @bind-Value="Model.Entity.Second" />
+                            </Field>
+                        }
+
+                        @if (Model.Entity.RecurrenceInterval is JobSchedule.RecurrenceIntervals.Month or JobSchedule.RecurrenceIntervals.Week or JobSchedule.RecurrenceIntervals.Day)
+                        {
+                            <Field Label="Time Zone"
+                                   Size="Field.Sizes.MediumLarge">
+                                <TimeZonePicker ReadOnly="Model.ReadOnly"
+                                                @bind-Value="Model.Entity.TimeZoneId" />
+                            </Field>
+                        }
+                    }
+                </Wrapped>
+                <Wrapped>
+                    <Field Label="Next Run"
+                           Size="Field.Sizes.Small">
+                        <DateTimePicker ReadOnly="Model.ReadOnly"
+                                        @bind-Value="Model.Entity.NextRun" />
+                    </Field>
+                    <ButtonCore ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                                IconClass="c-icon-magic-wand"
+                                Text="Determine"
+                                Disabled="Model.ReadOnly"
+                                Clicked="() => Model.Entity.NextRun = Model.Entity.DetermineNextRunDate()" />
+                </Wrapped>
+            </Padding>
+        </BatchSection>
+    }
+</Waiter>

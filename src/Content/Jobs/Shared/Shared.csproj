@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>Crudspa.Content.Jobs.Shared</AssemblyName>
+    <RootNamespace>Crudspa.Content.Jobs.Shared</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Design\Shared\Shared.csproj" />
+    <ProjectReference Include="..\..\..\Framework\Jobs\Shared\Shared.csproj" />
+  </ItemGroup>
+</Project>

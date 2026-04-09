@@ -1,0 +1,91 @@
+<Toolbar>
+    <Left>
+        @if (Model.ReadOnly)
+        {
+            <ButtonEdit Clicked="() => Model.Edit()" />
+        }
+        else
+        {
+            <ButtonGroup>
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            </ButtonGroup>
+        }
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Key"
+                       Size="Field.Sizes.Medium">
+                    <TextBox ReadOnly="true"
+                             MaxLength="75"
+                             @bind-Value="Model.Entity.Portal.Key" />
+                </Field>
+                <Field Label="Title"
+                       Size="Field.Sizes.Wide">
+                    <TextBox ReadOnly="true"
+                             MaxLength="75"
+                             @bind-Value="Model.Entity.Portal.Title" />
+                </Field>
+            </Wrapped>
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Max Width"
+                       Size="Field.Sizes.Medium"
+                       Container="Field.Containers.Div">
+                    <EnumRadio TEnum="OverrideState"
+                               @bind-SelectedValue="@Model.MaxWidthState"
+                               ReadOnly="Model.ReadOnly"
+                               RadioCssClass="tight-bottom" />
+                    <div class="c-min @(Model.MaxWidthState == OverrideState.Custom ? String.Empty : "c-hide")">
+                        <TextBox MaxLength="10"
+                                 Placeholder="96em"
+                                 ReadOnly="Model.ReadOnly"
+                                 @bind-Value="Model.Entity.MaxWidth" />
+                    </div>
+                </Field>
+                <Field Label="Branding Image"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <ImageUploader ReadOnly="Model.ReadOnly"
+                                   Required="false"
+                                   ImageFile="Model.Entity.BrandingImageFile" />
+                </Field>
+            </Wrapped>
+            @if (Features.Count > 0)
+            {
+                <BatchSection Title="Features">
+                    <Padding Size="Padding.Sizes.Small">
+                        <Wrapped Alignment="Wrapped.Alignments.Top">
+                            @foreach (var feature in Features)
+                            {
+                                <Padding Direction="Padding.Directions.Right"
+                                         Size="Padding.Sizes.Small">
+                                    <Padding Direction="Padding.Directions.Bottom"
+                                             Size="Padding.Sizes.Small">
+                                        <ButtonFeature Href="@($"{Path}/{feature.Key}")"
+                                                       Text="@(feature.Title ?? String.Empty)"
+                                                       IconClass="@(feature.IconCssClass)" />
+                                    </Padding>
+                                </Padding>
+                            }
+                        </Wrapped>
+                    </Padding>
+                </BatchSection>
+            }
+            @if (Model.Entity.FooterPageId.HasSomething())
+            {
+                <BatchSection Title="Footer">
+                    <Padding Size="Padding.Sizes.Small">
+                        <ContentPortalSections Path="@Path"
+                                              ContentPortalId="Model.Entity.Portal.Id"
+                                              PageId="Model.Entity.FooterPageId" />
+                    </Padding>
+                </BatchSection>
+            }
+        </Padding>
+    }
+</Waiter>

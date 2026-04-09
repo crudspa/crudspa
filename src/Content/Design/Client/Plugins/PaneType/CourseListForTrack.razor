@@ -1,0 +1,39 @@
+<ListOrderables Model="Model"
+                T="CourseModel"
+                EntityName="Course"
+                UrlPrefix="@($"{Path}/course")"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Full">
+            <LabeledHtml Label="Description"
+                         HtmlValue="@context.Course.Description" />
+        </Field>
+        <Field Size="Field.Sizes.Unspecified">
+            <Labeled CssClass="status"
+                     Width="6em"
+                     Label="Status">
+                <StatusDisplay Id="@context.Course.StatusId"
+                               Name="@context.Course.StatusName"
+                               ColorClassFrom="ContentStatusColors.For" />
+            </Labeled>
+            <Labeled Width="6em"
+                     Label="Binder"
+                     StringValue="@context.Course.Binder.TypeName" />
+        </Field>
+        <Field Size="Field.Sizes.Unspecified">
+            <Labeled Width="6em"
+                     Label="Requires"
+                     StringValue="@context.Course.RequiresAchievementTitle" />
+            <Labeled Width="6em"
+                     Label="Generates"
+                     StringValue="@context.Course.GeneratesAchievementTitle" />
+        </Field>
+    </ReadView>
+    <PaneLinks>
+        <PaneLink Href="@($"{Path}/course-{context.Course.Id:D}?pane=pages")"
+                  Text="Pages"
+                  Count="context.Course.PageCount" />
+    </PaneLinks>
+</ListOrderables>

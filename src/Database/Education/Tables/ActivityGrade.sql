@@ -1,0 +1,16 @@
+create table [Education].[ActivityGrade] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [ActivityId] uniqueidentifier not null,
+    [AssessmentTypeId] uniqueidentifier not null,
+    [AssessmentLevelId] uniqueidentifier not null,
+    [GradeId] uniqueidentifier not null,
+    constraint [PK_Education_ActivityGrade] primary key clustered ([Id]),
+    constraint [FK_Education_ActivityGrade_Activity] foreign key ([ActivityId]) references [Education].[Activity] ([Id]),
+    constraint [FK_Education_ActivityGrade_AssessmentType] foreign key ([AssessmentTypeId]) references [Education].[AssessmentType] ([Id]),
+    constraint [FK_Education_ActivityGrade_AssessmentLevel] foreign key ([AssessmentLevelId]) references [Education].[AssessmentLevel] ([Id]),
+    constraint [FK_Education_ActivityGrade_Grade] foreign key ([GradeId]) references [Education].[Grade] ([Id]),
+);

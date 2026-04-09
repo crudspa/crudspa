@@ -1,0 +1,78 @@
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+            }
+            else
+            {
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            }
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Title"
+                       Size="Field.Sizes.Wide">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="160"
+                             @bind-Value="Model.Entity.Title" />
+                </Field>
+                <Field Label="Genre"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown ReadOnly="Model.ReadOnly"
+                              LookupValues="Model.GenreNames"
+                              @bind-Value="Model.Entity.GenreId" />
+                </Field>
+                <Field Label="Rating"
+                       Size="Field.Sizes.Small">
+                    <Dropdown ReadOnly="Model.ReadOnly"
+                              LookupValues="Model.RatingNames"
+                              @bind-Value="Model.Entity.RatingId" />
+                </Field>
+                <Field Label="Released"
+                       Size="Field.Sizes.Medium">
+                    <DateTimePicker ReadOnly="Model.ReadOnly"
+                                    @bind-Value="Model.Entity.Released" />
+                </Field>
+                <Field Label="Runtime"
+                       Size="Field.Sizes.Tiny">
+                    <NumericTextBox ReadOnly="Model.ReadOnly"
+                                    @bind-Value="Model.Entity.RuntimeMin" />
+                </Field>
+                <Field Label="Score"
+                       Size="Field.Sizes.Tiny">
+                    <NumericTextBox ReadOnly="Model.ReadOnly"
+                                    @bind-Value="Model.Entity.Score" />
+                </Field>
+                <Field Label="Summary"
+                       Size="Field.Sizes.Full"
+                       Container="Field.Containers.Div">
+                    <HtmlEditor ReadOnly="Model.ReadOnly"
+                                @bind-Value="Model.Entity.Summary" />
+                </Field>
+                <Field Label="Poster Image"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <ImageUploader ReadOnly="Model.ReadOnly"
+                                   Required="false"
+                                   ImageFile="Model.Entity.PosterImageFile" />
+                </Field>
+                <Field Label="Trailer Video"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <VideoUploader ReadOnly="Model.ReadOnly"
+                                   Required="false"
+                                   VideoFile="Model.Entity.TrailerVideoFile" />
+                </Field>
+            </Wrapped>
+        </Padding>
+    }
+</Waiter>

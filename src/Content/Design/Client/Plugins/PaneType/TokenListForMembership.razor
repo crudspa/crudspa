@@ -1,0 +1,15 @@
+<ListOrderables Model="Model"
+                T="TokenModel"
+                EntityName="Token"
+                UrlPrefix="@($"{Path}/token")"
+                ShowAdd="false"
+                ShowDelete="false"
+                ShowView="false">
+    <ReadView>
+        <Field Size="Field.Sizes.Unspecified">
+            <Labeled Width="6em"
+                     Label="Description"
+                     StringValue="@context.Token.Description" />
+        </Field>
+    </ReadView>
+</ListOrderables>

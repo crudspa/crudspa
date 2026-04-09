@@ -1,0 +1,51 @@
+﻿<Waiter Model="Model">
+    @if (Model.Track is not null)
+    {
+        @if (Model.Track.Courses.IsEmpty())
+        {
+            <NoRecords EntityName="courses" />
+        }
+        else
+        {
+            @foreach (var course in Model.Track.Courses)
+            {
+                <div class="c-card c-padding-medium-top c-padding-small-bottom">
+                    <div class="values">
+                        <div class="title c-padding-small-top">
+                            @if (course.Locked)
+                            {
+                                <span class="c-icon-lock c-margin-tiny-right"></span>
+                                @(course.Title)
+                            }
+                            else
+                            {
+                                <a @onclick="() => Model.GoToCourse(course.Id)">@(course.Title)</a>
+                            }
+                        </div>
+                        @if (course.Description is not null)
+                        {
+                            <UserHtml Html="@(course.Description)"
+                                      CssClass="c-padding-small" />
+                        }
+                    </div>
+                    <div class="buttons">
+                        <div class="c-course-completion">
+                            <div class="status-icon">
+                                @if (course.Progress.TimesCompleted == 0)
+                                {
+                                    <img src="/api/content/display/images/check-empty"
+                                         alt="Incomplete" />
+                                }
+                                else
+                                {
+                                    <img src="/api/content/display/images/check-filled"
+                                         alt="Complete" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }
+</Waiter>

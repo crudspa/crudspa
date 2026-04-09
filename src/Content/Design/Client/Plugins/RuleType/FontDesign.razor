@@ -1,0 +1,30 @@
+﻿<Wrapped Alignment="Wrapped.Alignments.Top">
+    <Field Label="Font"
+           Size="Field.Sizes.Medium">
+        <Dropdown LookupValues="Fonts"
+                  ReadOnly="ReadOnly"
+                  AllowNull="true"
+                  NullText="system-ui"
+                  @bind-Value="Config.Id" />
+    </Field>
+    <Field Label="Size"
+           Size="Field.Sizes.Tinier">
+        <TextBox @bind-Value="Config.Size" />
+    </Field>
+    <Field Label="Weight"
+           Size="Field.Sizes.Min">
+        <select class="input"
+                disabled="@ReadOnly"
+                @bind="Config.Weight">
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="300">300</option>
+            <option value="400">400</option>
+            <option value="500">500</option>
+            <option value="600">600</option>
+            <option value="700">700</option>
+            <option value="800">800</option>
+            <option value="900">900</option>
+        </select>
+    </Field>
+</Wrapped>

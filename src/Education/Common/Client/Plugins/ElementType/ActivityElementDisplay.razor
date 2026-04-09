@@ -1,0 +1,24 @@
+﻿<div class="cec-activity-wrapper star c-overlay-parent">
+
+    <Modal Model="Model.ModalModel"
+           TopMargin="1em"
+           Width="18em"
+           ZIndex="500">
+        <Content>
+            <div class="c-padding-medium-vert c-full c-centered"
+                 style="font-size: 1.125em;">
+                @(Model.ModalModel.Message)
+            </div>
+        </Content>
+        <Buttons>
+            <ButtonCore ButtonStyle="ButtonCore.ButtonStyles.Cancel"
+                        Text="@(Model.ModalModel.ButtonText)"
+                        Clicked="PlayAgain" />
+        </Buttons>
+    </Modal>
+
+    <ActivityDisplayPlugin TypeName="@Model.ActivityElement.Activity!.ActivityTypeDisplayView"
+                           Activity="@Model.ActivityElement.Activity"
+                           ActivityCompleted="@Model.HandleActivityCompleted"
+                           @ref="ActivityDisplay" />
+</div>

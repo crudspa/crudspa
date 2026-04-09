@@ -1,0 +1,530 @@
+/// <reference path="../defaults.scss" />
+
+// Route Radzen's standard theme through Crudspa's defaults/runtime tokens.
+$base: true;
+$standard: true;
+
+// Theme colors
+$rz-white: #ffffff !default;
+$rz-black: #000000 !default;
+
+$rz-base: $windowBackgroundColor !default;
+$rz-primary: $accent1BackgroundColor !default;
+$rz-secondary: $rzSecondary !default;
+$rz-info: $hyperlinkForegroundColor !default;
+$rz-success: $successBackgroundColor !default;
+$rz-warning: $warningBackgroundColor !default;
+$rz-danger: $errorBackgroundColor !default;
+
+$rz-series-1: #376df5 !default;
+$rz-series-2: #64dfdf !default;
+$rz-series-3: #f68769 !default;
+$rz-series-4: #c161e2 !default;
+$rz-series-5: #fdd07a !default;
+$rz-series-6: #f8629b !default;
+$rz-series-7: #74d062 !default;
+$rz-series-8: #84a7ff !default;
+$rz-series-9: #4d99f9 !default;
+$rz-series-10: #8cecec !default;
+$rz-series-11: #fab793 !default;
+$rz-series-12: #da88ee !default;
+$rz-series-13: #fee3ab !default;
+$rz-series-14: #fb89c3 !default;
+$rz-series-15: #a2e389 !default;
+$rz-series-16: #b5caff !default;
+$rz-series-17: #1750f3 !default;
+$rz-series-18: #46d7d7 !default;
+$rz-series-19: #f46e4c !default;
+$rz-series-20: #b343db !default;
+$rz-series-21: #fdc55f !default;
+$rz-series-22: #f64485 !default;
+$rz-series-23: #58c544 !default;
+$rz-series-24: #6a93ff !default;
+
+$rz-base-50: $bodyBackgroundColor !default;
+$rz-base-100: $bodyBackgroundColor !default;
+$rz-base-200: $windowBackgroundColor !default;
+$rz-base-300: $rzBase300 !default;
+$rz-base-400: $defaultBorderColor !default;
+$rz-base-500: $rzBase500 !default;
+$rz-base-600: $rzBase600 !default;
+$rz-base-700: $rzBase700 !default;
+$rz-base-800: #333333 !default;
+$rz-base-900: #111111 !default;
+$rz-base-light: $rz-base-200 !default;
+$rz-base-lighter: $rz-base-100 !default;
+$rz-base-dark: $rz-base-700 !default;
+$rz-base-darker: $rz-base-900 !default;
+$rz-base-background-color: $windowBackgroundColor !default;
+
+$rz-primary-light: $rzPrimaryLight !default;
+$rz-primary-lighter: $rzPrimaryLighter !default;
+$rz-primary-dark: $rzPrimaryDark !default;
+$rz-primary-darker: $rzPrimaryDarker !default;
+
+$rz-secondary-light: $rzSecondaryLight !default;
+$rz-secondary-lighter: $rzSecondaryLighter !default;
+$rz-secondary-dark: $rzSecondaryDark !default;
+$rz-secondary-darker: $rzSecondaryDarker !default;
+
+$rz-info-light: $rzInfoLight !default;
+$rz-info-lighter: $rzInfoLighter !default;
+$rz-info-dark: $rzInfoDark !default;
+$rz-info-darker: $rzInfoDarker !default;
+
+$rz-success-light: $rzSuccessLight !default;
+$rz-success-lighter: $rzSuccessLighter !default;
+$rz-success-dark: $rzSuccessDark !default;
+$rz-success-darker: $rzSuccessDarker !default;
+
+$rz-warning-light: $rzWarningLight !default;
+$rz-warning-lighter: $rzWarningLighter !default;
+$rz-warning-dark: $rzWarningDark !default;
+$rz-warning-darker: $rzWarningDarker !default;
+
+$rz-danger-light: $rzDangerLight !default;
+$rz-danger-lighter: $rzDangerLighter !default;
+$rz-danger-dark: $rzDangerDark !default;
+$rz-danger-darker: $rzDangerDarker !default;
+
+// Theme constants
+$rz-border-width: $inputBorderWidth !default;
+$rz-border-radius: $inputBorderRadius !default;
+$rz-root-font-size: 100% !default;
+$rz-body-font-size: $bodyFontSize !default;
+$rz-body-line-height: $paragraphLineHeight !default;
+$rz-body-background-color: $bodyBackgroundColor !default;
+$rz-body-background: none !default;
+$rz-text-font-family: $bodyFontFamily !default;
+$rz-outline-offset: 1px !default;
+$rz-outline-width: 2px !default;
+$rz-outline-color: var(--rz-primary-light) !default;
+
+// Utilities
+$rz-text-title-color: $h1ForegroundColor !default;
+$rz-text-color: $bodyForegroundColor !default;
+$rz-text-secondary-color: $metadataForegroundColor !default;
+$rz-text-tertiary-color: $rzTextTertiaryColor !default;
+$rz-text-disabled-color: $hyperlinkDisabledForegroundColor !default;
+$rz-text-contrast-color: $buttonForegroundColor !default;
+
+$rz-border-normal: #{$inputBorderWidth} #{$inputBorderStyle} #{$inputBorderColor} !default;
+$rz-border-hover: #{$inputBorderWidth} #{$inputBorderStyle} $inputHoverBorderColor !default;
+$rz-border-focus: #{$inputBorderWidth} #{$inputBorderStyle} $inputFocusedBorderColor !default;
+$rz-border-disabled: #{$inputBorderWidth} #{$inputBorderStyle} $inputReadOnlyBorderColor !default;
+
+$rz-shadow-1: $defaultBoxShadow !default;
+$rz-shadow-2: $defaultBoxShadow !default;
+$rz-shadow-3: $defaultBoxShadow !default;
+$rz-shadow-4: $windowBoxShadow !default;
+$rz-shadow-5: $modalBoxShadow !default;
+$rz-shadow-6: $modalBoxShadow !default;
+$rz-shadow-7: $modalBoxShadow !default;
+$rz-shadow-8: $modalBoxShadow !default;
+$rz-shadow-9: $modalBoxShadow !default;
+$rz-shadow-10: $modalBoxShadow !default;
+
+// Buttons and inputs
+$button-base-background-color: $buttonBackgroundColor !default;
+$button-base-color: $buttonForegroundColor !default;
+$button-border-radius: $buttonBorderRadius !default;
+$button-shadow: none !default;
+$button-hover-shadow: none !default;
+$button-hover-gradient: none !default;
+$button-focus-shadow: none !default;
+$button-focus-gradient: none !default;
+$button-active-shadow: none !default;
+$button-active-gradient: none !default;
+$button-disabled-opacity: 1 !default;
+
+$input-font-size: $inputFontSize !default;
+$input-height: auto !default;
+$input-line-height: normal !default;
+$input-padding-block: .5em !default;
+$input-padding-inline: .5em !default;
+$input-background-color: $inputBackgroundColor !default;
+$input-hover-background-color: $inputBackgroundColor !default;
+$input-focus-background-color: $inputBackgroundColor !default;
+$input-placeholder-color: $inputPlaceholderColor !default;
+$input-border-radius: $inputBorderRadius !default;
+$input-border: #{$inputBorderWidth} #{$inputBorderStyle} #{$inputBorderColor} !default;
+$input-border-block-end: #{$inputBorderWidth} #{$inputBorderStyle} #{$inputBorderColor} !default;
+$input-shadow: none !default;
+$input-hover-shadow: none !default;
+$input-hover-border: #{$inputBorderWidth} #{$inputBorderStyle} $inputHoverBorderColor !default;
+$input-hover-border-block-end: #{$inputBorderWidth} #{$inputBorderStyle} $inputHoverBorderColor !default;
+$input-focus-shadow: $inputFocusedBoxShadow !default;
+$input-focus-border: #{$inputBorderWidth} #{$inputBorderStyle} $inputFocusedBorderColor !default;
+$input-focus-border-block-end: #{$inputBorderWidth} #{$inputBorderStyle} $inputFocusedBorderColor !default;
+$input-disabled-background-color: $inputReadOnlyBackgroundColor !default;
+$input-disabled-border: #{$inputBorderWidth} #{$inputBorderStyle} $inputReadOnlyBorderColor !default;
+$input-disabled-border-block-end: #{$inputBorderWidth} #{$inputBorderStyle} $inputReadOnlyBorderColor !default;
+$input-disabled-color: $inputReadOnlyForegroundColor !default;
+$input-disabled-shadow: none !default;
+$input-disabled-opacity: 1 !default;
+
+// Feedback
+$alert-background-color: $errorBackgroundColor !default;
+$alert-color: $errorForegroundColor !default;
+$form-error-color: $errorBackgroundColor !default;
+$validator-background-color: $errorBackgroundColor !default;
+$validator-color: $errorForegroundColor !default;
+$validator-shadow: 0 6px 14px 0 $rzValidatorShadowColor !default;
+
+$notification-error-background-color: $errorBackgroundColor !default;
+$notification-error-color: $errorForegroundColor !default;
+$notification-info-background-color: $tipBackgroundColor !default;
+$notification-info-color: $tipForegroundColor !default;
+$notification-success-background-color: $successBackgroundColor !default;
+$notification-success-color: $successForegroundColor !default;
+$notification-warning-background-color: $warningBackgroundColor !default;
+$notification-warning-color: $warningForegroundColor !default;
+
+// Windows and panels
+$dialog-background-color: $modalBackgroundColor !default;
+$dialog-border: $modalBorder !default;
+$dialog-border-radius: $modalBorderRadius !default;
+$dialog-shadow: $modalBoxShadow !default;
+$dialog-title-background-color: $modalTitleBackgroundColor !default;
+$dialog-title-border: #{$modalTitleBorderWidth} solid $modalTitleBorderColor !default;
+$dialog-title-color: $modalTitleForegroundColor !default;
+$dialog-title-padding-block: $modalTitlePadding !default;
+$dialog-title-padding-inline: $modalTitlePadding !default;
+$dialog-title-font-size: $modalTitleFontSize !default;
+$dialog-title-font-weight: $modalTitleFontWeight !default;
+$dialog-title-letter-spacing: 0 !default;
+$dialog-title-line-height: normal !default;
+$dialog-close-font-size: $modalTitleFontSize !default;
+$dialog-close-color: $modalTitleButtonForegroundColor !default;
+$dialog-close-hover-color: $modalTitleButtonHoverForegroundColor !default;
+$dialog-mask-background-color: $overlayBackgroundColor !default;
+
+$panel-background-color: $windowBackgroundColor !default;
+$panel-shadow: $windowBoxShadow !default;
+$panel-border-radius: $inputBorderRadius !default;
+$card-shadow: $windowBoxShadow !default;
+
+// Header and footer
+$header-background-color: $headerBackgroundColor !default;
+$header-border: #{$headerBorderWidth} solid $headerBorderColor !default;
+$header-color: $headerForegroundColor !default;
+$header-shadow: $headerBoxShadow !default;
+
+$footer-padding: $footerPadding !default;
+$footer-background-color: $footerBackgroundColor !default;
+$footer-border: #{$footerBorderWidth} solid $footerBorderColor !default;
+$footer-color: $footerForegroundColor !default;
+
+// Menus
+$menu-background-color: $contextMenuBackgroundColor !default;
+$menu-border: $contextMenuBorder !default;
+$menu-item-color: $contextMenuItemLinkForegroundColor !default;
+$menu-item-hover-color: $contextMenuItemLinkHoverForegroundColor !default;
+$menu-item-hover-background-color: $contextMenuItemLinkHoverBackgroundColor !default;
+$menu-item-selected-color: $contextMenuItemLinkForegroundColor !default;
+$menu-top-item-color: $headerForegroundColor !default;
+$menu-top-item-background-color: transparent !default;
+$menu-top-item-hover-color: $headerHyperlinkHoverColor !default;
+$menu-top-item-hover-background-color: transparent !default;
+$menu-top-item-selected-color: $headerHyperlinkColor !default;
+$menu-top-item-selected-background-color: transparent !default;
+$menu-top-item-icon-color: $headerMenuButtonColor !default;
+$menu-top-item-icon-hover-color: $headerMenuButtonHoverColor !default;
+$context-menu-box-shadow: $contextMenuBoxShadow !default;
+
+$profile-menu-background-color: $contextMenuBackgroundColor !default;
+$profile-menu-top-item-background-color: $headerBackgroundColor !default;
+$profile-menu-border: $contextMenuBorder !default;
+$profile-menu-toggle-button-color: $headerMenuButtonColor !default;
+$profile-menu-item-hover-background-color: $contextMenuItemLinkHoverBackgroundColor !default;
+
+$panel-menu-item-border: $verticalNodeBorderBottom !default;
+$panel-menu-item-color: $verticalNodeForegroundColor !default;
+$panel-menu-item-background-color: $verticalNodeBackgroundColor !default;
+$panel-menu-item-hover-color: $verticalNodeHoverForegroundColor !default;
+$panel-menu-item-hover-background-color: $verticalNodeHoverBackgroundColor !default;
+$panel-menu-item-active-color: $verticalNodeSelectedForegroundColor !default;
+$panel-menu-item-active-background-color: $verticalNodeSelectedBackgroundColor !default;
+$panel-menu-item-active-indicator: $accent1BackgroundColor !default;
+$panel-menu-item-2nd-level-color: $verticalNodeForegroundColor !default;
+$panel-menu-item-2nd-level-background-color: $verticalNodeBackgroundColor !default;
+$panel-menu-item-2nd-level-hover-color: $verticalNodeHoverForegroundColor !default;
+$panel-menu-item-2nd-level-hover-background-color: $verticalNodeHoverBackgroundColor !default;
+$panel-menu-item-2nd-level-active-color: $verticalNodeSelectedForegroundColor !default;
+$panel-menu-item-2nd-level-active-background-color: $verticalNodeSelectedBackgroundColor !default;
+$panel-menu-item-3rd-level-color: $verticalNodeForegroundColor !default;
+$panel-menu-item-3rd-level-background-color: $verticalNodeBackgroundColor !default;
+$panel-menu-item-3rd-level-hover-color: $verticalNodeHoverForegroundColor !default;
+$panel-menu-item-3rd-level-hover-background-color: $verticalNodeHoverBackgroundColor !default;
+$panel-menu-item-3rd-level-active-color: $verticalNodeSelectedForegroundColor !default;
+$panel-menu-item-3rd-level-active-background-color: $verticalNodeSelectedBackgroundColor !default;
+$panel-menu-icon-color: $verticalNodeForegroundColor !default;
+
+// Tabs and trees
+$tabs-border: #{$inputBorderWidth} #{$inputBorderStyle} $tabBorderColor !default;
+$tabs-shadow: none !default;
+$tabs-background-color: $tabSelectedBackgroundColor !default;
+$tabs-tab-font-size: $tabFontSize !default;
+$tabs-tab-font-weight: $tabFontWeight !default;
+$tabs-tab-text-transform: $tabTextTransform !default;
+$tabs-tab-padding-block: $tabVerticalPadding !default;
+$tabs-tab-padding-inline: $tabHorizontalPadding !default;
+$tabs-tab-background-color: $tabBackgroundColor !default;
+$tabs-tab-color: $tabForegroundColor !default;
+$tabs-tab-selected-background-color: $tabSelectedBackgroundColor !default;
+$tabs-tab-selected-color: $tabSelectedForegroundColor !default;
+$tabs-tab-selected-top-border-color: $tabSelectedBorderColor !default;
+$tabs-tab-hover-background-color: $tabHoverBackgroundColor !default;
+$tabs-tab-hover-color: $tabHoverForegroundColor !default;
+
+$tree-node-selected-background-color: $treeNodeSelectedBackgroundColor !default;
+$tree-node-selected-color: $treeNodeSelectedForegroundColor !default;
+$tree-node-hover-background-color: $treeNodeHoverBackgroundColor !default;
+$tree-node-hover-color: $treeNodeHoverForegroundColor !default;
+
+// Radzen control states
+$timepicker-button-background-color: $buttonBackgroundColor !default;
+$timepicker-button-color: $buttonForegroundColor !default;
+
+$chip-font-size: 1em !default;
+$chip-icon-size: 1em !default;
+$chip-font-weight: normal !default;
+$chip-padding-block: .125em !default;
+$chip-padding-inline: .5em !default;
+$chip-gap: .25em !default;
+$chip-list-gap: .25em !default;
+$chip-border-radius: $inputBorderRadius !default;
+
+$dropdown-chips-padding-block: .25em !default;
+$dropdown-chips-padding-inline: .25em !default;
+$dropdown-item-hover-background-color: $inputButtonHoverBackgroundColor !default;
+$dropdown-item-hover-color: $inputButtonHoverForegroundColor !default;
+$dropdown-item-selected-background-color: $inputButtonHoverBackgroundColor !default;
+$dropdown-item-selected-color: $inputButtonHoverForegroundColor !default;
+$dropdown-item-selected-hover-background-color: $inputButtonHoverBackgroundColor !default;
+$dropdown-item-selected-hover-color: $inputButtonHoverForegroundColor !default;
+$dropdown-item-selected-shadow: none !default;
+$dropdown-filter-border: #{$inputBorderWidth} #{$inputBorderStyle} #{$inputBorderColor} !default;
+
+$checkbox-width: 1em !default;
+$checkbox-height: $checkbox-width !default;
+$checkbox-border-radius: $inputBorderRadius !default;
+$checkbox-border-width: $inputBorderWidth !default;
+$checkbox-label-margin-inline: 0 !default;
+$checkbox-checked-background-color: $accent1BackgroundColor !default;
+$checkbox-checked-hover-background-color: $accent1BackgroundColor !default;
+$checkbox-checked-disabled-background-color: $accent1BackgroundColor !default;
+$checkbox-checked-border: #{$inputBorderWidth} #{$inputBorderStyle} $accent1BackgroundColor !default;
+$checkbox-checked-hover-border: #{$inputBorderWidth} #{$inputBorderStyle} $accent1BackgroundColor !default;
+$checkbox-checked-disabled-border: #{$inputBorderWidth} #{$inputBorderStyle} $accent1BackgroundColor !default;
+$checkbox-checked-color: $accent1ForegroundColor !default;
+$checkbox-icon-width: 1em !default;
+$checkbox-icon-font-size: 1em !default;
+
+$radio-active-background-color: $windowBackgroundColor !default;
+$radio-active-shadow: none !default;
+$radio-checked-background-color: $windowBackgroundColor !default;
+$radio-checked-hover-background-color: $windowBackgroundColor !default;
+$radio-checked-hover-shadow: none !default;
+$radio-checked-color: $accent1ForegroundColor !default;
+$radio-circle-background-color: $accent1BackgroundColor !default;
+$radio-circle-shadow: none !default;
+$radio-circle-hover-background-color: $rzPrimaryLight !default;
+$radio-checked-border: #{$inputBorderWidth} #{$inputBorderStyle} $accent1BackgroundColor !default;
+
+$pager-background-color: $filtersBackgroundColor !default;
+$pager-padding: .5em !default;
+$pager-gap: .5em !default;
+$pager-border: #{$inputBorderWidth} #{$inputBorderStyle} $inputBorderColor !default;
+$pager-button-border-radius: $inputBorderRadius !default;
+$pager-numeric-button-background-color: $buttonCancelBackgroundColor !default;
+$pager-numeric-button-color: $buttonCancelForegroundColor !default;
+$pager-numeric-button-border: 1px solid transparent !default;
+$pager-numeric-button-hover-background-color: $accent1BackgroundColorLight25 !default;
+$pager-numeric-button-hover-color: $accent1ForegroundColor !default;
+$pager-numeric-button-padding: .375em !default;
+$pager-numeric-button-selected-background-color: $accent1BackgroundColor !default;
+$pager-numeric-button-selected-color: $accent1ForegroundColor !default;
+$pager-numeric-button-selected-border: #{$inputBorderWidth} #{$inputBorderStyle} $accent1BackgroundColor !default;
+$pager-back-button-background-color: $buttonCancelBackgroundColor !default;
+$pager-back-button-color: $buttonCancelForegroundColor !default;
+$pager-back-button-hover-background-color: $accent1BackgroundColorLight25 !default;
+$pager-back-button-hover-color: $accent1ForegroundColor !default;
+$pager-next-button-background-color: $buttonCancelBackgroundColor !default;
+$pager-next-button-color: $buttonCancelForegroundColor !default;
+$pager-next-button-hover-background-color: $accent1BackgroundColorLight25 !default;
+$pager-next-button-hover-color: $accent1ForegroundColor !default;
+$pager-summary-padding: .75em .5em !default;
+$pager-summary-font-size: $bodyFontSize !default;
+$pager-summary-color: $metadataForegroundColor !default;
+
+$grid-cell-focus-background-color: $accent1BackgroundColorLight25 !default;
+$grid-cell-focus-color: $accent1ForegroundColor !default;
+$grid-hover-background-color: $accent1BackgroundColorLight25 !default;
+$grid-hover-color: $accent1ForegroundColor !default;
+$grid-selected-background-color: $accent1BackgroundColorLight25 !default;
+$grid-selected-color: $accent1ForegroundColor !default;
+$grid-stripe-background-color: $windowBackgroundColor !default;
+$grid-clear-filter-button-background-color: $buttonCancelBackgroundColor !default;
+$grid-clear-filter-button-color: $buttonCancelForegroundColor !default;
+$grid-clear-filter-button-shadow: none !default;
+$grid-apply-filter-button-background-color: $buttonBackgroundColor !default;
+$grid-apply-filter-button-color: $buttonForegroundColor !default;
+$grid-apply-filter-button-shadow: none !default;
+
+$scheduler-toolbar-color: $buttonForegroundColor !default;
+$scheduler-toolbar-button-background-color: $buttonBackgroundColor !default;
+
+$splitbutton-background-color: $buttonBackgroundColor !default;
+
+$upload-choose-background-color: $buttonBackgroundColor !default;
+$upload-choose-color: $buttonForegroundColor !default;
+$upload-choose-hover-background-color: $buttonHoverBackgroundColor !default;
+$upload-choose-hover-color: $buttonHoverForegroundColor !default;
+$upload-choose-active-background-color: $buttonPressedBackgroundColor !default;
+$upload-choose-active-color: $buttonPressedForegroundColor !default;
+$upload-cancel-background-color: $buttonCancelBackgroundColor !default;
+$upload-cancel-color: $buttonCancelForegroundColor !default;
+$upload-button-background-color: $buttonBackgroundColor !default;
+
+$scrollbar-color: $scrollbarColor !default;
+
+@import 'standard-base';
+
+%rz-full-width {
+    width: 100%;
+    max-width: 100%;
+}
+
+%rz-vertical-margin {
+    margin-top: .375em;
+    margin-bottom: .375em;
+}
+
+.rz-autocomplete,
+.rz-combobox,
+.rz-colorpicker,
+.rz-datepicker,
+.rz-daterangepicker,
+.rz-datetimepicker,
+.rz-dropdown,
+.rz-field,
+.rz-form-field,
+.rz-html-editor,
+.rz-input,
+.rz-multiselect,
+.rz-numeric,
+.rz-textbox,
+.rz-timepicker,
+.rz-timespanpicker {
+    @extend %rz-full-width;
+    @extend %rz-vertical-margin;
+}
+
+.rz-checkbox-list-vertical,
+.rz-checkbox-list-horizontal {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin: .5em 1em .5em 0;
+
+    &.tight {
+        margin: 0;
+
+        .rz-chkbox-label {
+            padding-bottom: 0;
+            padding-top: 0;
+        }
+    }
+
+    &.tight-bottom {
+        margin-bottom: 0 !important;
+    }
+
+    &.tight-top {
+        margin-top: 0;
+        padding-top: 0;
+    }
+
+    .rz-chkbox-label {
+        color: $inputForegroundColor;
+        font-family: $labelFontFamily;
+        font-size: 1em;
+        font-weight: normal;
+        padding: .5em;
+    }
+
+    &.rz-state-disabled .rz-chkbox-label,
+    .rz-chkbox-label.rz-state-disabled {
+        color: $labelForegroundColorMuted;
+    }
+}
+
+.rz-dialog-content,
+.rz-dialog-side-content {
+    @extend .c-padding-small;
+}
+
+.rz-dropdown-multiple,
+.rz-multiselect {
+    display: flex;
+    align-items: center;
+
+    .rz-chip-list,
+    .rz-dropdown-chips-wrapper {
+        flex: 1 1 auto;
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 0 .25em;
+        min-height: 1em;
+    }
+}
+
+.rz-chip {
+    font-family: $inputFontFamily;
+}
+
+.rz-colorpicker-button {
+    .rz-button {
+        background-color: $buttonBackgroundColor;
+        color: $buttonForegroundColor;
+        background-image: none;
+        box-shadow: none;
+
+        &:not(.rz-state-disabled) {
+            &:hover,
+            &:focus-visible {
+                background-color: $buttonHoverBackgroundColor;
+                color: $buttonHoverForegroundColor;
+                background-image: none;
+                box-shadow: none;
+            }
+
+            &:active {
+                background-color: $buttonPressedBackgroundColor;
+                color: $buttonPressedForegroundColor;
+                background-image: none;
+                box-shadow: none;
+            }
+        }
+    }
+}
+
+.rz-dialog-content {
+    label {
+        @extend .c-label;
+    }
+
+    input.rz-textbox,
+    textarea,
+    select {
+        @extend .c-input;
+    }
+
+    .rz-html-editor-dialog-item label {
+        @extend .c-label;
+    }
+}

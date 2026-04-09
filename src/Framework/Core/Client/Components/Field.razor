@@ -1,0 +1,32 @@
+﻿@if (Container == Containers.Label)
+{
+    <label class="c-field @SizeClass @OrientationClass @PaddingClass">
+        @if (Label.HasSomething())
+        {
+            <div class="label-container">
+                <div class="label">@Label</div>
+                @if (LabelActions is not null)
+                {
+                    @LabelActions
+                }
+            </div>
+        }
+        @ChildContent
+    </label>
+}
+else
+{
+    <div class="c-field @SizeClass @OrientationClass @PaddingClass">
+        @if (Label.HasSomething())
+        {
+            <div class="label-container">
+                <div class="label">@Label</div>
+                @if (LabelActions is not null)
+                {
+                    @LabelActions
+                }
+            </div>
+        }
+        @ChildContent
+    </div>
+}

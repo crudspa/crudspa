@@ -1,0 +1,39 @@
+﻿@namespace Crudspa.Education.Common.Client.Plugins
+@PluginFragment
+
+@code
+{
+    [Parameter, EditorRequired] public String? TypeName { get; set; } = String.Empty;
+    [Parameter] public Activity? Activity { get; set; }
+    [Parameter] public EventCallback<Guid> ActivityCompleted { get; set; }
+    [Parameter] public Guid? AssignmentBatchId { get; set; }
+
+    public Object? Instance { get; private set; }
+
+    private RenderFragment PluginFragment => builder =>
+    {
+        if (TypeName.HasNothing())
+            throw new("TypeName was not supplied.");
+
+        var pluginType = Type.GetType(TypeName)
+            ?? throw new($"Component type '{TypeName}' not found.");
+
+        if (!typeof(IActivityDisplay).IsAssignableFrom(pluginType))
+            throw new($"Interface '{nameof(IActivityDisplay)}' is not implemented by the component '{TypeName}'.");
+
+        builder.OpenComponent(0, pluginType);
+
+        if (Activity is not null)
+            builder.AddAttribute(1, nameof(IActivityDisplay.Activity), Activity);
+
+        if (ActivityCompleted.HasDelegate)
+            builder.AddAttribute(2, nameof(IActivityDisplay.ActivityCompleted), ActivityCompleted);
+
+        if (AssignmentBatchId.HasSomething())
+            builder.AddAttribute(3, nameof(IActivityDisplay.AssignmentBatchId), AssignmentBatchId);
+
+        builder.AddComponentReferenceCapture(4, component => Instance = component);
+
+        builder.CloseComponent();
+    };
+}

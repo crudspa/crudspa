@@ -1,0 +1,21 @@
+<button @onclick="() => Clicked.InvokeAsync()"
+        disabled="@Disabled">
+    <div class="c-button @ButtonClass @(Text.HasSomething() ? "" : "icon-only")">
+        @if (IconClass.HasSomething() && IconPosition == IconPositions.Left)
+        {
+            <div class="icon">
+                <span class="@IconClass"></span>
+            </div>
+        }
+        @if (Text.HasSomething())
+        {
+            <div class="text">@Text</div>
+        }
+        @if (IconClass.HasSomething() && IconPosition == IconPositions.Right)
+        {
+            <div class="icon">
+                <span class="@IconClass"></span>
+            </div>
+        }
+    </div>
+</button>

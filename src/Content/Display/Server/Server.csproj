@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>Crudspa.Content.Display.Server</AssemblyName>
+    <RootNamespace>Crudspa.Content.Display.Server</RootNamespace>
+    <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Embedded\Images\Check-Empty.svg" />
+    <EmbeddedResource Include="Embedded\Images\Check-Filled.svg" />
+    <EmbeddedResource Include="Embedded\Images\Error.svg" />
+    <EmbeddedResource Include="Embedded\Images\Exclamation.svg" />
+    <EmbeddedResource Include="Embedded\Images\Notebook.svg" />
+    <EmbeddedResource Include="Embedded\Sounds\AchievementGrow.mp3" />
+    <EmbeddedResource Include="Embedded\Sounds\AchievementShrink.mp3" />
+    <EmbeddedResource Include="Embedded\Sounds\ButtonPress.mp3" />
+    <EmbeddedResource Include="Embedded\Sounds\ChoiceCorrect.mp3" />
+    <EmbeddedResource Include="Embedded\Sounds\ChoiceIncorrect.mp3" />
+    <EmbeddedResource Include="Embedded\Sounds\ChoiceSelected.mp3" />
+    <EmbeddedResource Include="Embedded\Sounds\Tada.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Styles\**\*.scss" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\Shared.csproj" />
+    <ProjectReference Include="..\..\..\Framework\Core\Server\Server.csproj" />
+  </ItemGroup>
+</Project>

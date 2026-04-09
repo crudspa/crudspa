@@ -1,0 +1,34 @@
+<div class="c-button-group c-status-edit @(ReadOnly ? "read-only" : String.Empty) @CssClass">
+    @if (AllowNull)
+    {
+        <div class="option">
+            <input type="radio"
+                   class="input"
+                   disabled="@ReadOnly"
+                   checked="@(Value is null)"
+                   id="@(InstanceId)-null"
+                   name="@InstanceId"
+                   @onchange="() => HandleRadioChanged(null)">
+            <label for="@(InstanceId)-null"
+                   class="@OptionClass(null, null, NullText)">
+                @(NullText)
+            </label>
+        </div>
+    }
+    @foreach (var named in LookupValues)
+    {
+        <div class="option">
+            <input type="radio"
+                   class="input"
+                   disabled="@ReadOnly"
+                   checked="@Value.Equals(named.Id)"
+                   id="@(InstanceId)-@(named.Id)"
+                   name="@InstanceId"
+                   @onchange="() => HandleRadioChanged(named.Id)">
+            <label for="@(InstanceId)-@(named.Id)"
+                   class="@OptionClass(named, named.Id, named.Name)">
+                @named.Name
+            </label>
+        </div>
+    }
+</div>

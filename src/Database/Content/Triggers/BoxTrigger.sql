@@ -1,0 +1,82 @@
+create trigger [Content].[BoxTrigger] on [Content].[Box]
+    for update
+as
+
+insert [Content].[Box] (
+     Id
+    ,VersionOf
+    ,Updated
+    ,UpdatedBy
+    ,IsDeleted
+    ,BackgroundColor
+    ,BackgroundImageId
+    ,BorderColor
+    ,BorderRadius
+    ,BorderThickness
+    ,BorderThicknessTop
+    ,BorderThicknessLeft
+    ,BorderThicknessRight
+    ,BorderThicknessBottom
+    ,CustomFontIndex
+    ,FontSize
+    ,FontWeight
+    ,ForegroundColor
+    ,MarginBottom
+    ,MarginLeft
+    ,MarginRight
+    ,MarginTop
+    ,PaddingBottom
+    ,PaddingLeft
+    ,PaddingRight
+    ,PaddingTop
+    ,ShadowBlurRadius
+    ,ShadowColor
+    ,ShadowOffsetX
+    ,ShadowOffsetY
+    ,ShadowSpreadRadius
+    ,TextShadowBlurRadius
+    ,TextShadowColor
+    ,TextShadowOffsetX
+    ,TextShadowOffsetY
+    ,HeadingLineHeight
+    ,ParagraphLineHeight
+)
+select
+     newid()
+    ,deleted.Id
+    ,deleted.Updated
+    ,deleted.UpdatedBy
+    ,deleted.IsDeleted
+    ,deleted.BackgroundColor
+    ,deleted.BackgroundImageId
+    ,deleted.BorderColor
+    ,deleted.BorderRadius
+    ,deleted.BorderThickness
+    ,deleted.BorderThicknessTop
+    ,deleted.BorderThicknessLeft
+    ,deleted.BorderThicknessRight
+    ,deleted.BorderThicknessBottom
+    ,deleted.CustomFontIndex
+    ,deleted.FontSize
+    ,deleted.FontWeight
+    ,deleted.ForegroundColor
+    ,deleted.MarginBottom
+    ,deleted.MarginLeft
+    ,deleted.MarginRight
+    ,deleted.MarginTop
+    ,deleted.PaddingBottom
+    ,deleted.PaddingLeft
+    ,deleted.PaddingRight
+    ,deleted.PaddingTop
+    ,deleted.ShadowBlurRadius
+    ,deleted.ShadowColor
+    ,deleted.ShadowOffsetX
+    ,deleted.ShadowOffsetY
+    ,deleted.ShadowSpreadRadius
+    ,deleted.TextShadowBlurRadius
+    ,deleted.TextShadowColor
+    ,deleted.TextShadowOffsetX
+    ,deleted.TextShadowOffsetY
+    ,deleted.HeadingLineHeight
+    ,deleted.ParagraphLineHeight
+from deleted

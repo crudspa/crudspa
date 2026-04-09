@@ -1,0 +1,9 @@
+@if (Model?.AudioElement.FileFile.Id is not null)
+{
+    <AudioPlayer AudioFile="Model.AudioElement.FileFile"
+                 PlayText="Listen"
+                 StopText="Listen"
+                 PlayIcon="c-icon-volume-high"
+                 StopIcon="c-icon-volume-high"
+                 MediaPlayed="HandleAudioPlayed" />
+}

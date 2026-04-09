@@ -1,0 +1,1092 @@
+/// <reference path="defaults.scss" />
+
+.c-overlay-parent {
+    overflow: visible;
+    position: relative;
+}
+
+.c-waiter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: $overlayBackgroundColor;
+    cursor: wait;
+    text-align: center;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.no-overlay {
+        background-color: transparent;
+    }
+
+    .content {
+        background-color: $waiterBackgroundColor;
+        border: 1px solid $defaultBorderColor;
+        border-radius: $waiterBorderRadius;
+        box-shadow: $defaultBoxShadow;
+        color: $waiterForegroundColor;
+        cursor: wait;
+        min-width: 16em;
+    }
+
+    .animation {
+        position: relative;
+        height: 2em;
+    }
+
+    .text {
+        padding: 2em 4em;
+    }
+}
+
+.c-alerts {
+
+    @extend .c-padding-small-hor;
+
+    .alert {
+
+        @extend .c-padding-small-vert;
+
+        .bubble {
+            align-items: center;
+            border-radius: $alertBorderRadius;
+            display: flex;
+            line-height: $paragraphLineHeight;
+            padding: 1em;
+
+            ul,
+            li {
+                list-style: none;
+                padding-left: 0;
+            }
+
+            &.error,
+            &.error a {
+                background-color: $errorBackgroundColor;
+                color: $errorForegroundColor;
+            }
+
+            &.lock,
+            &.lock a {
+                background-color: $lockBackgroundColor;
+                color: $lockForegroundColor;
+            }
+
+            &.success,
+            &.success a {
+                background-color: $successBackgroundColor;
+                color: $successForegroundColor;
+            }
+
+            &.tip,
+            &.tip a {
+                background-color: $tipBackgroundColor;
+                color: $tipForegroundColor;
+            }
+
+            &.warning,
+            &.warning a {
+                background-color: $warningBackgroundColor;
+                color: $warningForegroundColor;
+            }
+        }
+
+        .icon {
+            font-size: 2em;
+            line-height: 1;
+            margin-right: .5em;
+        }
+
+        .text {
+            flex: 1 1 auto;
+        }
+
+        .dismiss {
+            @extend .c-padding-tiny-hor;
+
+            a {
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+.c-no-records {
+    border-bottom: 1px solid $defaultBorderColor;
+    font-style: italic;
+    margin: 0 auto;
+    padding: 3em 1em;
+    text-align: center;
+
+    &[disabled] {
+        color: $hyperlinkDisabledForegroundColor;
+    }
+}
+
+.c-filters {
+    @extend .c-wrap;
+    background-color: $filtersBackgroundColor;
+    color: $filtersForegroundColor;
+    border-color: $filtersBorderColor;
+    border-radius: $filtersBorderRadius;
+    border-style: solid;
+    border-width: 1px 0;
+
+    &.space-above {
+        margin-top: .75em;
+    }
+
+    > .fields {
+        flex: 1 1 1em;
+        @extend .c-padding-tiny-top;
+    }
+
+    > .buttons {
+        @extend .c-padding-small-hor;
+        @extend .c-button-group;
+        margin: .5em auto;
+    }
+
+    > .center {
+        margin: 1em auto;
+    }
+}
+
+.c-card {
+    @extend .c-overlay-parent;
+    @extend .c-border-bottom;
+    @extend .c-wrap;
+    @extend .c-padding-tiny-vert;
+
+    &.added {
+        animation: c-kf-fade-in .5s ease-in;
+    }
+
+    &.saved {
+        animation: c-kf-pulse-result-background 1s linear;
+    }
+
+    &.removed {
+        animation: c-kf-fade-out .5s ease-out;
+    }
+
+    &.no-border {
+        border-bottom: none;
+    }
+
+    &.tight {
+        padding: 0 0 0 0;
+    }
+
+    .selection {
+        padding: 0 0 0 .75em;
+    }
+
+    .values {
+        flex: 1 1 1em;
+        min-width: $screenTiny;
+
+        > .title {
+            @extend .c-padding-small-hor;
+            color: $resultTitleForegroundColor;
+            font-family: $resultTitleFontFamily;
+            font-size: $resultTitleFontSize;
+            font-weight: $resultTitleFontWeight;
+            padding-bottom: .25em;
+            padding-top: .375em;
+
+            a {
+                color: $windowForegroundColor;
+                font-weight: $resultTitleFontWeight;
+
+                &:visited {
+                    color: $windowForegroundColor;
+                }
+
+                &:hover,
+                &:active {
+                    color: $hyperlinkForegroundColor;
+                }
+            }
+
+            .metadata {
+                background-color: $resultTitleMetadataBackgroundColor;
+                font-size: $resultTitleMetadataFontSize;
+                font-style: $resultTitleMetadataFontStyle;
+                margin: 0 0 0 1em;
+                padding: .75em;
+            }
+
+            &.normal-height {
+                line-height: 1;
+            }
+        }
+    }
+
+    .pane-links {
+        background-color: $tabBackgroundColor;
+        border-width: 0 0 0 1px;
+        border-color: $defaultBorderColor;
+        border-style: solid;
+        padding: .5em 1em .75em 1em;
+        margin: 0 .5em;
+        min-width: 8em;
+
+        &:not(:has(> *)) {
+            display: none;
+        }
+    }
+
+    .buttons {
+        @extend .c-padding-small-hor;
+        @extend .c-button-group;
+        margin: .5em auto;
+    }
+
+    .item-icon {
+        @extend .c-item-icon;
+    }
+}
+
+.c-button-feature {
+    align-items: center;
+    background-color: transparent;
+    border-color: $buttonFeatureBorderColor;
+    color: $buttonFeatureForegroundColor;
+    padding: .25em 1em;
+
+    .icon {
+        color: $buttonFeatureForegroundColor;
+        font-size: 1.375em;
+        padding: .25em .625em .25em .125em;
+    }
+
+    .text {
+        color: $buttonFeatureForegroundColor;
+        font-size: 1em;
+        font-weight: 400;
+        line-height: 1.2;
+        padding: .625em .75em .625em .125em;
+    }
+}
+
+.c-button-feature:not([disabled]):hover {
+    border-color: $accent1BackgroundColor;
+    color: $buttonFeatureHoverForegroundColor;
+}
+
+.c-edit-form {
+    @extend .c-border-bottom;
+}
+
+.c-pager-footer {
+    background-color: $filtersBackgroundColor;
+    position: sticky;
+    bottom: 0;
+    border-top: solid 1px $defaultBorderColor;
+    z-index: 50;
+}
+
+.c-toolbar {
+    @extend .c-padding-small;
+    align-items: center;
+    background-color: $filtersBackgroundColor;
+    color: $filtersForegroundColor;
+    border-color: $filtersBorderColor;
+    border-style: solid;
+    border-width: 0;
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+
+    &.top-bottom-border {
+        border-width: 1px 0;
+    }
+
+    &.bottom-border {
+        border-width: 0 0 1px 0;
+    }
+
+    > .left {
+        align-items: center;
+        flex: 1 0 auto;
+        display: flex;
+        flex-flow: row wrap;
+    }
+
+    > .right {
+        align-items: center;
+        justify-content: flex-end;
+        display: flex;
+        flex: 1 0 auto;
+        flex-flow: row wrap;
+    }
+}
+
+.c-progress-bar {
+    padding: .75em 0 1.5em 0;
+
+    > .text {
+        font-style: italic;
+        padding-bottom: .25em;
+    }
+
+    > .bar {
+    }
+}
+
+.c-batch-section {
+    @extend .c-overlay-parent;
+
+    > .heading {
+        @extend .c-margin-small-hor;
+        @extend .c-wrap;
+        align-items: flex-end;
+        border-bottom: $sectionHeadingBorder;
+        color: $sectionHeadingForegroundColor;
+
+        .title {
+            padding-top: .5em;
+            padding-bottom: .25em;
+            flex: 1 1 auto;
+            font-family: $sectionHeadingFontFamily;
+            font-size: $sectionHeadingFontSize;
+            font-weight: $sectionHeadingFontWeight;
+
+            input {
+                background-color: $inputBackgroundColor;
+                color: $inputForegroundColor;
+                padding: .5em 0 .25em 0;
+
+                &[disabled] {
+                    border-color: transparent;
+                    background-color: transparent;
+                }
+            }
+        }
+
+        .info {
+            @extend .c-metadata;
+        }
+
+        .no-border {
+            border-bottom: 1px solid transparent;
+        }
+    }
+}
+
+.c-message {
+    @extend .c-padding-medium;
+
+    .message-container {
+        @extend .c-padding-small-hor;
+        @extend .c-padding-medium-vert;
+        background-color: $inputBackgroundColor;
+        box-shadow: $defaultBoxShadow;
+        border-color: $inputBorderColor;
+        border-style: $inputBorderStyle;
+        border-width: $inputBorderWidth;
+    }
+}
+
+.c-text-messages {
+
+    .message {
+        padding: .75em 0;
+
+        .bubble {
+            border-radius: 1em;
+            line-height: $paragraphLineHeight;
+            padding: 1em;
+
+            &.inbound {
+                background-color: $textMessageInboundBackgroundColor;
+                color: $textMessageInboundForegroundColor;
+                margin-right: 8em;
+
+                .metadata {
+                    color: $textMessageInboundMetadataColor;
+                }
+            }
+
+            &.outbound {
+                background-color: $textMessageOutboundBackgroundColor;
+                color: $textMessageOutboundForegroundColor;
+                margin-left: 8em;
+
+                .metadata {
+                    color: $textMessageOutboundMetadataColor;
+                }
+            }
+
+            .metadata {
+                padding-top: 1em;
+                text-align: right;
+            }
+
+            .status {
+                background-color: rgba(221,221,221,0.5);
+                margin-top: 1em;
+                padding: 0 .5em;
+            }
+        }
+    }
+}
+
+.c-tree {
+    @extend .c-input;
+    max-height: 32em;
+    overflow-y: auto;
+    padding: 0 .5em;
+
+    .node {
+        .body {
+            @extend .c-nowrap;
+            cursor: pointer;
+
+            .expander {
+                padding: 0 .25em 0 0;
+
+                .nothing {
+                    color: transparent;
+                }
+            }
+
+            .name {
+                padding: .25em .5em;
+
+                &:hover {
+                    background-color: $treeNodeHoverBackgroundColor;
+                    color: $treeNodeHoverForegroundColor;
+                }
+
+                &.selected,
+                &.selected:hover {
+                    background-color: $treeNodeSelectedBackgroundColor;
+                    color: $treeNodeSelectedForegroundColor;
+                }
+            }
+        }
+
+        .children {
+            padding-left: 1em;
+        }
+    }
+}
+
+.c-checked-list {
+    @extend .c-input;
+    overflow-y: auto;
+    padding: 0 .5em;
+
+    &.short {
+        max-height: 8em;
+    }
+
+    &.average {
+        max-height: 12em;
+    }
+
+    &.tall {
+        max-height: 24em;
+    }
+
+    &.full {
+        max-height: none;
+    }
+
+    .c-checkbox {
+        margin: 0;
+    }
+}
+
+.c-uploader {
+    @extend .c-input;
+    align-items: center;
+    display: flex;
+    flex-flow: column wrap;
+    width: 100%;
+
+    .header {
+        align-items: center;
+        display: flex;
+        flex-flow: row nowrap;
+        padding: 0 0 .25em 0;
+        width: 100%;
+
+        .icon {
+            font-size: 1.618em;
+        }
+
+        .name {
+            flex: 1 1 auto;
+            padding: .75em;
+            word-break: break-all;
+
+            .none {
+                font-style: italic;
+            }
+        }
+    }
+
+    .player {
+        padding: .5em 0 .25em 0;
+        width: 100%;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+
+        .caption {
+            padding: .5em 0 .25em 0;
+        }
+    }
+}
+
+.c-audio-uploader,
+.c-font-uploader,
+.c-image-uploader,
+.c-import-uploader,
+.c-pdf-uploader,
+.c-video-uploader {
+    @extend .c-input;
+    background-color: $inputBackgroundColor;
+    border-color: $inputBorderColor;
+    border-style: $inputBorderStyle;
+    border-width: $inputBorderWidth;
+    position: relative;
+
+    .progress-bar-wrapper {
+        background-color: $inputBackgroundColor;
+        border-radius: $inputBorderRadius;
+        flex: 1;
+
+        .progress-bar {
+            background-color: $accent1BackgroundColor;
+            height: 100%;
+            transition: width 0.2s ease-in-out;
+
+            .progress-text {
+                color: $accent1ForegroundColor;
+                padding: .125em 0;
+            }
+        }
+    }
+
+    .status-text {
+        font-style: italic;
+        padding: .125em 0;
+    }
+
+    .preview-audio,
+    .preview-image {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+    }
+
+    .picker {
+        position: relative;
+    }
+
+    input[type="file"] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    &.dragging {
+        background-color: $sortableDraggingBackgroundColor;
+    }
+}
+
+.c-user-content,
+.rz-html-editor-content {
+    color: inherit;
+
+    > :first-child {
+        margin-top: 0;
+    }
+
+    > :last-child {
+        margin-bottom: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        margin: 0 0 .5em;
+        line-height: 1.15;
+    }
+
+    p,
+    ul,
+    ol,
+    blockquote {
+        margin: 0 0 .75em;
+    }
+
+    p,
+    li,
+    blockquote {
+        line-height: $paragraphLineHeight;
+    }
+
+    ul,
+    ol {
+        padding-left: 1.5em;
+    }
+
+    li + li {
+        margin-top: .35em;
+    }
+
+    blockquote {
+        border-left: .25em solid $defaultBorderColor;
+        margin-left: 0;
+        padding-left: 1em;
+    }
+}
+
+.c-html-editor-read-only {
+    background-color: $inputReadOnlyBackgroundColor;
+    border: #{$inputBorderWidth} #{$inputBorderStyle} $inputReadOnlyBorderColor;
+    border-radius: $inputBorderRadius;
+    color: $inputReadOnlyForegroundColor;
+    margin: .375em 0;
+
+    .content {
+        @extend .c-user-content;
+        padding: .5rem;
+    }
+}
+
+.c-obscure {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: $obscureColor;
+}
+
+.c-flyover {
+    position: relative;
+    display: none;
+
+    &.shown {
+        display: block;
+        animation: c-kf-fade-in .125s ease-in;
+    }
+
+    .info {
+        @extend .c-padding-small;
+        background-color: $windowBackgroundColor;
+        border: $contextMenuBorder;
+        box-shadow: $contextMenuBoxShadow;
+        font-family: $bodyFontFamily;
+        font-weight: 400;
+        position: absolute;
+        right: 0;
+        top: 1.25em;
+        z-index: 550;
+    }
+}
+
+.c-moved {
+    animation: c-kf-pulse-result-background 1s linear;
+
+    &.c-alternate-row {
+        animation: c-kf-pulse-result-background-alternate-row 1s linear;
+    }
+}
+
+.c-embedded-report {
+    @extend .c-padding-medium-hor;
+    @extend .c-padding-medium-bottom;
+
+    table {
+        border-collapse: collapse;
+
+        tr {
+            border-bottom: 1px solid $defaultBorderColor;
+
+            &.header {
+                border-bottom-width: 2px;
+            }
+        }
+
+        th, td {
+            padding: .5em 1em .5em 0;
+        }
+    }
+}
+
+.c-binder {
+    @extend .c-padding-medium-hor;
+    @extend .c-padding-small-vert;
+    background-color: $binderBackgroundColor;
+    color: $binderForegroundColor;
+    width: 100%;
+
+    .page-count {
+        text-align: center;
+    }
+}
+
+.c-shadowed-binder {
+    @extend .c-binder;
+    border-radius: $binderBorderRadius;
+    box-shadow: $binderBoxShadow;
+}
+
+.c-page {
+    min-height: 20em;
+    min-width: 20em;
+    background-color: $pageBackgroundColor;
+    border-radius: $pageBorderRadius;
+    color: $pageForegroundColor;
+}
+
+.c-element-editor {
+    @extend .c-margin-tiny;
+    background-color: $tabSelectedBackgroundColor;
+    border: 1px solid $tabBorderColor;
+
+    .element-title {
+        @extend .c-padding-tiny;
+        background-color: $windowTitleBackgroundColor;
+        color: $windowTitleForegroundColor;
+        font-size: .75em;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1em;
+        width: 100%;
+    }
+
+    .element-fields {
+        @extend .c-padding-tiny;
+    }
+
+    .element-settings-block {
+        @extend .c-nowrap;
+        align-items: center;
+        width: 100%;
+
+        > .c-field {
+            flex: 1 1 auto;
+            min-width: 0;
+        }
+    }
+
+    .element-settings-icon {
+        align-items: center;
+        color: $postMetadataForegroundColor;
+        display: flex;
+        flex: 0 0 auto;
+        font-size: 3em;
+        justify-content: center;
+        line-height: 1;
+        min-width: 1.7em;
+        opacity: 0.34;
+        padding: 0 .25em;
+
+        @media (max-width: $screenSmall) {
+            display: none;
+        }
+    }
+}
+
+.c-element-type-chooser {
+    display: grid;
+    gap: .5em;
+    grid-template-columns: repeat(auto-fit, minmax(7.25em, 1fr));
+    padding: .25em;
+
+    @media (max-width: $screenTiny) {
+        grid-template-columns: 1fr;
+    }
+
+    > button {
+        background-color: transparent;
+        border: 0;
+        display: block;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    .c-element-type-choice {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: flex-start;
+        min-height: 7em;
+        width: 100%;
+
+        .icon {
+            font-size: 2.9em;
+            line-height: 1;
+            padding: .38em .4em 0 .4em;
+            text-align: center;
+        }
+
+        .text {
+            align-items: center;
+            display: flex;
+            flex: 1 1 auto;
+            font-size: .95em;
+            justify-content: center;
+            line-height: 1.1;
+            padding: .05em .55em .72em .55em;
+            text-align: center;
+            text-transform: none;
+            white-space: normal;
+            width: 100%;
+        }
+    }
+}
+
+.c-element-child {
+    @extend .c-margin-tiny;
+    background-color: $elementChildBackgroundColor;
+    border: 1px solid $defaultBorderColor;
+
+    .child-title {
+        @extend .c-padding-tiny;
+        background-color: $filtersBackgroundColor;
+        color: $filtersForegroundColor;
+        font-size: .75em;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: .75em;
+        width: 100%;
+    }
+
+    .child-fields {
+        @extend .c-padding-tiny;
+    }
+}
+
+.c-post,
+.c-comment {
+    align-items: flex-start;
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+
+    .audio {
+        margin: 1em;
+        width: 360px;
+    }
+
+    .image {
+        margin: 1em;
+        width: 360px;
+    }
+
+    .video {
+        margin: 1em;
+        width: 360px;
+    }
+
+    .post-body,
+    .comment-body {
+        flex: 1 1 360px;
+        margin: 0 1em 1em 1em;
+
+        .author {
+            color: $postMetadataForegroundColor;
+            font-size: 1.125em;
+            margin: 1em 0 .25em 0;
+        }
+
+        .content {
+            @extend .c-user-content;
+            margin: .25em 0 2em 0;
+        }
+
+        .date {
+            color: $postMetadataForegroundColor;
+            font-size: .925em;
+            margin: 1em 0 0 0;
+        }
+    }
+}
+
+.c-guide {
+    @extend .c-margin-small-vert;
+    @extend .c-padding-small-hor;
+    max-width: 64em;
+    width: 100%;
+
+    .quote {
+        @extend .c-margin-medium-hor;
+        @extend .c-padding-small;
+        @extend .c-shadowed;
+        background-color: #fff;
+        border-radius: .5em;
+        font-family: $bodyFontFamily;
+        line-height: $paragraphLineHeight;
+
+        .text {
+            padding: .25em 1em .25em .5em;
+        }
+
+        &.transparent {
+            background-color: transparent;
+            box-shadow: .2em .2em .5em transparent;
+            border-color: transparent;
+        }
+    }
+}
+
+.c-element-completion {
+    min-width: 4em;
+    width: 4em;
+
+    > .status-icon {
+        padding: 0 .25em 0 1.5em;
+
+        img {
+            width: 1.625em;
+        }
+    }
+}
+
+.c-element {
+    padding: $elementPadding;
+
+    .completion {
+        @extend .c-element-completion;
+    }
+}
+
+.c-item-icon {
+    align-items: center;
+    color: $resultIconColor;
+    font-size: 4em;
+    justify-content: center;
+    padding: .25em;
+
+    &.smaller {
+        color: $labelForegroundColor;
+        font-size: 2em;
+        opacity: 0.5;
+    }
+
+    &.larger {
+        color: $labelForegroundColor;
+        font-size: 6em;
+    }
+}
+
+.c-course-completion {
+    min-width: 6em;
+    width: 6em;
+
+    > .status-icon {
+        padding: 0 .5em 0 2em;
+
+        img {
+            width: 2.5em;
+        }
+    }
+}
+
+.c-achievement-list {
+
+    .description {
+        padding: 0 .5em;
+
+        h3 {
+            margin: 0;
+            padding: 0;
+        }
+
+        p {
+            margin: 0;
+            padding: .5em 0;
+            font-size: .875em;
+        }
+    }
+}
+
+.c-achievement {
+
+    .title {
+        @extend .c-padding-small-vert;
+
+        h2 {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    .description {
+    }
+
+    .trophy {
+        padding: 2em 0 0 0;
+
+        img {
+            width: 12em;
+
+            &.animated {
+                animation: c-kf-bounce-in;
+                animation-duration: 2s;
+            }
+        }
+    }
+
+    .unlocks-header {
+        h3 {
+            margin: 0;
+            padding: 1em 0 .5em 0;
+            color: #a74e02;
+        }
+    }
+
+    .unlocked-item {
+        @extend .c-padding-tiny-vert;
+    }
+}
+
+.c-notebook {
+
+    h3 {
+        color: #a74e02;
+        margin: 0 .5em .5em .5em;
+    }
+
+    .note-area {
+        background-image: url('/api/content/display/images/notebook');
+        background-size: contain;
+        background-position: center center;
+        background-repeat: no-repeat;
+        font-family: $bodyFontFamily;
+        padding: 4em;
+
+        .page {
+            @extend .c-shadowed;
+            @extend .c-padding-medium;
+            background-color: #fff;
+            min-height: 22em;
+            width: 22em;
+        }
+    }
+}

@@ -1,0 +1,16 @@
+create table [Education].[GameSection] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [GameId] uniqueidentifier not null,
+    [Title] nvarchar(75) not null,
+    [StatusId] uniqueidentifier not null,
+    [TypeId] uniqueidentifier not null,
+    [Ordinal] int not null,
+    constraint [PK_Education_GameSection] primary key clustered ([Id]),
+    constraint [FK_Education_GameSection_Game] foreign key ([GameId]) references [Education].[Game] ([Id]),
+    constraint [FK_Education_GameSection_Status] foreign key ([StatusId]) references [Framework].[ContentStatus] ([Id]),
+    constraint [FK_Education_GameSection_Type] foreign key ([TypeId]) references [Education].[GameSectionType] ([Id]),
+);

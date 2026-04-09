@@ -1,0 +1,1 @@
+create schema [ContentDisplay] authorization [dbo]

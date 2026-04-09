@@ -1,0 +1,16 @@
+create table [Education].[StudentNotebook] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [StudentId] uniqueidentifier not null,
+    [NotebookId] uniqueidentifier not null,
+    [UnitId] uniqueidentifier null,
+    [BookId] uniqueidentifier null,
+    constraint [PK_Education_StudentNotebook] primary key clustered ([Id]),
+    constraint [FK_Education_StudentNotebook_Student] foreign key ([StudentId]) references [Education].[Student] ([Id]),
+    constraint [FK_Education_StudentNotebook_Notebook] foreign key ([NotebookId]) references [Content].[Notebook] ([Id]),
+    constraint [FK_Education_StudentNotebook_Unit] foreign key ([UnitId]) references [Education].[Unit] ([Id]),
+    constraint [FK_Education_StudentNotebook_Book] foreign key ([BookId]) references [Education].[Book] ([Id]),
+);

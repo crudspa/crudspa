@@ -1,0 +1,23 @@
+﻿@using Crudspa.Education.Common.Shared.Contracts.Config
+@using Crudspa.Framework.Core.Shared.Contracts.Config
+<Waiter Model="Model">
+    @if (Model.Reports.HasItems())
+    {
+        <Wrapped Alignment="Wrapped.Alignments.Top">
+            <Field Label="Report ID"
+                   Size="Field.Sizes.Large"
+                   Container="Field.Containers.Div">
+                <EnumRadio TEnum="ReportConfig.IdSources"
+                           @bind-SelectedValue="@Model.Config.IdSource"
+                           RadioCssClass="tight-bottom"
+                           ReadOnly="@ReadOnly" />
+                @if (Model.Config.IdSource == ReportConfig.IdSources.SpecificReport)
+                {
+                    <Dropdown LookupValues="Model.Reports"
+                              ReadOnly="@ReadOnly"
+                              @bind-Value="Model.Config.ReportId" />
+                }
+            </Field>
+        </Wrapped>
+    }
+</Waiter>

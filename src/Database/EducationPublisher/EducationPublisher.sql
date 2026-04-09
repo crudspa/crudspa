@@ -1,0 +1,1 @@
+create schema [EducationPublisher] authorization [dbo]

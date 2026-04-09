@@ -1,0 +1,123 @@
+<Toolbar>
+    <Left>
+        @if (Model.ReadOnly)
+        {
+            <ButtonEdit Clicked="() => Model.Edit()" />
+        }
+        else
+        {
+            <ButtonGroup>
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            </ButtonGroup>
+        }
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Text"
+                       Size="Field.Sizes.Full"
+                       Container="Field.Containers.Div">
+                    <HtmlEditor ReadOnly="Model.ReadOnly"
+                                @bind-Value="Model.Entity.Text" />
+                </Field>
+                <Field Label="Audio"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <AudioUploader ReadOnly="Model.ReadOnly"
+                                   Required="false"
+                                   AudioFile="Model.Entity.AudioFileFile" />
+                </Field>
+                <Field Label="Category"
+                       Size="Field.Sizes.Unspecified">
+                    <Radio ReadOnly="Model.ReadOnly"
+                           LookupValues="Model.ListenQuestionCategoryNames"
+                           @bind-Value="Model.Entity.CategoryId" />
+                </Field>
+                <Field Label="Type"
+                       Size="Field.Sizes.Unspecified">
+                    <Radio ReadOnly="Model.ReadOnly"
+                           LookupValues="Model.ReadQuestionTypeNames"
+                           @bind-Value="Model.Entity.TypeId" />
+                </Field>
+                <Field Label="Image File"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <ImageUploader ReadOnly="Model.ReadOnly"
+                                   Required="false"
+                                   ImageFile="Model.Entity.ImageFileFile" />
+                </Field>
+            </Wrapped>
+            <Wrapped>
+                <Field Label="Options"
+                       Container="Field.Containers.Div">
+                    <Wrapped NoWrap="true">
+                        <Checkbox Label="Is Preview"
+                                  ReadOnly="Model.ReadOnly"
+                                  @bind-Value="Model.Entity.IsPreview" />
+                        <Checkbox Label="Page Break Before"
+                                  ReadOnly="Model.ReadOnly"
+                                  @bind-Value="Model.Entity.PageBreakBefore" />
+                        <Checkbox Label="Has Correct Choice"
+                                  ReadOnly="Model.ReadOnly"
+                                  @bind-Value="Model.Entity.HasCorrectChoice" />
+                        <Checkbox Label="Require Text Input"
+                                  ReadOnly="Model.ReadOnly"
+                                  @bind-Value="Model.Entity.RequireTextInput" />
+                    </Wrapped>
+                </Field>
+            </Wrapped>
+            <BatchSection Title="Choices">
+                <HeadingPanel>
+                    <ButtonAdd EntityName="Choice"
+                               Disabled="Model.ReadOnly"
+                               Transparent="true"
+                               Clicked="() => Model.AddListenChoice()">
+                    </ButtonAdd>
+                </HeadingPanel>
+                <ChildContent>
+                    <Batch Model="Model.ListenChoicesModel"
+                           ReadOnly="Model.ReadOnly">
+                        <EditView>
+                            <Wrapped Alignment="Wrapped.Alignments.Top"
+                                     @key="context">
+                                <Field Label="Text"
+                                       Size="Field.Sizes.Large">
+                                    <MultilineTextBox ReadOnly="Model.ReadOnly"
+                                                      Height="MultilineTextBox.Heights.Mini"
+                                                      @bind-Value="context.Text" />
+                                </Field>
+                                <Field Label="Image File"
+                                       Size="Field.Sizes.Larger"
+                                       Container="Field.Containers.Div">
+                                    <ImageUploader ReadOnly="Model.ReadOnly"
+                                                   Required="false"
+                                                   ImageFile="context.ImageFileFile" />
+                                </Field>
+                                <Field Label="Audio File"
+                                       Size="Field.Sizes.Larger"
+                                       Container="Field.Containers.Div">
+                                    <AudioUploader ReadOnly="Model.ReadOnly"
+                                                   Required="false"
+                                                   AudioFile="context.AudioFileFile" />
+                                </Field>
+                                <Field Label="Options"
+                                       Container="Field.Containers.Div">
+                                    <Wrapped NoWrap="true">
+                                        <Checkbox Label="Is Correct"
+                                                  ReadOnly="Model.ReadOnly"
+                                                  @bind-Value="context.IsCorrect" />
+                                    </Wrapped>
+                                </Field>
+                            </Wrapped>
+                        </EditView>
+                    </Batch>
+                </ChildContent>
+            </BatchSection>
+        </Padding>
+    }
+</Waiter>

@@ -1,0 +1,202 @@
+@if (Model.Entity is not null && Model.SelectedActivityType is not null)
+{
+    <Padding Size="Padding.Sizes.Small"
+             Direction="Padding.Directions.Bottom">
+        <Wrapped Alignment="Wrapped.Alignments.Top">
+            <Field Label="Activity Type"
+                   Size="Field.Sizes.Medium">
+                <Dropdown LookupValues="ActivityTypes"
+                          ReadOnly="ReadOnly"
+                          @bind-Value="Model.Entity.ActivityTypeId" />
+            </Field>
+            <Field Label="Content Area"
+                   Size="Field.Sizes.Large">
+                <Dropdown LookupValues="ContentAreaNames"
+                          ReadOnly="ReadOnly"
+                          @bind-Value="Model.Entity.ContentAreaId" />
+            </Field>
+            @if (Model.SelectedActivityType.SupportsContextText == true || Model.SelectedActivityType.RequiresContextText == true)
+            {
+                <Field Label="Context"
+                       Size="Field.Sizes.Full">
+                    <LabelActions>
+                        @if (Model.SelectedActivityType.ContextGuidance.HasSomething())
+                        {
+                            <div class="parenthetical">@Model.SelectedActivityType.ContextGuidance</div>
+                        }
+                    </LabelActions>
+                    <ChildContent>
+                        <MultilineTextBox ReadOnly="ReadOnly"
+                                          Height="MultilineTextBox.Heights.Average"
+                                          @bind-Value="Model.Entity.ContextText" />
+                    </ChildContent>
+                </Field>
+            }
+            @if (Model.SelectedActivityType.SupportsExtraText == true || Model.SelectedActivityType.RequiresExtraText == true)
+            {
+                <Field Label="Extra Text"
+                       Size="Field.Sizes.Full">
+                    <LabelActions>
+                        @if (Model.SelectedActivityType.ExtraGuidance.HasSomething())
+                        {
+                            <div class="parenthetical">@Model.SelectedActivityType.ExtraGuidance</div>
+                        }
+                    </LabelActions>
+                    <ChildContent>
+                        <MultilineTextBox ReadOnly="ReadOnly"
+                                          Height="MultilineTextBox.Heights.Mini"
+                                          @bind-Value="Model.Entity.ExtraText" />
+                    </ChildContent>
+                </Field>
+            }
+            @if (Model.SelectedActivityType.SupportsContextAudio == true || Model.SelectedActivityType.RequiresContextAudio == true)
+            {
+                <Field Label="Audio"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <AudioUploader ReadOnly="ReadOnly"
+                                   Required="false"
+                                   AudioFile="Model.Entity.ContextAudioFile" />
+                </Field>
+            }
+            @if (Model.SelectedActivityType.SupportsContextImage == true || Model.SelectedActivityType.RequiresContextImage == true)
+            {
+                <Field Label="Image"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <ImageUploader ReadOnly="ReadOnly"
+                                   Required="false"
+                                   Width="240"
+                                   ImageFile="Model.Entity.ContextImageFile" />
+                </Field>
+            }
+        </Wrapped>
+
+        @if (Model.SelectedActivityType.SupportsChoices == true)
+        {
+            <BatchSection Title="Choices">
+                <HeadingPanel>
+                    <Wrapped Alignment="Wrapped.Alignments.Center">
+                        @if (Model.SelectedActivityType.ChoiceGuidance.HasSomething())
+                        {
+                            <div class="info c-padding-small-right">@Model.SelectedActivityType.ChoiceGuidance</div>
+                        }
+                        <ButtonAdd EntityName="Choice"
+                                   Disabled="ReadOnly"
+                                   Transparent="true"
+                                   Clicked="() => Model.AddActivityChoice()">
+                        </ButtonAdd>
+                    </Wrapped>
+                </HeadingPanel>
+                <ChildContent>
+                    <Batch Model="Model.ActivityChoicesModel"
+                           ReadOnly="ReadOnly">
+                        <EditView>
+                            <div class="c-element-child"
+                                 @key="context">
+                                <div class="child-title">Choice</div>
+                                <div class="child-fields">
+                                    <Wrapped Alignment="Wrapped.Alignments.Top">
+                                        @if (Model.SelectedActivityType.RequiresLongerTextChoices == true)
+                                        {
+                                            <Field Label="Text"
+                                                   Size="Field.Sizes.Full">
+                                                <MultilineTextBox ReadOnly="ReadOnly"
+                                                                  Height="MultilineTextBox.Heights.Mini"
+                                                                  @bind-Value="context.Text" />
+                                            </Field>
+                                        }
+                                        @if (Model.SelectedActivityType.RequiresTextChoices == true || Model.SelectedActivityType.RequiresTextOrImageChoices == true || Model.SelectedActivityType.SupportsTextChoices == true)
+                                        {
+                                            <Field Label="Text"
+                                                   Size="Field.Sizes.Large">
+                                                <TextBox ReadOnly="ReadOnly"
+                                                         @bind-Value="context.Text" />
+                                            </Field>
+                                        }
+                                        @if (Model.SelectedActivityType.SupportsAudioChoices == true)
+                                        {
+                                            <Field Label="Audio"
+                                                   Size="Field.Sizes.Larger"
+                                                   Container="Field.Containers.Div">
+                                                <AudioUploader ReadOnly="ReadOnly"
+                                                               Required="false"
+                                                               AudioFile="context.AudioFile" />
+                                            </Field>
+                                        }
+                                        @if (Model.SelectedActivityType.RequiresImageChoices == true || Model.SelectedActivityType.RequiresTextOrImageChoices == true)
+                                        {
+                                            <Field Label="Image"
+                                                   Size="Field.Sizes.Larger"
+                                                   Container="Field.Containers.Div">
+                                                <ImageUploader ReadOnly="ReadOnly"
+                                                               Required="false"
+                                                               Width="160"
+                                                               ImageFile="context.ImageFile" />
+                                            </Field>
+                                        }
+                                        @if (Model.SelectedActivityType.RequiresCorrectChoices == true)
+                                        {
+                                            <Field Label="Options"
+                                                   Container="Field.Containers.Div">
+                                                <Wrapped NoWrap="true">
+                                                    <Checkbox Label="Is Correct"
+                                                              ReadOnly="ReadOnly"
+                                                              @bind-Value="context.IsCorrect" />
+                                                </Wrapped>
+                                            </Field>
+                                        }
+                                        @if (Model.SelectedActivityType.RequiresColumnOrdinal == true)
+                                        {
+                                            <Field Label="Column"
+                                                   Size="Field.Sizes.Tiny">
+                                                <Wrapped>
+                                                    <div class="c-radio">
+                                                        <input type="radio"
+                                                               disabled="@ReadOnly"
+                                                               checked="@(context.ColumnOrdinal == 0)"
+                                                               @onchange="@(_ => context.ColumnOrdinal = 0)"
+                                                               name="@($"{context.Id:D}")"
+                                                               id="@($"{context.Id:D}-0")" />
+                                                        <label for="@($"{context.Id:D}-0")"
+                                                               class="label">
+                                                            A
+                                                        </label>
+                                                    </div>
+                                                    <div class="c-radio">
+                                                        <input type="radio"
+                                                               disabled="@ReadOnly"
+                                                               checked="@(context.ColumnOrdinal != 0)"
+                                                               @onchange="@(_ => context.ColumnOrdinal = 1)"
+                                                               name="@($"{context.Id:D}")"
+                                                               id="@($"{context.Id:D}-1")" />
+                                                        <label for="@($"{context.Id:D}-1")"
+                                                               class="label">
+                                                            B
+                                                        </label>
+                                                    </div>
+                                                </Wrapped>
+                                            </Field>
+                                        }
+                                    </Wrapped>
+                                </div>
+                            </div>
+                        </EditView>
+                    </Batch>
+                </ChildContent>
+            </BatchSection>
+        }
+
+        @if (PreviewPortalId.HasValue && Model.Entity.ActivityTypeDisplayView.HasSomething())
+        {
+            <Padding Direction="Padding.Directions.Top"
+                     Size="Padding.Sizes.Medium">
+                <div class="parenthetical c-margin-medium-bottom">Student Portal Preview</div>
+                <ThemePreview PortalId="PreviewPortalId">
+                    <StudentActivityPreview Activity="Model.Entity"
+                                            Version="PreviewVersion" />
+                </ThemePreview>
+            </Padding>
+        }
+    </Padding>
+}

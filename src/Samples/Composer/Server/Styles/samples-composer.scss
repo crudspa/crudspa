@@ -1,0 +1,41 @@
+/// <reference path="../../../../Framework/Core/Server/Styles/defaults.scss" />
+
+@import "content-display";
+@import "content-design";
+
+.c-vertical-navigation,
+.c-horizontal-navigation,
+.c-stack-navigation {
+    > .header .branding .image {
+        padding-block: calc(#{$spacingTinyScreenMin} * 2);
+        width: 18em;
+
+        @media (min-width: $screenTiny) {
+            padding-block: calc(#{$spacingTinyScreenTiny} * 2);
+        }
+
+        @media (min-width: $screenSmall) {
+            padding-block: calc(#{$spacingTinyScreenSmall} * 2);
+        }
+
+        @media (min-width: $screenMedium) {
+            padding-block: calc(#{$spacingTinyScreenMedium} * 2);
+        }
+
+        @media (min-width: $screenLarge) {
+            padding-block: calc(#{$spacingTinyScreenLarge} * 2);
+        }
+
+        @media (min-width: $screenWide) {
+            padding-block: calc(#{$spacingTinyScreenWide} * 2);
+        }
+
+        @media (min-width: $screenMax) {
+            padding-block: calc(#{$spacingTinyScreenMax} * 2);
+        }
+
+        @media (max-width: $screenMedium) {
+            width: 14em;
+        }
+    }
+}

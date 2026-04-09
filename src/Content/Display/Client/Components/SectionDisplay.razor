@@ -1,0 +1,12 @@
+@using Crudspa.Content.Display.Client.Extensions
+<div @key="Section"
+     id="box@($"{Section.Id:N}")"
+     class="@Section.Box.BoxClasses()"
+     style="@SectionStyles">
+
+    @foreach (var model in ElementDisplayModels)
+    {
+        <ElementDisplay Model="model"
+                        @key="model" />
+    }
+</div>

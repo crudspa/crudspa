@@ -1,0 +1,7 @@
+﻿<div class="c-tree">
+    @foreach (var child in Items)
+    {
+        <TreeNode Node="child"
+                  SelectionChanged="id => HandleSelectionChanged(id)" />
+    }
+</div>

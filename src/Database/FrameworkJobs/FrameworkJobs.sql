@@ -1,0 +1,1 @@
+create schema [FrameworkJobs] authorization [dbo]

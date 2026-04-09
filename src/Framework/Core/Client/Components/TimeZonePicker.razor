@@ -1,0 +1,13 @@
+﻿<select disabled="@ReadOnly"
+        @bind="Value"
+        @bind:event="onchange"
+        @bind:after="() => ValueChanged.InvokeAsync(Value)">
+    @if (AllowNull)
+    {
+        <option value="">@NullText</option>
+    }
+    @foreach (var timeZone in TimeZones)
+    {
+        <option value="@timeZone.Id">@timeZone.DisplayName</option>
+    }
+</select>

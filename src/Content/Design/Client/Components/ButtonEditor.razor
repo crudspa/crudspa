@@ -1,0 +1,109 @@
+<div class="c-overlay-parent">
+    <Modal Model="Model.BoxModel"
+           TopMargin="4em"
+           Width="34em"
+           Title="Button Styles">
+        <Content>
+            <BoxEditor Model="Model.BoxModel" />
+        </Content>
+        <Buttons>
+            <ButtonCore Text="Close"
+                        ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                        Clicked="() => Model.BoxModel.Hide()" />
+        </Buttons>
+    </Modal>
+    <Wrapped Alignment="Wrapped.Alignments.Top">
+        <Field Label="Path"
+               Size="Field.Sizes.Wide"
+               Container="Field.Containers.Div">
+            <BoolRadio TrueLabel="Internal"
+                       FalseLabel="External"
+                       ReadOnly="ReadOnly"
+                       @bind-SelectedValue="Model.Button.Internal" />
+            <Wrapped NoWrap="true">
+                <div>@(Model.Button.Internal == true ? "/" : "https://")</div>
+                <TextBox MaxLength="250"
+                         ReadOnly="ReadOnly"
+                         @bind-Value="Model.Button.Path" />
+            </Wrapped>
+        </Field>
+        <Field Label="Shape"
+               Container="Field.Containers.Div">
+            <EnumRadio TEnum="Button.Shapes"
+                       ReadOnly="ReadOnly"
+                       @bind-SelectedValue="Model.Button.ShapeIndex" />
+        </Field>
+        <Field Label="Graphic"
+               Container="Field.Containers.Div">
+            <EnumRadio TEnum="Button.Graphics"
+                       ReadOnly="ReadOnly"
+                       @bind-SelectedValue="Model.Button.GraphicIndex" />
+        </Field>
+        @if (Model.Button.GraphicIndex == Button.Graphics.Icon)
+        {
+            <Field Label="Icon"
+                   Size="Field.Sizes.Medium">
+                <IconDropdown LookupValues="Model.Icons"
+                              ReadOnly="ReadOnly"
+                              AllowNull="true"
+                              NullText="[None]"
+                              @bind-Value="Model.Button.IconId" />
+            </Field>
+        }
+        @if (Model.Button.GraphicIndex == Button.Graphics.Image)
+        {
+            <Field Label="Image"
+                   Size="Field.Sizes.Larger"
+                   Container="Field.Containers.Div">
+                <ImageUploader Required="false"
+                               ReadOnly="ReadOnly"
+                               Width="160"
+                               ImageFile="Model.Button.ImageFile" />
+            </Field>
+        }
+        <Field Label="Text"
+               Container="Field.Containers.Div">
+            <EnumRadio TEnum="Button.TextTypes"
+                       ReadOnly="ReadOnly"
+                       @bind-SelectedValue="Model.Button.TextTypeIndex" />
+        </Field>
+        @if (Model.Button.TextTypeIndex == Button.TextTypes.Custom)
+        {
+            <Field Label="Text"
+                   Size="Field.Sizes.Wide">
+                <TextBox MaxLength="250"
+                         ReadOnly="ReadOnly"
+                         @bind-Value="Model.Button.Text" />
+            </Field>
+        }
+        @if (Model.Button.ShapeIndex == Button.Shapes.Rectangle
+            && Model.Button.TextTypeIndex == Button.TextTypes.Custom
+            && Model.Button.GraphicIndex != Button.Graphics.None)
+        {
+            <Field Label="Orientation"
+                   Container="Field.Containers.Div">
+                <EnumRadio TEnum="Button.Orientations"
+                           ReadOnly="ReadOnly"
+                           @bind-SelectedValue="Model.Button.OrientationIndex" />
+            </Field>
+        }
+        <Field Label="Button Styles"
+               Size="Field.Sizes.Larger"
+               Container="Field.Containers.Div">
+            <Wrapped NoWrap="true">
+                <Padding Size="Padding.Sizes.Tiny"
+                         Direction="Padding.Directions.Vertical">
+                    <Padding Size="Padding.Sizes.Small"
+                             Direction="Padding.Directions.Right">
+                        <ButtonEdit Transparent="true"
+                                    Disabled="ReadOnly"
+                                    Clicked="() => Model.BoxModel.Show()" />
+                    </Padding>
+                </Padding>
+                <div class="star c-parenthetical c-padding-micro-vert">
+                    @(Model.BoxModel.Description)
+                </div>
+            </Wrapped>
+        </Field>
+    </Wrapped>
+</div>

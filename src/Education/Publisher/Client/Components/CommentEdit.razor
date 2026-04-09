@@ -1,0 +1,243 @@
+<Waiter Model="Model">
+    <Padding Size="Padding.Sizes.Small"
+             Direction="Padding.Directions.Left">
+        @if (Model.Entity is not null)
+        {
+            <Modal Model="Model.ConfirmationModel">
+                <Content>
+                    <Padding Direction="Padding.Directions.Top"
+                             Size="Padding.Sizes.Small">
+                        Are you sure you want to delete this comment?
+                    </Padding>
+                </Content>
+                <Buttons>
+                    <ButtonDelete Clicked="() => Model.Delete()" />
+                    <ButtonCancel Clicked="() => Model.ConfirmationModel.Hide()" />
+                </Buttons>
+            </Modal>
+            <div class="cec-comment"
+                 id="@($"{Model.Entity.Id:D}")">
+                @if (!Model.ReadOnly)
+                {
+                    <Wrapped NoWrap="true">
+                        <div class="star">
+                            <Wrapped Alignment="Wrapped.Alignments.Top">
+                                <Field Size="Field.Sizes.Full"
+                                       Container="Field.Containers.Div">
+                                    <HtmlEditor ReadOnly="Model.ReadOnly"
+                                                @bind-Value="Model.Entity.Body"
+                                                EditorHeight="16em" />
+                                </Field>
+                                <Field Label="Media"
+                                       Container="Field.Containers.Div">
+                                    <EnumRadio TEnum="CommentEditModel.MediaTypes"
+                                               @bind-SelectedValue="@Model.SelectedMediaType"
+                                               ReadOnly="@Model.ReadOnly" />
+                                </Field>
+                            </Wrapped>
+                            @switch (Model.SelectedMediaType)
+                            {
+                                case CommentEditModel.MediaTypes.Audio:
+                                    <Field Size="Field.Sizes.Larger"
+                                           Container="Field.Containers.Div">
+                                        <AudioUploader ReadOnly="Model.ReadOnly"
+                                                       Required="false"
+                                                       AudioFile="Model.Entity.AudioFile" />
+                                    </Field>
+                                    break;
+                                case CommentEditModel.MediaTypes.Image:
+                                    <Field Size="Field.Sizes.Larger"
+                                           Container="Field.Containers.Div">
+                                        <ImageUploader ReadOnly="Model.ReadOnly"
+                                                       Required="false"
+                                                       Width="480"
+                                                       ImageFile="Model.Entity.ImageFile" />
+                                    </Field>
+                                    break;
+                                case CommentEditModel.MediaTypes.Pdf:
+                                    <Field Size="Field.Sizes.Larger"
+                                           Container="Field.Containers.Div">
+                                        <PdfUploader ReadOnly="Model.ReadOnly"
+                                                     Required="false"
+                                                     PdfFile="Model.Entity.PdfFile" />
+                                    </Field>
+                                    break;
+                                case CommentEditModel.MediaTypes.Video:
+                                    <Field Size="Field.Sizes.Full"
+                                           Container="Field.Containers.Div">
+                                        <VideoUploader ReadOnly="Model.ReadOnly"
+                                                       Required="false"
+                                                       VideoFile="Model.Entity.VideoFile" />
+                                    </Field>
+                                    break;
+                            }
+                        </div>
+                        <Padding Direction="Padding.Directions.Horizontal"
+                                 Size="Padding.Sizes.Tiny">
+                            <ButtonGroup>
+                                <button @onclick="() => Model.Save()">
+                                    <div class="c-button tight save">
+                                        <div class="icon">
+                                            <span class="c-icon-floppy-disk"></span>
+                                        </div>
+                                        <div class="text">&nbsp;Save&nbsp;</div>
+                                    </div>
+                                </button>
+                                <button @onclick="HandleCancelClicked">
+                                    <div class="c-button tight transparent bordered">
+                                        <div class="text">&nbsp;</div>
+                                        <div class="icon">
+                                            <span class="c-icon-cross"></span>
+                                        </div>
+                                        <div class="text">&nbsp;</div>
+                                    </div>
+                                </button>
+                            </ButtonGroup>
+                        </Padding>
+                    </Wrapped>
+                }
+                else
+                {
+                    <Wrapped NoWrap="true">
+                        <div class="star cec-post-view">
+                            <div class="content">
+                                @if (Model.Entity.AudioFile.Id.HasSomething())
+                                {
+                                    <div class="audio">
+                                        <audio src="/api/framework/core/audio-file/fetch?id=@($"{Model.Entity.AudioFile.Id:D}")"
+                                               style="width: 300px;"
+                                               preload="auto"
+                                               controls>
+                                        </audio>
+                                    </div>
+                                }
+                                @if (Model.Entity.ImageFile.Id.HasSomething())
+                                {
+                                    <div class="image c-padding-small c-stack center">
+                                        <Image ImageFile="Model.Entity.ImageFile"
+                                               Shadowed="true"
+                                               Width="274" />
+                                        <div class="c-padding-small-top">
+                                            <button @onclick="() => EventBus.Publish(new ViewImage { Id = Model.Entity.ImageFile.Id.GetValueOrDefault() })">
+                                                <div class="c-button transparent bordered">
+                                                    <div class="icon">
+                                                        <span class="c-icon-eye"></span>
+                                                    </div>
+                                                    <div class="text">View Image</div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                }
+                                @if (Model.Entity.PdfFile.Id.HasSomething())
+                                {
+                                    <div class="pdf c-padding-small">
+                                        <div class="c-stack center">
+                                            <div class="thumbnail"
+                                                 style="width: 274px;">
+                                                <span class="c-icon-file-pdf"></span>
+                                            </div>
+                                            <div class="c-padding-small-top">
+                                                <ButtonGroup>
+                                                    <button @onclick="() => EventBus.Publish(new ViewPdf { Id = Model.Entity.PdfFile.Id.GetValueOrDefault() })">
+                                                        <div class="c-button primary">
+                                                            <div class="icon">
+                                                                <span class="c-icon-file-pdf"></span>
+                                                            </div>
+                                                            <div class="text">View PDF</div>
+                                                        </div>
+                                                    </button>
+                                                    <a class="c-button cancel"
+                                                       href="/api/framework/core/pdf-file/fetch?id=@($"{Model.Entity.PdfFile.Id:D}")&download=true&original=true"
+                                                       target="_blank">
+                                                        <div class="text">Download</div>
+                                                        <div class="icon">
+                                                            <span class="c-icon-cloud-download"></span>
+                                                        </div>
+                                                    </a>
+                                                </ButtonGroup>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                @if (Model.Entity.VideoFile.Id.HasSomething())
+                                {
+                                    <div class="video c-padding-small">
+                                        <video src="/api/framework/core/video-file/fetch?id=@($"{Model.Entity.VideoFile.Id:D}")"
+                                               class="c-shadowed"
+                                               style="width: 274px;"
+                                               preload="auto"
+                                               controls>
+                                        </video>
+                                    </div>
+                                }
+                                <div class="body-area">
+                                    <UserHtml Html="@(Model.Entity.Body!)"
+                                              CssClass="text" />
+                                    <div class="gutter c-padding-small-hor">
+                                        <div class="left metadata">
+                                            @(Model.Entity.ByFirstName) @(Model.Entity.ByLastName) (@(Model.Entity.ByOrganizationName))
+                                            @if (Model.Entity.Edited is null)
+                                            {
+                                                @($" posted on {Model.Entity.Posted.ToLocalTime(SessionState.TimeZoneId):g}")
+                                            }
+                                            else
+                                            {
+                                                @($" edited on {Model.Entity.Edited.ToLocalTime(SessionState.TimeZoneId):g}")
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <Padding Direction="Padding.Directions.Horizontal"
+                                 Size="Padding.Sizes.Tiny">
+                            <ButtonGroup>
+                                <button @onclick="() => Model.Reply()"
+                                        title="Reply">
+                                    <div class="c-button tight move">
+                                        <div class="text">&nbsp;</div>
+                                        <div class="icon">
+                                            <span class="c-icon-reply"></span>
+                                        </div>
+                                        <div class="text">&nbsp;</div>
+                                    </div>
+                                </button>
+                                @if (Model.CanEdit)
+                                {
+                                    <button @onclick="() => Model.Edit()"
+                                            title="Edit">
+                                        <div class="c-button tight move">
+                                            <div class="text">&nbsp;</div>
+                                            <div class="icon">
+                                                <span class="c-icon-pencil"></span>
+                                            </div>
+                                            <div class="text">&nbsp;</div>
+                                        </div>
+                                    </button>
+                                    <button @onclick="() => Model.ConfirmationModel.Show()"
+                                            title="Delete">
+                                        <div class="c-button tight move">
+                                            <div class="text">&nbsp;</div>
+                                            <div class="icon">
+                                                <span class="c-icon-trash2"></span>
+                                            </div>
+                                            <div class="text">&nbsp;</div>
+                                        </div>
+                                    </button>
+                                }
+                            </ButtonGroup>
+                        </Padding>
+                    </Wrapped>
+                }
+            </div>
+
+            @foreach (var commentModel in Model.Children.OrderBy(x => x.Entity!.Posted))
+            {
+                <CommentEdit Model="commentModel"
+                             Path="@Path"
+                             RemoveRequested="() => Model.Remove(commentModel.Entity!.Id)" />
+            }
+        }
+    </Padding>
+</Waiter>

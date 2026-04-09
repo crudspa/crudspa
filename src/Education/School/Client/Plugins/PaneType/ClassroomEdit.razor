@@ -1,0 +1,176 @@
+<Toolbar>
+    <Left>
+        @if (Model.ReadOnly)
+        {
+            <ButtonEdit Clicked="() => Model.Edit()" />
+            <Padding Direction="Padding.Directions.Horizontal"
+                     Size="Padding.Sizes.Small">
+                <a class="c-button view"
+                   href="/api/school/pdf/class-roster?id=@($"{Id:D}")"
+                   target="_blank">
+                    <div class="icon">
+                        <span class="c-icon-file-pdf"></span>
+                    </div>
+                    <div class="text">Download/Print (PDF)</div>
+                </a>
+            </Padding>
+        }
+        else
+        {
+            <ButtonGroup>
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            </ButtonGroup>
+        }
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Modal Model="Model.AddTeachersModel"
+               Title="Add Teachers"
+               Width="24em"
+               TopMargin="2em">
+            <Content>
+                <CheckedList Selectables="Model.SelectableTeachers" />
+            </Content>
+            <Buttons>
+                <ButtonOk Clicked="() => Model.AddTeachers()" />
+                <ButtonCancel Clicked="() => Model.AddTeachersModel.Hide()" />
+            </Buttons>
+        </Modal>
+        <Modal Model="Model.AddStudentsModel"
+               Title="Add Students"
+               Width="24em"
+               TopMargin="2em">
+            <Content>
+                <CheckedList Selectables="Model.SelectableStudents" />
+            </Content>
+            <Buttons>
+                <ButtonOk Clicked="() => Model.AddStudents()" />
+                <ButtonCancel Clicked="() => Model.AddStudentsModel.Hide()" />
+            </Buttons>
+        </Modal>
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Name"
+                       Size="Field.Sizes.Large">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="100"
+                             @bind-Value="Model.Entity.OrganizationName" />
+                </Field>
+                <Field Label="Subject Taught"
+                       Size="Field.Sizes.Tiny">
+                    <Dropdown LookupValues="Model.TypeNames"
+                              ReadOnly="Model.ReadOnly"
+                              @bind-Value="Model.Entity.TypeId" />
+                </Field>
+                <Field Label="Grade"
+                       Size="Field.Sizes.Tiny">
+                    <Dropdown LookupValues="Model.GradeNames"
+                              ReadOnly="Model.ReadOnly"
+                              @bind-Value="Model.Entity.GradeId" />
+                </Field>
+                <Field Label="Class Type"
+                       Size="Field.Sizes.Medium">
+                    <Checkbox Label="Special Education"
+                              ReadOnly="Model.ReadOnly"
+                              @bind-Value="Model.Entity.SmallClassroom" />
+                </Field>
+            </Wrapped>
+            <BatchSection Title="Teachers">
+                <HeadingPanel>
+                    <ButtonAdd EntityName="Teachers"
+                               Disabled="Model.ReadOnly"
+                               Transparent="true"
+                               Clicked="() => Model.ShowSelectableTeachers()">
+                    </ButtonAdd>
+                </HeadingPanel>
+                <ChildContent>
+                    @if (Model.Entity.ClassroomTeachers.Count == 0)
+                    {
+                        <Padding Size="Padding.Sizes.Medium"
+                                 Direction="Padding.Directions.All">
+                            <Stacked Alignment="Stacked.Alignments.Center">
+                                <em>None</em>
+                            </Stacked>
+                        </Padding>
+                    }
+                    @foreach (var teacher in Model.Entity.ClassroomTeachers.OrderBy(x => x.Name))
+                    {
+                        <Padding Direction="Padding.Directions.Horizontal"
+                                 Size="Padding.Sizes.Small">
+                            <Border Direction="Border.Directions.Bottom">
+                                <Padding Direction="Padding.Directions.Vertical"
+                                         Size="Padding.Sizes.Tiny">
+                                    <Padding Direction="Padding.Directions.Horizontal"
+                                             Size="Padding.Sizes.Small">
+                                        <Wrapped NoWrap="true">
+                                            <div class="star">
+                                                <a href="@(Path.Parent())/school-contact-@(teacher.SchoolContactId)">@(teacher.Name)</a>
+                                            </div>
+                                            <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Transparent"
+                                                         Disabled="Model.ReadOnly">
+                                                <BatchMenuItems RemoveClicked="() => Model.RemoveTeacher(teacher.Id)" />
+                                            </ContextMenu>
+                                        </Wrapped>
+                                    </Padding>
+                                </Padding>
+                            </Border>
+                        </Padding>
+                    }
+                </ChildContent>
+            </BatchSection>
+            <Padding Direction="Padding.Directions.Top"
+                     Size="Padding.Sizes.Medium">
+                <BatchSection Title="Students">
+                    <HeadingPanel>
+                        <ButtonAdd EntityName="Students"
+                                   Disabled="Model.ReadOnly"
+                                   Transparent="true"
+                                   Clicked="() => Model.ShowSelectableStudents()">
+                        </ButtonAdd>
+                    </HeadingPanel>
+                    <ChildContent>
+                        @if (Model.Entity.ClassroomStudents.Count == 0)
+                        {
+                            <Padding Size="Padding.Sizes.Medium"
+                                     Direction="Padding.Directions.All">
+                                <Stacked Alignment="Stacked.Alignments.Center">
+                                    <em>None</em>
+                                </Stacked>
+                            </Padding>
+                        }
+                        @foreach (var classroomStudent in Model.Entity.ClassroomStudents.OrderBy(x => x.Name))
+                        {
+                            <Padding Direction="Padding.Directions.Horizontal"
+                                     Size="Padding.Sizes.Small">
+                                <Border Direction="Border.Directions.Bottom">
+                                    <Padding Direction="Padding.Directions.Vertical"
+                                             Size="Padding.Sizes.Tiny">
+                                        <Padding Direction="Padding.Directions.Horizontal"
+                                                 Size="Padding.Sizes.Small">
+                                            <Wrapped NoWrap="true">
+                                                <div class="star">
+                                                    <a href="@(Path.Parent())/student-@(classroomStudent.StudentId)">@(classroomStudent.Name)</a>
+                                                </div>
+                                                <div style="width: 16em;">
+                                                    <strong>Code: </strong>@(classroomStudent.SecretCode)
+                                                </div>
+                                                <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Transparent"
+                                                             Disabled="Model.ReadOnly">
+                                                    <BatchMenuItems RemoveClicked="() => Model.RemoveStudent(classroomStudent.Id)" />
+                                                </ContextMenu>
+                                            </Wrapped>
+                                        </Padding>
+                                    </Padding>
+                                </Border>
+                            </Padding>
+                        }
+                    </ChildContent>
+                </BatchSection>
+            </Padding>
+        </Padding>
+    }
+</Waiter>

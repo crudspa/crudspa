@@ -1,0 +1,149 @@
+﻿<Waiter Model="Model">
+
+    <div class="ces-book-view c-wrap center">
+
+        @if (Model.Book is not null)
+        {
+            <div style="max-width: 32em;">
+
+                <div class="c-padding-small">
+                    <div class="title">@(Model.Book.Title)</div>
+                    <div class="author">by @(Model.Book.Author)</div>
+                </div>
+
+                <div class="c-stack center">
+
+                    @if (Model.Book.HasMap == true)
+                    {
+                        <button @onclick="() => Model.GoToMap()">
+                            <div class="c-button">
+                                <div class="icon">
+                                    <span class="c-icon-map2"></span>
+                                </div>
+                                <div class="text">Explore the Concept Map</div>
+                                <div class="cec-completion-status">
+                                    @if (Model.Book.Progress.MapCompletedCount == 0)
+                                    {
+                                        <img src="/api/education/student/images/star-empty"
+                                             alt="Incomplete" />
+                                    }
+                                    else
+                                    {
+                                        <img src="/api/education/student/images/star-filled"
+                                             alt="Completed" />
+                                    }
+                                </div>
+                            </div>
+                        </button>
+                    }
+
+                    @if (Model.Book.HasPreface == true)
+                    {
+                        <button @onclick="() => Model.GoToPreface()">
+                            <div class="c-button">
+                                <div class="icon">
+                                    <span class="c-icon-film-play"></span>
+                                </div>
+                                <div class="text">View the Intro</div>
+                                <div class="cec-completion-status">
+                                    @if (Model.Book.Progress.PrefaceCompletedCount == 0)
+                                    {
+                                        <img src="/api/education/student/images/star-empty"
+                                             alt="Incomplete" />
+                                    }
+                                    else
+                                    {
+                                        <img src="/api/education/student/images/star-filled"
+                                             alt="Completed" />
+                                    }
+                                </div>
+                            </div>
+                        </button>
+                    }
+
+                    @if (Model.Book.HasSomething == true)
+                    {
+                        <button @onclick="() => Model.GoToContent()">
+                            <div class="c-button">
+                                <div class="icon">
+                                    <span class="c-icon-reading"></span>
+                                </div>
+                                <div class="text">Read the Book</div>
+                                <div class="cec-completion-status">
+                                    @if (Model.Book.Progress.ContentCompletedCount == 0)
+                                    {
+                                        <img src="/api/education/student/images/star-empty"
+                                             alt="Incomplete" />
+                                    }
+                                    else
+                                    {
+                                        <img src="/api/education/student/images/star-filled"
+                                             alt="Completed" />
+                                    }
+                                </div>
+                            </div>
+                        </button>
+                    }
+
+                    @foreach (var game in Model.Book.Games)
+                    {
+                        <button @onclick="() => Model.GoToGame(game.Id)">
+                            <div class="c-button">
+                                <div class="icon">
+                                    <span class="@(game.IconName)"></span>
+                                </div>
+                                <div class="text">@(game.Title)</div>
+                                <div class="cec-completion-status">
+                                    @if (game.Progress.GameCompletedCount == 0)
+                                    {
+                                        <img src="/api/education/student/images/star-empty"
+                                             alt="Incomplete" />
+                                    }
+                                    else
+                                    {
+                                        <img src="/api/education/student/images/star-filled"
+                                             alt="Completed" />
+                                    }
+                                </div>
+                            </div>
+                        </button>
+                    }
+
+                    @foreach (var module in Model.Book.Modules)
+                    {
+                        <button @onclick="() => Model.GoToModule(module.Id)">
+                            <div class="c-button">
+                                <div class="icon">
+                                    <span class="@(module.IconName)"></span>
+                                </div>
+                                <div class="text">@(module.Title)</div>
+                                <div class="cec-completion-status">
+                                    @if (module.Progress.ModuleCompletedCount == 0)
+                                    {
+                                        <img src="/api/education/student/images/star-empty"
+                                             alt="Incomplete" />
+                                    }
+                                    else
+                                    {
+                                        <img src="/api/education/student/images/star-filled"
+                                             alt="Completed" />
+                                    }
+                                </div>
+                            </div>
+                        </button>
+                    }
+
+                </div>
+            </div>
+
+            <div class="c-margin-large"
+                 style="max-width: 320px;">
+                <Image ImageFile="Model.Book.CoverImage"
+                       Width="320"
+                       Shadowed="true" />
+            </div>
+        }
+
+    </div>
+
+</Waiter>

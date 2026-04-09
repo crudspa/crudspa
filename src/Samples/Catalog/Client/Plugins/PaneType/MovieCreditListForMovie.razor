@@ -1,0 +1,21 @@
+<ListOrderables Model="Model"
+                T="MovieCreditModel"
+                EntityName="Movie Credit"
+                UrlPrefix="@($"{Path}/movie-credit")"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Star">
+            <Labeled Width="6em"
+                     Label="Part"
+                     StringValue="@context.MovieCredit.Part" />
+            <Labeled Width="6em"
+                     Label="Billing"
+                     IntegerValue="@context.MovieCredit.Billing" />
+            <Labeled Width="6em"
+                     Label="Headliner"
+                     BooleanValue="@context.MovieCredit.Headliner" />
+        </Field>
+    </ReadView>
+</ListOrderables>

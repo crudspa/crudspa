@@ -1,0 +1,34 @@
+<ListOrderables Model="Model"
+                T="ObjectiveModel"
+                EntityName="Objective"
+                UrlPrefix="@($"{Path}/objective")"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Unspecified">
+            <Image ImageFile="context.Objective.TrophyImageFile"
+                   Width="160" />
+        </Field>
+        <Field Size="Field.Sizes.Unspecified">
+            <Labeled CssClass="status"
+                     Width="6em"
+                     Label="Status">
+                <StatusDisplay Id="@context.Objective.StatusId"
+                               Name="@context.Objective.StatusName"
+                               ColorClassFrom="ContentStatusColors.For" />
+            </Labeled>
+            <Labeled Width="6em"
+                     Label="Requires"
+                     StringValue="@context.Objective.RequiresAchievementTitle" />
+            <Labeled Width="6em"
+                     Label="Generates"
+                     StringValue="@context.Objective.GeneratesAchievementTitle" />
+        </Field>
+    </ReadView>
+    <PaneLinks>
+        <PaneLink Href="@($"{Path}/objective-{context.Objective.Id:D}?pane=pages")"
+                  Text="Pages"
+                  Count="context.Objective.PageCount" />
+    </PaneLinks>
+</ListOrderables>

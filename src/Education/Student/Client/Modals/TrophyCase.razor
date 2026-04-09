@@ -1,0 +1,66 @@
+﻿<div class="ces-trophy-case">
+
+    <div class="c-padding-small">
+
+        <div class="c-nowrap top">
+            <div style="width: 4em;">
+                &nbsp;
+            </div>
+            <div class="star window-title">
+                <h2>Trophy Case</h2>
+            </div>
+            <div class="close-button"
+                 style="width: 4em;">
+                <a @onclick="() => Model.Hide()">
+                    <span class="c-icon-cross"></span>
+                </a>
+            </div>
+        </div>
+
+        @if (Model.StudentAchievements is not null)
+        {
+            @if (Model.StudentAchievements.Count == 0)
+            {
+                <div class="c-stack center c-padding-large-vert">
+                    No trophies yet!
+                </div>
+            }
+
+            @foreach (var studentAchievement in Model.StudentAchievements)
+            {
+                <div style="max-height: 32em; overflow: auto; padding-right: .25em;">
+                    <div class="c-padding-small-vert">
+                        <div class="c-nowrap">
+                            <div class="c-padding-tiny-left c-padding-small-right"
+                                 style="width: 7.5em;">
+                                <Image ImageFile="studentAchievement.Achievement.TrophyImage" />
+                            </div>
+                            <div class="star achievement-description">
+                                <h3>@(studentAchievement.Achievement.Title)</h3>
+                                <p>@($"Earned: {studentAchievement.Earned.ToLocalTime(SessionState.TimeZoneId):g}")</p>
+                            </div>
+                            <div class="c-padding-small-left">
+                                <button @onclick="() => Model.ViewAchievement(studentAchievement)">
+                                    <div class="c-button">
+                                        <div class="text">View</div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+        <div class="c-stack center c-padding-small-top">
+            <button class="bottom-button"
+                    @onclick="() => Model.Hide()">
+                <div class="c-button primary">
+                    <div class="text">Close</div>
+                </div>
+            </button>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,23 @@
+﻿<Field Label="Video"
+       Size="Field.Sizes.Full"
+       Container="Field.Containers.Div">
+    <VideoUploader ReadOnly="ReadOnly"
+                   Required="true"
+                   VideoFile="VideoElement.FileFile" />
+</Field>
+<Field Label="Poster"
+       Size="Field.Sizes.Larger"
+       Container="Field.Containers.Div">
+    <ImageUploader ReadOnly="ReadOnly"
+                   Required="false"
+                   Width="480"
+                   ImageFile="VideoElement.Poster" />
+</Field>
+<Field Label="Options"
+       Container="Field.Containers.Div">
+    <Wrapped NoWrap="true">
+        <Checkbox Label="Auto Play"
+                  ReadOnly="ReadOnly"
+                  @bind-Value="VideoElement.AutoPlay" />
+    </Wrapped>
+</Field>

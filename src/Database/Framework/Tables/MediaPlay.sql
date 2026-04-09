@@ -1,0 +1,15 @@
+create table [Framework].[MediaPlay] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [AudioFileId] uniqueidentifier null,
+    [VideoFileId] uniqueidentifier null,
+    [Started] datetimeoffset(7) not null,
+    [Canceled] datetimeoffset(7) null,
+    [Completed] datetimeoffset(7) null,
+    constraint [PK_Framework_MediaPlay] primary key clustered ([Id]),
+    constraint [FK_Framework_MediaPlay_AudioFile] foreign key ([AudioFileId]) references [Framework].[AudioFile] ([Id]),
+    constraint [FK_Framework_MediaPlay_VideoFile] foreign key ([VideoFileId]) references [Framework].[VideoFile] ([Id]),
+);

@@ -1,0 +1,32 @@
+﻿@if (Pane is not null)
+{
+    <BatchSection Title="Pane">
+        <ChildContent>
+            <Padding Size="Padding.Sizes.Small"
+                     Direction="Padding.Directions.Vertical"
+                     @key="Pane">
+                <Wrapped NoWrap="true">
+                    <Wrapped Alignment="Wrapped.Alignments.Top"
+                             Star="true">
+                        <Field Label="Permission"
+                               Size="Field.Sizes.Medium">
+                            <Dropdown LookupValues="PermissionNames"
+                                      ReadOnly="ReadOnly"
+                                      AllowNull="true"
+                                      NullText="[Public]"
+                                      @bind-Value="Pane.PermissionId" />
+                        </Field>
+                        <Field Label="Pane Type"
+                               Size="Field.Sizes.MediumLarge">
+                            <Dropdown LookupValues="PaneTypes"
+                                      ReadOnly="ReadOnly"
+                                      AllowNull="true"
+                                      NullText="[Select Pane Type]"
+                                      @bind-Value="Pane.TypeId" />
+                        </Field>
+                    </Wrapped>
+                </Wrapped>
+            </Padding>
+        </ChildContent>
+    </BatchSection>
+}

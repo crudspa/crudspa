@@ -1,0 +1,18 @@
+create table [Content].[Element] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [SectionId] uniqueidentifier not null,
+    [TypeId] uniqueidentifier not null,
+    [RequireInteraction] bit default(1) not null,
+    [BoxId] uniqueidentifier null,
+    [ItemId] uniqueidentifier null,
+    [Ordinal] int not null,
+    constraint [PK_Content_Element] primary key clustered ([Id]),
+    constraint [FK_Content_Element_Section] foreign key ([SectionId]) references [Content].[Section] ([Id]),
+    constraint [FK_Content_Element_Type] foreign key ([TypeId]) references [Content].[ElementType] ([Id]),
+    constraint [FK_Content_Element_Box] foreign key ([BoxId]) references [Content].[Box] ([Id]),
+    constraint [FK_Content_Element_Item] foreign key ([ItemId]) references [Content].[Item] ([Id]),
+);

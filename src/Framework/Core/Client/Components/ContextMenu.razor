@@ -1,0 +1,27 @@
+﻿@if (ButtonStyle == ButtonStyles.User)
+{
+    <div class="contact-image"
+         @onclick="() => Model.Toggle()">
+        <div class="icon">
+            <span class="c-icon-user"></span>
+        </div>
+    </div>
+}
+else
+{
+    <button @onclick="() => Model.Toggle()"
+            disabled="@Disabled">
+        <div class="c-button narrow last-child @ButtonClass">
+            <div class="text">&nbsp;</div>
+            <div class="icon">
+                <span class="c-icon-ellipsis"></span>
+            </div>
+            <div class="text">&nbsp;</div>
+        </div>
+    </button>
+}
+<div class="c-context-menu @(Model.Visible ? String.Empty : "c-hide")">
+    <div class="menu-items @(HideBorder ? "no-border" : String.Empty)">
+        @ChildContent
+    </div>
+</div>

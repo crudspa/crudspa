@@ -1,0 +1,23 @@
+<ListOrderables Model="Model"
+                T="VocabPartModel"
+                EntityName="Vocab Part"
+                UrlPrefix="@($"{Path}/vocab-part")"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Full">
+            <LabeledHtml Label="Preview Instructions Text"
+                         HtmlValue="@context.VocabPart.PreviewInstructionsText" />
+        </Field>
+        <Field Size="Field.Sizes.Full">
+            <LabeledHtml Label="Questions Instructions Text"
+                         HtmlValue="@context.VocabPart.QuestionsInstructionsText" />
+        </Field>
+    </ReadView>
+    <PaneLinks>
+        <PaneLink Href="@($"{Path}/vocab-part-{context.VocabPart.Id:D}?pane=questions")"
+                  Text="Questions"
+                  Count="context.VocabPart.VocabQuestionCount" />
+    </PaneLinks>
+</ListOrderables>

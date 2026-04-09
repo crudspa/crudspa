@@ -1,0 +1,54 @@
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+            }
+            else
+            {
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            }
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Title"
+                       Size="Field.Sizes.Large">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="75"
+                             @bind-Value="Model.Entity.Title" />
+                </Field>
+                <Field Label="Rarity"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown ReadOnly="Model.ReadOnly"
+                              LookupValues="Model.RarityNames"
+                              @bind-Value="Model.Entity.RarityId" />
+                </Field>
+                <Field Label="Trophy Image"
+                       Size="Field.Sizes.Large"
+                       Container="Field.Containers.Div">
+                    <ImageUploader ReadOnly="Model.ReadOnly"
+                                   Required="true"
+                                   ImageFile="Model.Entity.TrophyImageFile" />
+                </Field>
+            </Wrapped>
+            <Wrapped>
+                <Field Label="Options"
+                       Container="Field.Containers.Div">
+                    <Wrapped NoWrap="true">
+                        <Checkbox Label="Visible To Students"
+                                  ReadOnly="Model.ReadOnly"
+                                  @bind-Value="Model.Entity.VisibleToStudents" />
+                    </Wrapped>
+                </Field>
+            </Wrapped>
+        </Padding>
+    }
+</Waiter>

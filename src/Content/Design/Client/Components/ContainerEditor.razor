@@ -1,0 +1,94 @@
+﻿@{
+    const String direction = "Direction";
+    const String gap = "Gap";
+    const String wrap = "Wrap";
+    const String justifyContent = "Justify Content";
+    const String alignItems = "Align Items";
+    const String alignContent = "Align Content";
+}
+<div class="c-tabbed-panes vertical">
+    <ul class="tabs secondary">
+        <li class="@(Model.ActiveTab.IsBasically(direction) ? "selected" : String.Empty)"
+            @onclick="() => Model.SetActiveTab(direction)">
+            @direction
+        </li>
+        <li class="@(Model.ActiveTab.IsBasically(gap) ? "selected" : String.Empty)"
+            @onclick="() => Model.SetActiveTab(gap)">
+            @gap
+        </li>
+        <li class="@(Model.ActiveTab.IsBasically(wrap) ? "selected" : String.Empty)"
+            @onclick="() => Model.SetActiveTab(wrap)">
+            @wrap
+        </li>
+        <li class="@(Model.ActiveTab.IsBasically(justifyContent) ? "selected" : String.Empty)"
+            @onclick="() => Model.SetActiveTab(justifyContent)">
+            @justifyContent
+        </li>
+        <li class="@(Model.ActiveTab.IsBasically(alignItems) ? "selected" : String.Empty)"
+            @onclick="() => Model.SetActiveTab(alignItems)">
+            @alignItems
+        </li>
+        <li class="@(Model.ActiveTab.IsBasically(alignContent) ? "selected" : String.Empty)"
+            @onclick="() => Model.SetActiveTab(alignContent)">
+            @alignContent
+        </li>
+    </ul>
+    <div class="panes match-tab-color">
+        <div class="@(Model.ActiveTab.IsBasically(direction) ? String.Empty : "c-hide")">
+            <Field Label="Direction">
+                <Radio LookupValues="Model.DirectionNames"
+                       Vertical="true"
+                       @bind-Value="Model.Container.DirectionId" />
+            </Field>
+        </div>
+        <div class="@(Model.ActiveTab.IsBasically(gap) ? String.Empty : "c-hide")">
+            <Padding Size="Padding.Sizes.Small"
+                     Direction="Padding.Directions.Vertical">
+                <Field Label="Gap"
+                       Size="Field.Sizes.Medium"
+                       Container="Field.Containers.Div">
+                    <TextBox MaxLength="10"
+                             Placeholder="1em"
+                             @bind-Value="Model.Container.Gap" />
+                </Field>
+            </Padding>
+        </div>
+        <div class="@(Model.ActiveTab.IsBasically(wrap) ? String.Empty : "c-hide")">
+            <Field Label="Wrap">
+                <Radio LookupValues="Model.WrapNames"
+                       Vertical="true"
+                       @bind-Value="Model.Container.WrapId" />
+            </Field>
+
+        </div>
+        <div class="@(Model.ActiveTab.IsBasically(justifyContent) ? String.Empty : "c-hide")">
+            <Field Label="Justify Content">
+                <Radio LookupValues="Model.JustifyContentNames"
+                       Vertical="true"
+                       @bind-Value="Model.Container.JustifyContentId" />
+            </Field>
+
+        </div>
+        <div class="@(Model.ActiveTab.IsBasically(alignItems) ? String.Empty : "c-hide")">
+            <Field Label="Align Items">
+                <Radio LookupValues="Model.AlignItemsNames"
+                       Vertical="true"
+                       @bind-Value="Model.Container.AlignItemsId" />
+            </Field>
+
+        </div>
+        <div class="@(Model.ActiveTab.IsBasically(alignContent) ? String.Empty : "c-hide")">
+            <Field Label="Align Content">
+                <Radio LookupValues="Model.AlignContentNames"
+                       Vertical="true"
+                       @bind-Value="Model.Container.AlignContentId" />
+            </Field>
+        </div>
+    </div>
+</div>
+<div class="c-padding-small c-centered">
+    <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/"
+       target="_blank">
+        Layout Guide (Flexbox)
+    </a>
+</div>

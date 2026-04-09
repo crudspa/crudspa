@@ -1,2 +1,2 @@
-# Auto detect text files and perform LF normalization
+# Tell git to change line-endings for all text files based on the current OS
 * text=auto

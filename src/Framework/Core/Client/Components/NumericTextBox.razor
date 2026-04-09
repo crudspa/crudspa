@@ -1,0 +1,28 @@
+@typeparam T
+@if (Prefix.HasSomething() || Suffix.HasSomething())
+{
+    <div style="display: flex; align-items: center; gap: .375rem;">
+        @if (Prefix.HasSomething())
+        {
+            <span class="c-nowrap">@Prefix</span>
+        }
+        <RadzenNumeric TValue="T"
+                       Value="Value"
+                       ValueChanged="value => ValueChanged.InvokeAsync(value)"
+                       Disabled="@ReadOnly"
+                       Style="flex: 1 1 auto; min-width: 0;"
+                       Format="@Format" />
+        @if (Suffix.HasSomething())
+        {
+            <span class="c-nowrap">@Suffix</span>
+        }
+    </div>
+}
+else
+{
+    <RadzenNumeric TValue="T"
+                   Value="Value"
+                   ValueChanged="value => ValueChanged.InvokeAsync(value)"
+                   Disabled="@ReadOnly"
+                   Format="@Format" />
+}

@@ -1,0 +1,26 @@
+﻿<div class="c-overlay-parent">
+
+    @if (Model.Waiting)
+    {
+        <div class="c-waiter">
+            <div class="content">
+                <div class="animation">
+                    <div class="c-moving-balls">
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                    </div>
+                </div>
+                <div class="text">
+                    @Model.WaitingOn
+                </div>
+            </div>
+        </div>
+    }
+
+    <Alerts Items="Model.Alerts" />
+
+    @ChildContent
+
+</div>

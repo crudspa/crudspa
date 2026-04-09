@@ -1,0 +1,287 @@
+/// <reference path="defaults.scss" />
+
+.c-window {
+    background-color: $windowBackgroundColor;
+    border: $windowBorder;
+    border-bottom-width: 0;
+    box-shadow: $windowBoxShadow;
+    color: $windowForegroundColor;
+
+    &.full-height {
+        display: flex;
+        flex-flow: column nowrap;
+        flex: 1 0 auto;
+        overflow: visible;
+
+        .content {
+            flex: 1 0 auto;
+        }
+    }
+}
+
+.c-window-title {
+    @extend .c-padding-small-hor;
+    background-color: $windowTitleBackgroundColor;
+    border-bottom: $windowTitleBorderWidth solid $windowTitleBorderColor;
+    color: $windowTitleForegroundColor;
+    display: flex;
+    font-family: $windowTitleFontFamily;
+    font-size: $windowTitleFontSize;
+    font-style: $windowTitleFontStyle;
+    font-weight: $windowTitleFontWeight;
+    padding-top: $windowTitleVerticalPadding;
+    padding-bottom: $windowTitleVerticalPadding;
+    text-transform: $windowTitleTextTransform;
+
+    .text {
+        flex: 1 1 auto;
+        overflow: hidden;
+        padding: $windowTitleTextPadding;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .close-button {
+        align-items: center;
+        display: flex;
+        flex: 0 0 auto;
+        font-size: 1.15em;
+        justify-content: center;
+        margin-left: .25em;
+        margin-right: -.25em;
+        user-select: none;
+
+        > a,
+        > a:link,
+        > a:active,
+        > a:visited {
+            align-items: center;
+            background-color: $windowTitleButtonBackgroundColor;
+            color: $windowTitleButtonForegroundColor;
+            display: inline-flex;
+            justify-content: center;
+            line-height: 1;
+            min-height: 1.35em;
+            min-width: 1.35em;
+            padding: .125em;
+            text-decoration: none;
+        }
+
+        > a:hover {
+            background-color: $windowTitleButtonHoverBackgroundColor;
+            color: $windowTitleButtonHoverForegroundColor;
+            text-decoration: none;
+            transition: $defaultHoverTransition;
+        }
+
+    }
+}
+
+.c-window-header {
+    align-items: center;
+    display: flex;
+    flex-flow: row nowrap;
+    padding: .5em;
+}
+
+.c-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: $overlayBackgroundColor;
+    text-align: center;
+
+    &.global {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    &.fluid {
+        .window {
+            margin: 0 auto;
+            max-width: 100%;
+        }
+    }
+
+    &.no-overlay {
+        background-color: transparent;
+    }
+
+    &.full {
+        padding: 2em;
+        box-sizing: border-box;
+
+        .window {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            max-width: none;
+            max-height: none;
+            box-sizing: border-box;
+
+            .title {
+                flex: 0 0 auto;
+            }
+
+            .c-overlay-parent {
+                position: static;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+
+                .content {
+                    flex: 1 1 auto;
+                    display: flex;
+                    margin: 0;
+                    padding: 0;
+                }
+            }
+        }
+    }
+
+    .window {
+        background-color: $modalBackgroundColor;
+        border: $modalBorder;
+        border-radius: $modalBorderRadius;
+        box-shadow: $modalBoxShadow;
+        color: $modalForegroundColor;
+        display: inline-block;
+        max-width: 20em;
+        text-align: left;
+
+        @media (min-width: $screenTiny) {
+            max-width: 28em;
+        }
+
+        @media (min-width: $screenSmall) {
+            max-width: 30em;
+        }
+
+        @media (min-width: $screenMedium) {
+            max-width: 40em;
+        }
+
+        @media (min-width: $screenLarge) {
+            max-width: 50em;
+        }
+
+        @media (min-width: $screenWide) {
+            max-width: 60em;
+        }
+
+        @media (min-width: $screenMax) {
+            max-width: 75em;
+        }
+
+        > .title {
+            background-color: $modalTitleBackgroundColor;
+            border-color: $modalTitleBorderColor;
+            border-top-left-radius: $modalBorderRadius;
+            border-top-right-radius: $modalBorderRadius;
+            border-style: solid;
+            border-width: $modalTitleBorderWidth;
+            color: $modalTitleForegroundColor;
+            display: flex;
+            font-family: $modalTitleFontFamily;
+            font-size: $modalTitleFontSize;
+            font-weight: $modalTitleFontWeight;
+            padding: $modalTitlePadding;
+
+            .text {
+                flex: 1 1 auto;
+                overflow: hidden;
+                padding: .25em .5em;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .close-button {
+                align-items: center;
+                display: flex;
+                flex: 0 0 auto;
+                font-size: 1.1em;
+                justify-content: center;
+                margin-left: .25em;
+                user-select: none;
+
+                > a,
+                > a:link,
+                > a:active,
+                > a:visited {
+                    align-items: center;
+                    background-color: $modalTitleButtonBackgroundColor;
+                    color: $modalTitleButtonForegroundColor;
+                    display: inline-flex;
+                    justify-content: center;
+                    line-height: 1;
+                    min-height: 1.35em;
+                    min-width: 1.35em;
+                    padding: .125em;
+                    transition: $defaultHoverTransition;
+                    text-decoration: none;
+                }
+
+                > a:hover {
+                    background-color: $modalTitleButtonHoverBackgroundColor;
+                    color: $modalTitleButtonHoverForegroundColor;
+                    text-decoration: none;
+                }
+
+            }
+        }
+
+        .c-overlay-parent {
+            > .content {
+                @extend .c-padding-small;
+                overflow: hidden;
+
+                h1, h2, h3, h4 {
+                    margin-top: 0;
+                }
+            }
+
+            > .content.no-padding {
+                padding: 0;
+                overflow: visible;
+            }
+
+            .well {
+                padding: 1em 0;
+                text-align: right;
+                width: 100%;
+
+                .buttons {
+                    @extend .c-button-group;
+                    display: inline-flex;
+                }
+
+                &.center {
+                    text-align: center;
+                }
+            }
+
+            .links {
+                font-size: 1em;
+                padding: 2em 0 1em 0;
+                text-align: center;
+
+                a {
+                    text-decoration: underline;
+                }
+
+                .step {
+                    padding-bottom: 1em;
+                }
+            }
+        }
+    }
+}

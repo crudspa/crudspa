@@ -1,0 +1,31 @@
+<PageTitle>@(Navigator.AppTitle)</PageTitle>
+<SplashScreen />
+<ErrorRecover>
+    @if (PortalRun is not null)
+    {
+        <RadzenComponents />
+
+        <RootModalsContent PortalRun="PortalRun"
+                           ImageViewerModel="ImageViewerModel"
+                           PdfViewerModel="PdfViewerModel" />
+
+        <NavigationDisplayPlugin TypeName="@PortalRun.Portal.NavigationTypeDisplayView"
+                                 Portal="PortalRun.Portal"
+                                 Styles="@(PortalRun.MaxWidth.HasSomething() ? $"max-width: {PortalRun.MaxWidth}; margin: auto;" : String.Empty)">
+            <Branding>
+                <a @onclick="() => Navigator.GoToRoot()">
+                    <div class="image">
+                        <img src="_content/Crudspa.Samples.Consumer.Client/Banner-Consumer.png"
+                             alt="Consumer" />
+                    </div>
+                </a>
+            </Branding>
+            <AuthViews>
+                <SignInEmailTfa Portal="PortalRun.Portal" />
+            </AuthViews>
+            <Footer>
+                <Footer Page="PortalRun.FooterPage" />
+            </Footer>
+        </NavigationDisplayPlugin>
+    }
+</ErrorRecover>

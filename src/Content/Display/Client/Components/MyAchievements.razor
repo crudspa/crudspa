@@ -1,0 +1,39 @@
+﻿<div class="c-achievement-list">
+
+    @if (Model.ContactAchievements is not null)
+    {
+        @if (Model.ContactAchievements.Count == 0)
+        {
+            <div class="c-stack center c-padding-large-vert">
+                No achievements yet!
+            </div>
+        }
+
+        @foreach (var contactAchievement in Model.ContactAchievements)
+        {
+            <div class="c-padding-small-vert">
+                <div class="c-nowrap">
+                    <div class="c-padding-tiny-left c-padding-small-right">
+                        <Image ImageFile="contactAchievement.Achievement.ImageFile"
+                               Width="120" />
+                    </div>
+                    <div class="star description">
+                        <h3>@(contactAchievement.Achievement.Title)</h3>
+                        @if (contactAchievement.Achievement.Description.HasSomething())
+                        {
+                            <UserHtml Html="@(contactAchievement.Achievement.Description)" />
+                        }
+                        <p>@($"Earned: {contactAchievement.Earned.ToLocalTime(SessionState.TimeZoneId):g}")</p>
+                    </div>
+                    <div class="c-padding-tiny-left">
+                        <button @onclick="() => Model.ViewAchievement(contactAchievement)">
+                            <div class="c-button">
+                                <div class="text">View</div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

@@ -1,0 +1,116 @@
+@using Microsoft.AspNetCore.Components.Forms
+
+<div class="c-uploader"
+     disabled="@ReadOnly">
+
+    <div class="header">
+
+        <div class="icon">
+            <span class="c-icon-file-image"></span>
+        </div>
+
+        <div class="name">
+            @if (ImageFile.Name.HasSomething())
+            {
+                @if (ImageFile.Id.HasSomething())
+                {
+                    <a href="/api/framework/core/image-file/fetch?id=@($"{ImageFile.Id:D}")&download=true&original=true"
+                       target="_blank">
+                        @(ImageFile.Name)
+                    </a>
+                }
+                else
+                {
+                    @(ImageFile.Name)
+                }
+            }
+            else
+            {
+                <span class="none">None</span>
+            }
+        </div>
+
+        @if (!ReadOnly)
+        {
+            <div class="buttons">
+                <button @onclick="Clear"
+                        disabled="@ReadOnly">
+                    <div class="c-button transparent">
+                        <div class="icon">
+                            <span class="c-icon-trash2"></span>
+                        </div>
+                    </div>
+                </button>
+            </div>
+        }
+
+    </div>
+
+    @if (ImageFile.Id.HasSomething())
+    {
+        <div class="player">
+            <Image ImageFile="ImageFile"
+                   Width="Width" />
+        </div>
+    }
+    else if (ImageFile.UploadPreview.HasSomething())
+    {
+        <div class="preview-image">
+            <img alt="Image Preview"
+                 src="@(ImageFile.UploadPreview)" />
+        </div>
+    }
+
+    @if (!ReadOnly)
+    {
+        <div class="c-full">
+            <Field Label="File"
+                   Size="Field.Sizes.Full"
+                   Padding="Field.Paddings.TightHor">
+
+                <div class="c-image-uploader">
+
+                    <div class="c-nowrap picker">
+
+                        <label class="c-button"
+                               for="@($"input{InstanceId:N}")">
+                            Browse...
+                        </label>
+
+                        <div class="c-padding-small-hor">
+                            Browse or drop files here
+                        </div>
+
+                        <InputFile id="@($"input{InstanceId:N}")"
+                                   accept="@Accept"
+                                   disabled="@ReadOnly"
+                                   OnChange="HandleFileChanged"
+                                   @key="InstanceId" />
+                    </div>
+
+                    @if (ImageFile.Name.HasSomething() && ImageFile.Id is null)
+                    {
+                        <div class="c-wrap c-padding-small-vert">
+                            <div class="star">
+                                @if (ImageFile.UploadProgress > 0)
+                                {
+                                    <div class="progress-bar-wrapper">
+                                        <div class="progress-bar"
+                                             style="width: @($"{ImageFile.UploadProgress}%")">
+                                            <span class="progress-text">Uploading...</span>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="status-text">@(ImageFile.UploadStatus)</div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            </Field>
+        </div>
+    }
+
+</div>

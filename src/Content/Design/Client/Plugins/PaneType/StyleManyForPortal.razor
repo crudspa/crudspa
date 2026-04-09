@@ -1,0 +1,30 @@
+<Many Model="Model"
+      T="StyleModel"
+      EntityName="Style"
+      ShowFilter="true"
+      SupportsCreate="false"
+      SupportsDelete="false"
+      SaveRequested="id => Model.Save(id)"
+      CancelRequested="id => Model.Cancel(id)">
+    <ReadView>
+        <StyleDisplayPlugin TypeName="@context.Style.Rule.RuleType!.DisplayView"
+                            ConfigJson="@context.Style.ConfigJson"
+                            ContentPortalId="@context.Style.ContentPortalId"
+                            @key="context"
+                            @ref="context.RuleDisplay" />
+    </ReadView>
+    <EditView>
+        <Wrapped Alignment="Wrapped.Alignments.Top">
+            <Field Label="Rule"
+                   Size="Field.Sizes.Large">
+                <TextBox ReadOnly="true"
+                         Value="@context.Style.Rule.Name" />
+            </Field>
+            <StyleDesignPlugin TypeName="@context.Style.Rule.RuleType!.EditorView"
+                               ConfigJson="@context.Style.ConfigJson"
+                               ContentPortalId="@context.Style.ContentPortalId"
+                               @key="context"
+                               @ref="context.StyleDesign" />
+        </Wrapped>
+    </EditView>
+</Many>

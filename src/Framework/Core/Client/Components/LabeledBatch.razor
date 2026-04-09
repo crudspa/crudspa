@@ -1,0 +1,18 @@
+﻿@typeparam T
+@if (Items.Any())
+{
+    <div class="c-labeled">
+        <div class="label"
+             style="width: @Width; min-width: @Width;">
+            @Label
+        </div>
+        <div class="value">
+            <ul>
+                @foreach (var item in Items)
+                {
+                    <li>@ReadView(item)</li>
+                }
+            </ul>
+        </div>
+    </div>
+}

@@ -1,0 +1,9 @@
+﻿@if (UsaPostal is not null)
+{
+    <Field Size="Field.Sizes.Unspecified">
+        <Labeled Width="6em"
+                 Label="Postal"
+                 StringValue="@(UsaPostal.StreetAddress)" />
+    </Field>
+    @ChildContent
+}

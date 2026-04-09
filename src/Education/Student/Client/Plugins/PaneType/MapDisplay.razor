@@ -1,0 +1,31 @@
+﻿<Waiter Model="Model">
+    <div class="c-margin-large">
+        @if (Model.BookContent is not null)
+        {
+            @foreach (var trifold in Model.BookContent.Trifolds)
+            {
+                <button @onclick="() => Model.GoToTrifold(trifold.Id)">
+                    <div class="c-button">
+                        <div class="text">
+                            @(trifold.Title)
+                        </div>
+                        <div class="c-element-completion">
+                            <div class="status-icon">
+                                @if (trifold.Progress.TrifoldCompletedCount == 0)
+                                {
+                                    <img src="/api/content/display/images/check-empty"
+                                         alt="Incomplete" />
+                                }
+                                else
+                                {
+                                    <img src="/api/content/display/images/check-filled"
+                                         alt="Complete" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </button>
+            }
+        }
+    </div>
+</Waiter>

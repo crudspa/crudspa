@@ -1,0 +1,17 @@
+{
+  "default": true,
+  "MD003": { "style": "atx" },
+  "MD004": { "style": "asterisk" },
+  "MD007": { "indent": 4 },
+  "MD009": { "br_spaces": 1, "strict": false },
+  "MD013": false,
+  "MD026": false,
+  "MD033": true,
+  "MD040": true,
+  "MD041": true,
+  "MD042": true,
+  "MD045": true,
+  "MD055": { "style": "consistent" },
+  "MD056": true,
+  "MD058": true
+}

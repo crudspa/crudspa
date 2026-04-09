@@ -1,0 +1,87 @@
+<div class="c-hide">
+    <ThemePreview PortalId="PreviewPortalId"
+                  Loaded="HandleThemeLoaded">
+        <div></div>
+    </ThemePreview>
+</div>
+
+<ListOrderables Model="Model"
+                T="GameActivityModel"
+                EntityName="Activity"
+                UrlPrefix="@($"{Path}/game-activity")"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <Modals>
+        <Modal Model="Model.ShareModel"
+               Title="Share Activity"
+               Width="40em"
+               TopMargin="1em">
+            <Content>
+                <Wrapped>
+                    <Field Label="Book"
+                           Size="Field.Sizes.Full">
+                        <Dropdown LookupValues="Model.Books.OrderBy(x => x.Name)"
+                                  @bind-Value="Model.SelectedBookId" />
+                    </Field>
+                    <Field Label="Section"
+                           Size="Field.Sizes.Full">
+                        <Dropdown LookupValues="Model.Sections.OrderBy(x => x.Name)"
+                                  @bind-Value="Model.SelectedSectionId" />
+                    </Field>
+                </Wrapped>
+            </Content>
+            <Buttons>
+                <ButtonOk Clicked="() => Model.Share()" />
+                <ButtonCancel Clicked="() => Model.ShareModel.Hide()" />
+            </Buttons>
+        </Modal>
+    </Modals>
+    <ReadView>
+        <Field Size="Field.Sizes.Unspecified">
+            <Labeled Width="7em"
+                     Label="Theme Word"
+                     StringValue="@context.GameActivity.ThemeWord" />
+            <Labeled Width="7em"
+                     Label="MORE Word"
+                     BooleanValue="@context.GameActivity.Rigorous" />
+            <Labeled Width="7em"
+                     Label="Multisyllabic"
+                     BooleanValue="@context.GameActivity.Multisyllabic" />
+            <Labeled Width="7em"
+                     Label="Group"
+                     StringValue="@context.GameActivity.GroupName" />
+            <Labeled Width="7em"
+                     Label="Type"
+                     StringValue="@context.GameActivity.TypeName" />
+            <LabeledBatch Label="Shared With"
+                          Width="7em"
+                          Items="context.GameActivity.SharedWith.OrderBy(x => x.SectionGameBookTitle).ThenBy(x => x.SectionGameKey).ThenBy(x => x.SectionTitle)"
+                          Context="item">
+                <ReadView>
+                    @(item.SectionGameBookTitle) &gt; @(item.SectionGameKey) &gt; @(item.SectionTitle)
+                </ReadView>
+            </LabeledBatch>
+        </Field>
+        <Field Size="Field.Sizes.Full"
+               Container="Field.Containers.Div">
+            @if (ThemeReady)
+            {
+                <ThemePreview PortalId="PreviewPortalId"
+                              Primary="false">
+                    <Wrapped NoWrap="true">
+                        <div class="star c-overlay-parent">
+                            <StudentActivityPreview Activity="context.GameActivity.Activity!" />
+                        </div>
+                    </Wrapped>
+                </ThemePreview>
+            }
+        </Field>
+    </ReadView>
+    <CardMenuItems>
+        <MenuItem Type="MenuItem.Types.Custom"
+                  Text="Share"
+                  Icon="c-icon-link2"
+                  Clicked="() => Model.StartShare(context.Id)" />
+    </CardMenuItems>
+</ListOrderables>

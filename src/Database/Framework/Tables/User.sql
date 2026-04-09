@@ -1,0 +1,18 @@
+create table [Framework].[User] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [ContactId] uniqueidentifier not null,
+    [PortalId] uniqueidentifier not null,
+    [OrganizationId] uniqueidentifier not null,
+    [Username] nvarchar(150) not null,
+    [PasswordSalt] binary(32) null,
+    [PasswordHash] binary(32) null,
+    [ResetPassword] bit default(1) not null,
+    constraint [PK_Framework_User] primary key clustered ([Id]),
+    constraint [FK_Framework_User_Contact] foreign key ([ContactId]) references [Framework].[Contact] ([Id]),
+    constraint [FK_Framework_User_Portal] foreign key ([PortalId]) references [Framework].[Portal] ([Id]),
+    constraint [FK_Framework_User_Organization] foreign key ([OrganizationId]) references [Framework].[Organization] ([Id]),
+);

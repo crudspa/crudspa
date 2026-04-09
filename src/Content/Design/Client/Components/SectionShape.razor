@@ -1,0 +1,176 @@
+<Modal Model="Model.SectionShapeModel"
+       Title="Section Shape"
+       Width="min(60rem, calc(100% - .5rem))"
+       TopMargin=".25rem"
+       Sizing="Modal.ModalSizing.Fluid">
+    <Content>
+        <div class="c-shape-layout">
+            <div class="c-shape-left">
+                <div class="c-field full c-shape-field">
+                    <div class="label-container">
+                        <div class="label">Shape</div>
+                    </div>
+                    <div class="c-input-margin c-shape-list">
+                        <ListBox TItem="SectionShapeChoice"
+                                 LookupValues="Model.SectionShapeModel.Shapes"
+                                 @bind-Value="Model.SectionShapeModel.SelectedShapeId"
+                                 Style="height: 100%; max-height: min(40rem, 70vh); width: 100%;" />
+                    </div>
+                    <div class="c-shape-variant-field">
+                        <div class="label-container">
+                            <div class="label">Variants</div>
+                        </div>
+                        <div class="c-input-margin c-shape-variants">
+                            <div class="c-shape-variant-list">
+                                <Checkbox Label="Bordered"
+                                          @bind-Value="Model.SectionShapeModel.Bordered" />
+                                <Checkbox Label="Shadowed"
+                                          @bind-Value="Model.SectionShapeModel.Shadowed" />
+                                <Checkbox Label="Rounded"
+                                          @bind-Value="Model.SectionShapeModel.Rounded" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="c-shape-right">
+                @if (PreviewSection is { } previewSection)
+                {
+                    <div class="c-shape-views">
+                        <div class="c-shape-group">
+                            <div class="c-shape-title">Wide</div>
+                            <SectionShapePreview Section="previewSection" />
+                        </div>
+                        <div class="c-shape-group tall">
+                            <div class="c-shape-title">Tall</div>
+                            <SectionShapePreview Section="previewSection"
+                                                  Tall="true" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        @if (Model.SectionShapeModel.ExistingContentMessage.HasSomething())
+        {
+            <div class="c-shape-message">
+                @Model.SectionShapeModel.ExistingContentMessage
+            </div>
+        }
+    </Content>
+    <Buttons>
+        <ButtonOk Clicked="() => Model.SectionShapeModel.Apply()" />
+        <ButtonCancel Clicked="() => Model.SectionShapeModel.Hide()" />
+    </Buttons>
+</Modal>
+<style>
+    .c-shape-layout {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.25rem;
+        align-items: stretch;
+    }
+
+    .c-shape-message {
+        margin-top: 1.5rem;
+        border: 1px solid #d9a441;
+        border-radius: .4rem;
+        padding: .75rem 1rem;
+        background-color: #fff8e8;
+    }
+
+    .c-shape-left,
+    .c-shape-right {
+        min-width: 0;
+        min-height: 0;
+    }
+
+    .c-shape-left {
+        display: flex;
+        flex-direction: column;
+        flex: 0 1 18rem;
+        width: min(18rem, 100%);
+        align-self: stretch;
+    }
+
+    .c-shape-field {
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+        min-width: 0;
+        min-height: 0;
+        height: 100%;
+        gap: .6rem;
+    }
+
+    .c-shape-list {
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    .c-shape-list .rz-listbox {
+        flex: 1 1 auto;
+        min-height: 0;
+    }
+
+    .c-shape-variant-field {
+        flex: 0 0 auto;
+        min-width: 0;
+    }
+
+    .c-shape-variant-field .c-input-margin {
+        margin-top: .2rem;
+    }
+
+    .c-shape-variants {
+        min-width: 0;
+    }
+
+    .c-shape-variant-list {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 1rem;
+        row-gap: .25rem;
+        align-items: flex-start;
+        align-content: flex-start;
+        min-width: 0;
+    }
+
+    .c-shape-variant-list .c-checkbox {
+        margin: 0;
+    }
+
+    .c-shape-right {
+        display: flex;
+        min-width: min(100%, 24rem);
+        flex: 1 1 28rem;
+    }
+
+    .c-shape-views {
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+        min-height: 0;
+        padding: .5rem 0;
+    }
+
+    .c-shape-group {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
+
+    .c-shape-group.tall {
+        width: min(12rem, 100%);
+        margin: 0 auto;
+    }
+
+    .c-shape-title {
+        font-weight: 600;
+        text-align: center;
+    }
+</style>

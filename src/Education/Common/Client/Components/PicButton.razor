@@ -1,0 +1,7 @@
+﻿<button @onclick="() => Clicked.InvokeAsync()"
+        disabled="@Disabled">
+    <div class="cec-choice cec-pic-button c-button center @(Model.StateClass)">
+        <ImageDiv ImageFile="Model.Choice.ImageFile"
+                  Width="160" />
+    </div>
+</button>

@@ -1,0 +1,1316 @@
+﻿/// <reference path="defaults.scss" />
+
+.c-padding-tight-top {
+    padding-top: 0;
+}
+
+.c-padding-tight-right {
+    padding-right: 0;
+}
+
+.c-padding-tight-bottom {
+    padding-bottom: 0;
+}
+
+.c-padding-tight-left {
+    padding-left: 0;
+}
+
+.c-padding-tight-hor {
+    @extend .c-padding-tight-left;
+    @extend .c-padding-tight-right;
+}
+
+.c-padding-tight-vert {
+    @extend .c-padding-tight-top;
+    @extend .c-padding-tight-bottom;
+}
+
+.c-padding-tight {
+    @extend .c-padding-tight-hor;
+    @extend .c-padding-tight-vert;
+}
+
+.c-padding-micro-top {
+    padding-top: $spacingMicroScreenMin;
+
+    @media (min-width: $screenTiny) {
+        padding-top: $spacingMicroScreenMicro;
+    }
+
+    @media (min-width: $screenSmall) {
+        padding-top: $spacingMicroScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        padding-top: $spacingMicroScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        padding-top: $spacingMicroScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        padding-top: $spacingMicroScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        padding-top: $spacingMicroScreenMax;
+    }
+}
+
+.c-padding-micro-right {
+    padding-right: $spacingMicroScreenMin;
+
+    @media (min-width: $screenTiny) {
+        padding-right: $spacingMicroScreenMicro;
+    }
+
+    @media (min-width: $screenSmall) {
+        padding-right: $spacingMicroScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        padding-right: $spacingMicroScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        padding-right: $spacingMicroScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        padding-right: $spacingMicroScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        padding-right: $spacingMicroScreenMax;
+    }
+}
+
+.c-padding-micro-bottom {
+    padding-bottom: $spacingMicroScreenMin;
+
+    @media (min-width: $screenTiny) {
+        padding-bottom: $spacingMicroScreenMicro;
+    }
+
+    @media (min-width: $screenSmall) {
+        padding-bottom: $spacingMicroScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        padding-bottom: $spacingMicroScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        padding-bottom: $spacingMicroScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        padding-bottom: $spacingMicroScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        padding-bottom: $spacingMicroScreenMax;
+    }
+}
+
+.c-padding-micro-left {
+    padding-left: $spacingMicroScreenMin;
+
+    @media (min-width: $screenTiny) {
+        padding-left: $spacingMicroScreenMicro;
+    }
+
+    @media (min-width: $screenSmall) {
+        padding-left: $spacingMicroScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        padding-left: $spacingMicroScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        padding-left: $spacingMicroScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        padding-left: $spacingMicroScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        padding-left: $spacingMicroScreenMax;
+    }
+}
+
+.c-padding-micro-hor {
+    @extend .c-padding-micro-left;
+    @extend .c-padding-micro-right;
+}
+
+.c-padding-micro-vert {
+    @extend .c-padding-micro-top;
+    @extend .c-padding-micro-bottom;
+}
+
+.c-padding-micro,
+.c-padding-micro-all {
+    @extend .c-padding-micro-hor;
+    @extend .c-padding-micro-vert;
+}
+
+.c-padding-tiny-top {
+    padding-top: $spacingTinyScreenMin;
+
+    @media (min-width: $screenTiny) {
+        padding-top: $spacingTinyScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        padding-top: $spacingTinyScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        padding-top: $spacingTinyScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        padding-top: $spacingTinyScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        padding-top: $spacingTinyScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        padding-top: $spacingTinyScreenMax;
+    }
+}
+
+.c-padding-tiny-right {
+    padding-right: $spacingTinyScreenMin;
+
+    @media (min-width: $screenTiny) {
+        padding-right: $spacingTinyScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        padding-right: $spacingTinyScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        padding-right: $spacingTinyScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        padding-right: $spacingTinyScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        padding-right: $spacingTinyScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        padding-right: $spacingTinyScreenMax;
+    }
+}
+
+.c-padding-tiny-bottom {
+    padding-bottom: $spacingTinyScreenMin;
+
+    @media (min-width: $screenTiny) {
+        padding-bottom: $spacingTinyScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        padding-bottom: $spacingTinyScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        padding-bottom: $spacingTinyScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        padding-bottom: $spacingTinyScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        padding-bottom: $spacingTinyScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        padding-bottom: $spacingTinyScreenMax;
+    }
+}
+
+.c-padding-tiny-left {
+    padding-left: $spacingTinyScreenMin;
+
+    @media (min-width: $screenTiny) {
+        padding-left: $spacingTinyScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        padding-left: $spacingTinyScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        padding-left: $spacingTinyScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        padding-left: $spacingTinyScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        padding-left: $spacingTinyScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        padding-left: $spacingTinyScreenMax;
+    }
+}
+
+.c-padding-tiny-hor {
+    @extend .c-padding-tiny-left;
+    @extend .c-padding-tiny-right;
+}
+
+.c-padding-tiny-vert {
+    @extend .c-padding-tiny-top;
+    @extend .c-padding-tiny-bottom;
+}
+
+.c-padding-tiny,
+.c-padding-tiny-all {
+    @extend .c-padding-tiny-hor;
+    @extend .c-padding-tiny-vert;
+}
+
+.c-padding-small-top {
+    padding-top: $spacingSmallScreenMin;
+
+    @media (min-width: $screenTiny) {
+        padding-top: $spacingSmallScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        padding-top: $spacingSmallScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        padding-top: $spacingSmallScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        padding-top: $spacingSmallScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        padding-top: $spacingSmallScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        padding-top: $spacingSmallScreenMax;
+    }
+}
+
+.c-padding-small-right {
+    padding-right: $spacingSmallScreenMin;
+
+    @media (min-width: $screenTiny) {
+        padding-right: $spacingSmallScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        padding-right: $spacingSmallScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        padding-right: $spacingSmallScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        padding-right: $spacingSmallScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        padding-right: $spacingSmallScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        padding-right: $spacingSmallScreenMax;
+    }
+}
+
+.c-padding-small-bottom {
+    padding-bottom: $spacingSmallScreenMin;
+
+    @media (min-width: $screenTiny) {
+        padding-bottom: $spacingSmallScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        padding-bottom: $spacingSmallScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        padding-bottom: $spacingSmallScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        padding-bottom: $spacingSmallScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        padding-bottom: $spacingSmallScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        padding-bottom: $spacingSmallScreenMax;
+    }
+}
+
+.c-padding-small-left {
+    padding-left: $spacingSmallScreenMin;
+
+    @media (min-width: $screenTiny) {
+        padding-left: $spacingSmallScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        padding-left: $spacingSmallScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        padding-left: $spacingSmallScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        padding-left: $spacingSmallScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        padding-left: $spacingSmallScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        padding-left: $spacingSmallScreenMax;
+    }
+}
+
+.c-padding-small-hor {
+    @extend .c-padding-small-left;
+    @extend .c-padding-small-right;
+}
+
+.c-padding-small-vert {
+    @extend .c-padding-small-top;
+    @extend .c-padding-small-bottom;
+}
+
+.c-padding-small,
+.c-padding-small-all {
+    @extend .c-padding-small-hor;
+    @extend .c-padding-small-vert;
+}
+
+.c-padding-medium-top {
+    padding-top: $spacingMediumScreenMin;
+
+    @media (min-width: $screenTiny) {
+        padding-top: $spacingMediumScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        padding-top: $spacingMediumScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        padding-top: $spacingMediumScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        padding-top: $spacingMediumScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        padding-top: $spacingMediumScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        padding-top: $spacingMediumScreenMax;
+    }
+}
+
+.c-padding-medium-right {
+    padding-right: $spacingMediumScreenMin;
+
+    @media (min-width: $screenTiny) {
+        padding-right: $spacingMediumScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        padding-right: $spacingMediumScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        padding-right: $spacingMediumScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        padding-right: $spacingMediumScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        padding-right: $spacingMediumScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        padding-right: $spacingMediumScreenMax;
+    }
+}
+
+.c-padding-medium-bottom {
+    padding-bottom: $spacingMediumScreenMin;
+
+    @media (min-width: $screenTiny) {
+        padding-bottom: $spacingMediumScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        padding-bottom: $spacingMediumScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        padding-bottom: $spacingMediumScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        padding-bottom: $spacingMediumScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        padding-bottom: $spacingMediumScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        padding-bottom: $spacingMediumScreenMax;
+    }
+}
+
+.c-padding-medium-left {
+    padding-left: $spacingMediumScreenMin;
+
+    @media (min-width: $screenTiny) {
+        padding-left: $spacingMediumScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        padding-left: $spacingMediumScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        padding-left: $spacingMediumScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        padding-left: $spacingMediumScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        padding-left: $spacingMediumScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        padding-left: $spacingMediumScreenMax;
+    }
+}
+
+.c-padding-medium-hor {
+    @extend .c-padding-medium-left;
+    @extend .c-padding-medium-right;
+}
+
+.c-padding-medium-vert {
+    @extend .c-padding-medium-top;
+    @extend .c-padding-medium-bottom;
+}
+
+.c-padding-medium,
+.c-padding-medium-all {
+    @extend .c-padding-medium-hor;
+    @extend .c-padding-medium-vert;
+}
+
+.c-padding-large-top {
+    padding-top: $spacingLargeScreenMin;
+
+    @media (min-width: $screenTiny) {
+        padding-top: $spacingLargeScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        padding-top: $spacingLargeScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        padding-top: $spacingLargeScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        padding-top: $spacingLargeScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        padding-top: $spacingLargeScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        padding-top: $spacingLargeScreenMax;
+    }
+}
+
+.c-padding-large-right {
+    padding-right: $spacingLargeScreenMin;
+
+    @media (min-width: $screenTiny) {
+        padding-right: $spacingLargeScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        padding-right: $spacingLargeScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        padding-right: $spacingLargeScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        padding-right: $spacingLargeScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        padding-right: $spacingLargeScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        padding-right: $spacingLargeScreenMax;
+    }
+}
+
+.c-padding-large-bottom {
+    padding-bottom: $spacingLargeScreenMin;
+
+    @media (min-width: $screenTiny) {
+        padding-bottom: $spacingLargeScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        padding-bottom: $spacingLargeScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        padding-bottom: $spacingLargeScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        padding-bottom: $spacingLargeScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        padding-bottom: $spacingLargeScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        padding-bottom: $spacingLargeScreenMax;
+    }
+}
+
+.c-padding-large-left {
+    padding-left: $spacingLargeScreenMin;
+
+    @media (min-width: $screenTiny) {
+        padding-left: $spacingLargeScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        padding-left: $spacingLargeScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        padding-left: $spacingLargeScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        padding-left: $spacingLargeScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        padding-left: $spacingLargeScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        padding-left: $spacingLargeScreenMax;
+    }
+}
+
+.c-padding-large-hor {
+    @extend .c-padding-large-left;
+    @extend .c-padding-large-right;
+}
+
+.c-padding-large-vert {
+    @extend .c-padding-large-top;
+    @extend .c-padding-large-bottom;
+}
+
+.c-padding-large,
+.c-padding-large-all {
+    @extend .c-padding-large-hor;
+    @extend .c-padding-large-vert;
+}
+
+.c-padding-small-hor-screen-medium {
+    @extend .c-padding-small-hor;
+
+    @media (max-width: $screenMedium) {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.c-padding-small-hor-screen-large {
+    @extend .c-padding-small-hor;
+
+    @media (max-width: $screenLarge) {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.c-padding-small-top-screen-medium {
+    @extend .c-padding-small-top;
+
+    @media (max-width: $screenMedium) {
+        padding-top: 0;
+    }
+}
+
+.c-padding-small-vert-screen-medium {
+    @extend .c-padding-small-vert;
+
+    @media (max-width: $screenMedium) {
+        padding-bottom: 0;
+        padding-top: 0;
+    }
+}
+
+.c-padding-medium-all-screen-large {
+    @extend .c-padding-medium-all;
+
+    @media (max-width: $screenLarge) {
+        padding: 0;
+    }
+}
+
+.c-padding-medium-hor-screen-large {
+    @extend .c-padding-medium-hor;
+
+    @media (max-width: $screenLarge) {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.c-padding-medium-vert-screen-medium {
+    @extend .c-padding-medium-vert;
+
+    @media (max-width: $screenMedium) {
+        padding-bottom: 0;
+        padding-top: 0;
+    }
+}
+
+.c-padding-large-hor-screen-large {
+    @extend .c-padding-large-hor;
+
+    @media (max-width: $screenLarge) {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.c-margin-tiny-top {
+    margin-top: $spacingTinyScreenMin;
+
+    @media (min-width: $screenTiny) {
+        margin-top: $spacingTinyScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        margin-top: $spacingTinyScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        margin-top: $spacingTinyScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        margin-top: $spacingTinyScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        margin-top: $spacingTinyScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        margin-top: $spacingTinyScreenMax;
+    }
+}
+
+.c-margin-tiny-right {
+    margin-right: $spacingTinyScreenMin;
+
+    @media (min-width: $screenTiny) {
+        margin-right: $spacingTinyScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        margin-right: $spacingTinyScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        margin-right: $spacingTinyScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        margin-right: $spacingTinyScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        margin-right: $spacingTinyScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        margin-right: $spacingTinyScreenMax;
+    }
+}
+
+.c-margin-tiny-bottom {
+    margin-bottom: $spacingTinyScreenMin;
+
+    @media (min-width: $screenTiny) {
+        margin-bottom: $spacingTinyScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        margin-bottom: $spacingTinyScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        margin-bottom: $spacingTinyScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        margin-bottom: $spacingTinyScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        margin-bottom: $spacingTinyScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        margin-bottom: $spacingTinyScreenMax;
+    }
+}
+
+.c-margin-tiny-left {
+    margin-left: $spacingTinyScreenMin;
+
+    @media (min-width: $screenTiny) {
+        margin-left: $spacingTinyScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        margin-left: $spacingTinyScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        margin-left: $spacingTinyScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        margin-left: $spacingTinyScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        margin-left: $spacingTinyScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        margin-left: $spacingTinyScreenMax;
+    }
+}
+
+.c-margin-tiny-hor {
+    @extend .c-margin-tiny-left;
+    @extend .c-margin-tiny-right;
+}
+
+.c-margin-tiny-vert {
+    @extend .c-margin-tiny-top;
+    @extend .c-margin-tiny-bottom;
+}
+
+.c-margin-tiny,
+.c-margin-tiny-all {
+    @extend .c-margin-tiny-hor;
+    @extend .c-margin-tiny-vert;
+}
+
+.c-margin-small-top {
+    margin-top: $spacingSmallScreenMin;
+
+    @media (min-width: $screenTiny) {
+        margin-top: $spacingSmallScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        margin-top: $spacingSmallScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        margin-top: $spacingSmallScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        margin-top: $spacingSmallScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        margin-top: $spacingSmallScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        margin-top: $spacingSmallScreenMax;
+    }
+}
+
+.c-margin-small-right {
+    margin-right: $spacingSmallScreenMin;
+
+    @media (min-width: $screenTiny) {
+        margin-right: $spacingSmallScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        margin-right: $spacingSmallScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        margin-right: $spacingSmallScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        margin-right: $spacingSmallScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        margin-right: $spacingSmallScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        margin-right: $spacingSmallScreenMax;
+    }
+}
+
+.c-margin-small-bottom {
+    margin-bottom: $spacingSmallScreenMin;
+
+    @media (min-width: $screenTiny) {
+        margin-bottom: $spacingSmallScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        margin-bottom: $spacingSmallScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        margin-bottom: $spacingSmallScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        margin-bottom: $spacingSmallScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        margin-bottom: $spacingSmallScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        margin-bottom: $spacingSmallScreenMax;
+    }
+}
+
+.c-margin-small-left {
+    margin-left: $spacingSmallScreenMin;
+
+    @media (min-width: $screenTiny) {
+        margin-left: $spacingSmallScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        margin-left: $spacingSmallScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        margin-left: $spacingSmallScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        margin-left: $spacingSmallScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        margin-left: $spacingSmallScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        margin-left: $spacingSmallScreenMax;
+    }
+}
+
+.c-margin-small-hor {
+    @extend .c-margin-small-left;
+    @extend .c-margin-small-right;
+}
+
+.c-margin-small-vert {
+    @extend .c-margin-small-top;
+    @extend .c-margin-small-bottom;
+}
+
+.c-margin-small,
+.c-margin-small-all {
+    @extend .c-margin-small-hor;
+    @extend .c-margin-small-vert;
+}
+
+.c-margin-medium-top {
+    margin-top: $spacingMediumScreenMin;
+
+    @media (min-width: $screenTiny) {
+        margin-top: $spacingMediumScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        margin-top: $spacingMediumScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        margin-top: $spacingMediumScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        margin-top: $spacingMediumScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        margin-top: $spacingMediumScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        margin-top: $spacingMediumScreenMax;
+    }
+}
+
+.c-margin-medium-right {
+    margin-right: $spacingMediumScreenMin;
+
+    @media (min-width: $screenTiny) {
+        margin-right: $spacingMediumScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        margin-right: $spacingMediumScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        margin-right: $spacingMediumScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        margin-right: $spacingMediumScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        margin-right: $spacingMediumScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        margin-right: $spacingMediumScreenMax;
+    }
+}
+
+.c-margin-medium-bottom {
+    margin-bottom: $spacingMediumScreenMin;
+
+    @media (min-width: $screenTiny) {
+        margin-bottom: $spacingMediumScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        margin-bottom: $spacingMediumScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        margin-bottom: $spacingMediumScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        margin-bottom: $spacingMediumScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        margin-bottom: $spacingMediumScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        margin-bottom: $spacingMediumScreenMax;
+    }
+}
+
+.c-margin-medium-left {
+    margin-left: $spacingMediumScreenMin;
+
+    @media (min-width: $screenTiny) {
+        margin-left: $spacingMediumScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        margin-left: $spacingMediumScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        margin-left: $spacingMediumScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        margin-left: $spacingMediumScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        margin-left: $spacingMediumScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        margin-left: $spacingMediumScreenMax;
+    }
+}
+
+.c-margin-medium-hor {
+    @extend .c-margin-medium-left;
+    @extend .c-margin-medium-right;
+}
+
+.c-margin-medium-vert {
+    @extend .c-margin-medium-top;
+    @extend .c-margin-medium-bottom;
+}
+
+.c-margin-medium,
+.c-margin-medium-all {
+    @extend .c-margin-medium-hor;
+    @extend .c-margin-medium-vert;
+}
+
+.c-margin-large-top {
+    margin-top: $spacingLargeScreenMin;
+
+    @media (min-width: $screenTiny) {
+        margin-top: $spacingLargeScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        margin-top: $spacingLargeScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        margin-top: $spacingLargeScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        margin-top: $spacingLargeScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        margin-top: $spacingLargeScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        margin-top: $spacingLargeScreenMax;
+    }
+}
+
+.c-margin-large-right {
+    margin-right: $spacingLargeScreenMin;
+
+    @media (min-width: $screenTiny) {
+        margin-right: $spacingLargeScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        margin-right: $spacingLargeScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        margin-right: $spacingLargeScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        margin-right: $spacingLargeScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        margin-right: $spacingLargeScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        margin-right: $spacingLargeScreenMax;
+    }
+}
+
+.c-margin-large-bottom {
+    margin-bottom: $spacingLargeScreenMin;
+
+    @media (min-width: $screenTiny) {
+        margin-bottom: $spacingLargeScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        margin-bottom: $spacingLargeScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        margin-bottom: $spacingLargeScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        margin-bottom: $spacingLargeScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        margin-bottom: $spacingLargeScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        margin-bottom: $spacingLargeScreenMax;
+    }
+}
+
+.c-margin-large-left {
+    margin-left: $spacingLargeScreenMin;
+
+    @media (min-width: $screenTiny) {
+        margin-left: $spacingLargeScreenTiny;
+    }
+
+    @media (min-width: $screenSmall) {
+        margin-left: $spacingLargeScreenSmall;
+    }
+
+    @media (min-width: $screenMedium) {
+        margin-left: $spacingLargeScreenMedium;
+    }
+
+    @media (min-width: $screenLarge) {
+        margin-left: $spacingLargeScreenLarge;
+    }
+
+    @media (min-width: $screenWide) {
+        margin-left: $spacingLargeScreenWide;
+    }
+
+    @media (min-width: $screenMax) {
+        margin-left: $spacingLargeScreenMax;
+    }
+}
+
+.c-margin-large-hor {
+    @extend .c-margin-large-left;
+    @extend .c-margin-large-right;
+}
+
+.c-margin-large-vert {
+    @extend .c-margin-large-top;
+    @extend .c-margin-large-bottom;
+}
+
+.c-margin-large,
+.c-margin-large-all {
+    @extend .c-margin-large-hor;
+    @extend .c-margin-large-vert;
+}
+
+.c-margin-small-horScreenMedium {
+    @extend .c-margin-small-hor;
+
+    @media (max-width: $screenMedium) {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+.c-margin-small-hor-mostly-right {
+    margin-left: .125rem;
+    margin-right: .25rem;
+
+    @media (min-width: $screenTiny) {
+        margin-left: .2rem;
+        margin-right: .4rem;
+    }
+
+    @media (min-width: $screenSmall) {
+        margin-left: .3rem;
+        margin-right: .6rem;
+    }
+
+    @media (min-width: $screenMedium) {
+        margin-left: .35rem;
+        margin-right: .7rem;
+    }
+
+    @media (min-width: $screenLarge) {
+        margin-left: .4rem;
+        margin-right: .8rem;
+    }
+
+    @media (min-width: $screenWide) {
+        margin-left: .45rem;
+        margin-right: .9rem;
+    }
+
+    @media (min-width: $screenMax) {
+        margin-left: .5rem;
+        margin-right: 1rem;
+    }
+}
+
+.c-margin-small-vertScreenMedium {
+    @extend .c-margin-small-vert;
+
+    @media (max-width: $screenMedium) {
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+}
+
+.c-margin-medium-vertScreenMedium {
+    @extend .c-margin-medium-vert;
+
+    @media (max-width: $screenMedium) {
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+}

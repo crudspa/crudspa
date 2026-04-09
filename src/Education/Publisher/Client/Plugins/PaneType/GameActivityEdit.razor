@@ -1,0 +1,64 @@
+<Toolbar>
+    <Left>
+        @if (Model.ReadOnly)
+        {
+            <ButtonEdit Clicked="() => Model.Edit()" />
+        }
+        else
+        {
+            <ButtonGroup>
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            </ButtonGroup>
+        }
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Theme Word"
+                       Size="Field.Sizes.Medium">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="50"
+                             @bind-Value="Model.Entity.ThemeWord" />
+                </Field>
+                <Field Label="Research Group"
+                       Size="Field.Sizes.Small">
+                    <Dropdown ReadOnly="Model.ReadOnly"
+                              AllowNull="true"
+                              NullText="[None]"
+                              LookupValues="Model.ResearchGroupNames"
+                              @bind-Value="Model.Entity.GroupId" />
+                </Field>
+                <Field Label="Type"
+                       Size="Field.Sizes.Unspecified">
+                    <Radio ReadOnly="Model.ReadOnly"
+                           LookupValues="Model.GameActivityTypeNames"
+                           @bind-Value="Model.Entity.TypeId" />
+                </Field>
+                <Field Label="Options"
+                       Container="Field.Containers.Div">
+                    <Wrapped NoWrap="true">
+                        <Checkbox Label="MORE Word"
+                                  ReadOnly="Model.ReadOnly"
+                                  @bind-Value="Model.Entity.Rigorous" />
+                        <Checkbox Label="Multisyllabic"
+                                  ReadOnly="Model.ReadOnly"
+                                  @bind-Value="Model.Entity.Multisyllabic" />
+                    </Wrapped>
+                </Field>
+            </Wrapped>
+            @if (Model.Entity?.Activity is not null && Model.ActivityTypes.HasItems())
+            {
+                <ActivityEdit Model="Model.ActivityEditModel"
+                              ActivityTypes="Model.ActivityTypes"
+                              ContentAreaNames="Model.ContentAreaNames"
+                              PreviewPortalId="PortalIds.Student"
+                              ReadOnly="Model.ReadOnly" />
+            }
+        </Padding>
+    }
+</Waiter>

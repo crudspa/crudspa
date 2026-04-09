@@ -1,0 +1,21 @@
+﻿<Padding Size="Padding.Sizes.Small">
+    <div class="c-labeled">
+        <div class="label"
+             style="width: 6em; min-width: 6em;">
+            Font
+        </div>
+        @if (Font?.Name is not null)
+        {
+            <style>
+                @@font-face {
+                    font-family: @($"'{Font.Name}'");
+                    src: url('@Font.FileFile.FetchUrl()');
+                }
+            </style>
+        }
+        <div class="value"
+             style="font-family: '@(Font?.Name ?? "system-ui")', sans-serif; font-size: @(Config.Size); font-weight: @(Config.Weight);">
+            @(Font?.Name ?? "system-ui") | @(Config.Size) | @(Config.Weight)
+        </div>
+    </div>
+</Padding>

@@ -1,0 +1,59 @@
+﻿@namespace Crudspa.Framework.Core.Client.Plugins
+@PluginFragment
+
+@code
+{
+    [Parameter, EditorRequired] public String? TypeName { get; set; } = String.Empty;
+    [Parameter] public String? Path { get; set; }
+    [Parameter] public Guid? Id { get; set; }
+    [Parameter] public String? ConfigJson { get; set; }
+    [Parameter] public ObservableCollection<Pane>? Panes { get; set; }
+    [Parameter] public BatchModel<Pane>? PanesModel { get; set; }
+    [Parameter] public System.Collections.Generic.List<Named>? PermissionNames { get; set; }
+    [Parameter] public System.Collections.Generic.List<PaneTypeFull>? PaneTypes { get; set; }
+    [Parameter] public Action? AddPane { get; set; }
+
+    public Object? Instance { get; private set; }
+
+    private RenderFragment PluginFragment => builder =>
+    {
+        if (TypeName.HasNothing())
+            throw new("TypeName was not supplied.");
+
+        var pluginType = Type.GetType(TypeName)
+            ?? throw new($"Component type '{TypeName}' not found.");
+
+        if (!typeof(ISegmentDesign).IsAssignableFrom(pluginType))
+            throw new($"Interface '{nameof(ISegmentDesign)}' is not implemented by the component '{TypeName}'.");
+
+        builder.OpenComponent(0, pluginType);
+
+        if (Path.HasSomething())
+            builder.AddAttribute(1, nameof(ISegmentDesign.Path), Path);
+
+        if (Id.HasSomething())
+            builder.AddAttribute(2, nameof(ISegmentDesign.Id), Id);
+
+        if (Panes is not null)
+            builder.AddAttribute(3, nameof(ISegmentDesign.Panes), Panes);
+
+        if (PanesModel is not null)
+            builder.AddAttribute(4, nameof(ISegmentDesign.PanesModel), PanesModel);
+
+        if (PermissionNames is not null)
+            builder.AddAttribute(5, nameof(ISegmentDesign.PermissionNames), PermissionNames);
+
+        if (PaneTypes is not null)
+            builder.AddAttribute(6, nameof(ISegmentDesign.PaneTypes), PaneTypes);
+
+        if (AddPane is not null)
+            builder.AddAttribute(7, nameof(ISegmentDesign.AddPane), AddPane);
+
+        if (ConfigJson.HasSomething())
+            builder.AddAttribute(8, nameof(ISegmentDesign.ConfigJson), ConfigJson);
+
+        builder.AddComponentReferenceCapture(9, component => Instance = component);
+
+        builder.CloseComponent();
+    };
+}

@@ -1,0 +1,16 @@
+create table [Education].[District] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [OrganizationId] uniqueidentifier not null,
+    [PublisherId] uniqueidentifier not null,
+    [AddressId] uniqueidentifier null,
+    [StudentIdNumberLabel] nvarchar(50) not null,
+    [AssessmentExplainer] nvarchar(max) not null,
+    constraint [PK_Education_District] primary key clustered ([Id]),
+    constraint [FK_Education_District_Organization] foreign key ([OrganizationId]) references [Framework].[Organization] ([Id]),
+    constraint [FK_Education_District_Publisher] foreign key ([PublisherId]) references [Education].[Publisher] ([Id]),
+    constraint [FK_Education_District_Address] foreign key ([AddressId]) references [Framework].[UsaPostal] ([Id]),
+);

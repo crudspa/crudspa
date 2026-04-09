@@ -1,0 +1,9 @@
+﻿<div class="menu-item @(StartsGroup ? "starts-group" : String.Empty)">
+    <a class="link"
+       @onclick="() => Clicked.InvokeAsync()">
+        <div class="icon">
+            <span class="@ItemIcon"></span>
+        </div>
+        <div class="text">@ItemText</div>
+    </a>
+</div>

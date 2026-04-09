@@ -1,0 +1,66 @@
+<Toolbar>
+    <Left>
+        @if (Model.ReadOnly)
+        {
+            <ButtonEdit Clicked="() => Model.Edit()" />
+        }
+        else
+        {
+            <ButtonGroup>
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            </ButtonGroup>
+        }
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Title"
+                       Size="Field.Sizes.Large">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="75"
+                             @bind-Value="Model.Entity.Title" />
+                </Field>
+                <Field Label="Status"
+                       Size="Field.Sizes.Unspecified">
+                    <StatusEdit ReadOnly="Model.ReadOnly"
+                                LookupValues="Model.ContentStatusNames"
+                                ColorClassFrom="ContentStatusColors.For"
+                                @bind-Value="Model.Entity.StatusId" />
+                </Field>
+                <Field Label="Description"
+                       Size="Field.Sizes.Full"
+                       Container="Field.Containers.Div">
+                    <HtmlEditor ReadOnly="Model.ReadOnly"
+                                @bind-Value="Model.Entity.Description" />
+                </Field>
+                <Field Label="Requires Achievement"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown ReadOnly="Model.ReadOnly"
+                              AllowNull="true"
+                              NullText="[None]"
+                              LookupValues="Model.AchievementNames"
+                              @bind-Value="Model.Entity.RequiresAchievementId" />
+                </Field>
+                <Field Label="Generates Achievement"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown ReadOnly="Model.ReadOnly"
+                              AllowNull="true"
+                              NullText="[None]"
+                              LookupValues="Model.AchievementNames"
+                              @bind-Value="Model.Entity.GeneratesAchievementId" />
+                </Field>
+                <Field Label="Binder Type"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown ReadOnly="Model.ReadOnly"
+                              LookupValues="Model.BinderTypeNames"
+                              @bind-Value="Model.Entity.Binder.TypeId" />
+                </Field>
+            </Wrapped>
+        </Padding>
+    }
+</Waiter>

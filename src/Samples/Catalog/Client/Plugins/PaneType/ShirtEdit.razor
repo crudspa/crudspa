@@ -1,0 +1,70 @@
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+            }
+            else
+            {
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            }
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Name"
+                       Size="Field.Sizes.Wide">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="120"
+                             @bind-Value="Model.Entity.Name" />
+                </Field>
+                <Field Label="Brand"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown ReadOnly="Model.ReadOnly"
+                              LookupValues="Model.BrandNames"
+                              @bind-Value="Model.Entity.BrandId" />
+                </Field>
+                <Field Label="Fit"
+                       Size="Field.Sizes.Small">
+                    <EnumDropdown ReadOnly="Model.ReadOnly"
+                                  TEnum="Shirt.Fits"
+                                  @bind-SelectedValue="Model.Entity.Fit" />
+                </Field>
+                <Field Label="Material"
+                       Size="Field.Sizes.MediumLarge">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="80"
+                             @bind-Value="Model.Entity.Material" />
+                </Field>
+                <Field Label="Price"
+                       Size="Field.Sizes.Tiny">
+                    <NumericTextBox ReadOnly="Model.ReadOnly"
+                                    Format="#,##0.00"
+                                    Prefix="$"
+                                    @bind-Value="Model.Entity.Price" />
+                </Field>
+                <Field Label="Hero Image"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <ImageUploader ReadOnly="Model.ReadOnly"
+                                   Required="false"
+                                   ImageFile="Model.Entity.HeroImageFile" />
+                </Field>
+                <Field Label="Guide PDF"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <PdfUploader ReadOnly="Model.ReadOnly"
+                                 Required="false"
+                                 PdfFile="Model.Entity.GuidePdfFile" />
+                </Field>
+            </Wrapped>
+        </Padding>
+    }
+</Waiter>

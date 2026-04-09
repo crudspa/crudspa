@@ -1,0 +1,40 @@
+<ListOrderables Model="Model"
+                T="ListenQuestionModel"
+                EntityName="Listen Question"
+                UrlPrefix="@($"{Path}/listen-question")"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Tiny">
+            <Labeled Width="7em"
+                     Label="Is Preview"
+                     BooleanValue="@context.ListenQuestion.IsPreview" />
+            <Labeled Width="7em"
+                     Label="Page Break"
+                     BooleanValue="@context.ListenQuestion.PageBreakBefore" />
+            <Labeled Width="7em"
+                     Label="Has Correct"
+                     BooleanValue="@context.ListenQuestion.HasCorrectChoice" />
+            <Labeled Width="7em"
+                     Label="Require Text"
+                     BooleanValue="@context.ListenQuestion.RequireTextInput" />
+        </Field>
+        <Field Size="Field.Sizes.Large">
+            <LabeledHtml Label="Text"
+                         HtmlValue="@context.ListenQuestion.Text" />
+        </Field>
+        <Field Size="Field.Sizes.Unspecified">
+            <LabeledBatch Label="Choices"
+                          Width="5em"
+                          Items="context.ListenQuestion.ListenChoices.OrderBy(x => x.Ordinal)"
+                          Context="item">
+                <ReadView>
+                    <span style="@(item.IsCorrect == true ? "font-weight: bold;" : String.Empty)">
+                        @(item.Text)
+                    </span>
+                </ReadView>
+            </LabeledBatch>
+        </Field>
+    </ReadView>
+</ListOrderables>

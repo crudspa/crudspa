@@ -1,0 +1,30 @@
+<ListOrderables Model="Model"
+                T="ReadPartModel"
+                EntityName="Read Part"
+                UrlPrefix="@($"{Path}/read-part")"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Full">
+            <LabeledHtml Label="Passage Instructions Text"
+                         HtmlValue="@context.ReadPart.PassageInstructionsText" />
+        </Field>
+        <Field Size="Field.Sizes.Full">
+            <LabeledHtml Label="Preview Instructions Text"
+                         HtmlValue="@context.ReadPart.PreviewInstructionsText" />
+        </Field>
+        <Field Size="Field.Sizes.Full">
+            <LabeledHtml Label="Questions Instructions Text"
+                         HtmlValue="@context.ReadPart.QuestionsInstructionsText" />
+        </Field>
+    </ReadView>
+    <PaneLinks>
+        <PaneLink Href="@($"{Path}/read-part-{context.ReadPart.Id:D}?pane=paragraphs")"
+                  Text="Paragraphs"
+                  Count="context.ReadPart.ReadParagraphCount" />
+        <PaneLink Href="@($"{Path}/read-part-{context.ReadPart.Id:D}?pane=questions")"
+                  Text="Questions"
+                  Count="context.ReadPart.ReadQuestionCount" />
+    </PaneLinks>
+</ListOrderables>

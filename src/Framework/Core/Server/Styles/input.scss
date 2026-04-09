@@ -1,0 +1,360 @@
+﻿/// <reference path="defaults.scss" />
+
+.c-input-padding {
+    padding: .5em;
+}
+
+.c-input-margin {
+    margin-bottom: .375em;
+    margin-top: .375em;
+}
+
+.c-input {
+    @extend .c-input-padding;
+    @extend .c-input-margin;
+    background-color: $inputBackgroundColor;
+    color: $inputForegroundColor;
+    border: $inputBorderWidth $inputBorderStyle $inputBorderColor;
+    border-radius: $inputBorderRadius;
+    font-size: $inputFontSize;
+    font-weight: $inputFontWeight;
+    line-height: normal;
+    text-indent: 0;
+    transition: box-shadow .25s, border-color .25s ease;
+    width: 100%;
+
+    &:focus {
+        border-color: $inputFocusedBorderColor;
+        box-shadow: $inputFocusedBoxShadow;
+        outline: none;
+    }
+
+    &[disabled] {
+        border-color: $inputReadOnlyBorderColor;
+        background-color: $inputReadOnlyBackgroundColor;
+        color: $inputReadOnlyForegroundColor;
+        -webkit-text-fill-color: $inputReadOnlyForegroundColor;
+        opacity: 1;
+    }
+
+    &.tight-bottom {
+        margin-bottom: 0;
+    }
+}
+
+select {
+    &.c-input {
+        padding: .425em;
+    }
+}
+
+.c-input-text {
+    border: $inputBorderWidth $inputBorderStyle rgba(255, 255, 255, 0.000000001);
+    border-radius: $inputBorderRadius;
+    margin: .25em 0 1em 0;
+    padding: .6em .6em .6em 0;
+
+    &.tight {
+        padding: 0 .6em 0 0;
+    }
+
+    &.tight-right {
+        padding: .6em 0;
+    }
+}
+
+.c-input-link {
+    @extend .c-input-text;
+    text-decoration: underline;
+}
+
+.c-radio,
+.c-checkbox {
+    align-items: center;
+    display: flex;
+    flex-flow: row nowrap;
+    margin: .5em 1em .5em 0;
+
+    .label {
+        @extend .c-label;
+        color: $inputForegroundColor;
+        font-size: 1em;
+        font-weight: normal;
+        padding: .5em;
+
+        &.disabled {
+            color: $labelForegroundColorMuted;
+        }
+
+        &.pull-up {
+            padding-top: .125em;
+        }
+    }
+
+    &.tight {
+        margin: 0;
+
+        .label {
+            padding-bottom: 0;
+            padding-top: 0;
+        }
+    }
+
+    &.tight-bottom {
+        margin-bottom: 0 !important;
+    }
+
+    &.tight-top {
+        margin-top: 0;
+        padding-top: 0;
+    }
+
+    &.field-label-margin {
+        margin: 0 0 0 1em !important;
+    }
+
+    &.tight-label {
+        .label {
+            padding-bottom: 0;
+            padding-top: 0;
+        }
+    }
+
+    &.spacious {
+        .label {
+            line-height: $paragraphLineHeight;
+            margin-left: 1em;
+        }
+    }
+}
+
+.c-status-edit {
+    justify-content: flex-start;
+    margin-bottom: .375em;
+    margin-top: .375em;
+
+    .option {
+        position: relative;
+    }
+
+    .input {
+        height: 1px;
+        left: 0;
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        width: 1px;
+    }
+
+    .label {
+        border-style: $inputBorderStyle;
+        border-width: $inputBorderWidth;
+        border-color: $buttonBorderColor;
+        font-size: $inputFontSize;
+        font-weight: $inputFontWeight;
+        justify-content: center;
+        line-height: normal;
+        min-width: 6em;
+        padding: .5em .75em;
+        text-align: center;
+        transition: $defaultHoverTransition;
+        width: 100%;
+        z-index: 100;
+
+        &:not(.selected) {
+            &.content-draft:hover {
+                background-color: $contentDraftReadOnlyBackgroundColor;
+                border-color: $buttonBorderColor;
+                color: $contentDraftForegroundColor;
+            }
+
+            &.content-complete:hover {
+                background-color: $contentCompleteReadOnlyBackgroundColor;
+                border-color: $buttonBorderColor;
+                color: $contentCompleteBackgroundColor;
+            }
+
+            &.content-retired:hover {
+                background-color: $contentRetiredReadOnlyBackgroundColor;
+                border-color: $buttonBorderColor;
+                color: $contentRetiredBackgroundColor;
+            }
+
+            &.status-pending:hover {
+                background-color: $tipBackgroundColor;
+                border-color: $buttonBorderColor;
+                color: $tipForegroundColor;
+            }
+
+            &.status-running:hover {
+                background-color: $warningBackgroundColor;
+                border-color: $buttonBorderColor;
+                color: $warningForegroundColor;
+            }
+
+            &.status-completed:hover {
+                background-color: $successBackgroundColor;
+                border-color: $buttonBorderColor;
+                color: $successForegroundColor;
+            }
+
+            &.status-failed:hover {
+                background-color: $errorBackgroundColor;
+                border-color: $buttonBorderColor;
+                color: $errorForegroundColor;
+            }
+
+            &.status-canceled:hover {
+                background-color: $lockBackgroundColor;
+                border-color: $buttonBorderColor;
+                color: $lockForegroundColor;
+            }
+        }
+
+        &.selected {
+            border-color: $buttonBorderColor;
+
+            &:not(.content-draft):not(.content-complete):not(.content-retired):not(.status-pending):not(.status-running):not(.status-completed):not(.status-failed):not(.status-canceled) {
+                background-color: $accent1BackgroundColor;
+                color: $accent1ForegroundColor;
+            }
+        }
+
+        &.selected.content-draft,
+        &.selected.content-draft:hover {
+            background-color: $contentDraftBackgroundColor;
+            border-color: $buttonBorderColor;
+            color: $contentDraftForegroundColor;
+        }
+
+        &.selected.content-complete,
+        &.selected.content-complete:hover {
+            background-color: $contentCompleteBackgroundColor;
+            border-color: $buttonBorderColor;
+            color: $contentCompleteForegroundColor;
+        }
+
+        &.selected.content-retired,
+        &.selected.content-retired:hover {
+            background-color: $contentRetiredBackgroundColor;
+            border-color: $buttonBorderColor;
+            color: $contentRetiredForegroundColor;
+        }
+
+        &.selected.status-pending,
+        &.selected.status-pending:hover {
+            background-color: $tipBackgroundColor;
+            border-color: $buttonBorderColor;
+            color: $tipForegroundColor;
+        }
+
+        &.selected.status-running,
+        &.selected.status-running:hover {
+            background-color: $warningBackgroundColor;
+            border-color: $buttonBorderColor;
+            color: $warningForegroundColor;
+        }
+
+        &.selected.status-completed,
+        &.selected.status-completed:hover {
+            background-color: $successBackgroundColor;
+            border-color: $buttonBorderColor;
+            color: $successForegroundColor;
+        }
+
+        &.selected.status-failed,
+        &.selected.status-failed:hover {
+            background-color: $errorBackgroundColor;
+            border-color: $buttonBorderColor;
+            color: $errorForegroundColor;
+        }
+
+        &.selected.status-canceled,
+        &.selected.status-canceled:hover {
+            background-color: $lockBackgroundColor;
+            border-color: $buttonBorderColor;
+            color: $lockForegroundColor;
+        }
+    }
+
+    .option:focus-within .label {
+        border-color: $inputFocusedBorderColor;
+        box-shadow: $inputFocusedBoxShadow;
+        z-index: 20;
+    }
+
+    &.read-only {
+        .label,
+        .label:hover {
+            background-color: $inputReadOnlyBackgroundColor;
+            border-color: $inputReadOnlyBorderColor;
+            color: $inputReadOnlyForegroundColor;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .label.selected.content-draft,
+        .label.selected.content-draft:hover {
+            background-color: $contentDraftHoverBackgroundColor;
+            border-color: $inputReadOnlyBorderColor;
+            color: $contentDraftForegroundColor;
+        }
+
+        .label.selected.content-complete,
+        .label.selected.content-complete:hover {
+            background-color: $contentCompleteHoverBackgroundColor;
+            border-color: $inputReadOnlyBorderColor;
+            color: $contentCompleteBackgroundColor;
+        }
+
+        .label.selected.content-retired,
+        .label.selected.content-retired:hover {
+            background-color: $contentRetiredHoverBackgroundColor;
+            border-color: $inputReadOnlyBorderColor;
+            color: $contentRetiredBackgroundColor;
+        }
+
+        .label.selected.status-pending,
+        .label.selected.status-pending:hover {
+            background-color: $tipBackgroundColor;
+            border-color: $inputReadOnlyBorderColor;
+            color: $tipForegroundColor;
+        }
+
+        .label.selected.status-running,
+        .label.selected.status-running:hover {
+            background-color: $warningBackgroundColor;
+            border-color: $inputReadOnlyBorderColor;
+            color: $warningForegroundColor;
+        }
+
+        .label.selected.status-completed,
+        .label.selected.status-completed:hover {
+            background-color: $successBackgroundColor;
+            border-color: $inputReadOnlyBorderColor;
+            color: $successForegroundColor;
+        }
+
+        .label.selected.status-failed,
+        .label.selected.status-failed:hover {
+            background-color: $errorBackgroundColor;
+            border-color: $inputReadOnlyBorderColor;
+            color: $errorForegroundColor;
+        }
+
+        .label.selected.status-canceled,
+        .label.selected.status-canceled:hover {
+            background-color: $lockBackgroundColor;
+            border-color: $inputReadOnlyBorderColor;
+            color: $lockForegroundColor;
+        }
+
+        .label.selected:not(.content-draft):not(.content-complete):not(.content-retired):not(.status-pending):not(.status-running):not(.status-completed):not(.status-failed):not(.status-canceled),
+        .label.selected:not(.content-draft):not(.content-complete):not(.content-retired):not(.status-pending):not(.status-running):not(.status-completed):not(.status-failed):not(.status-canceled):hover {
+            background-color: $inputReadOnlyBackgroundColor;
+            border-color: $inputReadOnlyBorderColor;
+            color: $inputReadOnlyForegroundColor;
+        }
+    }
+}

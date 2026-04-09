@@ -1,0 +1,96 @@
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+            }
+            else
+            {
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            }
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Prompt"
+                       Size="Field.Sizes.Full">
+                    <TextBox ReadOnly="true"
+                             Value="Click on the two words that best go with the word _____________________." />
+                </Field>
+                <Field Label="Word"
+                       Size="Field.Sizes.Medium">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="50"
+                             @bind-Value="Model.Entity.Word" />
+                </Field>
+                <Field Label="Audio"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <AudioUploader ReadOnly="Model.ReadOnly"
+                                   Required="false"
+                                   AudioFile="Model.Entity.AudioFileFile" />
+                </Field>
+            </Wrapped>
+            <Wrapped>
+                <Field Label="Options"
+                       Container="Field.Containers.Div">
+                    <Wrapped NoWrap="true">
+                        <Checkbox Label="Is Preview"
+                                  ReadOnly="Model.ReadOnly"
+                                  @bind-Value="Model.Entity.IsPreview" />
+                        <Checkbox Label="Page Break Before"
+                                  ReadOnly="Model.ReadOnly"
+                                  @bind-Value="Model.Entity.PageBreakBefore" />
+                    </Wrapped>
+                </Field>
+            </Wrapped>
+            <BatchSection Title="Choices">
+                <HeadingPanel>
+                    <ButtonAdd EntityName="Choice"
+                               Disabled="Model.ReadOnly"
+                               Transparent="true"
+                               Clicked="() => Model.AddVocabChoice()">
+                    </ButtonAdd>
+                </HeadingPanel>
+                <ChildContent>
+                    <Batch Model="Model.VocabChoicesModel"
+                           ReadOnly="Model.ReadOnly">
+                        <EditView>
+                            <Wrapped Alignment="Wrapped.Alignments.Top"
+                                     @key="context">
+                                <Field Label="Word"
+                                       Size="Field.Sizes.Medium">
+                                    <TextBox ReadOnly="Model.ReadOnly"
+                                             MaxLength="50"
+                                             @bind-Value="context.Word" />
+                                </Field>
+                                <Field Label="Audio File"
+                                       Size="Field.Sizes.Larger"
+                                       Container="Field.Containers.Div">
+                                    <AudioUploader ReadOnly="Model.ReadOnly"
+                                                   Required="false"
+                                                   AudioFile="context.AudioFileFile" />
+                                </Field>
+                                <Field Label="Options"
+                                       Container="Field.Containers.Div">
+                                    <Wrapped NoWrap="true">
+                                        <Checkbox Label="Is Correct"
+                                                  ReadOnly="Model.ReadOnly"
+                                                  @bind-Value="context.IsCorrect" />
+                                    </Wrapped>
+                                </Field>
+                            </Wrapped>
+                        </EditView>
+                    </Batch>
+                </ChildContent>
+            </BatchSection>
+        </Padding>
+    }
+</Waiter>

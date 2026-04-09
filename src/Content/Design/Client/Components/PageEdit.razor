@@ -1,0 +1,98 @@
+<Toolbar>
+    <Left>
+        @if (Model.ReadOnly)
+        {
+            <ButtonEdit Clicked="() => Model.Edit()" />
+        }
+        else
+        {
+            <ButtonGroup>
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="CancelClicked" />
+            </ButtonGroup>
+        }
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Title"
+                       Size="Field.Sizes.Wide">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="150"
+                             @bind-Value="Model.Entity.Title" />
+                </Field>
+                <Field Label="Status"
+                       Size="Field.Sizes.Unspecified">
+                    <StatusEdit LookupValues="Model.ContentStatusNames"
+                                ReadOnly="Model.ReadOnly"
+                                ColorClassFrom="ContentStatusColors.For"
+                                @bind-Value="Model.Entity.StatusId" />
+                </Field>
+                @if (Model.BoxModel is not null)
+                {
+                    <Modal Model="Model.BoxModel"
+                           TopMargin="4em"
+                           Width="34em"
+                           Title="Page Settings">
+                        <Content>
+                            <BoxEditor Model="Model.BoxModel" />
+                        </Content>
+                        <Buttons>
+                            <ButtonCore Text="Close"
+                                        ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                                        Clicked="() => Model.BoxModel.Hide()" />
+                        </Buttons>
+                    </Modal>
+                    <Field Label="Page Settings"
+                           Size="Field.Sizes.Larger"
+                           Container="Field.Containers.Div">
+                        <Wrapped NoWrap="true">
+                            <Padding Size="Padding.Sizes.Tiny"
+                                     Direction="Padding.Directions.Vertical">
+                                <Padding Size="Padding.Sizes.Small"
+                                         Direction="Padding.Directions.Right">
+                                    <ButtonEdit Transparent="true"
+                                                Clicked="() => Model.BoxModel.Show()" />
+                                </Padding>
+                            </Padding>
+                            <div class="star c-parenthetical c-padding-micro-vert">
+                                @(Model.BoxModel.Description)
+                            </div>
+                        </Wrapped>
+                    </Field>
+                }
+                <Field Label="Options"
+                       Container="Field.Containers.Div">
+                    <Wrapped NoWrap="true">
+                        <Checkbox Label="Show Notebook"
+                                  ReadOnly="Model.ReadOnly"
+                                  @bind-Value="Model.Entity.ShowNotebook" />
+                        <Checkbox Label="Show Guide"
+                                  ReadOnly="Model.ReadOnly"
+                                  @bind-Value="Model.Entity.ShowGuide" />
+                    </Wrapped>
+                </Field>
+                @if (Model.Entity.ShowGuide == true)
+                {
+                    <Field Label="Guide Text"
+                           Size="Field.Sizes.Full">
+                        <MultilineTextBox ReadOnly="Model.ReadOnly"
+                                          Height="MultilineTextBox.Heights.Tall"
+                                          @bind-Value="Model.Entity.GuideText" />
+                    </Field>
+                    <Field Label="Guide Audio"
+                           Size="Field.Sizes.Larger"
+                           Container="Field.Containers.Div">
+                        <AudioUploader ReadOnly="Model.ReadOnly"
+                                       Required="false"
+                                       AudioFile="Model.Entity.GuideAudioFile" />
+                    </Field>
+                }
+            </Wrapped>
+        </Padding>
+    }
+</Waiter>

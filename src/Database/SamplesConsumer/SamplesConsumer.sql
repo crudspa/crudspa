@@ -1,0 +1,1 @@
+create schema [SamplesConsumer] authorization [dbo]

@@ -1,0 +1,15 @@
+create table [Education].[VocabChoice] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [VocabQuestionId] uniqueidentifier not null,
+    [Word] nvarchar(50) not null,
+    [IsCorrect] bit default(0) not null,
+    [AudioFileId] uniqueidentifier null,
+    [Ordinal] int not null,
+    constraint [PK_Education_VocabChoice] primary key clustered ([Id]),
+    constraint [FK_Education_VocabChoice_VocabQuestion] foreign key ([VocabQuestionId]) references [Education].[VocabQuestion] ([Id]),
+    constraint [FK_Education_VocabChoice_AudioFile] foreign key ([AudioFileId]) references [Framework].[AudioFile] ([Id]),
+);

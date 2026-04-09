@@ -1,0 +1,16 @@
+create table [Education].[Achievement] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [OwnerId] uniqueidentifier not null,
+    [Title] nvarchar(75) not null,
+    [RarityId] uniqueidentifier not null,
+    [TrophyImageId] uniqueidentifier null,
+    [VisibleToStudents] bit default(1) not null,
+    constraint [PK_Education_Achievement] primary key clustered ([Id]),
+    constraint [FK_Education_Achievement_Owner] foreign key ([OwnerId]) references [Framework].[Organization] ([Id]),
+    constraint [FK_Education_Achievement_Rarity] foreign key ([RarityId]) references [Education].[Rarity] ([Id]),
+    constraint [FK_Education_Achievement_TrophyImage] foreign key ([TrophyImageId]) references [Framework].[ImageFile] ([Id]),
+);

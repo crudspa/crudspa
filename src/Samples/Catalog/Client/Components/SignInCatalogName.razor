@@ -1,0 +1,119 @@
+@if (Model is not null)
+{
+    @if (Portal.AllowSignIn == true)
+    {
+        <Modal Model="Model"
+               Width="26em"
+               TopMargin="3em">
+            <Content>
+                @switch (Model.State)
+                {
+                    case SignInCatalogNameModel.States.SignIn:
+
+                        <div class="c-padding-small-hor c-nowrap">
+                            <div class="star">
+                                <h2>Sign In</h2>
+                            </div>
+                        </div>
+
+                        <form @onsubmit="Model.SignIn">
+                            <div class="c-padding-small-vert">
+                                <div class="c-wrap">
+                                    <label class="c-field medium-large">
+                                        <div class="label">Name</div>
+                                        <input type="text"
+                                               class="c-input"
+                                               maxlength="75"
+                                               @bind="Model.Name" />
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="well center">
+                                <div class="buttons">
+                                    <button type="submit">
+                                        <div class="c-button large save">
+                                            <div class="text">Sign In</div>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        break;
+
+                    case SignInCatalogNameModel.States.SignOut:
+
+                        <div class="c-padding-small-hor">
+                            <h2>Sign Out</h2>
+                        </div>
+
+                        <p class="c-padding-small-vert c-centered">
+                            Are you sure you want to sign out?
+                        </p>
+
+                        <div class="well center">
+                            <div class="buttons">
+                                <button @onclick="Model.SignOut">
+                                    <div class="c-button large destroy">
+                                        <div class="text">Sign Out</div>
+                                    </div>
+                                </button>
+                                <button @onclick="Model.Hide"
+                                        type="button">
+                                    <div class="c-button large cancel">
+                                        <div class="text">Cancel</div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        break;
+                }
+            </Content>
+        </Modal>
+    }
+
+    @if (Portal.AllowSignIn == true || LeftPanel is not null || MenuItems is not null)
+    {
+        <div class="auth-bar">
+            <div class="c-padding-small-hor c-nowrap">
+                @if (LeftPanel is not null)
+                {
+                    @LeftPanel
+                }
+                @if (!SessionState.IsSignedIn)
+                {
+                    <div class="signed-out">
+                        @if (Portal.AllowSignIn == true)
+                        {
+                            <button @onclick="Model.ShowSignIn">
+                                <div class="c-button">
+                                    <div class="text">Sign In</div>
+                                </div>
+                            </button>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="signed-in">
+                        <div class="contact-name">
+                            @(SessionState.Session.User?.Contact.Name)
+                        </div>
+                        <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.User">
+                            @if (MenuItems is not null)
+                            {
+                                @MenuItems
+                            }
+                            <MenuItem Type="MenuItem.Types.Custom"
+                                      Text="Sign Out"
+                                      Icon="c-icon-exit"
+                                      Clicked="Model.ShowSignOut" />
+                        </ContextMenu>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+}

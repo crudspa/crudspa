@@ -1,0 +1,26 @@
+<ManyOrderables Model="Model"
+                T="ReadParagraphModel"
+                EntityName="Paragraph"
+                SaveRequested="id => Model.Save(id)"
+                CancelRequested="id => Model.Cancel(id)"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Unspecified">
+            <LabeledHtml Label="Text"
+                         HideLabel="true"
+                         HtmlValue="@context.ReadParagraph.Text" />
+        </Field>
+    </ReadView>
+    <EditView>
+        <Wrapped Alignment="Wrapped.Alignments.Top">
+            <Field Label="Text"
+                   Size="Field.Sizes.Full"
+                   Container="Field.Containers.Div">
+                <HtmlEditor ReadOnly="@false"
+                            @bind-Value="context.ReadParagraph.Text" />
+            </Field>
+        </Wrapped>
+    </EditView>
+</ManyOrderables>

@@ -1,0 +1,58 @@
+@ChildContent
+@if (UsaPostal is not null && UsaStateNames.HasItems())
+{
+    @if (ShowRecipient)
+    {
+        <Wrapped Alignment="Wrapped.Alignments.Top">
+            <Field Label="Recipient Name"
+                   Size="Field.Sizes.Wide">
+                <TextBox ReadOnly="ReadOnly"
+                         MaxLength="75"
+                         @bind-Value="UsaPostal.RecipientName" />
+            </Field>
+        </Wrapped>
+    }
+
+    @if (ShowBusiness)
+    {
+        <Wrapped Alignment="Wrapped.Alignments.Top">
+            <Field Label="Business Name"
+                   Size="Field.Sizes.Wide">
+                <TextBox ReadOnly="ReadOnly"
+                         MaxLength="75"
+                         @bind-Value="UsaPostal.BusinessName" />
+            </Field>
+        </Wrapped>
+    }
+
+    <Wrapped Alignment="Wrapped.Alignments.Top">
+        <Field Label="Street Address"
+               Size="Field.Sizes.Wide">
+            <MultilineTextBox ReadOnly="ReadOnly"
+                              Height="MultilineTextBox.Heights.Short"
+                              @bind-Value="UsaPostal.StreetAddress" />
+        </Field>
+    </Wrapped>
+    <Wrapped Alignment="Wrapped.Alignments.Top">
+        <Field Label="City"
+               Size="Field.Sizes.Medium">
+            <TextBox ReadOnly="@ReadOnly"
+                     MaxLength="50"
+                     @bind-Value="UsaPostal.City" />
+        </Field>
+        <Field Label="State"
+               Size="Field.Sizes.Min">
+            <Dropdown ReadOnly="@ReadOnly"
+                      LookupValues="UsaStateNames"
+                      @bind-Value="UsaPostal.StateId" />
+        </Field>
+        <Field Label="Zip Code"
+               Size="Field.Sizes.Tiny">
+            <MaskedTextBox ReadOnly="@ReadOnly"
+                           Mask="*****-****"
+                           CharacterPattern="[0-9]"
+                           Placeholder="00000-0000"
+                           @bind-Value="UsaPostal.PostalCode" />
+        </Field>
+    </Wrapped>
+}

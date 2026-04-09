@@ -1,0 +1,211 @@
+﻿/// <reference path="defaults.scss" />
+
+.c-rotate-90 {
+    transform: rotate(90deg);
+}
+
+.c-rotate-180 {
+    transform: rotate(180deg);
+}
+
+.c-rotate-270 {
+    transform: rotate(270deg);
+}
+
+.c-rotate-180-animated {
+    transform: rotate(-180deg);
+    transition: transform .125s ease-in;
+}
+
+.c-spin {
+    animation: c-kf-spin 1s infinite linear;
+    display: inline-block;
+}
+
+.c-fade-out {
+    animation: fadeOutAnimation 2s ease-in forwards;
+}
+
+@keyframes fadeOutAnimation {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.c-moving-balls {
+
+    .ball {
+        position: absolute;
+        height: .5em;
+        left: .5em;
+        top: 2em;
+        width: .5em;
+        animation: c-kf-waiting-balls 2s infinite cubic-bezier(.25, .625, .75, .25);
+        border-radius: 50%;
+
+        &:nth-child(2) {
+            animation-delay: 150ms;
+        }
+
+        &:nth-child(3) {
+            animation-delay: 300ms;
+        }
+
+        &:nth-child(4) {
+            animation-delay: 450ms;
+        }
+    }
+}
+
+@keyframes c-kf-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes c-kf-spin-180 {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(180deg);
+    }
+}
+
+@keyframes c-kf-spin-quarterly-stops {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    20% {
+        transform: rotate(90deg);
+    }
+
+    25% {
+        transform: rotate(90deg);
+    }
+
+    45% {
+        transform: rotate(180deg);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    70% {
+        transform: rotate(270deg);
+    }
+
+    75% {
+        transform: rotate(270deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes c-kf-waiting-balls {
+    0% {
+        background-color: transparent;
+        left: 5%;
+    }
+
+    25% {
+        background-color: $waitingBallsColor;
+    }
+
+    50% {
+        background-color: $waitingBallsColor;
+    }
+
+    75% {
+        background-color: transparent;
+        left: 95%;
+    }
+
+    100% {
+        background-color: transparent;
+        left: 95%;
+    }
+}
+
+@keyframes c-kf-pulse-result-background {
+    0% {
+        background-color: $resultPulseBackgroundColor;
+    }
+
+    100% {
+        background-color: $resultBackgroundColor;
+    }
+}
+
+@keyframes c-kf-pulse-result-background-alternate-row {
+    0% {
+        background-color: $resultAlternateRowPulseBackgroundColor;
+    }
+
+    100% {
+        background-color: $resultAlternateRowBackgroundColor;
+    }
+}
+
+@keyframes c-kf-fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes c-kf-fade-out {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes c-kf-bounce-in {
+    from, 20%, 40%, 60%, 80%, to {
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    0% {
+        transform: scale3d(0.3, 0.3, 0.3);
+    }
+
+    20% {
+        transform: scale3d(1.1, 1.1, 1.1);
+    }
+
+    40% {
+        transform: scale3d(0.9, 0.9, 0.9);
+    }
+
+    60% {
+        transform: scale3d(1.03, 1.03, 1.03);
+    }
+
+    80% {
+        transform: scale3d(0.97, 0.97, 0.97);
+    }
+
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}

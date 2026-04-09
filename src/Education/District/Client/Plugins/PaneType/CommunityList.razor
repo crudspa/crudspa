@@ -1,0 +1,23 @@
+<List Model="Model"
+      T="CommunityModel"
+      EntityName="Community"
+      UrlPrefix="@($"{Path}/community")"
+      DeleteRequested="id => Model.Delete(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Unspecified">
+            <LabeledBatch Label="Stewards"
+                          Width="6em"
+                          Items="context.Community.CommunityStewards.OrderBy(x => x.Name)"
+                          Context="item">
+                <ReadView>
+                    @(item.Name)
+                </ReadView>
+            </LabeledBatch>
+        </Field>
+    </ReadView>
+    <PaneLinks>
+        <PaneLink Href="@($"{Path}/community-{context.Community.Id:D}?pane=schools")"
+                  Text="Schools"
+                  Count="context.Community.SchoolCount" />
+    </PaneLinks>
+</List>

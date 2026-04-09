@@ -1,0 +1,91 @@
+﻿<div class="c-full c-centered">
+
+    @if (Model.Activity.ContextAudioFile.Id.HasSomething())
+    {
+        <Padding Size="Padding.Sizes.Small">
+            <AudioPlayer AudioFile="Model.Activity.ContextAudioFile"
+                         PlayText="Listen"
+                         StopText="Listen"
+                         PlayIcon="c-icon-volume-high"
+                         StopIcon="c-icon-volume-high"
+                         MediaPlayed="HandleContextAudioPlayed">
+            </AudioPlayer>
+        </Padding>
+    }
+
+    @if (AssignmentBatchId.HasValue)
+    {
+        <h2>@(Model.Activity.ContentAreaAppNavText)</h2>
+    }
+
+    <div class="c-shadowed c-margin-medium-bottom">
+
+        <div class="cec-context-text tight">Answer Bank</div>
+
+        <div class="c-wrap center c-padding-medium-vert">
+            @foreach (var option in Model.AnswerBank)
+            {
+                <button class="c-padding-tiny"
+                        style="z-index: 100;"
+                        @onclick="() => Model.SelectOption(option.Id!.Value)">
+                    <div class="cec-choice squared c-button cancel @(option.State == PieceModel.States.Default ? "default" : "selected")">
+                        <div class="text">@(option.Text)</div>
+                    </div>
+                </button>
+            }
+        </div>
+    </div>
+
+    <div class="cec-concept-map">
+
+        @if (Model.Activity.ContextText.HasSomething())
+        {
+            <div id="centralConcept-@($"{Model.Activity.Id:D}")"
+                 class="central-concept">
+                @(Model.Activity.ContextText)
+            </div>
+        }
+
+        <div class="choices c-wrap center">
+
+            @foreach (var conceptChoice in Model.ConceptChoices)
+            {
+                <div class="choice">
+
+                    <div id="conceptChoice-@($"{conceptChoice.Choice.Id:D}")">
+
+                        @if (conceptChoice.FirstHtml.HasSomething())
+                        {
+                            <UserHtml Html="@(conceptChoice.FirstHtml)"
+                                      CssClass="c-margin-small-all" />
+                        }
+
+                        @if (conceptChoice.Destination is not null)
+                        {
+                            <button @onclick="() => Model.SelectDestination(conceptChoice.Destination.TargetPiece!.Id!.Value)">
+                                <div class="cec-choice squared c-button cancel c-margin-small-vert @(conceptChoice.CssClass)">
+                                    <div class="text">@(conceptChoice.Destination.PlacedPiece?.Text)</div>
+                                </div>
+                            </button>
+                        }
+
+                        @if (conceptChoice.LastHtml.HasSomething())
+                        {
+                            <UserHtml Html="@(conceptChoice.LastHtml)"
+                                      CssClass="c-margin-small-all" />
+                        }
+
+                    </div>
+
+                </div>
+            }
+        </div>
+
+        @foreach (var conceptChoice in Model.ConceptChoices)
+        {
+            <ConnectingLine SourceId="@($"centralConcept-{Model.Activity.Id:D}")"
+                            TargetId="@($"conceptChoice-{conceptChoice.Choice.Id:D}")">
+            </ConnectingLine>
+        }
+    </div>
+</div>

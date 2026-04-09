@@ -1,0 +1,112 @@
+<div class="c-overlay-parent">
+    <SectionShape Model="Model" />
+    @if (Model.BoxModel is not null)
+    {
+        <Modal Model="Model.BoxModel"
+               TopMargin="4em"
+               Width="34em"
+               Title="Section Settings">
+            <Content>
+                <div class="c-tabbed-panes">
+                    <ul class="tabs">
+                        <li class="@(ActiveTab.IsBasically(StylesTab) ? "selected" : String.Empty)"
+                            @onclick="() => SetSectionSettingsTab(StylesTab)">
+                            Styles
+                        </li>
+                        <li class="@(ActiveTab.IsBasically(LayoutTab) ? "selected" : String.Empty)"
+                            @onclick="() => SetSectionSettingsTab(LayoutTab)">
+                            Layout
+                        </li>
+                    </ul>
+                    <div class="panes match-tab-color">
+                        <div class="@(ActiveTab.IsBasically(StylesTab) ? String.Empty : "c-hide")">
+                            <div class="c-padding-tiny">
+                                <BoxEditor Model="Model.BoxModel" />
+                            </div>
+                        </div>
+                        <div class="@(ActiveTab.IsBasically(LayoutTab) ? String.Empty : "c-hide")">
+                            <div class="c-padding-tiny">
+                                @if (Model.ContainerModel is not null)
+                                {
+                                    <ContainerEditor Model="Model.ContainerModel" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Content>
+            <Buttons>
+                <ButtonCore Text="Close"
+                            ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                            Clicked="() => HideSectionSettings()" />
+            </Buttons>
+        </Modal>
+    }
+    <Wrapped Alignment="Wrapped.Alignments.Top">
+        <Field Label="Section Settings"
+               Size="Field.Sizes.Full"
+               Container="Field.Containers.Div">
+            <Wrapped NoWrap="true">
+                <Padding Size="Padding.Sizes.Tiny"
+                         Direction="Padding.Directions.Vertical">
+                    <Padding Size="Padding.Sizes.Small"
+                             Direction="Padding.Directions.Right">
+                        <ButtonEdit Transparent="true"
+                                    Disabled="Model.ReadOnly"
+                                    Clicked="() => OpenSectionSettings()" />
+                    </Padding>
+                </Padding>
+                <div class="star c-parenthetical c-padding-micro-vert">
+                    @SettingsDescription
+                </div>
+            </Wrapped>
+        </Field>
+    </Wrapped>
+    <BatchSection Title="Elements">
+        <HeadingPanel>
+            <ButtonAdd EntityName="Element"
+                       Disabled="Model.ReadOnly"
+                       Transparent="true"
+                       Clicked="() => Model.AddElementModel.Show()">
+            </ButtonAdd>
+        </HeadingPanel>
+        <ChildContent>
+            <Modal Model="Model.AddElementModel"
+                   Title="Add Element"
+                   Width="36em"
+                   TopMargin="1em">
+                <Content>
+                    <div class="c-element-type-chooser">
+                        @foreach (var elementType in Model.ElementTypes.OrderBy(x => x.Ordinal))
+                        {
+                            <button type="button"
+                                    disabled="@Model.ReadOnly"
+                                    @onclick="() => AddElement(elementType)">
+                                <div class="c-button transparent bordered vertical c-element-type-choice">
+                                    <div class="icon">
+                                        <span class="@GetElementTypeIconClass(elementType)"></span>
+                                    </div>
+                                    <div class="text">@elementType.Name</div>
+                                </div>
+                            </button>
+                        }
+                    </div>
+                </Content>
+                <Buttons>
+                    <ButtonCore Text="Close"
+                                ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                                Clicked="() => Model.AddElementModel.Hide()" />
+                </Buttons>
+            </Modal>
+            <Batch Model="Model.ElementEditBatchModel"
+                   Context="elementModel"
+                   NoRecordsText="Add at least one element.">
+                <EditView>
+                    <ElementEdit Model="elementModel"
+                                 ReadOnly="Model.ReadOnly"
+                                 ElementTypes="Model.ElementTypes" />
+                </EditView>
+            </Batch>
+        </ChildContent>
+    </BatchSection>
+</div>

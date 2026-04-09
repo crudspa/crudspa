@@ -1,0 +1,100 @@
+<Toolbar>
+    <Left>
+        @if (Model.ReadOnly)
+        {
+            <ButtonEdit Clicked="() => Model.Edit()" />
+        }
+        else
+        {
+            <ButtonGroup>
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            </ButtonGroup>
+        }
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="First Name"
+                       Size="Field.Sizes.MediumSmall">
+                    <TextBox ReadOnly="@Model.ReadOnly"
+                             MaxLength="75"
+                             @bind-Value="Model.Entity.FirstName" />
+                </Field>
+                <Field Label="Last Name"
+                       Size="Field.Sizes.MediumSmall">
+                    <TextBox ReadOnly="@Model.ReadOnly"
+                             MaxLength="75"
+                             @bind-Value="Model.Entity.LastName" />
+                </Field>
+                <Field Label="Id Number"
+                       Size="Field.Sizes.Small">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="35"
+                             @bind-Value="Model.Entity.IdNumber" />
+                </Field>
+                <Field Label="Grade"
+                       Size="Field.Sizes.Tiny">
+                    <Dropdown LookupValues="Model.GradeNames"
+                              ReadOnly="Model.ReadOnly"
+                              @bind-Value="Model.Entity.GradeId" />
+                </Field>
+                <Field Label="Assessment Level"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown LookupValues="Model.AssessmentLevelNames"
+                              ReadOnly="Model.ReadOnly"
+                              @bind-Value="Model.Entity.AssessmentLevelGroupId" />
+                </Field>
+                <Field Label="Options"
+                       Container="Field.Containers.Div">
+                    <Wrapped NoWrap="true">
+                        <Checkbox Label="Test Account"
+                                  ReadOnly="Model.ReadOnly"
+                                  @bind-Value="Model.Entity.IsTestAccount" />
+                    </Wrapped>
+                </Field>
+            </Wrapped>
+        </Padding>
+        <BatchSection Title="Profile">
+            <HeadingPanel>
+                <ButtonCore Text="Generate Code"
+                            IconClass="c-icon-magic-wand"
+                            ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                            Disabled="@Model.ReadOnly"
+                            Clicked="() => Model.GenerateCode()" />
+            </HeadingPanel>
+            <ChildContent>
+                <Padding Direction="Padding.Directions.Vertical"
+                         Size="Padding.Sizes.Small">
+                    <Wrapped Alignment="Wrapped.Alignments.Top">
+                        <Field Label="Preferred Name"
+                               Size="Field.Sizes.Medium">
+                            <TextBox ReadOnly="Model.ReadOnly"
+                                     MaxLength="75"
+                                     @bind-Value="Model.Entity.PreferredName" />
+                        </Field>
+                        <Field Label="Secret Code"
+                               Size="Field.Sizes.Small">
+                            <TextBox ReadOnly="Model.ReadOnly"
+                                     MaxLength="75"
+                                     @bind-Value="Model.Entity.SecretCode" />
+                        </Field>
+                        @if (Model.Entity.AvatarString is not null)
+                        {
+                            <Field Label="Avatar"
+                                   Size="Field.Sizes.Tiny">
+                                <div style="font-size: 2.4em;">
+                                    @Model.Entity.AvatarString
+                                </div>
+                            </Field>
+                        }
+                    </Wrapped>
+                </Padding>
+            </ChildContent>
+        </BatchSection>
+    }
+</Waiter>

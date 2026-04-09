@@ -1,0 +1,182 @@
+<Waiter Model="Model">
+    <Modal Model="Model.BulkModel"
+           Title="Bulk Assignment"
+           Width="36em"
+           TopMargin="1em">
+        <Content>
+            @if (!Model.BulkModel.Completed)
+            {
+                <Wrapped Alignment="Wrapped.Alignments.Top">
+                    <Field Label="Scope"
+                           Container="Field.Containers.Div">
+                        <EnumRadio TEnum="AssessmentAssignmentBulk.Scopes"
+                                   @bind-SelectedValue="@Model.BulkModel.Assignment.Scope" />
+                    </Field>
+                    @if (Model.BulkModel.Assignment.Scope == AssessmentAssignmentBulk.Scopes.Classroom)
+                    {
+                        <Field Label="Classroom"
+                               Size="Field.Sizes.Large">
+                            <Dropdown LookupValues="Model.ClassroomNames"
+                                      @bind-Value="Model.BulkModel.Assignment.ClassroomId" />
+                        </Field>
+                    }
+                    <Field Label="Assessment"
+                           Size="Field.Sizes.Larger">
+                        <Dropdown LookupValues="Model.AssessmentNames"
+                                  @bind-Value="Model.BulkModel.Assignment.AssessmentId" />
+                    </Field>
+                    <Field Label="Start After"
+                           Size="Field.Sizes.Small">
+                        <DateTimePicker @bind-Value="Model.BulkModel.Assignment.StartAfter" />
+                    </Field>
+                    <Field Label="End Before"
+                           Size="Field.Sizes.Small">
+                        <DateTimePicker @bind-Value="Model.BulkModel.Assignment.EndBefore" />
+                    </Field>
+                    <Field Label="Action"
+                           Container="Field.Containers.Div">
+                        <EnumRadio TEnum="AssessmentAssignmentBulk.Actions"
+                                   @bind-SelectedValue="@Model.BulkModel.Assignment.Action" />
+                    </Field>
+                </Wrapped>
+            }
+            else
+            {
+                <div class="c-centered">
+                    <div class="icon"
+                         style="font-size: 4em; font-weight: bold;">
+                        <span class="c-icon-checkmark-circle c-color-success"></span>
+                    </div>
+                    <div>
+                        <h2>Success!</h2>
+                        <p>@(Model.BulkModel.Assignment.RecordsAdded) assignments were added, and @(Model.BulkModel.Assignment.RecordsUpdated) were updated.</p>
+                    </div>
+                </div>
+            }
+        </Content>
+        <Buttons>
+            @if (!Model.BulkModel.Completed)
+            {
+                <ButtonOk OkText="Assign"
+                          Clicked="() => Model.BulkAssign()" />
+                <ButtonCancel Clicked="() => Model.BulkModel.Hide()" />
+            }
+            else
+            {
+                <ButtonCore Text="Close"
+                            Clicked="() => Model.BulkModel.Hide()" />
+            }
+        </Buttons>
+    </Modal>
+    <Filters>
+        <Fields>
+            <Field Label="Classroom"
+                   Size="Field.Sizes.Medium">
+                <MultiSelect LookupValues="Model.ClassroomNames"
+                             @bind-SelectedValues="Model.Search.Classrooms" />
+            </Field>
+            <Field Label="Assessment"
+                   Size="Field.Sizes.Medium">
+                <MultiSelect LookupValues="Model.AssessmentNames"
+                             @bind-SelectedValues="Model.Search.Assessments" />
+            </Field>
+            <Sorter Sorts="Model.Sorts"
+                    @bind-Selected="Model.Search.Sort.Field"
+                    @bind-Ascending="Model.Search.Sort.Ascending" />
+        </Fields>
+        <Buttons>
+            <ButtonAdd EntityName="Assignment"
+                       Clicked="AddNew" />
+            <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Create">
+                <MenuItem Text="Bulk Assign..."
+                          Icon="c-icon-papers"
+                          Clicked="() => Model.BulkModel.Show()" />
+                <MenuItem Type="MenuItem.Types.Reset"
+                          Clicked="() => Model.Reset()" />
+                <MenuItem Type="MenuItem.Types.Refresh"
+                          Clicked="() => Model.Refresh()" />
+            </ContextMenu>
+        </Buttons>
+    </Filters>
+</Waiter>
+@if (Model.Cards.IsEmpty())
+{
+    <NoRecords EntityName="assessments" />
+}
+else
+{
+    @foreach (var card in Model.Cards)
+    {
+        <Card Model="card"
+              Title="@card.Entity.Name"
+              SupportsDelete="true"
+              DeleteRequested="() => Model.Delete(card.Entity.Id)">
+            <Values>
+                <Field Size="Field.Sizes.MediumLarge">
+                    <Labeled Width="7em"
+                             Label="Assessment"
+                             StringValue="@(card.Entity.AssessmentName)" />
+                    <Labeled Width="7em"
+                             Label="Start After"
+                             DateTimeOffsetValue="card.Entity.StartAfter" />
+                    <Labeled Width="7em"
+                             Label="End Before"
+                             DateTimeOffsetValue="card.Entity.EndBefore" />
+                </Field>
+                <Field Size="Field.Sizes.Unspecified">
+                    <Labeled Width="7em"
+                             Label="Started"
+                             DateTimeOffsetValue="card.Entity.Started" />
+                    <Labeled Width="7em"
+                             Label="Completed"
+                             DateTimeOffsetValue="card.Entity.Completed" />
+                    <Labeled Width="7em"
+                             Label="Terminated"
+                             DateTimeOffsetValue="card.Entity.Terminated" />
+                    <Labeled Width="7em"
+                             Label="Parts"
+                             StringValue="@card.Entity.PartsProgress" />
+                    <Labeled Width="7em"
+                             Label="Questions"
+                             StringValue="@card.Entity.QuestionsProgress" />
+                </Field>
+            </Values>
+            <Buttons>
+                @if (Model.ResetProgressModel.AssessmentAssignmentId == card.Entity.Id)
+                {
+                    <Modal Model="Model.ResetProgressModel"
+                           Title="Reset Progress"
+                           Width="28em">
+                        <Content>
+                            <Padding Direction="Padding.Directions.Top"
+                                     Size="Padding.Sizes.Small">
+                                Are you sure you want to reset this student's progress for the assignment?
+                            </Padding>
+                        </Content>
+                        <Buttons>
+                            <ButtonCore Text="Reset Progress"
+                                        IconClass="c-icon-redo2"
+                                        ButtonStyle="ButtonCore.ButtonStyles.Destroy"
+                                        Clicked="() => Model.ResetProgress()" />
+                            <ButtonCancel Clicked="() => Model.ResetProgressModel.Hide()" />
+                        </Buttons>
+                    </Modal>
+                }
+                <ButtonView Href="@($"{Path}/assessment-assignment-{card.Entity.Id:D}")" />
+                <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.View">
+                    <MenuItem Type="MenuItem.Types.Delete"
+                              Clicked="() => Model.ShowConfirmation(card.Entity.Id)" />
+                    @if (card.Entity.Started.HasValue)
+                    {
+                        <MenuItem Text="Reset Progress"
+                                  Icon="c-icon-redo2"
+                                  Clicked="() => Model.ShowResetProgressConfirmation(card.Entity.Id)" />
+                    }
+                </ContextMenu>
+            </Buttons>
+        </Card>
+    }
+
+    <Pager Paged="Model.Search.Paged"
+           PageNumberChanged="Model.HandlePageNumberChanged" />
+}

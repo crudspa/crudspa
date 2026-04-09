@@ -1,0 +1,24 @@
+/*
+merge into [Education].[BodyTemplate] as Target
+using ( values
+-- todo: Add values
+) as Source
+    (Id, Name, Template, Ordinal)
+on Target.Id = Source.Id
+
+when matched then
+update set
+     Target.IsDeleted = 0
+    ,Target.Name = Source.Name
+    ,Target.Template = Source.Template
+    ,Target.Ordinal = Source.Ordinal
+
+when not matched by target then
+insert (Id, Name, Template, Ordinal)
+values (Id, Name, Template, Ordinal)
+
+when not matched by source and Target.IsDeleted = 0 then
+update set
+     Target.IsDeleted = 1
+;
+*/

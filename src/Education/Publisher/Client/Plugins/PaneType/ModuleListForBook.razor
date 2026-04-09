@@ -1,0 +1,31 @@
+<ListOrderables Model="Model"
+                T="ModuleModel"
+                EntityName="Module"
+                UrlPrefix="@($"{Path}/module")"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Unspecified">
+            <Labeled CssClass="status"
+                     Width="8em"
+                     Label="Status">
+                <StatusDisplay Id="@context.Module.StatusId"
+                               Name="@context.Module.StatusName"
+                               ColorClassFrom="ContentStatusColors.For" />
+            </Labeled>
+            <Labeled Width="8em"
+                     Label="Icon"
+                     StringValue="@context.Module.IconCssClass" />
+            <Labeled Width="8em"
+                     Label="Requires"
+                     StringValue="@context.Module.RequiresAchievementTitle" />
+            <Labeled Width="8em"
+                     Label="Generates"
+                     StringValue="@context.Module.GeneratesAchievementTitle" />
+            <Labeled Width="8em"
+                     Label="Type"
+                     StringValue="@context.Module.Binder.TypeName" />
+        </Field>
+    </ReadView>
+</ListOrderables>

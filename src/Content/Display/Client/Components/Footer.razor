@@ -1,0 +1,13 @@
+@if (Page?.Sections.HasItems() == true)
+{
+    <div class="footer c-footer"
+         @key="Page">
+        <div class="content">
+            @foreach (var section in Page.Sections.OrderBy(x => x.Ordinal))
+            {
+                <SectionDisplay Section="section"
+                                @key="section" />
+            }
+        </div>
+    </div>
+}

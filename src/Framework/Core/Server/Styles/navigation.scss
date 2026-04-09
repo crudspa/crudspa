@@ -1,0 +1,1139 @@
+/// <reference path="defaults.scss" />
+
+.c-vertical-navigation {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content 1fr min-content;
+    height: 100vh;
+    width: 100vw;
+
+    @media (max-width: $screenMedium) {
+        display: flex;
+        flex-flow: column nowrap;
+        height: 100vh;
+        width: auto;
+    }
+
+    > .header {
+        grid-row: 1;
+        align-items: center;
+        background-color: $headerBackgroundColor;
+        border-color: $headerBorderColor;
+        border-style: solid;
+        border-width: $headerBorderWidth;
+        box-shadow: $headerBoxShadow;
+        color: $headerForegroundColor;
+        display: flex;
+        flex-flow: row nowrap;
+        flex: 0 1 auto;
+        position: static;
+        width: 100%;
+        z-index: 100;
+
+        @media (max-width: $screenMedium) {
+            position: sticky;
+            top: 0;
+        }
+
+        > :not(.c-modal) {
+            a {
+                color: $headerHyperlinkColor;
+
+                &:visited {
+                    color: $headerHyperlinkColor;
+                }
+
+                &:hover,
+                &:active {
+                    color: $headerHyperlinkHoverColor;
+                }
+            }
+
+            .c-button {
+                border-color: $headerButtonBorderColor;
+
+                &,
+                &:focus,
+                &:active,
+                &:visited {
+                    background-color: $headerButtonBackgroundColor;
+                    color: $headerButtonForegroundColor;
+                }
+            }
+
+            .c-button:not([disabled]):hover {
+                background-color: $headerButtonHoverBackgroundColor;
+                color: $headerButtonHoverForegroundColor;
+            }
+        }
+
+        .menu-button {
+            @extend .c-not-selectable;
+            display: none;
+            font-size: 2em;
+
+            @media (max-width: $screenMedium) {
+                display: block;
+            }
+
+            a {
+                transition: color .25s ease;
+                padding: .25em .5em;
+
+                &,
+                &:link,
+                &:active,
+                &:visited {
+                    background-color: $headerBackgroundColor;
+                    color: $headerMenuButtonColor;
+                }
+
+                &:hover {
+                    background-color: $headerBackgroundColor;
+                    color: $headerMenuButtonHoverColor;
+                }
+            }
+        }
+
+        .branding {
+            display: flex;
+            flex: 1 1 auto;
+            flex-flow: row nowrap;
+            justify-content: flex-start;
+            user-select: none;
+
+            @media (max-width: $screenMedium) {
+                justify-content: center;
+            }
+
+            h1 {
+                margin: .5em 0;
+            }
+
+            a {
+                &,
+                &:link,
+                &:active,
+                &:visited,
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+
+            .image {
+                @extend .c-padding-tiny;
+                width: 16em;
+
+                @media (max-width: $screenMedium) {
+                    width: 12em;
+                }
+            }
+        }
+
+        .auth-bar {
+            .signed-in {
+                @extend .c-nowrap;
+
+                .c-button {
+                    background-color: $headerContactImageBackgroundColor;
+                    border-color: $headerContactImageForegroundColor;
+                }
+
+                button:not([disabled]):hover .c-button,
+                .c-button:not([disabled]):hover {
+                    background-color: $headerContactImageHoverBackgroundColor;
+                    border-color: $headerContactImageForegroundColor;
+                }
+
+                .contact-name {
+                    color: $headerContactNameForegroundColor;
+                    display: none;
+
+                    @media (min-width: $screenMedium) {
+                        display: inline-block;
+                        margin-right: 1em;
+                    }
+
+                    a {
+                        color: $headerContactNameForegroundColor;
+                        text-decoration: none;
+                    }
+                }
+
+                .contact-image {
+                    @extend .c-not-selectable;
+                    background-color: $headerContactImageBackgroundColor;
+                    border: 1px solid $headerContactImageBorderColor;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 2.5em;
+                    width: 2.5em;
+
+                    .icon {
+                        color: $headerContactImageForegroundColor;
+                        font-size: 1.25em;
+                    }
+                }
+            }
+        }
+    }
+
+    .main {
+        display: grid;
+        flex: 1 0 auto;
+        grid-row: 2;
+        grid-template-columns: 1fr 2.75fr;
+        grid-template-rows: 1fr;
+        overflow: hidden;
+
+        @media (max-width: $screenMedium) {
+            display: flex;
+            flex-flow: column nowrap;
+        }
+
+        .vertical-tree {
+            background-color: $verticalTreeBackgroundColor;
+            border-color: $verticalTreeBorderColor;
+            border-style: $verticalTreeBorderStyle;
+            border-width: $verticalTreeBorderWidth;
+            box-shadow: $verticalTreeBoxShadow;
+            grid-column: 1;
+            overflow-y: auto;
+            padding-top: 1px;
+
+            @media (max-width: $screenMedium) {
+                border-style: none;
+                margin-left: -1em;
+
+                &.hidden {
+                    display: none;
+                }
+            }
+
+            ul {
+                list-style: none;
+                line-height: 1;
+                margin: 0;
+                padding-left: 0;
+
+                li {
+                    padding-left: .75em;
+                }
+
+                .node {
+                    align-items: center;
+                    background-color: $verticalNodeBackgroundColor;
+                    border-bottom: $verticalNodeBorderBottom;
+                    border-left: $verticalNodeBorderLeft;
+                    border-right: $verticalNodeBorderRight;
+                    border-top: $verticalNodeBorderTop;
+                    display: flex;
+                    flex-flow: row nowrap;
+                    margin-top: -1px;
+                    z-index: 1;
+
+                    .link {
+                        @extend .c-padding-small-vert;
+                        align-items: center;
+                        display: flex;
+                        flex: 1 1 auto;
+                        flex-flow: row nowrap;
+                        line-height: normal;
+                        min-width: 0;
+                        text-decoration: none !important;
+
+                        &:link,
+                        &:active,
+                        &:visited {
+                            color: $verticalNodeForegroundColor;
+                        }
+
+                        .icon {
+                            align-items: center;
+                            color: $verticalNodeForegroundColor;
+                            display: flex;
+                            font-size: 1.5em;
+                            line-height: 1;
+                            padding: 0 0 0 .675em;
+                        }
+
+                        .text {
+                            font-family: $verticalNodeFontFamily;
+                            font-weight: $verticalNodeFontWeight;
+                            font-size: $verticalNodeFontSize;
+                            font-style: $verticalNodeFontStyle;
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                            padding: 0 .25em 0 .75em;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 2;
+                            -webkit-box-orient: vertical;
+
+                            &.child {
+                                padding: 0 0 0 .5em;
+                            }
+                        }
+                    }
+
+                    &:hover {
+                        background-color: $verticalNodeHoverBackgroundColor;
+                        color: $verticalNodeHoverForegroundColor;
+
+                        .link {
+                            &:link,
+                            &:active,
+                            &:visited {
+                                color: $verticalNodeHoverForegroundColor;
+                            }
+                        }
+
+                        .icon {
+                            color: $verticalNodeHoverForegroundColor;
+                        }
+                    }
+
+                    &.selected,
+                    &.selected:hover {
+                        background-color: $verticalNodeSelectedBackgroundColor;
+                        color: $verticalNodeSelectedForegroundColor;
+                        border-bottom: $verticalNodeSelectedBorderBottom;
+                        border-left: $verticalNodeSelectedBorderLeft;
+                        border-right: $verticalNodeSelectedBorderRight;
+                        border-top: $verticalNodeSelectedBorderTop;
+                        box-shadow: $verticalNodeSelectedBoxShadow;
+                        z-index: 2;
+
+                        .link {
+                            &:link,
+                            &:active,
+                            &:visited {
+                                color: $verticalNodeSelectedForegroundColor;
+                            }
+                        }
+
+                        .icon {
+                            color: $verticalNodeSelectedForegroundColor;
+                        }
+                    }
+
+                    .close-button {
+                        align-items: center;
+                        display: flex;
+                        flex: 0 0 auto;
+                        font-size: 1.125em;
+                        justify-content: center;
+                        padding: 0 .25em;
+                        text-align: center;
+                        user-select: none;
+
+                        > a,
+                        > a:link,
+                        > a:active,
+                        > a:visited {
+                            background-color: transparent;
+                            color: $verticalNodeCloseButtonForegroundColor;
+                            align-items: center;
+                            display: inline-flex;
+                            justify-content: center;
+                            line-height: 1;
+                            min-height: 1.25em;
+                            min-width: 1.25em;
+                            text-decoration: none;
+                        }
+
+                        > a:hover {
+                            color: $verticalNodeCloseButtonHoverForegroundColor;
+                            text-decoration: none;
+                        }
+
+                        > a {
+                            transition: $defaultHoverTransition;
+                        }
+
+                    }
+                }
+            }
+        }
+
+        > .c-window {
+            display: grid;
+            flex: 1 0 auto;
+            grid-template-columns: 1fr;
+            grid-template-rows: min-content 1fr;
+            grid-column: 2;
+            margin: 0 1em;
+            overflow: hidden;
+
+            @media (max-width: $screenMedium) {
+                grid-column: 1;
+                grid-row: 2;
+                margin: 0 0;
+            }
+
+            .c-window-title {
+                grid-row: 1;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            > .content {
+                justify-self: stretch;
+                grid-row: 2;
+                overflow-y: scroll;
+            }
+        }
+    }
+
+    .footer {
+        flex: 0 1 auto;
+        grid-row: 3;
+        background-color: $footerBackgroundColor;
+    }
+}
+
+.c-horizontal-navigation {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+    height: 100vh;
+    width: 100vw;
+
+    @media (max-width: $screenMedium) {
+        display: flex;
+        flex-flow: column nowrap;
+        height: 100vh;
+        width: auto;
+    }
+
+    > .header {
+        grid-row: 1;
+        align-items: center;
+        background-color: $headerBackgroundColor;
+        border-color: $headerBorderColor;
+        border-style: solid;
+        border-width: $headerBorderWidth;
+        box-shadow: $headerBoxShadow;
+        color: $headerForegroundColor;
+        display: flex;
+        flex-flow: row nowrap;
+        flex: 0 1 auto;
+        position: static;
+        width: 100%;
+        z-index: 100;
+
+        @media (max-width: $screenMedium) {
+            position: sticky;
+            top: 0;
+        }
+
+        > :not(.c-modal) {
+            a {
+                color: $headerHyperlinkColor;
+
+                &:visited {
+                    color: $headerHyperlinkColor;
+                }
+
+                &:hover,
+                &:active {
+                    color: $headerHyperlinkHoverColor;
+                }
+            }
+
+            .c-button {
+                border-color: $headerButtonBorderColor;
+
+                &,
+                &:focus,
+                &:active,
+                &:visited {
+                    background-color: $headerButtonBackgroundColor;
+                    color: $headerButtonForegroundColor;
+                }
+            }
+
+            .c-button:not([disabled]):hover {
+                background-color: $headerButtonHoverBackgroundColor;
+                color: $headerButtonHoverForegroundColor;
+            }
+        }
+
+        .menu-button {
+            @extend .c-not-selectable;
+            display: none;
+            font-size: 2em;
+
+            @media (max-width: $screenMedium) {
+                display: block;
+            }
+
+            a {
+                transition: color .25s ease;
+                padding: .25em .5em;
+
+                &,
+                &:link,
+                &:active,
+                &:visited {
+                    background-color: $headerBackgroundColor;
+                    color: $headerMenuButtonColor;
+                }
+
+                &:hover {
+                    background-color: $headerBackgroundColor;
+                    color: $headerMenuButtonHoverColor;
+                }
+            }
+        }
+
+        .branding {
+            display: flex;
+            flex: 0 1 auto;
+            flex-flow: row nowrap;
+            justify-content: flex-start;
+            user-select: none;
+
+            @media (max-width: $screenMedium) {
+                flex: 1 1 auto;
+                justify-content: center;
+            }
+
+            h1 {
+                margin: .5em 0;
+            }
+
+            a {
+                &,
+                &:link,
+                &:active,
+                &:visited,
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+
+            .image {
+                @extend .c-padding-small;
+                width: 16em;
+
+                @media (max-width: $screenMedium) {
+                    width: 12em;
+                }
+            }
+        }
+
+        .horizontal-tree {
+            background-color: $horizontalTreeBackgroundColor;
+            box-shadow: $horizontalTreeBoxShadow;
+            flex: 1 1 auto;
+            margin: 0 1em;
+
+            @media (max-width: $screenMedium) {
+                border-style: none;
+                padding: 0 0;
+                margin: 0 0;
+
+                &.hidden {
+                    display: none;
+                }
+            }
+
+            ul {
+                list-style: none;
+                line-height: 1;
+                margin: 0;
+            }
+
+            > ul {
+                padding-left: 0;
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-around;
+
+                @media (max-width: $screenMedium) {
+                    display: block;
+                }
+
+                .level1 {
+                    padding: 0;
+                }
+
+                .child-tree {
+
+                    .ul {
+                        padding-left: .375em;
+                    }
+
+                    &.level2 {
+                        background-color: $horizontalTreeBackgroundColor;
+                        box-shadow: $modalBoxShadow;
+                        display: block;
+                        position: absolute;
+                        max-width: 32em;
+                        z-index: 400;
+                        padding: 0;
+
+                        &.hidden {
+                            display: none;
+                        }
+                    }
+                }
+
+                .node {
+                    align-items: center;
+                    background-color: $horizontalNodeBackgroundColor;
+                    display: flex;
+                    flex-flow: row nowrap;
+                    margin-top: -1px;
+                    padding-left: 1em;
+                    padding-right: 1em;
+                    z-index: 1;
+
+                    .link {
+                        @extend .c-padding-small-vert;
+                        align-items: center;
+                        display: flex;
+                        flex: 1 1 auto;
+                        flex-flow: row nowrap;
+                        line-height: normal;
+                        min-width: 0;
+                        text-decoration: none !important;
+
+                        &:link,
+                        &:active,
+                        &:visited {
+                            color: $horizontalNodeForegroundColor;
+                        }
+
+                        .icon {
+                            color: $horizontalNodeForegroundColor;
+                            font-size: 1.125em;
+                            line-height: .9;
+                            padding: 0 0 0 1em;
+                        }
+
+                        .text {
+                            font-family: $horizontalNodeFontFamily;
+                            font-weight: $horizontalNodeFontWeight;
+                            font-size: $horizontalNodeFontSize;
+                            font-style: $horizontalNodeFontStyle;
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                            padding: 0 1em;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 2;
+                            -webkit-box-orient: vertical;
+
+                            &.child {
+                                padding: 0 0 0 .5em;
+                            }
+                        }
+                    }
+
+                    &:hover {
+                        background-color: $horizontalNodeHoverBackgroundColor;
+                        color: $horizontalNodeHoverForegroundColor;
+
+                        .link {
+                            &:link,
+                            &:active,
+                            &:visited {
+                                color: $horizontalNodeHoverForegroundColor;
+                            }
+                        }
+
+                        .icon {
+                            color: $horizontalNodeHoverForegroundColor;
+                        }
+                    }
+
+                    &.selected,
+                    &.selected:hover {
+                        background-color: $horizontalNodeSelectedBackgroundColor;
+                        color: $horizontalNodeSelectedForegroundColor;
+                        box-shadow: $horizontalNodeSelectedBoxShadow;
+                        z-index: 2;
+
+                        .link {
+                            &:link,
+                            &:active,
+                            &:visited {
+                                color: $horizontalNodeSelectedForegroundColor;
+                            }
+                        }
+
+                        .icon {
+                            color: $horizontalNodeSelectedForegroundColor;
+                        }
+                    }
+
+                    .expand-button {
+                        font-size: .875em;
+                        padding: 0 .5em 0 0;
+                        text-align: center;
+                        user-select: none;
+
+                        > a,
+                        > a:link,
+                        > a:active,
+                        > a:visited {
+                            border: 1px solid transparent;
+                            background-color: transparent;
+                            color: $horizontalNodeForegroundColorMuted;
+                            text-decoration: none;
+                        }
+
+                        > a:hover {
+                            border: 1px solid $defaultBorderColor;
+                            color: $horizontalNodeForegroundColor;
+                            text-decoration: none;
+                        }
+
+                        > a {
+                            transition: $defaultHoverTransition;
+                            padding: .5em;
+                        }
+                    }
+
+                    .close-button {
+                        align-items: center;
+                        display: flex;
+                        flex: 0 0 auto;
+                        font-size: 1.125em;
+                        justify-content: center;
+                        padding: 0 .375em 0 .25em;
+                        text-align: center;
+                        user-select: none;
+
+                        > a,
+                        > a:link,
+                        > a:active,
+                        > a:visited {
+                            background-color: transparent;
+                            color: $horizontalNodeCloseButtonForegroundColor;
+                            align-items: center;
+                            display: inline-flex;
+                            justify-content: center;
+                            line-height: 1;
+                            min-height: 1.25em;
+                            min-width: 1.25em;
+                            text-decoration: none;
+                        }
+
+                        > a:hover {
+                            color: $horizontalNodeCloseButtonHoverForegroundColor;
+                            text-decoration: none;
+                        }
+
+                        > a {
+                            transition: $defaultHoverTransition;
+                            padding: .125em;
+                        }
+
+                    }
+                }
+            }
+        }
+
+        .auth-bar {
+            flex: 0 0 auto;
+
+            .signed-in {
+                @extend .c-nowrap;
+
+                .c-button {
+                    background-color: $headerContactImageBackgroundColor;
+                    border-color: $headerContactImageForegroundColor;
+                }
+
+                button:not([disabled]):hover .c-button,
+                .c-button:not([disabled]):hover {
+                    background-color: $headerContactImageHoverBackgroundColor;
+                    border-color: $headerContactImageForegroundColor;
+                }
+
+                .contact-name {
+                    color: $headerContactNameForegroundColor;
+                    display: none;
+
+                    @media (min-width: $screenMedium) {
+                        display: inline-block;
+                        margin-right: 1em;
+                    }
+
+                    a {
+                        color: $headerContactNameForegroundColor;
+                        text-decoration: none;
+                    }
+                }
+
+                .contact-image {
+                    @extend .c-not-selectable;
+                    background-color: $headerContactImageBackgroundColor;
+                    border: 1px solid $headerContactImageBorderColor;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 2.5em;
+                    width: 2.5em;
+
+                    .icon {
+                        color: $headerContactImageForegroundColor;
+                        font-size: 1.25em;
+                    }
+                }
+            }
+        }
+    }
+
+    .main {
+        display: grid;
+        flex: 1 0 auto;
+        grid-row: 2;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        overflow: hidden;
+
+        @media (max-width: $screenMedium) {
+            display: flex;
+            flex-flow: column nowrap;
+        }
+
+        .scrollable-body {
+            overflow-x: hidden;
+            overflow-y: scroll;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex: 1;
+
+            @media (max-width: $screenMedium) {
+                overflow-y: auto;
+            }
+
+            > .c-window {
+                border: hidden;
+                display: grid;
+                flex: 1 0 auto;
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr;
+                grid-row: 2;
+                margin: 0 0;
+
+                > .content {
+                    grid-row: 1;
+                    justify-self: stretch;
+                }
+            }
+
+            .footer {
+                background-color: $footerBackgroundColor;
+                margin-top: auto;
+            }
+        }
+    }
+}
+
+.c-footer {
+    background-color: $footerBackgroundColor;
+    border-color: $footerBorderColor;
+    border-style: solid;
+    border-width: $footerBorderWidth;
+    box-shadow: $footerBoxShadow;
+    color: $footerForegroundColor;
+    font-family: $footerFontFamily;
+    font-size: $footerFontSize;
+    font-weight: $footerFontWeight;
+    line-height: $paragraphLineHeight;
+    margin: $footerMargin;
+    width: 100%;
+
+    .content {
+        padding: $footerPadding;
+        width: 100%;
+
+        a {
+            color: $footerHyperlinkColor;
+            text-decoration: none;
+
+            &:visited {
+                color: $footerHyperlinkColor;
+            }
+
+            &:hover,
+            &:active {
+                color: $footerHyperlinkHoverColor;
+            }
+        }
+
+        .right {
+            text-align: right;
+        }
+    }
+}
+
+.c-tabbed-panes {
+    display: block;
+
+    .tabs {
+        background-color: transparent;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: start;
+        list-style: none;
+        margin: 0;
+        padding: .5em .5em 0 .5em;
+
+        li {
+            background-color: $tabBackgroundColor;
+            border-bottom: none;
+            border-left: none;
+            border-right: 1px solid $tabBorderColor;
+            border-top: 6px solid $tabBorderColor;
+            color: $tabForegroundColor;
+            cursor: pointer;
+            font-family: $tabFontFamily;
+            font-size: $tabFontSize;
+            font-style: $tabFontStyle;
+            font-weight: $tabFontWeight;
+            margin: $tabMargin;
+            padding: $tabHorizontalPadding;
+            text-transform: $tabTextTransform;
+            user-select: none;
+
+            &:hover {
+                background-color: $tabHoverBackgroundColor;
+                color: $tabHoverForegroundColor;
+            }
+
+            &.selected {
+                background-color: $tabSelectedBackgroundColor;
+                border-bottom: 1px solid $tabSelectedBackgroundColor;
+                border-top: 6px solid $tabSelectedBorderColor;
+                color: $tabSelectedForegroundColor;
+                margin-bottom: -1px;
+                z-index: 20;
+            }
+
+            &:first-of-type {
+                border-left: 1px solid $tabBorderColor;
+            }
+
+            &.active {
+                cursor: default;
+            }
+        }
+
+        &.modal {
+            font-size: 0.875em;
+            padding: 0 0 2em 0;
+        }
+
+        &.secondary {
+            li {
+                border-top-width: 2px;
+
+                &.selected {
+                    border-top-color: $tabSelectedBorderColor;
+                }
+            }
+        }
+    }
+
+    > .panes {
+        &.match-tab-color {
+            background-color: $tabSelectedBackgroundColor;
+            border: 1px solid $tabBorderColor;
+        }
+    }
+
+    > .panes .c-tabbed-panes.vertical {
+        padding: .25em;
+    }
+
+    &.vertical {
+        display: flex;
+        flex-flow: row nowrap;
+
+        @media (max-width: $screenMedium) {
+            flex-flow: column nowrap;
+        }
+
+        .tabs {
+            background-color: transparent;
+            display: flex;
+            flex: 1;
+            flex-flow: column nowrap;
+            padding: 0 0 0 0;
+            z-index: 100;
+
+            li {
+                border-right: 1px solid $tabBorderColor;
+                border-top: none;
+                border-bottom: 1px solid $tabBorderColor;
+                border-left: 6px solid $tabBorderColor;
+                padding: $tabVerticalPadding;
+
+                &.selected {
+                    border-right: 1px solid $tabSelectedBackgroundColor;
+                    border-left: 6px solid $tabSelectedBorderColor;
+                    margin-right: -1px;
+                    z-index: 20;
+
+                    @media (max-width: $screenMedium) {
+                        margin-right: 0;
+                    }
+                }
+
+                &:first-of-type {
+                    border-top: 1px solid $tabBorderColor;
+                }
+            }
+
+            &.secondary {
+                li {
+                    border-left-width: 2px;
+
+                    &.selected {
+                        border-left-color: $tabSelectedBorderColor;
+                    }
+                }
+            }
+        }
+
+        .panes {
+            flex: 2.5;
+            margin-left: -1px;
+            z-index: 10;
+        }
+    }
+}
+
+.c-stack-navigation {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content 1fr;
+    height: 100vh;
+    width: 100vw;
+
+    @media (max-width: $screenMedium) {
+        display: flex;
+        flex-flow: column nowrap;
+        height: 100vh;
+        width: auto;
+    }
+
+    > .header {
+        align-items: center;
+        background-color: $headerBackgroundColor;
+        border-color: $headerBorderColor;
+        border-style: solid;
+        border-width: $headerBorderWidth;
+        box-shadow: $headerBoxShadow;
+        color: $headerForegroundColor;
+        display: flex;
+        flex-flow: row nowrap;
+        flex: 0 1 auto;
+        width: 100%;
+        z-index: 100;
+
+        @media (max-width: $screenMedium) {
+            position: sticky;
+            top: 0;
+        }
+
+        > :not(.c-modal) {
+            a {
+                color: $headerHyperlinkColor;
+
+                &:visited {
+                    color: $headerHyperlinkColor;
+                }
+
+                &:hover,
+                &:active {
+                    color: $headerHyperlinkHoverColor;
+                }
+            }
+        }
+
+        .menu-button {
+            @extend .c-not-selectable;
+            font-size: .875em;
+
+            a {
+                transition: color .25s ease;
+                padding: .25em .5em;
+
+                &,
+                &:link,
+                &:active,
+                &:visited {
+                    background-color: $headerBackgroundColor;
+                    color: $headerMenuButtonColor;
+                    text-decoration: none;
+                }
+
+                &:hover {
+                    background-color: $headerBackgroundColor;
+                    color: $headerMenuButtonHoverColor;
+                }
+            }
+        }
+
+        .branding {
+            display: flex;
+            flex: 1 1 auto;
+            flex-flow: row nowrap;
+            justify-content: flex-start;
+            padding-left: .75em;
+            user-select: none;
+
+            @media (max-width: $screenMedium) {
+                justify-content: center;
+            }
+        }
+
+        .auth-bar {
+            flex: 0 0 auto;
+        }
+    }
+
+    > .main {
+        display: grid;
+        flex: 1 0 auto;
+        grid-row: 2;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        overflow: hidden;
+
+        @media (max-width: $screenMedium) {
+            display: flex;
+            flex-flow: column nowrap;
+        }
+
+        > .c-window {
+            border: hidden;
+            display: grid;
+            flex: 1 0 auto;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+            margin: 0 0;
+            overflow: hidden;
+
+            > .content {
+                grid-row: 1;
+                justify-self: stretch;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+    }
+}

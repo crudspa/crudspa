@@ -1,0 +1,39 @@
+﻿<div class="node @(Screen.Visible ? "selected" : String.Empty)">
+
+    <a class="link"
+       href="@(Screen.Path + Screen.Query)">
+        @if (Screen.Icon.HasSomething())
+        {
+            <div class="icon">
+                <span class="@(Screen.Icon)"></span>
+            </div>
+        }
+        <div class="text">@Screen.Title</div>
+    </a>
+
+    @if (!Screen.Fixed)
+    {
+        <div class="close-button">
+            <a @onclick="() => NodeClosed.InvokeAsync(Screen.Path)">
+                <span class="c-icon-cross"></span>
+            </a>
+        </div>
+    }
+</div>
+
+<ul>
+    @foreach (var child in Screen.Children)
+    {
+        <li class="level@(Level)">
+            <VerticalNode Screen="@child"
+                          Level="@(Level + 1)"
+                          NodeClosed="@NodeClosed" />
+        </li>
+    }
+</ul>
+
+@code {
+    [Parameter, EditorRequired] public Screen Screen { get; set; } = null!;
+    [Parameter, EditorRequired] public Int32 Level { get; set; }
+    [Parameter] public EventCallback<String> NodeClosed { get; set; }
+}

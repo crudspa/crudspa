@@ -1,0 +1,10 @@
+@if (Model.Entity is not null)
+{
+    <PageListForBinder Id="Model.Entity.Binder.Id"
+                       Path="@Path"
+                       AddPage="AddPage"
+                       FetchPages="binderId => TrifoldService.FetchPages(new(new() { TrifoldId = Model.Entity.Id }))"
+                       FetchPage="pageId => TrifoldService.FetchPage(new(new() { TrifoldId = Model.Entity.Id, Page = new() { Id = pageId } }))"
+                       RemovePage="pageId => TrifoldService.RemovePage(new(new() { TrifoldId = Model.Entity.Id, Page = new() { Id = pageId } }))"
+                       SavePageOrder="pages => TrifoldService.SavePageOrder(new(new() { TrifoldId = Model.Entity.Id, Pages = pages }))" />
+}

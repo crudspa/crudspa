@@ -1,0 +1,72 @@
+﻿@using Crudspa.Framework.Core.Shared.Contracts.Config.SegmentType
+@if (Panes is not null)
+{
+    <Padding Direction="Padding.Directions.Top"
+             Size="Padding.Sizes.Small">
+        <Wrapped Alignment="Wrapped.Alignments.Top">
+            <Field Label="Tab Orientation"
+                   Container="Field.Containers.Div">
+                <EnumRadio TEnum="TabbedPanesConfig.Orientations"
+                           @bind-SelectedValue="@Config.Orientation"
+                           ReadOnly="ReadOnly" />
+            </Field>
+        </Wrapped>
+    </Padding>
+    <BatchSection Title="Panes">
+        <HeadingPanel>
+            <ButtonAdd Disabled="ReadOnly || AddPane is null"
+                       Transparent="true"
+                       Clicked="HandleAddPaneClicked" />
+        </HeadingPanel>
+        <ChildContent>
+            @if (PanesModel is not null)
+            {
+                <Batch Model="PanesModel"
+                       ReadOnly="ReadOnly"
+                       NoRecordsText="None">
+                    <EditView>
+                        <Border Direction="Border.Directions.Bottom">
+                            <Padding Size="Padding.Sizes.Small"
+                                     Direction="Padding.Directions.Vertical"
+                                     @key="context">
+                                <Wrapped NoWrap="true">
+                                    <Wrapped Alignment="Wrapped.Alignments.Top"
+                                             Star="true">
+                                        <Field Label="Key"
+                                               Size="Field.Sizes.Tiny">
+                                            <TextBox ReadOnly="ReadOnly"
+                                                     MaxLength="75"
+                                                     @bind-Value="context.Key" />
+                                        </Field>
+                                        <Field Label="Title"
+                                               Size="Field.Sizes.Tiny">
+                                            <TextBox ReadOnly="ReadOnly"
+                                                     MaxLength="150"
+                                                     @bind-Value="context.Title" />
+                                        </Field>
+                                        <Field Label="Permission"
+                                               Size="Field.Sizes.Medium">
+                                            <Dropdown LookupValues="PermissionNames"
+                                                      ReadOnly="ReadOnly"
+                                                      AllowNull="true"
+                                                      NullText="[Public]"
+                                                      @bind-Value="context.PermissionId" />
+                                        </Field>
+                                        <Field Label="Pane Type"
+                                               Size="Field.Sizes.MediumLarge">
+                                            <Dropdown LookupValues="PaneTypes"
+                                                      ReadOnly="ReadOnly"
+                                                      AllowNull="true"
+                                                      NullText="[Select Pane Type]"
+                                                      @bind-Value="context.TypeId" />
+                                        </Field>
+                                    </Wrapped>
+                                </Wrapped>
+                            </Padding>
+                        </Border>
+                    </EditView>
+                </Batch>
+            }
+        </ChildContent>
+    </BatchSection>
+}

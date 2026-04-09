@@ -1,0 +1,8 @@
+﻿<div class="c-pane-link">
+    <a href="@Href">@Text</a>
+    @if (Count is not null)
+    {
+        <span class="separator">:</span>
+        @($"{Count:G}")
+    }
+</div>

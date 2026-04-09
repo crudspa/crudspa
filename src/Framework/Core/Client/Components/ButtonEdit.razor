@@ -1,0 +1,9 @@
+﻿<button @onclick="() => Clicked.InvokeAsync()"
+        disabled="@Disabled">
+    <div class="c-button @(Transparent ? "transparent bordered" : "edit")">
+        <div class="icon">
+            <span class="c-icon-pencil"></span>
+        </div>
+        <div class="text">Edit</div>
+    </div>
+</button>

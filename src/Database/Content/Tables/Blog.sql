@@ -1,0 +1,17 @@
+create table [Content].[Blog] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [PortalId] uniqueidentifier not null,
+    [StatusId] uniqueidentifier not null,
+    [Title] nvarchar(150) not null,
+    [Author] nvarchar(150) not null,
+    [Description] nvarchar(max) null,
+    [ImageId] uniqueidentifier null,
+    constraint [PK_Content_Blog] primary key clustered ([Id]),
+    constraint [FK_Content_Blog_Portal] foreign key ([PortalId]) references [Framework].[Portal] ([Id]),
+    constraint [FK_Content_Blog_Status] foreign key ([StatusId]) references [Framework].[ContentStatus] ([Id]),
+    constraint [FK_Content_Blog_Image] foreign key ([ImageId]) references [Framework].[ImageFile] ([Id]),
+);

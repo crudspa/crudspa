@@ -1,0 +1,21 @@
+﻿<button @onclick="() => Model.Toggle()"
+        title="Reaction">
+    <div class="c-button transparent bordered">
+        <div class="text">
+            @if (SelectedEmoji is null)
+            {
+                <span class="none">&#x263a;</span>
+            }
+            else
+            {
+                <span class="emoji">@(SelectedEmoji)</span>
+            }
+            <span class="arrow">&#x25BC;</span>
+        </div>
+    </div>
+</button>
+<div class="c-context-menu @(Model.Visible ? String.Empty : "c-hide")">
+    <div class="menu-items so-tight">
+        @ChildContent
+    </div>
+</div>

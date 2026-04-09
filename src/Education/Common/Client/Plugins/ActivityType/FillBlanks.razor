@@ -1,0 +1,98 @@
+﻿<div class="c-stack center">
+
+    @if (Model.Activity.ContextAudioFile.Id.HasSomething())
+    {
+        <Padding Size="Padding.Sizes.Small">
+            <AudioPlayer AudioFile="Model.Activity.ContextAudioFile"
+                         PlayText="Listen"
+                         StopText="Listen"
+                         PlayIcon="c-icon-volume-high"
+                         StopIcon="c-icon-volume-high"
+                         MediaPlayed="HandleContextAudioPlayed">
+            </AudioPlayer>
+        </Padding>
+    }
+
+    @if (AssignmentBatchId.HasValue)
+    {
+        <h2>@(Model.Activity.ContentAreaAppNavText)</h2>
+    }
+
+    @foreach (var line in Model.Lines)
+    {
+        @if (line.IsLabel == true)
+        {
+            <div class="cec-context-text tight">
+                @(line.LabelText)
+            </div>
+        }
+
+        @if (line.IsInput == true)
+        {
+            <div class="c-nowrap c-large">
+                <input class="c-input input large"
+                       type="text"
+                       @bind="line.EntryText" />
+                @if (line.NeedsAttention())
+                {
+                    <img src="/api/content/display/images/exclamation"
+                         alt="Error"
+                         style="width: 1.625em;" />
+                }
+            </div>
+        }
+
+        @if (line.IsTallInput == true)
+        {
+            <div class="c-nowrap c-large">
+                <textarea class="input short"
+                          @bind="line.EntryText"></textarea>
+                @if (line.NeedsAttention())
+                {
+                    <img src="/api/content/display/images/exclamation"
+                         alt="Error"
+                         style="width: 1.625em;" />
+                }
+            </div>
+        }
+
+        @if (line.IsChoice == true)
+        {
+            <div class="c-nowrap">
+                <button @onclick="() => Model.SelectDestination(line.DestinationModel!.ModelId!.Value)">
+                    <div class="cec-choice squared c-button cancel @(line.DestinationModel!.CssClass)">
+                        <div class="text">@line.DestinationModel!.PlacedPiece!.Text</div>
+                    </div>
+                </button>
+                @if (line.NeedsAttention())
+                {
+                    <img src="/api/content/display/images/exclamation"
+                         alt="Error"
+                         style="width: 1.625em;" />
+                }
+            </div>
+        }
+    }
+
+    <div class="c-wrap center c-padding-medium-vert">
+        @foreach (var option in Model.Options)
+        {
+            <button class="c-padding-tiny"
+                    @onclick="() => Model.SelectOption(option.Id!.Value)">
+                <div class="cec-choice squared c-button cancel @(option.State == PieceModel.States.Default ? "default" : "selected")">
+                    <div class="text">@(option.Text)</div>
+                </div>
+            </button>
+        }
+    </div>
+
+    @if (Model.HasInputs)
+    {
+        <button class="c-margin-medium-vert"
+                @onclick="Model.EvaluateProgress">
+            <div class="c-button primary c-padding-large-hor">
+                <div class="text">Submit</div>
+            </div>
+        </button>
+    }
+</div>

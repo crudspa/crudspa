@@ -1,0 +1,86 @@
+Third-Party Notices
+
+Last updated: 2026-03-25
+
+This file records third-party components used by this repository and where
+applicable, includes bundled license and notice files.
+
+Scope:
+* Direct NuGet dependencies referenced by the current *.csproj files.
+* Third-party source assets copied into this repository.
+* symbols.scss is intentionally excluded from this notice set per current
+  project migration guidance.
+
+Vendored source assets in this repository:
+
+1. Radzen Blazor SCSS source
+   * Local path: src/Framework/Core/Server/Styles/Radzen
+   * Source package: Radzen.Blazor 9.0.4
+   * License: MIT
+   * Bundled license text:
+     lic/ThirdParty/Radzen.Blazor-9.0.4-License.txt
+
+2. normalize.css
+   * Local path: src/Framework/Core/Server/Styles/normalize.scss
+   * Source project: normalize.css v8.0.1
+   * License: MIT
+   * Existing in-file notice:
+     "normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css"
+   * Bundled license text:
+     lic/ThirdParty/Normalize.css-v8.0.1-License.txt
+
+Direct NuGet dependencies:
+
+* AngleSharp 1.4.0 | MIT | https://www.nuget.org/packages/AngleSharp/1.4.0/license
+* Azure.Messaging.EventGrid 5.0.0 | MIT | https://www.nuget.org/packages/Azure.Messaging.EventGrid/5.0.0/license
+* Azure.Storage.Blobs 12.27.0 | MIT | https://www.nuget.org/packages/Azure.Storage.Blobs/12.27.0/license
+* CliWrap 3.10.0 | MIT | https://www.nuget.org/packages/CliWrap/3.10.0/license
+* DartSass.Native.win-arm64 1.97.3 | MIT | https://www.nuget.org/packages/DartSass.Native.win-arm64/1.97.3/license
+* DartSass.Native.win-x64 1.97.3 | MIT | https://www.nuget.org/packages/DartSass.Native.win-x64/1.97.3/license
+* DartSassHost 2.0.2 | MIT | https://www.nuget.org/packages/DartSassHost/2.0.2/license
+* HtmlSanitizer 9.1.893-beta | MIT | https://www.nuget.org/packages/HtmlSanitizer/9.1.893-beta/license
+* JavaScriptEngineSwitcher.ChakraCore 3.31.0 | Apache-2.0 | https://www.nuget.org/packages/JavaScriptEngineSwitcher.ChakraCore/3.31.0/license
+* JavaScriptEngineSwitcher.ChakraCore.Native.win-arm64 3.31.0 | Apache-2.0 | https://www.nuget.org/packages/JavaScriptEngineSwitcher.ChakraCore.Native.win-arm64/3.31.0/license
+* JavaScriptEngineSwitcher.ChakraCore.Native.win-x64 3.31.0 | Apache-2.0 | https://www.nuget.org/packages/JavaScriptEngineSwitcher.ChakraCore.Native.win-x64/3.31.0/license
+* JavaScriptEngineSwitcher.Core 3.31.0 | Apache-2.0 | https://www.nuget.org/packages/JavaScriptEngineSwitcher.Core/3.31.0/license
+* Magick.NET-Q16-AnyCPU 14.11.0 | Apache-2.0 | https://www.nuget.org/packages/Magick.NET-Q16-AnyCPU/14.11.0/license
+* Microsoft.ApplicationInsights.AspNetCore 2.23.0 | MIT | https://www.nuget.org/packages/Microsoft.ApplicationInsights.AspNetCore/2.23.0/license
+* Microsoft.ApplicationInsights.WorkerService 2.23.0 | MIT | https://www.nuget.org/packages/Microsoft.ApplicationInsights.WorkerService/2.23.0/license
+* Microsoft.AspNetCore.Components.Web 10.0.4 | MIT | https://www.nuget.org/packages/Microsoft.AspNetCore.Components.Web/10.0.4/license
+* Microsoft.AspNetCore.Components.WebAssembly 10.0.4 | MIT | https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly/10.0.4/license
+* Microsoft.AspNetCore.Components.WebAssembly.DevServer 10.0.4 | MIT | https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.DevServer/10.0.4/license
+* Microsoft.AspNetCore.Components.WebAssembly.Server 10.0.4 | MIT | https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Server/10.0.4/license
+* Microsoft.AspNetCore.SignalR.Client 10.0.4 | MIT | https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/10.0.4/license
+* Microsoft.Azure.SignalR 1.33.0 | MIT | https://www.nuget.org/packages/Microsoft.Azure.SignalR/1.33.0/license
+* Microsoft.Data.SqlClient 6.1.4 | MIT | https://www.nuget.org/packages/Microsoft.Data.SqlClient/6.1.4/license
+* Microsoft.Extensions.Hosting 10.0.4 | MIT | https://www.nuget.org/packages/Microsoft.Extensions.Hosting/10.0.4/license
+* Microsoft.Extensions.Hosting.WindowsServices 10.0.4 | MIT | https://www.nuget.org/packages/Microsoft.Extensions.Hosting.WindowsServices/10.0.4/license
+* Microsoft.ICU.ICU4C.Runtime 72.1.0.3 | Unicode/ICU license and notices | https://www.nuget.org/packages/Microsoft.ICU.ICU4C.Runtime/72.1.0.3/license
+* PDFsharp-MigraDoc 6.2.4 | MIT | https://www.nuget.org/packages/PDFsharp-MigraDoc/6.2.4/license
+* PreMailer.Net 2.7.2 | MIT | https://www.nuget.org/packages/PreMailer.Net/2.7.2/license
+* Radzen.Blazor 10.0.1 | MIT | https://www.nuget.org/packages/Radzen.Blazor/10.0.1/license
+* SendGrid 9.29.3 | MIT | https://www.nuget.org/packages/SendGrid/9.29.3/license
+* Serilog 4.3.1 | Apache-2.0 | https://www.nuget.org/packages/Serilog/4.3.1/license
+* Serilog.AspNetCore 10.0.0 | Apache-2.0 | https://www.nuget.org/packages/Serilog.AspNetCore/10.0.0/license
+* Serilog.Exceptions 8.4.0 | MIT | https://www.nuget.org/packages/Serilog.Exceptions/8.4.0/license
+* Serilog.Exceptions.MsSqlServer 8.4.0 | MIT | https://www.nuget.org/packages/Serilog.Exceptions.MsSqlServer/8.4.0/license
+* Serilog.Extensions.Hosting 10.0.0 | Apache-2.0 | https://www.nuget.org/packages/Serilog.Extensions.Hosting/10.0.0/license
+* Serilog.Settings.Configuration 10.0.0 | Apache-2.0 | https://www.nuget.org/packages/Serilog.Settings.Configuration/10.0.0/license
+* Serilog.Sinks.ApplicationInsights 5.0.0 | Apache-2.0 | https://www.nuget.org/packages/Serilog.Sinks.ApplicationInsights/5.0.0/license
+* Serilog.Sinks.Console 6.1.1 | Apache-2.0 | https://www.nuget.org/packages/Serilog.Sinks.Console/6.1.1/license
+* Serilog.Sinks.File 7.0.0 | Apache-2.0 | https://www.nuget.org/packages/Serilog.Sinks.File/7.0.0/license
+* SSH.NET 2025.1.0 | MIT | https://www.nuget.org/packages/SSH.NET/2025.1.0/license
+
+Additional bundled upstream notices:
+
+* Magick.NET-Q16-AnyCPU Notice.txt copied from package:
+  lic/ThirdParty/Magick.NET-Q16-AnyCPU-14.11.0-Notice.txt
+
+* Microsoft.ICU.ICU4C.Runtime license copied from package:
+  lic/ThirdParty/Microsoft.ICU.ICU4C.Runtime-72.1.0.3-License.txt
+
+Notes:
+* Dependency license metadata above was verified against restored local NuGet
+  package manifests on 2026-03-25.
+* This file covers direct package references. Transitive dependencies are
+  governed by each package's own bundled notices and upstream license terms.

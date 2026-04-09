@@ -1,0 +1,46 @@
+﻿@namespace Crudspa.Framework.Core.Client.Plugins
+@PluginFragment
+
+@code
+{
+    [Parameter, EditorRequired] public String? TypeName { get; set; } = String.Empty;
+    [Parameter] public Guid? PaneId { get; set; }
+    [Parameter, EditorRequired] public String? Path { get; set; }
+    [Parameter, EditorRequired] public String? ConfigJson { get; set; }
+    [Parameter, EditorRequired] public Boolean ReadOnly { get; set; }
+    [Parameter, EditorRequired] public EventCallback ConfigUpdated { get; set; }
+
+    public Object? Instance { get; private set; }
+
+    private RenderFragment PluginFragment => builder =>
+    {
+        if (TypeName.HasNothing())
+            throw new("TypeName was not supplied.");
+
+        var pluginType = Type.GetType(TypeName)
+            ?? throw new($"Component type '{TypeName}' not found.");
+
+        if (!typeof(IPaneDesign).IsAssignableFrom(pluginType))
+            throw new($"Interface '{nameof(IPaneDesign)}' is not implemented by the component '{TypeName}'.");
+
+        builder.OpenComponent(0, pluginType);
+
+        if (Path.HasSomething())
+            builder.AddAttribute(1, nameof(IPaneDesign.Path), Path);
+
+        if (ConfigJson.HasSomething())
+            builder.AddAttribute(2, nameof(IPaneDesign.ConfigJson), ConfigJson);
+
+        builder.AddAttribute(3, nameof(IPaneDesign.ReadOnly), ReadOnly);
+
+        if (ConfigUpdated.HasDelegate)
+            builder.AddAttribute(4, nameof(IPaneDesign.ConfigUpdated), ConfigUpdated);
+
+        if (PaneId.HasValue && typeof(IHasPaneId).IsAssignableFrom(pluginType))
+            builder.AddAttribute(5, nameof(IHasPaneId.PaneId), PaneId);
+
+        builder.AddComponentReferenceCapture(6, component => Instance = component);
+
+        builder.CloseComponent();
+    };
+}

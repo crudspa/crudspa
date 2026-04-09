@@ -1,0 +1,54 @@
+﻿@if (ChildContent is not null)
+{
+    var scope = Scope ?? TabScope.Root;
+
+    <CascadingValue Value="scope.Next()"
+                    IsFixed="true">
+        <CascadingValue Value="this"
+                        IsFixed="true">
+            @ChildContent
+        </CascadingValue>
+    </CascadingValue>
+}
+@if (ActiveModel is not null && ActiveModel.Tabs.HasItems())
+{
+    <div class="c-tabbed-panes @(Vertical ? "vertical" : String.Empty)">
+        @if (!HideTabs)
+        {
+            <ul class="tabs">
+                @foreach (var tab in ActiveModel.Tabs)
+                {
+                    <li class="@(ActiveModel.ActiveKey.IsBasically(tab.Key) ? "selected" : String.Empty)"
+                        @onclick="() => ActiveModel.SetActive(tab.Key)">
+                        @tab.Title
+                    </li>
+                }
+            </ul>
+        }
+        <div class="panes">
+            @foreach (var tab in ActiveModel.Tabs)
+            {
+                @if (tab.Loaded || !tab.Lazy)
+                {
+                    <div class="@(ActiveModel.ActiveKey.IsBasically(tab.Key) ? String.Empty : "c-hide")"
+                         @key="tab.Key">
+                        <ErrorRecover>
+                            @if (tab.Content is not null)
+                            {
+                                @tab.Content
+                            }
+                            else if (tab.PaneTypeDisplayView.HasSomething())
+                            {
+                                <PaneDisplayPlugin TypeName="@tab.PaneTypeDisplayView"
+                                                   Path="@Path"
+                                                   Id="@tab.Id"
+                                                   IsNew="@tab.IsNew"
+                                                   ConfigJson="@tab.ConfigJson" />
+                            }
+                        </ErrorRecover>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+}

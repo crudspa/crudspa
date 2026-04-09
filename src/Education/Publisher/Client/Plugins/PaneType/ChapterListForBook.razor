@@ -1,0 +1,20 @@
+<ListOrderables Model="Model"
+                T="ChapterModel"
+                EntityName="Chapter"
+                UrlPrefix="@($"{Path}/chapter")"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Unspecified">
+            <Labeled Width="4em"
+                     Label="Type"
+                     StringValue="@context.Chapter.Binder.TypeName" />
+        </Field>
+    </ReadView>
+    <PaneLinks>
+        <PaneLink Href="@($"{Path}/chapter-{context.Chapter.Id:D}?pane=pages")"
+                  Text="Pages"
+                  Count="context.Chapter.PageCount" />
+    </PaneLinks>
+</ListOrderables>

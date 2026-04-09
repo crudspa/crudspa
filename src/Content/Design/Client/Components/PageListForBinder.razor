@@ -1,0 +1,31 @@
+<ListOrderables Model="Model"
+                T="PageModel"
+                EntityName="Page"
+                UrlPrefix="@($"{Path}/page")"
+                AddRequested="HandleAddRequested"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.MediumSmall">
+            <Labeled CssClass="status"
+                     Width="6em"
+                     Label="Status">
+                <StatusDisplay Id="@(context.Page.StatusId)"
+                               Name="@(context.Page.StatusName)"
+                               ColorClassFrom="ContentStatusColors.For" />
+            </Labeled>
+            <Labeled Width="6em"
+                     Label="Notebook"
+                     BooleanValue="context.Page.ShowNotebook" />
+            <Labeled Width="6em"
+                     Label="Guide"
+                     BooleanValue="context.Page.ShowGuide" />
+        </Field>
+    </ReadView>
+    <PaneLinks>
+        <PaneLink Href="@($"{Path}/page-{context.Page.Id:D}?pane=sections")"
+                  Text="Sections"
+                  Count="context.Page.SectionCount" />
+    </PaneLinks>
+</ListOrderables>

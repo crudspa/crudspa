@@ -1,0 +1,15 @@
+create table [Content].[VideoElement] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [ElementId] uniqueidentifier not null,
+    [FileId] uniqueidentifier not null,
+    [AutoPlay] bit default(0) not null,
+    [PosterId] uniqueidentifier null,
+    constraint [PK_Content_VideoElement] primary key clustered ([Id]),
+    constraint [FK_Content_VideoElement_Element] foreign key ([ElementId]) references [Content].[Element] ([Id]),
+    constraint [FK_Content_VideoElement_File] foreign key ([FileId]) references [Framework].[VideoFile] ([Id]),
+    constraint [FK_Content_VideoElement_Poster] foreign key ([PosterId]) references [Framework].[ImageFile] ([Id]),
+);

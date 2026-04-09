@@ -1,0 +1,26 @@
+<Padding Size="Padding.Sizes.Medium"
+         Direction="Padding.Directions.Vertical">
+    <BatchSection Title="Comments">
+        <Waiter Model="Model">
+            @if (Model.CommentModels.IsEmpty())
+            {
+                <NoRecords EntityName="comments" />
+            }
+            else
+            {
+                foreach (var commentModel in Model.CommentModels.OrderBy(x => x.Entity!.Posted))
+                {
+                    <CommentEdit Model="commentModel"
+                                 Path="@Path"
+                                 RemoveRequested="id => Model.Remove(id)" />
+                }
+            }
+        </Waiter>
+        <div class="c-stack center c-padding-medium">
+            <ButtonCore Clicked="() => Model.AddComment()"
+                        ButtonStyle="ButtonCore.ButtonStyles.Move"
+                        Text="Add Comment"
+                        IconClass="c-icon-plus" />
+        </div>
+    </BatchSection>
+</Padding>

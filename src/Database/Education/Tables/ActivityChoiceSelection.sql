@@ -1,0 +1,15 @@
+create table [Education].[ActivityChoiceSelection] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [AssignmentId] uniqueidentifier not null,
+    [ChoiceId] uniqueidentifier not null,
+    [Made] datetimeoffset(7) not null,
+    [TargetChoiceId] uniqueidentifier null,
+    constraint [PK_Education_ActivityChoiceSelection] primary key clustered ([Id]),
+    constraint [FK_Education_ActivityChoiceSelection_Assignment] foreign key ([AssignmentId]) references [Education].[ActivityAssignment] ([Id]),
+    constraint [FK_Education_ActivityChoiceSelection_Choice] foreign key ([ChoiceId]) references [Education].[ActivityChoice] ([Id]),
+    constraint [FK_Education_ActivityChoiceSelection_TargetChoice] foreign key ([TargetChoiceId]) references [Education].[ActivityChoice] ([Id]),
+);

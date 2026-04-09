@@ -1,0 +1,1 @@
+create schema [FrameworkCore] authorization [dbo]

@@ -1,0 +1,19 @@
+﻿@typeparam TEnum
+<div class="@(Orientation == Orientations.Horizontal ? "c-wrap top" : "c-stack")">
+    @foreach (var value in Enum.GetValues(typeof(TEnum)))
+    {
+        var enumValue = (TEnum)value;
+        <div class="c-radio @RadioCssClass">
+            <input type="radio"
+                   disabled="@ReadOnly"
+                   checked="@SelectedValue.Equals(enumValue)"
+                   @onchange="() => OnValueChanged(enumValue)"
+                   name="@($"{InstanceId:D}")"
+                   id="@($"{InstanceId:D}-{enumValue}")">
+            <label for="@($"{InstanceId:D}-{enumValue}")"
+                   class="label">
+                @enumValue.ToString()!.InsertSpaces()
+            </label>
+        </div>
+    }
+</div>

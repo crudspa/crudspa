@@ -1,0 +1,72 @@
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+            }
+            else
+            {
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            }
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Name"
+                       Size="Field.Sizes.Large">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="100"
+                             @bind-Value="Model.Entity.Name" />
+                </Field>
+                <Field Label="Status"
+                       Size="Field.Sizes.Unspecified">
+                    <StatusEdit ReadOnly="Model.ReadOnly"
+                                LookupValues="Model.ContentStatusNames"
+                                ColorClassFrom="ContentStatusColors.For"
+                                @bind-Value="Model.Entity.StatusId" />
+                </Field>
+                <Field Label="Grade"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown ReadOnly="Model.ReadOnly"
+                              LookupValues="Model.GradeNames"
+                              @bind-Value="Model.Entity.GradeId" />
+                </Field>
+                <Field Label="Available Start"
+                       Size="Field.Sizes.Tiny">
+                    <DatePicker ReadOnly="Model.ReadOnly"
+                                Format="d"
+                                @bind-Value="Model.Entity.AvailableStart" />
+                </Field>
+                <Field Label="Available End"
+                       Size="Field.Sizes.Tiny">
+                    <DatePicker ReadOnly="Model.ReadOnly"
+                                Format="d"
+                                @bind-Value="Model.Entity.AvailableEnd" />
+                </Field>
+                <Field Label="Category"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown ReadOnly="Model.ReadOnly"
+                              AllowNull="true"
+                              NullText="[None]"
+                              LookupValues="Model.ContentCategoryNames"
+                              @bind-Value="Model.Entity.CategoryId" />
+                </Field>
+                <Field Label="Image"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <ImageUploader ReadOnly="Model.ReadOnly"
+                                   Required="false"
+                                   Width="480"
+                                   ImageFile="Model.Entity.ImageFileFile" />
+                </Field>
+            </Wrapped>
+        </Padding>
+    }
+</Waiter>

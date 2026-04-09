@@ -1,0 +1,242 @@
+@using Crudspa.Education.Common.Shared.Contracts
+<Toolbar>
+    <Left>
+        @if (Model.ReadOnly)
+        {
+            <ButtonEdit Clicked="() => Model.Edit()" />
+        }
+        else
+        {
+            <ButtonGroup>
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            </ButtonGroup>
+        }
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Student"
+                       Size="Field.Sizes.MediumLarge">
+                    <Dropdown LookupValues="Model.StudentNames"
+                              ReadOnly="Model.ReadOnly"
+                              @bind-Value="Model.Entity.StudentId" />
+                </Field>
+                <Field Label="Assessment"
+                       Size="Field.Sizes.Larger">
+                    <Dropdown LookupValues="Model.AssessmentNames"
+                              ReadOnly="Model.ReadOnly"
+                              @bind-Value="Model.Entity.AssessmentId" />
+                </Field>
+                <Field Label="Start After"
+                       Size="Field.Sizes.Small">
+                    <DateTimePicker ReadOnly="Model.ReadOnly"
+                                    @bind-Value="Model.Entity.StartAfter" />
+                </Field>
+                <Field Label="End Before"
+                       Size="Field.Sizes.Small">
+                    <DateTimePicker ReadOnly="Model.ReadOnly"
+                                    @bind-Value="Model.Entity.EndBefore" />
+                </Field>
+            </Wrapped>
+        </Padding>
+    }
+</Waiter>
+@if (!IsNew && Model.ProgressModel.Assessment is not null)
+{
+    <BatchSection Title="Progress">
+
+        <Waiter Model="Model.ProgressModel">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Size="Field.Sizes.MediumLarge">
+                    <Labeled Width="7em"
+                             Label="Start After"
+                             DateTimeOffsetValue="Model.ProgressModel.Assessment.Assignment!.StartAfter" />
+                    <Labeled Width="7em"
+                             Label="End Before"
+                             DateTimeOffsetValue="Model.ProgressModel.Assessment.Assignment.EndBefore" />
+                </Field>
+                <Field Size="Field.Sizes.Unspecified">
+                    <Labeled Width="7em"
+                             Label="Started"
+                             DateTimeOffsetValue="Model.ProgressModel.Assessment.Assignment!.Started" />
+                    <Labeled Width="7em"
+                             Label="Completed"
+                             DateTimeOffsetValue="Model.ProgressModel.Assessment.Assignment.Completed" />
+                    <Labeled Width="7em"
+                             Label="Terminated"
+                             DateTimeOffsetValue="Model.ProgressModel.Assessment.Assignment.Terminated" />
+                    <Labeled Width="7em"
+                             Label="Parts"
+                             StringValue="@Model.ProgressModel.Assessment.Assignment.PartsProgress" />
+                    <Labeled Width="7em"
+                             Label="Questions"
+                             StringValue="@Model.ProgressModel.Assessment.Assignment.QuestionsProgress" />
+                </Field>
+            </Wrapped>
+        </Waiter>
+
+    </BatchSection>
+
+    @foreach (var part in Model.ProgressModel.Assessment.VocabParts)
+    {
+        <BatchSection Title="@($"Vocab | {part.Title}")">
+            @foreach (var question in part.VocabQuestions)
+            {
+                <div class="cec-vocab-question c-padding-tiny-top">
+                    <div class="question c-padding-small-hor">
+                        <div class="number">
+                            <p>
+                                @(question.Number).
+                                @if (question.IsPreview == true)
+                                {
+                                    <span>
+                                        <em>(Preview)</em>
+                                    </span>
+                                }
+                            </p>
+                        </div>
+                        <div class="text">
+                            <p>Click on the two words that best go with the word <span class="word">@(question.Word)</span>.</p>
+                        </div>
+                    </div>
+                    <div class="choices">
+                        @foreach (var vocabChoice in question.VocabChoices)
+                        {
+                            <button>
+                                <div class="choice c-button @(vocabChoice.StateClass)">
+                                    <div class="text">@(vocabChoice.Word)</div>
+                                    @if (vocabChoice.State == AssessmentChoiceStates.Invalid)
+                                    {
+                                        <div class="cec-completion-status tight">
+                                            <img src="/api/content/display/images/error"
+                                                 alt="Incorrect" />
+                                        </div>
+                                    }
+                                    @if (vocabChoice.State == AssessmentChoiceStates.Valid)
+                                    {
+                                        <div class="cec-completion-status tight">
+                                            <img src="/api/content/display/images/check-filled"
+                                                 alt="Correct" />
+                                        </div>
+                                    }
+                                </div>
+                            </button>
+                        }
+                    </div>
+
+                </div>
+            }
+        </BatchSection>
+    }
+
+    @foreach (var part in Model.ProgressModel.Assessment.ListenParts)
+    {
+        <BatchSection Title="@($"Listen | {part.Title}")">
+            @foreach (var question in part.ListenQuestions)
+            {
+                <div class="cec-assessment-question c-padding-tiny-top">
+                    <div class="question c-padding-small-hor">
+                        <div class="number">
+                            <p>
+                                @(question.Number).
+                                @if (question.IsPreview == true)
+                                {
+                                    <span>
+                                        <em>(Preview)</em>
+                                    </span>
+                                }
+                            </p>
+                        </div>
+                        <div class="text">
+                            <UserHtml Html="@(question.Text!)" />
+                        </div>
+                    </div>
+                    <div class="choices">
+                        @foreach (var listenChoice in question.ListenChoices)
+                        {
+                            <div class="choice">
+                                <div class="letter">@(listenChoice.Ordinal.GetValueOrDefault().ToLowercaseLetter()).</div>
+                                <div class="choice c-button @(listenChoice.StateClass)">
+                                    <div class="text">@(listenChoice.Text)</div>
+                                    @if (listenChoice.State == AssessmentChoiceStates.Invalid)
+                                    {
+                                        <div class="cec-completion-status tight">
+                                            <img src="/api/content/display/images/error"
+                                                 alt="Incorrect" />
+                                        </div>
+                                    }
+                                    @if (listenChoice.State == AssessmentChoiceStates.Valid)
+                                    {
+                                        <div class="cec-completion-status tight">
+                                            <img src="/api/content/display/images/check-filled"
+                                                 alt="Correct" />
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            }
+        </BatchSection>
+    }
+
+    @foreach (var part in Model.ProgressModel.Assessment.ReadParts)
+    {
+        <BatchSection Title="@($"Read | {part.Title}")">
+            @foreach (var question in part.ReadQuestions)
+            {
+                <div class="cec-assessment-question c-padding-tiny-top">
+                    <div class="question c-padding-small-hor">
+                        <div class="number">
+                            <p>
+                                @(question.Number).
+                                @if (question.IsPreview == true)
+                                {
+                                    <span>
+                                        <em>(Preview)</em>
+                                    </span>
+                                }
+                            </p>
+                        </div>
+                        <div class="text">
+                            <UserHtml Html="@(question.Text!)" />
+                        </div>
+                    </div>
+                    <div class="choices">
+                        @foreach (var readChoice in question.ReadChoices)
+                        {
+                            <div class="choice">
+                                <div class="letter">@(readChoice.Ordinal.GetValueOrDefault().ToLowercaseLetter()).</div>
+                                <div class="c-button choice-button @(readChoice.StateClass)">
+                                    <div class="text">@(readChoice.Text)</div>
+                                    @if (readChoice.State == AssessmentChoiceStates.Invalid)
+                                    {
+                                        <div class="cec-completion-status tight">
+                                            <img src="/api/content/display/images/error"
+                                                 alt="Incorrect" />
+                                        </div>
+                                    }
+                                    @if (readChoice.State == AssessmentChoiceStates.Valid)
+                                    {
+                                        <div class="cec-completion-status tight">
+                                            <img src="/api/content/display/images/check-filled"
+                                                 alt="Correct" />
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            }
+        </BatchSection>
+    }
+}

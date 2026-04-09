@@ -1,0 +1,83 @@
+@typeparam T
+@if (Model.Reordering)
+{
+    <Toolbar>
+        <Left>
+            <ButtonGroup>
+                <ButtonSave Clicked="() => Model.SaveReordering()" />
+                <ButtonCancel Clicked="() => Model.CancelReordering()" />
+            </ButtonGroup>
+            <Padding Direction="Padding.Directions.Horizontal"
+                     Size="Padding.Sizes.Small">
+                <div class="c-stretched-vertically centered">
+                    <em>Save your changes once reordering is complete.</em>
+                </div>
+            </Padding>
+        </Left>
+    </Toolbar>
+}
+else
+{
+    <Toolbar>
+        <Left>
+            @if (ShowFilter)
+            {
+                <Field Size="Field.Sizes.Medium"
+                       Padding="Field.Paddings.None">
+                    <TextBox Placeholder="Filter..."
+                             Value="@Model.Filter"
+                             ValueChanged="filter => Model.HandleFilterChanged(filter)" />
+                </Field>
+            }
+        </Left>
+        <Right>
+            <ButtonGroup>
+                <ButtonAdd EntityName="@EntityName"
+                           Clicked="() => Model.Create()" />
+                <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Create">
+                    <MenuItem Type="MenuItem.Types.Refresh"
+                              Clicked="() => Model.Refresh()" />
+                    <MenuItem Type="MenuItem.Types.Reorder"
+                              Clicked="() => Model.Reorder()" />
+                </ContextMenu>
+            </ButtonGroup>
+        </Right>
+    </Toolbar>
+}
+<Waiter Model="Model">
+    @if (Modals is not null)
+    {
+        @Modals
+    }
+    @if (Model.Forms.IsEmpty())
+    {
+        <NoRecords EntityName="@EntityName.PluralizeNaively().ToLower()" />
+    }
+    else
+    {
+        @foreach (var form in SortedForms)
+        {
+            <Form Model="form"
+                  @key="form.Entity"
+                  Title="@form.Entity.Name"
+                  SaveRequested="() => SaveRequested.InvokeAsync(form.Entity.Id)"
+                  CancelRequested="() => CancelRequested.InvokeAsync(form.Entity.Id)"
+                  DeleteRequested="() => DeleteRequested.InvokeAsync(form.Entity.Id)"
+                  MoveUpRequested="() => MoveUpRequested.InvokeAsync(form.Entity.Id)"
+                  MoveDownRequested="() => MoveDownRequested.InvokeAsync(form.Entity.Id)"
+                  ReadViewContainer="ReadViewContainer"
+                  Tight="Tight">
+                <ReadView>
+                    @ReadView(form.Entity)
+                </ReadView>
+                <EditView>
+                    @EditView(form.Entity)
+                </EditView>
+            </Form>
+            @if (Children is not null && !form.IsNew)
+            {
+                @Children(form.Entity)
+            }
+        }
+    }
+</Waiter>

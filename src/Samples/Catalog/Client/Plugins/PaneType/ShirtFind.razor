@@ -1,0 +1,80 @@
+<Waiter Model="Model">
+    <Filters>
+        <Fields>
+            <Field Label="Search"
+                   Size="Field.Sizes.Medium">
+                <SearchTextBox @bind-Value="Model.Search.Text" />
+            </Field>
+            <Field Label="Brand"
+                   Size="Field.Sizes.Medium">
+                <MultiSelect LookupValues="Model.BrandNames"
+                             @bind-SelectedValues="Model.Search.Brands" />
+            </Field>
+            <Sorter Sorts="Model.Sorts"
+                    @bind-Selected="Model.Search.Sort.Field"
+                    @bind-Ascending="Model.Search.Sort.Ascending" />
+        </Fields>
+        <Buttons>
+            <ButtonAdd EntityName="Shirt"
+                       Clicked="AddNew" />
+            <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Create">
+                <MenuItem Type="MenuItem.Types.Reset"
+                          Clicked="() => Model.Reset()" />
+                <MenuItem Type="MenuItem.Types.Refresh"
+                          Clicked="() => Model.Refresh()" />
+            </ContextMenu>
+        </Buttons>
+    </Filters>
+</Waiter>
+@if (Model.Cards.IsEmpty())
+{
+    <NoRecords EntityName="shirts" />
+}
+else
+{
+    @foreach (var card in Model.Cards)
+    {
+        <Card Model="card"
+              Title="@card.Entity.Name"
+              SupportsDelete="true"
+              DeleteRequested="() => Model.Delete(card.Entity.Id)">
+            <Values>
+                <Field Size="Field.Sizes.Unspecified">
+                    <Image ImageFile="card.Entity.HeroImageFile"
+                           Width="160" />
+                </Field>
+                <Field Size="Field.Sizes.Star">
+                    <Labeled Width="5.5em"
+                             Label="Brand"
+                             StringValue="@card.Entity.BrandName" />
+                    <Labeled Width="5.5em"
+                             Label="Fit"
+                             StringValue="@card.Entity.Fit.GetLabel()" />
+                    <Labeled Width="5.5em"
+                             Label="Material"
+                             StringValue="@card.Entity.Material" />
+                    <Labeled Width="5.5em"
+                             Label="Price"
+                             SingleValue="@card.Entity.Price"
+                             NumberFormat="#,##0.00"
+                             ValuePrefix="$" />
+                </Field>
+            </Values>
+            <PaneLinks>
+                <PaneLink Href="@($"{Path}/shirt-{card.Entity.Id:D}?pane=options")"
+                          Text="Options"
+                          Count="card.Entity.ShirtOptionCount" />
+            </PaneLinks>
+            <Buttons>
+                <ButtonView Href="@($"{Path}/shirt-{card.Entity.Id:D}")" />
+                <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.View">
+                    <MenuItem Type="MenuItem.Types.Delete"
+                              Clicked="() => Model.ShowConfirmation(card.Entity.Id)" />
+                </ContextMenu>
+            </Buttons>
+        </Card>
+    }
+
+    <Pager Paged="Model.Search.Paged"
+           PageNumberChanged="Model.HandlePageNumberChanged" />
+}

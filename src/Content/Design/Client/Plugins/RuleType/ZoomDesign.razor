@@ -1,0 +1,11 @@
+﻿@using Crudspa.Framework.Core.Shared.Contracts.Config.RuleType
+<Field Label="Level"
+       Size="Field.Sizes.Tiny">
+    <select @bind="Config.Level">
+        <option value="@ZoomConfig.Levels.Smaller">@nameof(ZoomConfig.Levels.Smaller)</option>
+        <option value="@ZoomConfig.Levels.Small">@nameof(ZoomConfig.Levels.Small)</option>
+        <option value="@ZoomConfig.Levels.Regular">@nameof(ZoomConfig.Levels.Regular)</option>
+        <option value="@ZoomConfig.Levels.Large">@nameof(ZoomConfig.Levels.Large)</option>
+        <option value="@ZoomConfig.Levels.Larger">@nameof(ZoomConfig.Levels.Larger)</option>
+    </select>
+</Field>

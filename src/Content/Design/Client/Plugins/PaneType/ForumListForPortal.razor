@@ -1,0 +1,27 @@
+<ListOrderables Model="Model"
+                T="ForumModel"
+                EntityName="Forum"
+                UrlPrefix="@($"{Path}/forum")"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Small">
+            <Image ImageFile="context.Forum.ImageFile"
+                   Width="160" />
+        </Field>
+        <Field Size="Field.Sizes.Full">
+            <LabeledHtml Label="Description"
+                         HtmlValue="@context.Forum.Description" />
+        </Field>
+        <Field Size="Field.Sizes.Unspecified">
+            <Labeled CssClass="status"
+                     Width="8em"
+                     Label="Status">
+                <StatusDisplay Id="@context.Forum.StatusId"
+                               Name="@context.Forum.StatusName"
+                               ColorClassFrom="ContentStatusColors.For" />
+            </Labeled>
+        </Field>
+    </ReadView>
+</ListOrderables>

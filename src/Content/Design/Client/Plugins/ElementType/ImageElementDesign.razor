@@ -1,0 +1,17 @@
+﻿<Field Label="Image"
+       Container="Field.Containers.Div">
+    <ImageUploader ReadOnly="ReadOnly"
+                   Required="true"
+                   Width="480"
+                   ImageFile="ImageElement.FileFile" />
+</Field>
+<Field Label="Hyperlink URL"
+       Size="Field.Sizes.Full">
+    <LabelActions>
+        <div class="parenthetical">optional</div>
+    </LabelActions>
+    <ChildContent>
+        <TextBox ReadOnly="ReadOnly"
+                 @bind-Value="ImageElement.HyperlinkUrl" />
+    </ChildContent>
+</Field>

@@ -1,0 +1,69 @@
+<Many Model="Model"
+      T="ClassRecordingModel"
+      EntityName="Recording"
+      SaveRequested="id => Model.Save(id)"
+      CancelRequested="id => Model.Cancel(id)"
+      DeleteRequested="id => Model.Delete(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Large">
+            <AudioPlayer AudioFile="context.ClassRecording.AudioFileFile"
+                         Control="AudioPlayer.Controls.Native" />
+            <Image ImageFile="context.ClassRecording.ImageFile"
+                   Width="240" />
+        </Field>
+        <Field Size="Field.Sizes.Unspecified">
+            <Labeled Width="6em"
+                     Label="Subject"
+                     StringValue="@context.ClassRecording.CategoryName" />
+            <Labeled Width="6em"
+                     Label="Unit"
+                     IntegerValue="@context.ClassRecording.Unit" />
+            <Labeled Width="6em"
+                     Label="Lesson"
+                     IntegerValue="@context.ClassRecording.Lesson" />
+            <LabeledHtml Label="Notes"
+                         HtmlValue="@context.ClassRecording.TeacherNotes" />
+        </Field>
+    </ReadView>
+    <EditView>
+        <Wrapped Alignment="Wrapped.Alignments.Top">
+            <Field Label="Audio File"
+                   Size="Field.Sizes.Large"
+                   Container="Field.Containers.Div">
+                <AudioUploader ReadOnly="@false"
+                               Required="false"
+                               AudioFile="context.ClassRecording.AudioFileFile" />
+            </Field>
+            <Field Label="Image"
+                   Size="Field.Sizes.Larger"
+                   Container="Field.Containers.Div">
+                <ImageUploader ReadOnly="@false"
+                               Required="false"
+                               ImageFile="context.ClassRecording.ImageFile" />
+            </Field>
+            <Field Label="Subject"
+                   Size="Field.Sizes.Small">
+                <Dropdown ReadOnly="@false"
+                          LookupValues="Model.ContentCategoryNames"
+                          @bind-Value="context.ClassRecording.CategoryId" />
+            </Field>
+            <Field Label="Unit"
+                   Size="Field.Sizes.Min">
+                <NumericTextBox ReadOnly="@false"
+                                @bind-Value="context.ClassRecording.Unit" />
+            </Field>
+            <Field Label="Lesson"
+                   Size="Field.Sizes.Min">
+                <NumericTextBox ReadOnly="@false"
+                                @bind-Value="context.ClassRecording.Lesson" />
+            </Field>
+            <Field Label="Notes"
+                   Size="Field.Sizes.Full"
+                   Container="Field.Containers.Div">
+                <HtmlEditor ReadOnly="@false"
+                            EditorHeight="16em"
+                            @bind-Value="context.ClassRecording.TeacherNotes" />
+            </Field>
+        </Wrapped>
+    </EditView>
+</Many>

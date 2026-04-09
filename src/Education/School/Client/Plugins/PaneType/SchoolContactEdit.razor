@@ -1,0 +1,51 @@
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+                @if (Model.Entity?.User is not null && Model.Entity.User.MaySignIn == true)
+                {
+                    <ButtonCore Text="Send Access Code"
+                                IconClass="c-icon-paper-plane"
+                                Clicked="() => Model.SendAccessCode()" />
+                }
+            }
+            else
+            {
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            }
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <ContactEdit ReadOnly="Model.ReadOnly"
+                         Contact="Model.Entity.Contact"
+                         User="Model.Entity.User">
+                <Wrapped Alignment="Wrapped.Alignments.Top">
+                    <Field Label="Title"
+                           Size="Field.Sizes.Unspecified">
+                        <Dropdown ReadOnly="Model.ReadOnly"
+                                  LookupValues="Model.TitleNames"
+                                  @bind-Value="Model.Entity.TitleId" />
+                    </Field>
+                </Wrapped>
+                <Wrapped>
+                    <Field Label="Options"
+                           Container="Field.Containers.Div">
+                        <Wrapped NoWrap="true">
+                            <Checkbox Label="Test Account"
+                                      ReadOnly="Model.ReadOnly"
+                                      @bind-Value="Model.Entity.TestAccount" />
+                        </Wrapped>
+                    </Field>
+                </Wrapped>
+            </ContactEdit>
+        </Padding>
+    }
+</Waiter>

@@ -1,0 +1,57 @@
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+            }
+            else
+            {
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            }
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Title"
+                       Size="Field.Sizes.Large">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="100"
+                             @bind-Value="Model.Entity.Title" />
+                </Field>
+                <Field Label="Preview Instructions Text"
+                       Size="Field.Sizes.Full"
+                       Container="Field.Containers.Div">
+                    <HtmlEditor ReadOnly="Model.ReadOnly"
+                                @bind-Value="Model.Entity.PreviewInstructionsText" />
+                </Field>
+                <Field Label="Preview Instructions Audio"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <AudioUploader ReadOnly="Model.ReadOnly"
+                                   Required="false"
+                                   AudioFile="Model.Entity.PreviewInstructionsAudioFileFile" />
+                </Field>
+                <Field Label="Questions Instructions Text"
+                       Size="Field.Sizes.Full"
+                       Container="Field.Containers.Div">
+                    <HtmlEditor ReadOnly="Model.ReadOnly"
+                                @bind-Value="Model.Entity.QuestionsInstructionsText" />
+                </Field>
+                <Field Label="Questions Instructions Audio"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <AudioUploader ReadOnly="Model.ReadOnly"
+                                   Required="false"
+                                   AudioFile="Model.Entity.QuestionsInstructionsAudioFileFile" />
+                </Field>
+            </Wrapped>
+        </Padding>
+    }
+</Waiter>

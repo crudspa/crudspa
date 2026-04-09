@@ -1,0 +1,15 @@
+create table [Education].[StudentAssessment] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [StudentId] uniqueidentifier not null,
+    [AssessmentTypeId] uniqueidentifier not null,
+    [AssessmentLevelId] uniqueidentifier not null,
+    [Score] nvarchar(100) null,
+    constraint [PK_Education_StudentAssessment] primary key clustered ([Id]),
+    constraint [FK_Education_StudentAssessment_Student] foreign key ([StudentId]) references [Education].[Student] ([Id]),
+    constraint [FK_Education_StudentAssessment_AssessmentType] foreign key ([AssessmentTypeId]) references [Education].[AssessmentType] ([Id]),
+    constraint [FK_Education_StudentAssessment_AssessmentLevel] foreign key ([AssessmentLevelId]) references [Education].[AssessmentLevel] ([Id]),
+);

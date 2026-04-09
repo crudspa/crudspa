@@ -1,0 +1,42 @@
+@if (PreviewPortalId.HasValue)
+{
+    <div class="c-hide">
+        <ThemePreview PortalId="PreviewPortalId"
+                      Version="PreviewVersion"
+                      Loaded="HandleThemeLoaded"
+                      @key="PreviewVersion">
+            <div></div>
+        </ThemePreview>
+    </div>
+}
+
+<Waiter Model="ThemeModel">
+    <ListOrderables Model="Model"
+                    T="SectionListModel"
+                    EntityName="Section"
+                    UrlPrefix="@($"{EffectiveSectionPathPrefix}/section")"
+                    DeleteRequested="id => Model.Delete(id)"
+                    MoveUpRequested="id => Model.MoveUp(id)"
+                    MoveDownRequested="id => Model.MoveDown(id)"
+                    ReadViewContainer="Card<SectionListModel>.Containers.None"
+                    Tight="true">
+        <ReadView>
+            @if (PreviewPortalId.HasValue)
+            {
+                @if (ThemeReady)
+                {
+                    <ThemePreview PortalId="PreviewPortalId"
+                                  Primary="false">
+                        <SectionDisplay Section="context.Section"
+                                        @key="context.Section" />
+                    </ThemePreview>
+                }
+            }
+            else
+            {
+                <SectionDisplay Section="context.Section"
+                                @key="context.Section" />
+            }
+        </ReadView>
+    </ListOrderables>
+</Waiter>

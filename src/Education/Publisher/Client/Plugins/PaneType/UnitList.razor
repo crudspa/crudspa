@@ -1,0 +1,76 @@
+<ListOrderables Model="Model"
+                T="UnitModel"
+                EntityName="Unit"
+                UrlPrefix="@($"{Path}/unit")"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)"
+                ShowFilter="true">
+    <Modals>
+        <Modal Model="Model.CopyModel"
+               Title="Copy Unit"
+               Width="32em"
+               TopMargin="1em">
+            <Content>
+                <Wrapped>
+                    <Field Label="Title"
+                           Size="Field.Sizes.Large">
+                        <TextBox MaxLength="75"
+                                 @bind-Value="Model.CopyModel.Copy.NewName" />
+                    </Field>
+                </Wrapped>
+            </Content>
+            <Buttons>
+                <ButtonOk Clicked="() => Model.Copy()" />
+                <ButtonCancel Clicked="() => Model.CopyModel.Hide()" />
+            </Buttons>
+        </Modal>
+    </Modals>
+    <ReadView>
+        <Field Size="Field.Sizes.Unspecified">
+            <Image ImageFile="context.Unit.ImageFile"
+                   Width="160" />
+        </Field>
+        <Field Size="Field.Sizes.Unspecified">
+            <Labeled CssClass="status"
+                     Width="7em"
+                     Label="Status">
+                <StatusDisplay Id="@context.Unit.StatusId"
+                               Name="@context.Unit.StatusName"
+                               ColorClassFrom="ContentStatusColors.For" />
+            </Labeled>
+            <Labeled Width="7em"
+                     Label="Grade"
+                     StringValue="@context.Unit.GradeName" />
+            <Labeled Width="7em"
+                     Label="Parent"
+                     StringValue="@context.Unit.ParentTitle" />
+            <Labeled Width="7em"
+                     Label="Requires"
+                     StringValue="@context.Unit.RequiresAchievementTitle" />
+            <Labeled Width="7em"
+                     Label="Generates"
+                     StringValue="@context.Unit.GeneratesAchievementTitle" />
+            <Labeled Width="7em"
+                     Label="Treatment"
+                     BooleanValue="@context.Unit.Treatment" />
+            <Labeled Width="7em"
+                     Label="Control"
+                     BooleanValue="@context.Unit.Control" />
+        </Field>
+    </ReadView>
+    <PaneLinks>
+        <PaneLink Href="@($"{Path}/unit-{context.Unit.Id:D}?pane=lessons")"
+                  Text="Lessons"
+                  Count="context.Unit.LessonCount" />
+        <PaneLink Href="@($"{Path}/unit-{context.Unit.Id:D}?pane=books")"
+                  Text="Books"
+                  Count="context.Unit.UnitBookCount" />
+    </PaneLinks>
+    <CardMenuItems>
+        <MenuItem Type="MenuItem.Types.Custom"
+                  Text="Copy..."
+                  Icon="c-icon-copy"
+                  Clicked="() => Model.StartCopy(context.Id)" />
+    </CardMenuItems>
+</ListOrderables>

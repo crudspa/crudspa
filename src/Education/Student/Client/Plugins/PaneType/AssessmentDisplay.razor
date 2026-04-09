@@ -1,0 +1,756 @@
+@using Crudspa.Education.Common.Shared.Contracts
+<div class="c-page c-overlay-parent ces-pane-flow ces-assessment-display">
+
+<div class="ces-progress-meter">
+    <div class="foreground"
+         style="width: @($"{Model.CompletionPercentage:N2}")%;">
+    </div>
+</div>
+
+<Padding Size="Padding.Sizes.Medium">
+@switch (Model.State)
+{
+    case AssessmentStates.VocabPreview:
+
+        @if (Model.VocabPartModel is not null)
+        {
+            <div class="c-nowrap">
+                <UserHtml Html="@(Model.VocabPartModel.VocabPart.PreviewInstructionsText!)"
+                          CssClass="star" />
+                <Padding Size="Padding.Sizes.Small">
+                    <AudioPlayer AudioFile="Model.VocabPartModel.VocabPart.PreviewInstructionsAudioFileFile"
+                                 AutoPlay="true"
+                                 PlayText="Instructions"
+                                 StopText="Instructions"
+                                 PlayIcon="c-icon-volume-high"
+                                 MediaPlayed="HandleAudioPlayed"
+                                 @key="Model.VocabPartModel.VocabPart.PreviewInstructionsAudioFileFile.Id" />
+                </Padding>
+            </div>
+
+            @foreach (var vocabQuestionModel in Model.VocabPartModel.PreviewQuestions)
+            {
+                <div class="cec-vocab-question">
+                    <div class="question">
+                        <div class="number">
+                            <p>@(vocabQuestionModel.Number).</p>
+                        </div>
+                        <div class="text">
+                            <p>Click on the two words that best go with the word <span class="word">@(vocabQuestionModel.VocabQuestion.Word)</span>.</p>
+                        </div>
+                        <AudioPlayer AudioFile="vocabQuestionModel.VocabQuestion.AudioFileFile"
+                                     Compact="true"
+                                     PlayIcon="c-icon-volume-high"
+                                     MediaPlayed="HandleAudioPlayed"
+                                     @key="vocabQuestionModel.VocabQuestion.AudioFileFile.Id" />
+                    </div>
+                    <div class="choices">
+                        @foreach (var vocabChoiceModel in vocabQuestionModel.ChoiceModels)
+                        {
+                            <div class="c-button-group">
+                                <button @onclick="() => vocabQuestionModel.SelectChoice(vocabChoiceModel.VocabChoice.Id)">
+                                    <div class="choice c-button @(vocabChoiceModel.StateClass)">
+                                        <div class="text">@(vocabChoiceModel.VocabChoice.Word)</div>
+                                        @if (vocabChoiceModel.State == AssessmentChoiceStates.Invalid)
+                                        {
+                                            <div class="cec-completion-status tight">
+                                                <img src="/api/content/display/images/error"
+                                                     alt="Incorrect" />
+                                            </div>
+                                        }
+                                        @if (vocabChoiceModel.State == AssessmentChoiceStates.Valid)
+                                        {
+                                            <div class="cec-completion-status tight">
+                                                <img src="/api/content/display/images/check-filled"
+                                                     alt="Correct" />
+                                            </div>
+                                        }
+                                    </div>
+                                </button>
+                                @if (vocabChoiceModel.VocabChoice.AudioFileFile.Id is not null)
+                                {
+                                    <AudioPlayer AudioFile="vocabChoiceModel.VocabChoice.AudioFileFile"
+                                                 PlayText="@null"
+                                                 StopText="@null"
+                                                 PlayIcon="c-icon-volume-high"
+                                                 StopIcon="c-icon-volume-high"
+                                                 MediaPlayed="HandleAudioPlayed"
+                                                 @key="vocabChoiceModel.VocabChoice.AudioFileFile.Id" />
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+
+            <Alerts Items="Model.Alerts" />
+
+            @if (Model.VocabPartModel.State != AssessmentPartStates.Valid)
+            {
+                <div class="c-stack center c-padding-medium-vert">
+                    <ButtonCore ButtonStyle="ButtonCore.ButtonStyles.Primary"
+                                Text="Check answers"
+                                Clicked="() => Model.CheckVocabPreview()" />
+                </div>
+            }
+            else
+            {
+                <div class="c-stack center c-padding-medium-vert">
+                    <ButtonCore ButtonStyle="ButtonCore.ButtonStyles.Primary"
+                                IconPosition="ButtonCore.IconPositions.Right"
+                                Text="Next"
+                                IconClass="c-icon-chevron-right"
+                                Clicked="() => Model.AdvanceVocabPreview()" />
+                </div>
+            }
+        }
+
+        break;
+
+    case AssessmentStates.VocabQuestions:
+
+        @if (Model.VocabPartModel is not null)
+        {
+            <div class="c-nowrap">
+                <UserHtml Html="@(Model.VocabPartModel.VocabPart.QuestionsInstructionsText!)"
+                          CssClass="star" />
+                <Padding Size="Padding.Sizes.Small">
+                    @if (Model.VocabPartModel.VocabPart.QuestionsInstructionsAudioFileFile.Id is not null)
+                    {
+                        <AudioPlayer AudioFile="Model.VocabPartModel.VocabPart.QuestionsInstructionsAudioFileFile"
+                                     AutoPlay="true"
+                                     PlayText="Instructions"
+                                     StopText="Instructions"
+                                     PlayIcon="c-icon-volume-high"
+                                     MediaPlayed="HandleAudioPlayed"
+                                     @key="Model.VocabPartModel.VocabPart.QuestionsInstructionsAudioFileFile.Id" />
+                    }
+                </Padding>
+            </div>
+
+            @foreach (var vocabQuestionModel in Model.VocabPartModel.QuestionCollection.Current)
+            {
+                <div class="cec-vocab-question @(vocabQuestionModel.State == AssessmentQuestionStates.Invalid ? "invalid" : String.Empty)">
+                    <div class="question">
+                        <div class="number">
+                            <p>@(vocabQuestionModel.Number).</p>
+                        </div>
+                        <div class="text">
+                            <p>Click on the two words that best go with the word <span class="word">@(vocabQuestionModel.VocabQuestion.Word)</span>.</p>
+                        </div>
+                        @if (vocabQuestionModel.VocabQuestion.AudioFileFile.Id is not null)
+                        {
+                            <AudioPlayer AudioFile="vocabQuestionModel.VocabQuestion.AudioFileFile"
+                                         Compact="true"
+                                         PlayIcon="c-icon-volume-high"
+                                         MediaPlayed="HandleAudioPlayed"
+                                         @key="vocabQuestionModel.VocabQuestion.AudioFileFile.Id" />
+                        }
+                    </div>
+                    <div class="choices">
+                        @foreach (var vocabChoiceModel in vocabQuestionModel.ChoiceModels)
+                        {
+                            <div class="c-button-group">
+                                <button @onclick="() => vocabQuestionModel.SelectChoice(vocabChoiceModel.VocabChoice.Id)">
+                                    <div class="choice c-button @(vocabChoiceModel.StateClass)">
+                                        <div class="text">@(vocabChoiceModel.VocabChoice.Word)</div>
+                                    </div>
+                                </button>
+                                @if (vocabChoiceModel.VocabChoice.AudioFileFile.Id is not null)
+                                {
+                                    <AudioPlayer AudioFile="vocabChoiceModel.VocabChoice.AudioFileFile"
+                                                 PlayText="@null"
+                                                 StopText="@null"
+                                                 PlayIcon="c-icon-volume-high"
+                                                 StopIcon="c-icon-volume-high"
+                                                 MediaPlayed="HandleAudioPlayed"
+                                                 @key="vocabChoiceModel.VocabChoice.AudioFileFile.Id" />
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+
+            <Alerts Items="Model.Alerts" />
+
+            <div class="c-stack center c-padding-medium-vert">
+                <ButtonCore ButtonStyle="ButtonCore.ButtonStyles.Primary"
+                            IconPosition="ButtonCore.IconPositions.Right"
+                            Text="Next"
+                            IconClass="c-icon-chevron-right"
+                            Clicked="() => Model.AdvanceVocabQuestions()" />
+            </div>
+        }
+
+        break;
+
+    case AssessmentStates.ListenPassage:
+
+        @if (Model.ListenPartModel is not null)
+        {
+            <div class="c-nowrap">
+                <UserHtml Html="@(Model.ListenPartModel.ListenPart.PassageInstructionsText!)"
+                          CssClass="star" />
+                @if (Model.ListenPartModel.ListenPart.PassageInstructionsAudioFileFile.Id is not null)
+                {
+                    <Padding Size="Padding.Sizes.Small">
+                        <AudioPlayer AudioFile="Model.ListenPartModel.ListenPart.PassageInstructionsAudioFileFile"
+                                     AutoPlay="true"
+                                     PlayText="Instructions"
+                                     StopText="Instructions"
+                                     PlayIcon="c-icon-volume-high"
+                                     MediaPlayed="HandleAudioPlayed"
+                                     @key="Model.ListenPartModel.ListenPart.PassageInstructionsAudioFileFile.Id" />
+                    </Padding>
+                }
+            </div>
+            <div class="c-stack center">
+                <Padding Size="Padding.Sizes.Small">
+                    <AudioPlayer AudioFile="Model.ListenPartModel.ListenPart.PassageAudioFileFile"
+                                 PlayText="Listen to passage"
+                                 PlayIcon="c-icon-volume-high"
+                                 MediaPlayed="HandleAudioPlayed"
+                                 @key="Model.ListenPartModel.ListenPart.PassageAudioFileFile.Id" />
+                </Padding>
+                <ButtonCore ButtonStyle="ButtonCore.ButtonStyles.Primary"
+                            IconPosition="ButtonCore.IconPositions.Right"
+                            Text="Next"
+                            IconClass="c-icon-chevron-right"
+                            Clicked="() => Model.AdvanceListenPassage()" />
+            </div>
+        }
+
+        break;
+
+    case AssessmentStates.ListenPreview:
+
+        @if (Model.ListenPartModel is not null)
+        {
+            <div class="c-nowrap">
+                <UserHtml Html="@(Model.ListenPartModel.ListenPart.PreviewInstructionsText!)"
+                          CssClass="star" />
+                <Padding Size="Padding.Sizes.Small">
+                    @if (Model.ListenPartModel.ListenPart.PreviewInstructionsAudioFileFile.Id is not null)
+                    {
+                        <AudioPlayer AudioFile="Model.ListenPartModel.ListenPart.PreviewInstructionsAudioFileFile"
+                                     AutoPlay="true"
+                                     PlayText="Instructions"
+                                     StopText="Instructions"
+                                     PlayIcon="c-icon-volume-high"
+                                     MediaPlayed="HandleAudioPlayed"
+                                     @key="Model.ListenPartModel.ListenPart.PreviewInstructionsAudioFileFile.Id" />
+                    }
+                </Padding>
+            </div>
+
+            @foreach (var listenQuestionModel in Model.ListenPartModel.PreviewQuestions)
+            {
+                <div class="cec-assessment-question">
+                    <div class="question">
+                        <div class="number">
+                            <p>@(listenQuestionModel.Number).</p>
+                        </div>
+                        <div class="text">
+                            <UserHtml Html="@(listenQuestionModel.ListenQuestion.Text!)" />
+                        </div>
+                        @if (listenQuestionModel.ListenQuestion.AudioFileFile.Id is not null)
+                        {
+                            <AudioPlayer AudioFile="listenQuestionModel.ListenQuestion.AudioFileFile"
+                                         Compact="true"
+                                         PlayIcon="c-icon-volume-high"
+                                         MediaPlayed="HandleAudioPlayed"
+                                         @key="listenQuestionModel.ListenQuestion.AudioFileFile.Id" />
+                        }
+                    </div>
+                    @if (listenQuestionModel.ListenQuestion.ImageFileFile.Id is not null)
+                    {
+                        <div class="c-margin-large"
+                             style="max-width: 200px;">
+                            <Image ImageFile="listenQuestionModel.ListenQuestion.ImageFileFile"
+                                   Width="200"
+                                   @key="listenQuestionModel.ListenQuestion.ImageFileFile.Id" />
+                        </div>
+                    }
+                    <div class="choices">
+                        @foreach (var listenChoiceModel in listenQuestionModel.ChoiceModels)
+                        {
+                            <div class="c-button-group">
+                                <button @onclick="() => listenQuestionModel.SelectChoice(listenChoiceModel.ListenChoice.Id)">
+                                    <div class="choice-button c-button @(listenChoiceModel.StateClass)">
+                                        <div class="text">@listenChoiceModel.ListenChoice.Text</div>
+                                        @if (listenChoiceModel.State == AssessmentChoiceStates.Invalid)
+                                        {
+                                            <div class="cec-completion-status tight">
+                                                <img src="/api/content/display/images/error"
+                                                     alt="Incorrect" />
+                                            </div>
+                                        }
+                                        @if (listenChoiceModel.State == AssessmentChoiceStates.Valid)
+                                        {
+                                            <div class="cec-completion-status tight">
+                                                <img src="/api/content/display/images/check-filled"
+                                                     alt="Correct" />
+                                            </div>
+                                        }
+                                    </div>
+                                </button>
+                                @if (listenChoiceModel.ListenChoice.AudioFileFile.Id.HasSomething())
+                                {
+                                    <AudioPlayer AudioFile="listenChoiceModel.ListenChoice.AudioFileFile"
+                                                 PlayText="@null"
+                                                 StopText="@null"
+                                                 PlayIcon="c-icon-volume-high"
+                                                 StopIcon="c-icon-volume-high"
+                                                 MediaPlayed="HandleAudioPlayed"
+                                                 @key="listenChoiceModel.ListenChoice.AudioFileFile.Id" />
+                                }
+                            </div>
+                            @if (listenChoiceModel.ListenChoice.ImageFileFile.Id is not null)
+                            {
+                                <div class="c-margin-large"
+                                     style="max-width: 50px;">
+                                    <Image ImageFile="listenChoiceModel.ListenChoice.ImageFileFile"
+                                           Width="50"
+                                           @key="listenChoiceModel.ListenChoice.ImageFileFile.Id" />
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            }
+
+            <Alerts Items="Model.Alerts" />
+
+            @if (Model.ListenPartModel.State != AssessmentPartStates.Valid)
+            {
+                <div class="c-stack center c-padding-medium-vert">
+                    <ButtonCore ButtonStyle="ButtonCore.ButtonStyles.Primary"
+                                Text="Check answers"
+                                Clicked="() => Model.CheckListenPreview()" />
+                </div>
+            }
+            else
+            {
+                <div class="c-stack center c-padding-medium-vert">
+                    <ButtonCore ButtonStyle="ButtonCore.ButtonStyles.Primary"
+                                IconPosition="ButtonCore.IconPositions.Right"
+                                Text="Next"
+                                IconClass="c-icon-chevron-right"
+                                Clicked="() => Model.AdvanceListenPreview()" />
+                </div>
+            }
+        }
+
+        break;
+
+    case AssessmentStates.ListenQuestions:
+
+        @if (Model.ListenPartModel is not null)
+        {
+            <div class="c-nowrap">
+                <UserHtml Html="@(Model.ListenPartModel.ListenPart.QuestionsInstructionsText!)"
+                          CssClass="star" />
+                <Padding Size="Padding.Sizes.Small">
+                    @if (Model.ListenPartModel.ListenPart.QuestionsInstructionsAudioFileFile.Id is not null)
+                    {
+                        <AudioPlayer AudioFile="Model.ListenPartModel.ListenPart.QuestionsInstructionsAudioFileFile"
+                                     AutoPlay="true"
+                                     PlayText="Instructions"
+                                     StopText="Instructions"
+                                     PlayIcon="c-icon-volume-high"
+                                     MediaPlayed="HandleAudioPlayed"
+                                     @key="Model.ListenPartModel.ListenPart.QuestionsInstructionsAudioFileFile.Id" />
+                    }
+                </Padding>
+            </div>
+
+            @foreach (var listenQuestionModel in Model.ListenPartModel.QuestionCollection.Current)
+            {
+                <div class="cec-assessment-question @(listenQuestionModel.State == AssessmentQuestionStates.Invalid ? "invalid" : String.Empty)">
+                    <div class="question">
+                        <div class="number">
+                            <p>@(listenQuestionModel.Number).</p>
+                        </div>
+                        <div class="text">
+                            <UserHtml Html="@(listenQuestionModel.ListenQuestion.Text!)" />
+                        </div>
+                        @if (listenQuestionModel.ListenQuestion.AudioFileFile.Id is not null)
+                        {
+                            <AudioPlayer AudioFile="listenQuestionModel.ListenQuestion.AudioFileFile"
+                                         Compact="true"
+                                         PlayIcon="c-icon-volume-high"
+                                         MediaPlayed="HandleAudioPlayed"
+                                         @key="listenQuestionModel.ListenQuestion.AudioFileFile" />
+                        }
+                    </div>
+                    @if (listenQuestionModel.ListenQuestion.RequireTextInput != true)
+                    {
+                        <div class="choices">
+                            @foreach (var listenChoiceModel in listenQuestionModel.ChoiceModels)
+                            {
+                                <div class="choice">
+                                    <div class="letter">@(listenChoiceModel.ListenChoice.Ordinal.GetValueOrDefault().ToLowercaseLetter()).</div>
+                                    <div class="c-button-group">
+                                        <button @onclick="() => listenQuestionModel.SelectChoice(listenChoiceModel.ListenChoice.Id)">
+                                            <div class="choice-button c-button @(listenChoiceModel.StateClass)">
+                                                <div class="text">@listenChoiceModel.ListenChoice.Text</div>
+                                            </div>
+                                        </button>
+                                        @if (listenChoiceModel.ListenChoice.AudioFileFile.Id.HasSomething())
+                                        {
+                                            <AudioPlayer AudioFile="listenChoiceModel.ListenChoice.AudioFileFile"
+                                                         PlayText="@null"
+                                                         StopText="@null"
+                                                         PlayIcon="c-icon-volume-high"
+                                                         StopIcon="c-icon-volume-high"
+                                                         MediaPlayed="HandleAudioPlayed"
+                                                         @key="listenChoiceModel.ListenChoice.AudioFileFile.Id" />
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-entry">
+                            <MultilineTextBox Height="MultilineTextBox.Heights.Average"
+                                              Placeholder="Enter text..."
+                                              @bind-Value="listenQuestionModel.TextEntry"
+                                              @bind-Value:after="() => listenQuestionModel.HandleTextChanged()" />
+                        </div>
+                    }
+                </div>
+            }
+
+            <Alerts Items="Model.Alerts" />
+
+            <div class="c-stack center c-padding-medium-vert">
+                <ButtonCore ButtonStyle="ButtonCore.ButtonStyles.Primary"
+                            IconPosition="ButtonCore.IconPositions.Right"
+                            Text="Next"
+                            IconClass="c-icon-chevron-right"
+                            Clicked="() => Model.AdvanceListenQuestions()" />
+            </div>
+        }
+
+        break;
+
+    case AssessmentStates.ReadPreview:
+
+        @if (Model.ReadPartModel is not null)
+        {
+            <div class="c-two-panes top">
+
+                @if (Model.ReadPartModel.ReadPart.PassageInstructionsText.HasSomething() || Model.ReadPartModel.ReadPart.ReadParagraphs.HasItems())
+                {
+                    <div class="left c-padding-small-right">
+                        <div class="c-nowrap">
+                            <UserHtml Html="@(Model.ReadPartModel.ReadPart.PassageInstructionsText!)"
+                                      CssClass="star" />
+                            @if (Model.ReadPartModel.ReadPart.PassageInstructionsAudioFileFile.Id.HasSomething())
+                            {
+                                <Padding Size="Padding.Sizes.Small">
+                                    <AudioPlayer AudioFile="Model.ReadPartModel.ReadPart.PassageInstructionsAudioFileFile"
+                                                 PlayText="Instructions"
+                                                 StopText="Instructions"
+                                                 PlayIcon="c-icon-volume-high"
+                                                 AutoPlay="true"
+                                                 MediaPlayed="HandleAudioPlayed"
+                                                 @key="Model.ReadPartModel.ReadPart.PassageInstructionsAudioFileFile.Id" />
+                                </Padding>
+                            }
+                        </div>
+                        @foreach (var readParagraph in Model.ReadPartModel.ReadPart.ReadParagraphs)
+                        {
+                            <div class="c-full c-nowrap">
+                                <div class="c-padding-small-right">
+                                    <p>(@(readParagraph.Ordinal + 1))</p>
+                                </div>
+                                <UserHtml Html="@(readParagraph.Text!)"
+                                          CssClass="star">
+                                    <hr />
+                                </UserHtml>
+                            </div>
+                        }
+                    </div>
+                }
+
+                @if (Model.ReadPartModel.ReadPart.PreviewInstructionsText.HasSomething() || Model.ReadPartModel.PreviewQuestions.HasItems())
+                {
+                    <div class="right cec-right-pane @(Model.ReadPartModel.ReadPart.ReadParagraphs.HasItems() ? "c-padding-small-left" : "no-border")">
+
+                        <div class="c-nowrap">
+                            <UserHtml Html="@(Model.ReadPartModel.ReadPart.PreviewInstructionsText!)"
+                                      CssClass="star" />
+                            @if (Model.ReadPartModel.ReadPart.PreviewInstructionsAudioFileFile.Id.HasSomething())
+                            {
+                                <Padding Size="Padding.Sizes.Small">
+                                    <AudioPlayer AudioFile="Model.ReadPartModel.ReadPart.PreviewInstructionsAudioFileFile"
+                                                 PlayText="Instructions"
+                                                 StopText="Instructions"
+                                                 PlayIcon="c-icon-volume-high"
+                                                 AutoPlay="true"
+                                                 MediaPlayed="HandleAudioPlayed"
+                                                 @key="Model.ReadPartModel.ReadPart.PreviewInstructionsAudioFileFile.Id" />
+                                </Padding>
+                            }
+                        </div>
+
+                        @foreach (var readQuestionModel in Model.ReadPartModel.PreviewQuestions)
+                        {
+                            <div class="cec-assessment-question">
+                                <div class="question">
+                                    <div class="number">
+                                        <p>@(readQuestionModel.Number).</p>
+                                    </div>
+                                    <div class="text">
+                                        <UserHtml Html="@(readQuestionModel.ReadQuestion.Text!)"
+                                                  CssClass="star" />
+                                    </div>
+                                    @if (readQuestionModel.ReadQuestion.AudioFileFile.Id.HasSomething())
+                                    {
+                                        <AudioPlayer AudioFile="readQuestionModel.ReadQuestion.AudioFileFile"
+                                                     Compact="true"
+                                                     PlayIcon="c-icon-volume-high"
+                                                     MediaPlayed="HandleAudioPlayed"
+                                                     @key="readQuestionModel.ReadQuestion.AudioFileFile.Id" />
+                                    }
+                                </div>
+                                <div class="choices">
+                                    @foreach (var readChoiceModel in readQuestionModel.ChoiceModels)
+                                    {
+                                        <div class="choice">
+                                            <div class="letter">@(readChoiceModel.ReadChoice.Ordinal.GetValueOrDefault().ToLowercaseLetter()).</div>
+                                            <div class="c-button-group">
+                                                <button @onclick="() => readQuestionModel.SelectChoice(readChoiceModel.ReadChoice.Id)">
+                                                    <div class="choice-button c-button @(readChoiceModel.StateClass)">
+                                                        <div class="text">@readChoiceModel.ReadChoice.Text</div>
+                                                        @if (readChoiceModel.State == AssessmentChoiceStates.Invalid)
+                                                        {
+                                                            <div class="cec-completion-status tight">
+                                                                <img src="/api/content/display/images/error"
+                                                                     alt="Incorrect" />
+                                                            </div>
+                                                        }
+                                                        @if (readChoiceModel.State == AssessmentChoiceStates.Valid)
+                                                        {
+                                                            <div class="cec-completion-status tight">
+                                                                <img src="/api/content/display/images/check-filled"
+                                                                     alt="Correct" />
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                </button>
+                                                <AudioPlayer AudioFile="readChoiceModel.ReadChoice.AudioFileFile"
+                                                             PlayText="@null"
+                                                             StopText="@null"
+                                                             PlayIcon="c-icon-volume-high"
+                                                             StopIcon="c-icon-volume-high"
+                                                             MediaPlayed="HandleAudioPlayed"
+                                                             @key="readChoiceModel.ReadChoice.AudioFileFile.Id" />
+                                            </div>
+                                            @if (readChoiceModel.ReadChoice.ImageFileFile.Id is not null)
+                                            {
+                                                <div class="c-margin-small"
+                                                     style="max-width: 50px;">
+                                                    <Image ImageFile="readChoiceModel.ReadChoice.ImageFileFile"
+                                                           Width="50"
+                                                           @key="readChoiceModel.ReadChoice.ImageFileFile.Id" />
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                }
+            </div>
+
+            <Alerts Items="Model.Alerts" />
+
+            @if (Model.ReadPartModel.State != AssessmentPartStates.Valid)
+            {
+                <div class="c-stack center c-padding-medium-vert">
+                    <ButtonCore ButtonStyle="ButtonCore.ButtonStyles.Primary"
+                                Text="Check answers"
+                                Clicked="() => Model.CheckReadPreview()" />
+                </div>
+            }
+            else
+            {
+                <div class="c-stack center c-padding-medium-vert">
+                    <ButtonCore ButtonStyle="ButtonCore.ButtonStyles.Primary"
+                                IconPosition="ButtonCore.IconPositions.Right"
+                                Text="Next"
+                                IconClass="c-icon-chevron-right"
+                                Clicked="() => Model.AdvanceReadPreview()" />
+                </div>
+            }
+        }
+
+        break;
+
+    case AssessmentStates.ReadQuestions:
+
+        @if (Model.ReadPartModel is not null)
+        {
+            <div class="c-two-panes top">
+
+                @if (Model.ReadPartModel.ReadPart.PassageInstructionsText.HasSomething() || Model.ReadPartModel.ReadPart.ReadParagraphs.HasItems())
+                {
+                    <div class="left c-padding-small-right">
+                        <div class="c-nowrap">
+                            <UserHtml Html="@(Model.ReadPartModel.ReadPart.PassageInstructionsText!)"
+                                      CssClass="star" />
+                            @if (Model.ReadPartModel.ReadPart.PassageInstructionsAudioFileFile.Id.HasSomething())
+                            {
+                                <Padding Size="Padding.Sizes.Small">
+                                    <AudioPlayer AudioFile="Model.ReadPartModel.ReadPart.PassageInstructionsAudioFileFile"
+                                                 PlayText="Instructions"
+                                                 StopText="Instructions"
+                                                 PlayIcon="c-icon-volume-high"
+                                                 AutoPlay="true"
+                                                 MediaPlayed="HandleAudioPlayed"
+                                                 @key="Model.ReadPartModel.ReadPart.PassageInstructionsAudioFileFile.Id" />
+                                </Padding>
+                            }
+                        </div>
+                        @foreach (var readParagraph in Model.ReadPartModel.ReadPart.ReadParagraphs)
+                        {
+                            <div class="c-full c-nowrap">
+                                <div class="c-padding-small-right">
+                                    <p>(@(readParagraph.Ordinal + 1))</p>
+                                </div>
+                                <UserHtml Html="@(readParagraph.Text!)"
+                                          CssClass="star">
+                                    <hr />
+                                </UserHtml>
+                            </div>
+                        }
+                    </div>
+                }
+
+                @if (Model.ReadPartModel.ReadPart.QuestionsInstructionsText.HasSomething() || Model.ReadPartModel.QuestionCollection.Current.HasItems())
+                {
+                    <div class="right cec-right-pane @(Model.ReadPartModel.ReadPart.ReadParagraphs.HasItems() ? "c-padding-small-left" : "no-border")">
+                        <div class="c-nowrap">
+                            <UserHtml Html="@(Model.ReadPartModel.ReadPart.QuestionsInstructionsText!)"
+                                      CssClass="star" />
+                            @if (Model.ReadPartModel.ReadPart.QuestionsInstructionsAudioFileFile.Id.HasSomething())
+                            {
+                                <Padding Size="Padding.Sizes.Small">
+                                    <AudioPlayer AudioFile="Model.ReadPartModel.ReadPart.QuestionsInstructionsAudioFileFile"
+                                                 PlayText="Instructions"
+                                                 StopText="Instructions"
+                                                 PlayIcon="c-icon-volume-high"
+                                                 AutoPlay="true"
+                                                 MediaPlayed="HandleAudioPlayed"
+                                                 @key="Model.ReadPartModel.ReadPart.QuestionsInstructionsAudioFileFile.Id" />
+                                </Padding>
+                            }
+                        </div>
+                        @foreach (var readQuestionModel in Model.ReadPartModel.QuestionCollection.Current)
+                        {
+                            <div class="cec-assessment-question @(readQuestionModel.State == AssessmentQuestionStates.Invalid ? "invalid" : String.Empty)">
+                                <div class="question">
+                                    <div class="number">
+                                        <p>@(readQuestionModel.Number).</p>
+                                    </div>
+                                    <div class="text">
+                                        <UserHtml Html="@(readQuestionModel.ReadQuestion.Text!)"
+                                                  CssClass="star" />
+                                    </div>
+                                    @if (readQuestionModel.ReadQuestion.AudioFileFile.Id.HasSomething())
+                                    {
+                                        <AudioPlayer AudioFile="readQuestionModel.ReadQuestion.AudioFileFile"
+                                                     Compact="true"
+                                                     PlayIcon="c-icon-volume-high"
+                                                     MediaPlayed="HandleAudioPlayed"
+                                                     @key="readQuestionModel.ReadQuestion.AudioFileFile.Id" />
+                                    }
+                                </div>
+                                @if (readQuestionModel.ReadQuestion.ImageFileFile.Id is not null)
+                                {
+                                    <div class="c-margin-large"
+                                         style="max-width: 200px;">
+                                        <Image ImageFile="readQuestionModel.ReadQuestion.ImageFileFile"
+                                               Width="200"
+                                               @key="readQuestionModel.ReadQuestion.ImageFileFile.Id" />
+                                    </div>
+                                }
+                                @if (readQuestionModel.ReadQuestion.RequireTextInput != true)
+                                {
+                                    <div class="choices">
+                                        @foreach (var readChoiceModel in readQuestionModel.ChoiceModels)
+                                        {
+                                            <div class="choice">
+                                                <div class="letter">@(readChoiceModel.ReadChoice.Ordinal.GetValueOrDefault().ToLowercaseLetter()).</div>
+                                                <div class="c-button-group">
+                                                    <button @onclick="() => readQuestionModel.SelectChoice(readChoiceModel.ReadChoice.Id)">
+                                                        <div class="c-button choice-button @(readChoiceModel.StateClass)">
+                                                            <div class="text">@readChoiceModel.ReadChoice.Text</div>
+                                                        </div>
+                                                    </button>
+                                                    @if (readChoiceModel.ReadChoice.AudioFileFile.Id is not null)
+                                                    {
+                                                        <AudioPlayer AudioFile="readChoiceModel.ReadChoice.AudioFileFile"
+                                                                     PlayText="@null"
+                                                                     StopText="@null"
+                                                                     PlayIcon="c-icon-volume-high"
+                                                                     StopIcon="c-icon-volume-high"
+                                                                     MediaPlayed="HandleAudioPlayed"
+                                                                     @key="readChoiceModel.ReadChoice.AudioFileFile.Id" />
+                                                    }
+                                                </div>
+                                                @if (readChoiceModel.ReadChoice.ImageFileFile.Id is not null)
+                                                {
+                                                    <div class="c-margin-small"
+                                                         style="max-width: 50px;">
+                                                        <Image ImageFile="readChoiceModel.ReadChoice.ImageFileFile"
+                                                               Width="50"
+                                                               @key="readChoiceModel.ReadChoice.ImageFileFile.Id" />
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="text-entry">
+                                        <MultilineTextBox Height="MultilineTextBox.Heights.Average"
+                                                          Placeholder="Enter text..."
+                                                          @bind-Value="readQuestionModel.TextEntry"
+                                                          @bind-Value:after="() => readQuestionModel.HandleTextChanged()" />
+                                    </div>
+                                }
+                            </div>
+                        }
+
+                    </div>
+                }
+            </div>
+
+            <Alerts Items="Model.Alerts" />
+
+            <div class="c-stack center c-padding-medium-vert">
+                <ButtonCore ButtonStyle="ButtonCore.ButtonStyles.Primary"
+                            IconPosition="ButtonCore.IconPositions.Right"
+                            Text="Next"
+                            IconClass="c-icon-chevron-right"
+                            Clicked="() => Model.AdvanceReadQuestions()" />
+            </div>
+        }
+
+        break;
+
+    default:
+        throw new ArgumentOutOfRangeException();
+}
+</Padding>
+
+</div>

@@ -1,0 +1,134 @@
+﻿<div class="c-notebook c-padding-small-hor">
+
+    <h2>My Notebook</h2>
+
+    <div class="note-area">
+        <div class="page">
+            @if (Model.HasFetched)
+            {
+                @if (Model.IsEmpty)
+                {
+                    <div class="c-stack center">
+                        Nothing here yet!
+                    </div>
+                }
+                else if (Model.CurrentPage is not null)
+                {
+                    @if (Model.CurrentPage.Notepage.Note!.ImageFileFile.Id is not null)
+                    {
+                        <Image ImageFile="Model.CurrentPage.Notepage.Note.ImageFileFile"
+                               Width="240" />
+                    }
+
+                    <div class="c-padding-small-vert">
+                        @(Model.CurrentPage.Notepage.Note.Instructions)
+                    </div>
+
+                    @if (Model.CurrentPage.Notepage.Note.RequireText == true)
+                    {
+                        <textarea class="input average"
+                                      placeholder="Enter text..."
+                                      disabled="@(!Model.CurrentPage.IsDirty)"
+                                      @bind="Model.CurrentPage.Notepage.Text"></textarea>
+                    }
+
+                    @if (Model.CurrentPage.Notepage.Note.RequireImageSelection == true)
+                    {
+                        @if (Model.CurrentPage.ImageSelected)
+                        {
+                            <div class="c-padding-small">
+                                <Image ImageFile="Model.CurrentPage.SelectedImage"
+                                       Width="240" />
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="b-wrap">
+                                @foreach (var noteImage in Model.CurrentPage.Notepage.Note.NoteImages)
+                                {
+                                    <button @onclick="() => Model.CurrentPage.SelectImage(noteImage.Id)">
+                                        <div class="c-button">
+                                            <div class="icon">
+                                                <Image ImageFile="noteImage.ImageFile"
+                                                       Width="220" />
+                                            </div>
+                                        </div>
+                                    </button>
+                                }
+                            </div>
+                        }
+                    }
+
+                    @if (Model.CurrentPage.ShowEdit)
+                    {
+                        @if (Model.CurrentPage.RequiresInteraction)
+                        {
+                            <div class="c-stack center c-padding-small">
+                                <button @onclick="() => Model.CurrentPage.Edit()">
+                                    <div class="c-button secondary">
+                                        <div class="text">Edit</div>
+                                    </div>
+                                </button>
+                            </div>
+                        }
+                    }
+                }
+            }
+        </div>
+    </div>
+
+    @if (Model.HasFetched && !Model.IsEmpty)
+    {
+        <div class="c-nowrap c-padding-small-top">
+
+            <button @onclick="() => Model.MoveBack()"
+                    disabled="@(!Model.CanMoveBack)">
+                <div class="c-button circle secondary">
+                    <div class="icon">
+                        <span class="c-icon-chevron-left"></span>
+                    </div>
+                </div>
+            </button>
+
+            <div class="star">
+                @if (Model.IsValidating)
+                {
+                    <div class="c-page-counter">
+                        <div class="c-nowrap center">
+                            <img src="/api/content/display/images/exclamation"
+                                 alt="Error"
+                                 style="width: 1.625em; margin-right: 1em;" />
+                            <div>@(Model.ValidationText)</div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="c-page-counter">
+                        <div class="c-nowrap center">
+                            @(Model.PositionText)
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <button @onclick="() => Model.MoveNext()"
+                    disabled="@(!Model.CanMoveNext)">
+                <div class="c-button circle secondary">
+                    <div class="icon">
+                        <span class="c-icon-chevron-right"></span>
+                    </div>
+                </div>
+            </button>
+
+        </div>
+    }
+    <div class="c-stack center">
+        <button class="c-margin-small"
+                @onclick="() => Model.Save()">
+            <div class="c-button primary c-padding-large-hor">
+                <div class="text">Done</div>
+            </div>
+        </button>
+    </div>
+</div>

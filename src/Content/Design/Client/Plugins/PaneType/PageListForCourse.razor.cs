@@ -1,0 +1,65 @@
+namespace Crudspa.Content.Design.Client.Plugins.PaneType;
+
+public partial class PageListForCourse : IPaneDisplay, IDisposable
+{
+    private void HandleModelChanged(Object? sender, PropertyChangedEventArgs args) => InvokeAsync(StateHasChanged);
+
+    [Parameter] public String? Path { get; set; }
+    [Parameter] public Guid? Id { get; set; }
+    [Parameter] public Boolean IsNew { get; set; }
+    [Parameter] public String? ConfigJson { get; set; }
+
+    [Inject] public ICourseService CourseService { get; set; } = null!;
+
+    public PageListForCourseModel Model { get; set; } = null!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model = new(Id, CourseService);
+        Model.PropertyChanged += HandleModelChanged;
+
+        await Model.Initialize();
+    }
+
+    public void Dispose()
+    {
+        Model.PropertyChanged -= HandleModelChanged;
+        Model.Dispose();
+    }
+
+    public Task<Response<Page?>> AddPage()
+    {
+        var course = Model.Entity!;
+
+        return CourseService.AddPage(new(new()
+        {
+            CourseId = course.Id,
+            Page = new()
+            {
+                TypeId = PageTypeIds.StackedSections,
+                Title = "New Page",
+                StatusId = Crudspa.Framework.Core.Shared.Contracts.Ids.ContentStatusIds.Draft,
+                ShowNotebook = false,
+                ShowGuide = false,
+            },
+        }));
+    }
+}
+
+public class PageListForCourseModel(Guid? id, ICourseService courseService) : EditModel<Course>(false)
+{
+    public async Task Initialize()
+    {
+        await Refresh();
+    }
+
+    public async Task Refresh()
+    {
+        ReadOnly = true;
+
+        var response = await WithWaiting("Fetching...", () => courseService.Fetch(new(new() { Id = id })));
+
+        if (response.Ok)
+            Entity = response.Value;
+    }
+}

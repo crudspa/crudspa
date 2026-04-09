@@ -1,0 +1,14 @@
+﻿<Waiter Model="Model">
+    @if (Model.Module is not null)
+    {
+        <Padding Direction="Padding.Directions.Horizontal"
+                 Size="Padding.Sizes.Medium">
+            <BinderDisplayPlugin Path="@Path"
+                                 Id="Model.Module.BinderId"
+                                 TypeName="@Model.Module.BinderDisplayView"
+                                 BinderCompleted="() => Model.HandleBinderCompleted()"
+                                 GuideImage="Model.Module.BookGuideImage"
+                                 Shadowed="true" />
+        </Padding>
+    }
+</Waiter>

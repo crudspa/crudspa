@@ -1,0 +1,106 @@
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+            }
+            else
+            {
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            }
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Title"
+                       Size="Field.Sizes.Wide">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="150"
+                             @bind-Value="Model.Entity.Title" />
+                </Field>
+                <Field Label="Status"
+                       Size="Field.Sizes.Unspecified">
+                    <StatusEdit ReadOnly="Model.ReadOnly"
+                                LookupValues="Model.ContentStatusNames"
+                                ColorClassFrom="ContentStatusColors.For"
+                                @bind-Value="Model.Entity.StatusId" />
+                </Field>
+                <Field Label="Key"
+                       Size="Field.Sizes.Medium">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="100"
+                             @bind-Value="Model.Entity.Key" />
+                </Field>
+                <Field Label="Author"
+                       Size="Field.Sizes.Wide">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="150"
+                             @bind-Value="Model.Entity.Author" />
+                </Field>
+                <Field Label="ISBN"
+                       Size="Field.Sizes.Medium">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="20"
+                             @bind-Value="Model.Entity.Isbn" />
+                </Field>
+                <Field Label="Lexile"
+                       Size="Field.Sizes.Medium">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="10"
+                             @bind-Value="Model.Entity.Lexile" />
+                </Field>
+                <Field Label="Season"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown ReadOnly="Model.ReadOnly"
+                              LookupValues="Model.BookSeasonNames"
+                              @bind-Value="Model.Entity.SeasonId" />
+                </Field>
+                <Field Label="Category"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown ReadOnly="Model.ReadOnly"
+                              AllowNull="true"
+                              NullText="[None]"
+                              LookupValues="Model.BookCategoryNames"
+                              @bind-Value="Model.Entity.CategoryId" />
+                </Field>
+                <Field Label="Requires Achievement"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown ReadOnly="Model.ReadOnly"
+                              AllowNull="true"
+                              NullText="[None]"
+                              LookupValues="Model.AchievementNames"
+                              @bind-Value="Model.Entity.RequiresAchievementId" />
+                </Field>
+                <Field Label="Summary"
+                       Size="Field.Sizes.Full">
+                    <MultilineTextBox ReadOnly="Model.ReadOnly"
+                                      Height="MultilineTextBox.Heights.Tall"
+                                      @bind-Value="Model.Entity.Summary" />
+                </Field>
+                <Field Label="Cover Image"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <ImageUploader ReadOnly="Model.ReadOnly"
+                                   Required="true"
+                                   Width="480"
+                                   ImageFile="Model.Entity.CoverImageFile" />
+                </Field>
+                <Field Label="Guide Image"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <ImageUploader ReadOnly="Model.ReadOnly"
+                                   Required="false"
+                                   Width="480"
+                                   ImageFile="Model.Entity.GuideImageFile" />
+                </Field>
+            </Wrapped>
+        </Padding>
+    }
+</Waiter>

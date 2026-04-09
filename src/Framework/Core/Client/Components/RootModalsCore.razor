@@ -1,0 +1,20 @@
+﻿@if (ImageViewerModel is not null)
+{
+    <Modal Model="ImageViewerModel"
+           Sizing="Modal.ModalSizing.Fluid"
+           Title="View Image">
+        <Content>
+            <ImageViewer Model="ImageViewerModel" />
+        </Content>
+    </Modal>
+}
+@if (PdfViewerModel is not null)
+{
+    <Modal Model="PdfViewerModel"
+           Sizing="Modal.ModalSizing.Full"
+           Title="View PDF">
+        <Content>
+            <PdfViewer Model="PdfViewerModel" />
+        </Content>
+    </Modal>
+}

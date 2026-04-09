@@ -1,0 +1,11 @@
+﻿<RadzenDropDown TValue="Guid?"
+                Data="@LookupValues"
+                TextProperty="Name"
+                ValueProperty="Id"
+                Disabled="@ReadOnly"
+                Placeholder="@NullText"
+                AllowClear="@AllowNull"
+                AllowFiltering="true"
+                FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                Value="Value"
+                ValueChanged="value => ValueChanged.InvokeAsync(value)" />
