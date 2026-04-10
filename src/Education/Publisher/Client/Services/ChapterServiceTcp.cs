@@ -53,6 +53,9 @@ public class ChapterServiceTcp(IProxyWrappers proxyWrappers) : IChapterService
     public async Task<Response<Section?>> AddSection(Request<ChapterSection> request) =>
         await proxyWrappers.Send<Section?>("ChapterAddSection", request);
 
+    public async Task<Response<Section?>> DuplicateSection(Request<ChapterSection> request) =>
+        await proxyWrappers.Send<Section?>("ChapterDuplicateSection", request);
+
     public async Task<Response> SaveSection(Request<ChapterSection> request) =>
         await proxyWrappers.Send("ChapterSaveSection", request);
 

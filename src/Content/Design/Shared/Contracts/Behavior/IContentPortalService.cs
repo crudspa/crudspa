@@ -12,6 +12,7 @@ public interface IContentPortalService
     Task<Response<IList<Section>>> FetchSections(Request<ContentPortalSection> request);
     Task<Response<Section?>> FetchSection(Request<ContentPortalSection> request);
     Task<Response<Section?>> AddSection(Request<ContentPortalSection> request);
+    Task<Response<Section?>> DuplicateSection(Request<ContentPortalSection> request);
     Task<Response> SaveSection(Request<ContentPortalSection> request);
     Task<Response> RemoveSection(Request<ContentPortalSection> request);
     Task<Response> SaveSectionOrder(Request<ContentPortalSection> request);

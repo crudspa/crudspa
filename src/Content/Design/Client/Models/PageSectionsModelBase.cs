@@ -57,6 +57,15 @@ public abstract class PageSectionsModelBase : ListOrderablesModel<SectionListMod
         });
     }
 
+    public async Task Duplicate(Guid? id)
+    {
+        await WithWaiting("Duplicating...", () => DuplicateSection(new()
+        {
+            Id = id,
+            PageId = PageId,
+        }));
+    }
+
     public override async Task<Response> SaveOrder()
     {
         var sections = Cards.Select(x => x.Entity.Section).ToList();
@@ -66,5 +75,6 @@ public abstract class PageSectionsModelBase : ListOrderablesModel<SectionListMod
     protected abstract Task<Response<IList<Section>>> FetchSections(Guid? pageId);
     protected abstract Task<Response<Section?>> FetchSection(Section section);
     protected abstract Task<Response> RemoveSection(Section section);
+    protected abstract Task<Response<Section?>> DuplicateSection(Section section);
     protected abstract Task<Response> SaveSectionOrder(IList<Section> sections);
 }

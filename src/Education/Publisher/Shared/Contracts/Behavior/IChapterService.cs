@@ -19,6 +19,7 @@ public interface IChapterService
     Task<Response<IList<Section>>> FetchSections(Request<ChapterSection> request);
     Task<Response<Section?>> FetchSection(Request<ChapterSection> request);
     Task<Response<Section?>> AddSection(Request<ChapterSection> request);
+    Task<Response<Section?>> DuplicateSection(Request<ChapterSection> request);
     Task<Response> SaveSection(Request<ChapterSection> request);
     Task<Response> RemoveSection(Request<ChapterSection> request);
     Task<Response> SaveSectionOrder(Request<ChapterSection> request);

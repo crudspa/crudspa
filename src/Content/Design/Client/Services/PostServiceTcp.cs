@@ -41,6 +41,9 @@ public class PostServiceTcp(IProxyWrappers proxyWrappers) : IPostService
     public async Task<Response<Section?>> AddSection(Request<PostSection> request) =>
         await proxyWrappers.Send<Section?>("PostAddSection", request);
 
+    public async Task<Response<Section?>> DuplicateSection(Request<PostSection> request) =>
+        await proxyWrappers.Send<Section?>("PostDuplicateSection", request);
+
     public async Task<Response> SaveSection(Request<PostSection> request) =>
         await proxyWrappers.Send("PostSaveSection", request);
 

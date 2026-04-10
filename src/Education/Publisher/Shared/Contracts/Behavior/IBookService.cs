@@ -23,6 +23,7 @@ public interface IBookService
     Task<Response<IList<Section>>> FetchSections(Request<BookSection> request);
     Task<Response<Section?>> FetchSection(Request<BookSection> request);
     Task<Response<Section?>> AddSection(Request<BookSection> request);
+    Task<Response<Section?>> DuplicateSection(Request<BookSection> request);
     Task<Response> SaveSection(Request<BookSection> request);
     Task<Response> RemoveSection(Request<BookSection> request);
     Task<Response> SaveSectionOrder(Request<BookSection> request);

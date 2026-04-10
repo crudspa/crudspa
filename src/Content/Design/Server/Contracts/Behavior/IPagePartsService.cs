@@ -20,6 +20,8 @@ public interface IPagePartsService
     Task<Response<Section?>> FetchSection(Guid? sessionId, Guid? binderId, Guid? pageId, Section section);
     Task<Response<Section?>> AddSection(Guid? sessionId, Guid? pageId, Section section);
     Task<Response<Section?>> AddSection(Guid? sessionId, Guid? binderId, Guid? pageId, Section section);
+    Task<Response<Section?>> DuplicateSection(Guid? sessionId, Guid? pageId, Section section);
+    Task<Response<Section?>> DuplicateSection(Guid? sessionId, Guid? binderId, Guid? pageId, Section section);
     Task<Response> SaveSection(Guid? sessionId, Guid? pageId, Section section);
     Task<Response> SaveSection(Guid? sessionId, Guid? binderId, Guid? pageId, Section section);
     Task<Response> RemoveSection(Guid? sessionId, Guid? pageId, Section section);

@@ -115,16 +115,10 @@ public class PagePartsServiceSql(
             {
                 foreach (var section in sectionResponse.Value.OrderBy(x => x.Ordinal))
                 {
-                    var sectionCopy = new Copy
-                    {
-                        ExistingId = section.Id,
-                        ExistingParentId = pageRequest.Id,
-                        NewParentId = newPageResponse.Value.Id,
-                        NewName = "Section Name",
-                        NewId = Guid.NewGuid(),
-                    };
+                    var copyResponse = await CopySection(sessionId, pageRequest.Id, newPageResponse.Value.Id, section.Id);
 
-                    await sectionService.Copy(new(sessionId, sectionCopy));
+                    if (!copyResponse.Ok)
+                        return new() { Errors = copyResponse.Errors };
                 }
             }
         }
@@ -288,6 +282,22 @@ public class PagePartsServiceSql(
         return await AddSection(sessionId, pageId, section);
     }
 
+    public async Task<Response<Section?>> DuplicateSection(Guid? sessionId, Guid? pageId, Section section)
+    {
+        if (!await MatchesSection(sessionId, pageId, section.Id))
+            return new("Section not found.");
+
+        return await CopySection(sessionId, pageId, pageId, section.Id);
+    }
+
+    public async Task<Response<Section?>> DuplicateSection(Guid? sessionId, Guid? binderId, Guid? pageId, Section section)
+    {
+        if (!await MatchesBinder(sessionId, binderId, pageId))
+            return new("Page not found.");
+
+        return await DuplicateSection(sessionId, pageId, section);
+    }
+
     public async Task<Response> SaveSection(Guid? sessionId, Guid? pageId, Section section)
     {
         if (!await MatchesSection(sessionId, pageId, section.Id))
@@ -347,6 +357,27 @@ public class PagePartsServiceSql(
             return false;
 
         return await pageRepository.Select(Connection, sessionId, new() { Id = pageId }) is not null;
+    }
+
+    private async Task<Response<Section?>> CopySection(Guid? sessionId, Guid? existingPageId, Guid? newPageId, Guid? sectionId)
+    {
+        var copyResponse = await sectionService.Copy(new(sessionId, new()
+        {
+            ExistingId = sectionId,
+            ExistingParentId = existingPageId,
+            NewParentId = newPageId,
+        }));
+
+        if (!copyResponse.Ok)
+            return new() { Errors = copyResponse.Errors };
+
+        return copyResponse.Value?.NewId.HasValue == true
+            ? new(new Section
+            {
+                Id = copyResponse.Value.NewId,
+                PageId = copyResponse.Value.NewParentId,
+            })
+            : new("Section copy failed.");
     }
 
     private async Task<Boolean> MatchesBinder(Guid? sessionId, Guid? binderId, Guid? pageId)

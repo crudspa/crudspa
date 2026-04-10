@@ -261,6 +261,23 @@ public class ModuleServiceSql(
         });
     }
 
+    public async Task<Response<Section?>> DuplicateSection(Request<ModuleSection> request)
+    {
+        return await wrappers.Try<Section?>(request, async response =>
+        {
+            var binderId = await FetchBinderId(request.SessionId, request.Value.ModuleId);
+            var pageId = request.Value.PageId;
+            var section = request.Value.Section;
+
+            if (section is null || pageId.HasNothing() || binderId.HasNothing())
+                throw new("Module section not found.");
+
+            var duplicateResponse = await pagePartsService.DuplicateSection(request.SessionId, binderId, pageId, section);
+            response.AddErrors(duplicateResponse.Errors);
+            return duplicateResponse.Value!;
+        });
+    }
+
     public async Task<Response> SaveSection(Request<ModuleSection> request)
     {
         return await wrappers.Try(request, async response =>

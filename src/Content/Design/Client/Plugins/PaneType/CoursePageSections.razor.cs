@@ -63,6 +63,14 @@ public class CoursePageSectionsModel(
             Section = section,
         }));
 
+    protected override async Task<Response<Section?>> DuplicateSection(Section section) =>
+        await courseService.DuplicateSection(new(new()
+        {
+            CourseId = courseId,
+            PageId = section.PageId,
+            Section = section,
+        }));
+
     protected override async Task<Response> SaveSectionOrder(IList<Section> sections) =>
         await courseService.SaveSectionOrder(new(new()
         {

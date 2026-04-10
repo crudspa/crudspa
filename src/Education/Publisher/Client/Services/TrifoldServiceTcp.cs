@@ -56,6 +56,9 @@ public class TrifoldServiceTcp(IProxyWrappers proxyWrappers) : ITrifoldService
     public async Task<Response<Section?>> AddSection(Request<TrifoldSection> request) =>
         await proxyWrappers.Send<Section?>("TrifoldAddSection", request);
 
+    public async Task<Response<Section?>> DuplicateSection(Request<TrifoldSection> request) =>
+        await proxyWrappers.Send<Section?>("TrifoldDuplicateSection", request);
+
     public async Task<Response> SaveSection(Request<TrifoldSection> request) =>
         await proxyWrappers.Send("TrifoldSaveSection", request);
 

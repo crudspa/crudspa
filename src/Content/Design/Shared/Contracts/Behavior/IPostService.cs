@@ -15,6 +15,7 @@ public interface IPostService
     Task<Response<IList<Section>>> FetchSections(Request<PostSection> request);
     Task<Response<Section?>> FetchSection(Request<PostSection> request);
     Task<Response<Section?>> AddSection(Request<PostSection> request);
+    Task<Response<Section?>> DuplicateSection(Request<PostSection> request);
     Task<Response> SaveSection(Request<PostSection> request);
     Task<Response> RemoveSection(Request<PostSection> request);
     Task<Response> SaveSectionOrder(Request<PostSection> request);

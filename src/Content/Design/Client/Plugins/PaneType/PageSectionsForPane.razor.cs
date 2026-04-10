@@ -97,6 +97,13 @@ public class PageSectionsForPaneModel(
             Section = section,
         }));
 
+    protected override async Task<Response<Section?>> DuplicateSection(Section section) =>
+        await panePageService.DuplicateSection(new(new()
+        {
+            PageId = section.PageId,
+            Section = section,
+        }));
+
     protected override async Task<Response> SaveSectionOrder(IList<Section> sections) =>
         await panePageService.SaveSectionOrder(new(new()
         {

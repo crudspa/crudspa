@@ -56,6 +56,9 @@ public class CourseServiceTcp(IProxyWrappers proxyWrappers) : ICourseService
     public async Task<Response<Section?>> AddSection(Request<CourseSection> request) =>
         await proxyWrappers.Send<Section?>("CourseAddSection", request);
 
+    public async Task<Response<Section?>> DuplicateSection(Request<CourseSection> request) =>
+        await proxyWrappers.Send<Section?>("CourseDuplicateSection", request);
+
     public async Task<Response> SaveSection(Request<CourseSection> request) =>
         await proxyWrappers.Send("CourseSaveSection", request);
 

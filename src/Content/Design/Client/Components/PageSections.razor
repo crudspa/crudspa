@@ -38,5 +38,10 @@
                                 @key="context.Section" />
             }
         </ReadView>
+        <CardMenuItems>
+            <MenuItem Text="Duplicate"
+                      Icon="c-icon-copy"
+                      Clicked="() => Model.Duplicate(context.Id)" />
+        </CardMenuItems>
     </ListOrderables>
 </Waiter>

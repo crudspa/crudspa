@@ -20,6 +20,7 @@ public interface ICourseService
     Task<Response<IList<Section>>> FetchSections(Request<CourseSection> request);
     Task<Response<Section?>> FetchSection(Request<CourseSection> request);
     Task<Response<Section?>> AddSection(Request<CourseSection> request);
+    Task<Response<Section?>> DuplicateSection(Request<CourseSection> request);
     Task<Response> SaveSection(Request<CourseSection> request);
     Task<Response> RemoveSection(Request<CourseSection> request);
     Task<Response> SaveSectionOrder(Request<CourseSection> request);

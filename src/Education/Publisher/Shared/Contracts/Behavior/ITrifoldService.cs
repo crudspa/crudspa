@@ -20,6 +20,7 @@ public interface ITrifoldService
     Task<Response<IList<Section>>> FetchSections(Request<TrifoldSection> request);
     Task<Response<Section?>> FetchSection(Request<TrifoldSection> request);
     Task<Response<Section?>> AddSection(Request<TrifoldSection> request);
+    Task<Response<Section?>> DuplicateSection(Request<TrifoldSection> request);
     Task<Response> SaveSection(Request<TrifoldSection> request);
     Task<Response> RemoveSection(Request<TrifoldSection> request);
     Task<Response> SaveSectionOrder(Request<TrifoldSection> request);

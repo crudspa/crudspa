@@ -59,6 +59,9 @@ public class ModuleServiceTcp(IProxyWrappers proxyWrappers) : IModuleService
     public async Task<Response<Section?>> AddSection(Request<ModuleSection> request) =>
         await proxyWrappers.Send<Section?>("ModuleAddSection", request);
 
+    public async Task<Response<Section?>> DuplicateSection(Request<ModuleSection> request) =>
+        await proxyWrappers.Send<Section?>("ModuleDuplicateSection", request);
+
     public async Task<Response> SaveSection(Request<ModuleSection> request) =>
         await proxyWrappers.Send("ModuleSaveSection", request);
 

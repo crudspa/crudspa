@@ -32,6 +32,9 @@ public class ContentPortalServiceTcp(IProxyWrappers proxyWrappers) : IContentPor
     public async Task<Response<Section?>> AddSection(Request<ContentPortalSection> request) =>
         await proxyWrappers.Send<Section?>("ContentPortalAddSection", request);
 
+    public async Task<Response<Section?>> DuplicateSection(Request<ContentPortalSection> request) =>
+        await proxyWrappers.Send<Section?>("ContentPortalDuplicateSection", request);
+
     public async Task<Response> SaveSection(Request<ContentPortalSection> request) =>
         await proxyWrappers.Send("ContentPortalSaveSection", request);
 

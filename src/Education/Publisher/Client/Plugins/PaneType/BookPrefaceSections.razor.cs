@@ -49,6 +49,9 @@ public class BookPrefaceSectionsModel(
     protected override async Task<Response> RemoveSection(Section section) =>
         await bookService.RemoveSection(new(new() { BookId = bookId, PageId = section.PageId, Section = section }));
 
+    protected override async Task<Response<Section?>> DuplicateSection(Section section) =>
+        await bookService.DuplicateSection(new(new() { BookId = bookId, PageId = section.PageId, Section = section }));
+
     protected override async Task<Response> SaveSectionOrder(IList<Section> sections) =>
         await bookService.SaveSectionOrder(new(new() { BookId = bookId, PageId = sections.FirstOrDefault()?.PageId, Sections = sections }));
 }

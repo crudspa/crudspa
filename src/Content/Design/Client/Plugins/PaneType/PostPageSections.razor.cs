@@ -54,6 +54,13 @@ public class PostPageSectionsModel(
             Section = section,
         }));
 
+    protected override async Task<Response<Section?>> DuplicateSection(Section section) =>
+        await postService.DuplicateSection(new(new()
+        {
+            PostId = postId,
+            Section = section,
+        }));
+
     protected override async Task<Response> SaveSectionOrder(IList<Section> sections) =>
         await postService.SaveSectionOrder(new(new()
         {

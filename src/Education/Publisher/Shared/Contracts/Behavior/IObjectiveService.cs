@@ -21,6 +21,7 @@ public interface IObjectiveService
     Task<Response<IList<Section>>> FetchSections(Request<ObjectiveSection> request);
     Task<Response<Section?>> FetchSection(Request<ObjectiveSection> request);
     Task<Response<Section?>> AddSection(Request<ObjectiveSection> request);
+    Task<Response<Section?>> DuplicateSection(Request<ObjectiveSection> request);
     Task<Response> SaveSection(Request<ObjectiveSection> request);
     Task<Response> RemoveSection(Request<ObjectiveSection> request);
     Task<Response> SaveSectionOrder(Request<ObjectiveSection> request);

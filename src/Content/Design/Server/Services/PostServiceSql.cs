@@ -167,6 +167,22 @@ public class PostServiceSql(
         });
     }
 
+    public async Task<Response<Section?>> DuplicateSection(Request<PostSection> request)
+    {
+        return await wrappers.Try<Section?>(request, async response =>
+        {
+            var pageId = await FetchPageId(request.SessionId, request.Value.PostId);
+            var section = request.Value.Section;
+
+            if (section is null || pageId.HasNothing())
+                throw new("Post section not found.");
+
+            var duplicateResponse = await pagePartsService.DuplicateSection(request.SessionId, pageId, section);
+            response.AddErrors(duplicateResponse.Errors);
+            return duplicateResponse.Value!;
+        });
+    }
+
     public async Task<Response> SaveSection(Request<PostSection> request)
     {
         return await wrappers.Try(request, async response =>

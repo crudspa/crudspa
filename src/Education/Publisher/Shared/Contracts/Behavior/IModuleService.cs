@@ -21,6 +21,7 @@ public interface IModuleService
     Task<Response<IList<Section>>> FetchSections(Request<ModuleSection> request);
     Task<Response<Section?>> FetchSection(Request<ModuleSection> request);
     Task<Response<Section?>> AddSection(Request<ModuleSection> request);
+    Task<Response<Section?>> DuplicateSection(Request<ModuleSection> request);
     Task<Response> SaveSection(Request<ModuleSection> request);
     Task<Response> RemoveSection(Request<ModuleSection> request);
     Task<Response> SaveSectionOrder(Request<ModuleSection> request);

@@ -255,6 +255,23 @@ public class TrifoldServiceSql(
         });
     }
 
+    public async Task<Response<Section?>> DuplicateSection(Request<TrifoldSection> request)
+    {
+        return await wrappers.Try<Section?>(request, async response =>
+        {
+            var binderId = await FetchBinderId(request.SessionId, request.Value.TrifoldId);
+            var pageId = request.Value.PageId;
+            var section = request.Value.Section;
+
+            if (section is null || pageId.HasNothing() || binderId.HasNothing())
+                throw new("Trifold section not found.");
+
+            var duplicateResponse = await pagePartsService.DuplicateSection(request.SessionId, binderId, pageId, section);
+            response.AddErrors(duplicateResponse.Errors);
+            return duplicateResponse.Value!;
+        });
+    }
+
     public async Task<Response> SaveSection(Request<TrifoldSection> request)
     {
         return await wrappers.Try(request, async response =>

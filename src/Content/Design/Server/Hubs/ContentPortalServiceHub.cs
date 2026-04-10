@@ -93,6 +93,27 @@ public partial class DesignHub
         });
     }
 
+    public async Task<Response<Section?>> ContentPortalDuplicateSection(Request<ContentPortalSection> request)
+    {
+        return await HubWrappers.RequirePermission(request, PermissionIds.Portals, async session =>
+        {
+            var response = await ContentPortalService.DuplicateSection(request);
+
+            if (response.Ok)
+            {
+                await Notify(request.SessionId, PermissionIds.Portals, new SectionAdded
+                {
+                    Id = response.Value.Id,
+                    PageId = response.Value.PageId,
+                });
+
+                await GatewayService.Publish(new PageContentChanged { Id = response.Value.PageId });
+            }
+
+            return response;
+        });
+    }
+
     public async Task<Response> ContentPortalSaveSection(Request<ContentPortalSection> request)
     {
         return await HubWrappers.RequirePermission(request, PermissionIds.Portals, async session =>

@@ -12,6 +12,7 @@ public interface IPanePageService
     Task<Response<IList<Section>>> FetchSections(Request<SectionForPane> request);
     Task<Response<Section?>> FetchSection(Request<SectionForPane> request);
     Task<Response<Section?>> AddSection(Request<SectionForPane> request);
+    Task<Response<Section?>> DuplicateSection(Request<SectionForPane> request);
     Task<Response> SaveSection(Request<SectionForPane> request);
     Task<Response> RemoveSection(Request<SectionForPane> request);
     Task<Response> SaveSectionOrder(Request<SectionForPane> request);

@@ -184,6 +184,22 @@ public class PanePageServiceSql(
         });
     }
 
+    public async Task<Response<Section?>> DuplicateSection(Request<SectionForPane> request)
+    {
+        return await wrappers.Try<Section?>(request, async response =>
+        {
+            var pageId = await FetchPageId(request.SessionId, request.Value);
+            var section = request.Value.Section;
+
+            if (pageId.HasNothing() || section is null)
+                throw new("Pane section not found.");
+
+            var duplicateResponse = await pagePartsService.DuplicateSection(request.SessionId, pageId, section);
+            response.AddErrors(duplicateResponse.Errors);
+            return duplicateResponse.Value!;
+        });
+    }
+
     public async Task<Response> SaveSection(Request<SectionForPane> request)
     {
         return await wrappers.Try(request, async response =>

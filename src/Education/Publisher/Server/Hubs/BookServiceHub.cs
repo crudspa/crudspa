@@ -235,6 +235,27 @@ public partial class PublisherHub
         });
     }
 
+    public async Task<Response<Section?>> BookDuplicateSection(Request<BookSection> request)
+    {
+        return await HubWrappers.RequirePermission(request, PermissionIds.Books, async session =>
+        {
+            var response = await BookService.DuplicateSection(request);
+
+            if (response.Ok)
+            {
+                await Notify(request.SessionId, PermissionIds.Books, new SectionAdded
+                {
+                    Id = response.Value.Id,
+                    PageId = response.Value.PageId,
+                });
+
+                await GatewayService.Publish(new PageContentChanged { Id = response.Value.PageId });
+            }
+
+            return response;
+        });
+    }
+
     public async Task<Response> BookSaveSection(Request<BookSection> request)
     {
         return await HubWrappers.RequirePermission(request, PermissionIds.Books, async session =>

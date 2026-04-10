@@ -72,6 +72,13 @@ public class ContentPortalSectionsModel(
             Section = section,
         }));
 
+    protected override async Task<Response<Section?>> DuplicateSection(Section section) =>
+        await contentPortalService.DuplicateSection(new(new()
+        {
+            ContentPortalId = contentPortalId,
+            Section = section,
+        }));
+
     protected override async Task<Response> SaveSectionOrder(IList<Section> sections) =>
         await contentPortalService.SaveSectionOrder(new(new()
         {

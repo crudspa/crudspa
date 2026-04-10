@@ -49,6 +49,9 @@ public class TrifoldPageSectionsModel(
     protected override async Task<Response> RemoveSection(Section section) =>
         await trifoldService.RemoveSection(new(new() { TrifoldId = trifoldId, PageId = section.PageId, Section = section }));
 
+    protected override async Task<Response<Section?>> DuplicateSection(Section section) =>
+        await trifoldService.DuplicateSection(new(new() { TrifoldId = trifoldId, PageId = section.PageId, Section = section }));
+
     protected override async Task<Response> SaveSectionOrder(IList<Section> sections) =>
         await trifoldService.SaveSectionOrder(new(new() { TrifoldId = trifoldId, PageId = sections.FirstOrDefault()?.PageId, Sections = sections }));
 }

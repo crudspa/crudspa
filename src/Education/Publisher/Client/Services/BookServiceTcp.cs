@@ -65,6 +65,9 @@ public class BookServiceTcp(IProxyWrappers proxyWrappers) : IBookService
     public async Task<Response<Section?>> AddSection(Request<BookSection> request) =>
         await proxyWrappers.Send<Section?>("BookAddSection", request);
 
+    public async Task<Response<Section?>> DuplicateSection(Request<BookSection> request) =>
+        await proxyWrappers.Send<Section?>("BookDuplicateSection", request);
+
     public async Task<Response> SaveSection(Request<BookSection> request) =>
         await proxyWrappers.Send("BookSaveSection", request);
 

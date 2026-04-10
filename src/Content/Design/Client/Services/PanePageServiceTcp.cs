@@ -32,6 +32,9 @@ public class PanePageServiceTcp(IProxyWrappers proxyWrappers) : IPanePageService
     public async Task<Response<Section?>> AddSection(Request<SectionForPane> request) =>
         await proxyWrappers.Send<Section?>("PanePageAddSection", request);
 
+    public async Task<Response<Section?>> DuplicateSection(Request<SectionForPane> request) =>
+        await proxyWrappers.Send<Section?>("PanePageDuplicateSection", request);
+
     public async Task<Response> SaveSection(Request<SectionForPane> request) =>
         await proxyWrappers.Send("PanePageSaveSection", request);
 

@@ -217,6 +217,27 @@ public partial class DesignHub
         });
     }
 
+    public async Task<Response<Section?>> CourseDuplicateSection(Request<CourseSection> request)
+    {
+        return await HubWrappers.RequirePermission(request, PermissionIds.Tracks, async session =>
+        {
+            var response = await CourseService.DuplicateSection(request);
+
+            if (response.Ok)
+            {
+                await Notify(request.SessionId, PermissionIds.Tracks, new SectionAdded
+                {
+                    Id = response.Value.Id,
+                    PageId = response.Value.PageId,
+                });
+
+                await GatewayService.Publish(new PageContentChanged { Id = response.Value.PageId });
+            }
+
+            return response;
+        });
+    }
+
     public async Task<Response> CourseSaveSection(Request<CourseSection> request)
     {
         return await HubWrappers.RequirePermission(request, PermissionIds.Tracks, async session =>

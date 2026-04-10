@@ -59,6 +59,9 @@ public class ObjectiveServiceTcp(IProxyWrappers proxyWrappers) : IObjectiveServi
     public async Task<Response<Section?>> AddSection(Request<ObjectiveSection> request) =>
         await proxyWrappers.Send<Section?>("ObjectiveAddSection", request);
 
+    public async Task<Response<Section?>> DuplicateSection(Request<ObjectiveSection> request) =>
+        await proxyWrappers.Send<Section?>("ObjectiveDuplicateSection", request);
+
     public async Task<Response> SaveSection(Request<ObjectiveSection> request) =>
         await proxyWrappers.Send("ObjectiveSaveSection", request);
 

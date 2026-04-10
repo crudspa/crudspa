@@ -312,6 +312,23 @@ public class BookServiceSql(
         });
     }
 
+    public async Task<Response<Section?>> DuplicateSection(Request<BookSection> request)
+    {
+        return await wrappers.Try<Section?>(request, async response =>
+        {
+            var binderId = await FetchBinderId(request.SessionId, request.Value.BookId);
+            var pageId = request.Value.PageId;
+            var section = request.Value.Section;
+
+            if (section is null || pageId.HasNothing() || binderId.HasNothing())
+                throw new("Book section not found.");
+
+            var duplicateResponse = await pagePartsService.DuplicateSection(request.SessionId, binderId, pageId, section);
+            response.AddErrors(duplicateResponse.Errors);
+            return duplicateResponse.Value!;
+        });
+    }
+
     public async Task<Response> SaveSection(Request<BookSection> request)
     {
         return await wrappers.Try(request, async response =>

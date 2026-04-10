@@ -49,6 +49,9 @@ public class ModulePageSectionsModel(
     protected override async Task<Response> RemoveSection(Section section) =>
         await moduleService.RemoveSection(new(new() { ModuleId = moduleId, PageId = section.PageId, Section = section }));
 
+    protected override async Task<Response<Section?>> DuplicateSection(Section section) =>
+        await moduleService.DuplicateSection(new(new() { ModuleId = moduleId, PageId = section.PageId, Section = section }));
+
     protected override async Task<Response> SaveSectionOrder(IList<Section> sections) =>
         await moduleService.SaveSectionOrder(new(new() { ModuleId = moduleId, PageId = sections.FirstOrDefault()?.PageId, Sections = sections }));
 }

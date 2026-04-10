@@ -125,6 +125,22 @@ public class ContentPortalServiceSql(
         });
     }
 
+    public async Task<Response<Section?>> DuplicateSection(Request<ContentPortalSection> request)
+    {
+        return await wrappers.Try<Section?>(request, async response =>
+        {
+            var pageId = await FetchFooterPageId(request.SessionId, request.Value.ContentPortalId);
+            var section = request.Value.Section;
+
+            if (section is null || pageId.HasNothing())
+                throw new("Footer section not found.");
+
+            var duplicateResponse = await pagePartsService.DuplicateSection(request.SessionId, pageId, section);
+            response.AddErrors(duplicateResponse.Errors);
+            return duplicateResponse.Value!;
+        });
+    }
+
     public async Task<Response> SaveSection(Request<ContentPortalSection> request)
     {
         return await wrappers.Try(request, async response =>

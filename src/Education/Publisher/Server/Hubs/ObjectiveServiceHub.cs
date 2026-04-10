@@ -233,6 +233,27 @@ public partial class PublisherHub
         });
     }
 
+    public async Task<Response<Section?>> ObjectiveDuplicateSection(Request<ObjectiveSection> request)
+    {
+        return await HubWrappers.RequirePermission(request, PermissionIds.Units, async session =>
+        {
+            var response = await ObjectiveService.DuplicateSection(request);
+
+            if (response.Ok)
+            {
+                await Notify(request.SessionId, PermissionIds.Units, new SectionAdded
+                {
+                    Id = response.Value.Id,
+                    PageId = response.Value.PageId,
+                });
+
+                await GatewayService.Publish(new PageContentChanged { Id = response.Value.PageId });
+            }
+
+            return response;
+        });
+    }
+
     public async Task<Response> ObjectiveSaveSection(Request<ObjectiveSection> request)
     {
         return await HubWrappers.RequirePermission(request, PermissionIds.Units, async session =>

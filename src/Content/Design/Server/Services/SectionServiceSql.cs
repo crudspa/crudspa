@@ -157,22 +157,56 @@ public class SectionServiceSql(
 
     public async Task<Response<Copy>> Copy(Request<Copy> request)
     {
-        return await wrappers.Validate<Copy, Copy>(request, async response =>
+        return await wrappers.Try<Copy>(request, async response =>
         {
-            var newSection = await FetchSection(new(request.SessionId, new() { Id = request.Value.ExistingId, PageId = request.Value.ExistingParentId }));
+            var copy = request.Value;
 
-            if (newSection is not null)
+            if (copy.ExistingId.HasNothing())
             {
-                newSection.Id = Guid.NewGuid();
-                newSection.PageId = request.Value.NewParentId;
-
-                var newSectionResponse = await Add(new(request.SessionId, newSection));
-
-                if (!newSectionResponse.Ok)
-                    throw new("Add failed.");
+                response.AddError("Existing Id is required.", nameof(Crudspa.Framework.Core.Shared.Contracts.Data.Copy.ExistingId));
+                return null!;
             }
 
-            return new();
+            if (copy.ExistingParentId.HasNothing())
+            {
+                response.AddError("Existing Parent Id is required.", nameof(Crudspa.Framework.Core.Shared.Contracts.Data.Copy.ExistingParentId));
+                return null!;
+            }
+
+            if (copy.NewParentId.HasNothing())
+            {
+                response.AddError("New Parent Id is required.", nameof(Crudspa.Framework.Core.Shared.Contracts.Data.Copy.NewParentId));
+                return null!;
+            }
+
+            var existingSection = await FetchSection(new(request.SessionId, new()
+            {
+                Id = copy.ExistingId,
+                PageId = copy.ExistingParentId,
+            }));
+
+            if (existingSection is null)
+            {
+                response.AddError("Section not found.");
+                return null!;
+            }
+
+            var newSectionResponse = await Add(new(request.SessionId, existingSection.CreateCopy(copy.NewParentId)));
+
+            if (!newSectionResponse.Ok || newSectionResponse.Value is null)
+            {
+                if (newSectionResponse.Errors.HasItems())
+                    response.AddErrors(newSectionResponse.Errors);
+                else
+                    response.AddError("Section copy failed.");
+
+                return null!;
+            }
+
+            copy.NewId = newSectionResponse.Value.Id;
+            copy.NewParentId = newSectionResponse.Value.PageId;
+
+            return copy;
         });
     }
 
