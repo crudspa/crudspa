@@ -6,6 +6,7 @@
     <AssemblyName>Crudspa.Samples.Composer.Wasm</AssemblyName>
     <RootNamespace>Crudspa.Samples.Composer.Wasm</RootNamespace>
     <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
+    <WasmEnableHotReload>false</WasmEnableHotReload>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.5" />
