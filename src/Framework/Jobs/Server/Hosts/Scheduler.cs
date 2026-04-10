@@ -44,7 +44,7 @@ public class Scheduler : BackgroundService
             _logger.LogWarning("SchedulingInterval is set to {interval} so the scheduler will not run on this device.", jobsConfig.SchedulingInterval);
         else
         {
-            _logger.LogInformation("Starting scheduler session for portal {portalId} and user {userId}...", serverConfig.PortalId, jobsConfig.UserId);
+            _logger.LogInformation("Starting scheduler session for portal {portalId}...", serverConfig.PortalId);
 
             var sessionResponse = await _jobRunService.CreateSession(new Request());
 

@@ -38,9 +38,7 @@ public class Worker : BackgroundService
         _logger.LogInformation("Worker service {className} started.", GetType().FullName);
 
         var serverConfig = _serverConfigService.Fetch();
-        var jobsConfig = _jobsConfigService.Fetch();
-
-        _logger.LogInformation("Starting worker session for portal {portalId} and user {userId}...", serverConfig.PortalId, jobsConfig.UserId);
+        _logger.LogInformation("Starting worker session for portal {portalId}...", serverConfig.PortalId);
 
         var sessionResponse = await _jobRunService.CreateSession(new Request());
 

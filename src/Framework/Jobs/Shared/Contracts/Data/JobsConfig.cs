@@ -6,5 +6,4 @@ public class JobsConfig
     public String OpenAiApiKey { get; set; } = null!;
     public Int32 PollingInterval { get; set; } = 0;
     public Int32 SchedulingInterval { get; set; } = 0;
-    public Guid UserId { get; set; } = Guid.Empty;
 }

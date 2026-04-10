@@ -1697,7 +1697,6 @@
     <Build Include="FrameworkJobs\StoredProcedures\JobTypeSelectNames.sql" />
     <Build Include="FrameworkJobs\StoredProcedures\JobUpdateStatus.sql" />
     <Build Include="FrameworkJobs\StoredProcedures\SessionEndExpired.sql" />
-    <Build Include="FrameworkJobs\StoredProcedures\SessionInsert.sql" />
     <Build Include="FrameworkJobs\StoredProcedures\VideoFileSelect.sql" />
     <Build Include="FrameworkJobs\StoredProcedures\VideoFileSelectBeenOptimized.sql" />
     <Build Include="FrameworkJobs\StoredProcedures\VideoFileSelectForOptimization.sql" />

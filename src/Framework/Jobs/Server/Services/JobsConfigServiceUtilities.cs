@@ -12,7 +12,6 @@ public class JobsConfigServiceUtilities(IConfiguration configuration) : IJobsCon
             OpenAiApiKey = configuration.ReadString("Crudspa.Framework.Jobs.Utilities.OpenAiApiKey"),
             PollingInterval = configuration.ReadInt("Crudspa.Framework.Jobs.Utilities.PollingInterval"),
             SchedulingInterval = configuration.ReadInt("Crudspa.Framework.Jobs.Utilities.SchedulingInterval"),
-            UserId = configuration.ReadGuid("Crudspa.Framework.Jobs.Utilities.UserId"),
         };
     }
 

@@ -1,4 +1,4 @@
-﻿using SessionInsert = Crudspa.Framework.Jobs.Server.Sproxies.SessionInsert;
+using SessionInsert = Crudspa.Framework.Core.Server.Sproxies.SessionInsert;
 
 namespace Crudspa.Framework.Jobs.Server.Services;
 
@@ -6,7 +6,6 @@ public class JobRunServiceSql(
     IServiceWrappers wrappers,
     ISqlWrappers sqlWrappers,
     IServerConfigService serverConfigService,
-    IJobsConfigService jobsConfigService,
     ICryptographyService cryptographyService)
     : IJobRunService
 {
@@ -18,11 +17,10 @@ public class JobRunServiceSql(
         {
             var sessionId = cryptographyService.GetRandomGuid();
             var serverConfig = serverConfigService.Fetch();
-            var jobsConfig = jobsConfigService.Fetch();
 
             return (await sqlWrappers.WithConnection(async (connection, transaction) =>
             {
-                await SessionInsert.Execute(connection, transaction, sessionId, serverConfig.PortalId, jobsConfig.UserId);
+                await SessionInsert.Execute(connection, transaction, serverConfig.PortalId, sessionId);
                 return await SessionSelect.Execute(Connection, sessionId, serverConfig.PortalId);
             }))!;
         });
