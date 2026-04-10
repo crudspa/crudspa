@@ -2,6 +2,13 @@ namespace Crudspa.Content.Display.Client.Components;
 
 public partial class ThemePreview
 {
+    public enum Surfaces
+    {
+        None,
+        Binder,
+        Page,
+    }
+
     private String? _loadedHref;
     private Boolean _ready;
 
@@ -9,6 +16,7 @@ public partial class ThemePreview
     [Parameter] public EventCallback Loaded { get; set; }
     [Parameter] public Guid? PortalId { get; set; }
     [Parameter] public Boolean Primary { get; set; } = true;
+    [Parameter] public Surfaces Surface { get; set; }
     [Parameter] public Int32 Version { get; set; }
 
     public ScreenModel Model { get; } = new();
@@ -16,6 +24,12 @@ public partial class ThemePreview
     private String Scope => PreviewCss.Scope(PortalId!.Value);
     private String Href => $"/api/content/display/styles/preview?portal={PortalId!.Value:D}&scope={Scope}&version={Version:D}";
     private String Class => PreviewCss.Class(Scope);
+    private String? SurfaceStyle => Surface switch
+    {
+        Surfaces.Binder => "background-color: var(--binder-background-color); color: var(--binder-foreground-color);",
+        Surfaces.Page => "background-color: var(--page-background-color); color: var(--page-foreground-color);",
+        _ => null,
+    };
 
     protected override Task OnParametersSetAsync()
     {

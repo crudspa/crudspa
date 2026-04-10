@@ -10,7 +10,8 @@
 
             @if (!Model.Waiting && _ready)
             {
-                <div class="@Class">
+                <div class="@Class"
+                     style="@SurfaceStyle">
                     @ChildContent
                 </div>
             }
@@ -19,7 +20,8 @@
 }
 else
 {
-    <div class="@Class">
+    <div class="@Class"
+         style="@SurfaceStyle">
         @ChildContent
     </div>
 }
