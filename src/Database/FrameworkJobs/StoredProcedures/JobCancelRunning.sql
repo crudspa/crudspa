@@ -10,5 +10,11 @@ declare @now datetimeoffset = sysdatetimeoffset()
 update [Framework].[Job]
 set  StatusId = @JobStatusCanceled
     ,Ended = @now
+output
+     inserted.Id
+    ,inserted.Started
+    ,inserted.Ended
+    ,inserted.StatusId
+    ,inserted.DeviceId
 where StatusId = @JobStatusRunning
     and DeviceId = @DeviceId

@@ -20,6 +20,9 @@ public static class JobGatewayRelay
             case "Crudspa.Framework.Core.Shared.Contracts.Events.JobRemoved":
                 return await TryRelay<THub, JobRemoved>(gridEvent, hubContext);
 
+            case "Crudspa.Framework.Jobs.Shared.Contracts.Events.JobStatusChanged":
+                return await TryRelay<THub, JobStatusChanged>(gridEvent, hubContext);
+
             case "Crudspa.Framework.Jobs.Shared.Contracts.Events.JobScheduleAdded":
                 return await TryRelay<THub, JobScheduleAdded>(gridEvent, hubContext);
 

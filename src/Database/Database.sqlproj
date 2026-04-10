@@ -110,7 +110,6 @@
     <Folder Include="SamplesComposer" />
     <Folder Include="SamplesComposer\StoredProcedures" />
     <Folder Include="SamplesConsumer" />
-    <Folder Include="SamplesConsumer\StoredProcedures" />
     <Folder Include="SamplesJobs" />
     <Folder Include="Scripts" />
   </ItemGroup>

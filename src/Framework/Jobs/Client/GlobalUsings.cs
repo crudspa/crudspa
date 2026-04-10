@@ -11,6 +11,7 @@ global using Crudspa.Framework.Core.Shared.Contracts.Events;
 global using Crudspa.Framework.Core.Shared.Extensions;
 global using Crudspa.Framework.Jobs.Client.Contracts.Behavior;
 global using Crudspa.Framework.Jobs.Client.Plugins.PaneType;
+global using Crudspa.Framework.Jobs.Client.Services;
 global using Crudspa.Framework.Jobs.Shared.Contracts.Behavior;
 global using Crudspa.Framework.Jobs.Shared.Contracts.Data;
 global using Crudspa.Framework.Jobs.Shared.Contracts.Events;

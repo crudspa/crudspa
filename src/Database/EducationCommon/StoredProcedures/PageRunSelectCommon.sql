@@ -241,9 +241,19 @@ select
     ,button.Internal
     ,button.Path
     ,button.Text
-    ,button.TextAlignIndex
-    ,button.LeftIconId
-    ,button.RightIconId
+    ,button.ShapeIndex
+    ,button.GraphicIndex
+    ,button.TextTypeIndex
+    ,button.OrientationIndex
+    ,button.IconId
+    ,buttonImage.Id as ButtonImageId
+    ,buttonImage.BlobId as ButtonImageBlobId
+    ,buttonImage.Name as ButtonImageName
+    ,buttonImage.Format as ButtonImageFormat
+    ,buttonImage.Width as ButtonImageWidth
+    ,buttonImage.Height as ButtonImageHeight
+    ,buttonImage.Caption as ButtonImageCaption
+    ,icon.CssClass as ButtonIconCssClass
     ,box.Id as BoxId
     ,box.BackgroundColor as BoxBackgroundColor
     ,backgroundImage.Id as BoxBackgroundImageId
@@ -283,14 +293,12 @@ select
     ,box.TextShadowOffsetY as BoxTextShadowOffsetY
     ,box.HeadingLineHeight as BoxHeadingLineHeight
     ,box.ParagraphLineHeight as BoxParagraphLineHeight
-    ,leftIcon.CssClass as LeftIconCssClass
-    ,rightIcon.CssClass as RightIconCssClass
 from [Content].[ButtonElement-Active] buttonElement
     inner join [Content].[Button-Active] button on buttonElement.ButtonId = button.Id
     inner join [Content].[Element-Active] element on buttonElement.ElementId = element.Id
     inner join [Content].[Section-Active] section on element.SectionId = section.Id
-    left join [Framework].[Icon-Active] leftIcon on button.LeftIconId = leftIcon.Id
-    left join [Framework].[Icon-Active] rightIcon on button.RightIconId = rightIcon.Id
+    left join [Framework].[Icon-Active] icon on button.IconId = icon.Id
+    left join [Framework].[ImageFile-Active] buttonImage on button.ImageId = buttonImage.Id
     left join [Content].[Box-Active] box on button.BoxId = box.Id
     left join [Framework].[ImageFile-Active] backgroundImage on box.BackgroundImageId = backgroundImage.Id
 where section.PageId = @Id
@@ -374,9 +382,19 @@ select
     ,button.Internal as ButtonInteral
     ,button.Path as ButtonPath
     ,button.Text as ButtonText
-    ,button.TextAlignIndex as ButtonTextAlignIndex
-    ,button.LeftIconId as ButtonLeftIconId
-    ,button.RightIconId as ButtonRightIconId
+    ,button.ShapeIndex as ButtonShapeIndex
+    ,button.GraphicIndex as ButtonGraphicIndex
+    ,button.TextTypeIndex as ButtonTextTypeIndex
+    ,button.OrientationIndex as ButtonOrientationIndex
+    ,button.IconId as ButtonIconId
+    ,buttonImage.Id as ButtonImageId
+    ,buttonImage.BlobId as ButtonImageBlobId
+    ,buttonImage.Name as ButtonImageName
+    ,buttonImage.Format as ButtonImageFormat
+    ,buttonImage.Width as ButtonImageWidth
+    ,buttonImage.Height as ButtonImageHeight
+    ,buttonImage.Caption as ButtonImageCaption
+    ,buttonIcon.CssClass as ButtonIconCssClass
     ,buttonBox.Id as ButtonBoxId
     ,buttonBox.BackgroundColor as ButtonBoxBackgroundColor
     ,buttonBoxBackgroundImage.Id as ButtonBoxBackgroundImageId
@@ -416,8 +434,6 @@ select
     ,buttonBox.TextShadowOffsetY as ButtonBoxTextShadowOffsetY
     ,buttonBox.HeadingLineHeight as ButtonBoxHeadingLineHeight
     ,buttonBox.ParagraphLineHeight as ButtonBoxParagraphLineHeight
-    ,leftIcon.CssClass as LeftIconCssClass
-    ,rightIcon.CssClass as RightIconCssClass
     ,image.Id as ImageId
     ,image.BlobId as ImageBlobId
     ,image.Name as ImageName
@@ -444,11 +460,11 @@ from [Content].[MultimediaItem-Active] multimediaItem
     left join [Content].[Item-Active] item on multimediaItem.ItemId = item.Id
     left join [Framework].[AudioFile-Active] audio on multimediaItem.AudioId = audio.Id
     left join [Content].[Button-Active] button on multimediaItem.ButtonId = button.Id
+    left join [Framework].[Icon-Active] buttonIcon on button.IconId = buttonIcon.Id
+    left join [Framework].[ImageFile-Active] buttonImage on button.ImageId = buttonImage.Id
     left join [Framework].[ImageFile-Active] image on multimediaItem.ImageId = image.Id
     left join [Framework].[VideoFile-Active] video on multimediaItem.VideoId = video.Id
     left join [Framework].[ImageFile-Active] backgroundImage on box.BackgroundImageId = backgroundImage.Id
-    left join [Framework].[Icon-Active] leftIcon on button.LeftIconId = leftIcon.Id
-    left join [Framework].[Icon-Active] rightIcon on button.RightIconId = rightIcon.Id
     left join [Content].[Box-Active] buttonBox on button.BoxId = buttonBox.Id
     left join [Framework].[ImageFile-Active] buttonBoxBackgroundImage on buttonBox.BackgroundImageId = buttonBoxBackgroundImage.Id
 where section.PageId = @Id

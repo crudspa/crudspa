@@ -37,7 +37,7 @@ public partial class JobFind : IPaneDisplay, IDisposable
 }
 
 public class JobFindModel : FindModel<JobSearch, Job>,
-    IHandle<JobAdded>, IHandle<JobSaved>, IHandle<JobRemoved>
+    IHandle<JobAdded>, IHandle<JobSaved>, IHandle<JobRemoved>, IHandle<JobStatusChanged>
 {
     private readonly IJobService _jobService;
     private ObservableCollection<String> _sorts;
@@ -59,6 +59,30 @@ public class JobFindModel : FindModel<JobSearch, Job>,
     public async Task Handle(JobAdded payload) => await Refresh();
     public async Task Handle(JobSaved payload) => await Refresh();
     public async Task Handle(JobRemoved payload) => await Refresh();
+    public async Task Handle(JobStatusChanged payload)
+    {
+        var card = Cards.FirstOrDefault(x => x.Entity.Id.Equals(payload.Id));
+
+        if (card is not null)
+        {
+            card.Entity.ApplyStatusChange(payload, JobStatusNames, DeviceNames);
+
+            if (!MatchesActiveFilters(card.Entity))
+            {
+                RemoveCard(card);
+                await Refresh();
+                return;
+            }
+        }
+        else if (MightMatchResults(payload))
+        {
+            await Refresh();
+            return;
+        }
+
+        if (Search.Sort.Field.IsExactly("Started"))
+            await Refresh();
+    }
 
     public List<Named> JobTypeNames
     {
@@ -159,5 +183,30 @@ public class JobFindModel : FindModel<JobSearch, Job>,
     {
         var response = await WithAlerts(() => _jobService.FetchJobScheduleNames(new()), false);
         if (response.Ok) JobScheduleNames = response.Value.ToObservable();
+    }
+
+    private Boolean MatchesActiveFilters(Job job)
+    {
+        var matchesStatus = Search.Status.IsEmpty() || Search.Status.Any(x => x.Equals(job.StatusId));
+        var matchesDevice = Search.Devices.IsEmpty() || Search.Devices.Any(x => x.Equals(job.DeviceId));
+
+        return matchesStatus && matchesDevice;
+    }
+
+    private Boolean MightMatchResults(JobStatusChanged payload)
+    {
+        if (Search.Status.IsEmpty() && Search.Devices.IsEmpty())
+            return false;
+
+        var matchesStatus = Search.Status.IsEmpty() || Search.Status.Any(x => x.Equals(payload.StatusId));
+        var matchesDevice = Search.Devices.IsEmpty() || Search.Devices.Any(x => x.Equals(payload.DeviceId));
+
+        return matchesStatus && matchesDevice;
+    }
+
+    private void RemoveCard(CardModel<Job> card)
+    {
+        card.Dispose();
+        Cards.Remove(card);
     }
 }

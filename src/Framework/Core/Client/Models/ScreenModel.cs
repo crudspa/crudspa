@@ -141,6 +141,8 @@ public class ScreenModel : Observable, IDisposable
 
     public Boolean IsValid(IValidates entity)
     {
+        Alerts.RemoveWhere(x => x.Dismissible);
+
         var errors = entity.Validate();
 
         if (errors.HasItems())

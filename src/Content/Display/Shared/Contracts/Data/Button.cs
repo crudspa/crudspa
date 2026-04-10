@@ -41,7 +41,7 @@ public class Button : Observable, IValidates
     {
         get;
         set => SetProperty(ref field, value);
-    } = Graphics.Icon;
+    } = Graphics.None;
 
     public TextTypes TextTypeIndex
     {

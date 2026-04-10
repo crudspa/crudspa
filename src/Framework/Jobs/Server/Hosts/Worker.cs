@@ -60,6 +60,8 @@ public class Worker : BackgroundService
 
         if (!response.Ok)
             _logger.LogError("Error while marking jobs as canceled for device {deviceId}. {message}", _jobsConfig.DeviceId, response.ErrorMessages);
+        else
+            await PublishStatusChanges(response.Value);
 
         _logger.LogInformation("Beginning worker loop for device {deviceId} with polling interval {interval}...", _jobsConfig.DeviceId, _jobsConfig.PollingInterval);
 
@@ -103,6 +105,8 @@ public class Worker : BackgroundService
             return;
 
         _logger.LogInformation("Found {jobCount} jobs.", jobs.Count);
+
+        await PublishStatusChanges(jobs.Select(ToJobStatusChanged));
 
         var batchId = jobs.First().BatchId;
         using (_logger.BeginScope(new Dictionary<String, Object> { ["BatchId"] = batchId! }))
@@ -179,6 +183,35 @@ public class Worker : BackgroundService
         }
 
         if (job.Id is not null)
-            await _gatewayService.Publish(new JobSaved { Id = job.Id });
+            await PublishStatusChange(ToJobStatusChanged(job));
+    }
+
+    private async Task PublishStatusChanges(IEnumerable<JobStatusChanged>? changes)
+    {
+        if (changes is null)
+            return;
+
+        foreach (var change in changes)
+            await PublishStatusChange(change);
+    }
+
+    private async Task PublishStatusChange(JobStatusChanged change)
+    {
+        if (change.Id is null)
+            return;
+
+        await _gatewayService.Publish(change);
+    }
+
+    private static JobStatusChanged ToJobStatusChanged(Job job)
+    {
+        return new()
+        {
+            Id = job.Id,
+            Started = job.Started,
+            Ended = job.Ended,
+            StatusId = job.StatusId,
+            DeviceId = job.DeviceId,
+        };
     }
 }

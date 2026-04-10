@@ -6,5 +6,5 @@ public interface IJobRunService
     Task<Response<IList<Job>?>> FetchBatch(Request<Device> request);
     Task<Response<Job?>> FetchSingle(Request<Job> request);
     Task<Response> SaveStatus(Request<Job> request);
-    Task<Response> CancelRunning(Request<Device> request);
+    Task<Response<IList<JobStatusChanged>?>> CancelRunning(Request<Device> request);
 }

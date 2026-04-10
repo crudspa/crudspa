@@ -54,15 +54,15 @@ public class JobRunServiceSql(
         });
     }
 
-    public async Task<Response> CancelRunning(Request<Device> request)
+    public async Task<Response<IList<JobStatusChanged>?>> CancelRunning(Request<Device> request)
     {
-        return await wrappers.Try(request, async response =>
+        return await wrappers.Try<IList<JobStatusChanged>?>(request, async response =>
         {
             var device = request.Value;
 
-            await sqlWrappers.WithConnection(async (connection, transaction) =>
+            return await sqlWrappers.WithConnection(async (connection, transaction) =>
             {
-                await JobCancelRunning.Execute(connection, transaction, device.Id);
+                return await JobCancelRunning.Execute(connection, transaction, device.Id);
             });
         });
     }

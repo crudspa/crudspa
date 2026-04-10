@@ -37,7 +37,8 @@
                Container="Field.Containers.Div">
             <EnumRadio TEnum="Button.Graphics"
                        ReadOnly="ReadOnly"
-                       @bind-SelectedValue="Model.Button.GraphicIndex" />
+                       SelectedValue="Model.Button.GraphicIndex"
+                       SelectedValueChanged="HandleGraphicChanged" />
         </Field>
         @if (Model.Button.GraphicIndex == Button.Graphics.Icon)
         {
@@ -45,8 +46,7 @@
                    Size="Field.Sizes.Medium">
                 <IconDropdown LookupValues="Model.Icons"
                               ReadOnly="ReadOnly"
-                              AllowNull="true"
-                              NullText="[None]"
+                              AllowNull="false"
                               @bind-Value="Model.Button.IconId" />
             </Field>
         }

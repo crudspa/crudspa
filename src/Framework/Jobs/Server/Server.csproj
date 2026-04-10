@@ -12,7 +12,6 @@
     <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.11.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Content\Display\Shared\Shared.csproj" />
     <ProjectReference Include="..\..\Core\Server\Server.csproj" />
     <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>

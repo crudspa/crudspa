@@ -47,7 +47,7 @@ public partial class JobEdit : IPaneDisplay, IDisposable
     }
 }
 
-public class JobEditModel : EditModel<Job>, IHandle<JobSaved>, IHandle<JobRemoved>
+public class JobEditModel : EditModel<Job>, IHandle<JobSaved>, IHandle<JobRemoved>, IHandle<JobStatusChanged>
 {
     private readonly String? _path;
     private readonly Guid? _id;
@@ -79,6 +79,23 @@ public class JobEditModel : EditModel<Job>, IHandle<JobSaved>, IHandle<JobRemove
             await Refresh();
     }
 
+    public async Task Handle(JobStatusChanged payload)
+    {
+        if (!payload.Id.Equals(_id))
+            return;
+
+        if (Entity is null)
+        {
+            await Refresh();
+            return;
+        }
+
+        Entity.ApplyStatusChange(payload, JobStatusNames, DeviceNames);
+        SetProgressForStatus();
+        RaisePropertyChanged(nameof(Entity));
+        RaisePropertyChanged(nameof(Progress));
+    }
+
     public Task Handle(JobRemoved payload)
     {
         if (payload.Id.Equals(_id))
@@ -101,6 +118,12 @@ public class JobEditModel : EditModel<Job>, IHandle<JobSaved>, IHandle<JobRemove
         set => SetProperty(ref field, value);
     } = [];
 
+    public List<OrderableCssClass> JobStatusNames
+    {
+        get;
+        set => SetProperty(ref field, value);
+    } = [];
+
     public JobTypeFull? SelectedJobType
     {
         get;
@@ -111,7 +134,8 @@ public class JobEditModel : EditModel<Job>, IHandle<JobSaved>, IHandle<JobRemove
     {
         await WithMany("Initializing...",
             FetchJobTypes(),
-            FetchDeviceNames());
+            FetchDeviceNames(),
+            FetchJobStatusNames());
 
         await Refresh();
     }
@@ -198,6 +222,12 @@ public class JobEditModel : EditModel<Job>, IHandle<JobSaved>, IHandle<JobRemove
     {
         var response = await WithAlerts(() => _jobService.FetchDeviceNames(new()), false);
         if (response.Ok) DeviceNames = response.Value.ToList();
+    }
+
+    public async Task FetchJobStatusNames()
+    {
+        var response = await WithAlerts(() => _jobService.FetchJobStatusNames(new()), false);
+        if (response.Ok) JobStatusNames = response.Value.ToList();
     }
 
     private void SetSelectedType()
