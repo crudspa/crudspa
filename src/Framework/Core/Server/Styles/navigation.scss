@@ -743,6 +743,21 @@
         .auth-bar {
             flex: 0 0 auto;
 
+            &.placeholder {
+                display: none;
+
+                @media (max-width: $screenMedium) {
+                    align-items: center;
+                    display: flex;
+                    font-size: 2em;
+                    line-height: 1;
+                    padding: .25em .5em;
+                    pointer-events: none;
+                    user-select: none;
+                    visibility: hidden;
+                }
+            }
+
             .signed-in {
                 @extend .c-nowrap;
 
