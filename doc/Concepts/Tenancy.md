@@ -12,9 +12,9 @@ Crudspa thinks about tenancy as a question:
 
 That question is more useful than arguing about one universal tenancy model, because real applications rarely have one.
 
-## Why This Matters Publicly
+## Why This Shows Up Publicly
 
-This is not just a database detail. It affects how teams build with the framework.
+This isn't just a database detail. It affects how teams build with the framework.
 
 If tenancy is treated as a first-class concern:
 
@@ -36,13 +36,13 @@ That last step is the important one. Crudspa wants the hard guarantee to survive
 
 ## Different Applications, Different Predicates
 
-Some applications are organization-scoped. Others are district-scoped or provider-scoped. Crudspa does not try to flatten those into one fake universal rule.
+Some applications are organization-scoped. Others are district-scoped or provider-scoped. Crudspa doesn't try to flatten those into one fake universal rule.
 
-That flexibility matters because line-of-business software often grows through exactly those differences.
+That flexibility helps because line-of-business software often grows through exactly those differences.
 
 ## Repositories And Tenancy
 
-Crudspa repositories are usually shared persistence helpers, not the final authority on feature scope. That is why a service can reuse shared contact or user persistence logic while a feature-specific write still applies the true tenancy rule for the feature itself.
+Crudspa repositories are usually shared persistence helpers, not the final authority on feature scope. That's why a service can reuse shared contact or user persistence logic while a feature-specific write still applies the true tenancy rule for the feature itself.
 
 That separation keeps common persistence code reusable without weakening the final rule.
 
@@ -57,7 +57,7 @@ When adding a tenancy-sensitive feature:
 
 ## Tradeoffs
 
-Crudspa's tenancy model asks teams to take scope seriously all the way down to the data layer. That is more deliberate than treating tenancy as a browser convention, but it is much safer once the application has real complexity.
+Crudspa's tenancy model asks teams to take scope seriously all the way down to the data layer. That's more deliberate than treating tenancy as a browser convention, but it's much safer once the application has real complexity.
 
 ## Next Steps
 

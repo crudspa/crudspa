@@ -109,7 +109,7 @@ Usually no. Wrap with nearby fields or use `ChildContent` first. Fork only when 
 
 ### Can `UsaPostalEdit` be used outside contact and organization forms?
 
-Yes. It is a standalone address editor and works in any form.
+Yes. It's a standalone address editor and works in any form.
 
 ### Why are these not just partial snippets?
 

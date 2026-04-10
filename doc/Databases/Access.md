@@ -1,6 +1,6 @@
 # Databases | Access
 
-In CRUD systems, the database is the shared resource every request eventually depends on. You can add more web servers, but there is still one transactional source of truth that decides latency, correctness, and concurrency behavior.
+In CRUD systems, the database is the shared resource every request eventually depends on. You can add more web servers, but there's still one transactional source of truth that decides latency, correctness, and concurrency behavior.
 
 Our default access style is direct and explicit: `Microsoft.Data.SqlClient`, stored procedures, and small C# sproxy classes. A sproxy is a stored procedure proxy that builds a `SqlCommand`, adds typed parameters, executes the call, and maps the result into models.
 
@@ -8,7 +8,7 @@ We prefer this style because it performs well in real CRUD workloads and keeps i
 
 ## Access Stack
 
- Layer | Responsibility | Why it matters
+ Layer | Responsibility | Why it helps
  --- | --- | ---
  Stored procedure or view | defines the SQL contract and data-tier enforcement | behavior stays visible and reviewable
  sproxy class | builds the command and maps rows into models | keeps each call small and explicit

@@ -32,7 +32,7 @@ The same idea holds on the server side, where applications choose wrappers, repo
 
 ## Why This Helps Consumers
 
-This matters because Crudspa is not trying to own your whole application. It is trying to give your application a strong default shape.
+That helps because Crudspa isn't trying to own your whole application. It's trying to give your application a strong default shape.
 
 Clear registration keeps it easy to:
 
@@ -41,11 +41,11 @@ Clear registration keeps it easy to:
 * keep custom application behavior separate from reusable framework behavior
 * understand what an application actually depends on
 
-That is why this topic belongs in the public docs. It is not just an implementation detail. It is part of how teams use Crudspa cleanly.
+That's why this topic belongs in the public docs. It's not just an implementation detail. It's part of how teams use Crudspa cleanly.
 
 ## Models And DI
 
-Crudspa does not force every object into the container.
+Crudspa doesn't force every object into the container.
 
 Shared services and infrastructure usually live in DI. Short-lived screen models are often created in components with injected services passed in. That balance keeps application code straightforward: DI owns long-lived capability, while components own local workflow state.
 
@@ -62,7 +62,7 @@ If you want the broader application picture, read [Overview | Applications](../O
 
 ## Tradeoffs
 
-Dependency injection can become noisy when it is used carelessly. Crudspa tries to avoid that by keeping registration predictable and by giving each layer a clear role.
+Dependency injection can become noisy when it's used carelessly. Crudspa tries to avoid that by keeping registration predictable and by giving each layer a clear role.
 
 The result is a codebase that stays easier to reshape as the application grows.
 

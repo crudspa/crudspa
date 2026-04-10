@@ -56,15 +56,15 @@ where Id = @Id
     and IsDeleted = 0
 ```
 
-## Why Active Views Matter
+## Why Active Views Help
 
-The `-Active` view is what keeps soft deletion ergonomic. Reads do not need to repeat `IsDeleted = 0` everywhere, and developers naturally stay on the correct path because the default query surface already excludes deleted rows.
+The `-Active` view is what keeps soft deletion ergonomic. Reads don't need to repeat `IsDeleted = 0` everywhere, and developers naturally stay on the correct path because the default query surface already excludes deleted rows.
 
 This is also why soft deletion fits well with the rest of the framework. Support and recovery flows can still reach the base table when they need to, while most application code stays simple.
 
 ## Lifecycle Planning
 
-Soft-deleted rows still consume storage, so long-lived products need archive and purge routines. That is not a flaw in the pattern. It is a lifecycle responsibility that should be planned from the start.
+Soft-deleted rows still consume storage, so long-lived products need archive and purge routines. That's not a flaw in the pattern. It's a lifecycle responsibility that should be planned from the start.
 
 In this framework, soft deletion pairs naturally with [Auditing](Auditing.md) and [Versioning](Versioning.md) so teams get accountability, recoverability, and historical visibility from one consistent model.
 

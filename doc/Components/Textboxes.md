@@ -105,7 +105,7 @@ Use `TextBox` for short text and `MultilineTextBox` for longer plain text:
 
 ## Radzen-Backed Wrappers
 
-`SearchTextBox`, `MaskedTextBox`, `NumericTextBox<T>`, and editable `HtmlEditor` all sit on top of Radzen controls. Crudspa trims their public surface to the behavior we use most often in forms, filters, and editors. If you need a lower-level Radzen option that Crudspa does not expose, you can use the Radzen component directly because the library is bundled with the framework.
+`SearchTextBox`, `MaskedTextBox`, `NumericTextBox<T>`, and editable `HtmlEditor` all sit on top of Radzen controls. Crudspa trims their public surface to the behavior we use most often in forms, filters, and editors. If you need a lower-level Radzen option that Crudspa doesn't expose, you can use the Radzen component directly because the library is bundled with the framework.
 
 ## Rich Text Safety Model
 
@@ -128,7 +128,7 @@ This default protects CRUD editors from common injected markup issues while pres
 
 * Use `SearchTextBox` for filter/search only, not ordinary form fields.
 * Keep masks strict for structured values (phone, postal codes, account codes).
-* Keep numeric formats explicit when precision/scale matters.
+* Keep numeric formats explicit when precision or scale needs to stay obvious.
 * Use `UserHtml` directly only when html is already trusted/sanitized.
 
 ## Common Questions

@@ -77,7 +77,7 @@ The fastest way to get oriented is:
 
 Managed projects in this repository target `net10.0`.
 
-For the full workspace, open [src/Crudspa.slnx](src/Crudspa.slnx) in Visual Studio. The solution includes [src/Database/Database.sqlproj](src/Database/Database.sqlproj), so full solution builds require Visual Studio or MSBuild with SQL Server Data Tools. Plain `dotnet build` is still useful for managed projects, but a full solution build will stop when it reaches the SQL project if SSDT is not installed.
+For the full workspace, open [src/Crudspa.slnx](src/Crudspa.slnx) in Visual Studio. The solution includes [src/Database/Database.sqlproj](src/Database/Database.sqlproj), so full solution builds require Visual Studio or MSBuild with SQL Server Data Tools. Plain `dotnet build` is still useful for managed projects, but a full solution build will stop when it reaches the SQL project if SSDT isn't installed.
 
 ## Docs
 
@@ -100,7 +100,7 @@ The documentation is meant to teach both the platform's shape and the reasoning 
 
 Crudspa welcomes focused contributions that solve real problems while fitting the platform's existing structure. If you are considering a pull request, start with the contribution guide and keep documentation in sync with behavior changes.
 
-Questions, bug reports, and small improvement proposals belong in GitHub Discussions. Security reports and other private matters should follow the contact paths in [Security.md](Security.md) and [Support.md](Support.md).
+Questions, bug reports, and small improvement proposals belong in GitHub Discussions. Security reports and other private concerns should follow the contact paths in [Security.md](Security.md) and [Support.md](Support.md).
 
 | Topic | Link |
 | --- | --- |

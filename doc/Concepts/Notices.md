@@ -2,7 +2,7 @@
 
 Multi-user CRUD screens go stale quickly if the architecture only thinks in request and response pairs. One user saves a record. Another user still sees the old value. Lists drift. Counts drift. Runtime content can drift too.
 
-Crudspa treats that as a first-class problem. Its notice model is not an optional add-on. It is part of the platform's default story for keeping connected clients fresh.
+Crudspa treats that as a first-class problem. Its notice model isn't an optional add-on. It's part of the platform's default story for keeping connected clients fresh.
 
 `Catalog` is the smallest place to study the notice loop end to end. `Composer` plus `Consumer` then shows how the same event vocabulary crosses host boundaries for authored content, and `Samples/Jobs/Engine` plus `Catalog` or `Composer` shows the same pattern for background work.
 
@@ -23,18 +23,18 @@ In practice, a notice flow starts with a client mutation, passes through hub wra
 
 ## Across Hosts
 
-Crudspa does not treat cross-host refresh as a different system. It keeps the same typed event vocabulary and adds a gateway hop when another host needs to invalidate caches or rebroadcast a notice.
+Crudspa doesn't treat cross-host refresh as a different system. It keeps the same typed event vocabulary and adds a gateway hop when another host needs to invalidate caches or rebroadcast a notice.
 
 In the shipped samples, `GatewayServiceEventGrid` uses the checked-in `EventReceiverUrls` values to post Event Grid-shaped payloads to the sample controllers:
 
 * `Composer` publishes `PageContentChanged` and `PortalRunChanged` so `Consumer` can invalidate runtime content caches, warm themed output, and rebroadcast.
 * `Samples/Jobs/Engine` publishes job and schedule events so `Catalog` and `Composer` can refresh their `Jobs` and `Schedules` panes.
 
-That is still one architectural loop, not two unrelated systems. The gateway carries the event between hosts, then each host uses the normal notice mechanism for its own connected clients.
+That's still one architectural loop, not two unrelated systems. The gateway carries the event between hosts, then each host uses the normal notice mechanism for its own connected clients.
 
 ## Subscription And Audience Model
 
-Subscriptions happen in the context of a real session. That matters because audience scoping depends on who the user is and what they are allowed to see.
+Subscriptions happen in the context of a real session. That helps because audience scoping depends on who the user is and what they are allowed to see.
 
 Crudspa's hub subscription model groups connections by scopes such as:
 
@@ -52,9 +52,9 @@ On the client side, the event bus and screen models do the rest. Common update p
 * refresh a currently open edit pane
 * replace one card or form inside a list or many surface
 * remove an item that was deleted elsewhere
-* ignore the event if it is outside the current scope
+* ignore the event if it's outside the current scope
 
-Those scope-aware helpers are a big reason the notice flow stays manageable. Panes are not all inventing their own synchronization logic.
+Those scope-aware helpers are a big reason the notice flow stays manageable. Panes aren't all inventing their own synchronization logic.
 
 ## Security And Reliability
 
@@ -74,17 +74,17 @@ When adding notice behavior to a feature:
 
 * publish notices only after successful commits
 * keep payloads small and typed
-* let the client refetch authoritative data when it matters
-* use scope checks so unrelated panes do not churn
+* let the client refetch authoritative data when it needs to
+* use scope checks so unrelated panes don't churn
 * handle reconnects by resubscribing and refreshing where appropriate
 
 This keeps the architecture honest and keeps the event model from becoming a second, hidden data layer.
 
 ## Tradeoffs
 
-Notice-driven refresh adds moving parts. You are now thinking about sessions, audience scope, reconnects, and eventual refresh behavior. Cross-host refresh adds gateway endpoints and cache invalidation on top of that. That is more work than a static page.
+Notice-driven refresh adds moving parts. You are now thinking about sessions, audience scope, reconnects, and eventual refresh behavior. Cross-host refresh adds gateway endpoints and cache invalidation on top of that. That's more work than a static page.
 
-But for serious CRUD+SPA applications, it is usually the right work. The alternative is stale screens and quiet user confusion.
+But for serious CRUD+SPA applications, it's usually the right work. The alternative is stale screens and quiet user confusion.
 
 ## Next Steps
 

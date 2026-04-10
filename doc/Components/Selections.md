@@ -97,7 +97,7 @@ Prefer typed selection components over custom input markup:
 
 ## Practical Guidance
 
-* Use `BoolRadio` when labels matter more than simple on/off toggles.
+* Use `BoolRadio` when labels are clearer than a simple on/off toggle.
 * Use `Checkbox` for quick flags and secondary options.
 * Keep null behavior explicit for optional relationships (`AllowNull` with clear `NullText`).
 * Keep orientation consistent within a form section for readability.
@@ -110,7 +110,7 @@ Use `BoolRadio` when explicit labels improve clarity. Use `Checkbox` for lightwe
 
 ### Should enum choices be dropdown or radio?
 
-If option count is small and clarity matters, use radio. If space is tight or options are many, use dropdown.
+If the option count is small and clarity is the priority, use radio. If space is tight or options are many, use dropdown.
 
 ### How do I handle many relationship options?
 

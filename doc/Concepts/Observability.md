@@ -1,6 +1,6 @@
 # Concepts | Observability
 
-Good CRUD applications are operational software, not just UI. Teams need to know what failed, where it failed, and what to do next. That matters even more when some of the most important workflow runs in the browser.
+Good CRUD applications are operational software, not just UI. Teams need to know what failed, where it failed, and what to do next. That becomes even more important when some of the most important workflow runs in the browser.
 
 Crudspa's observability stance is intentionally simple in public use: log through normal .NET APIs, let the application choose sinks, and keep browser and server events close enough that they can be understood as one story.
 
@@ -23,19 +23,19 @@ For most application developers, the rule is easy:
 * return expected problems as structured results
 * let the framework and the application host handle routing, aggregation, and sinks
 
-You should not need a second logging vocabulary just because a workflow started in a pane instead of on the server.
+You shouldn't need a second logging vocabulary just because a workflow started in a pane instead of on the server.
 
 ## Browser And Server Together
 
 Crudspa's client logging support exists to preserve that simplicity. Browser-side logs can be relayed through the existing application boundary so they end up in the same general logging story as server-side events.
 
-That matters because many real failures in CRUD+SPA applications are cross-boundary problems: a pane action starts in the browser, crosses a service boundary, touches the database, and then refreshes other users in real time. Operations teams need that story to stay coherent.
+That helps because many real failures in CRUD+SPA applications are cross-boundary problems: a pane action starts in the browser, crosses a service boundary, touches the database, and then refreshes other users in real time. Operations teams need that story to stay coherent.
 
 ## Where To Extend
 
-When teams want more than basic logging, the usual extension point is not feature code. It is application configuration and wrapper behavior.
+When teams want more than basic logging, the usual extension point isn't feature code. It's application configuration and wrapper behavior.
 
-That is where you typically add:
+That's where you typically add:
 
 * structured sink configuration
 * distributed tracing
@@ -49,7 +49,7 @@ Crudspa's public message here should be reassuring: the framework gives you a cl
 
 The same story applies to jobs and worker processes. Background work is still part of the application's operational model, not a side system that should be invisible until it fails.
 
-That is why the jobs sample sits in the same documentation story as the interactive applications.
+That's why the jobs sample sits in the same documentation story as the interactive applications.
 
 ## Practical Guidance
 
@@ -62,7 +62,7 @@ When building with Crudspa:
 
 ## Tradeoffs
 
-This approach asks for a little architectural discipline, but it keeps the overall system much easier to operate. The payoff is not cleverness. The payoff is that the application tells one clearer story when something goes wrong.
+This approach asks for a little architectural discipline, but it keeps the overall system much easier to operate. The payoff isn't cleverness. The payoff is that the application tells one clearer story when something goes wrong.
 
 ## Next Steps
 

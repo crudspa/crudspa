@@ -1,4 +1,4 @@
-﻿# Components | Dialogs
+# Components | Dialogs
 
 CRUD+SPA systems rely on overlays for edit forms, confirmations, viewers, and error recovery. Without a shared dialog model, focus behavior, waiting states, and close handling drift across screens.
 
@@ -86,7 +86,7 @@ Inside the app itself, place `ErrorRecover` around a subtree only when that subt
 </ErrorRecover>
 ```
 
-On unhandled render exceptions, `ErrorRecover` logs once and shows a fallback error panel. Crudspa does not retry rendering automatically at this boundary.
+On unhandled render exceptions, `ErrorRecover` logs once and shows a fallback error panel. Crudspa doesn't retry rendering automatically at this boundary.
 
 ## Practical Guidance
 
@@ -113,7 +113,7 @@ Only in specialized layouts where modal dimming blocks critical context. Keep ov
 
 The modal system is intentionally opinionated. You get reliable close behavior and shared waiting/alert UX, but less freedom for one-off overlay mechanics.
 
-The scope of the modal matters more than its chrome. Local modals belong to one pane workflow such as edit, confirm, or pick. Global modals belong to shell-wide concerns such as authentication or shared viewers.
+The modal's scope is more important than its chrome. Local modals belong to one pane workflow such as edit, confirm, or pick. Global modals belong to shell-wide concerns such as authentication or shared viewers.
 
 ## Next Steps
 

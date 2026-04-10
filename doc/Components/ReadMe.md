@@ -74,7 +74,7 @@ Media | [Media](Media.md) | uploaders, players, viewers, `RootModalsCore`
 
 ## Tradeoffs
 
-This layer leans toward consistency and reusable screen shapes because that is what helps larger CRUD+SPA systems age well. That does mean some screens will feel more structured than raw HTML plus ad-hoc controls.
+This layer leans toward consistency and reusable screen shapes because that's what helps larger CRUD+SPA systems age well. That does mean some screens will feel more structured than raw HTML plus ad-hoc controls.
 
 Crudspa is also intentionally opt-in. If a built-in component stops helping, you can drop down to lower-level Razor, direct Blazor markup, or vendor-specific controls without abandoning the rest of the framework.
 
@@ -82,7 +82,7 @@ Crudspa is also intentionally opt-in. If a built-in component stops helping, you
 
 Crudspa bundles the full Radzen Blazor library alongside its own component layer. In practice, most screens work best when they depend on Crudspa components first, because those components keep parameter surfaces, styling, and CRUD behavior more consistent across panes.
 
-Some Crudspa components are pure framework components. Others are thin wrappers over Radzen with smaller, Crudspa-shaped APIs. When you need a Radzen control that Crudspa does not wrap, you can use it directly.
+Some Crudspa components are pure framework components. Others are thin wrappers over Radzen with smaller, Crudspa-shaped APIs. When you need a Radzen control that Crudspa doesn't wrap, you can use it directly.
 
 That layering also helps contain vendor-specific concerns. Screen code can stay mostly Crudspa-shaped while the component layer absorbs more of the direct Radzen dependency.
 

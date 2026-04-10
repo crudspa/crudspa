@@ -42,7 +42,7 @@ This is the default path for lookup-backed content states because the same resol
 
  Parameter | Purpose | Notes
  --- | --- | ---
- `Name` | text shown inside the status pill | required in practice; component does not render without it
+ `Name` | text shown inside the status pill | required in practice; component doesn't render without it
  `Id` | optional status id | used by resolver functions
  `ColorClass` | explicit css class for the pill | takes precedence over `ColorClassFrom`
  `ColorClassFrom` | shared resolver function | receives `(id, name)` and returns a css class or `null`
@@ -57,7 +57,7 @@ This is the default path for lookup-backed content states because the same resol
  `ReadOnly` | disables selection changes | keeps selected option visually distinct
  `AllowNull` | shows an explicit no-selection option | default `false`
  `NullText` | label for the null option | useful with `AllowNull`
- `ColorClassFrom` | fallback resolver function | used when lookup items do not already provide a css class
+ `ColorClassFrom` | fallback resolver function | used when lookup items don't already provide a css class
  `CssClass` | additional classes for the button group | optional
 
 ## Color Resolution
@@ -103,7 +103,7 @@ If you use a different class name, the components still work, but the final appe
 
 ## Practical Guidance
 
-* Use `StatusEdit` when status should stay visible at all times. Because it renders every option as a button, it is better for small sets than large taxonomies.
+* Use `StatusEdit` when status should stay visible at all times. Because it renders every option as a button, it's better for small sets than large taxonomies.
 * Keep the status vocabulary stable. A status control works best when each option has clear workflow meaning, not just alternate wording.
 * Prefer shared color mappings over one-off local class decisions so status meaning stays consistent across lists, cards, and forms.
 * Set `AllowNull` only when a missing status is a real business state, not just a temporary loading gap.
@@ -116,7 +116,7 @@ Use `StatusEdit` when status is an important workflow signal and color should re
 
 ### Do I need both `Id` and `Name` for `StatusDisplay`?
 
-`Name` is the key requirement because it is the visible text. `Id` is optional but useful when color resolution depends on stable identifiers instead of display names.
+`Name` is the key requirement because it's the visible text. `Id` is optional but useful when color resolution depends on stable identifiers instead of display names.
 
 ### Should I use `ColorClass` or `ColorClassFrom`?
 
@@ -124,7 +124,7 @@ Use `ColorClass` when the data already includes the final class to render. Use `
 
 ## Tradeoffs
 
-These components intentionally favor visibility and consistency over compactness. `StatusEdit` is stronger than a dropdown for small status sets, but it is not the right fit for large lookups. The coloring story is also convention-based, so teams get the most value when they share a small, stable css class vocabulary.
+These components intentionally favor visibility and consistency over compactness. `StatusEdit` is stronger than a dropdown for small status sets, but it's not the right fit for large lookups. The coloring story is also convention-based, so teams get the most value when they share a small, stable css class vocabulary.
 
 ## Next Steps
 

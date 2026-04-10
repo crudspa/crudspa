@@ -1,6 +1,6 @@
 # Components | Dropdowns
 
-Lookup selection is everywhere in CRUD forms. The challenge is not just showing choices, but keeping null handling, filtering, and display conventions consistent across modules.
+Lookup selection is everywhere in CRUD forms. The challenge isn't just showing choices, but keeping null handling, filtering, and display conventions consistent across modules.
 
 Crudspa provides multiple dropdown variants with clear intent boundaries.
 

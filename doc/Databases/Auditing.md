@@ -87,15 +87,15 @@ order by emailLog.Updated desc;
 
 ## When To Extend It
 
-For many CRUD products, this is the right default. It is cheap to maintain and very effective in practice.
+For many CRUD products, this is the right default. It's cheap to maintain and very effective in practice.
 
 When you need to reconstruct prior row values over time, pair this pattern with [Versioning](Versioning.md). When a table is truly static or disposable, adding audit metadata may not be worth the extra write cost.
 
 ## Tradeoffs
 
-This approach tells you who last touched a row and when. It does not, by itself, tell you what the previous values were or preserve every intermediate state.
+This approach tells you who last touched a row and when. It doesn't, by itself, tell you what the previous values were or preserve every intermediate state.
 
-That is an intentional trade. The baseline stays cheap, widely applicable, and easy to query. More detailed history should be added only where it pays for itself.
+That's an intentional trade. The baseline stays cheap, widely applicable, and easy to query. More detailed history should be added only where it pays for itself.
 
 ## Next Steps
 

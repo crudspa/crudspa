@@ -73,7 +73,7 @@ The concepts pages explain the platform's core mechanics. This section is where 
 | --- | --- |
 | [Contracts](Concepts/Contracts.md) | Shared DTOs, behavior interfaces, events, and request or response envelopes that keep client and server aligned. |
 | [Services](Concepts/Services.md) | The stateless service patterns Crudspa uses for feature access across client and server boundaries. |
-| [Wrappers](Concepts/Wrappers.md) | Cross-cutting hooks for logging, authorization, transactions, observability, and other policies that should not leak into feature code. |
+| [Wrappers](Concepts/Wrappers.md) | Cross-cutting hooks for logging, authorization, transactions, observability, and other policies that shouldn't leak into feature code. |
 | [Exceptions](Concepts/Exceptions.md) | Why expected failures should travel back as structured results instead of being treated as ordinary control flow exceptions. |
 | [Observability](Concepts/Observability.md) | How Crudspa keeps browser logs, server logs, and wrapper-level telemetry inside one standard .NET logging story. |
 | [Injection](Concepts/Injection.md) | The dependency registration patterns that keep transports, providers, and project-specific behavior swappable. |
@@ -170,8 +170,8 @@ Crudspa keeps the database layer visible instead of treating it as a persistence
 | --- | --- |
 | [Access](Databases/Access.md) | Database access patterns, concurrency expectations, and why the database is a shared runtime dependency. |
 | [Auditing](Databases/Auditing.md) | How to answer who changed what and when without bolting on support-only fixes later. |
-| [Deletion](Databases/Deletion.md) | Safe deletion strategies and why soft-delete-style behavior matters in business systems. |
+| [Deletion](Databases/Deletion.md) | Safe deletion strategies and how soft-delete-style behavior fits business systems. |
 | [Lookups](Databases/Lookups.md) | Stable small datasets that power dropdowns, radio lists, and filters across the application. |
 | [Migrations](Databases/Migrations.md) | The discipline and workflow around safe schema evolution. |
 | [Standards](Databases/Standards.md) | Crudspa's SQL naming, structure, and style conventions. |
-| [Versioning](Databases/Versioning.md) | Historical row-state patterns for cases where overwrite-only updates are not enough. |
+| [Versioning](Databases/Versioning.md) | Historical row-state patterns for cases where overwrite-only updates aren't enough. |

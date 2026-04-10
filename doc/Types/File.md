@@ -1,4 +1,4 @@
-﻿# Types | File
+# Types | File
 
 File handling is one of the highest-risk parts of CRUD platforms. Uploading bytes is easy. Keeping metadata, optimization, caching, and authorization coherent over time is harder.
 
@@ -140,7 +140,7 @@ return BuildFetchUrl(
 
 Uploader components expose original download links with `original=true`, while standard rendering usually prefers optimized assets.
 
-File workflows usually cross several steps. The upload updates model-held metadata, the parent save persists the relationship to the owning record, fetch URLs carry cache-version information, and the client can then render optimized or original assets as needed. That is why Crudspa treats file metadata as first-class application data.
+File workflows usually cross several steps. The upload updates model-held metadata, the parent save persists the relationship to the owning record, fetch URLs carry cache-version information, and the client can then render optimized or original assets as needed. That's why Crudspa treats file metadata as first-class application data.
 
 ## Optimization Behavior
 
@@ -165,7 +165,7 @@ If media access is sensitive, implement a feature endpoint that:
 
 ## Cleanup Strategy
 
-Crudspa does not force one blob cleanup policy. Teams usually choose one of these, or combine them:
+Crudspa doesn't force one blob cleanup policy. Teams usually choose one of these, or combine them:
 
 * immediate cleanup during update/remove flows,
 * scheduled orphan cleanup jobs,

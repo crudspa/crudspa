@@ -1,8 +1,8 @@
 # Styling | Stylesheets
 
-Most Crudspa developers do not need to work at the raw CSS level very often. The component layer already applies most of the framework classes for forms, buttons, toolbars, tabs, dialogs, trees, cards, and navigation shells.
+Most Crudspa developers don't need to work at the raw CSS level very often. The component layer already applies most of the framework classes for forms, buttons, toolbars, tabs, dialogs, trees, cards, and navigation shells.
 
-This page is still important. It is the single reference for the Crudspa stylesheet system itself: how stylesheet entrypoints are composed, how module layering works, how host-specific SCSS fits in, and how the framework exposes theme tokens to those stylesheets. If you need to extend the platform cleanly or build a custom style stack that still feels like Crudspa, this is the page to read.
+This page is still important. It's the single reference for the Crudspa stylesheet system itself: how stylesheet entrypoints are composed, how module layering works, how host-specific SCSS fits in, and how the framework exposes theme tokens to those stylesheets. If you need to extend the platform cleanly or build a custom style stack that still feels like Crudspa, this is the page to read.
 
 If you mainly want to build screens, start with [Components | Layouts](../Components/Layouts.md) and [Components | Forms](../Components/Forms.md). This page is the map underneath those higher-level APIs.
 
@@ -101,7 +101,7 @@ The stylesheet entrypoint system mirrors the way the C# projects already relate.
 
 This is the key idea: SCSS layering follows the same architectural shape as the platform itself.
 
-That is a big win for maintainability because developers can reason about styling with the same mental model they already use for client, shared, and server code.
+That's a big win for maintainability because developers can reason about styling with the same mental model they already use for client, shared, and server code.
 
 ## Naming
 
@@ -113,7 +113,7 @@ The naming style is intentionally closer to a UI framework than a utility-first 
 * Feature-specific application classes usually use their own prefixes, such as `cec-` or `ces-`.
 * Stylesheet entrypoint files use the `area-module.scss` pattern where that helps developers find the right file quickly, for example `portals-provider.scss` or `sites-summer.scss`.
 
-That difference is important. Crudspa is not trying to turn every page into a long string of tiny numeric utility tokens. The goal is a readable, shared language that matches the kinds of screens CRUD developers build every day.
+That difference is important. Crudspa isn't trying to turn every page into a long string of tiny numeric utility tokens. The goal is a readable, shared language that matches the kinds of screens CRUD developers build every day.
 
 ## Responsive Foundation
 
@@ -154,7 +154,7 @@ That scaling is a major reason Crudspa layouts hold up on phones without every p
 
 ## Class Families
 
-You do not need to memorize every class. Learn the families.
+You don't need to memorize every class. Learn the families.
 
 ### Layout
 
@@ -209,7 +209,7 @@ The practical class families stay the same even though the assembly mechanism ch
 * content surfaces still center on binders, pages, and embedded reports
 * shell surfaces still center on navigation, windows, tabs, modals, and footers
 
-The important change is not the class vocabulary. The important change is that those classes compile from explicit stylesheet entrypoints and consume runtime theme tokens through `defaults.scss`.
+The important change isn't the class vocabulary. The important change is that those classes compile from explicit stylesheet entrypoints and consume runtime theme tokens through `defaults.scss`.
 
 ## Practical Guidance
 

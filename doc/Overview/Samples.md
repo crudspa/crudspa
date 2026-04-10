@@ -2,15 +2,15 @@
 
 The sample track is the fastest way to understand Crudspa as a working system instead of as a list of libraries.
 
-These are not throwaway demos. They are focused hosts that show how the platform is actually composed: a small `Framework.Core` app, an authoring host, a runtime host, and a jobs engine. Together they cover most of the architecture that new readers need to see first.
+These aren't throwaway demos. They are focused hosts that show how the platform is actually composed: a small `Framework.Core` app, an authoring host, a runtime host, and a jobs engine. Together they cover most of the architecture that new readers need to see first.
 
-If you have not already done the one-time setup steps, start with [Getting Started](../Starting.md).
+If you haven't already done the one-time setup steps, start with [Getting Started](../Starting.md).
 
 ## Sample Map
 
 | Host | Default URL | Sign-In Shape | Best For | Pair With |
 | --- | --- | --- | --- | --- |
-| `Catalog` | `https://localhost:42100` | required, name-only sample sign-in | the shortest `Framework.Core` walkthrough | `Samples/Jobs/Engine` when jobs matter |
+| `Catalog` | `https://localhost:42100` | required, name-only sample sign-in | the shortest `Framework.Core` walkthrough | `Samples/Jobs/Engine` when you want to study jobs |
 | `Composer` | `https://localhost:42200` | optional sign-in, email plus access code and password | editor-facing content management and richer admin composition | `Consumer` and optionally `Samples/Jobs/Engine` |
 | `Consumer` | `https://localhost:42300` | sign-in allowed but not required | runtime content delivery and live preview behavior | `Composer` |
 | `Samples/Jobs/Engine` | n/a | background host | scheduling and worker execution | `Catalog` or `Composer` |

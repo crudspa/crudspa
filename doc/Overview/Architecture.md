@@ -30,11 +30,11 @@ This shape works especially well when a product needs many CRUD features over ti
 Crudspa is also a distinctly modern .NET architecture. It assumes a C# client in the browser, typed contracts shared across the boundary, SignalR for both request and notice flow, and a data layer that stays explicit rather than hidden behind a vague persistence abstraction.
 
 * `Blazor WebAssembly` puts a real C# client in the browser, so views, client models, and shared contracts can stay in one language and one toolchain.
-* `SignalR` is not just a notification add-on. Crudspa uses it as the typed service transport to the server and as the notice channel for real-time refresh.
+* `SignalR` isn't just a notification add-on. Crudspa uses it as the typed service transport to the server and as the notice channel for real-time refresh.
 * `Shared` contracts let the browser and server exchange the same typed DTOs, events, config payloads, and error structures.
 * The shell stays deep-linkable and browser-friendly while still behaving like a rich multi-pane application.
 * JavaScript interop stays close to the edges where browser APIs genuinely require it instead of becoming the center of the client architecture.
-* The default stack includes a SQL Database Project and explicit server-side data access, so modern client behavior does not come at the cost of weak data enforcement.
+* The default stack includes a SQL Database Project and explicit server-side data access, so modern client behavior doesn't come at the cost of weak data enforcement.
 * Most solutions are best implemented as modular monoliths with strong internal boundaries, which keeps them easier to evolve than prematurely distributed systems.
 
 What is distinctive is how those parts stay aligned inside the same feature slice. A `Node` can participate in navigation, typed services, real-time notices, and SQL enforcement without inventing its own local architecture.
@@ -97,7 +97,7 @@ A typical Crudspa request flow looks like this:
 7. A `Response<T>` returns to the client.
 8. After a successful mutation, the host can publish a typed notice so other clients refresh or reconcile local state, and it can publish a typed gateway event when another host needs to react.
 
-This is not just a request pipeline. It is the platform's consistency loop. Navigation, service calls, SQL enforcement, and real-time refresh all follow the same architecture instead of competing with it.
+This isn't just a request pipeline. It's the platform's consistency loop. Navigation, service calls, SQL enforcement, and real-time refresh all follow the same architecture instead of competing with it.
 
 In practice, one pane action usually moves from model to proxy, through hub wrappers, into a server service, down to repositories or sproxies and SQL, then back as a `Response<T>`. If the mutation succeeds, that same feature can publish a typed notice so other models refresh or reconcile local state. When another host also needs to react, the same feature can publish a typed gateway event so the other host can invalidate caches and rebroadcast its own notice. Requests and notices therefore live inside one architectural loop instead of two unrelated systems.
 
@@ -113,7 +113,7 @@ The shell itself is data-driven and plugin-based:
 * `Segment` metadata selects `Segment` display behavior
 * `Pane` metadata selects `Pane` display behavior
 
-That is why the platform can support very different application shapes without rewriting the shell for each one. The `Navigator` service keeps URL state, screen state, and titles aligned so deep links, the back button, and multi-pane workflows still feel like normal browser behavior.
+That's why the platform can support very different application shapes without rewriting the shell for each one. The `Navigator` service keeps URL state, screen state, and titles aligned so deep links, the back button, and multi-pane workflows still feel like normal browser behavior.
 
 ## Service Boundary
 
@@ -121,7 +121,7 @@ Crudspa is opinionated about remote boundaries.
 
 `Shared` defines the behavior contracts. Client proxy services stay extremely small. Hubs stay focused on authorization, session handling, and notice publishing. Server services own the actual orchestration and business behavior. In modern .NET terms, this looks closest to typed application services behind a clean RPC boundary.
 
-The `Request<T>` and `Response<T>` envelopes matter because they make that boundary predictable. Requests carry one typed payload plus session context. Responses carry either a typed result or structured errors. That stable shape is what makes wrappers so effective for logging, retries, exception handling, validation, and other cross-cutting concerns.
+The `Request<T>` and `Response<T>` envelopes make that boundary predictable. Requests carry one typed payload plus session context. Responses carry either a typed result or structured errors. That stable shape is what makes wrappers so effective for logging, retries, exception handling, validation, and other cross-cutting concerns.
 
 ## Data Layer
 
@@ -129,11 +129,11 @@ Crudspa keeps the data layer explicit.
 
 The SQL Database Project is part of the default architecture, not a sidecar. Repositories and sproxies keep data access visible. In the standard setup, teams can work on C# and database code side by side in Visual Studio and SSDT, which makes the data layer easier to inspect, refactor, and enforce deliberately.
 
-That does not mean Crudspa is locked to one storage strategy. The service boundary is interface-driven and DI-friendly, so any `IService` can be replaced with an implementation backed by a different store when that fits the problem better. The point of the default setup is clarity and productivity, not insisting that every solution use one database forever.
+That doesn't mean Crudspa is locked to one storage strategy. The service boundary is interface-driven and DI-friendly, so any `IService` can be replaced with an implementation backed by a different store when that fits the problem better. The point of the default setup is clarity and productivity, not insisting that every solution use one database forever.
 
 When teams do follow the default path, predicates, scope checks, tenancy rules, and transactional writes stay close to the data tier where they can actually be enforced.
 
-This matters for correctness. A permission or scope rule that exists only in `Pane` code is not a real rule. Crudspa expects important data behavior to be enforced again on the server and in SQL Server.
+This is about correctness. A permission or scope rule that exists only in `Pane` code isn't a real rule. Crudspa expects important data behavior to be enforced again on the server and in SQL Server.
 
 ## Fresh State
 
@@ -155,11 +155,11 @@ Crudspa is at its best when you are building:
 * rich, real-time applications where stale screens create operational friction
 * codebases that benefit from strong conventions for extension, refactoring, and AI-assisted implementation
 
-If your application is tiny, mostly static, or intentionally short-lived, this is more architecture than you need. Crudspa pays off when changeability matters for years, not days.
+If your application is tiny, mostly static, or intentionally short-lived, this is more architecture than you need. Crudspa pays off when you're building something meant to keep changing for years, not days.
 
 ## Tradeoffs
 
-Crudspa is more structured than a minimal Blazor application, and that is intentional. Metadata-driven plugin selection means some mistakes appear at runtime instead of compile time. The built-in database project is most comfortable for teams that want application and database code visible in the same development environment. And the platform asks you to learn its vocabulary instead of pretending all CRUD systems are the same.
+Crudspa is more structured than a minimal Blazor application, and that's intentional. Metadata-driven plugin selection means some mistakes appear at runtime instead of compile time. The built-in database project is most comfortable for teams that want application and database code visible in the same development environment. And the platform asks you to learn its vocabulary instead of pretending all CRUD systems are the same.
 
 Crudspa is aimed at application surfaces with workflows, state, identity, and long-lived data. Teams sometimes still choose it for public-facing experiences when the CMS, workflow, and long-term maintenance benefits outweigh the initial download cost.
 

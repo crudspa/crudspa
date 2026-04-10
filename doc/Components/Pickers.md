@@ -1,6 +1,6 @@
 # Components | Pickers
 
-Pickers handle structured values that are not free-form text: dates, date-times, date ranges, colors, and file names. Consistent parsing and representation here prevents many downstream bugs.
+Pickers handle structured values that aren't free-form text: dates, date-times, date ranges, colors, and file names. Consistent parsing and representation here prevents many downstream bugs.
 
 Crudspa picker components keep these values strongly typed and predictable.
 
@@ -106,15 +106,15 @@ Use strongly typed controls and bind directly to model properties:
 
 ### Should I use `DatePicker` or `DateTimePicker` for local time values?
 
-If time-of-day matters, use `DateTimePicker`. If only date matters, use `DatePicker`.
+If you need time-of-day, use `DateTimePicker`. If you only need the date, use `DatePicker`.
 
 ### Can `DateFilter` be used outside list/find pages?
 
-Yes, but it is primarily optimized for search criteria and report filters.
+Yes, but it's primarily optimized for search criteria and report filters.
 
 ### Why not use `FilePicker` for uploads?
 
-`FilePicker` only captures selected file name. It does not upload content or track progress.
+`FilePicker` only captures selected file name. It doesn't upload content or track progress.
 
 ## Tradeoffs
 

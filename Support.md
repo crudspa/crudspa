@@ -2,11 +2,11 @@
 
 If you are blocked while building with Crudspa, start here. This page explains how to get help efficiently and what kind of support this repository can realistically provide.
 
-Crudspa is maintained by a small team. Open-source support in this repository is best effort and does not include an SLA.
+Crudspa is maintained by a small team. Open-source support in this repository is best effort and doesn't include an SLA.
 
 ## Start Here
 
-Before starting a GitHub Discussion, read the material that is most likely to answer common setup and architecture questions:
+Before starting a GitHub Discussion, read the material that's most likely to answer common setup and architecture questions:
 
 * [crudspa.org](https://crudspa.org) for the public project overview and general contact path
 * [doc/ReadMe.md](doc/ReadMe.md)
@@ -64,7 +64,7 @@ Large redesigns and broad strategic debates are much less likely to get active m
 
 ## Response Expectations
 
-We do read everything, but we cannot promise fast turnaround.
+We do read everything, but we can't promise fast turnaround.
 
 Discussions with a clear reproduction, a narrow scope, and a practical path to validation are the easiest for us to address.
 

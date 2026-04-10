@@ -4,11 +4,11 @@ Schema change is where many CRUD projects lose confidence. Teams move quickly at
 
 Our migration model is based on SQL Server Data Tools (SSDT) and the SQL project at `src/Database/Database.sqlproj`. SSDT compiles the project into a dacpac, and we generate deployment scripts for review before publishing. This keeps change history explicit and reviewable.
 
-We have found SSDT especially valuable during refactoring. The model stays coherent while schemas evolve, and the generated publish scripts make each change visible before it runs.
+We've found SSDT especially valuable during refactoring. The model stays coherent while schemas evolve, and the generated publish scripts make each change visible before it runs.
 
 ## Migration Assets
 
- Asset | Role | Why it matters
+ Asset | Role | Why it helps
  --- | --- | ---
  `Database.sqlproj` | source-controlled definition of the database | schema change becomes a code change
  dacpac output | compiled deployable package | publish behavior is generated from the current source model
@@ -19,7 +19,7 @@ We have found SSDT especially valuable during refactoring. The model stays coher
 
 Every object lives in source control as SQL. Tables, views, triggers, types, and stored procedures are all part of the project. A schema change is never just a manual production action.
 
-That discipline matters because database drift is expensive. Once teams start fixing production directly, the real source of truth becomes unclear and future deployments get riskier.
+That discipline helps because database drift is expensive. Once teams start fixing production directly, the real source of truth becomes unclear and future deployments get riskier.
 
 ## SSDT Refactors
 
@@ -27,7 +27,7 @@ Two SSDT refactors are especially helpful in day-to-day work.
 
 `Rename` lets you rename tables, columns, procedures, and other objects while preserving dependency awareness across the SQL project. This is much safer than ad-hoc text replacement, especially in larger databases.
 
-`Move to Schema` lets you move an object into a more appropriate schema as responsibilities become clearer. That is useful when an object started in a temporary location and later needs a cleaner long-term home.
+`Move to Schema` lets you move an object into a more appropriate schema as responsibilities become clearer. That's useful when an object started in a temporary location and later needs a cleaner long-term home.
 
 Both refactors are reliable in our experience, but the same rule still applies: always review the generated deployment script before publishing.
 
@@ -35,7 +35,7 @@ Both refactors are reliable in our experience, but the same rule still applies: 
 
 The local publish profile (`src/Database/Deploy-LocalMachine.publish.xml`) shows important safety defaults:
 
- Setting | Value | Why it matters
+ Setting | Value | Why it helps
  --- | --- | ---
  `BlockOnPossibleDataLoss` | `True` | forces an explicit decision when a change could destroy data
  `DropObjectsNotInSource` | `True` | removes drift so deployed environments match source control
@@ -55,7 +55,7 @@ If a change is destructive, use an expand-contract approach when needed: add new
 
 ## Complex Changes
 
-Some migrations cannot be made safe in one step. When a change touches high-volume tables, shared relationships, or tenancy-sensitive data, break it into phases and rehearse it against realistic data.
+Some migrations can't be made safe in one step. When a change touches high-volume tables, shared relationships, or tenancy-sensitive data, break it into phases and rehearse it against realistic data.
 
 A common pattern is: prepare new structure first, deploy the schema change, run targeted backfill or cleanup, then verify behavior before removing old structure. Rehearsing that flow several times is normal for serious migrations.
 

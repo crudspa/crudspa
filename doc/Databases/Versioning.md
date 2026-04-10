@@ -2,11 +2,11 @@
 
 A standard row update overwrites prior state. In many CRUD systems, that becomes a problem the first time someone needs to answer, "what did this record look like yesterday?"
 
-Our default versioning pattern keeps history in the same table with a simple chain based on `VersionOf`. It is straightforward to query, works cleanly with soft deletion, and avoids introducing a separate event model for common audit and recovery needs.
+Our default versioning pattern keeps history in the same table with a simple chain based on `VersionOf`. It's straightforward to query, works cleanly with soft deletion, and avoids introducing a separate event model for common audit and recovery needs.
 
 ## Versioning Pieces
 
- Piece | Role | Why it matters
+ Piece | Role | Why it helps
  --- | --- | ---
  `VersionOf` column | points every version back to the root row | history stays queryable with a simple key
  `for update` trigger | copies the previous row into history | updates keep prior state automatically
@@ -97,7 +97,7 @@ We intentionally avoid a strict foreign key from `UpdatedBy` to `[Framework].[Se
 
 ## Point-In-Time Query
 
-Historical reads are explicit SQL, using a time boundary that is clear and reviewable:
+Historical reads are explicit SQL, using a time boundary that's clear and reviewable:
 
 ```sql
 declare @id uniqueidentifier = '00000000-0000-0000-0000-000000000000';
@@ -120,7 +120,7 @@ If the table also uses soft deletion, include an `IsDeleted` condition when you 
 
 ## When To Use It
 
-This pattern works well when rows change over time and previous state has business value. It is usually unnecessary for static lookup tables or pure append-only telemetry streams.
+This pattern works well when rows change over time and previous state has business value. It's usually unnecessary for static lookup tables or pure append-only telemetry streams.
 
 ## Tradeoffs
 

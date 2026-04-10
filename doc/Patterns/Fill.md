@@ -16,7 +16,7 @@ That last step is what separates `Fill` from `Edit`. A fill workflow is optimize
 
 ## Public Repo Status
 
-The current public sample track does not center a dedicated fill pane. That makes this page more of a pattern guide than a code tour today.
+The current public sample track doesn't center a dedicated fill pane. That makes this page more of a pattern guide than a code tour today.
 
 Even so, the surrounding pieces already exist in public code:
 
@@ -32,8 +32,8 @@ That combination is enough to define the standard shape clearly, even without a 
 
 * the user is creating one new record at a time
 * the post-submit experience should return to a blank or ready state
-* the workflow does not need browse, reopen, delete, or relation-management behavior
-* speed of repeated entry matters more than long-lived record maintenance
+* the workflow doesn't need browse, reopen, delete, or relation-management behavior
+* speed of repeated entry is more important than long-lived record maintenance
 
 Typical examples include signup, request, feedback, intake, and other front-door submission workflows.
 
@@ -57,7 +57,7 @@ When a fill surface starts needing reopen, edit, delete, relation management, or
 
 ## Tradeoffs
 
-`Fill` maximizes speed and clarity for intake workflows, but it is intentionally narrow. It gives you a fast submission loop, not a full record-maintenance experience.
+`Fill` maximizes speed and clarity for intake workflows, but it's intentionally narrow. It gives you a fast submission loop, not a full record-maintenance experience.
 
 ## Next Steps
 

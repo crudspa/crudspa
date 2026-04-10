@@ -1,6 +1,6 @@
 # Overview | Tools
 
-Crudspa sits in a part of the .NET world where frontend, backend, SQL Server, and styling work all matter at the same time. If those tools are misaligned, the day-to-day development experience feels heavier than it should.
+Crudspa sits in a part of the .NET world where frontend, backend, SQL Server, and styling all have to work together at the same time. If those tools are misaligned, the day-to-day development experience feels heavier than it should.
 
 The good news is that Crudspa works best with a very practical toolchain. Nothing exotic is required. The main win comes from using the right tool for each layer and keeping those layers visible.
 
@@ -22,11 +22,11 @@ Visual Studio with SQL Server Data Tools is strongly recommended. It lets you wo
 
 ### SQL Server
 
-You will want a local SQL Server instance for real development work. Crudspa assumes real relational constraints, stored procedures, and data-layer validation or tenancy checks are part of the application rather than an afterthought. A lightweight mock database setup does not teach the right lessons here.
+You will want a local SQL Server instance for real development work. Crudspa assumes real relational constraints, stored procedures, and data-layer validation or tenancy checks are part of the application rather than an afterthought. A lightweight mock database setup doesn't teach the right lessons here.
 
 ## Recommended Tools
 
-The following are not always mandatory, but they materially improve day-to-day work:
+The following aren't always mandatory, but they materially improve day-to-day work:
 
 * a strong C# refactoring environment for navigating large client, shared, and server solutions
 * a SQL editor you are comfortable with for inspecting data, procedures, and migration results
@@ -59,7 +59,7 @@ When styling is part of the task, a practical loop usually looks like this:
 
 ## Practical Guidance
 
-Keep the docs open while you work. In Crudspa, vocabulary and architecture are part of the toolchain. If you skip those, it is easy to misread a `pane`, a `node`, or a runtime content flow.
+Keep the docs open while you work. In Crudspa, vocabulary and architecture are part of the toolchain. If you skip those, it's easy to misread a `pane`, a `node`, or a runtime content flow.
 
 Also, prefer working from the smallest runnable sample that still exercises the behavior in question. Start with `Catalog` for `Framework.Core` questions, move to `Composer` and `Consumer` for authored runtime or CMS behavior, use `Catalog` or `Composer` plus `Samples/Jobs/Engine` for background-work questions, and reach for the larger domain modules when you need broader composition examples.
 

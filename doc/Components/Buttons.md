@@ -1,4 +1,4 @@
-﻿# Components | Buttons
+# Components | Buttons
 
 Button behavior drifts quickly in CRUD apps. Labels, icon placement, destructive intent, and spacing become inconsistent across modules.
 
@@ -22,7 +22,7 @@ Crudspa prevents this with a compact button family: one flexible base component 
 
 ## Default Approach
 
-Use semantic buttons first. Drop to `ButtonCore` only when there is no existing semantic intent.
+Use semantic buttons first. Drop to `ButtonCore` only when there's no existing semantic intent.
 
 ```razor
 <ButtonGroup>

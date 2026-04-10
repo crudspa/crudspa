@@ -1,8 +1,8 @@
 # Concepts | Services
 
-Crudspa works best when each layer has a clear job. Views render. Models coordinate the screen. Services expose capability. That sounds simple, but it is one of the biggest reasons Crudspa applications stay clean as they grow.
+Crudspa works best when each layer has a clear job. Views render. Models coordinate the screen. Services expose capability. That sounds simple, but it's one of the biggest reasons Crudspa applications stay clean as they grow.
 
-The framework's service guidance is practical rather than academic: remote calls should have a predictable shape, local helpers should stay simple, and application code should not have to rediscover boundary design on every feature.
+The framework's service guidance is practical rather than academic: remote calls should have a predictable shape, local helpers should stay simple, and application code shouldn't have to rediscover boundary design on every feature.
 
 ## Crudspa's Stance
 
@@ -11,7 +11,7 @@ Crudspa uses two broad service shapes:
 * remote services, which cross the browser-server boundary and use `Request<T>` plus `Response<T>`
 * local services, which stay inside one runtime and use ordinary method signatures
 
-That split matters. It keeps trust boundaries obvious, gives expected failures a stable place to land, and keeps day-to-day application code from turning into transport ceremony.
+That split keeps the boundary predictable. It keeps trust boundaries obvious, gives expected failures a stable place to land, and keeps day-to-day application code from turning into transport ceremony.
 
 ## What You Usually Do As An App Developer
 
@@ -34,7 +34,7 @@ public async Task Save()
 }
 ```
 
-That is the public-facing value of the service model. The pane model gets a clean call surface and a predictable result. The framework handles the rest.
+That's the public-facing value of the service model. The pane model gets a clean call surface and a predictable result. The framework handles the rest.
 
 ## Remote Boundaries
 
@@ -51,13 +51,13 @@ public interface ITrackService
 }
 ```
 
-The important point is not that every feature must look identical. It is that the browser and server agree on one small, readable shape. That makes services easier to use, easier to replace, and easier to reason about.
+The important point isn't that every feature must look identical. It's that the browser and server agree on one small, readable shape. That makes services easier to use, easier to replace, and easier to reason about.
 
 ## Local Services
 
 Not every service needs a remote boundary. Local helpers should stay simple.
 
-That is why a service such as `IClickService` uses ordinary methods and events, and why application code logs through ordinary `ILogger` calls. Crudspa does not force request and response envelopes onto code that never leaves the current runtime.
+That's why a service such as `IClickService` uses ordinary methods and events, and why application code logs through ordinary `ILogger` calls. Crudspa doesn't force request and response envelopes onto code that never leaves the current runtime.
 
 ## Why This Feels Clean In Practice
 
@@ -68,7 +68,7 @@ This service model buys a few practical wins:
 * cross-cutting concerns such as retries, logging, validation, and authorization have a clear home
 * the same contract can support multiple application shapes
 
-That is the deeper point. The framework is trying to make common application code feel calmer and more obvious, not more abstract.
+That's the deeper point. The framework is trying to make common application code feel calmer and more obvious, not more abstract.
 
 ## Practical Guidance
 

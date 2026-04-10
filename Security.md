@@ -1,12 +1,12 @@
 # Security Policy
 
-Crudspa is used to build data-heavy applications with authentication, authorization, real-time messaging, file handling, and SQL-backed services. Security bugs in any of those layers matter.
+Crudspa is used to build data-heavy applications with authentication, authorization, real-time messaging, file handling, and SQL-backed services. Security bugs in any of those layers are serious.
 
 ## Report Privately
 
 If you discover a vulnerability, email `support@crudspa.org`.
 
-Please do not report suspected vulnerabilities in Discussions, pull requests, or any other public thread.
+Please don't report suspected vulnerabilities in Discussions, pull requests, or any other public thread.
 
 ## What to Include
 
@@ -20,15 +20,15 @@ The fastest way to help us triage a report is to include:
 
 ## Response Process
 
-We are a small team, but we do review good-faith security reports.
+We're a small team, but we do review good-faith security reports.
 
 * We aim to acknowledge reports within 5 business days.
-* We will triage severity and confirm whether the issue is reproducible.
-* If the report is valid, we will work on a fix in the current source line and coordinate disclosure timing with you.
+* We'll triage severity and confirm whether the issue is reproducible.
+* If the report is valid, we'll work on a fix in the current source line and coordinate disclosure timing with you.
 
-Crudspa is source-first today, so fixes may land in repository source before there is any packaged release channel for them.
+Crudspa is source-first today, so fixes may land in repository source before there's any packaged release channel for them.
 
-We do not currently offer a bug bounty program.
+We don't currently offer a bug bounty program.
 
 ## Good-Faith Research
 
@@ -45,7 +45,7 @@ Please:
 
 This policy applies to source code in this repository.
 
-Please do not:
+Please don't:
 
 * access or attempt to access real customer, student, educator, or school data
 * run denial-of-service or load tests against production systems
@@ -56,4 +56,4 @@ For production service incidents tied to hosted environments, contact `support@c
 
 ## Supported Fixes
 
-Crudspa does not currently publish multiple maintained release lines. We investigate reports against current source and fix forward.
+Crudspa doesn't currently publish multiple maintained release lines. We investigate reports against current source and fix forward.

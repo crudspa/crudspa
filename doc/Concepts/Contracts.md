@@ -2,7 +2,7 @@
 
 CRUD+SPA systems become brittle when each layer invents its own shapes, names, and expectations. The UI drifts from the transport contract. The transport drifts from the server. Event payloads stop matching what listeners expect.
 
-Crudspa avoids that drift by treating contracts as a first-class part of the architecture. Each module typically exposes a `Shared` project that holds the contracts both sides agree on. Those contracts are not incidental DTOs. They are the formal agreement for data, behavior, events, identifiers, and feature-specific configuration.
+Crudspa avoids that drift by treating contracts as a first-class part of the architecture. Each module typically exposes a `Shared` project that holds the contracts both sides agree on. Those contracts aren't incidental DTOs. They are the formal agreement for data, behavior, events, identifiers, and feature-specific configuration.
 
 ## Contract Families
 

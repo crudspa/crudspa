@@ -1,4 +1,4 @@
-﻿# Types | Enum
+# Types | Enum
 
 Enums are a strong fit for stable, code-owned states. They become a maintenance risk when teams use them for values that should be data-managed.
 
@@ -10,7 +10,7 @@ Use enums when:
 
 * the value set is controlled by code,
 * changes happen through deploys,
-* semantic labels matter more than arbitrary numeric values.
+* semantic labels are more important than arbitrary numeric values.
 
 Use lookup tables (`Named`, `Orderable`) when business users need to add, remove, or rename values in data.
 
@@ -124,7 +124,7 @@ Persisted enums are numeric contracts. Reordering enum members later can silentl
 Treat persisted enum values as stable:
 
 * append new members instead of reordering,
-* consider explicit numeric assignments when long-term compatibility matters.
+* consider explicit numeric assignments when you need long-term compatibility.
 
 ## Next Steps
 

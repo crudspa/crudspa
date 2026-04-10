@@ -114,7 +114,7 @@ List cards often expose child counts. Those counts can drift as related entities
 
 ### Reorder Collisions
 
-Reorder mode should stay explicit so users do not accidentally persist partial ordinal changes. Keep reorder actions separate from ordinary navigation and delete actions.
+Reorder mode should stay explicit so users don't accidentally persist partial ordinal changes. Keep reorder actions separate from ordinary navigation and delete actions.
 
 ### Scope And Tenancy
 
@@ -131,7 +131,7 @@ Real systems add list-specific actions such as copy, duplicate, or archive. Keep
 * Keep local presentation state in the model, not scattered through component markup.
 * Prefer `Replace` and `Rid` before falling back to a full refresh.
 
-When ordering matters, keep reorder as an explicit mode rather than mixing it into ordinary browsing. Users should be able to browse, open, and run lightweight actions in normal mode, then switch into a deliberate save-or-cancel ordering workflow when ordinals change.
+When ordering is part of the workflow, keep reorder as an explicit mode rather than mixing it into ordinary browsing. Users should be able to browse, open, and run lightweight actions in normal mode, then switch into a deliberate save-or-cancel ordering workflow when ordinals change.
 
 ## Tradeoffs
 

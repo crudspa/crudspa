@@ -4,7 +4,7 @@ Authentication UI is one of the fastest ways for CRUD apps to become inconsisten
 
 Crudspa's built-in auth surface is `SignInEmailTfa`. It combines the auth bar and the modal workflow into one component, backed by `SignInEmailTfaModel`. That keeps auth behavior shell-scoped instead of page-scoped.
 
-The `Catalog` sample intentionally uses a smaller sample-specific `SignInCatalogName` component instead. That is a sample convenience for local learning, not the framework default. The shared auth component documented on this page is still `SignInEmailTfa`, which is what `Composer` and `Consumer` use.
+The `Catalog` sample intentionally uses a smaller sample-specific `SignInCatalogName` component instead. That's a sample convenience for local learning, not the framework default. The shared auth component documented on this page is still `SignInEmailTfa`, which is what `Composer` and `Consumer` use.
 
 ## Component Catalog
 
@@ -58,7 +58,7 @@ Inside the component, the auth modal and the bar stay together on purpose. The m
 
 ## Framework Integration
 
-`SignInEmailTfaModel` wires directly into the core framework pieces that matter for auth:
+`SignInEmailTfaModel` wires directly into the core framework pieces that shape auth:
 
 * `IAuthService` checks credentials, verifies access codes, resets passwords, changes passwords, and signs out.
 * `ISessionState` initializes signed-in session data after code acceptance.
@@ -66,7 +66,7 @@ Inside the component, the auth modal and the bar stay together on purpose. The m
 * `INavigator` routes account settings to `/settings?pane=account` and bounces after sign-out.
 * `ModalModel` and `ScreenModel` provide `WithWaiting`, alerts, and modal visibility behavior.
 
-That is why auth should stay centralized. The shell needs one place that understands both the modal workflow and the session refresh that follows it.
+That's why auth should stay centralized. The shell needs one place that understands both the modal workflow and the session refresh that follows it.
 
 ## Practical Guidance
 
@@ -77,7 +77,7 @@ That is why auth should stay centralized. The shell needs one place that underst
 
 ## Tradeoffs
 
-The built-in auth flow is opinionated. You get consistent behavior and less maintenance, but fewer local UX variations. That is usually a good trade for admin-style and portal-style applications where session, navigation, and account actions need to stay coherent.
+The built-in auth flow is opinionated. You get consistent behavior and less maintenance, but fewer local UX variations. That's usually a good trade for admin-style and portal-style applications where session, navigation, and account actions need to stay coherent.
 
 ## Next Steps
 

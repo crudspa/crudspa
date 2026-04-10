@@ -1,4 +1,4 @@
-﻿# Components | Media
+# Components | Media
 
 Media workflows are a common source of duplicated code: upload controls, previews, players, fetch URLs, and modal viewers often diverge across modules.
 
@@ -138,7 +138,7 @@ Media components integrate deeply with framework infrastructure:
 
 ## Practical Guidance
 
-* Keep upload endpoint conventions unless there is a strong reason to customize `UploadPath`.
+* Keep upload endpoint conventions unless there's a strong reason to customize `UploadPath`.
 * Use app-root viewer hosts (`RootModalsCore`) to avoid duplicate modal wiring.
 * Use `Image` for responsive media display; use `ImageDiv` only when background-image behavior is required.
 * Pass explicit `Width` only when fixed-width media presentation is desired.
@@ -155,7 +155,7 @@ Use framework players for coordinated playback, event tracking, and consistent b
 
 ### Why are uploads model-driven instead of returning raw file ids only?
 
-The file contracts carry display, validation, progress, and optimization metadata that is useful across edit and read flows.
+The file contracts carry display, validation, progress, and optimization metadata that's useful across edit and read flows.
 
 ## Tradeoffs
 

@@ -4,7 +4,7 @@ Crudspa is built for applications that need many screens, varied workflows, and 
 
 In public terms, the idea is straightforward: your application supplies pane, navigation, report, and display components, and Crudspa loads the right one based on metadata instead of hard-coded branching.
 
-## Why This Matters
+## Why It Helps
 
 For application developers, plugins solve a very practical problem. They let you add new work surfaces without turning the shell into a long list of special cases.
 
@@ -32,7 +32,7 @@ public partial class TrackEdit : IPaneDisplay, IDisposable
 }
 ```
 
-That is the part application authors need to care about most. You implement the expected plugin interface, build the screen you need, and let the framework host it inside the shell.
+That's the part application authors need to care about most. You implement the expected plugin interface, build the screen you need, and let the framework host it inside the shell.
 
 ## Where Plugins Show Up
 
@@ -56,13 +56,13 @@ When adding a new plugin:
 * use metadata to select the plugin instead of adding shell-specific branching
 * keep application-specific screens in your application or module code, not in framework core
 
-That is how Crudspa keeps customization feeling clean instead of improvised.
+That's how Crudspa keeps customization feeling clean instead of improvised.
 
 ## What Crudspa Handles For You
 
-Crudspa handles the dynamic resolution, parameter passing, and shell integration. You do not need to build your own plugin loader just to add a pane or swap a navigation surface.
+Crudspa handles the dynamic resolution, parameter passing, and shell integration. You don't need to build your own plugin loader just to add a pane or swap a navigation surface.
 
-That is the main public value of the plugin model: flexibility without shell chaos.
+That's the main public value of the plugin model: flexibility without shell chaos.
 
 ## Tradeoffs
 

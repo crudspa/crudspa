@@ -5,7 +5,7 @@ Open-source .NET teams usually want more than a feature list before they invest 
 This page answers that question in the same shape as the repository itself: `Framework`, `Content`, and `Education`. The roadmap is directional rather than calendar-driven. Crudspa is maintained by a small team, so priorities can move when production needs, documentation gaps, or strong community contributions change the most useful next step.
 
 > [!NOTE]
-> This page is not a release schedule. It describes the most likely direction of the platform based on the current codebase, documentation, and long-term intent.
+> This page isn't a release schedule. It describes the most likely direction of the platform based on the current codebase, documentation, and long-term intent.
 
 ## Framework
 

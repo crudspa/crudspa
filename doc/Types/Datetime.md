@@ -1,4 +1,4 @@
-﻿# Types | Datetime
+# Types | Datetime
 
 Date and time fields are where many CRUD systems quietly break. The common failures are mixing calendar dates with real timestamps, skipping timezone conversion, and using inclusive end ranges that double-count results.
 
@@ -87,7 +87,7 @@ For timestamp editing, use the basic `DateTimePicker`:
 
 For full picker options, see [Components | Pickers](../Components/Pickers.md).
 
-Use `DatePicker` for calendar concepts such as due dates or publish dates. Use `DateTimePicker` for exact moments such as a next run time. Use `DateFilter` plus `DateRange` when the field is really a search window. Choose the smallest truthful precision. If the business rule only cares about the day, do not force users to supply a time.
+Use `DatePicker` for calendar concepts such as due dates or publish dates. Use `DateTimePicker` for exact moments such as a next run time. Use `DateFilter` plus `DateRange` when the field is really a search window. Choose the smallest truthful precision. If the business rule only cares about the day, don't force users to supply a time.
 
 ## Range Filters
 

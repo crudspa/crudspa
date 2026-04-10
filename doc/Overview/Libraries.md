@@ -1,6 +1,6 @@
 # Overview | Libraries
 
-One of the easiest ways to get lost in Crudspa is to treat every folder as if it had the same job. It does not. Some projects are core platform libraries. Some are higher-level reusable modules. Some are focused sample applications. And the domain modules show how those pieces can come together in broader product-style compositions.
+One of the easiest ways to get lost in Crudspa is to treat every folder as if it had the same job. It doesn't. Some projects are core platform libraries. Some are higher-level reusable modules. Some are focused sample applications. And the domain modules show how those pieces can come together in broader product-style compositions.
 
 Once you read the repo in those families, the structure becomes much easier to navigate.
 
@@ -32,13 +32,13 @@ Crudspa is easier to understand when you separate reusable libraries from the ap
 
 `Framework.Core` is the center of gravity. Nearly everything else depends on its shell, contracts, services, wrappers, and UI patterns.
 
-`Framework.Jobs` extends that same architecture into background work. It does not introduce a different mental model.
+`Framework.Jobs` extends that same architecture into background work. It doesn't introduce a different mental model.
 
 In the shipped samples, that jobs story spans multiple hosts on purpose. `Catalog` and `Composer` provide the admin panes where users create and inspect jobs or schedules. `src/Samples/Jobs/Engine` is the focused scheduler and worker host that makes those records move.
 
 `Content.Design` and `Content.Display` sit one layer higher. They reuse the framework fundamentals and apply them to authoring and runtime content. `Content.Jobs` then applies the jobs infrastructure to content-specific operational needs.
 
-The education modules show what this looks like in a domain. They are not a separate platform. They are proof that the same approach holds up in real business features.
+The education modules show what this looks like in a domain. They aren't a separate platform. They are proof that the same approach holds up in real business features.
 
 ## Reusable Versus App-Specific Code
 
@@ -51,7 +51,7 @@ A sample or full application host typically adds:
 * a `Registry.cs` that registers the chosen modules
 * custom branding, navigation metadata, and project-specific pane plugins
 
-In larger Crudspa solutions, those host layers often live under `Portals` or `Sites`. That is where a specific product, brand, or audience begins to show. The libraries stay reusable underneath.
+In larger Crudspa solutions, those host layers often live under `Portals` or `Sites`. That's where a specific product, brand, or audience begins to show. The libraries stay reusable underneath.
 
 If you want to see that application story directly, read [Overview | Applications](Applications.md).
 If you want the concrete host walkthrough, read [Overview | Samples](Samples.md).
@@ -62,7 +62,7 @@ If you are new, this order works well:
 
 1. Read `Framework.Core` first.
 2. Open `Catalog` to see how that foundation becomes a working application.
-3. Read `Framework.Jobs` only if background work matters to your current task.
+3. Read `Framework.Jobs` only if background work is part of your current task.
 4. Choose `Composer`, `Consumer`, or run `Samples/Jobs/Engine` alongside `Catalog` or `Composer` depending on whether you care more about authoring, runtime delivery, or background work.
 5. Read `Education.Common` and one domain module to see the patterns in a realistic slice.
 6. Finally, move into the larger domain modules if you want to see how the libraries compose into broader feature sets.

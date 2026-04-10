@@ -25,13 +25,13 @@ That model gives the platform a place to store:
 
 This is what keeps jobs visible instead of mysterious.
 
-That split is what makes the jobs system operationally visible. Job schedules explain why work appears, job types explain how it runs and how it is edited, and job records explain what actually happened.
+That split is what makes the jobs system operationally visible. Job schedules explain why work appears, job types explain how it runs and how it's edited, and job records explain what actually happened.
 
 ## Admin Surfaces
 
-Crudspa includes client-side administration surfaces for job records and schedules, and it allows job types to supply type-specific editor UIs. That is important because many jobs need structured configuration, not just a name and a cron string.
+Crudspa includes client-side administration surfaces for job records and schedules, and it allows job types to supply type-specific editor UIs. That's important because many jobs need structured configuration, not just a name and a cron string.
 
-In the shipped samples, those admin surfaces are normal panes inside `Catalog` and `Composer`. There is not a separate jobs website to open. The standalone sample under `src/Samples/Jobs` is the engine host that executes the work.
+In the shipped samples, those admin surfaces are normal panes inside `Catalog` and `Composer`. There's not a separate jobs website to open. The standalone sample under `src/Samples/Jobs` is the engine host that executes the work.
 
 This is also where the plugin model shows up again. A job type can point to its own editor surface, and the worker side can point to its own executable action class.
 
@@ -45,7 +45,7 @@ The server-side execution model is typically split into two long-running roles i
 
 The scheduler checks for due schedules, creates job records, and computes the next run time for each schedule.
 
-In the sample engine, it also reschedules overdue work on startup so the local database does not get stuck with stale `Next Run` values after a debugging session or an unclean shutdown.
+In the sample engine, it also reschedules overdue work on startup so the local database doesn't get stuck with stale `Next Run` values after a debugging session or an unclean shutdown.
 
 ### Worker
 
@@ -57,9 +57,9 @@ On startup, the sample worker also marks previously `Running` jobs for its devic
 
 ## Cross-Host Feedback
 
-The interesting part is not just that the engine runs jobs. It is how the rest of the platform stays in sync with that work.
+The interesting part isn't just that the engine runs jobs. It's how the rest of the platform stays in sync with that work.
 
-The web hosts create and edit jobs through the normal hub and service boundary. The engine then reads and writes the same database records, but it does not talk back to the UI through a private side channel. Instead, it publishes typed gateway events such as `JobAdded`, `JobSaved`, and `JobScheduleSaved`.
+The web hosts create and edit jobs through the normal hub and service boundary. The engine then reads and writes the same database records, but it doesn't talk back to the UI through a private side channel. Instead, it publishes typed gateway events such as `JobAdded`, `JobSaved`, and `JobScheduleSaved`.
 
 In the local sample configuration, `GatewayServiceEventGrid` posts Event Grid-shaped payloads to the checked-in receiver URLs on `Catalog`, `Composer`, and `Consumer`. The sample controllers accept those events and relay the relevant ones into normal SignalR notices. That means the jobs panes in `Catalog` and `Composer` refresh through the same notice model the rest of the platform already uses.
 
@@ -83,7 +83,7 @@ Try to keep job actions focused and safe to rerun. Background work is easier to 
 
 Crudspa's jobs model is more structured than handing work to a script folder or an external task runner. That structure is intentional. It keeps jobs observable, configurable, and aligned with the rest of the platform.
 
-The tradeoff is that even a simple operational task may deserve contracts, UI, status tracking, and an engine host. In production systems, that is usually a strength rather than overhead.
+The tradeoff is that even a simple operational task may deserve contracts, UI, status tracking, and an engine host. In production systems, that's usually a strength rather than overhead.
 
 ## Next Steps
 

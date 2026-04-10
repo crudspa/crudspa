@@ -188,7 +188,7 @@ Most real find queries combine several predicate classes at once:
 
 ### Stable Sorting
 
-Sorting must be deterministic. The `PostSelectWhereForBlog` query includes `post.Id` as a tie-break so paging does not reshuffle rows between requests.
+Sorting must be deterministic. The `PostSelectWhereForBlog` query includes `post.Id` as a tie-break so paging doesn't reshuffle rows between requests.
 
 ### High-Cardinality Filters
 
@@ -214,7 +214,7 @@ public async Task Handle(SectionRemoved payload) => await Refresh();
 * Keep `Reset` defaults obvious and deterministic.
 * Treat predicate logic as security-critical infrastructure.
 
-A good `Find` flow keeps its query shape explicit all the way down: filter controls update typed search state, the request goes to the server, SQL owns predicates and paging, and the UI renders the resulting cards or rows. Filters should not dissolve into an untyped bag once they leave the client.
+A good `Find` flow keeps its query shape explicit all the way down: filter controls update typed search state, the request goes to the server, SQL owns predicates and paging, and the UI renders the resulting cards or rows. Filters shouldn't dissolve into an untyped bag once they leave the client.
 
 ## Tradeoffs
 

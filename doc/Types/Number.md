@@ -1,4 +1,4 @@
-﻿# Types | Number
+# Types | Number
 
 Numeric fields often look like plain storage, but in production they usually carry real business rules: limits, schedule cadence, scoring, ordering, and thresholds.
 
@@ -78,7 +78,7 @@ Start with a basic `NumericTextBox` binding:
                 @bind-Value="Model.Entity.RecurrenceAmount" />
 ```
 
-`NumericTextBox<T>` supports an explicit `Format` parameter when display format matters.
+`NumericTextBox<T>` supports an explicit `Format` parameter when the display format needs to stay explicit.
 
 For full textbox and numeric input options, see [Components | Textboxes](../Components/Textboxes.md).
 

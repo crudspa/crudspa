@@ -82,7 +82,7 @@ These methods are easy to read, easy to review, and hard to misuse.
 
 A lookup should only return values valid for the caller's context. In practice, that often means scoping by portal, organization, session, or parent object.
 
-This is where lookup quality often fails in CRUD systems. A generic lookup leaks values across tenant or permission boundaries, and the UI looks fine until a user sees options they should not have. Keeping lookup queries explicit in SQL makes those boundaries visible and reviewable.
+This is where lookup quality often fails in CRUD systems. A generic lookup leaks values across tenant or permission boundaries, and the UI looks fine until a user sees options they shouldn't have. Keeping lookup queries explicit in SQL makes those boundaries visible and reviewable.
 
 ## Practical Guidance
 
@@ -92,7 +92,7 @@ If a lookup needs a richer shape for one feature, create a feature-specific proc
 
 ## Tradeoffs
 
-Explicit lookup procedures mean more small SQL objects. That is additional surface area compared to a single generic query helper.
+Explicit lookup procedures mean more small SQL objects. That's additional surface area compared to a single generic query helper.
 
 The payoff is consistency. Each lookup has a clear contract, the scoping rules are visible, and the UI receives only the shape it actually needs.
 

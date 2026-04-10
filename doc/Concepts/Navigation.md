@@ -2,11 +2,11 @@
 
 Navigation is where many CRUD+SPA systems reveal their limits. Traditional routing is often too page-oriented. Browser support gets weaker as the UI becomes richer. Deep links become awkward. Multi-pane workflows become brittle.
 
-Crudspa treats navigation as one of the platform's main differentiators. The shell is not a thin route table. It is a structured, data-driven application model.
+Crudspa treats navigation as one of the platform's main differentiators. The shell isn't a thin route table. It's a structured, data-driven application model.
 
 ## Canonical Terms
 
-These terms matter:
+These terms are worth learning:
 
 * a `portal` is the top-level shell for an application experience
 * a `segment` is a navigable branch inside that portal
@@ -27,7 +27,7 @@ The portal owns the broadest navigation concerns:
 
 Inside the portal, segments define structure. A segment can be fixed, hierarchical, permission-aware, and capable of containing both child segments and panes.
 
-Panes are where users actually work. A pane might host an edit surface, a list, a report, a runtime content screen, or a design surface. What matters is that the shell treats each one as a first-class, deep-linkable unit.
+Panes are where users actually work. A pane might host an edit surface, a list, a report, a runtime content screen, or a design surface. The important part is that the shell treats each one as a first-class, deep-linkable unit.
 
 In practical terms, a portal contains segments, segments can contain child segments and panes, and the current path resolves to one active pane. Desktop and mobile layouts may render that structure differently, but the underlying shell model stays the same.
 
@@ -36,10 +36,10 @@ In practical terms, a portal contains segments, segments can contain child segme
 Crudspa keeps normal browser expectations intact:
 
 * paths are deep-linkable
-* the back button still matters
+* the back button still needs to work
 * query strings can carry pane-adjacent UI state such as the active tab
 
-This is one of the reasons the `Navigator` service is so central. It is not just moving between pages. It is keeping the shell, the URL, and local UI state aligned.
+This is one of the reasons the `Navigator` service is so central. It's not just moving between pages. It's keeping the shell, the URL, and local UI state aligned.
 
 The platform also handles pane lifecycle concepts such as whether a pane is new, whether it has already been loaded, and which configuration payload should be applied when it opens.
 
@@ -55,11 +55,11 @@ That means the shell stays generic while the experience stays flexible. An admin
 
 ## Sessions, Authentication, And Permissions
 
-Navigation is not separate from security.
+Navigation isn't separate from security.
 
 Portal rules can require sign-in before the shell becomes available. Segment and pane metadata can carry permission requirements. Session state influences what the user can load, which notices they can subscribe to, and which work surfaces should even appear.
 
-That is a healthier model than treating security as a late filter on an otherwise public route table.
+That's a healthier model than treating security as a late filter on an otherwise public route table.
 
 ## Practical Guidance
 

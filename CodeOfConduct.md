@@ -1,6 +1,6 @@
 # Code of Conduct
 
-Crudspa is an engineering project. Strong technical disagreement is welcome. Contempt, harassment, and bad-faith behavior are not.
+Crudspa is an engineering project. Strong technical disagreement is welcome. Contempt, harassment, and bad-faith behavior aren't.
 
 We want this repository to feel like a room full of experienced teammates: direct, respectful, and focused on making the software better.
 
@@ -8,14 +8,14 @@ We want this repository to feel like a room full of experienced teammates: direc
 
 * Be respectful, professional, and technically honest.
 * Critique ideas, code, and tradeoffs without attacking people.
-* Assume good intent until there is evidence otherwise.
+* Assume good intent until there's evidence otherwise.
 * Make room for developers with different levels of experience.
 * Keep discussions relevant to the project and useful for future readers.
 * Respect privacy, licenses, and confidential information shared for troubleshooting.
 
 ## Unacceptable Behavior
 
-The following behavior is not acceptable in project spaces:
+The following behavior isn't acceptable in project spaces:
 
 * Harassment, discrimination, threats, or intimidation.
 * Personal attacks, insults, or repeated hostile behavior.

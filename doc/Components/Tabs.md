@@ -1,6 +1,6 @@
-﻿# Components | Tabs
+# Components | Tabs
 
-Tabbed navigation is common in pane-oriented CRUD interfaces. Problems usually appear when tab state is not URL-aware, nested tabs collide, or lazy loading is handled inconsistently.
+Tabbed navigation is common in pane-oriented CRUD interfaces. Problems usually appear when tab state isn't URL-aware, nested tabs collide, or lazy loading is handled inconsistently.
 
 Crudspa tabs are model-backed and navigation-aware by default.
 
@@ -36,11 +36,11 @@ That same component also supports declarative child `Tab` components for fixed t
  `Model` | optional external tab model | use for dynamic tabs
  `ChildContent` | declarative tabs | use for static tabs
  `QueryKey` | query parameter key for active tab | defaults by scope (`tab`, `tab2`, ...)
- `LockOnNew` | keeps initial tab when new-state flow should not switch tabs | useful in create workflows
+ `LockOnNew` | keeps initial tab when new-state flow shouldn't switch tabs | useful in create workflows
  `HideTabs` | hides tab header list | content still rendered
  `Vertical` | vertical tabs layout | optional
 
-`Tabs` cannot use both `Model` and `ChildContent` at once.
+`Tabs` can't use both `Model` and `ChildContent` at once.
 
 ### `Tab`
 
@@ -76,8 +76,8 @@ This prevents nested tab collisions without manual key management.
 Tabs integrate with broader framework concerns:
 
 * `INavigator` updates query parameters on tab changes.
-* `ErrorRecover` wraps tab content, so one tab failure does not crash the entire shell.
-* pane plugins can render through tab metadata (`PaneTypeDisplayView`) when content is not direct fragment markup.
+* `ErrorRecover` wraps tab content, so one tab failure doesn't crash the entire shell.
+* pane plugins can render through tab metadata (`PaneTypeDisplayView`) when content isn't direct fragment markup.
 
 ## Practical Guidance
 
@@ -94,7 +94,7 @@ No. Declarative `Tab` children are simpler for static sets.
 
 ### How do I keep the first tab fixed during new-item flows?
 
-Use `LockOnNew` so query-string updates do not switch tabs unexpectedly.
+Use `LockOnNew` so query-string updates don't switch tabs unexpectedly.
 
 ### Can tabs host plugin components?
 

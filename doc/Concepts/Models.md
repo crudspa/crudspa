@@ -1,6 +1,6 @@
 # Concepts | Models
 
-Blazor makes it easy to put a lot of behavior directly into a component. That is useful at first, but CRUD+SPA screens quickly accumulate waiting states, alerts, filters, edit toggles, modal visibility, and real-time refresh logic. If all of that stays in the component, the view becomes harder to reason about with every new requirement.
+Blazor makes it easy to put a lot of behavior directly into a component. That's useful at first, but CRUD+SPA screens quickly accumulate waiting states, alerts, filters, edit toggles, modal visibility, and real-time refresh logic. If all of that stays in the component, the view becomes harder to reason about with every new requirement.
 
 Crudspa pushes much of that behavior into client models instead. The goal is simple: let components focus on rendering and composition while models own UI workflow.
 
@@ -8,7 +8,7 @@ Crudspa pushes much of that behavior into client models instead. The goal is sim
 
 Crudspa views are meant to stay relatively thin. They bind to a model, inject services, and wire events. The model then tracks the UI state machine that would otherwise sprawl across the component tree.
 
-That is why the model layer is so central to the platform's preferred View, Model, Services approach.
+That's why the model layer is so central to the platform's preferred View, Model, Services approach.
 
 ## Core Model Families
 
@@ -25,7 +25,7 @@ That is why the model layer is so central to the platform's preferred View, Mode
 | `TabsModel` | tab state tied to the query string so the UI stays deep-linkable |
 | move models | focused workflows such as moving panes or segments within the shell |
 
-The point is not to create a model for every tiny concern. The point is to pull stable UI workflows out of the view layer and give them a clear home.
+The point isn't to create a model for every tiny concern. The point is to pull stable UI workflows out of the view layer and give them a clear home.
 
 ## What These Models Usually Own
 
@@ -44,15 +44,15 @@ A good rule of thumb is:
 * put feature access in services
 * put business rules and trust-boundary logic on the server
 
-That last line matters. Crudspa models are intentionally rich in UI behavior but poor in business authority. They are not miniature domain services.
+That last line is worth keeping in mind. Crudspa models are intentionally rich in UI behavior but poor in business authority. They aren't miniature domain services.
 
 ## Practical Guidance
 
 When deciding whether something belongs in a model:
 
-* if it controls waiting, alerts, visibility, sorting, filtering, paging, or edit flow, it is usually model state
-* if it changes how markup is arranged, it is usually a view concern
-* if it talks to a remote feature boundary, it is usually a service concern
+* if it controls waiting, alerts, visibility, sorting, filtering, paging, or edit flow, it's usually model state
+* if it changes how markup is arranged, it's usually a view concern
+* if it talks to a remote feature boundary, it's usually a service concern
 * if it must be trusted, validated, or enforced for all clients, it belongs on the server
 
 This division keeps components small and makes complex screens much easier to maintain.
@@ -65,7 +65,7 @@ When a save, cancel, or refresh flow should rebuild local UI state from a fresh 
 
 The model layer adds more named types to the client side. For a tiny page, that can feel like extra structure.
 
-But Crudspa is not optimized for tiny pages. It is optimized for rich, stateful applications. In that world, explicit models are usually much easier to evolve than giant component code-behind files.
+But Crudspa isn't optimized for tiny pages. It's optimized for rich, stateful applications. In that world, explicit models are usually much easier to evolve than giant component code-behind files.
 
 ## Next Steps
 

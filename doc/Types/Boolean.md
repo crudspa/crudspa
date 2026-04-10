@@ -1,6 +1,6 @@
-﻿# Types | Boolean
+# Types | Boolean
 
-Boolean fields are easy to underestimate. Most boolean defects in CRUD systems come from unclear defaults, hidden null handling, or UI controls that do not match intent.
+Boolean fields are easy to underestimate. Most boolean defects in CRUD systems come from unclear defaults, hidden null handling, or UI controls that don't match intent.
 
 Crudspa keeps boolean handling explicit from SQL `bit` columns through nullable DTO fields, sproxy parameter mapping, and purpose-built UI controls.
 
@@ -120,7 +120,7 @@ Use a simple checkbox when the field is one independent yes/no flag. Use a nulla
 
 Nullable booleans improve edit flexibility, but they require explicit save behavior.
 
-If the business meaning is not truly binary, do not force it into a boolean. Use enum or lookup semantics instead.
+If the business meaning isn't truly binary, don't force it into a boolean. Use enum or lookup semantics instead.
 
 ## Next Steps
 

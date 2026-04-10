@@ -1,6 +1,6 @@
 # Concepts | Exceptions
 
-One of the easiest ways to make a CRUD application feel fragile is to use exceptions for everyday user flow. A missing field, a denied permission, or a validation problem should not behave like a system fault.
+One of the easiest ways to make a CRUD application feel fragile is to use exceptions for everyday user flow. A missing field, a denied permission, or a validation problem shouldn't behave like a system fault.
 
 Crudspa takes a calmer approach. Expected problems come back as structured results. Exceptions are reserved for defects, broken assumptions, and real infrastructure failures.
 
@@ -12,7 +12,7 @@ Crudspa separates three kinds of failure:
 * normal denials, such as permission failures, which should also come back safely
 * genuine faults, which should be logged, contained, and treated as problems to fix
 
-That is not just an implementation preference. It changes how application code feels to write and maintain.
+That's not just an implementation preference. It changes how application code feels to write and maintain.
 
 ## What This Looks Like In Application Code
 
@@ -28,9 +28,9 @@ public async Task Save()
 }
 ```
 
-That is the important public-facing benefit. The application does not need to turn every failed save into a crash path. It can stay in the normal screen workflow and show useful feedback.
+That's the important public-facing benefit. The application doesn't need to turn every failed save into a crash path. It can stay in the normal screen workflow and show useful feedback.
 
-## Where Exceptions Still Matter
+## When Exceptions Are Still The Right Tool
 
 Crudspa still expects exceptions to exist. They just mean something different.
 
@@ -49,10 +49,10 @@ When those happen, the framework aims to contain them at the right boundary and 
 This policy improves several things at once:
 
 * user-facing flows become more stable
-* operational failures become easier to spot because they are not mixed with routine validation
+* operational failures become easier to spot because they aren't mixed with routine validation
 * application code stays cleaner because it works with results instead of defensive exception choreography
 
-That is a big part of why Crudspa applications feel production-minded rather than improvised.
+That's a big part of why Crudspa applications feel production-minded rather than improvised.
 
 ## Practical Guidance
 
@@ -65,7 +65,7 @@ When building on Crudspa:
 
 ## Tradeoffs
 
-This approach asks teams to model failure a little more explicitly. That is real work.
+This approach asks teams to model failure a little more explicitly. That's real work.
 
 But the payoff is a calmer system: fewer surprise crashes, clearer logs, and application code that reads more like workflow and less like damage control.
 

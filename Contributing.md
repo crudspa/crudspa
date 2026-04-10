@@ -8,7 +8,7 @@ Crudspa is a source-first framework maintained by a small team of experienced de
 
 If you are planning anything larger than a focused bug fix or documentation improvement, start a GitHub Discussion first.
 
-That early conversation matters in this repo. It helps us confirm that an idea fits the framework, matches the current architecture, and is realistic for a small maintainer team to support over time before anyone invests in a larger pull request.
+Having that conversation early helps in this repo. It helps us confirm that an idea fits the framework, matches the current architecture, and is realistic for a small maintainer team to support over time before anyone invests in a larger pull request.
 
 ## Good Fits
 
@@ -25,7 +25,7 @@ Some ideas are valid engineering directions, but they are usually not a fit for 
 
 * broad architectural rewrites
 * large refactors with little practical user value
-* features with a long-term support burden that does not match current team capacity
+* features with a long-term support burden that doesn't match current team capacity
 
 If your team needs a different direction, a fork is often the right tool.
 
@@ -64,9 +64,9 @@ For SQL work, follow [doc/Databases/Standards.md](doc/Databases/Standards.md).
 
 ## Validation
 
-This repository does not currently rely on a large permanent automated test suite. Most changes are validated through targeted builds, manual verification, and production-minded review.
+This repository doesn't currently rely on a large permanent automated test suite. Most changes are validated through targeted builds, manual verification, and production-minded review.
 
-If you create temporary tests or scratch code to prove a change locally, do not include them in the final pull request unless a maintainer asks for them.
+If you create temporary tests or scratch code to prove a change locally, don't include them in the final pull request unless a maintainer asks for them.
 
 ## Review Expectations
 

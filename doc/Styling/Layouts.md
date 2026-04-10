@@ -4,7 +4,7 @@ CRUD screens rarely fail because of one dramatic layout decision. They fail beca
 
 Crudspa's layout system was built to stop that drift. Our CSS is designed specifically for CRUD+SPA work: dense forms, repeated cards, action toolbars, tabbed panes, and navigation shells that need to stay readable on large monitors and still work naturally on phones. The framework's default goal is simple: let screens reflow by composition instead of by page-specific rescue CSS.
 
-Most developers do not need to write raw layout classes at all. They compose screens from components such as `Wrapped`, `Stacked`, `Padding`, `Margin`, `Field`, `Toolbar`, `ButtonGroup`, and `BatchSection`. Those components apply the right classes for them.
+Most developers don't need to write raw layout classes at all. They compose screens from components such as `Wrapped`, `Stacked`, `Padding`, `Margin`, `Field`, `Toolbar`, `ButtonGroup`, and `BatchSection`. Those components apply the right classes for them.
 
 A well-composed Crudspa form may show several fields on one row at desktop widths and then wrap those same fields into a vertical stack on narrower screens, without changing the page-specific markup. That reflow behavior is the point of the layout system.
 
@@ -18,11 +18,11 @@ Our layout CSS framework aims to do five things well:
 * Hide raw CSS details behind components in the common case.
 * Leave a clean escape hatch for custom visuals when a screen really is unique.
 
-That last point matters. The framework does not assume every screen should look the same. It aims to make the standard screens predictable and easy to compose, while still leaving room for custom visuals where they are needed.
+That last point is easy to miss. The framework doesn't assume every screen should look the same. It aims to make the standard screens predictable and easy to compose, while still leaving room for custom visuals where they are needed.
 
 ## Default Approach
 
-For most application work, you do not start with `<div class="c-wrap">`. You start with components. A real edit surface in a current Crudspa administrative client looks like this:
+For most application work, you don't start with `<div class="c-wrap">`. You start with components. A real edit surface in a current Crudspa administrative client looks like this:
 
 ```razor
 <Toolbar>
@@ -70,7 +70,7 @@ For most application work, you do not start with `<div class="c-wrap">`. You sta
 </Waiter>
 ```
 
-There is no page-specific media query here. There is no custom width math. The screen works because the layout system already knows how fields should size, wrap, pad, and stack.
+There's no page-specific media query here. There's no custom width math. The screen works because the layout system already knows how fields should size, wrap, pad, and stack.
 
 That pattern is common across Crudspa's administrative UI. Most of those Razor files are primarily component composition rather than hand-authored layout markup.
 
@@ -83,9 +83,9 @@ Crudspa's layout system depends heavily on flexbox, but most developers only nee
 | Main axis | The direction items flow in a container | `Wrapped` and `NoWrap` use a horizontal row; `Stacked` uses a vertical column |
 | Cross axis | The direction perpendicular to the main axis | Alignment options such as `Top`, `Center`, `Bottom`, and `Right` map to cross-axis or content alignment choices |
 | Wrapping | Whether items move to a new line when space runs out | `Wrapped` defaults to wrapping, which is why form rows collapse gracefully on smaller screens |
-| Basis, grow, shrink | How an item claims space and how willing it is to stretch or compress | `Field` sizes provide the common default behavior; advanced editors can expose basis, grow, and shrink directly |
+| Basis, grow, shrink | How an item claims space and how willing it's to stretch or compress | `Field` sizes provide the common default behavior; advanced editors can expose basis, grow, and shrink directly |
 | Min width | The smallest useful width before a control becomes cramped | Named sizes such as `Tiny`, `Medium`, `Wide`, and `Max` keep controls readable and encourage wrapping before collapse |
-| Justify and align | How extra space is distributed inside the container | Shared components encode the common alignments so pages do not need to repeat raw CSS |
+| Justify and align | How extra space is distributed inside the container | Shared components encode the common alignments so pages don't need to repeat raw CSS |
 
 If you come from XAML, WPF, or Silverlight, Crudspa's `Star` language will feel familiar. Star sizing means "take the remaining space." In CSS terms, the framework's star helper maps to flexible growth with a safe minimum width.
 
@@ -121,7 +121,7 @@ The result is that many screens become responsive without any page-specific brea
 
 ## Raw CSS Still Has A Place
 
-Component-first does not mean "never write CSS." It means "use custom CSS for custom visuals, not for basic screen structure."
+Component-first doesn't mean "never write CSS." It means "use custom CSS for custom visuals, not for basic screen structure."
 
 A good example is a feature-specific surface that still leans on the shared layout vocabulary:
 
@@ -153,7 +153,7 @@ That pattern comes up often in Crudspa applications. The custom class is feature
 
 Crudspa's layout system is opinionated. It asks teams to work within a shared vocabulary for layout, spacing, and sizing. In return, screens are easier to review and keep consistent.
 
-Developers do need to learn that vocabulary, even if they do not write much raw CSS. The set of concepts is small, but it shows up throughout the framework.
+Developers do need to learn that vocabulary, even if they don't write much raw CSS. The set of concepts is small, but it shows up throughout the framework.
 
 ## Next Steps
 

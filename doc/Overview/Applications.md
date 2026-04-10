@@ -1,8 +1,8 @@
 # Overview | Applications
 
-Crudspa is easiest to understand as a way to build applications, not as a pile of reusable parts. You do not need to master the whole framework before it becomes useful. The usual path is simpler: choose the modules that fit your problem, follow the platform's default application shape, and keep your own code focused on domain behavior, screen workflow, and product-specific decisions.
+Crudspa is easiest to understand as a way to build applications, not as a pile of reusable parts. You don't need to master the whole framework before it becomes useful. The usual path is simpler: choose the modules that fit your problem, follow the platform's default application shape, and keep your own code focused on domain behavior, screen workflow, and product-specific decisions.
 
-That is what the sample applications are for. They are not the point of Crudspa by themselves. They are compact examples of how to assemble the libraries into clean, maintainable applications.
+That's what the sample applications are for. They aren't the point of Crudspa by themselves. They are compact examples of how to assemble the libraries into clean, maintainable applications.
 
 ## Start With The Right Application
 
@@ -10,7 +10,7 @@ The sample track is meant to shorten the path from clone to understanding:
 
 * `Catalog` is the best starting point when you want a focused `Framework.Core` application and the simplest sample to run first.
 * `Composer` is the best starting point when you want editor-facing content management, especially with `Consumer` open beside it.
-* `Consumer` is the runtime half of the content story, so it is best studied together with `Composer`.
+* `Consumer` is the runtime half of the content story, so it's best studied together with `Composer`.
 * `Samples/Jobs/Engine` is the background-work host. Pair it with `Catalog` or `Composer`, both of which expose `Jobs` and `Schedules` panes.
 
 If you are building a conventional admin-style CRUD+SPA, start with `Catalog`. It shows the cleanest path to the core shell, model, service, and data-layer story without asking you to absorb the content stack at the same time.
@@ -30,7 +30,7 @@ In practice, an application usually adds:
 * domain-specific services, DTOs, and database objects
 * composition choices around authentication, infrastructure providers, and optional modules
 
-That is the public story we want the repo to tell: the framework handles the recurring platform problems cleanly, while your application stays free to concentrate on the business itself.
+That's the public story we want the repo to tell: the framework handles the recurring platform problems cleanly, while your application stays free to concentrate on the business itself.
 
 ## What The Libraries Already Give You
 
@@ -49,7 +49,7 @@ That means application code can start at a much higher level than "wire up routi
 Crudspa is designed to be adopted in layers.
 
 * Start with `Framework.Core` when you need the shell, components, typed services, sessions, and a solid data-heavy CRUD foundation.
-* Add `Framework.Jobs` when background scheduling and worker processes matter.
+* Add `Framework.Jobs` when you need background scheduling and worker processes.
 * Add `Content.Design` when you need authoring, metadata-driven panes, and editor-facing content workflows.
 * Add `Content.Display` when you need runtime content delivery, binders, elements, and theming.
 
@@ -65,7 +65,7 @@ As a rule of thumb:
 * keep application-specific composition and branding in the application projects
 * keep your own panes, services, and database changes aligned with the same layer and feature conventions the repo already uses
 
-That is one of the reasons the framework stays readable at scale. New work usually has an obvious home.
+That's one of the reasons the framework stays readable at scale. New work usually has an obvious home.
 
 ## Reading Order
 

@@ -1,8 +1,8 @@
 # Databases | Standards
 
-One of the first things people notice in Crudspa SQL is that it does not look like "classic" SQL. That is intentional.
+One of the first things people notice in Crudspa SQL is that it doesn't look like "classic" SQL. That's intentional.
 
-We do not think the old convention of writing SQL keywords in uppercase aged well. SQL is case-insensitive. Modern developers already rely on casing to communicate scope, type, and meaning in languages like C#, TypeScript, and JSON. We think SQL gets easier to read when it follows the same basic idea.
+We don't think the old convention of writing SQL keywords in uppercase aged well. SQL is case-insensitive. Modern developers already rely on casing to communicate scope, type, and meaning in languages like C#, TypeScript, and JSON. We think SQL gets easier to read when it follows the same basic idea.
 
 Our style gives visual emphasis to the names that carry business meaning: schemas, tables, views, procedures, columns, parameters, and variables. The keywords fade into the background where they belong.
 
@@ -10,7 +10,7 @@ Our style gives visual emphasis to the names that carry business meaning: schema
 
 We think this style is superior for production CRUD work because it makes SQL easier to scan, easier to refactor, and easier to discuss with the rest of a modern .NET codebase.
 
-That is the real goal of these standards. They are not decorative preferences. They are readability and maintenance choices.
+That's the real goal of these standards. They aren't decorative preferences. They are readability and maintenance choices.
 
 ## Style Rules
 
@@ -91,7 +91,7 @@ where organization.Id = @organizationId
     and baseTable.Ordinal != orderable.Ordinal
 ```
 
-We do not like aliases such as `a`, `b`, `t1`, or `x`. They save a few keystrokes and cost a lot of comprehension.
+We don't like aliases such as `a`, `b`, `t1`, or `x`. They save a few keystrokes and cost a lot of comprehension.
 
 A good alias is short, obvious, and human. `segment`, `portal`, `organization`, and `baseTable` tell the reader what role each source plays without forcing them to decode a legend.
 
@@ -128,7 +128,7 @@ This style is pragmatic.
 
 It makes vertical scanning easier because the delimiters line up. It makes ad hoc editing safer because adding, removing, or moving one item usually changes one line instead of two. It also works well with tooling and scripted transformations because each row in the list has a consistent shape.
 
-We do not think trailing commas are a disaster. We simply think leading commas read better in long SQL blocks, and long SQL blocks are where teams spend their time.
+We don't think trailing commas are a disaster. We simply think leading commas read better in long SQL blocks, and long SQL blocks are where teams spend their time.
 
 ## Explicit Aliases In Active Views
 
@@ -148,13 +148,13 @@ where 1=1
     and achievement.VersionOf = achievement.Id
 ```
 
-This is not busywork. It helps tools and text search find usages reliably, especially when developers are tracing a column through views, procedures, and C# mappings.
+This isn't busywork. It helps tools and text search find usages reliably, especially when developers are tracing a column through views, procedures, and C# mappings.
 
 It also makes the projection explicit. A view should make it easy to see exactly which columns are being exposed as part of the contract.
 
-## Why This Matters
+## Why This Holds Up
 
-SQL is read far more often than it is written. Teams inspect it during debugging, reviews, production support, migrations, and performance tuning.
+SQL is read far more often than it's written. Teams inspect it during debugging, reviews, production support, migrations, and performance tuning.
 
 A good style guide should optimize for those moments, not for nostalgia.
 
@@ -167,7 +167,7 @@ Crudspa SQL is designed to read like modern application code:
 * long lists are easy to scan and edit,
 * views make exposed columns obvious.
 
-That is why our SQL may look different than what some teams expect, and it is exactly why we keep it this way.
+That's why our SQL may look different than what some teams expect, and it's exactly why we keep it this way.
 
 ## Tradeoffs
 
@@ -177,7 +177,7 @@ We think that cost is minor. Once the reader adapts, the queries become calmer, 
 
 ## IDE Setup
 
-Most SQL editors ship with defaults that do not match Crudspa SQL. The settings below bring each tool closer to the conventions in this page, especially lowercase keywords, leading commas, readable multi-line lists, and consistent indentation.
+Most SQL editors ship with defaults that don't match Crudspa SQL. The settings below bring each tool closer to the conventions in this page, especially lowercase keywords, leading commas, readable multi-line lists, and consistent indentation.
 
 The menu names below were checked against current vendor docs on March 6, 2026. At that time this meant Visual Studio 2026, ReSharper 2025.3, SSMS 21, Rider 2025.3, and the current Visual Studio Code SQL tooling.
 
@@ -191,7 +191,7 @@ For this repository, Visual Studio Community 2026 plus SSDT fits the existing `D
 
 ### ReSharper
 
-ReSharper adds the SQL formatting controls that matter most for this style.
+ReSharper adds the SQL formatting controls that help most with this style.
 
 * Set the solution dialect at `ReSharper > Options > Code Inspection > SQL > SQL Dialects` so `.sql` files are treated as Transact-SQL.
 * In `ReSharper > Options > Code Editing > SQL > Formatting Style > Queries`, set `Place comma` to `To begin` for the clause types you use most often.

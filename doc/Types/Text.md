@@ -1,4 +1,4 @@
-﻿# Types | Text
+# Types | Text
 
 Text appears everywhere in CRUD systems, but not all text is the same. Short labels, search strings, long guidance content, and rich HTML each have different risk and validation needs.
 
@@ -105,7 +105,7 @@ Rich text:
 
 For full textbox and editor options, see [Components | Textboxes](../Components/Textboxes.md).
 
-In UI terms, short labels and codes usually want `TextBox`, longer notes want `MultilineTextBox`, search inputs want `SearchTextBox`, and authored body content wants the `HtmlEditor` and `UserHtml` pair. The important distinction is not only length. Each text shape carries different behavior, validation, and rendering needs.
+In UI terms, short labels and codes usually want `TextBox`, longer notes want `MultilineTextBox`, search inputs want `SearchTextBox`, and authored body content wants the `HtmlEditor` and `UserHtml` pair. The important distinction isn't only length. Each text shape carries different behavior, validation, and rendering needs.
 
 ## Rich Text Safety
 
@@ -147,7 +147,7 @@ This keeps behavior consistent across UI flows, API usage, and batch operations.
 
 Using bounded lengths and explicit validation adds a little upfront work, but it prevents common production drift between SQL, UI, and service behavior.
 
-For rich text, stricter sanitization can remove some pasted formatting. That is usually the safer production default.
+For rich text, stricter sanitization can remove some pasted formatting. That's usually the safer production default.
 
 ## Next Steps
 

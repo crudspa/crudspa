@@ -1,8 +1,8 @@
 # Concepts | Wrappers
 
-Most teams do not need to think about wrappers on day one. They start mattering when an application grows enough that logging, authorization, retries, validation, tracing, or transaction policy would otherwise leak into every feature.
+Most teams don't need to think about wrappers on day one. They become useful once an application grows enough that logging, authorization, retries, validation, tracing, or transaction policy would otherwise leak into every feature.
 
-That is exactly why Crudspa has them. Wrappers are the framework's main seam for cross-cutting concerns. They let application code stay focused on the feature while the policy stays centralized and replaceable.
+That's exactly why Crudspa has them. Wrappers are the framework's main seam for cross-cutting concerns. They let application code stay focused on the feature while the policy stays centralized and replaceable.
 
 ## Crudspa's Stance
 
@@ -17,7 +17,7 @@ Crudspa keeps different concerns at different boundaries:
 
 That separation is what keeps the framework from collapsing into one giant "pipeline" abstraction that means everything and therefore clarifies nothing.
 
-## Why This Matters To Application Developers
+## Why Application Developers Care
 
 The biggest practical benefit is that feature code stays small.
 
@@ -52,11 +52,11 @@ services.AddSingleton<ISqlWrappers, SqlWrappersCore>();
 
 If you need custom behavior, decorate or replace the implementation in your own application registration instead of pushing that policy into every pane, hub, or service.
 
-That is the part worth emphasizing publicly: wrappers are how you customize cross-cutting behavior without making the rest of your application uglier.
+That's the part worth emphasizing publicly: wrappers are how you customize cross-cutting behavior without making the rest of your application uglier.
 
 ## Relationship To Logging
 
-Wrappers are a major part of the observability story, but they are not the whole story.
+Wrappers are a major part of the observability story, but they aren't the whole story.
 
 Application code should still use `ILogger`. Browser log relay, host logging configuration, and wrapper-level tracing each solve different problems. Crudspa keeps those responsibilities adjacent, not tangled.
 
@@ -65,13 +65,13 @@ Application code should still use `ILogger`. Browser log relay, host logging con
 When deciding whether something belongs in a wrapper:
 
 * put it there if it applies broadly across many features
-* keep it out if it is really feature-specific business behavior
+* keep it out if it's really feature-specific business behavior
 * prefer decorating an existing wrapper over forking the whole policy surface
 * keep the public service and pane APIs clean, even when the policy behind them grows
 
 ## Tradeoffs
 
-Wrappers add a layer of indirection. That is real.
+Wrappers add a layer of indirection. That's real.
 
 But for CRUD+SPA systems that need consistent policy across many screens and services, that indirection is far cheaper than letting every feature grow its own private version of the same plumbing.
 

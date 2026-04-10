@@ -1,4 +1,4 @@
-﻿# Components | Forms
+# Components | Forms
 
 Forms are where CRUD complexity accumulates: read/edit toggles, confirmation flows, labels, field sizing, nested collections, and async save behavior.
 
@@ -53,7 +53,7 @@ This pattern keeps model state and visual behavior aligned across list, many-edi
  `Padding` | spacing variant | `Default`, `None`, `Tight*`
  `ChildContent` | field content | required
 
-Use shared sizes aggressively. It is one of the biggest consistency levers in Crudspa screens.
+Use shared sizes aggressively. It's one of the biggest consistency levers in Crudspa screens.
 
 ## `Form<T>` Option Reference
 
@@ -99,7 +99,7 @@ Form components align with model contracts used throughout Crudspa:
 * Use `ModalEdit` for dense many-edit screens where inline edit would be noisy.
 * Keep `ReadView` concise and use `Labeled*` helpers for consistency.
 * Use `LabelActions` for field-specific actions instead of adding detached buttons nearby.
-* Avoid raw HTML layout for common fields unless there is a clear exception.
+* Avoid raw HTML layout for common fields unless there's a clear exception.
 
 ## Common Questions
 

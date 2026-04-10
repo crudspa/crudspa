@@ -2,7 +2,7 @@
 
 Crudspa uses a small set of terms very deliberately. Learning them early pays off because the same vocabulary carries through the docs, the source tree, the database model, and the runtime shell.
 
-This is not meant to be a giant glossary. It is the short list of terms that unlock the rest of the platform.
+This isn't meant to be a giant glossary. It's the short list of terms that unlock the rest of the platform.
 
 ## Core Terms
 
@@ -56,7 +56,7 @@ If a page uses one of these terms heavily, it should use it in this sense.
 
 When you are reading about shell behavior, keep `portal`, `segment`, `pane`, and `path` in mind. When you are reading about CRUD patterns, keep `node`, `predicate`, and `sibling` in mind. When you are reading about authored experiences, keep `binder`, `page`, `section`, `element`, and `rule` in mind.
 
-You do not need to memorize the whole list up front. Just return here whenever a term feels more specific than everyday English.
+You don't need to memorize the whole list up front. Just return here whenever a term feels more specific than everyday English.
 
 ## Next Steps
 

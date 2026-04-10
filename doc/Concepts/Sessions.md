@@ -22,7 +22,7 @@ public class Session
 }
 ```
 
-A Crudspa session is not only an authentication token. It is also the carrier for:
+A Crudspa session isn't only an authentication token. It's also the carrier for:
 
 * the current portal
 * the current user, if any
@@ -30,7 +30,7 @@ A Crudspa session is not only an authentication token. It is also the carrier fo
 * the allowed navigation tree for that session
 * any currently open screens the client wants to preserve
 
-That is why the concept shows up everywhere in the framework.
+That's why the concept shows up everywhere in the framework.
 
 ## Lifecycle
 
@@ -136,9 +136,9 @@ That gives each portal an explicit persistence policy instead of assuming one de
 
 ## This Is Not ASP.NET Session State
 
-A Crudspa session is not a general-purpose key-value bag for arbitrary server memory.
+A Crudspa session isn't a general-purpose key-value bag for arbitrary server memory.
 
-It is:
+It's:
 
 * durable
 * database-backed
@@ -156,7 +156,7 @@ The session also anchors real-time subscriptions.
 * the server resolves the session and adds the connection to organization or permission groups
 * notifications are then scoped to the audience implied by that session
 
-So the session is not just about sign-in. It is part of the framework's messaging model too.
+So the session isn't just about sign-in. It's part of the framework's messaging model too.
 
 The important point is that the same session concept spans startup, authentication, navigation, and notice audience membership. A session can begin anonymously, pick up navigation and access state, attach a user and permissions after sign-in, drive SignalR group membership, and then end explicitly or by expiration.
 
@@ -164,7 +164,7 @@ The important point is that the same session concept spans startup, authenticati
 
 Crudspa sessions carry more responsibility than the simple cookies many web apps start with. That means session design affects navigation, security, and real-time behavior all at once.
 
-The payoff is coherence. One durable concept ties together the browser, the hub, the server, and the database in a way that is easy to reason about.
+The payoff is coherence. One durable concept ties together the browser, the hub, the server, and the database in a way that's easy to reason about.
 
 ## Next Steps
 

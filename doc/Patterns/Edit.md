@@ -166,7 +166,7 @@ end
 
 ### Real-Time Sync
 
-Open edit panes should react to saved and removed events so another client cannot leave the current record stale.
+Open edit panes should react to saved and removed events so another client can't leave the current record stale.
 
 ```csharp
 public async Task Handle(TrackSaved payload)

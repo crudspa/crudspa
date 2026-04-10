@@ -8,7 +8,7 @@ Crudspa theming works because structural CSS, runtime theme tokens, and page-lev
 
 ## The Core Idea
 
-Crudspa themes are not arbitrary CSS text blobs. They are structured data.
+Crudspa themes aren't arbitrary CSS text blobs. They are structured data.
 
 At runtime, the system combines three layers:
 
@@ -18,7 +18,7 @@ At runtime, the system combines three layers:
 | Portal `Styles` data | curated theme tokens such as colors, fonts, padding, roundness, and zoom |
 | Portal `Fonts` data | named uploaded font files that theme rules can reference |
 
-That structure matters because it keeps theming safe, readable, and consistent. Developers are not expected to inject random CSS into the system. They edit a curated set of design tokens that the framework already understands.
+That structure keeps theming safe, readable, and consistent. Developers aren't expected to inject random CSS into the system. They edit a curated set of design tokens that the framework already understands.
 
 ## Stylesheet Versus Theme
 
@@ -136,7 +136,7 @@ The host stylesheet already references those runtime tokens through `defaults.sc
 
 ## Theme-Aware Application SCSS
 
-The runtime theme does not stop at framework chrome. Application-specific SCSS can participate too, as long as it uses shared tokens instead of hard-coded values.
+The runtime theme doesn't stop at framework chrome. Application-specific SCSS can participate too, as long as it uses shared tokens instead of hard-coded values.
 
 For example, a portal stylesheet can write this:
 
@@ -161,13 +161,13 @@ This is the preferred pattern for custom styling in Crudspa:
 
 Crudspa's preview system stays self-contained.
 
-A preview does not need to fetch CSS from another running portal. Instead, the current host assembles preview CSS from:
+A preview doesn't need to fetch CSS from another running portal. Instead, the current host assembles preview CSS from:
 
 * the current host stylesheet
 * the target portal's theme tokens
 * scoped preview selectors
 
-That is an important architectural choice. It keeps previews inside the host that is already doing the editing while still reusing the real theme contract. In practice, this means a preview is exact for the current host's structural stylesheet and theme-aware for other portals that share the same design-token contract.
+That's an important architectural choice. It keeps previews inside the host that's already doing the editing while still reusing the real theme contract. In practice, this means a preview is exact for the current host's structural stylesheet and theme-aware for other portals that share the same design-token contract.
 
 ## Custom Font Slots And Box-Level Overrides
 
@@ -198,7 +198,7 @@ Those box-level settings are intentionally separate from the main theme. The the
 
 Crudspa's theming system is structured. Only the parts of the stylesheet that depend on the shared token contract will respond to theme changes.
 
-That is an intentional trade. The goal is not arbitrary CSS injection. The goal is a strong shared design system that can still be re-skinned quickly and safely.
+That's an intentional trade. The goal isn't arbitrary CSS injection. The goal is a strong shared design system that can still be re-skinned quickly and safely.
 
 ## Next Steps
 

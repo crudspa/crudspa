@@ -44,11 +44,11 @@ Start by proving the managed projects build cleanly:
 dotnet build src/Crudspa.slnx
 ```
 
-That validates the reusable client, shared, and server projects. It is the right first check after cloning.
+That validates the reusable client, shared, and server projects. It's the right first check after cloning.
 
 The database follows a different workflow. [src/Database/Database.sqlproj](../src/Database/Database.sqlproj) is a SQL Database Project, so treat it like one: build and publish it with the normal Visual Studio or MSBuild plus SSDT path instead of expecting `dotnet build` to cover everything.
 
-It is also normal to notice that the reusable projects and the sample applications have different responsibilities. The libraries hold the long-lived architecture. Each application adds the final composition, metadata, and branding needed to turn those libraries into a working product.
+It's also normal to notice that the reusable projects and the sample applications have different responsibilities. The libraries hold the long-lived architecture. Each application adds the final composition, metadata, and branding needed to turn those libraries into a working product.
 
 ## Application Shape
 
@@ -89,11 +89,11 @@ Open `https://localhost:42100`, enter a name, and use that session to trace one 
 
 Run `Composer` and `Consumer` together when you want to study `Content.Design` and `Content.Display` as one story instead of two isolated projects.
 
-Open `Composer` at `https://localhost:42200` and sign in with `sample@example.com`. Use the built-in `Reset password` flow, read the access-code email from `C:\data\temp\email`, set a password, and finish signing in. Then keep `Consumer` open at `https://localhost:42300` while you edit pages, sections, styles, or portal content in `Composer`. That is the shortest path to seeing authored changes invalidate caches and appear in the runtime host in real time.
+Open `Composer` at `https://localhost:42200` and sign in with `sample@example.com`. Use the built-in `Reset password` flow, read the access-code email from `C:\data\temp\email`, set a password, and finish signing in. Then keep `Consumer` open at `https://localhost:42300` while you edit pages, sections, styles, or portal content in `Composer`. That's the shortest path to seeing authored changes invalidate caches and appear in the runtime host in real time.
 
 ### Jobs Engine
 
-Run [src/Samples/Jobs/Engine/Engine.csproj](../src/Samples/Jobs/Engine/Engine.csproj) alongside `Catalog` or `Composer` when background work matters.
+Run [src/Samples/Jobs/Engine/Engine.csproj](../src/Samples/Jobs/Engine/Engine.csproj) alongside `Catalog` or `Composer` when you want to study background work.
 
 The jobs administration UI lives in the web hosts. Both `Catalog` and `Composer` expose `Jobs` and `Schedules` panes. The standalone sample under `src/Samples/Jobs` is the engine host that schedules due work, executes job actions, and publishes job updates back into those panes through the gateway flow.
 
