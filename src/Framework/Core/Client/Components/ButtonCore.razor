@@ -1,4 +1,6 @@
 <button @onclick="() => Clicked.InvokeAsync()"
+        title="@Title"
+        aria-label="@AriaLabel"
         disabled="@Disabled">
     <div class="c-button @ButtonClass @(Text.HasSomething() ? "" : "icon-only")">
         @if (IconClass.HasSomething() && IconPosition == IconPositions.Left)

@@ -897,6 +897,25 @@
 .c-tabbed-panes {
     display: block;
 
+    .c-settings-modal-tabs {
+        align-items: flex-start;
+        display: flex;
+        flex-flow: row nowrap;
+        gap: .5em;
+        justify-content: space-between;
+
+        > .tabs {
+            flex: 1 1 auto;
+            min-width: 0;
+            padding-right: 0;
+        }
+
+        > .c-settings-transfer {
+            flex: 0 0 auto;
+            padding: .5em .5em 0 0;
+        }
+    }
+
     .tabs {
         background-color: transparent;
         display: flex;
@@ -1029,6 +1048,33 @@
             z-index: 10;
         }
     }
+}
+
+.c-settings-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: .5em .5em 0 .5em;
+}
+
+.c-settings-transfer {
+    align-items: center;
+    display: flex;
+    gap: .375em;
+
+    .c-button.icon-only {
+        min-height: 2.5em;
+        min-width: 2.5em;
+        padding: .625em .875em;
+    }
+
+    .c-button .icon {
+        font-size: 1.35em;
+    }
+}
+
+.c-settings-description {
+    cursor: text;
+    user-select: text;
 }
 
 .c-stack-navigation {

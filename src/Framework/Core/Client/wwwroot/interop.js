@@ -200,6 +200,20 @@ function copyToClipboard(text) {
     }
 }
 
+async function readFromClipboard() {
+    try {
+        if (typeof navigator === "undefined"
+            || !navigator.clipboard
+            || typeof navigator.clipboard.readText !== "function")
+            return null;
+
+        return await navigator.clipboard.readText();
+    } catch (ex) {
+        logInteropError("readFromClipboard", ex);
+        return null;
+    }
+}
+
 // #endregion
 
 // #region Scrolling

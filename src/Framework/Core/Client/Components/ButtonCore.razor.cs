@@ -25,6 +25,8 @@ public partial class ButtonCore
     [Parameter, EditorRequired] public EventCallback Clicked { get; set; }
     [Parameter] public String? Text { get; set; } = String.Empty;
     [Parameter] public String? IconClass { get; set; } = String.Empty;
+    [Parameter] public String? Title { get; set; }
+    [Parameter] public String? AriaLabel { get; set; }
     [Parameter] public Boolean Disabled { get; set; }
     [Parameter] public IconPositions IconPosition { get; set; } = IconPositions.Left;
     [Parameter] public ButtonStyles ButtonStyle { get; set; } = ButtonStyles.Default;

@@ -9,6 +9,11 @@
                        Width="34em"
                        Title="Page Settings">
                     <Content>
+                        <div class="c-settings-modal-actions">
+                            <SettingsTransfer Description="@Model.BoxModel.Description"
+                                              HostModel="Model.BoxModel"
+                                              BoxModel="Model.BoxModel" />
+                        </div>
                         <BoxEditor Model="Model.BoxModel" />
                     </Content>
                     <Buttons>
@@ -30,7 +35,7 @@
                                                 Clicked="() => Model.BoxModel.Show()" />
                                 </Padding>
                             </Padding>
-                            <div class="star c-parenthetical c-padding-micro-vert">
+                            <div class="star c-parenthetical c-padding-micro-vert c-settings-description">
                                 @(Model.BoxModel.Description)
                             </div>
                         </Wrapped>

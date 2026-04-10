@@ -21,6 +21,20 @@ public class BoxModel : ModalModel
 
     public override Task Show()
     {
+        RefreshOverrideStates();
+
+        return base.Show();
+    }
+
+    public override Task Hide()
+    {
+        NormalizeOverrideValues();
+
+        return base.Hide();
+    }
+
+    public void RefreshOverrideStates()
+    {
         BorderColorState = _box.BorderColor.HasSomething() ? OverrideState.Custom : OverrideState.Default;
         BorderRadiusState = _box.BorderRadius.HasSomething() ? OverrideState.Custom : OverrideState.Default;
         BorderThicknessState = _box.BorderThickness.HasSomething() ? OverrideState.Custom : OverrideState.Default;
@@ -51,11 +65,9 @@ public class BoxModel : ModalModel
         ShadowSpreadRadiusState = _box.ShadowSpreadRadius.HasSomething() ? OverrideState.Custom : OverrideState.Default;
         HeadingLineHeightState = _box.HeadingLineHeight.HasSomething() ? OverrideState.Custom : OverrideState.Default;
         ParagraphLineHeightState = _box.ParagraphLineHeight.HasSomething() ? OverrideState.Custom : OverrideState.Default;
-
-        return base.Show();
     }
 
-    public override Task Hide()
+    public void NormalizeOverrideValues()
     {
         if (BorderColorState == OverrideState.Default || _box.BorderColor.HasNothing())
             _box.BorderColor = null;
@@ -146,8 +158,6 @@ public class BoxModel : ModalModel
 
         if (ParagraphLineHeightState == OverrideState.Default || _box.ParagraphLineHeight.HasNothing())
             _box.ParagraphLineHeight = null;
-
-        return base.Hide();
     }
 
     public Box Box

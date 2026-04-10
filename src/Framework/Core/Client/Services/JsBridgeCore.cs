@@ -47,6 +47,24 @@ public class JsBridgeCore(IJSRuntime jsRuntime, NavigationManager navigationMana
         }
     }
 
+    public async Task<String?> ReadFromClipboard()
+    {
+        try
+        {
+            return await jsRuntime.InvokeAsync<String?>("readFromClipboard");
+        }
+        catch (JSException jsException)
+        {
+            logger.LogError(jsException, "JSException raised in ReadFromClipboard(). {message} {stackTrace}", jsException.Message, jsException.StackTrace);
+            return null;
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Exception raised in ReadFromClipboard(). {message} {stackTrace}", ex.Message, ex.StackTrace);
+            return null;
+        }
+    }
+
     public async Task ScrollToTop()
     {
         try

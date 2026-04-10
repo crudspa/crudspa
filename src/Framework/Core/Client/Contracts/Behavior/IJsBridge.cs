@@ -8,6 +8,7 @@ public interface IJsBridge
     Task SetCookie(String key, String value, DateTimeOffset? expires = null);
     Task RefreshBrowser(Int32 secondsToWait = 0);
     Task CopyToClipboard(String text);
+    Task<String?> ReadFromClipboard();
     Task ScrollToTop();
     Task ScrollToBottom();
     Task ScrollToId(String id);

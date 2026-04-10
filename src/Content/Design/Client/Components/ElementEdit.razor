@@ -7,16 +7,22 @@
                Title="Element Settings">
             <Content>
                 <div class="c-tabbed-panes">
-                    <ul class="tabs">
-                        <li class="@(ActiveElementSettingsTab.IsBasically(StylesTab) ? "selected" : String.Empty)"
-                            @onclick="() => SetElementSettingsTab(StylesTab)">
-                            Styles
-                        </li>
-                        <li class="@(ActiveElementSettingsTab.IsBasically(SizingTab) ? "selected" : String.Empty)"
-                            @onclick="() => SetElementSettingsTab(SizingTab)">
-                            Sizing
-                        </li>
-                    </ul>
+                    <div class="c-settings-modal-tabs">
+                        <ul class="tabs">
+                            <li class="@(ActiveElementSettingsTab.IsBasically(StylesTab) ? "selected" : String.Empty)"
+                                @onclick="() => SetElementSettingsTab(StylesTab)">
+                                Styles
+                            </li>
+                            <li class="@(ActiveElementSettingsTab.IsBasically(SizingTab) ? "selected" : String.Empty)"
+                                @onclick="() => SetElementSettingsTab(SizingTab)">
+                                Sizing
+                            </li>
+                        </ul>
+                        <SettingsTransfer Description="@SettingsDescription"
+                                          HostModel="Model.BoxModel"
+                                          BoxModel="Model.BoxModel"
+                                          ItemModel="Model.ItemModel" />
+                    </div>
                     <div class="panes match-tab-color">
                         <div class="@(ActiveElementSettingsTab.IsBasically(StylesTab) ? String.Empty : "c-hide")">
                             <div class="c-padding-tiny">
@@ -58,7 +64,7 @@
                                                     Clicked="() => OpenElementSettings()" />
                                     </Padding>
                                 </Padding>
-                                <div class="star c-parenthetical c-padding-micro-vert">
+                                <div class="star c-parenthetical c-padding-micro-vert c-settings-description">
                                     @SettingsDescription
                                 </div>
                             </Wrapped>

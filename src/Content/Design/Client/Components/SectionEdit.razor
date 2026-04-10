@@ -8,16 +8,22 @@
                Title="Section Settings">
             <Content>
                 <div class="c-tabbed-panes">
-                    <ul class="tabs">
-                        <li class="@(ActiveTab.IsBasically(StylesTab) ? "selected" : String.Empty)"
-                            @onclick="() => SetSectionSettingsTab(StylesTab)">
-                            Styles
-                        </li>
-                        <li class="@(ActiveTab.IsBasically(LayoutTab) ? "selected" : String.Empty)"
-                            @onclick="() => SetSectionSettingsTab(LayoutTab)">
-                            Layout
-                        </li>
-                    </ul>
+                    <div class="c-settings-modal-tabs">
+                        <ul class="tabs">
+                            <li class="@(ActiveTab.IsBasically(StylesTab) ? "selected" : String.Empty)"
+                                @onclick="() => SetSectionSettingsTab(StylesTab)">
+                                Styles
+                            </li>
+                            <li class="@(ActiveTab.IsBasically(LayoutTab) ? "selected" : String.Empty)"
+                                @onclick="() => SetSectionSettingsTab(LayoutTab)">
+                                Layout
+                            </li>
+                        </ul>
+                        <SettingsTransfer Description="@SettingsDescription"
+                                          HostModel="Model.BoxModel"
+                                          BoxModel="Model.BoxModel"
+                                          ContainerModel="Model.ContainerModel" />
+                    </div>
                     <div class="panes match-tab-color">
                         <div class="@(ActiveTab.IsBasically(StylesTab) ? String.Empty : "c-hide")">
                             <div class="c-padding-tiny">
@@ -56,7 +62,7 @@
                                     Clicked="() => OpenSectionSettings()" />
                     </Padding>
                 </Padding>
-                <div class="star c-parenthetical c-padding-micro-vert">
+                <div class="star c-parenthetical c-padding-micro-vert c-settings-description">
                     @SettingsDescription
                 </div>
             </Wrapped>

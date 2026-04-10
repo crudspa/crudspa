@@ -7,20 +7,27 @@
                Title="Element Settings">
             <Content>
                 <div class="c-tabbed-panes">
-                    <ul class="tabs">
-                        <li class="@(ActiveElementSettingsTab.IsBasically(ElementStylesTab) ? "selected" : String.Empty)"
-                            @onclick="() => SetElementSettingsTab(ElementStylesTab)">
-                            Styles
-                        </li>
-                        <li class="@(ActiveElementSettingsTab.IsBasically(ElementSizingTab) ? "selected" : String.Empty)"
-                            @onclick="() => SetElementSettingsTab(ElementSizingTab)">
-                            Sizing
-                        </li>
-                        <li class="@(ActiveElementSettingsTab.IsBasically(ElementLayoutTab) ? "selected" : String.Empty)"
-                            @onclick="() => SetElementSettingsTab(ElementLayoutTab)">
-                            Layout
-                        </li>
-                    </ul>
+                    <div class="c-settings-modal-tabs">
+                        <ul class="tabs">
+                            <li class="@(ActiveElementSettingsTab.IsBasically(ElementStylesTab) ? "selected" : String.Empty)"
+                                @onclick="() => SetElementSettingsTab(ElementStylesTab)">
+                                Styles
+                            </li>
+                            <li class="@(ActiveElementSettingsTab.IsBasically(ElementSizingTab) ? "selected" : String.Empty)"
+                                @onclick="() => SetElementSettingsTab(ElementSizingTab)">
+                                Sizing
+                            </li>
+                            <li class="@(ActiveElementSettingsTab.IsBasically(ElementLayoutTab) ? "selected" : String.Empty)"
+                                @onclick="() => SetElementSettingsTab(ElementLayoutTab)">
+                                Layout
+                            </li>
+                        </ul>
+                        <SettingsTransfer Description="@SettingsDescription"
+                                          HostModel="ElementBoxModel"
+                                          BoxModel="ElementBoxModel"
+                                          ItemModel="ElementItemModel"
+                                          ContainerModel="ContainerModel" />
+                    </div>
                     <div class="panes match-tab-color">
                         <div class="@(ActiveElementSettingsTab.IsBasically(ElementStylesTab) ? String.Empty : "c-hide")">
                             <div class="c-padding-tiny">
@@ -61,7 +68,7 @@
                                             Clicked="() => OpenElementSettings()" />
                             </Padding>
                         </Padding>
-                        <div class="star c-parenthetical c-padding-micro-vert">
+                        <div class="star c-parenthetical c-padding-micro-vert c-settings-description">
                             @SettingsDescription
                         </div>
                     </Wrapped>
@@ -126,16 +133,22 @@
                                            Title="Item Settings">
                                         <Content>
                                             <div class="c-tabbed-panes">
-                                                <ul class="tabs">
-                                                    <li class="@(context.ActiveTab.IsBasically(ItemStylesTab) ? "selected" : String.Empty)"
-                                                        @onclick="() => SetItemSettingsTab(context, ItemStylesTab)">
-                                                        Styles
-                                                    </li>
-                                                    <li class="@(context.ActiveTab.IsBasically(ItemSizingTab) ? "selected" : String.Empty)"
-                                                        @onclick="() => SetItemSettingsTab(context, ItemSizingTab)">
-                                                        Sizing
-                                                    </li>
-                                                </ul>
+                                                <div class="c-settings-modal-tabs">
+                                                    <ul class="tabs">
+                                                        <li class="@(context.ActiveTab.IsBasically(ItemStylesTab) ? "selected" : String.Empty)"
+                                                            @onclick="() => SetItemSettingsTab(context, ItemStylesTab)">
+                                                            Styles
+                                                        </li>
+                                                        <li class="@(context.ActiveTab.IsBasically(ItemSizingTab) ? "selected" : String.Empty)"
+                                                            @onclick="() => SetItemSettingsTab(context, ItemSizingTab)">
+                                                            Sizing
+                                                        </li>
+                                                    </ul>
+                                                    <SettingsTransfer Description="@GetItemSettingsDescription(context)"
+                                                                      HostModel="context.BoxModel"
+                                                                      BoxModel="context.BoxModel"
+                                                                      ItemModel="context.ItemModel" />
+                                                </div>
                                                 <div class="panes match-tab-color">
                                                     <div class="@(context.ActiveTab.IsBasically(ItemStylesTab) ? String.Empty : "c-hide")">
                                                         <div class="c-padding-tiny">
@@ -170,7 +183,7 @@
                                                                     Clicked="() => OpenItemSettings(context)" />
                                                     </Padding>
                                                 </Padding>
-                                                <div class="star c-parenthetical c-padding-micro-vert">
+                                                <div class="star c-parenthetical c-padding-micro-vert c-settings-description">
                                                     @GetItemSettingsDescription(context)
                                                 </div>
                                             </Wrapped>
