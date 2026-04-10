@@ -1,4 +1,4 @@
-![Crudspa](art/Logo-Mark-Colored.svg)
+![CRUD+SPA](art/GitHub-ReadMe-Logo.png)
 
 # Crudspa
 
