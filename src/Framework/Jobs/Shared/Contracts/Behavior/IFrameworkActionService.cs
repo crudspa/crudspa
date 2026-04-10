@@ -3,7 +3,6 @@ namespace Crudspa.Framework.Jobs.Shared.Contracts.Behavior;
 public interface IFrameworkActionService
 {
     Task<Response> ExpireSessions(Request request, Int32? sessionLengthInDays);
-    Task<Response<SanitizeHtmlRun>> SanitizeHtml(Request request, SanitizeHtmlConfig config);
     Task<Response<IList<AudioFile>>> FetchAudioForOptimization(Request request);
     Task<Response<IList<AudioFile>>> FetchAudioBeenOptimized(Request request);
     Task<Response> SaveAudioOptimizationStatus(Request<AudioFile> request);
