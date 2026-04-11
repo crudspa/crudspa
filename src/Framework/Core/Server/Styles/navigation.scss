@@ -1059,16 +1059,16 @@
 .c-settings-transfer {
     align-items: center;
     display: flex;
-    gap: .375em;
+    justify-content: flex-end;
 
     .c-button.icon-only {
-        min-height: 2.5em;
-        min-width: 2.5em;
-        padding: .625em .875em;
+        min-height: 2.25em;
+        min-width: 2.25em;
+        padding: .5em .625em;
     }
 
     .c-button .icon {
-        font-size: 1.35em;
+        font-size: 1.25em;
     }
 }
 
