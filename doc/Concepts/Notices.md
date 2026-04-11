@@ -4,7 +4,7 @@ Multi-user CRUD screens go stale quickly if the architecture only thinks in requ
 
 Crudspa treats that as a first-class problem. Its notice model isn't an optional add-on. It's part of the platform's default story for keeping connected clients fresh.
 
-`Catalog` is the smallest place to study the notice loop end to end. `Composer` plus `Consumer` then shows how the same event vocabulary crosses host boundaries for authored content, and `Samples/Jobs/Engine` plus `Catalog` or `Composer` shows the same pattern for background work.
+The same notice vocabulary works inside one host and across multiple hosts. That's important because authored content, background work, and admin screens often need to stay in sync even when they are not running inside one website.
 
 ## Default Flow
 
@@ -25,10 +25,10 @@ In practice, a notice flow starts with a client mutation, passes through hub wra
 
 Crudspa doesn't treat cross-host refresh as a different system. It keeps the same typed event vocabulary and adds a gateway hop when another host needs to invalidate caches or rebroadcast a notice.
 
-In the shipped samples, `GatewayServiceEventGrid` uses the checked-in `EventReceiverUrls` values to post Event Grid-shaped payloads to the sample controllers:
+At a high level, that cross-host flow usually looks like this:
 
-* `Composer` publishes `PageContentChanged` and `PortalRunChanged` so `Consumer` can invalidate runtime content caches, warm themed output, and rebroadcast.
-* `Samples/Jobs/Engine` publishes job and schedule events so `Catalog` and `Composer` can refresh their `Jobs` and `Schedules` panes.
+* an authoring host publishes content invalidation events so a runtime host can invalidate caches, warm output, and rebroadcast
+* a jobs engine publishes job and schedule events, plus live status changes, so admin hosts can refresh `Jobs` and `Schedules` panes without polling
 
 That's still one architectural loop, not two unrelated systems. The gateway carries the event between hosts, then each host uses the normal notice mechanism for its own connected clients.
 

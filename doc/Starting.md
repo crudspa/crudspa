@@ -89,13 +89,15 @@ Open `https://localhost:42100`, enter a name, and use that session to trace one 
 
 Run `Composer` and `Consumer` together when you want to study `Content.Design` and `Content.Display` as one story instead of two isolated projects.
 
-Open `Composer` at `https://localhost:42200` and sign in with `sample@example.com`. Use the built-in `Reset password` flow, read the access-code email from `C:\data\temp\email`, set a password, and finish signing in. Then keep `Consumer` open at `https://localhost:42300` while you edit pages, sections, styles, or portal content in `Composer`. That's the shortest path to seeing authored changes invalidate caches and appear in the runtime host in real time.
+Open `Composer` at `https://localhost:42200` and sign in with `sample@example.com`. Use the built-in `Reset password` flow, read the access-code email from `C:\data\temp\email`, set a password, and finish signing in. Then keep `Consumer` open at `https://localhost:42300` while you edit pages, duplicate sections, reuse page, section, element, or button settings, styles, or portal content in `Composer`. That's the shortest path to seeing authored changes invalidate caches and appear in the runtime host in real time.
 
 ### Jobs Engine
 
 Run [src/Samples/Jobs/Engine/Engine.csproj](../src/Samples/Jobs/Engine/Engine.csproj) alongside `Catalog` or `Composer` when you want to study background work.
 
 The jobs administration UI lives in the web hosts. Both `Catalog` and `Composer` expose `Jobs` and `Schedules` panes. The standalone sample under `src/Samples/Jobs` is the engine host that schedules due work, executes job actions, and publishes job updates back into those panes through the gateway flow.
+
+The checked-in sample engine configuration is meant to run locally as-is. The scheduler and worker create anonymous framework sessions on startup, so you do not need to configure a separate jobs user just to study the sample.
 
 ## First Code Tour
 

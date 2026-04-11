@@ -44,6 +44,8 @@ If you want one end-to-end code tour, start here and trace a book, movie, or shi
 * memberships, members, emails, and templates
 * jobs and schedules
 
+Those authoring surfaces now support a faster editing loop than they used to. You can duplicate a section from its card menu, and you can copy and paste settings across page, section, element, media item, and button editors when you want to reuse a layout or visual treatment instead of rebuilding it by hand.
+
 `Consumer` is the runtime host. It shows the content-side result of those authoring changes through a smaller runtime portal.
 
 The most useful sample loop is:
@@ -52,7 +54,7 @@ The most useful sample loop is:
 2. Sign in with `sample@example.com`.
 3. Use `Reset password`, read the access-code message from `C:\data\temp\email`, set a password, and finish signing in.
 4. Open `Consumer` at the same time.
-5. Edit content, sections, styles, or portal settings in `Composer`.
+5. Edit content, duplicate sections, reuse settings, styles, or portal settings in `Composer`.
 6. Watch the changes show up in `Consumer`.
 
 This is the shortest path to understanding `Content.Design`, `Content.Display`, portal invalidation, themed runtime output, and the cross-host gateway flow.
@@ -64,7 +66,9 @@ The web hosts expose the jobs administration UI. The dedicated engine host runs 
 That split is intentional:
 
 * `Catalog` and `Composer` let you create, inspect, and manage jobs or schedules inside the same UI where the rest of the work already happens.
-* `Samples/Jobs/Engine` creates due jobs, runs job actions, updates statuses, and publishes job events back into the web hosts.
+* `Samples/Jobs/Engine` creates due jobs, runs job actions, updates statuses, and publishes job and schedule events plus live status changes back into the web hosts.
+
+The checked-in sample engine config is designed for local study. The scheduler and worker create anonymous framework sessions on startup, so you can run the engine without supplying a dedicated jobs user in configuration.
 
 If you create or schedule jobs in the UI and nothing advances, the first thing to check is whether `Samples/Jobs/Engine` is running.
 
@@ -75,7 +79,7 @@ The shipped sample configuration uses the checked-in `EventReceiverUrls` values 
 That means:
 
 * `Composer` can publish content and portal events that `Consumer` receives and rebroadcasts.
-* `Samples/Jobs/Engine` can publish job and schedule events that `Catalog` and `Composer` receive and rebroadcast.
+* `Samples/Jobs/Engine` can publish job and schedule events plus live status changes that `Catalog` and `Composer` receive and rebroadcast.
 
 If you keep the default ports `42100`, `42200`, and `42300`, the local gateway flow works with no extra editing.
 

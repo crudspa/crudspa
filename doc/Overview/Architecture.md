@@ -4,7 +4,7 @@ CRUD+SPA applications ask teams to solve the same platform problems again and ag
 
 Crudspa gives .NET developers a strong starting architecture for that class of software. It provides a coherent default shape for Blazor WebAssembly clients, SignalR-based service boundaries, shared C# contracts, and SQL Server-backed data work so teams can focus on domain behavior instead of rebuilding the same foundation for each solution.
 
-The repository teaches that architecture in layers. `Catalog` is the focused `Framework.Core` sample. `Composer` and `Consumer` show what changes when `Content.Design` and `Content.Display` are added. The jobs story is split between jobs panes in `Catalog` or `Composer` and the `Samples/Jobs/Engine` host that schedules and executes work. The larger domain modules show how those ideas hold up in broader solutions.
+The repository teaches that architecture in layers. `Framework.Core` establishes the shell, contracts, wrappers, and service boundary. `Content.Design` and `Content.Display` show how authored content layers onto that foundation. `Framework.Jobs` adds scheduling and worker-host patterns for background work. The larger domain modules show how those ideas hold up in broader solutions.
 
 The architecture is organized along two axes:
 
@@ -69,7 +69,7 @@ You can read that structure in two directions. From the user's side, a path reso
 
 ## One Slice
 
-If you want the smallest end-to-end slice first, start with `Catalog`. If you want a built-in framework example that already exercises content authoring layers, `Track` is a strong next stop.
+If you want one end-to-end feature slice first, `Track` is a strong next stop.
 
 To make the structure concrete, the `Track` feature in `Content.Design` spans these files:
 
@@ -141,7 +141,7 @@ Real-time behavior is one of the platform's strongest architectural qualities.
 
 After a successful mutation, the server can publish a typed notice over SignalR. Subscriptions happen in the context of a real session, so the audience can be scoped by permissions and other session-aware rules. On the client, models decide whether to refresh, replace, remove, or ignore local state.
 
-When the reacting client lives in another host, Crudspa keeps the same event vocabulary and adds one gateway hop. `Composer` publishes `PageContentChanged` and `PortalRunChanged` so `Consumer` can invalidate runtime caches and rebroadcast. `Samples/Jobs/Engine` publishes job and schedule events so `Catalog` and `Composer` can refresh their `Jobs` panes. In the local sample configuration, those gateway publishes go to the checked-in receiver URLs on the sample web hosts. In broader deployments, the same abstraction can target Event Grid.
+When the reacting client lives in another host, Crudspa keeps the same event vocabulary and adds one gateway hop. An authoring host can publish content invalidation events so a runtime host can rebroadcast fresh state. A jobs engine can publish job and schedule events plus live status changes so administration hosts refresh their jobs screens as work starts, finishes, or gets canceled. In local development, those gateway publishes can target configured receiver URLs. In broader deployments, the same abstraction can target Event Grid.
 
 That keeps lists, edit panes, and runtime content from going stale in multi-user scenarios. Just as important, it keeps real-time behavior inside the same service architecture instead of creating a second, hidden synchronization system.
 

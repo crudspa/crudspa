@@ -47,6 +47,8 @@ Use semantic buttons first. Drop to `ButtonCore` only when there's no existing s
  `Clicked` | action callback | required
  `Text` | visible label text | empty
  `IconClass` | icon css class | empty
+ `Title` | browser tooltip text | empty
+ `AriaLabel` | accessible label for icon-only or abbreviated buttons | empty
  `IconPosition` | icon placement (`Left`, `Right`) | `Left`
  `ButtonStyle` | intent style (`Default`, `Save`, `Destroy`, `Transparent`, and others) | `Default`
  `Size` | size scale (`Default`, `Small`, `Large`) | `Default`
@@ -78,6 +80,7 @@ Use these integrations first to reduce custom action wiring.
 * Use `ButtonStyle.Transparent` for low-emphasis utility actions, not primary workflow actions.
 * Keep destructive actions visually obvious (`ButtonDelete` or `ButtonStyle.Destroy`).
 * Use icon-only buttons only when context is clear and repeated across the app.
+* When a button is icon-only, set `Title` and `AriaLabel` so hover text and assistive technology still expose the action clearly.
 * Keep navigation intent (`ButtonView`) separate from mutation intent (`ButtonSave`, `ButtonDelete`).
 
 ## Common Questions
