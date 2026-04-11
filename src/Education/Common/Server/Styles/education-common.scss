@@ -620,7 +620,7 @@ $reportFooterForegroundColor: $reportBodyForegroundColor !default;
         }
     }
 
-    body {
+    & {
         background-color: $reportBodyBackgroundColor;
         color: $reportBodyForegroundColor;
         font-family: $reportBodyFontFamily;
@@ -647,14 +647,14 @@ $reportFooterForegroundColor: $reportBodyForegroundColor !default;
         font-family: $reportH2FontFamily;
         font-size: $reportH2FontSize;
         font-weight: $reportH2FontWeight;
-        color: $reportParagraphForegroundColor;
+        color: $reportH2ForegroundColor;
     }
 
     p {
         font-family: $reportParagraphFontFamily;
         font-size: $reportParagraphFontSize;
         font-weight: $reportParagraphFontWeight;
-        color: $reportH2ForegroundColor;
+        color: $reportParagraphForegroundColor;
     }
 
     a {
