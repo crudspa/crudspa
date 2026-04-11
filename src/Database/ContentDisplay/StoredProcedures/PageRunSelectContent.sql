@@ -1,6 +1,7 @@
 create proc [ContentDisplay].[PageRunSelectContent] (
      @Id uniqueidentifier
     ,@SessionId uniqueidentifier
+    ,@SectionId uniqueidentifier = null
 ) as
 
 select
@@ -118,6 +119,7 @@ from [Content].[Section-Active] section
     left join [Content].[Box-Active] box on section.BoxId = box.Id
     left join [Framework].[ImageFile-Active] backgroundImage on box.BackgroundImageId = backgroundImage.Id
 where section.PageId = @Id
+    and (@SectionId is null or section.Id = @SectionId)
 order by section.Ordinal
 
 select
@@ -189,6 +191,7 @@ from [Content].[Element-Active] element
     left join [Framework].[ImageFile-Active] backgroundImage on box.BackgroundImageId = backgroundImage.Id
     inner join [Content].[Section-Active] section on element.SectionId = section.Id
 where section.PageId = @Id
+    and (@SectionId is null or section.Id = @SectionId)
 
 select
      audio.Id
@@ -205,6 +208,7 @@ from [Content].[AudioElement-Active] audio
     inner join [Content].[Element-Active] element on audio.ElementId = element.Id
     inner join [Content].[Section-Active] section on element.SectionId = section.Id
 where section.PageId = @Id
+    and (@SectionId is null or section.Id = @SectionId)
 
 select
      textElement.Id
@@ -214,6 +218,7 @@ from [Content].[TextElement-Active] textElement
     inner join [Content].[Element-Active] element on textElement.ElementId = element.Id
     inner join [Content].[Section-Active] section on element.SectionId = section.Id
 where section.PageId = @Id
+    and (@SectionId is null or section.Id = @SectionId)
 
 select
      image.Id
@@ -231,6 +236,7 @@ from [Content].[ImageElement-Active] image
     inner join [Content].[Element-Active] element on image.ElementId = element.Id
     inner join [Content].[Section-Active] section on element.SectionId = section.Id
 where section.PageId = @Id
+    and (@SectionId is null or section.Id = @SectionId)
 
 select
      buttonElement.Id
@@ -300,6 +306,7 @@ from [Content].[ButtonElement-Active] buttonElement
     left join [Content].[Box-Active] box on button.BoxId = box.Id
     left join [Framework].[ImageFile-Active] backgroundImage on box.BackgroundImageId = backgroundImage.Id
 where section.PageId = @Id
+    and (@SectionId is null or section.Id = @SectionId)
 
 select
      multimediaElement.Id
@@ -316,6 +323,7 @@ from [Content].[MultimediaElement-Active] multimediaElement
     inner join [Content].[Section-Active] section on element.SectionId = section.Id
     inner join [Content].[Container-Active] container on multimediaElement.ContainerId = container.Id
 where section.PageId = @Id
+    and (@SectionId is null or section.Id = @SectionId)
 
 select
      multimediaItem.Id
@@ -466,6 +474,7 @@ from [Content].[MultimediaItem-Active] multimediaItem
     left join [Content].[Box-Active] buttonBox on button.BoxId = buttonBox.Id
     left join [Framework].[ImageFile-Active] buttonBoxBackgroundImage on buttonBox.BackgroundImageId = buttonBoxBackgroundImage.Id
 where section.PageId = @Id
+    and (@SectionId is null or section.Id = @SectionId)
 
 select
      note.Id
@@ -485,6 +494,7 @@ from [Content].[NoteElement-Active] note
     inner join [Content].[Element-Active] element on note.ElementId = element.Id
     inner join [Content].[Section-Active] section on element.SectionId = section.Id
 where section.PageId = @Id
+    and (@SectionId is null or section.Id = @SectionId)
 
 select
      noteImage.Id as Id
@@ -504,6 +514,7 @@ from [Content].[NoteImage-Active] noteImage
     inner join [Content].[Element-Active] element on note.ElementId = element.Id
     inner join [Content].[Section-Active] section on element.SectionId = section.Id
 where section.PageId = @Id
+    and (@SectionId is null or section.Id = @SectionId)
 
 select
      pdf.Id
@@ -518,6 +529,7 @@ from [Content].[PdfElement-Active] pdf
     inner join [Content].[Element-Active] element on pdf.ElementId = element.Id
     inner join [Content].[Section-Active] section on element.SectionId = section.Id
 where section.PageId = @Id
+    and (@SectionId is null or section.Id = @SectionId)
 
 select
      video.Id
@@ -545,3 +557,4 @@ from [Content].[VideoElement-Active] video
     inner join [Content].[Section-Active] section on element.SectionId = section.Id
     left join [Framework].[ImageFile-Active] poster on video.PosterId = poster.Id
 where section.PageId = @Id
+    and (@SectionId is null or section.Id = @SectionId)

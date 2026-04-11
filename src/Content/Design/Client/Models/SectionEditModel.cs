@@ -89,6 +89,8 @@ public abstract class SectionEditModel : EditModel<Section>, IHandle<SectionSave
         SectionShapeModel = new(scrollService, this);
         ElementEditBatchModel = new();
         AutoShowSectionShape = isNew;
+        WaitingOn = "Initializing...";
+        Waiting = true;
 
         eventBus.Subscribe(this);
     }
@@ -186,30 +188,41 @@ public abstract class SectionEditModel : EditModel<Section>, IHandle<SectionSave
         {
             ReadOnly = false;
 
-            await SetSection(new()
+            await WithWaiting("Initializing...", async () =>
             {
-                Id = Id ?? Guid.NewGuid(),
-                PageId = _defaultPageId,
-                TypeId = SectionTypeIds.Responsive,
-                Container = new()
+                var section = new Section
                 {
-                    DirectionId = DirectionIds.Row,
-                    WrapId = WrapIds.Wrap,
-                    JustifyContentId = JustifyContentIds.Center,
-                    AlignItemsId = AlignItemsIds.Center,
-                    AlignContentId = AlignContentIds.Start,
-                },
-                Ordinal = 0,
+                    Id = Id ?? Guid.NewGuid(),
+                    PageId = _defaultPageId,
+                    TypeId = SectionTypeIds.Responsive,
+                    Container = new()
+                    {
+                        DirectionId = DirectionIds.Row,
+                        WrapId = WrapIds.Wrap,
+                        JustifyContentId = JustifyContentIds.Center,
+                        AlignItemsId = AlignItemsIds.Center,
+                        AlignContentId = AlignContentIds.Start,
+                    },
+                    Ordinal = 0,
+                };
+
+                await SetSection(section);
+                return new Response<Section?>(section);
             });
         }
         else
         {
             ReadOnly = true;
 
-            var response = await WithWaiting("Fetching...", () => FetchSection(Id));
+            await WithWaiting("Fetching...", async () =>
+            {
+                var response = await FetchSection(Id);
 
-            if (response.Ok && response.Value is not null)
-                await SetSection(response.Value);
+                if (response.Ok && response.Value is not null)
+                    await SetSection(response.Value);
+
+                return response;
+            });
         }
     }
 

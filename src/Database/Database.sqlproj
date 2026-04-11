@@ -452,6 +452,7 @@
     <Build Include="ContentDesign\StoredProcedures\RuleSelectFull.sql" />
     <Build Include="ContentDesign\StoredProcedures\SectionDelete.sql" />
     <Build Include="ContentDesign\StoredProcedures\SectionInsert.sql" />
+    <Build Include="ContentDesign\StoredProcedures\SectionSelectIdsForPage.sql" />
     <Build Include="ContentDesign\StoredProcedures\SectionSelectPageId.sql" />
     <Build Include="ContentDesign\StoredProcedures\SectionUpdate.sql" />
     <Build Include="ContentDesign\StoredProcedures\SectionUpdateOrdinals.sql" />

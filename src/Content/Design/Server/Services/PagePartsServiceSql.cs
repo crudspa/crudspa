@@ -248,7 +248,7 @@ public class PagePartsServiceSql(
 
     public async Task<Response<Section?>> FetchSection(Guid? sessionId, Guid? pageId, Section section)
     {
-        if (!await MatchesSection(sessionId, pageId, section.Id))
+        if (pageId.HasNothing() || section.Id.HasNothing())
             return new("Section not found.");
 
         section.PageId = pageId;
@@ -406,13 +406,8 @@ public class PagePartsServiceSql(
         if (pageId.HasNothing() || sectionId.HasNothing())
             return false;
 
-        var response = await sectionService.Fetch(new(sessionId, new()
-        {
-            Id = sectionId,
-            PageId = pageId,
-        }));
-
-        return response.Ok && response.Value is not null;
+        return await SectionSelectPageId.Execute(Connection, sessionId, sectionId) is Guid existingPageId
+            && existingPageId.Equals(pageId);
     }
 
     private async Task<Boolean> MatchesSections(Guid? sessionId, Guid? pageId, IList<Section> sections)
@@ -420,12 +415,7 @@ public class PagePartsServiceSql(
         if (pageId.HasNothing() || !sections.HasItems())
             return false;
 
-        var response = await sectionService.FetchForPage(new(sessionId, new() { Id = pageId }));
-
-        if (!response.Ok)
-            return false;
-
-        var ids = response.Value.Select(x => x.Id).ToHashSet();
+        var ids = (await SectionSelectIdsForPage.Execute(Connection, sessionId, pageId)).ToHashSet();
         return sections.All(x => x.Id.HasSomething() && ids.Contains(x.Id));
     }
 }

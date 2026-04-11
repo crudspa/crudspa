@@ -1,24 +1,31 @@
-<Toolbar>
-    <Left>
-        @if (Model.ReadOnly)
+@if (Model.Entity is not null)
+{
+    <Toolbar>
+        <Left>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+            }
+            else
+            {
+                <ButtonGroup>
+                    <ButtonSave Clicked="() => Model.Save()" />
+                    <ButtonCancel Clicked="CancelClicked" />
+                </ButtonGroup>
+            }
+        </Left>
+    </Toolbar>
+}
+<Waiter Model="Model">
+    <Padding Size="Padding.Sizes.Small"
+             Direction="Padding.Directions.Vertical">
+        @if (Model.Entity is not null)
         {
-            <ButtonEdit Clicked="() => Model.Edit()" />
+            <SectionEdit Model="Model" />
         }
         else
         {
-            <ButtonGroup>
-                <ButtonSave Clicked="() => Model.Save()" />
-                <ButtonCancel Clicked="CancelClicked" />
-            </ButtonGroup>
+            <div style="min-height: 20rem;"></div>
         }
-    </Left>
-</Toolbar>
-<Waiter Model="Model">
-    @if (Model.Entity is not null)
-    {
-        <Padding Size="Padding.Sizes.Small"
-                 Direction="Padding.Directions.Vertical">
-            <SectionEdit Model="Model" />
-        </Padding>
-    }
+    </Padding>
 </Waiter>

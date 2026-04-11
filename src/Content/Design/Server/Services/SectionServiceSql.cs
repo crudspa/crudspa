@@ -247,13 +247,15 @@ public class SectionServiceSql(
     {
         var section = request.Value;
 
-        var page = new Page { Id = section.PageId };
+        if (section.Id.HasNothing())
+            return null;
 
-        var pageRunResponse = await pageRunService.Fetch(new(request.SessionId, page));
+        var pageId = section.PageId ?? await SectionSelectPageId.Execute(Connection, request.SessionId, section.Id);
 
-        if (pageRunResponse.Ok)
-            return pageRunResponse.Value.Sections.FirstOrDefault(x => x.Id.Equals(section.Id));
+        if (pageId.HasNothing())
+            return null;
 
-        return null!;
+        var page = await PageRunSelectContent.Execute(Connection, new() { Id = pageId }, request.SessionId, section.Id);
+        return page?.Sections.FirstOrDefault();
     }
 }
