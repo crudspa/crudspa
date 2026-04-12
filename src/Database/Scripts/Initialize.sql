@@ -21753,6 +21753,28 @@ begin
         ,'{"Top":".5em","Right":".5em","Bottom":".5em","Left":".5em"}'
     )
 
+    -- Style: Consumer.84em.{"LineHeight":"1.15"}
+    insert [Content].[Style] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,ContentPortalId
+        ,RuleId
+        ,ConfigJson
+    )
+    values (
+         '13378b0c-8476-4dfa-934d-e99ba05d2d3d'
+        ,'13378b0c-8476-4dfa-934d-e99ba05d2d3d'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'73410fd3-3681-46d3-800e-a08670e291cf'
+        ,'59cea8f2-0a15-42eb-af8d-ba41bf73c3bc'
+        ,'{"LineHeight":"1.15"}'
+    )
+
     -- Style: Consumer.84em.{"Background":"#faf7b1","Foreground":"#222222"}
     insert [Content].[Style] (
          Id
@@ -21971,28 +21993,6 @@ begin
         ,'73410fd3-3681-46d3-800e-a08670e291cf'
         ,'74024c28-d5b6-4aed-82cc-915789c3e452'
         ,'{"Top":".5em","Right":"0em","Bottom":".5em","Left":"0em"}'
-    )
-
-    -- Style: Consumer.84em.{"LineHeight":"1.15"}
-    insert [Content].[Style] (
-         Id
-        ,VersionOf
-        ,Updated
-        ,UpdatedBy
-        ,IsDeleted
-        ,ContentPortalId
-        ,RuleId
-        ,ConfigJson
-    )
-    values (
-         '13378b0c-8476-4dfa-934d-e99ba05d2d3d'
-        ,'13378b0c-8476-4dfa-934d-e99ba05d2d3d'
-        ,@now
-        ,@sessionId
-        ,0
-        ,'73410fd3-3681-46d3-800e-a08670e291cf'
-        ,'59cea8f2-0a15-42eb-af8d-ba41bf73c3bc'
-        ,'{"LineHeight":"1.15"}'
     )
 
     -- Style: Consumer.84em.{"Color":"#00439f"}
@@ -22699,28 +22699,6 @@ begin
         ,'{"Top":"0em","Right":"0em","Bottom":"0em","Left":"0em"}'
     )
 
-    -- Style: Consumer.84em.{"LineHeight":"1.5"}
-    insert [Content].[Style] (
-         Id
-        ,VersionOf
-        ,Updated
-        ,UpdatedBy
-        ,IsDeleted
-        ,ContentPortalId
-        ,RuleId
-        ,ConfigJson
-    )
-    values (
-         'd4374acf-beaa-4ec2-b2f4-a36c903d2861'
-        ,'d4374acf-beaa-4ec2-b2f4-a36c903d2861'
-        ,@now
-        ,@sessionId
-        ,0
-        ,'73410fd3-3681-46d3-800e-a08670e291cf'
-        ,'e2ba1f21-29ea-47d5-8ff7-8c0bf0b8e848'
-        ,'{"LineHeight":"1.5"}'
-    )
-
     -- Style: Consumer.84em.{"Background":"#f4f6f6","Foreground":"#5d6869"}
     insert [Content].[Style] (
          Id
@@ -22939,6 +22917,28 @@ begin
         ,'73410fd3-3681-46d3-800e-a08670e291cf'
         ,'e05e69a3-673c-404c-b446-deccfb46d891'
         ,'{"Top":"1em","Right":".5em","Bottom":"1em","Left":".5em"}'
+    )
+
+    -- Style: Consumer.84em.{"LineHeight":"1.5"}
+    insert [Content].[Style] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,ContentPortalId
+        ,RuleId
+        ,ConfigJson
+    )
+    values (
+         'd4374acf-beaa-4ec2-b2f4-a36c903d2861'
+        ,'d4374acf-beaa-4ec2-b2f4-a36c903d2861'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'73410fd3-3681-46d3-800e-a08670e291cf'
+        ,'e2ba1f21-29ea-47d5-8ff7-8c0bf0b8e848'
+        ,'{"LineHeight":"1.5"}'
     )
 
     -- Style: Consumer.84em.{"Color":"#00439f"}
@@ -24107,6 +24107,28 @@ begin
         ,'{"Top":".5em","Right":".5em","Bottom":".5em","Left":".5em"}'
     )
 
+    -- Style: Composer | Composer Footer.{"LineHeight":"1.15"}
+    insert [Content].[Style] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,ContentPortalId
+        ,RuleId
+        ,ConfigJson
+    )
+    values (
+         '9d306cb6-7c84-41fd-87b5-f2c51b11706a'
+        ,'9d306cb6-7c84-41fd-87b5-f2c51b11706a'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
+        ,'59cea8f2-0a15-42eb-af8d-ba41bf73c3bc'
+        ,'{"LineHeight":"1.15"}'
+    )
+
     -- Style: Composer | Composer Footer.{"Background":"#faf7b1","Foreground":"#222222"}
     insert [Content].[Style] (
          Id
@@ -24325,28 +24347,6 @@ begin
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'74024c28-d5b6-4aed-82cc-915789c3e452'
         ,'{"Top":".5em","Right":"0em","Bottom":".5em","Left":"0em"}'
-    )
-
-    -- Style: Composer | Composer Footer.{"LineHeight":"1.15"}
-    insert [Content].[Style] (
-         Id
-        ,VersionOf
-        ,Updated
-        ,UpdatedBy
-        ,IsDeleted
-        ,ContentPortalId
-        ,RuleId
-        ,ConfigJson
-    )
-    values (
-         '9d306cb6-7c84-41fd-87b5-f2c51b11706a'
-        ,'9d306cb6-7c84-41fd-87b5-f2c51b11706a'
-        ,@now
-        ,@sessionId
-        ,0
-        ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
-        ,'59cea8f2-0a15-42eb-af8d-ba41bf73c3bc'
-        ,'{"LineHeight":"1.15"}'
     )
 
     -- Style: Composer | Composer Footer.{"Color":"#00439f"}
@@ -25053,28 +25053,6 @@ begin
         ,'{"Top":"0em","Right":"0em","Bottom":"0em","Left":"0em"}'
     )
 
-    -- Style: Composer | Composer Footer.{"LineHeight":"1.5"}
-    insert [Content].[Style] (
-         Id
-        ,VersionOf
-        ,Updated
-        ,UpdatedBy
-        ,IsDeleted
-        ,ContentPortalId
-        ,RuleId
-        ,ConfigJson
-    )
-    values (
-         'a5914a2a-81e5-427e-b8d5-9f39fa8b4b66'
-        ,'a5914a2a-81e5-427e-b8d5-9f39fa8b4b66'
-        ,@now
-        ,@sessionId
-        ,0
-        ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
-        ,'e2ba1f21-29ea-47d5-8ff7-8c0bf0b8e848'
-        ,'{"LineHeight":"1.5"}'
-    )
-
     -- Style: Composer | Composer Footer.{"Background":"#f5f3f7","Foreground":"#696173"}
     insert [Content].[Style] (
          Id
@@ -25293,6 +25271,28 @@ begin
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'e05e69a3-673c-404c-b446-deccfb46d891'
         ,'{"Top":"1em","Right":".5em","Bottom":"1em","Left":".5em"}'
+    )
+
+    -- Style: Composer | Composer Footer.{"LineHeight":"1.5"}
+    insert [Content].[Style] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,ContentPortalId
+        ,RuleId
+        ,ConfigJson
+    )
+    values (
+         'a5914a2a-81e5-427e-b8d5-9f39fa8b4b66'
+        ,'a5914a2a-81e5-427e-b8d5-9f39fa8b4b66'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
+        ,'e2ba1f21-29ea-47d5-8ff7-8c0bf0b8e848'
+        ,'{"LineHeight":"1.5"}'
     )
 
     -- Style: Composer | Composer Footer.{"Color":"#00439f"}
