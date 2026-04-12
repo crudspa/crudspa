@@ -69,6 +69,7 @@ $metadataForegroundColor: #888 !default;
 
 $headingMargin: .5em 0 0 0 !default;
 $headingPadding: .5em 0 !default;
+$headingLineHeight: 1.15 !default;
 
 $h1FontFamily: system-ui, sans-serif !default;
 $h1FontSize: 2.25em !default;
@@ -91,7 +92,7 @@ $h4FontWeight: 400 !default;
 $h4ForegroundColor: #111111 !default;
 
 $paragraphLineHeight: 1.5 !default;
-$paragraphMargin: 1.25em 0 !default;
+$paragraphMargin: 0 0 .75em 0 !default;
 $paragraphPadding: 0 !default;
 
 $codeFontFamily: Consolas, "Ubuntu Mono", "Lucida Console", "Courier New", monospace !default;

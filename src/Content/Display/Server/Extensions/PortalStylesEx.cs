@@ -43,6 +43,12 @@ public static class PortalStylesEx
 
                         break;
 
+                    case var id when id == RuleTypeIds.LineHeight:
+                        var lineHeightConfig = style.ConfigJson.FromJson<LineHeightConfig>();
+                        if (lineHeightConfig is not null)
+                            scss += $"${style.Rule.Key}LineHeight: {lineHeightConfig.LineHeight};{Environment.NewLine}";
+                        break;
+
                     case var id when id == RuleTypeIds.Margin:
                         var marginConfig = style.ConfigJson.FromJson<MarginConfig>();
                         if (marginConfig is not null)
