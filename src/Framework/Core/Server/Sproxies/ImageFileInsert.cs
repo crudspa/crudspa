@@ -11,6 +11,8 @@ public static class ImageFileInsert
         command.AddParameter("@BlobId", imageFile.BlobId);
         command.AddParameter("@Name", 150, imageFile.Name?.Trim());
         command.AddParameter("@Format", 10, imageFile.Name.GetExtension());
+        command.AddParameter("@Width", imageFile.Width);
+        command.AddParameter("@Height", imageFile.Height);
 
         var output = command.AddOutputParameter("@Id");
         await command.Execute(connection, transaction);

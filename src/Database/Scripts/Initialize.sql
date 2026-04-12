@@ -20360,7 +20360,7 @@ begin
         ,null
         ,null
         ,null
-        ,'<h4>This page was also created via the Composer portal.</h4><p>Log into Composer to modify this page and watch it update in real-time..</p>'
+        ,'<h4>This page was also created via the Composer portal.</h4><p>Log into Composer to modify this page and watch it update in real-time.</p>'
         ,null
         ,1
     )

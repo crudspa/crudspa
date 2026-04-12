@@ -12,6 +12,8 @@ public static class ImageFileUpdate
         command.AddParameter("@BlobId", imageFile.BlobId);
         command.AddParameter("@Name", 150, imageFile.Name?.Trim());
         command.AddParameter("@Format", 10, imageFile.Name.GetExtension());
+        command.AddParameter("@Width", imageFile.Width);
+        command.AddParameter("@Height", imageFile.Height);
         command.AddParameter("@Caption", imageFile.Caption);
 
         await command.Execute(connection, transaction);

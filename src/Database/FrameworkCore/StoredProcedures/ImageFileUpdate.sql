@@ -4,6 +4,8 @@
     ,@BlobId uniqueidentifier
     ,@Name nvarchar(150)
     ,@Format nvarchar(10)
+    ,@Width int
+    ,@Height int
     ,@Caption nvarchar(max)
 ) as
 
@@ -16,5 +18,7 @@ set
     ,BlobId = @BlobId
     ,Name = @Name
     ,Format = @Format
+    ,Width = @Width
+    ,Height = @Height
     ,Caption = @Caption
 where Id = @Id

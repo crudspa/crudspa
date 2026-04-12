@@ -3,6 +3,8 @@ create proc [FrameworkCore].[ImageFileInsert] (
     ,@BlobId uniqueidentifier
     ,@Name nvarchar(150)
     ,@Format nvarchar(10)
+    ,@Width int
+    ,@Height int
     ,@Id uniqueidentifier output
 ) as
 
@@ -16,6 +18,8 @@ insert [Framework].[ImageFile] (
     ,BlobId
     ,Name
     ,Format
+    ,Width
+    ,Height
     ,OptimizedStatus
 )
 values (
@@ -25,5 +29,7 @@ values (
     ,@BlobId
     ,@Name
     ,@Format
+    ,@Width
+    ,@Height
     ,0
 )
