@@ -4,9 +4,9 @@
 
 Crudspa is an MIT-licensed open-source framework for building rich CRUD+SPA applications with C#, Blazor WebAssembly, SignalR, and SQL Server.
 
-The hard part of line-of-business software is rarely the first screen. The hard part is keeping navigation, UI workflow, service boundaries, real-time updates, validation, permissions, and data rules clean as the application grows. Crudspa is designed so those concerns reinforce each other instead of drifting apart.
+Crudspa helps you build line-of-business software that stays coherent as it grows. Navigation, UI workflow, service boundaries, real-time updates, validation, permissions, and data rules are designed to reinforce each other instead of drifting apart.
 
-The result is a platform for deep-linkable portals, responsive admin surfaces, runtime content experiences, background jobs, and focused sample applications that can all share the same contracts, naming, and operational model.
+That foundation supports deep-linkable portals, responsive admin surfaces, runtime content experiences, background jobs, and focused sample applications that all share the same contracts, naming, and operational model.
 
 > [!NOTE]
 > Looking for the public project overview first? Start at [crudspa.org](https://crudspa.org).
