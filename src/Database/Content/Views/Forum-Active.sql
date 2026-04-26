@@ -6,6 +6,7 @@ select forum.Id as Id
     ,forum.Title as Title
     ,forum.Description as Description
     ,forum.ImageId as ImageId
+    ,forum.AccessMode as AccessMode
     ,forum.Ordinal as Ordinal
 from [Content].[Forum] forum
 where 1=1

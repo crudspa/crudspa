@@ -139,6 +139,7 @@
     <Build Include="Content\Tables\BinderCompleted.sql" />
     <Build Include="Content\Tables\BinderType.sql" />
     <Build Include="Content\Tables\Blog.sql" />
+    <Build Include="Content\Tables\BlogLicense.sql" />
     <Build Include="Content\Tables\BlogViewed.sql" />
     <Build Include="Content\Tables\Box.sql" />
     <Build Include="Content\Tables\Bundle.sql" />
@@ -167,6 +168,7 @@
     <Build Include="Content\Tables\Font.sql" />
     <Build Include="Content\Tables\Forum.sql" />
     <Build Include="Content\Tables\ForumBundle.sql" />
+    <Build Include="Content\Tables\ForumLicense.sql" />
     <Build Include="Content\Tables\ImageElement.sql" />
     <Build Include="Content\Tables\Item.sql" />
     <Build Include="Content\Tables\JustifyContent.sql" />
@@ -207,6 +209,7 @@
     <Build Include="Content\Triggers\AchievementTrigger.sql" />
     <Build Include="Content\Triggers\AudioElementTrigger.sql" />
     <Build Include="Content\Triggers\BinderTrigger.sql" />
+    <Build Include="Content\Triggers\BlogLicenseTrigger.sql" />
     <Build Include="Content\Triggers\BlogTrigger.sql" />
     <Build Include="Content\Triggers\BoxTrigger.sql" />
     <Build Include="Content\Triggers\BundleTrigger.sql" />
@@ -226,6 +229,7 @@
     <Build Include="Content\Triggers\EmailTrigger.sql" />
     <Build Include="Content\Triggers\FontTrigger.sql" />
     <Build Include="Content\Triggers\ForumBundleTrigger.sql" />
+    <Build Include="Content\Triggers\ForumLicenseTrigger.sql" />
     <Build Include="Content\Triggers\ForumTrigger.sql" />
     <Build Include="Content\Triggers\ImageElementTrigger.sql" />
     <Build Include="Content\Triggers\ItemTrigger.sql" />
@@ -263,6 +267,7 @@
     <Build Include="Content\Views\BinderCompleted-Active.sql" />
     <Build Include="Content\Views\BinderType-Active.sql" />
     <Build Include="Content\Views\Blog-Active.sql" />
+    <Build Include="Content\Views\BlogLicense-Active.sql" />
     <Build Include="Content\Views\BlogViewed-Active.sql" />
     <Build Include="Content\Views\Box-Active.sql" />
     <Build Include="Content\Views\Bundle-Active.sql" />
@@ -291,6 +296,7 @@
     <Build Include="Content\Views\Font-Active.sql" />
     <Build Include="Content\Views\Forum-Active.sql" />
     <Build Include="Content\Views\ForumBundle-Active.sql" />
+    <Build Include="Content\Views\ForumLicense-Active.sql" />
     <Build Include="Content\Views\ImageElement-Active.sql" />
     <Build Include="Content\Views\Item-Active.sql" />
     <Build Include="Content\Views\JustifyContent-Active.sql" />
@@ -357,6 +363,16 @@
     <Build Include="ContentDesign\StoredProcedures\ButtonElementUpdate.sql" />
     <Build Include="ContentDesign\StoredProcedures\ButtonSelect.sql" />
     <Build Include="ContentDesign\StoredProcedures\ButtonUpsert.sql" />
+    <Build Include="ContentDesign\StoredProcedures\CommentDelete.sql" />
+    <Build Include="ContentDesign\StoredProcedures\CommentInsert.sql" />
+    <Build Include="ContentDesign\StoredProcedures\CommentMediaDeleteByBatch.sql" />
+    <Build Include="ContentDesign\StoredProcedures\CommentMediaInsertByBatch.sql" />
+    <Build Include="ContentDesign\StoredProcedures\CommentMediaUpdateByBatch.sql" />
+    <Build Include="ContentDesign\StoredProcedures\CommentMediaUpdateOrdinalsByBatch.sql" />
+    <Build Include="ContentDesign\StoredProcedures\CommentSelect.sql" />
+    <Build Include="ContentDesign\StoredProcedures\CommentSelectTreeForPost.sql" />
+    <Build Include="ContentDesign\StoredProcedures\CommentSelectTreeForThread.sql" />
+    <Build Include="ContentDesign\StoredProcedures\CommentUpdate.sql" />
     <Build Include="ContentDesign\StoredProcedures\ContainerUpsert.sql" />
     <Build Include="ContentDesign\StoredProcedures\ContentPortalSelect.sql" />
     <Build Include="ContentDesign\StoredProcedures\ContentPortalSelectAll.sql" />
@@ -1628,8 +1644,8 @@
     <Build Include="FrameworkCore\StoredProcedures\SegmentSelectForParent.sql" />
     <Build Include="FrameworkCore\StoredProcedures\SegmentSelectForPortal.sql" />
     <Build Include="FrameworkCore\StoredProcedures\SegmentSelectForSession.sql" />
+    <Build Include="FrameworkCore\StoredProcedures\SegmentSelectNest.sql" />
     <Build Include="FrameworkCore\StoredProcedures\SegmentSelectStructure.sql" />
-    <Build Include="FrameworkCore\StoredProcedures\SegmentSelectTree.sql" />
     <Build Include="FrameworkCore\StoredProcedures\SegmentTypeSelectFull.sql" />
     <Build Include="FrameworkCore\StoredProcedures\SegmentUpdate.sql" />
     <Build Include="FrameworkCore\StoredProcedures\SegmentUpdateOrdinals.sql" />

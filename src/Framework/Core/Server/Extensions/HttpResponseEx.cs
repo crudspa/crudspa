@@ -11,6 +11,13 @@ public static class HttpResponseEx
         MaxAge = TimeSpan.FromDays(365),
     };
 
+    public static CacheControlHeaderValue EmbeddedResourceFileCache => new()
+    {
+        Public = true,
+        MaxAge = TimeSpan.FromDays(365),
+        Extensions = { new("immutable") },
+    };
+
     extension(HttpResponse response)
     {
         public void SetCacheHeaders(Boolean isOptimized)
@@ -26,6 +33,17 @@ public static class HttpResponseEx
                     NoStore = true,
                     MustRevalidate = true,
                 };
+        }
+
+        public void SetEmbeddedResourceFileHeaders(String fileName)
+        {
+            var headers = response.GetTypedHeaders();
+            headers.CacheControl = EmbeddedResourceFileCache;
+            headers.ContentDisposition = new("inline")
+            {
+                FileName = fileName,
+                FileNameStar = fileName,
+            };
         }
     }
 

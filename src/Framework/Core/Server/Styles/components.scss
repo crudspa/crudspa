@@ -437,7 +437,7 @@
     }
 }
 
-.c-tree {
+.c-nest {
     @extend .c-input;
     max-height: 32em;
     overflow-y: auto;
@@ -475,6 +475,41 @@
         .children {
             padding-left: 1em;
         }
+    }
+}
+
+.c-tree {
+    display: flex;
+    flex-direction: column;
+    gap: .75em;
+
+    .c-tree-node {
+        --tree-depth: 0;
+    }
+
+    .c-tree-node-shell {
+        display: flex;
+        gap: .25em;
+        padding-left: calc(var(--tree-depth) * 1.5rem);
+    }
+
+    .c-tree-node-spacer {
+        width: 2rem;
+    }
+
+    .c-tree-node-body {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .c-tree-node-actions {
+        padding: 0 .5rem .5rem 2.75rem;
+    }
+
+    .c-tree-node-children {
+        display: flex;
+        flex-direction: column;
+        gap: .75em;
     }
 }
 

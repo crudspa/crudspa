@@ -143,6 +143,8 @@ public class ElementRepositoryMultimedia(IServerConfigService configService, IFi
         element.Box.Id = await BoxUpsert.Execute(connection, transaction, sessionId, element.Box);
         element.Item.Id = await ItemUpsert.Execute(connection, transaction, sessionId, element.Item);
 
+        await ElementUpdate.Execute(connection, transaction, sessionId, element.Element);
+
         var existingMultimediaElement = await MultimediaElementSelectForElement.Execute(configService.Fetch().Database, element.Id);
 
         multimediaElement.Container.Id = await ContainerUpsert.Execute(connection, transaction, sessionId, multimediaElement.Container);

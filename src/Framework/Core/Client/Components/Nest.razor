@@ -1,0 +1,7 @@
+<div class="c-nest">
+    @foreach (var child in Items)
+    {
+        <NestNode Node="child"
+                  SelectionChanged="id => HandleSelectionChanged(id)" />
+    }
+</div>

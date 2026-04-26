@@ -1,7 +1,53 @@
-﻿<div class="c-tree">
-    @foreach (var child in Items)
+@typeparam T
+<Toolbar>
+    <Left>
+    </Left>
+    <Right>
+        <ButtonGroup>
+            @if (SupportsCreate)
+            {
+                <ButtonAdd EntityName="@EntityName"
+                           Clicked="() => Model.CreateRoot()" />
+            }
+            <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Create">
+                <MenuItem Type="MenuItem.Types.Refresh"
+                          Clicked="() => Model.Refresh()" />
+                @if (ToolbarMenuItems is not null)
+                {
+                    @ToolbarMenuItems
+                }
+            </ContextMenu>
+        </ButtonGroup>
+    </Right>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Modals is not null)
     {
-        <TreeNode Node="child"
-                  SelectionChanged="id => HandleSelectionChanged(id)" />
+        @Modals
     }
-</div>
+    @if (Model.Roots.IsEmpty())
+    {
+        <NoRecords EntityName="@EntityName.PluralizeNaively().ToLower()" />
+    }
+    else
+    {
+        <div class="c-tree">
+            @foreach (var node in Model.Roots)
+            {
+                <TreeNode T="T"
+                          Node="node"
+                          EntityName="EntityName"
+                          ReadView="ReadView"
+                          EditView="EditView"
+                          SupportsCreate="SupportsCreate"
+                          SupportsDelete="SupportsDelete"
+                          SaveRequested="SaveRequested"
+                          CancelRequested="CancelRequested"
+                          DeleteRequested="DeleteRequested"
+                          ReplyRequested="ReplyRequested"
+                          ReadViewContainer="ReadViewContainer"
+                          @key="node.Entity" />
+            }
+        </div>
+    }
+</Waiter>

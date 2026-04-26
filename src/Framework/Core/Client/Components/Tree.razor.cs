@@ -1,17 +1,33 @@
-﻿namespace Crudspa.Framework.Core.Client.Components;
+namespace Crudspa.Framework.Core.Client.Components;
 
-public partial class Tree
+public partial class Tree<T> : IDisposable
+    where T : class, INamed, IObservable
 {
-    [Parameter, EditorRequired] public ObservableCollection<Expandable> Items { get; set; } = null!;
-    [Parameter, EditorRequired] public Guid? SelectedId { get; set; }
-    [Parameter] public EventCallback<Guid?> SelectedIdChanged { get; set; }
+    private void HandleModelChanged(Object? sender, PropertyChangedEventArgs args) => InvokeAsync(StateHasChanged);
 
-    private async Task HandleSelectionChanged(Guid? id)
+    [Parameter, EditorRequired] public String? EntityName { get; set; } = String.Empty;
+    [Parameter, EditorRequired] public TreeModel<T> Model { get; set; } = null!;
+    [Parameter, EditorRequired] public RenderFragment<T> ReadView { get; set; } = null!;
+    [Parameter, EditorRequired] public RenderFragment<T> EditView { get; set; } = null!;
+    [Parameter] public RenderFragment? ToolbarMenuItems { get; set; }
+    [Parameter] public RenderFragment? Modals { get; set; }
+    [Parameter] public Boolean SupportsCreate { get; set; } = true;
+    [Parameter] public Boolean SupportsDelete { get; set; } = true;
+    [Parameter] public EventCallback<Guid?> DeleteRequested { get; set; }
+    [Parameter] public EventCallback<Guid?> SaveRequested { get; set; }
+    [Parameter] public EventCallback<Guid?> CancelRequested { get; set; }
+    [Parameter] public EventCallback<Guid?> ReplyRequested { get; set; }
+    [Parameter] public Card<T>.Containers ReadViewContainer { get; set; } = Card<T>.Containers.TitleAndWrappedValues;
+
+    protected override Task OnInitializedAsync()
     {
-        foreach (var expandable in Items)
-            expandable.Select(id);
+        Model.PropertyChanged += HandleModelChanged;
+        return Task.CompletedTask;
+    }
 
-        SelectedId = id;
-        await SelectedIdChanged.InvokeAsync(id);
+    public void Dispose()
+    {
+        Model.PropertyChanged -= HandleModelChanged;
+        Model.Dispose();
     }
 }

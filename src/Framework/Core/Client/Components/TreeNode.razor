@@ -1,35 +1,64 @@
-﻿<div class="node">
-    <div class="body">
-        <div class="expander"
-             @onclick="() => Node.Toggle()">
-            @if (Node.Children.IsEmpty())
+@typeparam T
+<div class="c-tree-node"
+     style="@($"--tree-depth:{Node.Depth}")">
+    <div class="c-tree-node-shell">
+        @if (Node.Children.HasItems())
+        {
+            <ButtonCore Clicked="ToggleExpanded"
+                        IconClass="@(Node.Expanded ? "c-icon-chevron-down" : "c-icon-chevron-right")"
+                        ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                        Size="ButtonCore.Sizes.Small"
+                        Title="Toggle replies" />
+        }
+        else
+        {
+            <div class="c-tree-node-spacer"></div>
+        }
+        <div class="c-tree-node-body">
+            <Form Model="Node.Form"
+                  Title="@Node.Entity.Name"
+                  SupportsDelete="SupportsDelete"
+                  SaveRequested="() => SaveRequested.InvokeAsync(Node.Entity.Id)"
+                  CancelRequested="() => CancelRequested.InvokeAsync(Node.Entity.Id)"
+                  DeleteRequested="() => DeleteRequested.InvokeAsync(Node.Entity.Id)"
+                  ReadViewContainer="ReadViewContainer">
+                <ReadView>
+                    @ReadView(Node.Entity)
+                </ReadView>
+                <EditView>
+                    @EditView(Node.Entity)
+                </EditView>
+            </Form>
+            @if (SupportsCreate && Node.Form.ReadOnly)
             {
-                <span class="nothing c-icon-chevron-right"></span>
+                <div class="c-tree-node-actions">
+                    <ButtonCore Clicked="() => ReplyRequested.InvokeAsync(Node.Entity.Id)"
+                                Text="Reply"
+                                IconClass="c-icon-reply"
+                                ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                                Size="ButtonCore.Sizes.Small" />
+                </div>
             }
-            else
-            {
-                @if (Node.Expanded == true)
-                {
-                    <span class="c-icon-chevron-down"></span>
-                }
-                else
-                {
-                    <span class="c-icon-chevron-right"></span>
-                }
-            }
-        </div>
-        <div class="name @(Node.Selected == true ? "selected" : String.Empty)"
-             @onclick="() => SelectionChanged.InvokeAsync(Node.Id)">
-            @Node.Name
         </div>
     </div>
-    @if (Node.Children.HasItems() && Node.Expanded == true)
+    @if (Node.Children.HasItems() && Node.Expanded)
     {
-        <div class="children">
+        <div class="c-tree-node-children">
             @foreach (var child in Node.Children)
             {
-                <TreeNode Node="child"
-                          SelectionChanged="id => SelectionChanged.InvokeAsync(id)" />
+                <TreeNode T="T"
+                          Node="child"
+                          EntityName="EntityName"
+                          ReadView="ReadView"
+                          EditView="EditView"
+                          SupportsCreate="SupportsCreate"
+                          SupportsDelete="SupportsDelete"
+                          SaveRequested="SaveRequested"
+                          CancelRequested="CancelRequested"
+                          DeleteRequested="DeleteRequested"
+                          ReplyRequested="ReplyRequested"
+                          ReadViewContainer="ReadViewContainer"
+                          @key="child.Entity" />
             }
         </div>
     }

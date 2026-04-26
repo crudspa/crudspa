@@ -1,4 +1,6 @@
-﻿namespace Crudspa.Framework.Core.Shared;
+using System.Net;
+
+namespace Crudspa.Framework.Core.Shared;
 
 public static class Constants
 {
@@ -28,6 +30,30 @@ public static class Constants
     {
         public const String SessionId = "SessionId";
         public const String Username = "Username";
+
+        public static String Resolve(String key, Uri uri) =>
+            Resolve(key, uri.Host, uri.IsDefaultPort ? null : uri.Port);
+
+        public static String Resolve(String key, String? host, Int32? port)
+        {
+            if (!key.IsBasically(SessionId) || !IsLoopback(host) || port is null or <= 0)
+                return key;
+
+            return $"{key}-{port.Value}";
+        }
+
+        private static Boolean IsLoopback(String? host)
+        {
+            if (host.HasNothing())
+                return false;
+
+            var normalized = host!.Trim('[', ']');
+
+            if (normalized.IsBasically("localhost"))
+                return true;
+
+            return IPAddress.TryParse(normalized, out var address) && IPAddress.IsLoopback(address);
+        }
     }
 
     public const String DefaultTimeZone = "America/New_York";

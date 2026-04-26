@@ -16,6 +16,12 @@ public class CommentMedia : Observable, IValidates, IOrderable
         set => SetProperty(ref field, value);
     }
 
+    public String? CommentBody
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
     public Types Type
     {
         get;
@@ -51,6 +57,15 @@ public class CommentMedia : Observable, IValidates, IOrderable
         get;
         set => SetProperty(ref field, value);
     }
+
+    public String? Name => Type switch
+    {
+        Types.Audio => AudioFile.Name,
+        Types.Image => ImageFile.Name,
+        Types.Pdf => PdfFile.Name,
+        Types.Video => VideoFile.Name,
+        _ => null,
+    };
 
     public List<Error> Validate()
     {

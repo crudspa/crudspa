@@ -1,56 +1,29 @@
-﻿using System.Reflection;
+using Crudspa.Framework.Core.Server.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Crudspa.Content.Display.Server.Controllers;
 
 [Route("api/content/display/images")]
-public class ImagesController(IEmbeddedResourceService embeddedResourceService) : ControllerBase
+public class ImagesController : EmbeddedResourceController
 {
-    private readonly Assembly _assembly = typeof(ImagesController).Assembly;
-    private readonly Dictionary<String, Byte[]> _cache = new();
-
     private const String Namespace = "Crudspa.Content.Display.Server.Embedded.Images.";
 
+    private static readonly EmbeddedResourceFileCache Files = new(typeof(ImagesController).Assembly, Namespace);
+
     [HttpGet("check-empty")]
-    public async Task<ActionResult> CheckEmpty() => (await GetFile("Check-Empty")).ActionResult;
+    public ActionResult CheckEmpty() => GetFile("Check-Empty.svg");
 
     [HttpGet("check-filled")]
-    public async Task<ActionResult> CheckFilled() => (await GetFile("Check-Filled")).ActionResult;
+    public ActionResult CheckFilled() => GetFile("Check-Filled.svg");
 
     [HttpGet("error")]
-    public async Task<ActionResult> Error() => (await GetFile("Error")).ActionResult;
+    public ActionResult Error() => GetFile("Error.svg");
 
     [HttpGet("exclamation")]
-    public async Task<ActionResult> Exclamation() => (await GetFile("Exclamation")).ActionResult;
+    public ActionResult Exclamation() => GetFile("Exclamation.svg");
 
     [HttpGet("notebook")]
-    public async Task<ActionResult> Notebook() => (await GetFile("Notebook")).ActionResult;
+    public ActionResult Notebook() => GetFile("Notebook.svg");
 
-    private async Task<FileResultWrapper> GetFile(String file)
-    {
-        const String extension = ".svg";
-        var fileName = $"{file}{extension}";
-
-        if (!_cache.ContainsKey(file))
-            _cache[file] = await embeddedResourceService.ReadBytes(_assembly, $"{Namespace}{fileName}");
-
-        var actionResult = File(_cache[file], extension.ToMimeType(), $"{fileName}");
-
-        var headers = Response.GetTypedHeaders();
-
-        headers.CacheControl = HttpResponseEx.NeverChanges;
-        headers.ContentDisposition = new("inline") { FileNameStar = $"{fileName}" };
-
-        return new()
-        {
-            ActionResult = actionResult,
-            Bytes = _cache[file],
-        };
-    }
-}
-
-public class FileResultWrapper
-{
-    public ActionResult ActionResult { get; set; } = null!;
-    public Byte[] Bytes { get; set; } = null!;
+    private ActionResult GetFile(String fileName) => EmbeddedResourceFile(Files, fileName);
 }

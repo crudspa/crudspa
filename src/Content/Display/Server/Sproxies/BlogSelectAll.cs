@@ -32,8 +32,8 @@ public static class BlogSelectAll
                 Height = reader.ReadInt32(11),
                 Caption = reader.ReadString(12),
             },
-            StatusName = reader.ReadString(12),
-            PostCount = reader.ReadInt32(13),
+            StatusName = reader.ReadString(13),
+            PostCount = reader.ReadInt32(14),
         };
     }
 }

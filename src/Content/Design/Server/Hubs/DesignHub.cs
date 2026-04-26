@@ -5,6 +5,7 @@ public partial class DesignHub : Crudspa.Content.Display.Server.Hubs.DisplayHub
     protected IAchievementService AchievementService { get; }
     protected IBlogService BlogService { get; }
     protected IContainerService ContainerService { get; }
+    protected ICommentService CommentService { get; }
     protected IContentPortalService ContentPortalService { get; }
     protected ICourseService CourseService { get; }
     protected IEmailService EmailService { get; }
@@ -54,6 +55,7 @@ public partial class DesignHub : Crudspa.Content.Display.Server.Hubs.DisplayHub
         IAchievementService achievementService,
         IBlogService blogService,
         IContainerService containerService,
+        ICommentService commentService,
         IContentPortalService contentPortalService,
         ICourseService courseService,
         IEmailService emailService,
@@ -99,6 +101,7 @@ public partial class DesignHub : Crudspa.Content.Display.Server.Hubs.DisplayHub
         AchievementService = achievementService;
         BlogService = blogService;
         ContainerService = containerService;
+        CommentService = commentService;
         ContentPortalService = contentPortalService;
         CourseService = courseService;
         EmailService = emailService;

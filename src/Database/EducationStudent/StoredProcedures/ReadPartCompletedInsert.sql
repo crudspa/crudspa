@@ -6,8 +6,19 @@ create proc [EducationStudent].[ReadPartCompletedInsert] (
     ,@Id uniqueidentifier output
 ) as
 
+select top 1
+    @Id = completed.Id
+from [Education].[ReadPartCompleted] completed with (updlock, holdlock)
+where completed.AssignmentId = @AssignmentId
+    and completed.ReadPartId = @ReadPartId
+    and completed.IsDeleted = 0
+order by completed.Updated
+    ,completed.Id
+
+if @Id is not null
+    return
+
 set @Id = newid()
-declare @now datetimeoffset = sysdatetimeoffset()
 
 insert [Education].[ReadPartCompleted] (
      Id

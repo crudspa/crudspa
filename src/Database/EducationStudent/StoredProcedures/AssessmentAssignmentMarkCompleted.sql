@@ -11,3 +11,4 @@ set
     ,UpdatedBy = @SessionId
     ,Completed = @now
 where Id = @Id
+    and Completed is null

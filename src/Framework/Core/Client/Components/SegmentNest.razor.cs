@@ -1,6 +1,6 @@
 namespace Crudspa.Framework.Core.Client.Components;
 
-public partial class SegmentTree
+public partial class SegmentNest
 {
     [Parameter] public String Prompt { get; set; } = "Select the destination segment:";
     [Parameter] public ObservableCollection<Expandable> Items { get; set; } = [];

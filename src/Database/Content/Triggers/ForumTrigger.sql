@@ -13,6 +13,7 @@ insert [Content].[Forum] (
     ,Title
     ,Description
     ,ImageId
+    ,AccessMode
     ,Ordinal
 )
 select
@@ -26,5 +27,6 @@ select
     ,deleted.Title
     ,deleted.Description
     ,deleted.ImageId
+    ,deleted.AccessMode
     ,deleted.Ordinal
 from deleted

@@ -13,45 +13,42 @@ public class ImageFileController(
     [HttpGet("fetch")]
     public async Task<ActionResult> Fetch(Guid? id, Int32? width, Guid? version, Boolean download = false, Boolean original = false)
     {
-        return await controllerWrappers.RequireSession(Request, async session =>
+        try
         {
-            try
+            var response = await imageFileService.Fetch(new(new() { Id = id }));
+
+            if (!response.Ok)
             {
-                var response = await imageFileService.Fetch(new(session.Id, new() { Id = id }));
-
-                if (!response.Ok)
-                {
-                    logger.LogWarning("Image file not found. Id: {id}", id);
-                    return NotFound();
-                }
-
-                var imageFile = response.Value;
-
-                foreach (var candidate in BuildBlobCandidates(imageFile, width, original))
-                {
-                    if (!candidate.BlobId.HasValue) continue;
-
-                    var stream = await blobService.TryFetchStream(candidate.BlobId.Value);
-                    if (stream is null) continue;
-
-                    Response.SetCacheHeaders(candidate.IsOptimized || version.HasValue);
-
-                    var mime = candidate.Format.ToMimeType();
-
-                    return download
-                        ? File(stream, mime, imageFile.Name, enableRangeProcessing: true)
-                        : File(stream, mime, enableRangeProcessing: true);
-                }
-
-                logger.LogWarning("No reachable blob for image file. Id: {id}", id);
+                logger.LogWarning("Image file not found. Id: {id}", id);
                 return NotFound();
             }
-            catch (Exception ex)
+
+            var imageFile = response.Value;
+
+            foreach (var candidate in BuildBlobCandidates(imageFile, width, original))
             {
-                logger.LogError(ex, "Exception while fetching image file. Id: {id}", id);
-                return NotFound();
+                if (!candidate.BlobId.HasValue) continue;
+
+                var stream = await blobService.TryFetchStream(candidate.BlobId.Value);
+                if (stream is null) continue;
+
+                Response.SetCacheHeaders(candidate.IsOptimized || version.HasValue);
+
+                var mime = candidate.Format.ToMimeType();
+
+                return download
+                    ? File(stream, mime, imageFile.Name, enableRangeProcessing: true)
+                    : File(stream, mime, enableRangeProcessing: true);
             }
-        });
+
+            logger.LogWarning("No reachable blob for image file. Id: {id}", id);
+            return NotFound();
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Exception while fetching image file. Id: {id}", id);
+            return NotFound();
+        }
     }
 
     [HttpPost("upload")]

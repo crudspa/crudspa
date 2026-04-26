@@ -119,16 +119,17 @@ public class Scheduler : BackgroundService
 
             if (!createJobResponse.Ok)
                 _logger.LogError("Error creating job. {error}", createJobResponse.ErrorMessages);
-            else
+            else if (createJobResponse.Value?.Id is Guid jobId)
             {
                 _logger.LogInformation("Created job for schedule {scheduleId}. The next scheduled run is: {nextRunDate}", updatedSchedule.Id, updatedSchedule.NextRun);
 
                 if (updatedSchedule.Id is not null)
                     await _gatewayService.Publish(new JobScheduleSaved { Id = updatedSchedule.Id });
 
-                if (createJobResponse.Value?.Id is not null)
-                    await _gatewayService.Publish(new JobAdded { Id = createJobResponse.Value.Id });
+                await _gatewayService.Publish(new JobAdded { Id = jobId });
             }
+            else
+                _logger.LogDebug("Skipped creating job for schedule {scheduleId} because another scheduler already claimed it.", updatedSchedule.Id);
         }
     }
 }

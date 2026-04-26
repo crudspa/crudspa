@@ -8,13 +8,19 @@ public class Comment : Observable, IValidates
         set => SetProperty(ref field, value);
     }
 
-    public Guid? ThreadId
+    public Guid? PostId
     {
         get;
         set => SetProperty(ref field, value);
     }
 
-    public String? ThreadTitle
+    public Guid? ParentId
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    public String? ParentBody
     {
         get;
         set => SetProperty(ref field, value);
@@ -32,10 +38,16 @@ public class Comment : Observable, IValidates
         set => SetProperty(ref field, value);
     }
 
-    public String? ByName
+    public String? ByFirstName
     {
         get;
         set => SetProperty(ref field, value);
+    }
+
+    public String? ByName
+    {
+        get => ByFirstName;
+        set => ByFirstName = value;
     }
 
     public DateTimeOffset? Posted
@@ -50,7 +62,19 @@ public class Comment : Observable, IValidates
         set => SetProperty(ref field, value);
     }
 
+    public Guid? ThreadId
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
     public ObservableCollection<CommentMedia> CommentMedias
+    {
+        get;
+        set => SetProperty(ref field, value);
+    } = [];
+
+    public ObservableCollection<Comment> Children
     {
         get;
         set => SetProperty(ref field, value);

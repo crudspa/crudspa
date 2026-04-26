@@ -28,7 +28,7 @@ public class PaneMoveModel(IScrollService scrollService, ISegmentService segment
 
         await Show();
 
-        var response = await WithWaiting("Fetching...", () => segmentService.FetchTree(new()));
+        var response = await WithWaiting("Fetching...", () => segmentService.FetchNest(new()));
 
         if (!response.Ok)
             return;

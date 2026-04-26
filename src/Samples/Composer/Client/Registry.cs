@@ -15,6 +15,7 @@ public class Registry
         services.AddSingleton<IAchievementService, AchievementServiceTcp>();
         services.AddSingleton<IBlogService, BlogServiceTcp>();
         services.AddSingleton<IContainerService, ContainerServiceTcp>();
+        services.AddSingleton<ICommentService, CommentServiceTcp>();
         services.AddSingleton<IContentPortalService, ContentPortalServiceTcp>();
         services.AddSingleton<ICourseService, CourseServiceTcp>();
         services.AddSingleton<IEmailService, EmailServiceTcp>();

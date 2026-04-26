@@ -9,10 +9,23 @@ create proc [ContentDesign].[ThreadInsert] (
 
 set @Id = newid()
 declare @now datetimeoffset = sysdatetimeoffset()
+declare @byId uniqueidentifier = (
+    select top 1 userTable.ContactId
+    from [Framework].[User-Active] userTable
+        inner join [Framework].[Session-Active] session on session.UserId = userTable.Id
+    where session.Id = @SessionId
+)
 
 set nocount on
 set xact_abort on
 begin transaction
+
+if (@byId is null)
+begin
+    rollback transaction
+    raiserror('Comment author not found for session', 16, 1)
+    return
+end
 
 declare @commentId uniqueidentifier = newid()
 
@@ -21,6 +34,7 @@ insert [Content].[Comment] (
     ,VersionOf
     ,Updated
     ,UpdatedBy
+    ,ById
     ,Body
 )
 values (
@@ -28,6 +42,7 @@ values (
     ,@commentId
     ,@now
     ,@SessionId
+    ,@byId
     ,@CommentBody
 )
 

@@ -251,11 +251,11 @@ public class SegmentServiceSql(
         });
     }
 
-    public async Task<Response<IList<Expandable>>> FetchTree(Request request)
+    public async Task<Response<IList<Expandable>>> FetchNest(Request request)
     {
         return await wrappers.Try<IList<Expandable>>(request, async response =>
         {
-            var portals = await SegmentSelectTree.Execute(Connection, request.SessionId);
+            var portals = await SegmentSelectNest.Execute(Connection, request.SessionId);
             return portals;
         });
     }

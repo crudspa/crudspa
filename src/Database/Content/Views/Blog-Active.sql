@@ -7,6 +7,7 @@ select blog.Id as Id
     ,blog.Author as Author
     ,blog.Description as Description
     ,blog.ImageId as ImageId
+    ,blog.AccessMode as AccessMode
 from [Content].[Blog] blog
 where 1=1
     and blog.IsDeleted = 0

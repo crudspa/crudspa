@@ -147,10 +147,10 @@ public partial class CoreHub
         });
     }
 
-    public async Task<Response<IList<Expandable>>> SegmentFetchTree(Request request)
+    public async Task<Response<IList<Expandable>>> SegmentFetchNest(Request request)
     {
         return await HubWrappers.RequirePermission(request, PermissionIds.Segments, async session =>
-            await SegmentService.FetchTree(request));
+            await SegmentService.FetchNest(request));
     }
 
     public async Task<Response> SegmentMove(Request<Segment> request)

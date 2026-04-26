@@ -96,7 +96,7 @@ public class JobScheduleServiceSql(
         {
             var jobSchedule = request.Value;
 
-            return await sqlWrappers.WithConnection(async (connection, transaction) =>
+            return await sqlWrappers.WithTransaction(async (connection, transaction) =>
             {
                 var jobId = await JobScheduleCreateJob.Execute(connection, transaction, request.SessionId, jobSchedule);
 

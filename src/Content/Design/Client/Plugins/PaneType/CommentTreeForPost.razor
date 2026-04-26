@@ -1,0 +1,95 @@
+<Tree Model="Model"
+      T="CommentTreeForPostItem"
+      EntityName="Comment"
+      SaveRequested="id => Model.Save(id)"
+      CancelRequested="id => Model.Cancel(id)"
+      DeleteRequested="id => Model.Delete(id)"
+      ReplyRequested="id => Model.Create(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Medium">
+            <LabeledHtml Label="Body"
+                         HtmlValue="@context.Comment.Body" />
+            <Labeled Width="8em"
+                     Label="By"
+                     StringValue="@context.Comment.ByFirstName" />
+            <Labeled Width="8em"
+                     Label="Posted"
+                     DateTimeOffsetValue="@context.Comment.Posted" />
+            <Labeled Width="8em"
+                     Label="Edited"
+                     DateTimeOffsetValue="@context.Comment.Edited" />
+        </Field>
+        <Field Size="Field.Sizes.Unspecified">
+            <LabeledBatch Label="Comment Medias"
+                          Width="5em"
+                          Items="context.Comment.CommentMedias.OrderBy(x => x.Ordinal)"
+                          Context="item">
+                <ReadView>
+                    @(item.Name)
+                </ReadView>
+            </LabeledBatch>
+        </Field>
+    </ReadView>
+    <EditView>
+        <Wrapped Alignment="Wrapped.Alignments.Top">
+            <Field Label="Body"
+                   Size="Field.Sizes.Full"
+                   Container="Field.Containers.Div">
+                <HtmlEditor ReadOnly="@false"
+                            @bind-Value="context.Comment.Body" />
+            </Field>
+        </Wrapped>
+        <BatchSection Title="Comment Medias">
+            <HeadingPanel>
+                <ButtonAdd EntityName="Comment Media"
+                           Disabled="false"
+                           Transparent="true"
+                           Clicked="() => Model.AddCommentMedia(context.Id)">
+                </ButtonAdd>
+            </HeadingPanel>
+            <ChildContent>
+                <Batch Model="Model.GetCommentMediasModel(context.Id)">
+                    <EditView Context="batchContext">
+                        <Wrapped Alignment="Wrapped.Alignments.Top"
+                                 @key="batchContext">
+                            <Field Label="Type"
+                                   Size="Field.Sizes.Large">
+                                <EnumDropdown ReadOnly="@false"
+                                              TEnum="CommentMedia.Types"
+                                              @bind-SelectedValue="batchContext.Type" />
+                            </Field>
+                            <Field Label="Audio"
+                                   Size="Field.Sizes.Larger"
+                                   Container="Field.Containers.Div">
+                                <AudioUploader ReadOnly="@false"
+                                               Required="false"
+                                               AudioFile="batchContext.AudioFile" />
+                            </Field>
+                            <Field Label="Image"
+                                   Size="Field.Sizes.Larger"
+                                   Container="Field.Containers.Div">
+                                <ImageUploader ReadOnly="@false"
+                                               Required="false"
+                                               ImageFile="batchContext.ImageFile" />
+                            </Field>
+                            <Field Label="Pdf"
+                                   Size="Field.Sizes.Larger"
+                                   Container="Field.Containers.Div">
+                                <PdfUploader ReadOnly="@false"
+                                             Required="false"
+                                             PdfFile="batchContext.PdfFile" />
+                            </Field>
+                            <Field Label="Video"
+                                   Size="Field.Sizes.Larger"
+                                   Container="Field.Containers.Div">
+                                <VideoUploader ReadOnly="@false"
+                                               Required="false"
+                                               VideoFile="batchContext.VideoFile" />
+                            </Field>
+                        </Wrapped>
+                    </EditView>
+                </Batch>
+            </ChildContent>
+        </BatchSection>
+    </EditView>
+</Tree>

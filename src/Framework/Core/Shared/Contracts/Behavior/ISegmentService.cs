@@ -16,6 +16,6 @@ public interface ISegmentService
     Task<Response<IList<Named>>> FetchLicenseNames(Request request);
     Task<Response<Segment?>> FetchStructure(Request<Segment> request);
     Task<Response> SaveStructure(Request<Segment> request);
-    Task<Response<IList<Expandable>>> FetchTree(Request request);
+    Task<Response<IList<Expandable>>> FetchNest(Request request);
     Task<Response> Move(Request<Segment> request);
 }

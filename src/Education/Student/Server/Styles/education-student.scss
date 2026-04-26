@@ -153,6 +153,15 @@ $overlayBackgroundColor: rgba(255, 255, 255, 0.4);
     padding: .25em;
 }
 
+.ces-student-pane-scroll {
+    align-content: start;
+    box-sizing: border-box;
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 1rem;
+    width: 100%;
+}
+
 .ces-avatar-options {
     @extend .c-wrap;
     justify-content: center;

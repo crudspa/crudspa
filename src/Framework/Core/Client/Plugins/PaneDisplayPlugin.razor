@@ -23,6 +23,7 @@
             throw new($"Interface '{nameof(IPaneDisplay)}' is not implemented by the component '{TypeName}'.");
 
         builder.OpenComponent(0, pluginType);
+        builder.SetKey((TypeName, Path, Id, IsNew));
 
         if (Path.HasSomething())
             builder.AddAttribute(1, nameof(IPaneDisplay.Path), Path);

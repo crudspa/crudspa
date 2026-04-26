@@ -19,6 +19,7 @@ public class Registry
         services.AddSingleton<IAchievementService, AchievementServiceSql>();
         services.AddSingleton<IBlogService, BlogServiceSql>();
         services.AddSingleton<IContainerService, ContainerServiceSql>();
+        services.AddSingleton<ICommentService, CommentServiceSql>();
         services.AddSingleton<IContentPortalService, ContentPortalServiceSql>();
         services.AddSingleton<ICourseService, CourseServiceSql>();
         services.AddSingleton<IEmailService, EmailServiceSql>();

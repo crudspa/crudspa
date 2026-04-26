@@ -39,8 +39,13 @@ public partial class JobFind : IPaneDisplay, IDisposable
 public class JobFindModel : FindModel<JobSearch, Job>,
     IHandle<JobAdded>, IHandle<JobSaved>, IHandle<JobRemoved>, IHandle<JobStatusChanged>
 {
+    private const String AddedSort = "Added";
+    private const String StartedSort = "Started";
+
     private readonly IJobService _jobService;
     private ObservableCollection<String> _sorts;
+    private Boolean _refreshing;
+    private Boolean _refreshRequested;
     private Boolean _resetting;
 
     public JobFindModel(IEventBus eventBus, IScrollService scrollService, IJobService jobService)
@@ -51,14 +56,15 @@ public class JobFindModel : FindModel<JobSearch, Job>,
 
         _sorts =
         [
-            "Added",
-            "Started",
+            AddedSort,
+            StartedSort,
         ];
     }
 
     public async Task Handle(JobAdded payload) => await Refresh();
     public async Task Handle(JobSaved payload) => await Refresh();
     public async Task Handle(JobRemoved payload) => await Refresh();
+
     public async Task Handle(JobStatusChanged payload)
     {
         var card = Cards.FirstOrDefault(x => x.Entity.Id.Equals(payload.Id));
@@ -74,13 +80,13 @@ public class JobFindModel : FindModel<JobSearch, Job>,
                 return;
             }
         }
-        else if (MightMatchResults(payload))
+        else if (ShouldRefreshForMissingCard(payload))
         {
             await Refresh();
             return;
         }
 
-        if (Search.Sort.Field.IsExactly("Started"))
+        if (SortingBy(StartedSort))
             await Refresh();
     }
 
@@ -149,11 +155,32 @@ public class JobFindModel : FindModel<JobSearch, Job>,
         if (_resetting)
             return;
 
-        var request = new Request<JobSearch>(Search);
-        var response = await WithWaiting("Searching...", () => _jobService.Search(request), resetAlerts);
+        if (_refreshing)
+        {
+            _refreshRequested = true;
+            return;
+        }
 
-        if (response.Ok)
-            SetCards(response.Value);
+        do
+        {
+            _refreshRequested = false;
+            _refreshing = true;
+
+            try
+            {
+                var request = new Request<JobSearch>(Search);
+                var response = await WithWaiting("Searching...", () => _jobService.Search(request), resetAlerts);
+
+                if (response.Ok)
+                    SetCards(response.Value);
+            }
+            finally
+            {
+                _refreshing = false;
+            }
+
+            resetAlerts = false;
+        } while (_refreshRequested);
     }
 
     public async Task Delete(Guid? id)
@@ -203,6 +230,27 @@ public class JobFindModel : FindModel<JobSearch, Job>,
 
         return matchesStatus && matchesDevice;
     }
+
+    private Boolean ShouldRefreshForMissingCard(JobStatusChanged payload)
+    {
+        return Waiting
+            || MightMatchResults(payload)
+            || ViewingNewestJobs();
+    }
+
+    private Boolean ViewingNewestJobs()
+    {
+        return Search.Paged.PageNumber == 1
+            && Search.Text.HasNothing()
+            && Search.Types.IsEmpty()
+            && Search.Status.IsEmpty()
+            && Search.Devices.IsEmpty()
+            && Search.Schedules.IsEmpty()
+            && SortingBy(AddedSort)
+            && Search.Sort.Ascending != true;
+    }
+
+    private Boolean SortingBy(String field) => Search.Sort.Field.IsExactly(field);
 
     private void RemoveCard(CardModel<Job> card)
     {

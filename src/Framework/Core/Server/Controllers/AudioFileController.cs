@@ -13,53 +13,50 @@ public class AudioFileController(
     [HttpGet("fetch")]
     public async Task<ActionResult> Fetch(Guid? id, Guid? version, Boolean download = false, Boolean original = false)
     {
-        return await controllerWrappers.RequireSession(Request, async session =>
+        try
         {
-            try
+            var response = await audioFileService.Fetch(new(new() { Id = id }));
+
+            if (!response.Ok)
             {
-                var response = await audioFileService.Fetch(new(session.Id, new() { Id = id }));
-
-                if (!response.Ok)
-                {
-                    logger.LogWarning("Audio file not found. Id: {id}", id);
-                    return NotFound();
-                }
-
-                var audioFile = response.Value;
-
-                var candidates = original
-                    ? new() { (audioFile.BlobId, audioFile.Format, false)! }
-                    : new List<(Guid? BlobId, String Format, Boolean IsOptimized)>
-                    {
-                        (audioFile.OptimizedBlobId, audioFile.OptimizedFormat, true)!,
-                        (audioFile.BlobId, audioFile.Format, false)!,
-                    };
-
-                foreach (var candidate in candidates)
-                {
-                    if (!candidate.BlobId.HasValue) continue;
-
-                    var stream = await blobService.TryFetchStream(candidate.BlobId.Value);
-                    if (stream is null) continue;
-
-                    Response.SetCacheHeaders(candidate.IsOptimized || version.HasValue);
-
-                    var mime = candidate.Format.ToMimeType();
-
-                    return download
-                        ? File(stream, mime, audioFile.Name, enableRangeProcessing: true)
-                        : File(stream, mime, enableRangeProcessing: true);
-                }
-
-                logger.LogWarning("Audio blob(s) missing. Id: {id}", id);
+                logger.LogWarning("Audio file not found. Id: {id}", id);
                 return NotFound();
             }
-            catch (Exception ex)
+
+            var audioFile = response.Value;
+
+            var candidates = original
+                ? new() { (audioFile.BlobId, audioFile.Format, false)! }
+                : new List<(Guid? BlobId, String Format, Boolean IsOptimized)>
+                {
+                    (audioFile.OptimizedBlobId, audioFile.OptimizedFormat, true)!,
+                    (audioFile.BlobId, audioFile.Format, false)!,
+                };
+
+            foreach (var candidate in candidates)
             {
-                logger.LogError(ex, "Exception while fetching audio file. Id: {id}", id);
-                return NotFound();
+                if (!candidate.BlobId.HasValue) continue;
+
+                var stream = await blobService.TryFetchStream(candidate.BlobId.Value);
+                if (stream is null) continue;
+
+                Response.SetCacheHeaders(candidate.IsOptimized || version.HasValue);
+
+                var mime = candidate.Format.ToMimeType();
+
+                return download
+                    ? File(stream, mime, audioFile.Name, enableRangeProcessing: true)
+                    : File(stream, mime, enableRangeProcessing: true);
             }
-        });
+
+            logger.LogWarning("Audio blob(s) missing. Id: {id}", id);
+            return NotFound();
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Exception while fetching audio file. Id: {id}", id);
+            return NotFound();
+        }
     }
 
     [HttpPost("upload")]

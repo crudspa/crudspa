@@ -25,7 +25,7 @@ public class SegmentMoveModel(IScrollService scrollService, ISegmentService segm
 
         await Show();
 
-        var response = await WithWaiting("Fetching...", () => segmentService.FetchTree(new()));
+        var response = await WithWaiting("Fetching...", () => segmentService.FetchNest(new()));
 
         if (response.Ok)
         {
@@ -67,6 +67,6 @@ public class SegmentMoveModel(IScrollService scrollService, ISegmentService segm
             }
         }
 
-        throw new("ID not found in tree.");
+        throw new("ID not found in nest.");
     }
 }

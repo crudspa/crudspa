@@ -9,6 +9,7 @@ create table [Content].[Forum] (
     [Title] nvarchar(150) not null,
     [Description] nvarchar(max) not null,
     [ImageId] uniqueidentifier null,
+    [AccessMode] int default(0) not null,
     [Ordinal] int not null,
     constraint [PK_Content_Forum] primary key clustered ([Id]),
     constraint [FK_Content_Forum_Portal] foreign key ([PortalId]) references [Framework].[Portal] ([Id]),

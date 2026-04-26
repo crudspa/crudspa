@@ -23,8 +23,8 @@ public class EmbeddedResourceServiceCore : IEmbeddedResourceService
         if (stream is null)
             throw new MissingManifestResourceException($"The embedded resource '{resourceName}' could not be found in the assembly '{assembly.FullName}'.");
 
-        var bytes = new Byte[stream.Length];
-        _ = await stream.ReadAsync(bytes, 0, (Int32)stream.Length);
+        var bytes = new Byte[checked((Int32)stream.Length)];
+        await stream.ReadExactlyAsync(bytes);
         return bytes;
     }
 
@@ -35,8 +35,8 @@ public class EmbeddedResourceServiceCore : IEmbeddedResourceService
         if (stream is null)
             throw new MissingManifestResourceException($"The embedded resource '{resourceName}' could not be found in the assembly '{assembly.FullName}'.");
 
-        var bytes = new Byte[stream.Length];
-        _ = stream.Read(bytes, 0, (Int32)stream.Length);
+        var bytes = new Byte[checked((Int32)stream.Length)];
+        stream.ReadExactly(bytes);
         return bytes;
     }
 }

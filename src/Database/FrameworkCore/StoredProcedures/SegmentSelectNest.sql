@@ -1,4 +1,4 @@
-create proc [FrameworkCore].[SegmentSelectTree] (
+create proc [FrameworkCore].[SegmentSelectNest] (
      @SessionId uniqueidentifier
 ) as
 

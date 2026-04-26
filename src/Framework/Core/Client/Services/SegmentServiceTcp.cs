@@ -44,8 +44,8 @@ public class SegmentServiceTcp(IProxyWrappers proxyWrappers) : ISegmentService
     public async Task<Response> SaveStructure(Request<Segment> request) =>
         await proxyWrappers.Send("SegmentSaveStructure", request);
 
-    public async Task<Response<IList<Expandable>>> FetchTree(Request request) =>
-        await proxyWrappers.Send<IList<Expandable>>("SegmentFetchTree", request);
+    public async Task<Response<IList<Expandable>>> FetchNest(Request request) =>
+        await proxyWrappers.Send<IList<Expandable>>("SegmentFetchNest", request);
 
     public async Task<Response> Move(Request<Segment> request) =>
         await proxyWrappers.Send("SegmentMove", request);

@@ -10,6 +10,7 @@ create table [Content].[Blog] (
     [Author] nvarchar(150) not null,
     [Description] nvarchar(max) null,
     [ImageId] uniqueidentifier null,
+    [AccessMode] int default(0) not null,
     constraint [PK_Content_Blog] primary key clustered ([Id]),
     constraint [FK_Content_Blog_Portal] foreign key ([PortalId]) references [Framework].[Portal] ([Id]),
     constraint [FK_Content_Blog_Status] foreign key ([StatusId]) references [Framework].[ContentStatus] ([Id]),

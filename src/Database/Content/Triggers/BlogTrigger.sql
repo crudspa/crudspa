@@ -14,6 +14,7 @@ insert [Content].[Blog] (
     ,Author
     ,Description
     ,ImageId
+    ,AccessMode
 )
 select
      newid()
@@ -27,4 +28,5 @@ select
     ,deleted.Author
     ,deleted.Description
     ,deleted.ImageId
+    ,deleted.AccessMode
 from deleted

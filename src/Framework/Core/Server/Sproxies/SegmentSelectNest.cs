@@ -2,12 +2,12 @@ using System.Collections.ObjectModel;
 
 namespace Crudspa.Framework.Core.Server.Sproxies;
 
-public static class SegmentSelectTree
+public static class SegmentSelectNest
 {
     public static async Task<IList<Expandable>> Execute(String connection, Guid? sessionId)
     {
         await using var command = new SqlCommand();
-        command.CommandText = "FrameworkCore.SegmentSelectTree";
+        command.CommandText = "FrameworkCore.SegmentSelectNest";
 
         command.AddParameter("@SessionId", sessionId);
 

@@ -5793,7 +5793,7 @@ begin
         ,null
     )
 
-    -- ImageFile: Logo-White.png
+    -- ImageFile: Logo-White.png [29b47191]
     insert [Framework].[ImageFile] (
          Id
         ,Updated
@@ -6105,7 +6105,7 @@ begin
         ,null
     )
 
-    -- ImageFile: Logo-White.png
+    -- ImageFile: Logo-White.png [d87104aa]
     insert [Framework].[ImageFile] (
          Id
         ,Updated
@@ -9485,7 +9485,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [00d8ca5f]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -9565,7 +9565,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [0828c046]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -9645,7 +9645,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [0a49ee26]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -9725,7 +9725,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [107f12ad]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -9805,7 +9805,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [1ff7eff5]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -9885,7 +9885,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [225c39cc]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -9965,7 +9965,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [237cc696]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -10045,7 +10045,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [251f35f1]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -10125,7 +10125,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [26e35b1f]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -10205,7 +10205,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [29b3d393]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -10285,7 +10285,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [2acd181e]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -10365,7 +10365,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [2d8ddf64]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -10445,7 +10445,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [2e4161c2]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -10525,7 +10525,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [2f0692aa]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -10605,7 +10605,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [30cbe0c3]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -10685,7 +10685,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [376b4139]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -10765,7 +10765,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [3abe7ebb]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -10845,7 +10845,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [3ce070fd]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -10925,7 +10925,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [3d40374c]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -11005,7 +11005,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [4580667e]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -11085,7 +11085,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [469be189]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -11165,7 +11165,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [4b06371a]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -11245,7 +11245,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [4dad2d85]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -11325,7 +11325,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [538e3c0d]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -11405,7 +11405,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [6a0c47e0]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -11485,7 +11485,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [70c7ffe8]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -11565,7 +11565,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [70d84206]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -11645,7 +11645,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [77eb6b06]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -11725,7 +11725,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [7b4faa15]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -11805,7 +11805,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [7e2c63e6]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -11885,7 +11885,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [7f4827a1]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -11965,7 +11965,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [842923d9]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -12045,7 +12045,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [86bbf7aa]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -12125,7 +12125,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [8c599a7c]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -12205,7 +12205,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [9ad745a6]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -12285,7 +12285,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [9b46b960]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -12365,7 +12365,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [9fbe3a9e]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -12445,7 +12445,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [9fccc3a0]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -12525,7 +12525,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [a61d24c9]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -12605,7 +12605,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [a8593419]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -12685,7 +12685,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [b5d3a9e1]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -12765,7 +12765,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [bdde7f5e]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -12845,7 +12845,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [be24972d]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -12925,7 +12925,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [cada0df8]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -13005,7 +13005,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [cddf5f5d]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -13085,7 +13085,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [d06de636]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -13165,7 +13165,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [d266bff5]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -13245,7 +13245,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [d360c590]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -13325,7 +13325,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [d57eafe7]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -13405,7 +13405,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [deb0ac77]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -13485,7 +13485,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [ded1b270]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -13565,7 +13565,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [e0371dfd]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -13645,7 +13645,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [e2bbd5cb]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -13725,7 +13725,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [e4be30e8]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -13805,7 +13805,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [ef21287d]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -13885,7 +13885,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [f755ae4c]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -13965,7 +13965,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [f8c25ba0]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -14045,7 +14045,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [faf4e858]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -14125,7 +14125,7 @@ begin
         ,null
     )
 
-    -- Box: 1em 1em
+    -- Box: 1em 1em [53c6c2f9]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -14205,7 +14205,7 @@ begin
         ,null
     )
 
-    -- Box: 1em 1em
+    -- Box: 1em 1em [8edfb38f]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -14285,7 +14285,7 @@ begin
         ,null
     )
 
-    -- Box: 2em 2em
+    -- Box: 2em 2em [a2cc679c]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -14365,7 +14365,7 @@ begin
         ,null
     )
 
-    -- Box: 2em 2em
+    -- Box: 2em 2em [a5841f3e]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -14525,7 +14525,7 @@ begin
         ,null
     )
 
-    -- Box: 1em 1em
+    -- Box: 1em 1em [c13fae26]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -14605,7 +14605,7 @@ begin
         ,null
     )
 
-    -- Box: 2em 2em
+    -- Box: 2em 2em [20ea6789]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -14685,7 +14685,7 @@ begin
         ,null
     )
 
-    -- Box: 2em 2em
+    -- Box: 2em 2em [6af5f157]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -14765,7 +14765,7 @@ begin
         ,null
     )
 
-    -- Box: 2em 2em
+    -- Box: 2em 2em [3f331567]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -14845,7 +14845,7 @@ begin
         ,null
     )
 
-    -- Box: 2em 2em
+    -- Box: 2em 2em [47c29286]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -14925,7 +14925,7 @@ begin
         ,null
     )
 
-    -- Box: 2em 2em
+    -- Box: 2em 2em [721e1e5c]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -15005,7 +15005,7 @@ begin
         ,null
     )
 
-    -- Box: 2em 2em
+    -- Box: 2em 2em [dda5f362]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -15085,7 +15085,7 @@ begin
         ,null
     )
 
-    -- Box: 2em 3em
+    -- Box: 2em 3em [61a3aa28]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -15165,7 +15165,7 @@ begin
         ,null
     )
 
-    -- Box: 2em 3em
+    -- Box: 2em 3em [64f30fd7]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -15245,7 +15245,7 @@ begin
         ,null
     )
 
-    -- Box: 0em 0em
+    -- Box: 0em 0em [9fbe3a9e]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -15325,7 +15325,7 @@ begin
         ,null
     )
 
-    -- Box: 0em 0em
+    -- Box: 0em 0em [b5d3a9e1]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -15405,7 +15405,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [07276d98]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -15485,7 +15485,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [4aeaaa53]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -15565,7 +15565,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [4e4a1753]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -15645,7 +15645,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [576f8ddf]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -15725,7 +15725,7 @@ begin
         ,null
     )
 
-    -- Box: 0
+    -- Box: 0 [a809f4f6]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -15805,7 +15805,7 @@ begin
         ,null
     )
 
-    -- Box: 1em 1px
+    -- Box: 1em 1px [4e36020f]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -15885,7 +15885,7 @@ begin
         ,null
     )
 
-    -- Box: 1em 1px
+    -- Box: 1em 1px [894e57fc]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -15965,7 +15965,7 @@ begin
         ,null
     )
 
-    -- Box: 1em 1px
+    -- Box: 1em 1px [d9555fc5]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -16045,7 +16045,7 @@ begin
         ,null
     )
 
-    -- Box: 1em 1px
+    -- Box: 1em 1px [7939824b]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -16365,7 +16365,7 @@ begin
         ,null
     )
 
-    -- Box: #ffffff #cccccc
+    -- Box: #ffffff #cccccc [6cc62ffe]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -16445,7 +16445,7 @@ begin
         ,null
     )
 
-    -- Box: #ffffff #cccccc
+    -- Box: #ffffff #cccccc [c41f40ee]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -16525,7 +16525,7 @@ begin
         ,null
     )
 
-    -- Box: #FFFFFF 5em
+    -- Box: #FFFFFF 5em [0645673e]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -16605,7 +16605,7 @@ begin
         ,null
     )
 
-    -- Box: #FFFFFF 5em
+    -- Box: #FFFFFF 5em [213a7076]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -16685,7 +16685,7 @@ begin
         ,null
     )
 
-    -- Box: #FFFFFF 5em
+    -- Box: #FFFFFF 5em [de8823f6]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -16765,7 +16765,7 @@ begin
         ,null
     )
 
-    -- Box: #FFFFFF 5em
+    -- Box: #FFFFFF 5em [fdf9b6bd]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -16845,7 +16845,7 @@ begin
         ,null
     )
 
-    -- Box: #FFFFFF 5em
+    -- Box: #FFFFFF 5em [fb063582]
     insert [Content].[Box] (
          Id
         ,VersionOf
@@ -17219,7 +17219,7 @@ begin
         ,null
     )
 
-    -- Container: 0.75em
+    -- Container: 0.75em [67edc9e8]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17247,7 +17247,7 @@ begin
         ,'0.75em'
     )
 
-    -- Container: 0.75em
+    -- Container: 0.75em [87c1b22b]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17275,7 +17275,7 @@ begin
         ,'0.75em'
     )
 
-    -- Container: Column | No Wrap | Center
+    -- Container: Column | No Wrap | Center [07387cad]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17303,7 +17303,7 @@ begin
         ,null
     )
 
-    -- Container: Column | No Wrap | Center
+    -- Container: Column | No Wrap | Center [69cc6acf]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17331,7 +17331,7 @@ begin
         ,null
     )
 
-    -- Container: Column | No Wrap | Center
+    -- Container: Column | No Wrap | Center [9fbe3a9e]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17359,7 +17359,7 @@ begin
         ,null
     )
 
-    -- Container: Column | No Wrap | Center
+    -- Container: Column | No Wrap | Center [b5d3a9e1]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17387,7 +17387,7 @@ begin
         ,null
     )
 
-    -- Container: Column | No Wrap | Center
+    -- Container: Column | No Wrap | Center [bd5df50c]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17415,7 +17415,7 @@ begin
         ,null
     )
 
-    -- Container: Column | No Wrap | Center
+    -- Container: Column | No Wrap | Center [f2cdf809]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17471,7 +17471,7 @@ begin
         ,null
     )
 
-    -- Container: Row | Wrap | Start
+    -- Container: Row | Wrap | Start [292af268]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17499,7 +17499,7 @@ begin
         ,null
     )
 
-    -- Container: Row | Wrap | Start
+    -- Container: Row | Wrap | Start [65b0cce6]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17527,7 +17527,7 @@ begin
         ,null
     )
 
-    -- Container: Row | Wrap | Start
+    -- Container: Row | Wrap | Start [ab32c3ae]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17555,7 +17555,7 @@ begin
         ,null
     )
 
-    -- Container: Row | Wrap | Start
+    -- Container: Row | Wrap | Start [c2c7dea4]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17583,7 +17583,7 @@ begin
         ,null
     )
 
-    -- Container: Row | Wrap | Start
+    -- Container: Row | Wrap | Start [ef98f425]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17611,7 +17611,7 @@ begin
         ,null
     )
 
-    -- Container: 1.25em
+    -- Container: 1.25em [3957c558]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17639,7 +17639,7 @@ begin
         ,'1.25em'
     )
 
-    -- Container: 1.25em
+    -- Container: 1.25em [3e77fe29]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17667,7 +17667,7 @@ begin
         ,'1.25em'
     )
 
-    -- Container: 1.25em
+    -- Container: 1.25em [c08e4675]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17695,7 +17695,7 @@ begin
         ,'1.25em'
     )
 
-    -- Container: 1em
+    -- Container: 1em [4df67369]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17723,7 +17723,7 @@ begin
         ,'1em'
     )
 
-    -- Container: 1em
+    -- Container: 1em [a5d87b81]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17751,7 +17751,7 @@ begin
         ,'1em'
     )
 
-    -- Container: Row | Wrap | Center
+    -- Container: Row | Wrap | Center [085edaa4]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17779,7 +17779,7 @@ begin
         ,null
     )
 
-    -- Container: Row | Wrap | Center
+    -- Container: Row | Wrap | Center [11d75131]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17807,7 +17807,7 @@ begin
         ,null
     )
 
-    -- Container: Row | Wrap | Center
+    -- Container: Row | Wrap | Center [4a8946ee]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17835,7 +17835,7 @@ begin
         ,null
     )
 
-    -- Container: Row | Wrap | Center
+    -- Container: Row | Wrap | Center [859ce92f]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17863,7 +17863,7 @@ begin
         ,null
     )
 
-    -- Container: Row | Wrap | Center
+    -- Container: Row | Wrap | Center [8894b506]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17891,7 +17891,7 @@ begin
         ,null
     )
 
-    -- Container: Row | Wrap | Center
+    -- Container: Row | Wrap | Center [a8d2ae78]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17919,7 +17919,7 @@ begin
         ,null
     )
 
-    -- Container: Row | Wrap | Center
+    -- Container: Row | Wrap | Center [adbd78cc]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17947,7 +17947,7 @@ begin
         ,null
     )
 
-    -- Container: Row | Wrap | Center
+    -- Container: Row | Wrap | Center [d7d4f381]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -17975,7 +17975,7 @@ begin
         ,null
     )
 
-    -- Container: Row | Wrap | Center
+    -- Container: Row | Wrap | Center [e269fc03]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -18003,7 +18003,7 @@ begin
         ,null
     )
 
-    -- Container: 0.75em
+    -- Container: 0.75em [810d9c23]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -18031,7 +18031,7 @@ begin
         ,'0.75em'
     )
 
-    -- Container: 0.75em
+    -- Container: 0.75em [c2d429b5]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -18059,7 +18059,7 @@ begin
         ,'0.75em'
     )
 
-    -- Container: 1.25em
+    -- Container: 1.25em [c46de928]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -18087,7 +18087,7 @@ begin
         ,'1.25em'
     )
 
-    -- Container: 1.25em
+    -- Container: 1.25em [ee69a717]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -18115,7 +18115,7 @@ begin
         ,'1.25em'
     )
 
-    -- Container: 1.5em
+    -- Container: 1.5em [400c6fc2]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -18143,7 +18143,7 @@ begin
         ,'1.5em'
     )
 
-    -- Container: 1.5em
+    -- Container: 1.5em [c4c3bda0]
     insert [Content].[Container] (
          Id
         ,VersionOf
@@ -18171,7 +18171,7 @@ begin
         ,'1.5em'
     )
 
-    -- Item: 0 1
+    -- Item: 0 1 [0f9fb9fc]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18203,7 +18203,7 @@ begin
         ,null
     )
 
-    -- Item: 0 1
+    -- Item: 0 1 [0feeb266]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18235,7 +18235,7 @@ begin
         ,null
     )
 
-    -- Item: 0 1
+    -- Item: 0 1 [1100c9d4]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18267,7 +18267,7 @@ begin
         ,null
     )
 
-    -- Item: 0 1
+    -- Item: 0 1 [3d962ff9]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18299,7 +18299,7 @@ begin
         ,null
     )
 
-    -- Item: 0 1
+    -- Item: 0 1 [4181259c]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18331,7 +18331,7 @@ begin
         ,null
     )
 
-    -- Item: 0 1
+    -- Item: 0 1 [45946788]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18363,7 +18363,7 @@ begin
         ,null
     )
 
-    -- Item: 0 1
+    -- Item: 0 1 [70f1838e]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18395,7 +18395,7 @@ begin
         ,null
     )
 
-    -- Item: 0 1
+    -- Item: 0 1 [77eee6f3]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18427,7 +18427,7 @@ begin
         ,null
     )
 
-    -- Item: 0 1
+    -- Item: 0 1 [78ec54b6]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18459,7 +18459,7 @@ begin
         ,null
     )
 
-    -- Item: 0 1
+    -- Item: 0 1 [7b66dd03]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18491,7 +18491,7 @@ begin
         ,null
     )
 
-    -- Item: 0 1
+    -- Item: 0 1 [89f35b63]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18523,7 +18523,7 @@ begin
         ,null
     )
 
-    -- Item: 0 1
+    -- Item: 0 1 [8c4986a8]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18555,7 +18555,7 @@ begin
         ,null
     )
 
-    -- Item: 0 1
+    -- Item: 0 1 [8eda2fd8]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18587,7 +18587,7 @@ begin
         ,null
     )
 
-    -- Item: 0 1
+    -- Item: 0 1 [ad85cc79]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18619,7 +18619,7 @@ begin
         ,null
     )
 
-    -- Item: 0 1
+    -- Item: 0 1 [b2c99186]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18651,7 +18651,7 @@ begin
         ,null
     )
 
-    -- Item: 0 1
+    -- Item: 0 1 [b6160814]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18683,7 +18683,7 @@ begin
         ,null
     )
 
-    -- Item: 0 1
+    -- Item: 0 1 [b88112a1]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18715,7 +18715,7 @@ begin
         ,null
     )
 
-    -- Item: 0 1
+    -- Item: 0 1 [c9727609]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18747,7 +18747,7 @@ begin
         ,null
     )
 
-    -- Item: 0 1
+    -- Item: 0 1 [db275eda]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18779,7 +18779,7 @@ begin
         ,null
     )
 
-    -- Item: 0 1
+    -- Item: 0 1 [f2db4716]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18811,7 +18811,7 @@ begin
         ,null
     )
 
-    -- Item: 0 1
+    -- Item: 0 1 [facfab6f]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18843,7 +18843,7 @@ begin
         ,null
     )
 
-    -- Item: 0 1
+    -- Item: 0 1 [90e92e03]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18907,7 +18907,7 @@ begin
         ,null
     )
 
-    -- Item: 1 1
+    -- Item: 1 1 [4b50d4fd]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18939,7 +18939,7 @@ begin
         ,null
     )
 
-    -- Item: 1 1
+    -- Item: 1 1 [6f56e224]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -18971,7 +18971,7 @@ begin
         ,null
     )
 
-    -- Item: 1 1
+    -- Item: 1 1 [ad79efac]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19003,7 +19003,7 @@ begin
         ,null
     )
 
-    -- Item: 1 1
+    -- Item: 1 1 [e25d8b87]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19035,7 +19035,7 @@ begin
         ,null
     )
 
-    -- Item: 1 1
+    -- Item: 1 1 [fe5b4c37]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19067,7 +19067,7 @@ begin
         ,null
     )
 
-    -- Item: 1 1
+    -- Item: 1 1 [1206702f]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19099,7 +19099,7 @@ begin
         ,'20em'
     )
 
-    -- Item: 1 1
+    -- Item: 1 1 [87dbead1]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19131,7 +19131,7 @@ begin
         ,'20em'
     )
 
-    -- Item: 1 1
+    -- Item: 1 1 [92b777fa]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19163,7 +19163,7 @@ begin
         ,'20em'
     )
 
-    -- Item: 1 1
+    -- Item: 1 1 [94f127ae]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19195,7 +19195,7 @@ begin
         ,'20em'
     )
 
-    -- Item: 1 1
+    -- Item: 1 1 [a61e372c]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19227,7 +19227,7 @@ begin
         ,'20em'
     )
 
-    -- Item: Percentage | Auto
+    -- Item: Percentage | Auto [9fbe3a9e]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19259,7 +19259,7 @@ begin
         ,null
     )
 
-    -- Item: Percentage | Auto
+    -- Item: Percentage | Auto [b5d3a9e1]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19291,7 +19291,7 @@ begin
         ,null
     )
 
-    -- Item: Percentage | Stretch
+    -- Item: Percentage | Stretch [15338d57]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19323,7 +19323,7 @@ begin
         ,'100%'
     )
 
-    -- Item: Percentage | Stretch
+    -- Item: Percentage | Stretch [a947b0b3]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19355,7 +19355,7 @@ begin
         ,'100%'
     )
 
-    -- Item: Percentage | Center
+    -- Item: Percentage | Center [1a8bd048]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19387,7 +19387,7 @@ begin
         ,null
     )
 
-    -- Item: Percentage | Center
+    -- Item: Percentage | Center [fd5751b9]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19419,7 +19419,7 @@ begin
         ,null
     )
 
-    -- Item: Percentage | Stretch
+    -- Item: Percentage | Stretch [403696a3]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19451,7 +19451,7 @@ begin
         ,null
     )
 
-    -- Item: Percentage | Stretch
+    -- Item: Percentage | Stretch [eefb30f0]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19483,7 +19483,7 @@ begin
         ,null
     )
 
-    -- Item: 14em 1
+    -- Item: 14em 1 [2af5c3a1]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19515,7 +19515,7 @@ begin
         ,null
     )
 
-    -- Item: 14em 1
+    -- Item: 14em 1 [6e6e4e22]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19547,7 +19547,7 @@ begin
         ,null
     )
 
-    -- Item: 14em 1
+    -- Item: 14em 1 [a79614b8]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19579,7 +19579,7 @@ begin
         ,null
     )
 
-    -- Item: 22em 1
+    -- Item: 22em 1 [27158a79]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19611,7 +19611,7 @@ begin
         ,null
     )
 
-    -- Item: 22em 1
+    -- Item: 22em 1 [461f2f0e]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19643,7 +19643,7 @@ begin
         ,null
     )
 
-    -- Item: 36em 1
+    -- Item: 36em 1 [0931c840]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19675,7 +19675,7 @@ begin
         ,'100%'
     )
 
-    -- Item: 36em 1
+    -- Item: 36em 1 [0b4bd36c]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19707,7 +19707,7 @@ begin
         ,'100%'
     )
 
-    -- Item: 36em 1
+    -- Item: 36em 1 [e6699b5d]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19739,7 +19739,7 @@ begin
         ,'100%'
     )
 
-    -- Item: 38em 1
+    -- Item: 38em 1 [01824161]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19771,7 +19771,7 @@ begin
         ,'100%'
     )
 
-    -- Item: 38em 1
+    -- Item: 38em 1 [1a64bba8]
     insert [Content].[Item] (
          Id
         ,VersionOf
@@ -19987,7 +19987,7 @@ begin
         ,0
     )
 
-    -- Page: 0.Pane Page
+    -- Page: 0.Pane Page [9021693d]
     insert [Content].[Page] (
          Id
         ,VersionOf
@@ -20023,7 +20023,7 @@ begin
         ,0
     )
 
-    -- Page: 0.Pane Page
+    -- Page: 0.Pane Page [ce59a958]
     insert [Content].[Page] (
          Id
         ,VersionOf
@@ -20059,7 +20059,7 @@ begin
         ,0
     )
 
-    -- Section: 0.Composer Home | 2em 2em | 1.25em
+    -- Section: 0.Composer Home | 2em 2em | 1.25em [34254e10]
     insert [Content].[Section] (
          Id
         ,VersionOf
@@ -20085,7 +20085,7 @@ begin
         ,0
     )
 
-    -- Element: 0.Composer Home | 2em 2em | 1.25em.True
+    -- Element: 0.Composer Home | 2em 2em | 1.25em.True [078bebe1]
     insert [Content].[Element] (
          Id
         ,VersionOf
@@ -20113,7 +20113,7 @@ begin
         ,0
     )
 
-    -- MultimediaElement: 0.Composer Home | 2em 2em | 1.25em.True | 0.75em
+    -- MultimediaElement: 0.Composer Home | 2em 2em | 1.25em.True | 0.75em [808f9171]
     insert [Content].[MultimediaElement] (
          Id
         ,VersionOf
@@ -20195,7 +20195,7 @@ begin
         ,0
     )
 
-    -- Element: 0.Pane Page | #034078ff #f6f6f6ff | 1.5em.True
+    -- Element: 0.Pane Page | #034078ff #f6f6f6ff | 1.5em.True [f9c9698d]
     insert [Content].[Element] (
          Id
         ,VersionOf
@@ -20223,7 +20223,7 @@ begin
         ,0
     )
 
-    -- Element: 0.Pane Page | #034078ff #f6f6f6ff | 1.5em.True
+    -- Element: 0.Pane Page | #034078ff #f6f6f6ff | 1.5em.True [82093c58]
     insert [Content].[Element] (
          Id
         ,VersionOf
@@ -20391,7 +20391,7 @@ begin
         ,0
     )
 
-    -- Element: 0.Pane Page | #468966ff #f6f6f6ff | 1.5em.True
+    -- Element: 0.Pane Page | #468966ff #f6f6f6ff | 1.5em.True [63560ea7]
     insert [Content].[Element] (
          Id
         ,VersionOf
@@ -20419,7 +20419,7 @@ begin
         ,0
     )
 
-    -- Element: 0.Pane Page | #468966ff #f6f6f6ff | 1.5em.True
+    -- Element: 0.Pane Page | #468966ff #f6f6f6ff | 1.5em.True [14ff93ae]
     insert [Content].[Element] (
          Id
         ,VersionOf
@@ -20561,7 +20561,7 @@ begin
         ,1
     )
 
-    -- Section: 0.Pane Page | 2em 2em | Row | Wrap | Center
+    -- Section: 0.Pane Page | 2em 2em | Row | Wrap | Center [62329b14]
     insert [Content].[Section] (
          Id
         ,VersionOf
@@ -20587,7 +20587,7 @@ begin
         ,1
     )
 
-    -- Element: 0.Pane Page | 2em 2em | Row | Wrap | Center.True
+    -- Element: 0.Pane Page | 2em 2em | Row | Wrap | Center.True [61176849]
     insert [Content].[Element] (
          Id
         ,VersionOf
@@ -20689,7 +20689,7 @@ begin
         ,0
     )
 
-    -- Section: 0.Composer Home | 2em 2em | 1.25em
+    -- Section: 0.Composer Home | 2em 2em | 1.25em [d01cef12]
     insert [Content].[Section] (
          Id
         ,VersionOf
@@ -20715,7 +20715,7 @@ begin
         ,1
     )
 
-    -- Element: 0.Composer Home | 2em 2em | 1.25em.True
+    -- Element: 0.Composer Home | 2em 2em | 1.25em.True [dd7dcb75]
     insert [Content].[Element] (
          Id
         ,VersionOf
@@ -20743,7 +20743,7 @@ begin
         ,0
     )
 
-    -- MultimediaElement: 0.Composer Home | 2em 2em | 1.25em.True | 0.75em
+    -- MultimediaElement: 0.Composer Home | 2em 2em | 1.25em.True | 0.75em [9a3cc741]
     insert [Content].[MultimediaElement] (
          Id
         ,VersionOf
@@ -20799,7 +20799,7 @@ begin
         ,0
     )
 
-    -- Section: 0.Pane Page | 2em 2em | Row | Wrap | Center
+    -- Section: 0.Pane Page | 2em 2em | Row | Wrap | Center [7ca083e4]
     insert [Content].[Section] (
          Id
         ,VersionOf
@@ -20825,7 +20825,7 @@ begin
         ,2
     )
 
-    -- Element: 0.Pane Page | 2em 2em | Row | Wrap | Center.True
+    -- Element: 0.Pane Page | 2em 2em | Row | Wrap | Center.True [0f459a03]
     insert [Content].[Element] (
          Id
         ,VersionOf
@@ -20873,7 +20873,7 @@ begin
         ,'129e30f3-2267-4571-a890-ff566cb4bb09'
     )
 
-    -- Style: Consumer.84em.{"Background":"#94090d","Foreground":"#f6f6f6"}
+    -- Style: Consumer.84em.{"Background":"#94090d","Foreground":"#f6f6f6"} [bea9d3a6]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -20895,7 +20895,7 @@ begin
         ,'{"Background":"#94090d","Foreground":"#f6f6f6"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#ffffff","Foreground":"#222729"}
+    -- Style: Consumer.84em.{"Background":"#ffffff","Foreground":"#222729"} [2c8befa1]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -20939,7 +20939,7 @@ begin
         ,'{"Top":"0em","Right":"0em","Bottom":".75em","Left":"0em"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#f4f6f6","Foreground":"#5d6869"}
+    -- Style: Consumer.84em.{"Background":"#f4f6f6","Foreground":"#5d6869"} [f951a87f]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -20961,7 +20961,7 @@ begin
         ,'{"Background":"#f4f6f6","Foreground":"#5d6869"}'
     )
 
-    -- Style: Consumer.84em.{"Size":"1.25em","Weight":"400"}
+    -- Style: Consumer.84em.{"Size":"1.25em","Weight":"400"} [dd13cc4f]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -20983,7 +20983,7 @@ begin
         ,'{"Size":"1.25em","Weight":"400"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#f4f6f6","Foreground":"#5d6869"}
+    -- Style: Consumer.84em.{"Background":"#f4f6f6","Foreground":"#5d6869"} [b10b3b30]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21071,7 +21071,7 @@ begin
         ,'{"Color":"#777777"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#ffffff","Foreground":"#222729"}
+    -- Style: Consumer.84em.{"Background":"#ffffff","Foreground":"#222729"} [e52e0fa4]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21093,7 +21093,7 @@ begin
         ,'{"Background":"#ffffff","Foreground":"#222729"}'
     )
 
-    -- Style: Consumer.84em.{"Color":"#00439f"}
+    -- Style: Consumer.84em.{"Color":"#00439f"} [563fa824]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21115,7 +21115,7 @@ begin
         ,'{"Color":"#00439f"}'
     )
 
-    -- Style: Consumer.84em.{"Radius":"0em"}
+    -- Style: Consumer.84em.{"Radius":"0em"} [539c7266]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21181,7 +21181,7 @@ begin
         ,'{"Size":"1.125em","Weight":"400"}'
     )
 
-    -- Style: Consumer.84em.{"Top":"0em","Right":"0em","Bottom":"0em","Left":"0em"}
+    -- Style: Consumer.84em.{"Top":"0em","Right":"0em","Bottom":"0em","Left":"0em"} [0ab1b575]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21203,7 +21203,7 @@ begin
         ,'{"Top":"0em","Right":"0em","Bottom":"0em","Left":"0em"}'
     )
 
-    -- Style: Consumer.84em.{"Size":"1em","Weight":"400"}
+    -- Style: Consumer.84em.{"Size":"1em","Weight":"400"} [bbac6157]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21247,7 +21247,7 @@ begin
         ,'{"Background":"#ffffff00","Foreground":"#222729"}'
     )
 
-    -- Style: Consumer.84em.{"Size":"1em","Weight":"400"}
+    -- Style: Consumer.84em.{"Size":"1em","Weight":"400"} [ef92b26c]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21269,7 +21269,7 @@ begin
         ,'{"Size":"1em","Weight":"400"}'
     )
 
-    -- Style: Consumer.84em.{"Color":"#00439f"}
+    -- Style: Consumer.84em.{"Color":"#00439f"} [a2184d44]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21291,7 +21291,7 @@ begin
         ,'{"Color":"#00439f"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#edf2f1","Foreground":"#222729"}
+    -- Style: Consumer.84em.{"Background":"#edf2f1","Foreground":"#222729"} [25dd9ae8]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21313,7 +21313,7 @@ begin
         ,'{"Background":"#edf2f1","Foreground":"#222729"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#edf2f1","Foreground":"#222729"}
+    -- Style: Consumer.84em.{"Background":"#edf2f1","Foreground":"#222729"} [546b0bcf]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21335,7 +21335,7 @@ begin
         ,'{"Background":"#edf2f1","Foreground":"#222729"}'
     )
 
-    -- Style: Consumer.84em.{"Color":"#111111"}
+    -- Style: Consumer.84em.{"Color":"#111111"} [72fdc2bf]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21357,7 +21357,7 @@ begin
         ,'{"Color":"#111111"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#e4e9e8","Foreground":"#222729"}
+    -- Style: Consumer.84em.{"Background":"#e4e9e8","Foreground":"#222729"} [fc01a73b]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21467,7 +21467,7 @@ begin
         ,'{"Size":".925em","Weight":"400"}'
     )
 
-    -- Style: Consumer.84em.{"Size":"1.25em","Weight":"400"}
+    -- Style: Consumer.84em.{"Size":"1.25em","Weight":"400"} [b1d292a2]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21511,7 +21511,7 @@ begin
         ,'{"Size":"1.075em","Weight":"600"}'
     )
 
-    -- Style: Consumer.84em.{"Color":"#222222"}
+    -- Style: Consumer.84em.{"Color":"#222222"} [c8afc5af]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21533,7 +21533,7 @@ begin
         ,'{"Color":"#222222"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#ffffff00","Foreground":"#00439f"}
+    -- Style: Consumer.84em.{"Background":"#ffffff00","Foreground":"#00439f"} [f4d0d14e]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21555,7 +21555,7 @@ begin
         ,'{"Background":"#ffffff00","Foreground":"#00439f"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#edf2f1","Foreground":"#222729"}
+    -- Style: Consumer.84em.{"Background":"#edf2f1","Foreground":"#222729"} [4737db4b]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21577,7 +21577,7 @@ begin
         ,'{"Background":"#edf2f1","Foreground":"#222729"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#ffffff00","Foreground":"#1a4348"}
+    -- Style: Consumer.84em.{"Background":"#ffffff00","Foreground":"#1a4348"} [2e867222]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21599,7 +21599,7 @@ begin
         ,'{"Background":"#ffffff00","Foreground":"#1a4348"}'
     )
 
-    -- Style: Consumer.84em.{"Color":"#111111"}
+    -- Style: Consumer.84em.{"Color":"#111111"} [b1c5bc0d]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21621,7 +21621,7 @@ begin
         ,'{"Color":"#111111"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#f4f6f6","Foreground":"#5d6869"}
+    -- Style: Consumer.84em.{"Background":"#f4f6f6","Foreground":"#5d6869"} [a89434cd]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21665,7 +21665,7 @@ begin
         ,'{"Background":"#2b6f77","Foreground":"#f6f6f6"}'
     )
 
-    -- Style: Consumer.84em.{"Radius":"unset"}
+    -- Style: Consumer.84em.{"Radius":"unset"} [f79d5d8a]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21709,7 +21709,7 @@ begin
         ,'{"Size":"1.125em","Weight":"700"}'
     )
 
-    -- Style: Consumer.84em.{"Size":"1em","Weight":"400"}
+    -- Style: Consumer.84em.{"Size":"1em","Weight":"400"} [59dc8ab1]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21841,7 +21841,7 @@ begin
         ,'{"Size":"1.75em","Weight":"400"}'
     )
 
-    -- Style: Consumer.84em.{"Color":"#e4e9e8"}
+    -- Style: Consumer.84em.{"Color":"#e4e9e8"} [0fb6eba4]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21863,7 +21863,7 @@ begin
         ,'{"Color":"#e4e9e8"}'
     )
 
-    -- Style: Consumer.84em.{"Radius":"unset"}
+    -- Style: Consumer.84em.{"Radius":"unset"} [9a6b5175]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21885,7 +21885,7 @@ begin
         ,'{"Radius":"unset"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#468966","Foreground":"#f6f6f6"}
+    -- Style: Consumer.84em.{"Background":"#468966","Foreground":"#f6f6f6"} [27746b7f]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21907,7 +21907,7 @@ begin
         ,'{"Background":"#468966","Foreground":"#f6f6f6"}'
     )
 
-    -- Style: Consumer.84em.{"Color":"#e4e9e8"}
+    -- Style: Consumer.84em.{"Color":"#e4e9e8"} [33da15a7]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21929,7 +21929,7 @@ begin
         ,'{"Color":"#e4e9e8"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#468966","Foreground":"#f6f6f6"}
+    -- Style: Consumer.84em.{"Background":"#468966","Foreground":"#f6f6f6"} [f1d99c96]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -21995,7 +21995,7 @@ begin
         ,'{"Top":".5em","Right":"0em","Bottom":".5em","Left":"0em"}'
     )
 
-    -- Style: Consumer.84em.{"Color":"#00439f"}
+    -- Style: Consumer.84em.{"Color":"#00439f"} [685a5496]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22017,7 +22017,7 @@ begin
         ,'{"Color":"#00439f"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#f4f6f6","Foreground":"#5d6869"}
+    -- Style: Consumer.84em.{"Background":"#f4f6f6","Foreground":"#5d6869"} [6d50a3a0]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22039,7 +22039,7 @@ begin
         ,'{"Background":"#f4f6f6","Foreground":"#5d6869"}'
     )
 
-    -- Style: Consumer.84em.{"Size":"1em","Weight":"400"}
+    -- Style: Consumer.84em.{"Size":"1em","Weight":"400"} [cc4b3b39]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22061,7 +22061,7 @@ begin
         ,'{"Size":"1em","Weight":"400"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#e4e9e8","Foreground":"#222729"}
+    -- Style: Consumer.84em.{"Background":"#e4e9e8","Foreground":"#222729"} [5c469661]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22149,7 +22149,7 @@ begin
         ,'{"Size":"1.4em","Weight":"400"}'
     )
 
-    -- Style: Consumer.84em.{"Radius":"0em"}
+    -- Style: Consumer.84em.{"Radius":"0em"} [5e20bd72]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22171,7 +22171,7 @@ begin
         ,'{"Radius":"0em"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#386180","Foreground":"#f6f6f6"}
+    -- Style: Consumer.84em.{"Background":"#386180","Foreground":"#f6f6f6"} [646dfee6]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22193,7 +22193,7 @@ begin
         ,'{"Background":"#386180","Foreground":"#f6f6f6"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#edf2f1","Foreground":"#222729"}
+    -- Style: Consumer.84em.{"Background":"#edf2f1","Foreground":"#222729"} [764f13b5]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22215,7 +22215,7 @@ begin
         ,'{"Background":"#edf2f1","Foreground":"#222729"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#c66d2a","Foreground":"#f6f6f6"}
+    -- Style: Consumer.84em.{"Background":"#c66d2a","Foreground":"#f6f6f6"} [cabf9c7f]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22237,7 +22237,7 @@ begin
         ,'{"Background":"#c66d2a","Foreground":"#f6f6f6"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#2b6f77","Foreground":"#eeeeee"}
+    -- Style: Consumer.84em.{"Background":"#2b6f77","Foreground":"#eeeeee"} [1bcd6196]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22259,7 +22259,7 @@ begin
         ,'{"Background":"#2b6f77","Foreground":"#eeeeee"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#edf2f1","Foreground":"#222729"}
+    -- Style: Consumer.84em.{"Background":"#edf2f1","Foreground":"#222729"} [39253374]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22281,7 +22281,7 @@ begin
         ,'{"Background":"#edf2f1","Foreground":"#222729"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#e4e9e8","Foreground":"#222729"}
+    -- Style: Consumer.84em.{"Background":"#e4e9e8","Foreground":"#222729"} [345b8069]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22303,7 +22303,7 @@ begin
         ,'{"Background":"#e4e9e8","Foreground":"#222729"}'
     )
 
-    -- Style: Consumer.84em.{"Color":"#222222"}
+    -- Style: Consumer.84em.{"Color":"#222222"} [505d4881]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22391,7 +22391,7 @@ begin
         ,'{"Size":"1.5em","Weight":"400"}'
     )
 
-    -- Style: Consumer.84em.{"Size":"0.75em","Weight":"200"}
+    -- Style: Consumer.84em.{"Size":"0.75em","Weight":"200"} [c3068981]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22413,7 +22413,7 @@ begin
         ,'{"Size":"0.75em","Weight":"200"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#468966","Foreground":"#f6f6f6"}
+    -- Style: Consumer.84em.{"Background":"#468966","Foreground":"#f6f6f6"} [b871382a]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22435,7 +22435,7 @@ begin
         ,'{"Background":"#468966","Foreground":"#f6f6f6"}'
     )
 
-    -- Style: Consumer.84em.{"Color":"#c4cfcd"}
+    -- Style: Consumer.84em.{"Color":"#c4cfcd"} [a565f76c]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22457,7 +22457,7 @@ begin
         ,'{"Color":"#c4cfcd"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#ffffff","Foreground":"#222729"}
+    -- Style: Consumer.84em.{"Background":"#ffffff","Foreground":"#222729"} [df535c7f]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22501,7 +22501,7 @@ begin
         ,'{"Radius":".5em"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#edf2f1","Foreground":"#222729"}
+    -- Style: Consumer.84em.{"Background":"#edf2f1","Foreground":"#222729"} [6f682e35]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22523,7 +22523,7 @@ begin
         ,'{"Background":"#edf2f1","Foreground":"#222729"}'
     )
 
-    -- Style: Consumer.84em.{"Size":"1em","Weight":"400"}
+    -- Style: Consumer.84em.{"Size":"1em","Weight":"400"} [922e5a2f]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22545,7 +22545,7 @@ begin
         ,'{"Size":"1em","Weight":"400"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#468966","Foreground":"#f6f6f6"}
+    -- Style: Consumer.84em.{"Background":"#468966","Foreground":"#f6f6f6"} [eaf7e8b4]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22567,7 +22567,7 @@ begin
         ,'{"Background":"#468966","Foreground":"#f6f6f6"}'
     )
 
-    -- Style: Consumer.84em.{"Size":"1em","Weight":"400"}
+    -- Style: Consumer.84em.{"Size":"1em","Weight":"400"} [7ac3510d]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22589,7 +22589,7 @@ begin
         ,'{"Size":"1em","Weight":"400"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#386180","Foreground":"#f6f6f6"}
+    -- Style: Consumer.84em.{"Background":"#386180","Foreground":"#f6f6f6"} [c29876c9]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22611,7 +22611,7 @@ begin
         ,'{"Background":"#386180","Foreground":"#f6f6f6"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#ffffff","Foreground":"#222729"}
+    -- Style: Consumer.84em.{"Background":"#ffffff","Foreground":"#222729"} [4636a87b]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22633,7 +22633,7 @@ begin
         ,'{"Background":"#ffffff","Foreground":"#222729"}'
     )
 
-    -- Style: Consumer.84em.{"Color":"#111111"}
+    -- Style: Consumer.84em.{"Color":"#111111"} [35786f23]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22655,7 +22655,7 @@ begin
         ,'{"Color":"#111111"}'
     )
 
-    -- Style: Consumer.84em.{"Size":"0.75em","Weight":"200"}
+    -- Style: Consumer.84em.{"Size":"0.75em","Weight":"200"} [101e9447]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22677,7 +22677,7 @@ begin
         ,'{"Size":"0.75em","Weight":"200"}'
     )
 
-    -- Style: Consumer.84em.{"Top":"0em","Right":"0em","Bottom":"0em","Left":"0em"}
+    -- Style: Consumer.84em.{"Top":"0em","Right":"0em","Bottom":"0em","Left":"0em"} [f2711e43]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22699,7 +22699,7 @@ begin
         ,'{"Top":"0em","Right":"0em","Bottom":"0em","Left":"0em"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#f4f6f6","Foreground":"#5d6869"}
+    -- Style: Consumer.84em.{"Background":"#f4f6f6","Foreground":"#5d6869"} [ed6dc446]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22721,7 +22721,7 @@ begin
         ,'{"Background":"#f4f6f6","Foreground":"#5d6869"}'
     )
 
-    -- Style: Consumer.84em.{"Color":"#111111"}
+    -- Style: Consumer.84em.{"Color":"#111111"} [58958da5]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22743,7 +22743,7 @@ begin
         ,'{"Color":"#111111"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#2b6f77","Foreground":"#eeeeee"}
+    -- Style: Consumer.84em.{"Background":"#2b6f77","Foreground":"#eeeeee"} [fe974d66]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22787,7 +22787,7 @@ begin
         ,'{"Color":"#444444"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#ffffff00","Foreground":"#1a4348"}
+    -- Style: Consumer.84em.{"Background":"#ffffff00","Foreground":"#1a4348"} [2cf45307]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22809,7 +22809,7 @@ begin
         ,'{"Background":"#ffffff00","Foreground":"#1a4348"}'
     )
 
-    -- Style: Consumer.84em.{"Color":"#222222"}
+    -- Style: Consumer.84em.{"Color":"#222222"} [0d57fdc4]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22875,7 +22875,7 @@ begin
         ,'{"Size":"1.25em","Weight":"600"}'
     )
 
-    -- Style: Consumer.84em.{"Size":"1em","Weight":"400"}
+    -- Style: Consumer.84em.{"Size":"1em","Weight":"400"} [7d02ad07]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22941,7 +22941,7 @@ begin
         ,'{"LineHeight":"1.5"}'
     )
 
-    -- Style: Consumer.84em.{"Color":"#00439f"}
+    -- Style: Consumer.84em.{"Color":"#00439f"} [4c276733]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22963,7 +22963,7 @@ begin
         ,'{"Color":"#00439f"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#ffffff","Foreground":"#222729"}
+    -- Style: Consumer.84em.{"Background":"#ffffff","Foreground":"#222729"} [54809cda]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -22985,7 +22985,7 @@ begin
         ,'{"Background":"#ffffff","Foreground":"#222729"}'
     )
 
-    -- Style: Consumer.84em.{"Size":"1em","Weight":"400"}
+    -- Style: Consumer.84em.{"Size":"1em","Weight":"400"} [ffae607a]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23051,7 +23051,7 @@ begin
         ,'{"Color":"#225f66"}'
     )
 
-    -- Style: Consumer.84em.{"Color":"#00439f"}
+    -- Style: Consumer.84em.{"Color":"#00439f"} [93942a59]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23095,7 +23095,7 @@ begin
         ,'{"Top":".5em","Right":"2em","Bottom":".5em","Left":"2em"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#ffffff00","Foreground":"#00439f"}
+    -- Style: Consumer.84em.{"Background":"#ffffff00","Foreground":"#00439f"} [1c3e37e0]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23117,7 +23117,7 @@ begin
         ,'{"Background":"#ffffff00","Foreground":"#00439f"}'
     )
 
-    -- Style: Consumer.84em.{"Color":"#c4cfcd"}
+    -- Style: Consumer.84em.{"Color":"#c4cfcd"} [8d6b12ca]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23139,7 +23139,7 @@ begin
         ,'{"Color":"#c4cfcd"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#94090d","Foreground":"#f6f6f6"}
+    -- Style: Consumer.84em.{"Background":"#94090d","Foreground":"#f6f6f6"} [15428ed7]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23183,7 +23183,7 @@ begin
         ,'{"Background":"#f1f3f4","Foreground":"#111111"}'
     )
 
-    -- Style: Consumer.84em.{"Background":"#c66d2a","Foreground":"#f6f6f6"}
+    -- Style: Consumer.84em.{"Background":"#c66d2a","Foreground":"#f6f6f6"} [ab2aaf16]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23227,7 +23227,7 @@ begin
         ,'{"Size":"2.5em","Weight":"300"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#94090d","Foreground":"#f6f6f6"}
+    -- Style: Composer | Composer Footer.{"Background":"#94090d","Foreground":"#f6f6f6"} [76394ae5]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23249,7 +23249,7 @@ begin
         ,'{"Background":"#94090d","Foreground":"#f6f6f6"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#ffffff","Foreground":"#26222a"}
+    -- Style: Composer | Composer Footer.{"Background":"#ffffff","Foreground":"#26222a"} [da24ba90]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23293,7 +23293,7 @@ begin
         ,'{"Top":"0em","Right":"0em","Bottom":".75em","Left":"0em"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#f5f3f7","Foreground":"#696173"}
+    -- Style: Composer | Composer Footer.{"Background":"#f5f3f7","Foreground":"#696173"} [c9492ca7]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23315,7 +23315,7 @@ begin
         ,'{"Background":"#f5f3f7","Foreground":"#696173"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Size":"1.25em","Weight":"400"}
+    -- Style: Composer | Composer Footer.{"Size":"1.25em","Weight":"400"} [2f7b1a87]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23337,7 +23337,7 @@ begin
         ,'{"Size":"1.25em","Weight":"400"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#f5f3f7","Foreground":"#696173"}
+    -- Style: Composer | Composer Footer.{"Background":"#f5f3f7","Foreground":"#696173"} [bbb15e02]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23425,7 +23425,7 @@ begin
         ,'{"Color":"#777777"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#ffffff","Foreground":"#26222a"}
+    -- Style: Composer | Composer Footer.{"Background":"#ffffff","Foreground":"#26222a"} [9525be8d]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23447,7 +23447,7 @@ begin
         ,'{"Background":"#ffffff","Foreground":"#26222a"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Color":"#00439f"}
+    -- Style: Composer | Composer Footer.{"Color":"#00439f"} [924ef7f5]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23469,7 +23469,7 @@ begin
         ,'{"Color":"#00439f"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Radius":"0em"}
+    -- Style: Composer | Composer Footer.{"Radius":"0em"} [5527fd04]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23535,7 +23535,7 @@ begin
         ,'{"Size":"1.125em","Weight":"400"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Top":"0em","Right":"0em","Bottom":"0em","Left":"0em"}
+    -- Style: Composer | Composer Footer.{"Top":"0em","Right":"0em","Bottom":"0em","Left":"0em"} [66968b17]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23557,7 +23557,7 @@ begin
         ,'{"Top":"0em","Right":"0em","Bottom":"0em","Left":"0em"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Size":"1em","Weight":"400"}
+    -- Style: Composer | Composer Footer.{"Size":"1em","Weight":"400"} [3e89e46a]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23601,7 +23601,7 @@ begin
         ,'{"Background":"#ffffff00","Foreground":"#26222a"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Size":"1em","Weight":"400"}
+    -- Style: Composer | Composer Footer.{"Size":"1em","Weight":"400"} [0f7e660a]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23623,7 +23623,7 @@ begin
         ,'{"Size":"1em","Weight":"400"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Color":"#00439f"}
+    -- Style: Composer | Composer Footer.{"Color":"#00439f"} [1e91255e]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23645,7 +23645,7 @@ begin
         ,'{"Color":"#00439f"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#f0edf3","Foreground":"#26222a"}
+    -- Style: Composer | Composer Footer.{"Background":"#f0edf3","Foreground":"#26222a"} [667fc9ed]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23667,7 +23667,7 @@ begin
         ,'{"Background":"#f0edf3","Foreground":"#26222a"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#f0edf3","Foreground":"#26222a"}
+    -- Style: Composer | Composer Footer.{"Background":"#f0edf3","Foreground":"#26222a"} [934fe2dd]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23689,7 +23689,7 @@ begin
         ,'{"Background":"#f0edf3","Foreground":"#26222a"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Color":"#111111"}
+    -- Style: Composer | Composer Footer.{"Color":"#111111"} [d28e76c1]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23711,7 +23711,7 @@ begin
         ,'{"Color":"#111111"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#e8e6eb","Foreground":"#26222a"}
+    -- Style: Composer | Composer Footer.{"Background":"#e8e6eb","Foreground":"#26222a"} [56ef72d9]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23821,7 +23821,7 @@ begin
         ,'{"Size":".925em","Weight":"400"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Size":"1.25em","Weight":"400"}
+    -- Style: Composer | Composer Footer.{"Size":"1.25em","Weight":"400"} [46e8fc5f]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23865,7 +23865,7 @@ begin
         ,'{"Size":"1.075em","Weight":"600"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Color":"#222222"}
+    -- Style: Composer | Composer Footer.{"Color":"#222222"} [a58f194e]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23887,7 +23887,7 @@ begin
         ,'{"Color":"#222222"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#ffffff00","Foreground":"#00439f"}
+    -- Style: Composer | Composer Footer.{"Background":"#ffffff00","Foreground":"#00439f"} [3a190916]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23909,7 +23909,7 @@ begin
         ,'{"Background":"#ffffff00","Foreground":"#00439f"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#f0edf3","Foreground":"#26222a"}
+    -- Style: Composer | Composer Footer.{"Background":"#f0edf3","Foreground":"#26222a"} [ab01ba47]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23931,7 +23931,7 @@ begin
         ,'{"Background":"#f0edf3","Foreground":"#26222a"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#ffffff00","Foreground":"#4a375a"}
+    -- Style: Composer | Composer Footer.{"Background":"#ffffff00","Foreground":"#4a375a"} [dcde2e1f]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23953,7 +23953,7 @@ begin
         ,'{"Background":"#ffffff00","Foreground":"#4a375a"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Color":"#111111"}
+    -- Style: Composer | Composer Footer.{"Color":"#111111"} [666fd9b0]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -23975,7 +23975,7 @@ begin
         ,'{"Color":"#111111"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#f5f3f7","Foreground":"#696173"}
+    -- Style: Composer | Composer Footer.{"Background":"#f5f3f7","Foreground":"#696173"} [b3ec0ba8]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24019,7 +24019,7 @@ begin
         ,'{"Background":"#6a4f82","Foreground":"#f6f6f6"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Radius":"unset"}
+    -- Style: Composer | Composer Footer.{"Radius":"unset"} [c8c44f64]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24063,7 +24063,7 @@ begin
         ,'{"Size":"1.125em","Weight":"700"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Size":"1em","Weight":"400"}
+    -- Style: Composer | Composer Footer.{"Size":"1em","Weight":"400"} [6be155d5]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24195,7 +24195,7 @@ begin
         ,'{"Size":"1.75em","Weight":"400"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Color":"#e8e6eb"}
+    -- Style: Composer | Composer Footer.{"Color":"#e8e6eb"} [6debec87]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24217,7 +24217,7 @@ begin
         ,'{"Color":"#e8e6eb"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Radius":"unset"}
+    -- Style: Composer | Composer Footer.{"Radius":"unset"} [cc857aae]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24239,7 +24239,7 @@ begin
         ,'{"Radius":"unset"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#468966","Foreground":"#f6f6f6"}
+    -- Style: Composer | Composer Footer.{"Background":"#468966","Foreground":"#f6f6f6"} [82b00336]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24261,7 +24261,7 @@ begin
         ,'{"Background":"#468966","Foreground":"#f6f6f6"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Color":"#e8e6eb"}
+    -- Style: Composer | Composer Footer.{"Color":"#e8e6eb"} [1798191a]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24283,7 +24283,7 @@ begin
         ,'{"Color":"#e8e6eb"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#468966","Foreground":"#f6f6f6"}
+    -- Style: Composer | Composer Footer.{"Background":"#468966","Foreground":"#f6f6f6"} [297db2d4]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24349,7 +24349,7 @@ begin
         ,'{"Top":".5em","Right":"0em","Bottom":".5em","Left":"0em"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Color":"#00439f"}
+    -- Style: Composer | Composer Footer.{"Color":"#00439f"} [3237efcf]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24371,7 +24371,7 @@ begin
         ,'{"Color":"#00439f"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#f5f3f7","Foreground":"#696173"}
+    -- Style: Composer | Composer Footer.{"Background":"#f5f3f7","Foreground":"#696173"} [e0d6ecd0]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24393,7 +24393,7 @@ begin
         ,'{"Background":"#f5f3f7","Foreground":"#696173"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Size":"1em","Weight":"400"}
+    -- Style: Composer | Composer Footer.{"Size":"1em","Weight":"400"} [5879c35c]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24415,7 +24415,7 @@ begin
         ,'{"Size":"1em","Weight":"400"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#e8e6eb","Foreground":"#26222a"}
+    -- Style: Composer | Composer Footer.{"Background":"#e8e6eb","Foreground":"#26222a"} [9f4c5512]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24503,7 +24503,7 @@ begin
         ,'{"Size":"1.4em","Weight":"400"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Radius":"0em"}
+    -- Style: Composer | Composer Footer.{"Radius":"0em"} [19bb7930]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24525,7 +24525,7 @@ begin
         ,'{"Radius":"0em"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#386180","Foreground":"#f6f6f6"}
+    -- Style: Composer | Composer Footer.{"Background":"#386180","Foreground":"#f6f6f6"} [7b864182]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24547,7 +24547,7 @@ begin
         ,'{"Background":"#386180","Foreground":"#f6f6f6"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#f0edf3","Foreground":"#26222a"}
+    -- Style: Composer | Composer Footer.{"Background":"#f0edf3","Foreground":"#26222a"} [17eff16d]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24569,7 +24569,7 @@ begin
         ,'{"Background":"#f0edf3","Foreground":"#26222a"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#c66d2a","Foreground":"#f6f6f6"}
+    -- Style: Composer | Composer Footer.{"Background":"#c66d2a","Foreground":"#f6f6f6"} [7a11dc76]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24591,7 +24591,7 @@ begin
         ,'{"Background":"#c66d2a","Foreground":"#f6f6f6"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#6a4f82","Foreground":"#eeeeee"}
+    -- Style: Composer | Composer Footer.{"Background":"#6a4f82","Foreground":"#eeeeee"} [89faadd4]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24613,7 +24613,7 @@ begin
         ,'{"Background":"#6a4f82","Foreground":"#eeeeee"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#f0edf3","Foreground":"#26222a"}
+    -- Style: Composer | Composer Footer.{"Background":"#f0edf3","Foreground":"#26222a"} [365ac5bf]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24635,7 +24635,7 @@ begin
         ,'{"Background":"#f0edf3","Foreground":"#26222a"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#e8e6eb","Foreground":"#26222a"}
+    -- Style: Composer | Composer Footer.{"Background":"#e8e6eb","Foreground":"#26222a"} [66350c75]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24657,7 +24657,7 @@ begin
         ,'{"Background":"#e8e6eb","Foreground":"#26222a"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Color":"#222222"}
+    -- Style: Composer | Composer Footer.{"Color":"#222222"} [21732f24]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24745,7 +24745,7 @@ begin
         ,'{"Size":"1.5em","Weight":"400"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Size":"0.75em","Weight":"200"}
+    -- Style: Composer | Composer Footer.{"Size":"0.75em","Weight":"200"} [dbb15c66]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24767,7 +24767,7 @@ begin
         ,'{"Size":"0.75em","Weight":"200"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#468966","Foreground":"#f6f6f6"}
+    -- Style: Composer | Composer Footer.{"Background":"#468966","Foreground":"#f6f6f6"} [8c9f3d1c]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24789,7 +24789,7 @@ begin
         ,'{"Background":"#468966","Foreground":"#f6f6f6"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Color":"#cdc6d5"}
+    -- Style: Composer | Composer Footer.{"Color":"#cdc6d5"} [55ea01a2]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24811,7 +24811,7 @@ begin
         ,'{"Color":"#cdc6d5"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#ffffff","Foreground":"#26222a"}
+    -- Style: Composer | Composer Footer.{"Background":"#ffffff","Foreground":"#26222a"} [42c03e82]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24855,7 +24855,7 @@ begin
         ,'{"Radius":".5em"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#f0edf3","Foreground":"#26222a"}
+    -- Style: Composer | Composer Footer.{"Background":"#f0edf3","Foreground":"#26222a"} [e24521bc]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24877,7 +24877,7 @@ begin
         ,'{"Background":"#f0edf3","Foreground":"#26222a"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Size":"1em","Weight":"400"}
+    -- Style: Composer | Composer Footer.{"Size":"1em","Weight":"400"} [cc2033bd]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24899,7 +24899,7 @@ begin
         ,'{"Size":"1em","Weight":"400"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#468966","Foreground":"#f6f6f6"}
+    -- Style: Composer | Composer Footer.{"Background":"#468966","Foreground":"#f6f6f6"} [07ca24cb]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24921,7 +24921,7 @@ begin
         ,'{"Background":"#468966","Foreground":"#f6f6f6"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Size":"1em","Weight":"400"}
+    -- Style: Composer | Composer Footer.{"Size":"1em","Weight":"400"} [0a729185]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24943,7 +24943,7 @@ begin
         ,'{"Size":"1em","Weight":"400"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#386180","Foreground":"#f6f6f6"}
+    -- Style: Composer | Composer Footer.{"Background":"#386180","Foreground":"#f6f6f6"} [bad598d8]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24965,7 +24965,7 @@ begin
         ,'{"Background":"#386180","Foreground":"#f6f6f6"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#ffffff","Foreground":"#26222a"}
+    -- Style: Composer | Composer Footer.{"Background":"#ffffff","Foreground":"#26222a"} [6f44d7db]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -24987,7 +24987,7 @@ begin
         ,'{"Background":"#ffffff","Foreground":"#26222a"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Color":"#111111"}
+    -- Style: Composer | Composer Footer.{"Color":"#111111"} [8657b603]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -25009,7 +25009,7 @@ begin
         ,'{"Color":"#111111"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Size":"0.75em","Weight":"200"}
+    -- Style: Composer | Composer Footer.{"Size":"0.75em","Weight":"200"} [1041d46b]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -25031,7 +25031,7 @@ begin
         ,'{"Size":"0.75em","Weight":"200"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Top":"0em","Right":"0em","Bottom":"0em","Left":"0em"}
+    -- Style: Composer | Composer Footer.{"Top":"0em","Right":"0em","Bottom":"0em","Left":"0em"} [dd01518a]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -25053,7 +25053,7 @@ begin
         ,'{"Top":"0em","Right":"0em","Bottom":"0em","Left":"0em"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#f5f3f7","Foreground":"#696173"}
+    -- Style: Composer | Composer Footer.{"Background":"#f5f3f7","Foreground":"#696173"} [bbc6e4c0]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -25075,7 +25075,7 @@ begin
         ,'{"Background":"#f5f3f7","Foreground":"#696173"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Color":"#111111"}
+    -- Style: Composer | Composer Footer.{"Color":"#111111"} [d11e7cbc]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -25097,7 +25097,7 @@ begin
         ,'{"Color":"#111111"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#6a4f82","Foreground":"#eeeeee"}
+    -- Style: Composer | Composer Footer.{"Background":"#6a4f82","Foreground":"#eeeeee"} [5d2549d5]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -25141,7 +25141,7 @@ begin
         ,'{"Color":"#444444"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#ffffff00","Foreground":"#4a375a"}
+    -- Style: Composer | Composer Footer.{"Background":"#ffffff00","Foreground":"#4a375a"} [25d745f7]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -25163,7 +25163,7 @@ begin
         ,'{"Background":"#ffffff00","Foreground":"#4a375a"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Color":"#222222"}
+    -- Style: Composer | Composer Footer.{"Color":"#222222"} [6748f676]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -25229,7 +25229,7 @@ begin
         ,'{"Size":"1.25em","Weight":"600"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Size":"1em","Weight":"400"}
+    -- Style: Composer | Composer Footer.{"Size":"1em","Weight":"400"} [5783c118]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -25295,7 +25295,7 @@ begin
         ,'{"LineHeight":"1.5"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Color":"#00439f"}
+    -- Style: Composer | Composer Footer.{"Color":"#00439f"} [1631ea96]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -25317,7 +25317,7 @@ begin
         ,'{"Color":"#00439f"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#ffffff","Foreground":"#26222a"}
+    -- Style: Composer | Composer Footer.{"Background":"#ffffff","Foreground":"#26222a"} [412e2139]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -25339,7 +25339,7 @@ begin
         ,'{"Background":"#ffffff","Foreground":"#26222a"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Size":"1em","Weight":"400"}
+    -- Style: Composer | Composer Footer.{"Size":"1em","Weight":"400"} [e8ad4de9]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -25405,7 +25405,7 @@ begin
         ,'{"Color":"#5b4371"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Color":"#00439f"}
+    -- Style: Composer | Composer Footer.{"Color":"#00439f"} [8c118250]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -25449,7 +25449,7 @@ begin
         ,'{"Top":".5em","Right":"2em","Bottom":".5em","Left":"2em"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#ffffff00","Foreground":"#00439f"}
+    -- Style: Composer | Composer Footer.{"Background":"#ffffff00","Foreground":"#00439f"} [689c80f6]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -25471,7 +25471,7 @@ begin
         ,'{"Background":"#ffffff00","Foreground":"#00439f"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Color":"#cdc6d5"}
+    -- Style: Composer | Composer Footer.{"Color":"#cdc6d5"} [d133ec86]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -25493,7 +25493,7 @@ begin
         ,'{"Color":"#cdc6d5"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#94090d","Foreground":"#f6f6f6"}
+    -- Style: Composer | Composer Footer.{"Background":"#94090d","Foreground":"#f6f6f6"} [8966a02c]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -25537,7 +25537,7 @@ begin
         ,'{"Background":"#f1f3f4","Foreground":"#111111"}'
     )
 
-    -- Style: Composer | Composer Footer.{"Background":"#c66d2a","Foreground":"#f6f6f6"}
+    -- Style: Composer | Composer Footer.{"Background":"#c66d2a","Foreground":"#f6f6f6"} [b1596d3e]
     insert [Content].[Style] (
          Id
         ,VersionOf
@@ -60573,7 +60573,7 @@ begin
         ,'38de530c-d16f-387d-96e2-0e743e9f841d'
     )
 
-    -- ShirtOptionSize: Weather Note Camp Shirt.TS-046-BF
+    -- ShirtOptionSize: Weather Note Camp Shirt.TS-046-BF [d1d74a57]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -60633,7 +60633,7 @@ begin
         ,'b8b96680-ffc6-43f4-fa87-eb5beabd7122'
     )
 
-    -- ShirtOptionSize: Weather Note Camp Shirt.TS-046-BF
+    -- ShirtOptionSize: Weather Note Camp Shirt.TS-046-BF [ecacb63b]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -60653,7 +60653,7 @@ begin
         ,'cf6a52d3-8250-e600-dd5a-b407bb4223c7'
     )
 
-    -- ShirtOptionSize: Lantern Route Henley.TS-055-SP
+    -- ShirtOptionSize: Lantern Route Henley.TS-055-SP [54b58de9]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -60753,7 +60753,7 @@ begin
         ,'8a6dce17-9a23-566d-ccbc-ea104411332d'
     )
 
-    -- ShirtOptionSize: Lantern Route Henley.TS-055-SP
+    -- ShirtOptionSize: Lantern Route Henley.TS-055-SP [beae8e46]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -60793,7 +60793,7 @@ begin
         ,'04d9142f-2681-4b9b-be0f-862a0a0936c4'
     )
 
-    -- ShirtOptionSize: North Loop Jersey Crew.TS-016-BF
+    -- ShirtOptionSize: North Loop Jersey Crew.TS-016-BF [dc005e00]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -60813,7 +60813,7 @@ begin
         ,'38de530c-d16f-387d-96e2-0e743e9f841d'
     )
 
-    -- ShirtOptionSize: North Loop Jersey Crew.TS-016-BF
+    -- ShirtOptionSize: North Loop Jersey Crew.TS-016-BF [d057afdd]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -60893,7 +60893,7 @@ begin
         ,'cf6a52d3-8250-e600-dd5a-b407bb4223c7'
     )
 
-    -- ShirtOptionSize: Orchard Map Jersey Crew.TS-015-T
+    -- ShirtOptionSize: Orchard Map Jersey Crew.TS-015-T [b257eea7]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -60933,7 +60933,7 @@ begin
         ,'4e130a3c-4f1b-79eb-78e0-566f8bbd2f79'
     )
 
-    -- ShirtOptionSize: Orchard Map Jersey Crew.TS-015-T
+    -- ShirtOptionSize: Orchard Map Jersey Crew.TS-015-T [aca07262]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -61033,7 +61033,7 @@ begin
         ,'1a5334fa-ee63-1a32-d4ac-5ea2a204012e'
     )
 
-    -- ShirtOptionSize: Signal Stripe Pocket Tee.TS-002-T
+    -- ShirtOptionSize: Signal Stripe Pocket Tee.TS-002-T [a249659a]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -61053,7 +61053,7 @@ begin
         ,'4e130a3c-4f1b-79eb-78e0-566f8bbd2f79'
     )
 
-    -- ShirtOptionSize: Signal Stripe Pocket Tee.TS-002-T
+    -- ShirtOptionSize: Signal Stripe Pocket Tee.TS-002-T [ade02499]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -61233,7 +61233,7 @@ begin
         ,'cc5d5ce0-573b-5393-5116-0b9de84c3a06'
     )
 
-    -- ShirtOptionSize: North Loop Camp Shirt.TS-040-MG
+    -- ShirtOptionSize: North Loop Camp Shirt.TS-040-MG [ae6f7fb6]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -61253,7 +61253,7 @@ begin
         ,'3d7bd2fe-14ff-c392-02f6-936bbb3b9d19'
     )
 
-    -- ShirtOptionSize: North Loop Camp Shirt.TS-040-MG
+    -- ShirtOptionSize: North Loop Camp Shirt.TS-040-MG [39b00652]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -61313,7 +61313,7 @@ begin
         ,'d7b3cbc1-58f3-19fc-cd38-9c80cdd9033c'
     )
 
-    -- ShirtOptionSize: North Loop Camp Shirt.TS-040-MG
+    -- ShirtOptionSize: North Loop Camp Shirt.TS-040-MG [7923490c]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -61353,7 +61353,7 @@ begin
         ,'3d7bd2fe-14ff-c392-02f6-936bbb3b9d19'
     )
 
-    -- ShirtOptionSize: Weather Note Pocket Tee.TS-010-MG
+    -- ShirtOptionSize: Weather Note Pocket Tee.TS-010-MG [1834a17c]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -61413,7 +61413,7 @@ begin
         ,'d7b3cbc1-58f3-19fc-cd38-9c80cdd9033c'
     )
 
-    -- ShirtOptionSize: Weather Note Pocket Tee.TS-010-MG
+    -- ShirtOptionSize: Weather Note Pocket Tee.TS-010-MG [7eee1548]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -61433,7 +61433,7 @@ begin
         ,'f6407077-6f78-afed-fc8f-b5732ad5d0d1'
     )
 
-    -- ShirtOptionSize: Lantern Route Camp Shirt.TS-043-HB
+    -- ShirtOptionSize: Lantern Route Camp Shirt.TS-043-HB [f07af894]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -61493,7 +61493,7 @@ begin
         ,'5e0a74c8-c5f1-39ac-1659-778776c36212'
     )
 
-    -- ShirtOptionSize: Lantern Route Camp Shirt.TS-043-HB
+    -- ShirtOptionSize: Lantern Route Camp Shirt.TS-043-HB [2c9b7630]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -61513,7 +61513,7 @@ begin
         ,'6ac531d8-d5a5-bf92-193c-bbbce77fdab5'
     )
 
-    -- ShirtOptionSize: Lantern Route Camp Shirt.TS-043-HB
+    -- ShirtOptionSize: Lantern Route Camp Shirt.TS-043-HB [a048a770]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -61613,7 +61613,7 @@ begin
         ,'5e0a74c8-c5f1-39ac-1659-778776c36212'
     )
 
-    -- ShirtOptionSize: North Loop Pocket Tee.TS-004-HB
+    -- ShirtOptionSize: North Loop Pocket Tee.TS-004-HB [d4092fec]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -61633,7 +61633,7 @@ begin
         ,'6ac531d8-d5a5-bf92-193c-bbbce77fdab5'
     )
 
-    -- ShirtOptionSize: North Loop Pocket Tee.TS-004-HB
+    -- ShirtOptionSize: North Loop Pocket Tee.TS-004-HB [8c4491bc]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -61673,7 +61673,7 @@ begin
         ,'e1ccd114-b398-f2e2-d4e0-3baa308b318e'
     )
 
-    -- ShirtOptionSize: Harbor Line Henley.TS-049-MI
+    -- ShirtOptionSize: Harbor Line Henley.TS-049-MI [9d5a4ad4]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -61693,7 +61693,7 @@ begin
         ,'10b4f5b2-11dd-c595-505e-1a0fbca64c2a'
     )
 
-    -- ShirtOptionSize: Harbor Line Henley.TS-049-MI
+    -- ShirtOptionSize: Harbor Line Henley.TS-049-MI [0458b1ec]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -61733,7 +61733,7 @@ begin
         ,'a905e1d1-87cd-cd26-2f00-ffc7433c27ae'
     )
 
-    -- ShirtOptionSize: Harbor Line Henley.TS-049-MI
+    -- ShirtOptionSize: Harbor Line Henley.TS-049-MI [7ac63f1f]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -61913,7 +61913,7 @@ begin
         ,'cc5d5ce0-573b-5393-5116-0b9de84c3a06'
     )
 
-    -- ShirtOptionSize: Cedar Field Camp Shirt.TS-044-MG
+    -- ShirtOptionSize: Cedar Field Camp Shirt.TS-044-MG [14e6d9b3]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -61933,7 +61933,7 @@ begin
         ,'3d7bd2fe-14ff-c392-02f6-936bbb3b9d19'
     )
 
-    -- ShirtOptionSize: Cedar Field Camp Shirt.TS-044-MG
+    -- ShirtOptionSize: Cedar Field Camp Shirt.TS-044-MG [ffb601fb]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -62013,7 +62013,7 @@ begin
         ,'d7b3cbc1-58f3-19fc-cd38-9c80cdd9033c'
     )
 
-    -- ShirtOptionSize: Cedar Field Camp Shirt.TS-044-MG
+    -- ShirtOptionSize: Cedar Field Camp Shirt.TS-044-MG [680ed0c8]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -62133,7 +62133,7 @@ begin
         ,'76b9c9c9-80c5-e792-5bfc-202be5b20120'
     )
 
-    -- ShirtOptionSize: Meadow Grid Ringer.TS-030-HB
+    -- ShirtOptionSize: Meadow Grid Ringer.TS-030-HB [bb711d7c]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -62213,7 +62213,7 @@ begin
         ,'5e0a74c8-c5f1-39ac-1659-778776c36212'
     )
 
-    -- ShirtOptionSize: Meadow Grid Ringer.TS-030-HB
+    -- ShirtOptionSize: Meadow Grid Ringer.TS-030-HB [5fd35558]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -62353,7 +62353,7 @@ begin
         ,'4777d169-c7fd-1280-bc46-0aee2157dfdd'
     )
 
-    -- ShirtOptionSize: Lantern Route Pocket Tee.TS-007-S
+    -- ShirtOptionSize: Lantern Route Pocket Tee.TS-007-S [0d6700d0]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -62373,7 +62373,7 @@ begin
         ,'6b6eea26-1902-b16c-37a8-9aae4a490825'
     )
 
-    -- ShirtOptionSize: Lantern Route Pocket Tee.TS-007-S
+    -- ShirtOptionSize: Lantern Route Pocket Tee.TS-007-S [a1d108e7]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -62393,7 +62393,7 @@ begin
         ,'867ce5e7-cffa-21fa-4cb4-232e7da85011'
     )
 
-    -- ShirtOptionSize: Orchard Map Henley.TS-051-PG
+    -- ShirtOptionSize: Orchard Map Henley.TS-051-PG [8de93949]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -62433,7 +62433,7 @@ begin
         ,'4f4c4c8f-9251-b119-6ac1-12fae3626cf0'
     )
 
-    -- ShirtOptionSize: Orchard Map Henley.TS-051-PG
+    -- ShirtOptionSize: Orchard Map Henley.TS-051-PG [21d682b0]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -62453,7 +62453,7 @@ begin
         ,'6c3ad6fc-fd17-fb00-12e1-b1eecea81cbc'
     )
 
-    -- ShirtOptionSize: Orchard Map Henley.TS-051-PG
+    -- ShirtOptionSize: Orchard Map Henley.TS-051-PG [6bf241a3]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -62593,7 +62593,7 @@ begin
         ,'ee8ed79f-1433-964a-8521-9bacf88bb268'
     )
 
-    -- ShirtOptionSize: Low Tide Camp Shirt.TS-047-HB
+    -- ShirtOptionSize: Low Tide Camp Shirt.TS-047-HB [673b80cd]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -62653,7 +62653,7 @@ begin
         ,'5e0a74c8-c5f1-39ac-1659-778776c36212'
     )
 
-    -- ShirtOptionSize: Low Tide Camp Shirt.TS-047-HB
+    -- ShirtOptionSize: Low Tide Camp Shirt.TS-047-HB [a3683be1]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -62673,7 +62673,7 @@ begin
         ,'6ac531d8-d5a5-bf92-193c-bbbce77fdab5'
     )
 
-    -- ShirtOptionSize: Low Tide Camp Shirt.TS-047-HB
+    -- ShirtOptionSize: Low Tide Camp Shirt.TS-047-HB [f90403a3]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -62773,7 +62773,7 @@ begin
         ,'46ef2312-d477-31d7-bff6-fd78b33fc14c'
     )
 
-    -- ShirtOptionSize: Lantern Route Ringer.TS-031-CW
+    -- ShirtOptionSize: Lantern Route Ringer.TS-031-CW [007ede7f]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -62793,7 +62793,7 @@ begin
         ,'53294af7-a1ab-d4aa-4834-3751c2e84a74'
     )
 
-    -- ShirtOptionSize: Lantern Route Ringer.TS-031-CW
+    -- ShirtOptionSize: Lantern Route Ringer.TS-031-CW [a1f5bf96]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -63013,7 +63013,7 @@ begin
         ,'46ef2312-d477-31d7-bff6-fd78b33fc14c'
     )
 
-    -- ShirtOptionSize: Harbor Line Pocket Tee.TS-001-CW
+    -- ShirtOptionSize: Harbor Line Pocket Tee.TS-001-CW [ba983347]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -63033,7 +63033,7 @@ begin
         ,'53294af7-a1ab-d4aa-4834-3751c2e84a74'
     )
 
-    -- ShirtOptionSize: Harbor Line Pocket Tee.TS-001-CW
+    -- ShirtOptionSize: Harbor Line Pocket Tee.TS-001-CW [f0c0abb2]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -63273,7 +63273,7 @@ begin
         ,'4777d169-c7fd-1280-bc46-0aee2157dfdd'
     )
 
-    -- ShirtOptionSize: Weather Note Henley.TS-058-S
+    -- ShirtOptionSize: Weather Note Henley.TS-058-S [8075cdbd]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -63293,7 +63293,7 @@ begin
         ,'6b6eea26-1902-b16c-37a8-9aae4a490825'
     )
 
-    -- ShirtOptionSize: Weather Note Henley.TS-058-S
+    -- ShirtOptionSize: Weather Note Henley.TS-058-S [1792b8e3]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -63353,7 +63353,7 @@ begin
         ,'1a5334fa-ee63-1a32-d4ac-5ea2a204012e'
     )
 
-    -- ShirtOptionSize: Weather Note Henley.TS-058-T
+    -- ShirtOptionSize: Weather Note Henley.TS-058-T [8156bb2f]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -63373,7 +63373,7 @@ begin
         ,'4e130a3c-4f1b-79eb-78e0-566f8bbd2f79'
     )
 
-    -- ShirtOptionSize: Weather Note Henley.TS-058-T
+    -- ShirtOptionSize: Weather Note Henley.TS-058-T [3e24abbb]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -63513,7 +63513,7 @@ begin
         ,'4777d169-c7fd-1280-bc46-0aee2157dfdd'
     )
 
-    -- ShirtOptionSize: Low Tide Pocket Tee.TS-011-S
+    -- ShirtOptionSize: Low Tide Pocket Tee.TS-011-S [7de048a9]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -63533,7 +63533,7 @@ begin
         ,'6b6eea26-1902-b16c-37a8-9aae4a490825'
     )
 
-    -- ShirtOptionSize: Low Tide Pocket Tee.TS-011-S
+    -- ShirtOptionSize: Low Tide Pocket Tee.TS-011-S [5a4432e1]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -63553,7 +63553,7 @@ begin
         ,'867ce5e7-cffa-21fa-4cb4-232e7da85011'
     )
 
-    -- ShirtOptionSize: North Loop Jersey Crew.TS-016-SP
+    -- ShirtOptionSize: North Loop Jersey Crew.TS-016-SP [914caa8e]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -63653,7 +63653,7 @@ begin
         ,'8a6dce17-9a23-566d-ccbc-ea104411332d'
     )
 
-    -- ShirtOptionSize: North Loop Jersey Crew.TS-016-SP
+    -- ShirtOptionSize: North Loop Jersey Crew.TS-016-SP [60720009]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -63733,7 +63733,7 @@ begin
         ,'46ef2312-d477-31d7-bff6-fd78b33fc14c'
     )
 
-    -- ShirtOptionSize: North Loop Henley.TS-052-CW
+    -- ShirtOptionSize: North Loop Henley.TS-052-CW [b25d3a2a]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -63753,7 +63753,7 @@ begin
         ,'53294af7-a1ab-d4aa-4834-3751c2e84a74'
     )
 
-    -- ShirtOptionSize: North Loop Henley.TS-052-CW
+    -- ShirtOptionSize: North Loop Henley.TS-052-CW [30c0e63b]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -63793,7 +63793,7 @@ begin
         ,'cc5d5ce0-573b-5393-5116-0b9de84c3a06'
     )
 
-    -- ShirtOptionSize: North Loop Camp Shirt.TS-040-MI
+    -- ShirtOptionSize: North Loop Camp Shirt.TS-040-MI [d91a8824]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -63813,7 +63813,7 @@ begin
         ,'10b4f5b2-11dd-c595-505e-1a0fbca64c2a'
     )
 
-    -- ShirtOptionSize: North Loop Camp Shirt.TS-040-MI
+    -- ShirtOptionSize: North Loop Camp Shirt.TS-040-MI [cd43f07b]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -63853,7 +63853,7 @@ begin
         ,'a905e1d1-87cd-cd26-2f00-ffc7433c27ae'
     )
 
-    -- ShirtOptionSize: North Loop Camp Shirt.TS-040-MI
+    -- ShirtOptionSize: North Loop Camp Shirt.TS-040-MI [b9923312]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -63913,7 +63913,7 @@ begin
         ,'d86703e6-dc51-43e2-12da-57b658dc795f'
     )
 
-    -- ShirtOptionSize: Cedar Field Henley.TS-056-HG
+    -- ShirtOptionSize: Cedar Field Henley.TS-056-HG [6a1bf0eb]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -63993,7 +63993,7 @@ begin
         ,'3ef75578-3e9d-a11c-2dd3-e8a42ae8a98c'
     )
 
-    -- ShirtOptionSize: Cedar Field Henley.TS-056-HG
+    -- ShirtOptionSize: Cedar Field Henley.TS-056-HG [69acfa28]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -64093,7 +64093,7 @@ begin
         ,'4777d169-c7fd-1280-bc46-0aee2157dfdd'
     )
 
-    -- ShirtOptionSize: North Loop Ringer.TS-028-S
+    -- ShirtOptionSize: North Loop Ringer.TS-028-S [2e923e94]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -64113,7 +64113,7 @@ begin
         ,'6b6eea26-1902-b16c-37a8-9aae4a490825'
     )
 
-    -- ShirtOptionSize: North Loop Ringer.TS-028-S
+    -- ShirtOptionSize: North Loop Ringer.TS-028-S [fa548da4]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -64193,7 +64193,7 @@ begin
         ,'4f4c4c8f-9251-b119-6ac1-12fae3626cf0'
     )
 
-    -- ShirtOptionSize: North Loop Pocket Tee.TS-004-PG
+    -- ShirtOptionSize: North Loop Pocket Tee.TS-004-PG [ce1b2746]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -64213,7 +64213,7 @@ begin
         ,'6c3ad6fc-fd17-fb00-12e1-b1eecea81cbc'
     )
 
-    -- ShirtOptionSize: North Loop Pocket Tee.TS-004-PG
+    -- ShirtOptionSize: North Loop Pocket Tee.TS-004-PG [fb0c2de5]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -64293,7 +64293,7 @@ begin
         ,'1935c371-d8f3-e375-db47-7b634227252c'
     )
 
-    -- ShirtOptionSize: Meadow Grid Henley.TS-054-S
+    -- ShirtOptionSize: Meadow Grid Henley.TS-054-S [46dfb29f]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -64333,7 +64333,7 @@ begin
         ,'4777d169-c7fd-1280-bc46-0aee2157dfdd'
     )
 
-    -- ShirtOptionSize: Meadow Grid Henley.TS-054-S
+    -- ShirtOptionSize: Meadow Grid Henley.TS-054-S [cf7a8490]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -64353,7 +64353,7 @@ begin
         ,'6b6eea26-1902-b16c-37a8-9aae4a490825'
     )
 
-    -- ShirtOptionSize: Meadow Grid Henley.TS-054-S
+    -- ShirtOptionSize: Meadow Grid Henley.TS-054-S [4e1da3f6]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -64413,7 +64413,7 @@ begin
         ,'1935c371-d8f3-e375-db47-7b634227252c'
     )
 
-    -- ShirtOptionSize: Daybreak Studio Camp Shirt.TS-041-S
+    -- ShirtOptionSize: Daybreak Studio Camp Shirt.TS-041-S [2ba345c5]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -64473,7 +64473,7 @@ begin
         ,'6b6eea26-1902-b16c-37a8-9aae4a490825'
     )
 
-    -- ShirtOptionSize: Daybreak Studio Camp Shirt.TS-041-S
+    -- ShirtOptionSize: Daybreak Studio Camp Shirt.TS-041-S [7d9e187a]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -64493,7 +64493,7 @@ begin
         ,'867ce5e7-cffa-21fa-4cb4-232e7da85011'
     )
 
-    -- ShirtOptionSize: Pine Street Camp Shirt.TS-045-T
+    -- ShirtOptionSize: Pine Street Camp Shirt.TS-045-T [8e4b2800]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -64533,7 +64533,7 @@ begin
         ,'4e130a3c-4f1b-79eb-78e0-566f8bbd2f79'
     )
 
-    -- ShirtOptionSize: Pine Street Camp Shirt.TS-045-T
+    -- ShirtOptionSize: Pine Street Camp Shirt.TS-045-T [5944eee4]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -64633,7 +64633,7 @@ begin
         ,'38de530c-d16f-387d-96e2-0e743e9f841d'
     )
 
-    -- ShirtOptionSize: Orchard Map Pocket Tee.TS-003-BF
+    -- ShirtOptionSize: Orchard Map Pocket Tee.TS-003-BF [fffa483a]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -64693,7 +64693,7 @@ begin
         ,'b8b96680-ffc6-43f4-fa87-eb5beabd7122'
     )
 
-    -- ShirtOptionSize: Orchard Map Pocket Tee.TS-003-BF
+    -- ShirtOptionSize: Orchard Map Pocket Tee.TS-003-BF [0c962f3a]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -64813,7 +64813,7 @@ begin
         ,'cf6a52d3-8250-e600-dd5a-b407bb4223c7'
     )
 
-    -- ShirtOptionSize: Weekend Atlas Pocket Tee.TS-012-SP
+    -- ShirtOptionSize: Weekend Atlas Pocket Tee.TS-012-SP [d8677609]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -64913,7 +64913,7 @@ begin
         ,'8a6dce17-9a23-566d-ccbc-ea104411332d'
     )
 
-    -- ShirtOptionSize: Weekend Atlas Pocket Tee.TS-012-SP
+    -- ShirtOptionSize: Weekend Atlas Pocket Tee.TS-012-SP [36c5faac]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -64933,7 +64933,7 @@ begin
         ,'c0d208a1-a202-b61b-bb0b-9c6a1287753c'
     )
 
-    -- ShirtOptionSize: Lantern Route Jersey Crew.TS-019-MI
+    -- ShirtOptionSize: Lantern Route Jersey Crew.TS-019-MI [1bcc24e3]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -64953,7 +64953,7 @@ begin
         ,'10b4f5b2-11dd-c595-505e-1a0fbca64c2a'
     )
 
-    -- ShirtOptionSize: Lantern Route Jersey Crew.TS-019-MI
+    -- ShirtOptionSize: Lantern Route Jersey Crew.TS-019-MI [f94cb9dc]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -64993,7 +64993,7 @@ begin
         ,'a905e1d1-87cd-cd26-2f00-ffc7433c27ae'
     )
 
-    -- ShirtOptionSize: Lantern Route Jersey Crew.TS-019-MI
+    -- ShirtOptionSize: Lantern Route Jersey Crew.TS-019-MI [78b1896c]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -65053,7 +65053,7 @@ begin
         ,'d86703e6-dc51-43e2-12da-57b658dc795f'
     )
 
-    -- ShirtOptionSize: Weekend Atlas Ringer.TS-036-MI
+    -- ShirtOptionSize: Weekend Atlas Ringer.TS-036-MI [361f9e4c]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -65073,7 +65073,7 @@ begin
         ,'10b4f5b2-11dd-c595-505e-1a0fbca64c2a'
     )
 
-    -- ShirtOptionSize: Weekend Atlas Ringer.TS-036-MI
+    -- ShirtOptionSize: Weekend Atlas Ringer.TS-036-MI [e971d3a4]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -65113,7 +65113,7 @@ begin
         ,'a905e1d1-87cd-cd26-2f00-ffc7433c27ae'
     )
 
-    -- ShirtOptionSize: Weekend Atlas Ringer.TS-036-MI
+    -- ShirtOptionSize: Weekend Atlas Ringer.TS-036-MI [6d609765]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -65233,7 +65233,7 @@ begin
         ,'46ef2312-d477-31d7-bff6-fd78b33fc14c'
     )
 
-    -- ShirtOptionSize: Low Tide Ringer.TS-035-CW
+    -- ShirtOptionSize: Low Tide Ringer.TS-035-CW [ad0cf0ca]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -65253,7 +65253,7 @@ begin
         ,'53294af7-a1ab-d4aa-4834-3751c2e84a74'
     )
 
-    -- ShirtOptionSize: Low Tide Ringer.TS-035-CW
+    -- ShirtOptionSize: Low Tide Ringer.TS-035-CW [c3e1b48d]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -65333,7 +65333,7 @@ begin
         ,'4f4c4c8f-9251-b119-6ac1-12fae3626cf0'
     )
 
-    -- ShirtOptionSize: Cedar Field Pocket Tee.TS-008-PG
+    -- ShirtOptionSize: Cedar Field Pocket Tee.TS-008-PG [f6a58cef]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -65353,7 +65353,7 @@ begin
         ,'6c3ad6fc-fd17-fb00-12e1-b1eecea81cbc'
     )
 
-    -- ShirtOptionSize: Cedar Field Pocket Tee.TS-008-PG
+    -- ShirtOptionSize: Cedar Field Pocket Tee.TS-008-PG [5471a611]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -65433,7 +65433,7 @@ begin
         ,'42879253-c242-f781-f2be-d1606638b445'
     )
 
-    -- ShirtOptionSize: Weekend Atlas Camp Shirt.TS-048-CW
+    -- ShirtOptionSize: Weekend Atlas Camp Shirt.TS-048-CW [d19351c3]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -65453,7 +65453,7 @@ begin
         ,'46ef2312-d477-31d7-bff6-fd78b33fc14c'
     )
 
-    -- ShirtOptionSize: Weekend Atlas Camp Shirt.TS-048-CW
+    -- ShirtOptionSize: Weekend Atlas Camp Shirt.TS-048-CW [ee65b171]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -65473,7 +65473,7 @@ begin
         ,'53294af7-a1ab-d4aa-4834-3751c2e84a74'
     )
 
-    -- ShirtOptionSize: Weekend Atlas Camp Shirt.TS-048-CW
+    -- ShirtOptionSize: Weekend Atlas Camp Shirt.TS-048-CW [5038020a]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -65513,7 +65513,7 @@ begin
         ,'cc5d5ce0-573b-5393-5116-0b9de84c3a06'
     )
 
-    -- ShirtOptionSize: Cedar Field Jersey Crew.TS-020-BF
+    -- ShirtOptionSize: Cedar Field Jersey Crew.TS-020-BF [6c95241f]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -65533,7 +65533,7 @@ begin
         ,'38de530c-d16f-387d-96e2-0e743e9f841d'
     )
 
-    -- ShirtOptionSize: Cedar Field Jersey Crew.TS-020-BF
+    -- ShirtOptionSize: Cedar Field Jersey Crew.TS-020-BF [c424033d]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -65753,7 +65753,7 @@ begin
         ,'c0d208a1-a202-b61b-bb0b-9c6a1287753c'
     )
 
-    -- ShirtOptionSize: Low Tide Jersey Crew.TS-023-MI
+    -- ShirtOptionSize: Low Tide Jersey Crew.TS-023-MI [4b2a879e]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -65773,7 +65773,7 @@ begin
         ,'10b4f5b2-11dd-c595-505e-1a0fbca64c2a'
     )
 
-    -- ShirtOptionSize: Low Tide Jersey Crew.TS-023-MI
+    -- ShirtOptionSize: Low Tide Jersey Crew.TS-023-MI [e350304e]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -65813,7 +65813,7 @@ begin
         ,'a905e1d1-87cd-cd26-2f00-ffc7433c27ae'
     )
 
-    -- ShirtOptionSize: Low Tide Jersey Crew.TS-023-MI
+    -- ShirtOptionSize: Low Tide Jersey Crew.TS-023-MI [62870627]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -65933,7 +65933,7 @@ begin
         ,'5c267e0f-35a5-3576-a657-babbe9be8ee4'
     )
 
-    -- ShirtOptionSize: Weather Note Camp Shirt.TS-046-SP
+    -- ShirtOptionSize: Weather Note Camp Shirt.TS-046-SP [099081e2]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -65973,7 +65973,7 @@ begin
         ,'8a6dce17-9a23-566d-ccbc-ea104411332d'
     )
 
-    -- ShirtOptionSize: Weather Note Camp Shirt.TS-046-SP
+    -- ShirtOptionSize: Weather Note Camp Shirt.TS-046-SP [30191d9d]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -66073,7 +66073,7 @@ begin
         ,'4777d169-c7fd-1280-bc46-0aee2157dfdd'
     )
 
-    -- ShirtOptionSize: Weekend Atlas Jersey Crew.TS-024-S
+    -- ShirtOptionSize: Weekend Atlas Jersey Crew.TS-024-S [de9e0b7c]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -66093,7 +66093,7 @@ begin
         ,'6b6eea26-1902-b16c-37a8-9aae4a490825'
     )
 
-    -- ShirtOptionSize: Weekend Atlas Jersey Crew.TS-024-S
+    -- ShirtOptionSize: Weekend Atlas Jersey Crew.TS-024-S [d0cf5e87]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -66153,7 +66153,7 @@ begin
         ,'1935c371-d8f3-e375-db47-7b634227252c'
     )
 
-    -- ShirtOptionSize: Harbor Line Camp Shirt.TS-037-S
+    -- ShirtOptionSize: Harbor Line Camp Shirt.TS-037-S [219994b1]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -66193,7 +66193,7 @@ begin
         ,'4777d169-c7fd-1280-bc46-0aee2157dfdd'
     )
 
-    -- ShirtOptionSize: Harbor Line Camp Shirt.TS-037-S
+    -- ShirtOptionSize: Harbor Line Camp Shirt.TS-037-S [359e1420]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -66213,7 +66213,7 @@ begin
         ,'6b6eea26-1902-b16c-37a8-9aae4a490825'
     )
 
-    -- ShirtOptionSize: Harbor Line Camp Shirt.TS-037-S
+    -- ShirtOptionSize: Harbor Line Camp Shirt.TS-037-S [8d0815ff]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -66373,7 +66373,7 @@ begin
         ,'20f4c115-2db1-b0bb-6ed3-da9d77b947e4'
     )
 
-    -- ShirtOptionSize: Low Tide Henley.TS-059-SP
+    -- ShirtOptionSize: Low Tide Henley.TS-059-SP [9336c749]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -66473,7 +66473,7 @@ begin
         ,'8a6dce17-9a23-566d-ccbc-ea104411332d'
     )
 
-    -- ShirtOptionSize: Low Tide Henley.TS-059-SP
+    -- ShirtOptionSize: Low Tide Henley.TS-059-SP [259a2ee6]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -66533,7 +66533,7 @@ begin
         ,'42879253-c242-f781-f2be-d1606638b445'
     )
 
-    -- ShirtOptionSize: Meadow Grid Jersey Crew.TS-018-CW
+    -- ShirtOptionSize: Meadow Grid Jersey Crew.TS-018-CW [6ea0a813]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -66553,7 +66553,7 @@ begin
         ,'46ef2312-d477-31d7-bff6-fd78b33fc14c'
     )
 
-    -- ShirtOptionSize: Meadow Grid Jersey Crew.TS-018-CW
+    -- ShirtOptionSize: Meadow Grid Jersey Crew.TS-018-CW [2f7b6e1d]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -66733,7 +66733,7 @@ begin
         ,'e1ccd114-b398-f2e2-d4e0-3baa308b318e'
     )
 
-    -- ShirtOptionSize: North Loop Henley.TS-052-HG
+    -- ShirtOptionSize: North Loop Henley.TS-052-HG [c0c19d19]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -66813,7 +66813,7 @@ begin
         ,'3ef75578-3e9d-a11c-2dd3-e8a42ae8a98c'
     )
 
-    -- ShirtOptionSize: North Loop Henley.TS-052-HG
+    -- ShirtOptionSize: North Loop Henley.TS-052-HG [f16d2b57]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -66833,7 +66833,7 @@ begin
         ,'76b9c9c9-80c5-e792-5bfc-202be5b20120'
     )
 
-    -- ShirtOptionSize: Orchard Map Camp Shirt.TS-039-HG
+    -- ShirtOptionSize: Orchard Map Camp Shirt.TS-039-HG [c66550e5]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -66853,7 +66853,7 @@ begin
         ,'124d3439-5fbe-3e4c-05de-658c9a712ea8'
     )
 
-    -- ShirtOptionSize: Orchard Map Camp Shirt.TS-039-HG
+    -- ShirtOptionSize: Orchard Map Camp Shirt.TS-039-HG [f2a54a26]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -66933,7 +66933,7 @@ begin
         ,'76b9c9c9-80c5-e792-5bfc-202be5b20120'
     )
 
-    -- ShirtOptionSize: Daybreak Studio Henley.TS-053-MI
+    -- ShirtOptionSize: Daybreak Studio Henley.TS-053-MI [c9bb1ab1]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -66953,7 +66953,7 @@ begin
         ,'10b4f5b2-11dd-c595-505e-1a0fbca64c2a'
     )
 
-    -- ShirtOptionSize: Daybreak Studio Henley.TS-053-MI
+    -- ShirtOptionSize: Daybreak Studio Henley.TS-053-MI [69afdec9]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -66993,7 +66993,7 @@ begin
         ,'a905e1d1-87cd-cd26-2f00-ffc7433c27ae'
     )
 
-    -- ShirtOptionSize: Daybreak Studio Henley.TS-053-MI
+    -- ShirtOptionSize: Daybreak Studio Henley.TS-053-MI [f129290b]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -67053,7 +67053,7 @@ begin
         ,'d86703e6-dc51-43e2-12da-57b658dc795f'
     )
 
-    -- ShirtOptionSize: Weather Note Pocket Tee.TS-010-MI
+    -- ShirtOptionSize: Weather Note Pocket Tee.TS-010-MI [ed775d00]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -67113,7 +67113,7 @@ begin
         ,'a905e1d1-87cd-cd26-2f00-ffc7433c27ae'
     )
 
-    -- ShirtOptionSize: Weather Note Pocket Tee.TS-010-MI
+    -- ShirtOptionSize: Weather Note Pocket Tee.TS-010-MI [96fe0051]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -67173,7 +67173,7 @@ begin
         ,'d86703e6-dc51-43e2-12da-57b658dc795f'
     )
 
-    -- ShirtOptionSize: Meadow Grid Pocket Tee.TS-006-MI
+    -- ShirtOptionSize: Meadow Grid Pocket Tee.TS-006-MI [f677c83a]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -67233,7 +67233,7 @@ begin
         ,'a905e1d1-87cd-cd26-2f00-ffc7433c27ae'
     )
 
-    -- ShirtOptionSize: Meadow Grid Pocket Tee.TS-006-MI
+    -- ShirtOptionSize: Meadow Grid Pocket Tee.TS-006-MI [b9db76f8]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -67373,7 +67373,7 @@ begin
         ,'5e0a74c8-c5f1-39ac-1659-778776c36212'
     )
 
-    -- ShirtOptionSize: Weekend Atlas Henley.TS-060-HB
+    -- ShirtOptionSize: Weekend Atlas Henley.TS-060-HB [7d83dd46]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -67393,7 +67393,7 @@ begin
         ,'6ac531d8-d5a5-bf92-193c-bbbce77fdab5'
     )
 
-    -- ShirtOptionSize: Weekend Atlas Henley.TS-060-HB
+    -- ShirtOptionSize: Weekend Atlas Henley.TS-060-HB [c3076bc2]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -67493,7 +67493,7 @@ begin
         ,'5c267e0f-35a5-3576-a657-babbe9be8ee4'
     )
 
-    -- ShirtOptionSize: Meadow Grid Camp Shirt.TS-042-SP
+    -- ShirtOptionSize: Meadow Grid Camp Shirt.TS-042-SP [3d0365e8]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -67533,7 +67533,7 @@ begin
         ,'8a6dce17-9a23-566d-ccbc-ea104411332d'
     )
 
-    -- ShirtOptionSize: Meadow Grid Camp Shirt.TS-042-SP
+    -- ShirtOptionSize: Meadow Grid Camp Shirt.TS-042-SP [93939db7]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -67553,7 +67553,7 @@ begin
         ,'c0d208a1-a202-b61b-bb0b-9c6a1287753c'
     )
 
-    -- ShirtOptionSize: Signal Stripe Ringer.TS-026-HG
+    -- ShirtOptionSize: Signal Stripe Ringer.TS-026-HG [c213c94e]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -67633,7 +67633,7 @@ begin
         ,'3ef75578-3e9d-a11c-2dd3-e8a42ae8a98c'
     )
 
-    -- ShirtOptionSize: Signal Stripe Ringer.TS-026-HG
+    -- ShirtOptionSize: Signal Stripe Ringer.TS-026-HG [8040bd87]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -67653,7 +67653,7 @@ begin
         ,'76b9c9c9-80c5-e792-5bfc-202be5b20120'
     )
 
-    -- ShirtOptionSize: Signal Stripe Henley.TS-050-BF
+    -- ShirtOptionSize: Signal Stripe Henley.TS-050-BF [53c039d6]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -67673,7 +67673,7 @@ begin
         ,'38de530c-d16f-387d-96e2-0e743e9f841d'
     )
 
-    -- ShirtOptionSize: Signal Stripe Henley.TS-050-BF
+    -- ShirtOptionSize: Signal Stripe Henley.TS-050-BF [97e2a799]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -67753,7 +67753,7 @@ begin
         ,'cf6a52d3-8250-e600-dd5a-b407bb4223c7'
     )
 
-    -- ShirtOptionSize: Signal Stripe Jersey Crew.TS-014-MG
+    -- ShirtOptionSize: Signal Stripe Jersey Crew.TS-014-MG [7ab3586d]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -67773,7 +67773,7 @@ begin
         ,'3d7bd2fe-14ff-c392-02f6-936bbb3b9d19'
     )
 
-    -- ShirtOptionSize: Signal Stripe Jersey Crew.TS-014-MG
+    -- ShirtOptionSize: Signal Stripe Jersey Crew.TS-014-MG [d67bb4a6]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -67853,7 +67853,7 @@ begin
         ,'d7b3cbc1-58f3-19fc-cd38-9c80cdd9033c'
     )
 
-    -- ShirtOptionSize: Signal Stripe Jersey Crew.TS-014-MG
+    -- ShirtOptionSize: Signal Stripe Jersey Crew.TS-014-MG [8efaccbc]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -67873,7 +67873,7 @@ begin
         ,'f6407077-6f78-afed-fc8f-b5732ad5d0d1'
     )
 
-    -- ShirtOptionSize: Harbor Line Ringer.TS-025-SP
+    -- ShirtOptionSize: Harbor Line Ringer.TS-025-SP [2d2b2843]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -67973,7 +67973,7 @@ begin
         ,'8a6dce17-9a23-566d-ccbc-ea104411332d'
     )
 
-    -- ShirtOptionSize: Harbor Line Ringer.TS-025-SP
+    -- ShirtOptionSize: Harbor Line Ringer.TS-025-SP [d5522dbd]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -68013,7 +68013,7 @@ begin
         ,'3d7bd2fe-14ff-c392-02f6-936bbb3b9d19'
     )
 
-    -- ShirtOptionSize: Orchard Map Ringer.TS-027-MG
+    -- ShirtOptionSize: Orchard Map Ringer.TS-027-MG [de30e185]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -68073,7 +68073,7 @@ begin
         ,'d7b3cbc1-58f3-19fc-cd38-9c80cdd9033c'
     )
 
-    -- ShirtOptionSize: Orchard Map Ringer.TS-027-MG
+    -- ShirtOptionSize: Orchard Map Ringer.TS-027-MG [d4f403c1]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -68153,7 +68153,7 @@ begin
         ,'5e0a74c8-c5f1-39ac-1659-778776c36212'
     )
 
-    -- ShirtOptionSize: Harbor Line Jersey Crew.TS-013-HB
+    -- ShirtOptionSize: Harbor Line Jersey Crew.TS-013-HB [68633143]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -68173,7 +68173,7 @@ begin
         ,'6ac531d8-d5a5-bf92-193c-bbbce77fdab5'
     )
 
-    -- ShirtOptionSize: Harbor Line Jersey Crew.TS-013-HB
+    -- ShirtOptionSize: Harbor Line Jersey Crew.TS-013-HB [f8d65150]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -68233,7 +68233,7 @@ begin
         ,'1a5334fa-ee63-1a32-d4ac-5ea2a204012e'
     )
 
-    -- ShirtOptionSize: Cedar Field Ringer.TS-032-T
+    -- ShirtOptionSize: Cedar Field Ringer.TS-032-T [daf32c9e]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -68253,7 +68253,7 @@ begin
         ,'4e130a3c-4f1b-79eb-78e0-566f8bbd2f79'
     )
 
-    -- ShirtOptionSize: Cedar Field Ringer.TS-032-T
+    -- ShirtOptionSize: Cedar Field Ringer.TS-032-T [8227b739]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -68313,7 +68313,7 @@ begin
         ,'bbaafc0f-ee63-4a6b-db46-b2f040a03c5e'
     )
 
-    -- ShirtOptionSize: Signal Stripe Camp Shirt.TS-038-PG
+    -- ShirtOptionSize: Signal Stripe Camp Shirt.TS-038-PG [ae81a802]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -68353,7 +68353,7 @@ begin
         ,'4f4c4c8f-9251-b119-6ac1-12fae3626cf0'
     )
 
-    -- ShirtOptionSize: Signal Stripe Camp Shirt.TS-038-PG
+    -- ShirtOptionSize: Signal Stripe Camp Shirt.TS-038-PG [718c9e74]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -68373,7 +68373,7 @@ begin
         ,'6c3ad6fc-fd17-fb00-12e1-b1eecea81cbc'
     )
 
-    -- ShirtOptionSize: Signal Stripe Camp Shirt.TS-038-PG
+    -- ShirtOptionSize: Signal Stripe Camp Shirt.TS-038-PG [571c2d89]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -68413,7 +68413,7 @@ begin
         ,'ee8ed79f-1433-964a-8521-9bacf88bb268'
     )
 
-    -- ShirtOptionSize: Pine Street Henley.TS-057-MG
+    -- ShirtOptionSize: Pine Street Henley.TS-057-MG [0fbc7d35]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -68433,7 +68433,7 @@ begin
         ,'3d7bd2fe-14ff-c392-02f6-936bbb3b9d19'
     )
 
-    -- ShirtOptionSize: Pine Street Henley.TS-057-MG
+    -- ShirtOptionSize: Pine Street Henley.TS-057-MG [773e0d5b]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -68493,7 +68493,7 @@ begin
         ,'d7b3cbc1-58f3-19fc-cd38-9c80cdd9033c'
     )
 
-    -- ShirtOptionSize: Pine Street Henley.TS-057-MG
+    -- ShirtOptionSize: Pine Street Henley.TS-057-MG [8849568e]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -68533,7 +68533,7 @@ begin
         ,'1a5334fa-ee63-1a32-d4ac-5ea2a204012e'
     )
 
-    -- ShirtOptionSize: North Loop Ringer.TS-028-T
+    -- ShirtOptionSize: North Loop Ringer.TS-028-T [08b59449]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf
@@ -68553,7 +68553,7 @@ begin
         ,'4e130a3c-4f1b-79eb-78e0-566f8bbd2f79'
     )
 
-    -- ShirtOptionSize: North Loop Ringer.TS-028-T
+    -- ShirtOptionSize: North Loop Ringer.TS-028-T [a9831fa7]
     insert [Samples].[ShirtOptionSize] (
          Id
         ,VersionOf

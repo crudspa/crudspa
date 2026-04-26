@@ -46,7 +46,8 @@ public class ControllerWrappersCore(ISessionWrappers sessionWrappers, ILogger<Co
     private static Boolean ReadSessionId(HttpRequest request, out Guid sessionId)
     {
         sessionId = Guid.Empty;
-        var cookie = request.Cookies[Constants.CookieKeys.SessionId];
+        var key = Constants.CookieKeys.Resolve(Constants.CookieKeys.SessionId, request.Host.Host, request.Host.Port);
+        var cookie = request.Cookies[key];
         return cookie.HasSomething() && Guid.TryParse(cookie, out sessionId);
     }
 }
