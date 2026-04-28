@@ -1,0 +1,11 @@
+@if (Config is not null)
+{
+    <Wrapped>
+        <Field Label="URLs"
+               Size="Field.Sizes.Full">
+            <MultilineTextBox ReadOnly="ReadOnly"
+                              Height="MultilineTextBox.Heights.Short"
+                              @bind-Value="Config.Urls" />
+        </Field>
+    </Wrapped>
+}
