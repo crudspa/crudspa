@@ -9,6 +9,15 @@ public static class SectionShapes
 {
     private static readonly Regex LengthRegex = new(@"^\s*(-?(?:\d+|\d*\.\d+))\s*([a-z%]+)\s*$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
     private static readonly Guid ArrowRightIconId = new("63F3F22E-C276-4373-B212-8190581359E0");
+    private static readonly PricingPlan[] PricingPlans =
+    [
+        new("Starter", "For solo teams launching the first version.", "$19", "per month", "starter", ["1 workspace", "Core content tools", "Email support"]),
+        new("Growth", "For small teams shipping and refining together.", "$49", "per month", "growth", ["3 workspaces", "Advanced automations", "Priority support"]),
+        new("Scale", "For growing teams coordinating multiple launches.", "$99", "per month", "scale", ["10 workspaces", "Approval flows", "Usage insights"]),
+        new("Enterprise", "For larger teams with custom rollout needs.", "$199", "per month", "enterprise", ["Unlimited workspaces", "Dedicated onboarding", "Custom agreements"]),
+    ];
+
+    private sealed record PricingPlan(String Name, String Summary, String Price, String Billing, String Path, String[] Features);
 
     public static List<SectionShapeChoice> All()
     {
@@ -18,12 +27,10 @@ public static class SectionShapes
             SingleColumn(),
             TwoColumns(),
             CenteredStack(),
-            QuoteSpotlight(),
             WideBand(),
             TwoUpCards(),
             ThreeUpCards(),
             FourUpCards(),
-            ActionCards(),
             TwoUpMediaPanels(),
             ThreeUpMediaPanels(),
             TwoUpMediaCards(),
@@ -33,8 +40,13 @@ public static class SectionShapes
             SplitReverse(),
             SplitWithActions(),
             SplitWithActionsReverse(),
-            HeroWithImage(),
+            ActionCards(),
             MainSidebarStack(),
+            HeroWithImage(),
+            PricingTwoCards(),
+            PricingThreeCards(),
+            PricingFourCards(),
+            QuoteSpotlight(),
             WideMediaNotes(),
             WideMediaSidebar(),
             AudioNotes(),
@@ -88,6 +100,33 @@ public static class SectionShapes
             "12em");
 
     private static SectionShapeChoice ActionCards() => CreateActionCardsShape();
+
+    private static SectionShapeChoice PricingTwoCards() =>
+        CreatePricingCardsShape(
+            Guid.Parse("21881cf7-ac3c-415b-9baa-f8185d867461"),
+            "Pricing (2 Cards)",
+            "Two pricing cards with plan copy, price, and one call to action.",
+            2,
+            "18em",
+            "16em");
+
+    private static SectionShapeChoice PricingThreeCards() =>
+        CreatePricingCardsShape(
+            Guid.Parse("c0c8707e-2e7b-4dfa-b3b7-b0afb9833724"),
+            "Pricing (3 Cards)",
+            "Three pricing cards for a standard SaaS comparison row.",
+            3,
+            "16em",
+            "14em");
+
+    private static SectionShapeChoice PricingFourCards() =>
+        CreatePricingCardsShape(
+            Guid.Parse("54e731bb-df30-4db5-8782-a796e03a0260"),
+            "Pricing (4 Cards)",
+            "Four compact pricing cards for denser comparison grids.",
+            4,
+            "14em",
+            "12em");
 
     private static SectionShapeChoice TwoUpMediaPanels() =>
         CreateMediaPanelsShape(
@@ -533,6 +572,53 @@ public static class SectionShapes
             section);
     }
 
+    private static SectionShapeChoice CreatePricingCardsShape(Guid id, String name, String description, Int32 count, String basis, String minWidth)
+    {
+        var cards = new List<SectionElement>();
+
+        for (var index = 0; index < count; index++)
+        {
+            var plan = PricingPlans[index];
+            var card = Multimedia(
+                MediaText(PricingTitleHtml(plan.Name), item =>
+                {
+                    SetFullWidthMultimediaItem(item.Item);
+                    SetPricingTitleChrome(item.Box);
+                }),
+                MediaText(PricingSummaryHtml(plan.Summary), item =>
+                {
+                    SetFullWidthMultimediaItem(item.Item);
+                    SetPricingTextChrome(item.Box);
+                }),
+                MediaText(PricingFeaturesHtml(plan.Features), item =>
+                {
+                    SetFullWidthMultimediaItem(item.Item);
+                    SetPricingTextChrome(item.Box);
+                }),
+                MediaText(PricingPriceHtml(plan.Price, plan.Billing), item =>
+                {
+                    SetFullWidthMultimediaItem(item.Item);
+                    SetPricingPriceChrome(item.Box);
+                }),
+                MediaButton("Choose Plan", $"pricing-{plan.Path}", SetPricingButtonChrome, item =>
+                {
+                    SetButtonItem(item.Item, AlignSelfIds.Center);
+                    SetPricingButtonItemChrome(item.Box);
+                }));
+
+            SetFixedItem(card.Item, basis, minWidth, "1");
+            ApplyColumn(card.RequireConfig<MultimediaElement>().Container, "0");
+            SetCardChrome(card.Box, padding: "0");
+            cards.Add(card);
+        }
+
+        var section = CreateSection(cards);
+        section.Container.Gap = "1em";
+        SetSectionPadding(section.Box, "1em");
+
+        return Choice(id, name, description, section);
+    }
+
     private static SectionShapeChoice CreateAudioNotesShape()
     {
         var audio = Audio();
@@ -964,6 +1050,40 @@ public static class SectionShapes
         ClearShadow(box);
     }
 
+    private static void SetPricingTitleChrome(Box box)
+    {
+        SetPricingDivider(box, "1em", "1.25em");
+    }
+
+    private static void SetPricingTextChrome(Box box)
+    {
+        SetPricingDivider(box, "1em", "1.25em");
+    }
+
+    private static void SetPricingPriceChrome(Box box)
+    {
+        box.PaddingTop = "1.25em";
+        box.PaddingBottom = ".5em";
+        box.PaddingLeft = "1.25em";
+        box.PaddingRight = "1.25em";
+    }
+
+    private static void SetPricingButtonItemChrome(Box box)
+    {
+        box.PaddingTop = "0";
+        box.PaddingBottom = "1.25em";
+    }
+
+    private static void SetPricingDivider(Box box, String vertical, String horizontal)
+    {
+        box.BorderThickness = "0";
+        box.BorderThicknessBottom = "1px";
+        box.PaddingTop = vertical;
+        box.PaddingBottom = vertical;
+        box.PaddingLeft = horizontal;
+        box.PaddingRight = horizontal;
+    }
+
     private static void SetButtonChrome(Button button)
     {
         button.ShapeIndex = Button.Shapes.Rectangle;
@@ -972,6 +1092,16 @@ public static class SectionShapes
         button.OrientationIndex = Button.Orientations.Right;
         button.IconId = ArrowRightIconId;
         button.IconCssClass = "c-icon-arrow-right";
+    }
+
+    private static void SetPricingButtonChrome(Button button)
+    {
+        button.ShapeIndex = Button.Shapes.Rectangle;
+        button.GraphicIndex = Button.Graphics.None;
+        button.TextTypeIndex = Button.TextTypes.Custom;
+        button.OrientationIndex = Button.Orientations.Left;
+        button.IconId = null;
+        button.IconCssClass = null;
     }
 
     private static void SetShadow(Box box, String offsetX = ".6em", String offsetY = ".6em", String blur = "1.5em", String spread = ".15em")
@@ -1044,5 +1174,25 @@ public static class SectionShapes
     private static String BandTextHtml(String heading, String body)
     {
         return $"<h2>{heading}</h2><p>{body}</p>";
+    }
+
+    private static String PricingTitleHtml(String title)
+    {
+        return $"<h3 style=\"text-align: center;\">{title}</h3>";
+    }
+
+    private static String PricingSummaryHtml(String body)
+    {
+        return $"<p style=\"text-align: center;\">{body}</p>";
+    }
+
+    private static String PricingFeaturesHtml(IEnumerable<String> features)
+    {
+        return $"<ul>{String.Join(String.Empty, features.Select(x => $"<li>{x}</li>"))}</ul>";
+    }
+
+    private static String PricingPriceHtml(String price, String billing)
+    {
+        return $"<h1 style=\"text-align: center;\">{price}</h1><p style=\"text-align: center;\">{billing}</p>";
     }
 }
