@@ -1,0 +1,72 @@
+<Wrapped Alignment="Wrapped.Alignments.Top">
+    <Field Label="Selection"
+           Size="Field.Sizes.Medium"
+           Container="Field.Containers.Div">
+        <EnumRadio TEnum="OptionsAnswer.Kinds"
+                   ReadOnly="ReadOnly"
+                   @bind-SelectedValue="Answer.Kind" />
+    </Field>
+    <Field Label="Orientation"
+           Size="Field.Sizes.Medium"
+           Container="Field.Containers.Div">
+        <EnumRadio TEnum="OptionsAnswer.Orientations"
+                   ReadOnly="ReadOnly"
+                   @bind-SelectedValue="Answer.Orientation" />
+    </Field>
+    <Field Label="Ordering"
+           Size="Field.Sizes.Medium"
+           Container="Field.Containers.Div">
+        <EnumRadio TEnum="OptionsAnswer.Orderings"
+                   ReadOnly="ReadOnly"
+                   @bind-SelectedValue="Answer.Ordering" />
+    </Field>
+    @if (Answer.Kind == OptionsAnswer.Kinds.Multiple)
+    {
+        <Field Label="Minimum"
+               Size="Field.Sizes.Tiny">
+            <NumericTextBox T="Int32?" ReadOnly="ReadOnly" @bind-Value="Answer.MinSelections" />
+        </Field>
+        <Field Label="Maximum"
+               Size="Field.Sizes.Tiny">
+            <NumericTextBox T="Int32?" ReadOnly="ReadOnly" @bind-Value="Answer.MaxSelections" />
+        </Field>
+    }
+    <Field Label="Other"
+           Size="Field.Sizes.Full"
+           Container="Field.Containers.Div">
+        <Wrapped NoWrap="true">
+            <Checkbox Label="Allow Other"
+                      ReadOnly="ReadOnly"
+                      @bind-Value="Answer.AllowOther" />
+            @if (Answer.AllowOther == true)
+            {
+                <div class="star">
+                    <TextBox ReadOnly="ReadOnly"
+                             Placeholder="Other"
+                             MaxLength="50"
+                             @bind-Value="Answer.OtherLabel" />
+                </div>
+            }
+        </Wrapped>
+    </Field>
+</Wrapped>
+<BatchSection Title="Choices">
+    <HeadingPanel>
+        <ButtonAdd EntityName="Choice"
+                   Disabled="ReadOnly"
+                   Transparent="true"
+                   Clicked="AddChoice" />
+    </HeadingPanel>
+    <ChildContent>
+        <Batch Model="ChoicesModel"
+               ReadOnly="ReadOnly">
+            <EditView>
+                <Field Label="Choice"
+                       Size="Field.Sizes.Full">
+                    <TextBox ReadOnly="ReadOnly"
+                             @bind-Value="context.Text" />
+                </Field>
+            </EditView>
+        </Batch>
+    </ChildContent>
+</BatchSection>

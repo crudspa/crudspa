@@ -548,6 +548,145 @@ from [Content].[VideoElement-Active] video
     left join [Framework].[ImageFile-Active] poster on video.PosterId = poster.Id
 where section.PageId = @Id
 
+select
+     questionElement.Id
+    ,questionElement.ElementId
+    ,questionElement.QuestionId
+    ,question.Text
+    ,question.AnswerTypeId
+    ,answerType.Name as AnswerTypeName
+    ,answerType.DesignView as AnswerTypeDesignView
+    ,answerType.DisplayView as AnswerTypeDisplayView
+from [Content].[QuestionElement-Active] questionElement
+    inner join [Content].[Question-Active] question on questionElement.QuestionId = question.Id
+    inner join [Content].[AnswerType-Active] answerType on question.AnswerTypeId = answerType.Id
+    inner join [Content].[Element-Active] element on questionElement.ElementId = element.Id
+    inner join [Content].[Section-Active] section on element.SectionId = section.Id
+where section.PageId = @Id
+
+select
+     answer.Id
+    ,answer.QuestionId
+    ,answer.Kind
+    ,answer.[Default]
+    ,answer.Orientation
+    ,answer.TrueLabel
+    ,answer.FalseLabel
+from [Content].[BooleanAnswer-Active] answer
+    inner join [Content].[QuestionElement-Active] questionElement on answer.QuestionId = questionElement.QuestionId
+    inner join [Content].[Element-Active] element on questionElement.ElementId = element.Id
+    inner join [Content].[Section-Active] section on element.SectionId = section.Id
+where section.PageId = @Id
+
+select
+     answer.Id
+    ,answer.QuestionId
+    ,answer.Kind
+    ,answer.Label
+from [Content].[ContactAnswer-Active] answer
+    inner join [Content].[QuestionElement-Active] questionElement on answer.QuestionId = questionElement.QuestionId
+    inner join [Content].[Element-Active] element on questionElement.ElementId = element.Id
+    inner join [Content].[Section-Active] section on element.SectionId = section.Id
+where section.PageId = @Id
+
+select
+     answer.Id
+    ,answer.QuestionId
+    ,answer.Kind
+    ,answer.DateMin
+    ,answer.DateMax
+    ,answer.TimeMin
+    ,answer.TimeMax
+    ,answer.DateTimeMin
+    ,answer.DateTimeMax
+from [Content].[DateAnswer-Active] answer
+    inner join [Content].[QuestionElement-Active] questionElement on answer.QuestionId = questionElement.QuestionId
+    inner join [Content].[Element-Active] element on questionElement.ElementId = element.Id
+    inner join [Content].[Section-Active] section on element.SectionId = section.Id
+where section.PageId = @Id
+
+select
+     answer.Id
+    ,answer.QuestionId
+    ,answer.Kind
+from [Content].[FileAnswer-Active] answer
+    inner join [Content].[QuestionElement-Active] questionElement on answer.QuestionId = questionElement.QuestionId
+    inner join [Content].[Element-Active] element on questionElement.ElementId = element.Id
+    inner join [Content].[Section-Active] section on element.SectionId = section.Id
+where section.PageId = @Id
+
+select
+     answer.Id
+    ,answer.QuestionId
+    ,answer.Kind
+    ,answer.IntegerMin
+    ,answer.IntegerMax
+    ,answer.DecimalMin
+    ,answer.DecimalMax
+    ,answer.CurrencyMin
+    ,answer.CurrencyMax
+from [Content].[NumberAnswer-Active] answer
+    inner join [Content].[QuestionElement-Active] questionElement on answer.QuestionId = questionElement.QuestionId
+    inner join [Content].[Element-Active] element on questionElement.ElementId = element.Id
+    inner join [Content].[Section-Active] section on element.SectionId = section.Id
+where section.PageId = @Id
+
+select
+     answer.Id
+    ,answer.QuestionId
+    ,answer.Kind
+    ,answer.Orientation
+    ,answer.AllowOther
+    ,answer.OtherLabel
+    ,answer.MinSelections
+    ,answer.MaxSelections
+    ,answer.Ordering
+from [Content].[OptionsAnswer-Active] answer
+    inner join [Content].[QuestionElement-Active] questionElement on answer.QuestionId = questionElement.QuestionId
+    inner join [Content].[Element-Active] element on questionElement.ElementId = element.Id
+    inner join [Content].[Section-Active] section on element.SectionId = section.Id
+where section.PageId = @Id
+
+select
+     choice.Id
+    ,choice.OptionsAnswerId
+    ,choice.Text
+    ,choice.Ordinal
+from [Content].[OptionsAnswerChoice-Active] choice
+    inner join [Content].[OptionsAnswer-Active] answer on choice.OptionsAnswerId = answer.Id
+    inner join [Content].[QuestionElement-Active] questionElement on answer.QuestionId = questionElement.QuestionId
+    inner join [Content].[Element-Active] element on questionElement.ElementId = element.Id
+    inner join [Content].[Section-Active] section on element.SectionId = section.Id
+where section.PageId = @Id
+order by choice.Ordinal
+
+select
+     answer.Id
+    ,answer.QuestionId
+    ,answer.Kind
+    ,answer.RatingKind
+    ,answer.LikertKind
+    ,answer.RatingMin
+    ,answer.RatingMax
+    ,answer.Ordering
+from [Content].[ScaleAnswer-Active] answer
+    inner join [Content].[QuestionElement-Active] questionElement on answer.QuestionId = questionElement.QuestionId
+    inner join [Content].[Element-Active] element on questionElement.ElementId = element.Id
+    inner join [Content].[Section-Active] section on element.SectionId = section.Id
+where section.PageId = @Id
+
+select
+     answer.Id
+    ,answer.QuestionId
+    ,answer.Kind
+    ,answer.Label
+    ,answer.Placeholder
+from [Content].[TextAnswer-Active] answer
+    inner join [Content].[QuestionElement-Active] questionElement on answer.QuestionId = questionElement.QuestionId
+    inner join [Content].[Element-Active] element on questionElement.ElementId = element.Id
+    inner join [Content].[Section-Active] section on element.SectionId = section.Id
+where section.PageId = @Id
+
 -- EducationCommon
 
 select

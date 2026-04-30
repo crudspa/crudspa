@@ -25,5 +25,11 @@ public class ImagesController : EmbeddedResourceController
     [HttpGet("notebook")]
     public ActionResult Notebook() => GetFile("Notebook.svg");
 
+    [HttpGet("star-empty")]
+    public ActionResult StarEmpty() => GetFile("Star-Empty.svg");
+
+    [HttpGet("star-filled")]
+    public ActionResult StarFilled() => GetFile("Star-Filled.svg");
+
     private ActionResult GetFile(String fileName) => EmbeddedResourceFile(Files, fileName);
 }

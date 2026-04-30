@@ -1,0 +1,17 @@
+create table [Content].[DateAnswer] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [QuestionId] uniqueidentifier not null,
+    [Kind] int default(0) not null,
+    [DateMin] date null,
+    [DateMax] date null,
+    [TimeMin] time null,
+    [TimeMax] time null,
+    [DateTimeMin] datetimeoffset(7) null,
+    [DateTimeMax] datetimeoffset(7) null,
+    constraint [PK_Content_DateAnswer] primary key clustered ([Id]),
+    constraint [FK_Content_DateAnswer_Question] foreign key ([QuestionId]) references [Content].[Question] ([Id]),
+);

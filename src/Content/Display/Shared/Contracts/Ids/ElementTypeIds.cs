@@ -8,6 +8,7 @@ public class ElementTypeIds
     public static readonly Guid Multimedia = new("10c2c0db-2aab-43bd-abc9-ec1b422f3907");
     public static readonly Guid Note = new("db70aeeb-3d2e-42f0-bbb2-61a6baf3f6f8");
     public static readonly Guid Pdf = new("52ce0670-8bae-43b6-aca2-9f5ca0c03f41");
+    public static readonly Guid Question = new("fe3d272b-8edd-486c-9d35-120fec97a8d5");
     public static readonly Guid TextElement = new("46931711-0f53-4791-9256-b0437a6c1ee6");
     public static readonly Guid Video = new("dcffec78-c3da-420f-9512-a7f9e09a0fbd");
 }

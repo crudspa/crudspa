@@ -1,0 +1,26 @@
+@if (Answer is not null)
+{
+    @if (Answer.Kind == NumberAnswer.Kinds.Integer)
+    {
+        <Field Label="Number"
+               Size="Field.Sizes.Small">
+            <NumericTextBox T="Int32?" @bind-Value="Model.Reply.IntegerValue" />
+        </Field>
+    }
+    else if (Answer.Kind == NumberAnswer.Kinds.Currency)
+    {
+        <Field Label="Amount"
+               Size="Field.Sizes.Small">
+            <NumericTextBox T="Single?" Prefix="$" @bind-Value="Model.Reply.CurrencyValue" />
+        </Field>
+    }
+    else
+    {
+        <Field Label="Number"
+               Size="Field.Sizes.Small">
+            <NumericTextBox T="Single?"
+                            Suffix="@(Answer.Kind == NumberAnswer.Kinds.Percentage ? "%" : null)"
+                            @bind-Value="Model.Reply.DecimalValue" />
+        </Field>
+    }
+}

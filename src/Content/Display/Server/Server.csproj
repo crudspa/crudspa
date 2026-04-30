@@ -13,6 +13,8 @@
     <EmbeddedResource Include="Embedded\Images\Error.svg" />
     <EmbeddedResource Include="Embedded\Images\Exclamation.svg" />
     <EmbeddedResource Include="Embedded\Images\Notebook.svg" />
+    <EmbeddedResource Include="Embedded\Images\Star-Empty.svg" />
+    <EmbeddedResource Include="Embedded\Images\Star-Filled.svg" />
     <EmbeddedResource Include="Embedded\Sounds\AchievementGrow.mp3" />
     <EmbeddedResource Include="Embedded\Sounds\AchievementShrink.mp3" />
     <EmbeddedResource Include="Embedded\Sounds\ButtonPress.mp3" />

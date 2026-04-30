@@ -1,0 +1,30 @@
+@namespace Crudspa.Content.Display.Client.Plugins
+@PluginFragment
+
+@code
+{
+    [Parameter, EditorRequired] public String? TypeName { get; set; } = String.Empty;
+    [Parameter, EditorRequired] public QuestionDisplayModel Model { get; set; } = null!;
+
+    public Object? Instance { get; private set; }
+
+    private RenderFragment PluginFragment => builder =>
+    {
+        if (TypeName.HasNothing())
+            throw new("TypeName was not supplied.");
+
+        var pluginType = Type.GetType(TypeName)
+            ?? throw new($"Component type '{TypeName}' not found.");
+
+        if (!typeof(IAnswerDisplay).IsAssignableFrom(pluginType))
+            throw new($"Interface '{nameof(IAnswerDisplay)}' is not implemented by the component '{TypeName}'.");
+
+        builder.OpenComponent(0, pluginType);
+
+        builder.AddAttribute(1, nameof(IAnswerDisplay.Model), Model);
+
+        builder.AddComponentReferenceCapture(2, component => Instance = component);
+
+        builder.CloseComponent();
+    };
+}

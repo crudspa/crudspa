@@ -8,6 +8,12 @@ public partial class DesignHub
             await SectionService.FetchElementTypes(request));
     }
 
+    public async Task<Response<IList<AnswerType>>> SectionFetchAnswerTypes(Request request)
+    {
+        return await HubWrappers.RequireUser(request, async session =>
+            await SectionService.FetchAnswerTypes(request));
+    }
+
     public async Task<Response<SectionElement?>> SectionCreateElement(Request<ElementSpec> request)
     {
         return await HubWrappers.RequireUser(request, async session =>

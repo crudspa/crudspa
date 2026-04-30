@@ -1,0 +1,31 @@
+<Wrapped Alignment="Wrapped.Alignments.Top">
+    <Field Label="Selection Style"
+           Size="Field.Sizes.Medium"
+           Container="Field.Containers.Div">
+        <EnumRadio TEnum="BooleanAnswer.Kinds"
+                   ReadOnly="ReadOnly"
+                   @bind-SelectedValue="Answer.Kind" />
+    </Field>
+    <Field Label="True Label"
+           Size="Field.Sizes.Medium">
+        <TextBox ReadOnly="ReadOnly"
+                 MaxLength="250"
+                 @bind-Value="Answer.TrueLabel" />
+    </Field>
+    @if (Answer.Kind == BooleanAnswer.Kinds.Radio)
+    {
+        <Field Label="False Label"
+               Size="Field.Sizes.Medium">
+            <TextBox ReadOnly="ReadOnly"
+                     MaxLength="250"
+                     @bind-Value="Answer.FalseLabel" />
+        </Field>
+        <Field Label="Orientation"
+               Size="Field.Sizes.Medium"
+               Container="Field.Containers.Div">
+            <EnumRadio TEnum="BooleanAnswer.Orientations"
+                       ReadOnly="ReadOnly"
+                       @bind-SelectedValue="Answer.Orientation" />
+        </Field>
+    }
+</Wrapped>

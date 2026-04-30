@@ -107,6 +107,76 @@ public static class PageRunSelectCommon
             while (await reader.ReadAsync())
                 videos.Add(PageDataReaders.ReadVideo(reader));
 
+            var questionElements = new List<QuestionElement>();
+
+            await reader.NextResultAsync();
+
+            while (await reader.ReadAsync())
+                questionElements.Add(PageDataReaders.ReadQuestionElement(reader));
+
+            var booleanAnswers = new List<BooleanAnswer>();
+
+            await reader.NextResultAsync();
+
+            while (await reader.ReadAsync())
+                booleanAnswers.Add(PageDataReaders.ReadBooleanAnswer(reader));
+
+            var contactAnswers = new List<ContactAnswer>();
+
+            await reader.NextResultAsync();
+
+            while (await reader.ReadAsync())
+                contactAnswers.Add(PageDataReaders.ReadContactAnswer(reader));
+
+            var dateAnswers = new List<DateAnswer>();
+
+            await reader.NextResultAsync();
+
+            while (await reader.ReadAsync())
+                dateAnswers.Add(PageDataReaders.ReadDateAnswer(reader));
+
+            var fileAnswers = new List<FileAnswer>();
+
+            await reader.NextResultAsync();
+
+            while (await reader.ReadAsync())
+                fileAnswers.Add(PageDataReaders.ReadFileAnswer(reader));
+
+            var numberAnswers = new List<NumberAnswer>();
+
+            await reader.NextResultAsync();
+
+            while (await reader.ReadAsync())
+                numberAnswers.Add(PageDataReaders.ReadNumberAnswer(reader));
+
+            var optionsAnswers = new List<OptionsAnswer>();
+
+            await reader.NextResultAsync();
+
+            while (await reader.ReadAsync())
+                optionsAnswers.Add(PageDataReaders.ReadOptionsAnswer(reader));
+
+            var optionsAnswerChoices = new List<OptionsAnswerChoice>();
+
+            await reader.NextResultAsync();
+
+            while (await reader.ReadAsync())
+                optionsAnswerChoices.Add(PageDataReaders.ReadOptionsAnswerChoice(reader));
+
+            var scaleAnswers = new List<ScaleAnswer>();
+
+            await reader.NextResultAsync();
+
+            while (await reader.ReadAsync())
+                scaleAnswers.Add(PageDataReaders.ReadScaleAnswer(reader));
+
+            var textAnswers = new List<TextAnswer>();
+
+            await reader.NextResultAsync();
+
+            while (await reader.ReadAsync())
+                textAnswers.Add(PageDataReaders.ReadTextAnswer(reader));
+
             var activityElements = new List<ActivityElement>();
 
             await reader.NextResultAsync();
@@ -138,6 +208,16 @@ public static class PageRunSelectCommon
             var notesByElementId = notes.ToLookup(x => x.ElementId);
             var pdfsByElementId = pdfs.ToLookup(x => x.ElementId);
             var videosByElementId = videos.ToLookup(x => x.ElementId);
+            var questionsByElementId = questionElements.ToLookup(x => x.ElementId);
+            var booleanAnswersByQuestionId = booleanAnswers.ToLookup(x => x.QuestionId);
+            var contactAnswersByQuestionId = contactAnswers.ToLookup(x => x.QuestionId);
+            var dateAnswersByQuestionId = dateAnswers.ToLookup(x => x.QuestionId);
+            var fileAnswersByQuestionId = fileAnswers.ToLookup(x => x.QuestionId);
+            var numberAnswersByQuestionId = numberAnswers.ToLookup(x => x.QuestionId);
+            var optionsAnswersByQuestionId = optionsAnswers.ToLookup(x => x.QuestionId);
+            var optionsAnswerChoicesByOptionsAnswerId = optionsAnswerChoices.ToLookup(x => x.OptionsAnswerId);
+            var scaleAnswersByQuestionId = scaleAnswers.ToLookup(x => x.QuestionId);
+            var textAnswersByQuestionId = textAnswers.ToLookup(x => x.QuestionId);
             var activityElementsByElementId = activityElements.ToLookup(x => x.ElementId);
 
             page.Sections = page.Sections.OrderBy(x => x.Ordinal).ToObservable();
@@ -198,6 +278,31 @@ public static class PageRunSelectCommon
                             var pdfSectionElement = new SectionElement { Element = element };
                             pdfSectionElement.SetConfig(pdfElement);
                             section.Elements.Add(pdfSectionElement);
+                            break;
+
+                        case var id when id == ElementTypeIds.Question:
+                            var questionElement = questionsByElementId[element.Id].First();
+                            var question = questionElement.Question;
+
+                            question.BooleanAnswer = booleanAnswersByQuestionId[question.Id].FirstOrDefault();
+                            question.ContactAnswer = contactAnswersByQuestionId[question.Id].FirstOrDefault();
+                            question.DateAnswer = dateAnswersByQuestionId[question.Id].FirstOrDefault();
+                            question.FileAnswer = fileAnswersByQuestionId[question.Id].FirstOrDefault();
+                            question.NumberAnswer = numberAnswersByQuestionId[question.Id].FirstOrDefault();
+                            question.OptionsAnswer = optionsAnswersByQuestionId[question.Id].FirstOrDefault();
+
+                            if (question.OptionsAnswer is not null)
+                                question.OptionsAnswer.Choices = optionsAnswerChoicesByOptionsAnswerId[question.OptionsAnswer.Id]
+                                    .OrderBy(x => x.Ordinal)
+                                    .ToObservable();
+
+                            question.ScaleAnswer = scaleAnswersByQuestionId[question.Id].FirstOrDefault();
+                            question.TextAnswer = textAnswersByQuestionId[question.Id].FirstOrDefault();
+                            question.EnsureAnswer();
+
+                            var questionSectionElement = new SectionElement { Element = element };
+                            questionSectionElement.SetConfig(questionElement);
+                            section.Elements.Add(questionSectionElement);
                             break;
 
                         case var id when id == ElementTypeIds.Video:

@@ -70,6 +70,12 @@ internal static class SectionCopyEx
             return;
         }
 
+        if (element.As<QuestionElement>() is { } question)
+        {
+            Reset(question);
+            return;
+        }
+
         if (element.As<TextElement>() is { } text)
         {
             Reset(text);
@@ -220,6 +226,25 @@ internal static class SectionCopyEx
         pdf.ElementId = null;
     }
 
+    private static void Reset(QuestionElement questionElement)
+    {
+        questionElement.Id = null;
+        questionElement.ElementId = null;
+        questionElement.QuestionId = null;
+
+        var question = questionElement.Question;
+        question.Id = null;
+
+        question.BooleanAnswer?.ClearIds();
+        question.ContactAnswer?.ClearIds();
+        question.DateAnswer?.ClearIds();
+        question.FileAnswer?.ClearIds();
+        question.NumberAnswer?.ClearIds();
+        question.OptionsAnswer?.ClearIds();
+        question.ScaleAnswer?.ClearIds();
+        question.TextAnswer?.ClearIds();
+    }
+
     private static void Reset(TextElement text)
     {
         text.Id = null;
@@ -230,5 +255,25 @@ internal static class SectionCopyEx
     {
         video.Id = null;
         video.ElementId = null;
+    }
+
+    private static void ClearIds(this BooleanAnswer answer) { answer.Id = null; answer.QuestionId = null; }
+    private static void ClearIds(this ContactAnswer answer) { answer.Id = null; answer.QuestionId = null; }
+    private static void ClearIds(this DateAnswer answer) { answer.Id = null; answer.QuestionId = null; }
+    private static void ClearIds(this FileAnswer answer) { answer.Id = null; answer.QuestionId = null; }
+    private static void ClearIds(this NumberAnswer answer) { answer.Id = null; answer.QuestionId = null; }
+    private static void ClearIds(this ScaleAnswer answer) { answer.Id = null; answer.QuestionId = null; }
+    private static void ClearIds(this TextAnswer answer) { answer.Id = null; answer.QuestionId = null; }
+
+    private static void ClearIds(this OptionsAnswer answer)
+    {
+        answer.Id = null;
+        answer.QuestionId = null;
+
+        foreach (var choice in answer.Choices)
+        {
+            choice.Id = null;
+            choice.OptionsAnswerId = null;
+        }
     }
 }

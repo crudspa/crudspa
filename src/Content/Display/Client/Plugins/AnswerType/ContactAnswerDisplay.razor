@@ -1,0 +1,24 @@
+@if (Answer is not null)
+{
+    @if (Answer.Kind == ContactAnswer.Kinds.Postal)
+    {
+        <div class="question-postal">
+            <UsaPostalEdit UsaPostal="Model.Reply.Postal" />
+        </div>
+    }
+    else if (Answer.Kind == ContactAnswer.Kinds.Signature)
+    {
+        <Field Label="@Label"
+               Size="Field.Sizes.Wide">
+            <MultilineTextBox Height="MultilineTextBox.Heights.Short"
+                              @bind-Value="Model.Reply.TextValue" />
+        </Field>
+    }
+    else
+    {
+        <Field Label="@Label"
+               Size="Field.Sizes.Medium">
+            <TextBox @bind-Value="Model.Reply.TextValue" />
+        </Field>
+    }
+}

@@ -1,0 +1,24 @@
+<Wrapped Alignment="Wrapped.Alignments.Top">
+    <Field Label="Kind"
+           Size="Field.Sizes.Medium"
+           Container="Field.Containers.Div">
+        <EnumRadio TEnum="TextAnswer.Kinds"
+                   ReadOnly="ReadOnly"
+                   @bind-SelectedValue="Answer.Kind" />
+    </Field>
+    <Field Label="Label"
+           Size="Field.Sizes.Medium">
+        <TextBox ReadOnly="ReadOnly"
+                 MaxLength="150"
+                 @bind-Value="Answer.Label" />
+    </Field>
+    @if (Answer.Kind != TextAnswer.Kinds.Rich)
+    {
+        <Field Label="Placeholder"
+               Size="Field.Sizes.Medium">
+            <TextBox ReadOnly="ReadOnly"
+                     MaxLength="150"
+                     @bind-Value="Answer.Placeholder" />
+        </Field>
+    }
+</Wrapped>

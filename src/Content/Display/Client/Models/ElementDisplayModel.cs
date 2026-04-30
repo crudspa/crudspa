@@ -70,9 +70,6 @@ public class ElementDisplayModel : Observable, IHandle<ElementProgressUpdated>
 
     public async Task AddElementCompleted()
     {
-        Replaying = false;
-        NeedsAttention = false;
-
         var request = new Request<ElementCompleted>(new()
         {
             ElementId = Element.Id,
@@ -80,6 +77,22 @@ public class ElementDisplayModel : Observable, IHandle<ElementProgressUpdated>
         });
 
         await _elementProgressService.AddCompleted(request);
+        await MarkElementCompleted();
+    }
+
+    public async Task MarkElementCompleted()
+    {
+        Replaying = false;
+        NeedsAttention = false;
+
+        _progress ??= new()
+        {
+            ElementId = Element.Id,
+            TimesCompleted = 0,
+        };
+
+        _progress.TimesCompleted = Math.Max(_progress.TimesCompleted.GetValueOrDefault(), 1);
+        RaisePropertyChanged(nameof(CompletionStatus));
 
         await _eventBus.Publish(new ValidateBinder());
     }

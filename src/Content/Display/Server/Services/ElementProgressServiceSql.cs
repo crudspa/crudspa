@@ -3,7 +3,9 @@
 public class ElementProgressServiceSql(
     IServiceWrappers wrappers,
     ISqlWrappers sqlWrappers,
-    IServerConfigService configService)
+    IServerConfigService configService,
+    IFileService fileService,
+    IHtmlSanitizer htmlSanitizer)
     : IElementProgressService
 {
     private String Connection => configService.Fetch().Database;
@@ -42,4 +44,89 @@ public class ElementProgressServiceSql(
             });
         });
     }
+
+    public async Task<Response> AddQuestionReply(Request<QuestionReply> request)
+    {
+        return await wrappers.Try(request, async response =>
+        {
+            var reply = request.Value;
+
+            if (!reply.QuestionId.HasValue)
+            {
+                response.AddError("Question is required.", nameof(reply.QuestionId));
+                return;
+            }
+
+            if (!reply.ElementId.HasValue)
+            {
+                response.AddError("Element is required.", nameof(reply.ElementId));
+                return;
+            }
+
+            var audioFileResponse = await fileService.SaveAudio(new(request.SessionId, reply.AudioFile));
+            if (!audioFileResponse.Ok)
+            {
+                response.AddErrors(audioFileResponse.Errors);
+                return;
+            }
+            reply.AudioId = audioFileResponse.Value?.Id;
+
+            var imageFileResponse = await fileService.SaveImage(new(request.SessionId, reply.ImageFile));
+            if (!imageFileResponse.Ok)
+            {
+                response.AddErrors(imageFileResponse.Errors);
+                return;
+            }
+            reply.ImageId = imageFileResponse.Value?.Id;
+
+            var pdfFileResponse = await fileService.SavePdf(new(request.SessionId, reply.PdfFile));
+            if (!pdfFileResponse.Ok)
+            {
+                response.AddErrors(pdfFileResponse.Errors);
+                return;
+            }
+            reply.PdfId = pdfFileResponse.Value?.Id;
+
+            var videoFileResponse = await fileService.SaveVideo(new(request.SessionId, reply.VideoFile));
+            if (!videoFileResponse.Ok)
+            {
+                response.AddErrors(videoFileResponse.Errors);
+                return;
+            }
+            reply.VideoId = videoFileResponse.Value?.Id;
+
+            reply.HtmlValue = htmlSanitizer.Sanitize(reply.HtmlValue);
+
+            await sqlWrappers.WithTransaction(async (connection, transaction) =>
+            {
+                if (reply.Postal.HasContent())
+                    reply.PostalId = await UsaPostalInsert.Execute(connection, transaction, request.SessionId, reply.Postal);
+
+                reply.Id = await QuestionReplyInsert.Execute(connection, transaction, request.SessionId, reply);
+
+                foreach (var answerChoice in reply.AnswerChoices)
+                {
+                    answerChoice.QuestionReplyId = reply.Id;
+                    await AnswerChoiceReplyInsertByBatch.Execute(connection, transaction, request.SessionId, answerChoice);
+                }
+
+                await ElementCompletedInsert.Execute(connection, transaction, request.SessionId, new()
+                {
+                    ElementId = reply.ElementId,
+                    DeviceTimestamp = reply.Submitted ?? DateTimeOffset.Now,
+                });
+            });
+        });
+    }
+}
+
+internal static class QuestionReplyPostalEx
+{
+    public static Boolean HasContent(this UsaPostal postal) =>
+        postal.RecipientName.HasSomething()
+        || postal.BusinessName.HasSomething()
+        || postal.StreetAddress.HasSomething()
+        || postal.City.HasSomething()
+        || postal.StateId.HasValue
+        || postal.PostalCode.HasSomething();
 }

@@ -1,0 +1,31 @@
+@if (Answer is not null)
+{
+    <div class="question-options @(Answer.Orientation == BooleanAnswer.Orientations.Horizontal ? "horizontal" : null)">
+        @if (Answer.Kind == BooleanAnswer.Kinds.Checkbox)
+        {
+            <label class="question-option">
+                <input type="checkbox"
+                       checked="@(Model.Reply.BoolValue == true)"
+                       @onchange="ToggleCheckbox" />
+                <span>@(Answer.TrueLabel.HasSomething() ? Answer.TrueLabel : "Yes")</span>
+            </label>
+        }
+        else
+        {
+            <label class="question-option">
+                <input type="radio"
+                       name="@GroupName"
+                       checked="@(Model.Reply.BoolValue == true)"
+                       @onchange="@(() => Model.SetBoolean(true))" />
+                <span>@(Answer.TrueLabel.HasSomething() ? Answer.TrueLabel : "Yes")</span>
+            </label>
+            <label class="question-option">
+                <input type="radio"
+                       name="@GroupName"
+                       checked="@(Model.Reply.BoolValue == false)"
+                       @onchange="@(() => Model.SetBoolean(false))" />
+                <span>@(Answer.FalseLabel.HasSomething() ? Answer.FalseLabel : "No")</span>
+            </label>
+        }
+    </div>
+}

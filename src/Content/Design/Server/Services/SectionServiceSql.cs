@@ -231,6 +231,12 @@ public class SectionServiceSql(
             await ElementTypeSelectFull.Execute(Connection));
     }
 
+    public async Task<Response<IList<AnswerType>>> FetchAnswerTypes(Request request)
+    {
+        return await wrappers.Try<IList<AnswerType>>(request, async response =>
+            await AnswerTypeSelectFull.Execute(Connection));
+    }
+
     public async Task<Response<SectionElement?>> CreateElement(Request<ElementSpec> request)
     {
         return await wrappers.Try<SectionElement?>(request, async response =>

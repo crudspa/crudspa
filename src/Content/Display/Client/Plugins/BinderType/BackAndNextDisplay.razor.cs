@@ -64,13 +64,13 @@ public partial class BackAndNextDisplay : IBinderDisplay, IDisposable, IHandle<V
 
     public async Task Next()
     {
-        if (MoveNext())
+        if (await MoveNext())
             await Model.LoadPage();
     }
 
     public async Task Finish()
     {
-        if (CheckMoveNext())
+        if (await CheckMoveNext())
         {
             var showAlert = false;
 
@@ -105,9 +105,9 @@ public partial class BackAndNextDisplay : IBinderDisplay, IDisposable, IHandle<V
         return false;
     }
 
-    private Boolean MoveNext()
+    private async Task<Boolean> MoveNext()
     {
-        if (CheckMoveNext())
+        if (await CheckMoveNext())
         {
             Model.PageNumber++;
             UpdatePagingState();
@@ -131,8 +131,9 @@ public partial class BackAndNextDisplay : IBinderDisplay, IDisposable, IHandle<V
         Model.UpdatePositionText();
     }
 
-    private Boolean CheckMoveNext()
+    private async Task<Boolean> CheckMoveNext()
     {
+        await EventBus.Publish(new ValidateBinderElements());
         return Validate() == 0;
     }
 

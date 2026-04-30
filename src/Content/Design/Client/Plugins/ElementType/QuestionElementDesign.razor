@@ -1,0 +1,27 @@
+@using HtmlEditorMarkup = Crudspa.Framework.Core.Client.Components.HtmlEditorMarkup
+
+@if (QuestionElement is not null && AnswerTypes.HasItems())
+{
+    <Wrapped Alignment="Wrapped.Alignments.Top">
+        <Field Label="Question"
+               Size="Field.Sizes.Full">
+            <HtmlEditor ReadOnly="ReadOnly"
+                        @bind-Value="QuestionElement.Question.Text" />
+        </Field>
+        <Field Label="Answer Type"
+               Size="Field.Sizes.Medium">
+            <Dropdown LookupValues="AnswerTypes"
+                      ReadOnly="ReadOnly"
+                      @bind-Value="QuestionElement.Question.AnswerTypeId" />
+        </Field>
+    </Wrapped>
+
+    @if (SelectedAnswerType?.DesignView.HasSomething() == true)
+    {
+        <AnswerDesignPlugin TypeName="@SelectedAnswerType.DesignView"
+                            Question="QuestionElement.Question"
+                            ReadOnly="ReadOnly"
+                            @ref="AnswerDesign"
+                            @key="QuestionElement.Question.AnswerTypeId" />
+    }
+}

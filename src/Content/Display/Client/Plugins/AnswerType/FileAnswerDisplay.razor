@@ -1,0 +1,25 @@
+@if (Answer is not null)
+{
+    <div class="question-file-answer">
+        @if (Answer.Kind == FileAnswer.Kinds.Audio)
+        {
+            <AudioUploader Required="true"
+                           AudioFile="Model.Reply.AudioFile" />
+        }
+        else if (Answer.Kind == FileAnswer.Kinds.Image)
+        {
+            <ImageUploader Required="true"
+                           ImageFile="Model.Reply.ImageFile" />
+        }
+        else if (Answer.Kind == FileAnswer.Kinds.Pdf)
+        {
+            <PdfUploader Required="true"
+                         PdfFile="Model.Reply.PdfFile" />
+        }
+        else
+        {
+            <VideoUploader Required="true"
+                           VideoFile="Model.Reply.VideoFile" />
+        }
+    </div>
+}

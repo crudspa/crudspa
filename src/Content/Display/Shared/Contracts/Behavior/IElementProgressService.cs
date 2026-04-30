@@ -6,4 +6,5 @@ public interface IElementProgressService
     Task<ElementProgress> Fetch(Request<Element> request);
     Task<Response> AddCompleted(Request<ElementCompleted> request);
     Task<Response> AddLink(Request<ElementLink> request);
+    Task<Response> AddQuestionReply(Request<QuestionReply> request);
 }

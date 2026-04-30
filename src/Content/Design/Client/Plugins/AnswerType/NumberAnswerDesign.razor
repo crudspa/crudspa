@@ -1,0 +1,42 @@
+<Wrapped Alignment="Wrapped.Alignments.Top">
+    <Field Label="Kind"
+           Size="Field.Sizes.Full"
+           Container="Field.Containers.Div">
+        <EnumRadio TEnum="NumberAnswer.Kinds"
+                   ReadOnly="ReadOnly"
+                   @bind-SelectedValue="Answer.Kind" />
+    </Field>
+    @if (Answer.Kind == NumberAnswer.Kinds.Integer)
+    {
+        <Field Label="Minimum"
+               Size="Field.Sizes.Small">
+            <NumericTextBox T="Int32?" ReadOnly="ReadOnly" @bind-Value="Answer.IntegerMin" />
+        </Field>
+        <Field Label="Maximum"
+               Size="Field.Sizes.Small">
+            <NumericTextBox T="Int32?" ReadOnly="ReadOnly" @bind-Value="Answer.IntegerMax" />
+        </Field>
+    }
+    else if (Answer.Kind == NumberAnswer.Kinds.Currency)
+    {
+        <Field Label="Minimum"
+               Size="Field.Sizes.Small">
+            <NumericTextBox T="Single?" Prefix="$" ReadOnly="ReadOnly" @bind-Value="Answer.CurrencyMin" />
+        </Field>
+        <Field Label="Maximum"
+               Size="Field.Sizes.Small">
+            <NumericTextBox T="Single?" Prefix="$" ReadOnly="ReadOnly" @bind-Value="Answer.CurrencyMax" />
+        </Field>
+    }
+    else
+    {
+        <Field Label="Minimum"
+               Size="Field.Sizes.Small">
+            <NumericTextBox T="Single?" Suffix="@(Answer.Kind == NumberAnswer.Kinds.Percentage ? "%" : null)" ReadOnly="ReadOnly" @bind-Value="Answer.DecimalMin" />
+        </Field>
+        <Field Label="Maximum"
+               Size="Field.Sizes.Small">
+            <NumericTextBox T="Single?" Suffix="@(Answer.Kind == NumberAnswer.Kinds.Percentage ? "%" : null)" ReadOnly="ReadOnly" @bind-Value="Answer.DecimalMax" />
+        </Field>
+    }
+</Wrapped>

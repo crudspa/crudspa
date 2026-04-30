@@ -32,4 +32,23 @@ public partial class DisplayHub
         return await HubWrappers.RequireSession(request, async session =>
             await ElementProgressService.AddLink(request));
     }
+
+    public async Task<Response> ElementProgressAddQuestionReply(Request<QuestionReply> request)
+    {
+        return await HubWrappers.RequireSession(request, async session =>
+        {
+            if (session.User?.Contact.Id is null)
+                return new();
+
+            var response = await ElementProgressService.AddQuestionReply(request);
+
+            if (response.Ok)
+            {
+                var progress = await ElementProgressService.Fetch(new(session.Id, new() { Id = request.Value.ElementId }));
+                await Notify(session.Id, session.User.Contact.Id, new ElementProgressUpdated { Progress = progress });
+            }
+
+            return response;
+        });
+    }
 }

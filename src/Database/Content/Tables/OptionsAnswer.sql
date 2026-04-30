@@ -1,0 +1,17 @@
+create table [Content].[OptionsAnswer] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [QuestionId] uniqueidentifier not null,
+    [Kind] int default(0) not null,
+    [Orientation] int default(0) not null,
+    [AllowOther] bit default(0) not null,
+    [OtherLabel] nvarchar(50) null,
+    [MinSelections] int null,
+    [MaxSelections] int null,
+    [Ordering] int default(0) not null,
+    constraint [PK_Content_OptionsAnswer] primary key clustered ([Id]),
+    constraint [FK_Content_OptionsAnswer_Question] foreign key ([QuestionId]) references [Content].[Question] ([Id]),
+);

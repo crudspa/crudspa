@@ -1,0 +1,52 @@
+<Wrapped Alignment="Wrapped.Alignments.Top">
+    <Field Label="Kind"
+           Size="Field.Sizes.Medium"
+           Container="Field.Containers.Div">
+        <EnumRadio TEnum="DateAnswer.Kinds"
+                   ReadOnly="ReadOnly"
+                   @bind-SelectedValue="Answer.Kind" />
+    </Field>
+    @if (Answer.Kind == DateAnswer.Kinds.Date)
+    {
+        <Field Label="Minimum Date"
+               Size="Field.Sizes.Medium">
+            <DatePicker Format="d"
+                        ReadOnly="ReadOnly"
+                        @bind-Value="Answer.DateMin" />
+        </Field>
+        <Field Label="Maximum Date"
+               Size="Field.Sizes.Medium">
+            <DatePicker Format="d"
+                        ReadOnly="ReadOnly"
+                        @bind-Value="Answer.DateMax" />
+        </Field>
+    }
+    else if (Answer.Kind == DateAnswer.Kinds.Time)
+    {
+        <Field Label="Minimum Time"
+               Size="Field.Sizes.Small">
+            <TextBox ReadOnly="ReadOnly"
+                     Placeholder="09:00"
+                     @bind-Value="TimeMinText" />
+        </Field>
+        <Field Label="Maximum Time"
+               Size="Field.Sizes.Small">
+            <TextBox ReadOnly="ReadOnly"
+                     Placeholder="17:00"
+                     @bind-Value="TimeMaxText" />
+        </Field>
+    }
+    else
+    {
+        <Field Label="Minimum Date/Time"
+               Size="Field.Sizes.Medium">
+            <DateTimePicker ReadOnly="ReadOnly"
+                            @bind-Value="Answer.DateTimeMin" />
+        </Field>
+        <Field Label="Maximum Date/Time"
+               Size="Field.Sizes.Medium">
+            <DateTimePicker ReadOnly="ReadOnly"
+                            @bind-Value="Answer.DateTimeMax" />
+        </Field>
+    }
+</Wrapped>

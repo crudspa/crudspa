@@ -1,0 +1,60 @@
+@if (Answer is not null)
+{
+    @if (IsRatingStars)
+    {
+        <div class="question-scale rating-stars">
+            <div class="question-star-rating"
+                 role="radiogroup">
+                @foreach (var option in Model.ScaleOptions())
+                {
+                    <button type="button"
+                            class="scale-star-option @(IsSelected(option) ? "selected" : null)"
+                            role="radio"
+                            aria-checked="@IsSelected(option)"
+                            aria-label="@StarLabel(option)"
+                            @onclick="@(() => Select(option))">
+                        <img src="@StarImage(option)"
+                             alt="" />
+                    </button>
+                }
+            </div>
+        </div>
+    }
+    else if (IsRatingNumbers)
+    {
+        <div class="question-scale rating-numbers">
+            <div class="question-number-rating c-button-group top-aligned"
+                 role="group">
+                @foreach (var option in Model.ScaleOptions())
+                {
+                    <button type="button"
+                            aria-pressed="@IsSelected(option)"
+                            @onclick="@(() => Select(option))">
+                        <div class="c-button input-look scale-number-option @(IsSelected(option) ? "selected" : null)">
+                            <div class="text">@option.Label</div>
+                        </div>
+                    </button>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="question-scale likert">
+            <div class="question-likert-options"
+                 role="radiogroup">
+                @foreach (var option in Model.ScaleOptions())
+                {
+                    <label class="c-radio tight-label question-likert-option">
+                        <input type="radio"
+                               name="@GroupName"
+                               value="@option.Value"
+                               checked="@IsSelected(option)"
+                               @onchange="@(() => Select(option))" />
+                        <span class="label">@option.Label</span>
+                    </label>
+                }
+            </div>
+        </div>
+    }
+}

@@ -1,0 +1,44 @@
+<Wrapped Alignment="Wrapped.Alignments.Top">
+    <Field Label="Kind"
+           Size="Field.Sizes.Medium"
+           Container="Field.Containers.Div">
+        <EnumRadio TEnum="ScaleAnswer.Kinds"
+                   ReadOnly="ReadOnly"
+                   @bind-SelectedValue="Answer.Kind" />
+    </Field>
+    @if (Answer.Kind == ScaleAnswer.Kinds.Rating)
+    {
+        <Field Label="Rating Style"
+               Size="Field.Sizes.Medium"
+               Container="Field.Containers.Div">
+            <EnumRadio TEnum="ScaleAnswer.RatingKinds"
+                       ReadOnly="ReadOnly"
+                       @bind-SelectedValue="Answer.RatingKind" />
+        </Field>
+        <Field Label="Minimum"
+               Size="Field.Sizes.Tiny">
+            <NumericTextBox T="Int32?" ReadOnly="ReadOnly" @bind-Value="Answer.RatingMin" />
+        </Field>
+        <Field Label="Maximum"
+               Size="Field.Sizes.Tiny">
+            <NumericTextBox T="Int32?" ReadOnly="ReadOnly" @bind-Value="Answer.RatingMax" />
+        </Field>
+    }
+    else
+    {
+        <Field Label="Likert Scale"
+               Size="Field.Sizes.Medium"
+               Container="Field.Containers.Div">
+            <EnumRadio TEnum="ScaleAnswer.LikertKinds"
+                       ReadOnly="ReadOnly"
+                       @bind-SelectedValue="Answer.LikertKind" />
+        </Field>
+        <Field Label="Ordering"
+               Size="Field.Sizes.Medium"
+               Container="Field.Containers.Div">
+            <EnumRadio TEnum="ScaleAnswer.Orderings"
+                       ReadOnly="ReadOnly"
+                       @bind-SelectedValue="Answer.Ordering" />
+        </Field>
+    }
+</Wrapped>

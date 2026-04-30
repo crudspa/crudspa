@@ -57,6 +57,9 @@ GO
 print format(getdate(), 'yyyy-MM-dd HH:mm:ss.fff ') + 'Running MergeElementType.sql...'
 :r .\..\Content\Scripts\MergeElementType.sql
 GO
+print format(getdate(), 'yyyy-MM-dd HH:mm:ss.fff ') + 'Running MergeAnswerType.sql...'
+:r .\..\Content\Scripts\MergeAnswerType.sql
+GO
 print format(getdate(), 'yyyy-MM-dd HH:mm:ss.fff ') + 'Running MergeJustifyContent.sql...'
 :r .\..\Content\Scripts\MergeJustifyContent.sql
 GO

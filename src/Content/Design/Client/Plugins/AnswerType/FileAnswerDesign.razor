@@ -1,0 +1,9 @@
+<Wrapped Alignment="Wrapped.Alignments.Top">
+    <Field Label="Accepted File"
+           Size="Field.Sizes.Full"
+           Container="Field.Containers.Div">
+        <EnumRadio TEnum="FileAnswer.Kinds"
+                   ReadOnly="ReadOnly"
+                   @bind-SelectedValue="Answer.Kind" />
+    </Field>
+</Wrapped>

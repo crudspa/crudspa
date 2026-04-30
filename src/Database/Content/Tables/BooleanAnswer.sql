@@ -1,0 +1,15 @@
+create table [Content].[BooleanAnswer] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [QuestionId] uniqueidentifier not null,
+    [Kind] int default(0) not null,
+    [Default] bit default(0) not null,
+    [Orientation] int default(0) not null,
+    [TrueLabel] nvarchar(250) default('Yes') null,
+    [FalseLabel] nvarchar(250) default('No') not null,
+    constraint [PK_Content_BooleanAnswer] primary key clustered ([Id]),
+    constraint [FK_Content_BooleanAnswer_Question] foreign key ([QuestionId]) references [Content].[Question] ([Id]),
+);

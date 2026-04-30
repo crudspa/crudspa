@@ -60,6 +60,9 @@ public class ElementProgressServiceTcp : IElementProgressService, IHandle<Elemen
     public async Task<Response> AddLink(Request<ElementLink> request) =>
         await _proxyWrappers.Send("ElementProgressAddLink", request);
 
+    public async Task<Response> AddQuestionReply(Request<QuestionReply> request) =>
+        await _proxyWrappers.Send("ElementProgressAddQuestionReply", request);
+
     public async Task Handle(ElementProgressUpdated payload)
     {
         await _initLock.WaitAsync();

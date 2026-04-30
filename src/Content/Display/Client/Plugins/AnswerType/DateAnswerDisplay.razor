@@ -1,0 +1,26 @@
+@if (Answer is not null)
+{
+    @if (Answer.Kind == DateAnswer.Kinds.Date)
+    {
+        <Field Label="Date"
+               Size="Field.Sizes.Medium">
+            <DatePicker Format="d"
+                        @bind-Value="Model.Reply.DateValue" />
+        </Field>
+    }
+    else if (Answer.Kind == DateAnswer.Kinds.Time)
+    {
+        <Field Label="Time"
+               Size="Field.Sizes.Small">
+            <TextBox Placeholder="09:00"
+                     @bind-Value="TimeText" />
+        </Field>
+    }
+    else
+    {
+        <Field Label="Date/Time"
+               Size="Field.Sizes.Medium">
+            <DateTimePicker @bind-Value="Model.Reply.DateTimeValue" />
+        </Field>
+    }
+}

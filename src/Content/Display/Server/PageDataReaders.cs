@@ -225,6 +225,76 @@ public static class PageDataReaders
         while (await reader.ReadAsync())
             videos.Add(ReadVideo(reader));
 
+        var questionElements = new List<QuestionElement>();
+
+        await reader.NextResultAsync();
+
+        while (await reader.ReadAsync())
+            questionElements.Add(ReadQuestionElement(reader));
+
+        var booleanAnswers = new List<BooleanAnswer>();
+
+        await reader.NextResultAsync();
+
+        while (await reader.ReadAsync())
+            booleanAnswers.Add(ReadBooleanAnswer(reader));
+
+        var contactAnswers = new List<ContactAnswer>();
+
+        await reader.NextResultAsync();
+
+        while (await reader.ReadAsync())
+            contactAnswers.Add(ReadContactAnswer(reader));
+
+        var dateAnswers = new List<DateAnswer>();
+
+        await reader.NextResultAsync();
+
+        while (await reader.ReadAsync())
+            dateAnswers.Add(ReadDateAnswer(reader));
+
+        var fileAnswers = new List<FileAnswer>();
+
+        await reader.NextResultAsync();
+
+        while (await reader.ReadAsync())
+            fileAnswers.Add(ReadFileAnswer(reader));
+
+        var numberAnswers = new List<NumberAnswer>();
+
+        await reader.NextResultAsync();
+
+        while (await reader.ReadAsync())
+            numberAnswers.Add(ReadNumberAnswer(reader));
+
+        var optionsAnswers = new List<OptionsAnswer>();
+
+        await reader.NextResultAsync();
+
+        while (await reader.ReadAsync())
+            optionsAnswers.Add(ReadOptionsAnswer(reader));
+
+        var optionsAnswerChoices = new List<OptionsAnswerChoice>();
+
+        await reader.NextResultAsync();
+
+        while (await reader.ReadAsync())
+            optionsAnswerChoices.Add(ReadOptionsAnswerChoice(reader));
+
+        var scaleAnswers = new List<ScaleAnswer>();
+
+        await reader.NextResultAsync();
+
+        while (await reader.ReadAsync())
+            scaleAnswers.Add(ReadScaleAnswer(reader));
+
+        var textAnswers = new List<TextAnswer>();
+
+        await reader.NextResultAsync();
+
+        while (await reader.ReadAsync())
+            textAnswers.Add(ReadTextAnswer(reader));
+
         var orderedSections = sections.OrderBy(x => x.Ordinal).ToList();
         var elementsBySectionId = elements.ToLookup(x => x.SectionId);
         var audiosByElementId = audios.ToLookup(x => x.ElementId);
@@ -236,6 +306,16 @@ public static class PageDataReaders
         var notesByElementId = notes.ToLookup(x => x.ElementId);
         var pdfsByElementId = pdfs.ToLookup(x => x.ElementId);
         var videosByElementId = videos.ToLookup(x => x.ElementId);
+        var questionsByElementId = questionElements.ToLookup(x => x.ElementId);
+        var booleanAnswersByQuestionId = booleanAnswers.ToLookup(x => x.QuestionId);
+        var contactAnswersByQuestionId = contactAnswers.ToLookup(x => x.QuestionId);
+        var dateAnswersByQuestionId = dateAnswers.ToLookup(x => x.QuestionId);
+        var fileAnswersByQuestionId = fileAnswers.ToLookup(x => x.QuestionId);
+        var numberAnswersByQuestionId = numberAnswers.ToLookup(x => x.QuestionId);
+        var optionsAnswersByQuestionId = optionsAnswers.ToLookup(x => x.QuestionId);
+        var optionsAnswerChoicesByOptionsAnswerId = optionsAnswerChoices.ToLookup(x => x.OptionsAnswerId);
+        var scaleAnswersByQuestionId = scaleAnswers.ToLookup(x => x.QuestionId);
+        var textAnswersByQuestionId = textAnswers.ToLookup(x => x.QuestionId);
 
         foreach (var section in orderedSections)
         {
@@ -293,6 +373,31 @@ public static class PageDataReaders
                         var pdfSectionElement = new SectionElement { Element = element };
                         pdfSectionElement.SetConfig(pdfElement);
                         section.Elements.Add(pdfSectionElement);
+                        break;
+
+                    case var id when id == ElementTypeIds.Question:
+                        var questionElement = questionsByElementId[element.Id].First();
+                        var question = questionElement.Question;
+
+                        question.BooleanAnswer = booleanAnswersByQuestionId[question.Id].FirstOrDefault();
+                        question.ContactAnswer = contactAnswersByQuestionId[question.Id].FirstOrDefault();
+                        question.DateAnswer = dateAnswersByQuestionId[question.Id].FirstOrDefault();
+                        question.FileAnswer = fileAnswersByQuestionId[question.Id].FirstOrDefault();
+                        question.NumberAnswer = numberAnswersByQuestionId[question.Id].FirstOrDefault();
+                        question.OptionsAnswer = optionsAnswersByQuestionId[question.Id].FirstOrDefault();
+
+                        if (question.OptionsAnswer is not null)
+                            question.OptionsAnswer.Choices = optionsAnswerChoicesByOptionsAnswerId[question.OptionsAnswer.Id]
+                                .OrderBy(x => x.Ordinal)
+                                .ToObservable();
+
+                        question.ScaleAnswer = scaleAnswersByQuestionId[question.Id].FirstOrDefault();
+                        question.TextAnswer = textAnswersByQuestionId[question.Id].FirstOrDefault();
+                        question.EnsureAnswer();
+
+                        var questionSectionElement = new SectionElement { Element = element };
+                        questionSectionElement.SetConfig(questionElement);
+                        section.Elements.Add(questionSectionElement);
                         break;
 
                     case var id when id == ElementTypeIds.Video:
@@ -730,6 +835,152 @@ public static class PageDataReaders
                 Height = reader.ReadInt32(17),
                 Caption = reader.ReadString(18),
             },
+        };
+    }
+
+    public static QuestionElement ReadQuestionElement(SqlDataReader reader)
+    {
+        var questionId = reader.ReadGuid(2);
+
+        return new()
+        {
+            Id = reader.ReadGuid(0),
+            ElementId = reader.ReadGuid(1),
+            QuestionId = questionId,
+            Question = new()
+            {
+                Id = questionId,
+                Text = reader.ReadString(3),
+                AnswerTypeId = reader.ReadGuid(4),
+                AnswerType = new()
+                {
+                    Id = reader.ReadGuid(4),
+                    Name = reader.ReadString(5),
+                    DesignView = reader.ReadString(6),
+                    DisplayView = reader.ReadString(7),
+                },
+            },
+        };
+    }
+
+    public static BooleanAnswer ReadBooleanAnswer(SqlDataReader reader)
+    {
+        return new()
+        {
+            Id = reader.ReadGuid(0),
+            QuestionId = reader.ReadGuid(1),
+            Kind = reader.ReadEnum<BooleanAnswer.Kinds>(2),
+            Default = reader.ReadBoolean(3),
+            Orientation = reader.ReadEnum<BooleanAnswer.Orientations>(4),
+            TrueLabel = reader.ReadString(5),
+            FalseLabel = reader.ReadString(6),
+        };
+    }
+
+    public static ContactAnswer ReadContactAnswer(SqlDataReader reader)
+    {
+        return new()
+        {
+            Id = reader.ReadGuid(0),
+            QuestionId = reader.ReadGuid(1),
+            Kind = reader.ReadEnum<ContactAnswer.Kinds>(2),
+            Label = reader.ReadString(3),
+        };
+    }
+
+    public static DateAnswer ReadDateAnswer(SqlDataReader reader)
+    {
+        return new()
+        {
+            Id = reader.ReadGuid(0),
+            QuestionId = reader.ReadGuid(1),
+            Kind = reader.ReadEnum<DateAnswer.Kinds>(2),
+            DateMin = reader.ReadDateOnly(3),
+            DateMax = reader.ReadDateOnly(4),
+            TimeMin = reader.ReadTimeOnly(5),
+            TimeMax = reader.ReadTimeOnly(6),
+            DateTimeMin = reader.ReadDateTimeOffset(7),
+            DateTimeMax = reader.ReadDateTimeOffset(8),
+        };
+    }
+
+    public static FileAnswer ReadFileAnswer(SqlDataReader reader)
+    {
+        return new()
+        {
+            Id = reader.ReadGuid(0),
+            QuestionId = reader.ReadGuid(1),
+            Kind = reader.ReadEnum<FileAnswer.Kinds>(2),
+        };
+    }
+
+    public static NumberAnswer ReadNumberAnswer(SqlDataReader reader)
+    {
+        return new()
+        {
+            Id = reader.ReadGuid(0),
+            QuestionId = reader.ReadGuid(1),
+            Kind = reader.ReadEnum<NumberAnswer.Kinds>(2),
+            IntegerMin = reader.ReadInt32(3),
+            IntegerMax = reader.ReadInt32(4),
+            DecimalMin = reader.ReadSingle(5),
+            DecimalMax = reader.ReadSingle(6),
+            CurrencyMin = reader.ReadSingle(7),
+            CurrencyMax = reader.ReadSingle(8),
+        };
+    }
+
+    public static OptionsAnswer ReadOptionsAnswer(SqlDataReader reader)
+    {
+        return new()
+        {
+            Id = reader.ReadGuid(0),
+            QuestionId = reader.ReadGuid(1),
+            Kind = reader.ReadEnum<OptionsAnswer.Kinds>(2),
+            Orientation = reader.ReadEnum<OptionsAnswer.Orientations>(3),
+            AllowOther = reader.ReadBoolean(4),
+            OtherLabel = reader.ReadString(5),
+            MinSelections = reader.ReadInt32(6),
+            MaxSelections = reader.ReadInt32(7),
+            Ordering = reader.ReadEnum<OptionsAnswer.Orderings>(8),
+        };
+    }
+
+    public static OptionsAnswerChoice ReadOptionsAnswerChoice(SqlDataReader reader)
+    {
+        return new()
+        {
+            Id = reader.ReadGuid(0),
+            OptionsAnswerId = reader.ReadGuid(1),
+            Text = reader.ReadString(2),
+            Ordinal = reader.ReadInt32(3),
+        };
+    }
+
+    public static ScaleAnswer ReadScaleAnswer(SqlDataReader reader)
+    {
+        return new()
+        {
+            Id = reader.ReadGuid(0),
+            QuestionId = reader.ReadGuid(1),
+            Kind = reader.ReadEnum<ScaleAnswer.Kinds>(2),
+            RatingKind = reader.ReadEnum<ScaleAnswer.RatingKinds>(3),
+            LikertKind = reader.ReadEnum<ScaleAnswer.LikertKinds>(4),
+            RatingMin = reader.ReadInt32(5),
+            RatingMax = reader.ReadInt32(6),
+            Ordering = reader.ReadEnum<ScaleAnswer.Orderings>(7),
+        };
+    }
+
+    public static TextAnswer ReadTextAnswer(SqlDataReader reader)
+    {
+        return new()
+        {
+            Id = reader.ReadGuid(0),
+            QuestionId = reader.ReadGuid(1),
+            Kind = reader.ReadEnum<TextAnswer.Kinds>(2),
+            Label = reader.ReadString(3),
+            Placeholder = reader.ReadString(4),
         };
     }
 }

@@ -1,0 +1,16 @@
+create table [Content].[ScaleAnswer] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [QuestionId] uniqueidentifier not null,
+    [Kind] int default(0) not null,
+    [RatingKind] int default(0) not null,
+    [LikertKind] int default(0) not null,
+    [RatingMin] int not null,
+    [RatingMax] int default(5) not null,
+    [Ordering] int default(0) not null,
+    constraint [PK_Content_ScaleAnswer] primary key clustered ([Id]),
+    constraint [FK_Content_ScaleAnswer_Question] foreign key ([QuestionId]) references [Content].[Question] ([Id]),
+);

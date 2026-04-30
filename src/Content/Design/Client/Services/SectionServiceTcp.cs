@@ -26,6 +26,9 @@ public class SectionServiceTcp(IProxyWrappers proxyWrappers) : ISectionService
     public async Task<Response<IList<ElementType>>> FetchElementTypes(Request request) =>
         await proxyWrappers.SendAndCache<IList<ElementType>>("SectionFetchElementTypes", request);
 
+    public async Task<Response<IList<AnswerType>>> FetchAnswerTypes(Request request) =>
+        await proxyWrappers.SendAndCache<IList<AnswerType>>("SectionFetchAnswerTypes", request);
+
     public async Task<Response<SectionElement?>> CreateElement(Request<ElementSpec> request) =>
         await proxyWrappers.Send<SectionElement?>("SectionCreateElement", request);
 }

@@ -1,0 +1,53 @@
+@if (Answer is not null)
+{
+    <div class="question-options @(Answer.Orientation == OptionsAnswer.Orientations.Horizontal ? "horizontal" : null)">
+        @foreach (var choice in Choices)
+        {
+            <label class="question-option" @key="choice.Id">
+                @if (Answer.Kind == OptionsAnswer.Kinds.Single)
+                {
+                    <input type="radio"
+                           name="@GroupName"
+                           checked="@Model.IsChoiceSelected(choice)"
+                           @onchange="@(() => SelectSingle(choice))" />
+                }
+                else
+                {
+                    <input type="checkbox"
+                           checked="@Model.IsChoiceSelected(choice)"
+                           @onchange="args => Toggle(choice, args)" />
+                }
+                <span>@choice.Text</span>
+            </label>
+        }
+
+        @if (Answer.AllowOther == true)
+        {
+            <label class="question-option other">
+                @if (Answer.Kind == OptionsAnswer.Kinds.Single)
+                {
+                    <input type="radio"
+                           name="@GroupName"
+                           checked="@(Model.Reply.OtherBoolValue == true)"
+                           @onchange="SelectOther" />
+                }
+                else
+                {
+                    <input type="checkbox"
+                           checked="@(Model.Reply.OtherBoolValue == true)"
+                           @onchange="ToggleOther" />
+                }
+                <span>@(Answer.OtherLabel.HasSomething() ? Answer.OtherLabel : "Other")</span>
+            </label>
+
+            @if (Model.Reply.OtherBoolValue == true)
+            {
+                <Field Label="Other"
+                       Size="Field.Sizes.Medium">
+                    <TextBox MaxLength="150"
+                             @bind-Value="Model.Reply.OtherTextValue" />
+                </Field>
+            }
+        }
+    </div>
+}

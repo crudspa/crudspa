@@ -10,5 +10,6 @@ public interface ISectionService
     Task<Response<Copy>> Copy(Request<Copy> request);
     Task<Response> SaveOrder(Request<IList<Section>> request);
     Task<Response<IList<ElementType>>> FetchElementTypes(Request request);
+    Task<Response<IList<AnswerType>>> FetchAnswerTypes(Request request);
     Task<Response<SectionElement?>> CreateElement(Request<ElementSpec> request);
 }

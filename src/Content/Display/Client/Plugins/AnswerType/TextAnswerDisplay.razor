@@ -1,0 +1,27 @@
+@if (Answer is not null)
+{
+    <div class="question-text-answer">
+        @if (Answer.Label.HasSomething())
+        {
+            <div class="question-answer-label">@Answer.Label</div>
+        }
+
+        @if (Answer.Kind == TextAnswer.Kinds.Rich)
+        {
+            <HtmlEditor @bind-Value="Model.Reply.HtmlValue" />
+        }
+        else if (Answer.Kind == TextAnswer.Kinds.Long)
+        {
+            <MultilineTextBox Height="MultilineTextBox.Heights.Average"
+                              Placeholder="@Answer.Placeholder"
+                              @bind-Value="Model.Reply.TextValue" />
+        }
+        else
+        {
+            <div class="question-short-text">
+                <TextBox Placeholder="@Answer.Placeholder"
+                         @bind-Value="Model.Reply.TextValue" />
+            </div>
+        }
+    </div>
+}
