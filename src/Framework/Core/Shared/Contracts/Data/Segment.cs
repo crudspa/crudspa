@@ -40,6 +40,12 @@ public class Segment : Observable, IValidates, INamed, IOrderable
         set => SetProperty(ref field, value);
     }
 
+    public String? SeoDescription
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
     public Guid? PermissionId
     {
         get;
@@ -170,6 +176,9 @@ public class Segment : Observable, IValidates, INamed, IOrderable
                 errors.AddError("Key cannot be longer than 100 characters.", nameof(Key));
             else if (!Key.IsSimpleKey())
                 errors.AddError("Key must be all lowercase letters, numbers, or hyphens.", nameof(Key));
+
+            if (SeoDescription?.Length > 300)
+                errors.AddError("Seo Description cannot be longer than 300 characters.", nameof(SeoDescription));
 
             if (Title.HasNothing())
                 errors.AddError("Title is required.", nameof(Title));

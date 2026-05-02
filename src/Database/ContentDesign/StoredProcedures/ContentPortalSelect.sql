@@ -23,6 +23,17 @@ select
     ,brandingImage.Width as BrandingImageWidth
     ,brandingImage.Height as BrandingImageHeight
     ,brandingImage.Caption as BrandingImageCaption
+    ,contentPortal.SeoTitle
+    ,contentPortal.SeoDescription
+    ,contentPortal.SeoKeywords
+    ,seoImage.Id as SeoImageId
+    ,seoImage.BlobId as SeoImageBlobId
+    ,seoImage.Name as SeoImageName
+    ,seoImage.Format as SeoImageFormat
+    ,seoImage.Width as SeoImageWidth
+    ,seoImage.Height as SeoImageHeight
+    ,seoImage.Caption as SeoImageCaption
+    ,contentPortal.CanonicalBaseUrl
     ,portal.Id as PortalId
     ,portal.[Key] as PortalKey
     ,portal.Title as PortalTitle
@@ -36,6 +47,7 @@ select
     ,(select count(1) from [Content].[Font-Active] where ContentPortalId = contentPortal.Id) as FontCount
 from [Content].[ContentPortal-Active] contentPortal
     left join [Framework].[ImageFile-Active] brandingImage on contentPortal.BrandingImageId = brandingImage.Id
+    left join [Framework].[ImageFile-Active] seoImage on contentPortal.SeoImageId = seoImage.Id
     inner join [Framework].[Portal-Active] portal on contentPortal.PortalId = portal.Id
     inner join [Framework].[Organization-Active] organization on portal.OwnerId = organization.Id
 where contentPortal.Id = @Id

@@ -4,6 +4,7 @@ create proc [FrameworkCore].[SegmentUpdate] (
     ,@Key nvarchar(100)
     ,@StatusId uniqueidentifier
     ,@Title nvarchar(150)
+    ,@SeoDescription nvarchar(300)
     ,@PermissionId uniqueidentifier
     ,@IconId uniqueidentifier
     ,@Fixed bit
@@ -34,6 +35,7 @@ set
     ,[Key] = @Key
     ,StatusId = @StatusId
     ,Title = @Title
+    ,SeoDescription = @SeoDescription
     ,PermissionId = @PermissionId
     ,IconId = @IconId
     ,Fixed = @Fixed

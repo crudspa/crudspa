@@ -38,6 +38,12 @@
                              MaxLength="150"
                              @bind-Value="Model.Entity.Title" />
                 </Field>
+                <Field Label="Seo Description"
+                       Size="Field.Sizes.Full">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="300"
+                             @bind-Value="Model.Entity.SeoDescription" />
+                </Field>
                 <Field Label="Permission"
                        Size="Field.Sizes.Medium">
                     <Dropdown ReadOnly="Model.ReadOnly"

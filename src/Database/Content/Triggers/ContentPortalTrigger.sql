@@ -12,6 +12,11 @@ insert [Content].[ContentPortal] (
     ,MaxWidth
     ,StyleRevision
     ,BrandingImageId
+    ,SeoTitle
+    ,SeoDescription
+    ,SeoKeywords
+    ,SeoImageId
+    ,CanonicalBaseUrl
     ,FooterPageId
 )
 select
@@ -24,5 +29,10 @@ select
     ,deleted.MaxWidth
     ,deleted.StyleRevision
     ,deleted.BrandingImageId
+    ,deleted.SeoTitle
+    ,deleted.SeoDescription
+    ,deleted.SeoKeywords
+    ,deleted.SeoImageId
+    ,deleted.CanonicalBaseUrl
     ,deleted.FooterPageId
 from deleted

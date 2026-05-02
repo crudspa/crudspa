@@ -19874,6 +19874,11 @@ begin
         ,MaxWidth
         ,StyleRevision
         ,BrandingImageId
+        ,SeoTitle
+        ,SeoDescription
+        ,SeoKeywords
+        ,SeoImageId
+        ,CanonicalBaseUrl
         ,FooterPageId
     )
     values (
@@ -19885,6 +19890,11 @@ begin
         ,'73410fd3-3681-46d3-800e-a08670e291cf'
         ,'84em'
         ,9
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
         ,null
         ,'2dd9575c-0fc6-4907-96cb-c694941d2375'
     )
@@ -19936,6 +19946,11 @@ begin
         ,MaxWidth
         ,StyleRevision
         ,BrandingImageId
+        ,SeoTitle
+        ,SeoDescription
+        ,SeoKeywords
+        ,SeoImageId
+        ,CanonicalBaseUrl
         ,FooterPageId
     )
     values (
@@ -19947,6 +19962,11 @@ begin
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,null
         ,8
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
         ,null
         ,'47b5f524-a1f7-4684-aca5-5d83ba127bb1'
     )

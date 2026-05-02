@@ -13,6 +13,7 @@ public static class SegmentInsert
         command.AddParameter("@Key", 100, segment.Key);
         command.AddParameter("@StatusId", segment.StatusId);
         command.AddParameter("@Title", 150, segment.Title);
+        command.AddParameter("@SeoDescription", 300, segment.SeoDescription);
         command.AddParameter("@PermissionId", segment.PermissionId);
         command.AddParameter("@IconId", segment.IconId);
         command.AddParameter("@Fixed", segment.Fixed);

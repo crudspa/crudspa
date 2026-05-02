@@ -21,6 +21,7 @@ select
     ,segment.[Key]
     ,segment.StatusId
     ,status.Name as StatusName
+    ,segment.SeoDescription
     ,segment.PermissionId
     ,permission.Name as PermissionName
     ,segment.IconId

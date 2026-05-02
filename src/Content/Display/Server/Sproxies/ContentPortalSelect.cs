@@ -38,7 +38,21 @@ public static class ContentPortalSelect
                 Height = reader.ReadInt32(14),
                 Caption = reader.ReadString(15),
             },
-            FooterPageId = reader.ReadGuid(16),
+            SeoTitle = reader.ReadString(16),
+            SeoDescription = reader.ReadString(17),
+            SeoKeywords = reader.ReadString(18),
+            SeoImageFile = new()
+            {
+                Id = reader.ReadGuid(19),
+                BlobId = reader.ReadGuid(20),
+                Name = reader.ReadString(21),
+                Format = reader.ReadString(22),
+                Width = reader.ReadInt32(23),
+                Height = reader.ReadInt32(24),
+                Caption = reader.ReadString(25),
+            },
+            CanonicalBaseUrl = reader.ReadString(26),
+            FooterPageId = reader.ReadGuid(27),
         };
     }
 }

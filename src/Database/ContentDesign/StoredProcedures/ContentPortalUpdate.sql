@@ -3,6 +3,11 @@ create proc [ContentDesign].[ContentPortalUpdate] (
     ,@Id uniqueidentifier
     ,@MaxWidth nvarchar(10)
     ,@BrandingImageId uniqueidentifier
+    ,@SeoTitle nvarchar(100)
+    ,@SeoDescription nvarchar(300)
+    ,@SeoKeywords nvarchar(300)
+    ,@SeoImageId uniqueidentifier
+    ,@CanonicalBaseUrl nvarchar(250)
 ) as
 
 declare @organizationId uniqueidentifier = (
@@ -39,6 +44,11 @@ set
     ,UpdatedBy = @SessionId
     ,MaxWidth = @MaxWidth
     ,BrandingImageId = @BrandingImageId
+    ,SeoTitle = @SeoTitle
+    ,SeoDescription = @SeoDescription
+    ,SeoKeywords = @SeoKeywords
+    ,SeoImageId = @SeoImageId
+    ,CanonicalBaseUrl = @CanonicalBaseUrl
 from [Content].[ContentPortal] contentPortal
 where contentPortal.Id = @Id
 

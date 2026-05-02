@@ -22,6 +22,7 @@ insert [Framework].[Segment] (
     ,Vertical
     ,ConfigJson
     ,AllLicenses
+    ,SeoDescription
     ,Ordinal
 )
 select
@@ -44,5 +45,6 @@ select
     ,deleted.Vertical
     ,deleted.ConfigJson
     ,deleted.AllLicenses
+    ,deleted.SeoDescription
     ,deleted.Ordinal
 from deleted

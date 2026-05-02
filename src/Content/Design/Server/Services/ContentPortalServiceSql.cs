@@ -47,6 +47,15 @@ public class ContentPortalServiceSql(
 
             contentPortal.BrandingImageFile.Id = brandingImageFileResponse.Value.Id;
 
+            var seoImageFileResponse = await fileService.SaveImage(new(request.SessionId, contentPortal.SeoImageFile), existing?.SeoImageFile);
+            if (!seoImageFileResponse.Ok)
+            {
+                response.AddErrors(seoImageFileResponse.Errors);
+                return;
+            }
+
+            contentPortal.SeoImageFile.Id = seoImageFileResponse.Value.Id;
+
             await sqlWrappers.WithConnection(async (connection, transaction) =>
             {
                 await ContentPortalUpdate.Execute(connection, transaction, request.SessionId, contentPortal);

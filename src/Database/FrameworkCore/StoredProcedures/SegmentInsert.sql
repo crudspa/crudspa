@@ -1,10 +1,11 @@
-﻿create proc [FrameworkCore].[SegmentInsert] (
+create proc [FrameworkCore].[SegmentInsert] (
      @SessionId uniqueidentifier
     ,@PortalId uniqueidentifier
     ,@ParentId uniqueidentifier
     ,@Key nvarchar(100)
     ,@StatusId uniqueidentifier
     ,@Title nvarchar(150)
+    ,@SeoDescription nvarchar(300)
     ,@PermissionId uniqueidentifier
     ,@IconId uniqueidentifier
     ,@Fixed bit
@@ -41,7 +42,6 @@ end
 
 if (@ordinal is null) set @ordinal = 0
 
-
 insert [Framework].[Segment] (
      Id
     ,VersionOf
@@ -52,6 +52,7 @@ insert [Framework].[Segment] (
     ,[Key]
     ,StatusId
     ,Title
+    ,SeoDescription
     ,PermissionId
     ,IconId
     ,Fixed
@@ -71,6 +72,7 @@ values (
     ,@Key
     ,@StatusId
     ,@Title
+    ,@SeoDescription
     ,@PermissionId
     ,@IconId
     ,@Fixed

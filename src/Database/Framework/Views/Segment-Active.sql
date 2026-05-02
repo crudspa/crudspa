@@ -15,6 +15,7 @@ select segment.Id as Id
     ,segment.Vertical as Vertical
     ,segment.ConfigJson as ConfigJson
     ,segment.AllLicenses as AllLicenses
+    ,segment.SeoDescription as SeoDescription
     ,segment.Ordinal as Ordinal
 from [Framework].[Segment] segment
 where 1=1

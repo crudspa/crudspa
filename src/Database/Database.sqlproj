@@ -597,6 +597,7 @@
     <Build Include="ContentDisplay\StoredProcedures\PageSelectForBinder.sql" />
     <Build Include="ContentDisplay\StoredProcedures\PostSelectRun.sql" />
     <Build Include="ContentDisplay\StoredProcedures\QuestionReplyInsert.sql" />
+    <Build Include="ContentDisplay\StoredProcedures\SeoRouteSelect.sql" />
     <Build Include="ContentDisplay\StoredProcedures\StyleRevisionSelectForPortal.sql" />
     <Build Include="ContentDisplay\StoredProcedures\StylesSelectForPortal.sql" />
     <Build Include="ContentDisplay\StoredProcedures\TrackAllCoursesAreCompleted.sql" />

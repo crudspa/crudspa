@@ -5,6 +5,11 @@ select contentPortal.Id as Id
     ,contentPortal.MaxWidth as MaxWidth
     ,contentPortal.StyleRevision as StyleRevision
     ,contentPortal.BrandingImageId as BrandingImageId
+    ,contentPortal.SeoTitle as SeoTitle
+    ,contentPortal.SeoDescription as SeoDescription
+    ,contentPortal.SeoKeywords as SeoKeywords
+    ,contentPortal.SeoImageId as SeoImageId
+    ,contentPortal.CanonicalBaseUrl as CanonicalBaseUrl
     ,contentPortal.FooterPageId as FooterPageId
 from [Content].[ContentPortal] contentPortal
 where 1=1

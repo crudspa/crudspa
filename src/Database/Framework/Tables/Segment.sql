@@ -18,6 +18,7 @@ create table [Framework].[Segment] (
     [Vertical] bit default(0) not null,
     [ConfigJson] nvarchar(max) null,
     [AllLicenses] bit default(1) not null,
+    [SeoDescription] nvarchar(300) null,
     [Ordinal] int not null,
     constraint [PK_Framework_Segment] primary key clustered ([Id]),
     constraint [FK_Framework_Segment_Status] foreign key ([StatusId]) references [Framework].[ContentStatus] ([Id]),
