@@ -25,6 +25,9 @@ select
     ,trifold.BookId
     ,trifold.BinderId
     ,trifold.Ordinal
+    ,guideBinder.Id as GuideBinderId
+    ,guideBinder.BinderId as GuideBinderBinderId
+    ,guideBinder.GuideImageId as GuideBinderGuideImageId
     ,guideImage.Id as GuideImageId
     ,guideImage.BlobId as GuideImageBlobId
     ,guideImage.Name as GuideImageName
@@ -37,8 +40,31 @@ select
 from [Education].[Trifold-Active] trifold
     left join [Education].[Book-Active] book on trifold.BookId = book.Id
     left join [Education].[UnitBook-Active] unitbook on book.Id = unitbook.BookId
-    left join [Framework].[ImageFile-Active] guideImage on book.GuideImageId = guideImage.Id
+    left join [Education].[GuideBinder-Active] guideBinder on trifold.BinderId = guideBinder.BinderId
+    left join [Framework].[ImageFile-Active] guideImage on guideBinder.GuideImageId = guideImage.Id
     inner join [Content].[Binder] binder on trifold.BinderId = binder.Id
     inner join [Content].[BinderType-Active] binderType on binder.TypeId = binderType.Id
+where trifold.Id = @Id
+    and trifold.StatusId = @ContentStatusComplete
+
+select
+     guidePage.Id
+    ,guidePage.GuideBinderId
+    ,guidePage.PageId
+    ,guidePage.ShowGuide
+    ,guidePage.GuideText
+    ,guidePage.GuideAudioId
+    ,guideAudio.Id as GuideAudioId
+    ,guideAudio.BlobId as GuideAudioBlobId
+    ,guideAudio.Name as GuideAudioName
+    ,guideAudio.Format as GuideAudioFormat
+    ,guideAudio.OptimizedStatus as GuideAudioOptimizedStatus
+    ,guideAudio.OptimizedBlobId as GuideAudioOptimizedBlobId
+    ,guideAudio.OptimizedFormat as GuideAudioOptimizedFormat
+    ,guidePage.ShowNotebook
+from [Education].[Trifold-Active] trifold
+    inner join [Education].[GuideBinder-Active] guideBinder on trifold.BinderId = guideBinder.BinderId
+    inner join [Education].[GuidePage-Active] guidePage on guideBinder.Id = guidePage.GuideBinderId
+    left join [Framework].[AudioFile-Active] guideAudio on guidePage.GuideAudioId = guideAudio.Id
 where trifold.Id = @Id
     and trifold.StatusId = @ContentStatusComplete

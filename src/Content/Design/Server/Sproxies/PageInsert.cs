@@ -13,10 +13,10 @@ public static class PageInsert
         command.AddParameter("@Title", 150, page.Title);
         command.AddParameter("@BoxId", page.Box.Id);
         command.AddParameter("@StatusId", page.StatusId);
-        command.AddParameter("@GuideText", page.GuideText);
-        command.AddParameter("@GuideAudioId", page.GuideAudioFile.Id);
-        command.AddParameter("@ShowNotebook", page.ShowNotebook ?? false);
-        command.AddParameter("@ShowGuide", page.ShowGuide ?? false);
+        command.AddParameter("@GuideText", (String?)null);
+        command.AddParameter("@GuideAudioId", (Guid?)null);
+        command.AddParameter("@ShowNotebook", false);
+        command.AddParameter("@ShowGuide", false);
 
         var output = command.AddOutputParameter("@Id");
         await command.Execute(connection, transaction);

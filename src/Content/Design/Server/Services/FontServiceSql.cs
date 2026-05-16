@@ -3,8 +3,7 @@ namespace Crudspa.Content.Design.Server.Services;
 public class FontServiceSql(
     IServiceWrappers wrappers,
     ISqlWrappers sqlWrappers,
-    IServerConfigService configService,
-    IFileService fileService)
+    IServerConfigService configService)
     : IFontService
 {
     private String Connection => configService.Fetch().Database;
@@ -33,15 +32,6 @@ public class FontServiceSql(
         {
             var font = request.Value;
 
-            var fileFileResponse = await fileService.SaveFont(new(request.SessionId, font.FileFile));
-            if (!fileFileResponse.Ok)
-            {
-                response.AddErrors(fileFileResponse.Errors);
-                return null;
-            }
-
-            font.FileFile.Id = fileFileResponse.Value.Id;
-
             return await sqlWrappers.WithConnection(async (connection, transaction) =>
             {
                 var id = await FontInsert.Execute(connection, transaction, request.SessionId, font);
@@ -60,17 +50,6 @@ public class FontServiceSql(
         return await wrappers.Validate(request, async response =>
         {
             var font = request.Value;
-
-            var existing = await FontSelect.Execute(Connection, request.SessionId, font);
-
-            var fileFileResponse = await fileService.SaveFont(new(request.SessionId, font.FileFile), existing?.FileFile);
-            if (!fileFileResponse.Ok)
-            {
-                response.AddErrors(fileFileResponse.Errors);
-                return;
-            }
-
-            font.FileFile.Id = fileFileResponse.Value.Id;
 
             await sqlWrappers.WithConnection(async (connection, transaction) =>
             {

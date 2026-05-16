@@ -1,0 +1,70 @@
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+            }
+            else
+            {
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            }
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                @if (Model.Entity.ContactId is not null)
+                {
+                    <Field Label="Contact"
+                           Size="Field.Sizes.Large">
+                        <TextBox ReadOnly="true"
+                                 @bind-Value="Model.Entity.ContactFirstName" />
+                    </Field>
+                }
+                @if (Model.Entity.ContactPhoneId is not null)
+                {
+                    <Field Label="Contact Phone"
+                           Size="Field.Sizes.Large">
+                        <TextBox ReadOnly="true"
+                                 @bind-Value="Model.Entity.ContactPhonePhone" />
+                    </Field>
+                }
+                <Field Label="Number"
+                       Size="Field.Sizes.Large">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="20"
+                             @bind-Value="Model.Entity.Number" />
+                </Field>
+                <Field Label="Status"
+                       Size="Field.Sizes.Large">
+                    <EnumDropdown ReadOnly="Model.ReadOnly"
+                                  TEnum="SmsPreference.Statuses"
+                                  @bind-SelectedValue="Model.Entity.Status" />
+                </Field>
+                <Field Label="Source"
+                       Size="Field.Sizes.Large">
+                    <EnumDropdown ReadOnly="Model.ReadOnly"
+                                  TEnum="SmsPreference.Sources"
+                                  @bind-SelectedValue="Model.Entity.Source" />
+                </Field>
+                <Field Label="Status Changed"
+                       Size="Field.Sizes.Small">
+                    <DateTimePicker ReadOnly="Model.ReadOnly"
+                                    @bind-Value="Model.Entity.StatusChanged" />
+                </Field>
+                <Field Label="Notes"
+                       Size="Field.Sizes.Full">
+                    <MultilineTextBox ReadOnly="Model.ReadOnly"
+                                      Height="MultilineTextBox.Heights.Tall"
+                                      @bind-Value="Model.Entity.Notes" />
+                </Field>
+            </Wrapped>
+        </Padding>
+    }
+</Waiter>

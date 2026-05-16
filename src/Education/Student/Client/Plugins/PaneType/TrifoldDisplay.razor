@@ -7,8 +7,12 @@
                                  Id="Model.Trifold.BinderId"
                                  TypeName="@Model.Trifold.BinderDisplayView"
                                  BinderCompleted="() => Model.HandleBinderCompleted()"
-                                 GuideImage="Model.Trifold.GuideImage"
-                                 Shadowed="true" />
+                                 Shadowed="true">
+                <PageHeader Context="page">
+                    <Guide GuideBinder="Model.Trifold.GuideBinder"
+                           Page="page" />
+                </PageHeader>
+            </BinderDisplayPlugin>
         </Padding>
     }
 </Waiter>

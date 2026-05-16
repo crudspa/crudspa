@@ -3,6 +3,7 @@ create view [Content].[DateAnswer-Active] as
 select dateAnswer.Id as Id
     ,dateAnswer.QuestionId as QuestionId
     ,dateAnswer.Kind as Kind
+    ,dateAnswer.Label as Label
     ,dateAnswer.DateMin as DateMin
     ,dateAnswer.DateMax as DateMax
     ,dateAnswer.TimeMin as TimeMin

@@ -38,6 +38,12 @@ public class NoteElement : Observable, IValidates
         set => SetProperty(ref field, value);
     } = false;
 
+    public Boolean? OpenOnly
+    {
+        get;
+        set => SetProperty(ref field, value);
+    } = false;
+
     public ObservableCollection<NoteImage> NoteImages
     {
         get;
@@ -48,7 +54,7 @@ public class NoteElement : Observable, IValidates
     {
         return ErrorsEx.Validate(errors =>
         {
-            if (Instructions.HasNothing())
+            if (OpenOnly != true && Instructions.HasNothing())
                 errors.AddError("Instructions are required.", nameof(Instructions));
 
             if (!RequireText.HasValue)
@@ -56,6 +62,9 @@ public class NoteElement : Observable, IValidates
 
             if (!RequireImageSelection.HasValue)
                 errors.AddError("Require Image Selection is required.", nameof(RequireImageSelection));
+
+            if (!OpenOnly.HasValue)
+                errors.AddError("Open Only is required.", nameof(OpenOnly));
         });
     }
 }

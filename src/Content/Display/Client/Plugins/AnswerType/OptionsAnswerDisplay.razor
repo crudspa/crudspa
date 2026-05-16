@@ -17,7 +17,9 @@
                            checked="@Model.IsChoiceSelected(choice)"
                            @onchange="args => Toggle(choice, args)" />
                 }
-                <span>@choice.Text</span>
+                <div class="question-option-text c-user-content">
+                    @((MarkupString)ChoiceHtml(choice))
+                </div>
             </label>
         }
 

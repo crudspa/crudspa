@@ -1,4 +1,4 @@
-using Crudspa.Content.Display.Shared.Contracts.Config.PaneType;
+using Sproxies = Crudspa.Content.Design.Server.Sproxies;
 
 namespace Crudspa.Content.Design.Server.Services;
 
@@ -14,6 +14,32 @@ public class PanePageServiceSql(
     {
         return await wrappers.Try<IList<Orderable>>(request, async response =>
             await ContentStatusSelectOrderables.Execute(Connection, request.SessionId));
+    }
+
+    public async Task<Response<PagePane?>> FetchPagePane(Request<PagePane> request)
+    {
+        return await wrappers.Try<PagePane?>(request, async response =>
+            await Sproxies.PagePaneSelectForPane.Execute(Connection, request.SessionId, request.Value.PaneId));
+    }
+
+    public async Task<Response<BinderPane?>> FetchBinderPane(Request<BinderPane> request)
+    {
+        return await wrappers.Try<BinderPane?>(request, async response =>
+            await Sproxies.BinderPaneSelectForPane.Execute(Connection, request.SessionId, request.Value.PaneId));
+    }
+
+    public async Task<Response<CoursePane?>> FetchCoursePane(Request<CoursePane> request)
+    {
+        return await wrappers.Try<CoursePane?>(request, async response =>
+            await Sproxies.CoursePaneSelectForPane.Execute(Connection, request.SessionId, request.Value.PaneId));
+    }
+
+    public async Task<Response> SaveCoursePane(Request<CoursePane> request)
+    {
+        return await wrappers.Try(request, async response =>
+        {
+            await Sproxies.CoursePaneUpdate.Execute(Connection, request.SessionId, request.Value);
+        });
     }
 
     public async Task<Response<IList<Page>>> FetchPages(Request<PageForPane> request)
@@ -75,8 +101,15 @@ public class PanePageServiceSql(
             if (request.Value.PaneId.HasNothing())
                 throw new("Pane page not found.");
 
+            if (!await HasPane(request.SessionId, request.Value.PaneId))
+                throw new("Pane not found.");
+
             var pageResponse = await pagePartsService.AddPage(request.SessionId, page);
             response.AddErrors(pageResponse.Errors);
+
+            if (pageResponse.Ok && pageResponse.Value?.Id is { } newPageId)
+                await Sproxies.PagePaneUpdate.Execute(Connection, request.SessionId, new() { PaneId = request.Value.PaneId, PageId = newPageId });
+
             return pageResponse.Value;
         });
     }
@@ -252,6 +285,9 @@ public class PanePageServiceSql(
             if (request.Value.PaneId.HasNothing())
                 throw new("Pane not found.");
 
+            if (!await HasPane(request.SessionId, request.Value.PaneId))
+                throw new("Pane not found.");
+
             var (pageId, binderId) = await FetchContentIds(request.SessionId, request.Value.PaneId);
 
             if (pageId.HasValue || binderId.HasValue)
@@ -267,6 +303,10 @@ public class PanePageServiceSql(
 
             var addResponse = await pagePartsService.AddBinder(request.SessionId, binder);
             response.AddErrors(addResponse.Errors);
+
+            if (addResponse.Ok && addResponse.Value?.Id is { } newBinderId)
+                await Sproxies.BinderPaneUpdate.Execute(Connection, request.SessionId, new() { PaneId = request.Value.PaneId, BinderId = newBinderId });
+
             return addResponse.Value!;
         });
     }
@@ -336,6 +376,9 @@ public class PanePageServiceSql(
     private async Task<Boolean> HasBinder(Guid? sessionId, Guid? binderId) =>
         binderId.HasValue && await PaneSelectForBinder.Execute(Connection, sessionId, binderId) is not null;
 
+    private async Task<Boolean> HasPane(Guid? sessionId, Guid? paneId) =>
+        paneId.HasValue && await PaneSelect.Execute(Connection, sessionId, new() { Id = paneId }) is not null;
+
     private async Task<Boolean> HasPage(Guid? sessionId, Guid? pageId) =>
         pageId.HasValue && await PaneSelectForPage.Execute(Connection, sessionId, pageId) is not null;
 
@@ -360,11 +403,11 @@ public class PanePageServiceSql(
         if (paneId.HasNothing())
             return (null, null);
 
-        var pane = await PaneSelect.Execute(Connection, sessionId, new() { Id = paneId });
+        var pagePaneTask = Sproxies.PagePaneSelectForPane.Execute(Connection, sessionId, paneId);
+        var binderPaneTask = Sproxies.BinderPaneSelectForPane.Execute(Connection, sessionId, paneId);
 
-        var pageId = pane?.ConfigJson.FromJson<PageConfig>()?.PageId;
-        var binderId = pane?.ConfigJson.FromJson<BinderConfig>()?.BinderId;
+        await Task.WhenAll(pagePaneTask, binderPaneTask);
 
-        return (pageId, binderId);
+        return ((await pagePaneTask)?.PageId, (await binderPaneTask)?.BinderId);
     }
 }

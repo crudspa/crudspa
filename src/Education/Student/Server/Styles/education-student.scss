@@ -154,7 +154,8 @@ $overlayBackgroundColor: rgba(255, 255, 255, 0.4);
 }
 
 .ces-student-pane-scroll {
-    align-content: start;
+    align-content: center;
+    align-content: safe center;
     box-sizing: border-box;
     height: auto;
     min-height: 100%;

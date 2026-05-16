@@ -5,6 +5,9 @@ select segment.Id as Id
     ,segment.Title as Title
     ,segment.StatusId as StatusId
     ,segment.Fixed as Fixed
+    ,segment.Routable as Routable
+    ,segment.Navigable as Navigable
+    ,segment.Mapable as Mapable
     ,segment.RequiresId as RequiresId
     ,segment.PortalId as PortalId
     ,segment.TypeId as TypeId

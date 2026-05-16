@@ -2,7 +2,6 @@ create proc [ContentDesign].[FontUpdate] (
      @SessionId uniqueidentifier
     ,@Id uniqueidentifier
     ,@Name nvarchar(75)
-    ,@FileId uniqueidentifier
 ) as
 
 declare @organizationId uniqueidentifier = (
@@ -24,7 +23,6 @@ set
     ,Updated = @now
     ,UpdatedBy = @SessionId
     ,Name = @Name
-    ,FileId = @FileId
 from [Content].[Font] baseTable
     inner join [Content].[Font-Active] font on font.Id = baseTable.Id
     inner join [Content].[ContentPortal-Active] contentPortal on font.ContentPortalId = contentPortal.Id

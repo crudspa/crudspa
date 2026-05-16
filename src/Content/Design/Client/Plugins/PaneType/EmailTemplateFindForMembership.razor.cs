@@ -18,7 +18,7 @@ public partial class EmailTemplateFindForMembership : IPaneDisplay, IDisposable
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new(EventBus, ScrollService, EmailTemplateService, Id);
+        Model = new(EventBus, ScrollService, EmailTemplateService, Id, Path.Id("portal"));
         Model.PropertyChanged += HandleModelChanged;
 
         await Model.Reset();
@@ -41,13 +41,15 @@ public class EmailTemplateFindForMembershipModel : FindModel<EmailTemplateSearch
 {
     private readonly IEmailTemplateService _emailTemplateService;
     private readonly Guid? _membershipId;
+    private readonly Guid? _portalId;
     private Boolean _resetting;
 
-    public EmailTemplateFindForMembershipModel(IEventBus eventBus, IScrollService scrollService, IEmailTemplateService emailTemplateService, Guid? membershipId)
+    public EmailTemplateFindForMembershipModel(IEventBus eventBus, IScrollService scrollService, IEmailTemplateService emailTemplateService, Guid? membershipId, Guid? portalId)
         : base(scrollService)
     {
         _emailTemplateService = emailTemplateService;
         _membershipId = membershipId;
+        _portalId = portalId;
         eventBus.Subscribe(this);
     }
 
@@ -61,7 +63,7 @@ public class EmailTemplateFindForMembershipModel : FindModel<EmailTemplateSearch
     {
         _resetting = true;
 
-        Search.ParentId = _membershipId;
+        Search.ParentId = _membershipId ?? _portalId;
 
         Search.Text = String.Empty;
 
@@ -80,7 +82,9 @@ public class EmailTemplateFindForMembershipModel : FindModel<EmailTemplateSearch
             return;
 
         var request = new Request<EmailTemplateSearch>(Search);
-        var response = await WithWaiting("Searching...", () => _emailTemplateService.SearchForMembership(request), resetAlerts);
+        var response = await WithWaiting("Searching...", () => _membershipId is not null
+            ? _emailTemplateService.SearchForMembership(request)
+            : _emailTemplateService.SearchForPortal(request), resetAlerts);
 
         if (response.Ok)
             SetCards(response.Value);

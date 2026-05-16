@@ -10,16 +10,10 @@
                          class="c-page @(Model.Page.Box.BoxClasses())"
                          style="@(Model.Page.Box.BoxStyles())"
                          @key="Model.Page">
-                        @if (Model.Page.ShowGuide == true || Model.Page.ShowNotebook == true)
+                        @if (PageHeader is not null)
                         {
                             <div class="c-stack center">
-                                @if (Model.GuideModel is not null)
-                                {
-                                    <Guide Model="Model.GuideModel"
-                                           ShowGuideFields="Model.Page.ShowGuide == true"
-                                           ShowNotebookButton="Model.Page.ShowNotebook == true"
-                                           AutoPlay="true" />
-                                }
+                                @PageHeader(Model.Page)
                             </div>
                         }
                         @foreach (var section in Model.Page.Sections)

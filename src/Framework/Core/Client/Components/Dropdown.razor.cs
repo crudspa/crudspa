@@ -2,6 +2,8 @@
 
 public partial class Dropdown
 {
+    private const Int32 MaxOptionCount = 1000;
+
     [Parameter, EditorRequired] public IEnumerable<INamed> LookupValues { get; set; } = null!;
     [Parameter] public Guid? Value { get; set; }
     [Parameter] public EventCallback<Guid?> ValueChanged { get; set; }

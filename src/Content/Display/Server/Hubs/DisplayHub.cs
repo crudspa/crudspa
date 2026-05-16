@@ -11,6 +11,7 @@ public partial class DisplayHub : Crudspa.Framework.Core.Server.Hubs.CoreHub
     protected IElementProgressService ElementProgressService { get; }
     protected INotebookRunService NotebookRunService { get; }
     protected IPageRunService PageRunService { get; }
+    protected ISurveyRunService SurveyRunService { get; }
 
     public DisplayHub(
         ILoggerFactory loggerFactory,
@@ -39,7 +40,8 @@ public partial class DisplayHub : Crudspa.Framework.Core.Server.Hubs.CoreHub
         ICourseRunService courseRunService,
         IElementProgressService elementProgressService,
         INotebookRunService notebookRunService,
-        IPageRunService pageRunService)
+        IPageRunService pageRunService,
+        ISurveyRunService surveyRunService)
         : base(loggerFactory,
             hubWrappers,
             accessDeniedService,
@@ -66,5 +68,6 @@ public partial class DisplayHub : Crudspa.Framework.Core.Server.Hubs.CoreHub
         ElementProgressService = elementProgressService;
         NotebookRunService = notebookRunService;
         PageRunService = pageRunService;
+        SurveyRunService = surveyRunService;
     }
 }

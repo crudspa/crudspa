@@ -14,14 +14,16 @@ public partial class EmailEdit : IPaneDisplay, IDisposable
     [Inject] public IScrollService ScrollService { get; set; } = null!;
     [Inject] public ISessionState SessionState { get; set; } = null!;
     [Inject] public IEmailService EmailService { get; set; } = null!;
+    [Inject] public IMembershipService MembershipService { get; set; } = null!;
 
     public EmailEditModel Model { get; set; } = null!;
 
     protected override async Task OnInitializedAsync()
     {
         var membershipId = Path!.Id("membership");
+        var portalId = Path.Id("portal");
 
-        Model = new(Path, Id, IsNew, membershipId, EventBus, Navigator, ScrollService, SessionState, EmailService);
+        Model = new(Path, Id, IsNew, membershipId, portalId, EventBus, Navigator, ScrollService, SessionState, EmailService, MembershipService);
         Model.PropertyChanged += HandleModelChanged;
 
         await Model.Initialize();
@@ -53,25 +55,30 @@ public class EmailEditModel : EditModel<Email>,
     private readonly String? _path;
     private readonly Guid? _id;
     private readonly Guid? _membershipId;
+    private readonly Guid? _portalId;
     private readonly INavigator _navigator;
     private readonly ISessionState _sessionState;
     private readonly IEmailService _emailService;
+    private readonly IMembershipService _membershipService;
 
     public ModalModel TemplateModalModel { get; }
 
-    public EmailEditModel(String? path, Guid? id, Boolean isNew, Guid? membershipId,
+    public EmailEditModel(String? path, Guid? id, Boolean isNew, Guid? membershipId, Guid? portalId,
         IEventBus eventBus,
         INavigator navigator,
         IScrollService scrollService,
         ISessionState sessionState,
-        IEmailService emailService) : base(isNew)
+        IEmailService emailService,
+        IMembershipService membershipService) : base(isNew)
     {
         _path = path;
         _id = id;
         _membershipId = membershipId;
+        _portalId = portalId;
         _navigator = navigator;
         _sessionState = sessionState;
         _emailService = emailService;
+        _membershipService = membershipService;
 
         EmailAttachmentsModel.PropertyChanged += HandleModelChanged;
 
@@ -125,6 +132,24 @@ public class EmailEditModel : EditModel<Email>,
         set => HandleTemplateChanged(value);
     }
 
+    public ObservableCollection<Membership> Memberships
+    {
+        get;
+        set => SetProperty(ref field, value);
+    } = [];
+
+    public Boolean ShowMembership => _membershipId is null;
+
+    public Guid? SelectedMembershipId
+    {
+        get => Entity?.MembershipId;
+        set
+        {
+            if (Entity is not null)
+                Entity.MembershipId = value;
+        }
+    }
+
     public List<String> Tokens
     {
         get;
@@ -133,11 +158,11 @@ public class EmailEditModel : EditModel<Email>,
 
     public async Task Initialize()
     {
+        await FetchMemberships();
+        await Refresh();
         await WithMany("Initializing...",
             FetchEmailTemplates(),
             FetchTokens());
-
-        await Refresh();
     }
 
     public async Task Refresh()
@@ -150,7 +175,7 @@ public class EmailEditModel : EditModel<Email>,
 
             SetEmail(new()
             {
-                MembershipId = _membershipId,
+                MembershipId = _membershipId ?? Memberships.FirstOrDefault()?.Id,
                 FromName = _sessionState.Session.User?.Name ?? String.Empty,
                 FromEmail = _sessionState.Session.User?.Username ?? String.Empty,
                 Subject = "New Email",
@@ -202,7 +227,15 @@ public class EmailEditModel : EditModel<Email>,
 
     public async Task FetchEmailTemplates()
     {
-        var response = await WithAlerts(() => _emailService.FetchEmailTemplates(new(new() { Id = _membershipId })), false);
+        var membershipId = Entity?.MembershipId ?? _membershipId;
+        if (membershipId is null)
+        {
+            EmailTemplates = [];
+            SelectedTemplate = null;
+            return;
+        }
+
+        var response = await WithAlerts(() => _emailService.FetchEmailTemplates(new(new() { Id = membershipId })), false);
         if (response.Ok)
         {
             EmailTemplates = response.Value.ToObservable();
@@ -212,9 +245,38 @@ public class EmailEditModel : EditModel<Email>,
 
     public async Task FetchTokens()
     {
-        var response = await WithAlerts(() => _emailService.FetchTokens(new(new() { Id = _membershipId })), false);
+        var membershipId = Entity?.MembershipId ?? _membershipId;
+        if (membershipId is null)
+        {
+            Tokens = [];
+            return;
+        }
+
+        var response = await WithAlerts(() => _emailService.FetchTokens(new(new() { Id = membershipId })), false);
         if (response.Ok)
             Tokens = response.Value.Select(x => $"[{x.Key!}]").ToList();
+    }
+
+    public async Task FetchMemberships()
+    {
+        if (_membershipId is not null || _portalId is null)
+            return;
+
+        var response = await WithAlerts(() => _membershipService.FetchForPortal(new(new() { Id = _portalId })), false);
+        if (response.Ok)
+            Memberships = response.Value.ToObservable();
+    }
+
+    public async Task HandleMembershipChanged(Guid? id)
+    {
+        SelectedMembershipId = id;
+
+        if (Entity is not null && SelectedTemplate?.MembershipId != id)
+            Entity.TemplateId = null;
+
+        await WithMany("Loading...",
+            FetchEmailTemplates(),
+            FetchTokens());
     }
 
     public void HandleTemplateChanged(Guid? id)

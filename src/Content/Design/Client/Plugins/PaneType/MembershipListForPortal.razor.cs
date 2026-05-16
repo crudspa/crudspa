@@ -1,5 +1,3 @@
-using Membership = Crudspa.Content.Design.Shared.Contracts.Data.Membership;
-
 namespace Crudspa.Content.Design.Client.Plugins.PaneType;
 
 public partial class MembershipListForPortal : IPaneDisplay, IDisposable
@@ -34,9 +32,7 @@ public partial class MembershipListForPortal : IPaneDisplay, IDisposable
 
 public class MembershipListForPortalModel : ListModel<MembershipModel>,
     IHandle<MembershipAdded>, IHandle<MembershipSaved>, IHandle<MembershipRemoved>,
-    IHandle<MemberAdded>, IHandle<MemberRemoved>,
-    IHandle<EmailAdded>, IHandle<EmailRemoved>,
-    IHandle<EmailTemplateAdded>, IHandle<EmailTemplateRemoved>
+    IHandle<MemberAdded>, IHandle<MemberRemoved>
 {
     private readonly IMembershipService _membershipService;
     private readonly Guid? _portalId;
@@ -45,6 +41,7 @@ public class MembershipListForPortalModel : ListModel<MembershipModel>,
         : base(scrollService)
     {
         _membershipService = membershipService;
+
         _portalId = portalId;
 
         eventBus.Subscribe(this);
@@ -63,30 +60,6 @@ public class MembershipListForPortalModel : ListModel<MembershipModel>,
     }
 
     public async Task Handle(MemberRemoved payload)
-    {
-        if (payload.MembershipId is not null && Cards.HasAny(x => x.Entity.Id.Equals(payload.MembershipId)))
-            await Replace(payload.MembershipId);
-    }
-
-    public async Task Handle(EmailAdded payload)
-    {
-        if (payload.MembershipId is not null && Cards.HasAny(x => x.Entity.Id.Equals(payload.MembershipId)))
-            await Replace(payload.MembershipId);
-    }
-
-    public async Task Handle(EmailRemoved payload)
-    {
-        if (payload.MembershipId is not null && Cards.HasAny(x => x.Entity.Id.Equals(payload.MembershipId)))
-            await Replace(payload.MembershipId);
-    }
-
-    public async Task Handle(EmailTemplateAdded payload)
-    {
-        if (payload.MembershipId is not null && Cards.HasAny(x => x.Entity.Id.Equals(payload.MembershipId)))
-            await Replace(payload.MembershipId);
-    }
-
-    public async Task Handle(EmailTemplateRemoved payload)
     {
         if (payload.MembershipId is not null && Cards.HasAny(x => x.Entity.Id.Equals(payload.MembershipId)))
             await Replace(payload.MembershipId);

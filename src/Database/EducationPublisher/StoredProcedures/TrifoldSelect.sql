@@ -26,8 +26,20 @@ select
     ,binder.Id as BinderId
     ,binder.TypeId as BinderTypeId
     ,type.Name as BinderTypeName
+    ,guideBinder.Id as GuideBinderId
+    ,guideBinder.BinderId as GuideBinderBinderId
+    ,guideBinder.GuideImageId as GuideBinderGuideImageId
+    ,guideImage.Id as GuideImageId
+    ,guideImage.BlobId as GuideImageBlobId
+    ,guideImage.Name as GuideImageName
+    ,guideImage.Format as GuideImageFormat
+    ,guideImage.Width as GuideImageWidth
+    ,guideImage.Height as GuideImageHeight
+    ,guideImage.Caption as GuideImageCaption
 from [Education].[Trifold-Active] trifold
     inner join [Content].[Binder-Active] binder on trifold.BinderId = binder.Id
+    left join [Education].[GuideBinder-Active] guideBinder on binder.Id = guideBinder.BinderId
+    left join [Framework].[ImageFile-Active] guideImage on guideBinder.GuideImageId = guideImage.Id
     inner join [Education].[Book-Active] book on trifold.BookId = book.Id
     left join [Education].[Achievement-Active] generatesAchievement on trifold.GeneratesAchievementId = generatesAchievement.Id
     inner join [Framework].[Organization-Active] organization on book.OwnerId = organization.Id

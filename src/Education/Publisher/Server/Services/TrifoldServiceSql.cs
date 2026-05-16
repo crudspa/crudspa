@@ -6,6 +6,7 @@ public class TrifoldServiceSql(
     IServiceWrappers wrappers,
     ISqlWrappers sqlWrappers,
     IServerConfigService configService,
+    IFileService fileService,
     IPagePartsService pagePartsService)
     : ITrifoldService
 {
@@ -37,9 +38,22 @@ public class TrifoldServiceSql(
         {
             var trifold = request.Value;
 
+            var guideImageFileResponse = await fileService.SaveImage(new(request.SessionId, trifold.GuideBinder.GuideImage));
+            if (!guideImageFileResponse.Ok)
+            {
+                response.AddErrors(guideImageFileResponse.Errors);
+                return null;
+            }
+
+            trifold.GuideBinder.GuideImage.Id = guideImageFileResponse.Value.Id;
+
             return await sqlWrappers.WithConnection(async (connection, transaction) =>
             {
                 var id = await TrifoldInsert.Execute(connection, transaction, request.SessionId, trifold);
+                var inserted = await TrifoldSelect.Execute(Connection, request.SessionId, new() { Id = id });
+
+                trifold.GuideBinder.BinderId = inserted?.Binder.Id;
+                trifold.GuideBinder.Id = await GuideBinderUpsert.Execute(connection, transaction, request.SessionId, trifold.GuideBinder);
 
                 return new Trifold
                 {
@@ -55,10 +69,22 @@ public class TrifoldServiceSql(
         return await wrappers.Validate(request, async response =>
         {
             var trifold = request.Value;
+            var existing = await TrifoldSelect.Execute(Connection, request.SessionId, trifold);
+
+            var guideImageFileResponse = await fileService.SaveImage(new(request.SessionId, trifold.GuideBinder.GuideImage), existing?.GuideBinder.GuideImage);
+            if (!guideImageFileResponse.Ok)
+            {
+                response.AddErrors(guideImageFileResponse.Errors);
+                return;
+            }
+
+            trifold.GuideBinder.BinderId = existing?.Binder.Id;
+            trifold.GuideBinder.GuideImage.Id = guideImageFileResponse.Value.Id;
 
             await sqlWrappers.WithConnection(async (connection, transaction) =>
             {
                 await TrifoldUpdate.Execute(connection, transaction, request.SessionId, trifold);
+                trifold.GuideBinder.Id = await GuideBinderUpsert.Execute(connection, transaction, request.SessionId, trifold.GuideBinder);
             });
         });
     }
@@ -140,6 +166,9 @@ public class TrifoldServiceSql(
 
             var fetchResponse = await pagePartsService.FetchPage(request.SessionId, binderId, page);
             response.AddErrors(fetchResponse.Errors);
+            if (fetchResponse.Value is not null)
+                await ApplyGuidePage(request.SessionId, fetchResponse.Value);
+
             return fetchResponse.Value!;
         });
     }
@@ -156,6 +185,12 @@ public class TrifoldServiceSql(
 
             var addResponse = await pagePartsService.AddPage(request.SessionId, binderId, page);
             response.AddErrors(addResponse.Errors);
+            if (addResponse.Ok && addResponse.Value?.Id is not null)
+            {
+                page.Id = addResponse.Value.Id;
+                await SaveGuidePage(request.SessionId, binderId, page);
+            }
+
             return addResponse.Value!;
         });
     }
@@ -169,6 +204,8 @@ public class TrifoldServiceSql(
 
             if (page is null || binderId.HasNothing())
                 throw new("Trifold page not found.");
+
+            await SaveGuidePage(request.SessionId, binderId, page);
 
             var saveResponse = await pagePartsService.SavePage(request.SessionId, binderId, page);
             response.AddErrors(saveResponse.Errors);
@@ -324,5 +361,43 @@ public class TrifoldServiceSql(
     {
         var trifold = await TrifoldSelect.Execute(Connection, sessionId, new() { Id = trifoldId });
         return trifold?.Binder?.Id;
+    }
+
+    private async Task ApplyGuidePage(Guid? sessionId, Page page)
+    {
+        var guidePage = await GuidePageSelectForPage.Execute(Connection, sessionId, page.Id);
+
+        page.ShowGuide = guidePage?.ShowGuide ?? false;
+        page.GuideText = guidePage?.GuideText;
+        page.GuideAudioFile = guidePage?.GuideAudioFile ?? new();
+        page.ShowNotebook = guidePage?.ShowNotebook ?? false;
+    }
+
+    private async Task SaveGuidePage(Guid? sessionId, Guid? binderId, Page page)
+    {
+        var guideBinder = await GuideBinderSelectForBinder.Execute(Connection, sessionId, binderId) ?? new() { BinderId = binderId };
+        var existing = await GuidePageSelectForPage.Execute(Connection, sessionId, page.Id);
+        var guideAudioFileResponse = await fileService.SaveAudio(new(sessionId, page.GuideAudioFile), existing?.GuideAudioFile);
+
+        if (!guideAudioFileResponse.Ok)
+            throw new("Call to IFileService.SaveAudio() failed. " + guideAudioFileResponse.ErrorMessages);
+
+        page.GuideAudioFile.Id = guideAudioFileResponse.Value.Id;
+
+        await sqlWrappers.WithConnection(async (connection, transaction) =>
+        {
+            if (!guideBinder.Id.HasValue)
+                guideBinder.Id = await GuideBinderUpsert.Execute(connection, transaction, sessionId, guideBinder);
+
+            await GuidePageUpsert.Execute(connection, transaction, sessionId, new()
+            {
+                GuideBinderId = guideBinder.Id,
+                PageId = page.Id,
+                ShowGuide = page.ShowGuide ?? false,
+                GuideText = page.GuideText,
+                GuideAudioFile = page.GuideAudioFile,
+                ShowNotebook = page.ShowNotebook ?? false,
+            });
+        });
     }
 }

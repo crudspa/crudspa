@@ -10,6 +10,30 @@ public partial class DesignHub
             await PanePageService.FetchContentStatusNames(request));
     }
 
+    public async Task<Response<PagePane?>> PanePageFetchPagePane(Request<PagePane> request)
+    {
+        return await HubWrappers.RequirePermission(request, PermissionIds.Segments, async session =>
+            await PanePageService.FetchPagePane(request));
+    }
+
+    public async Task<Response<BinderPane?>> PanePageFetchBinderPane(Request<BinderPane> request)
+    {
+        return await HubWrappers.RequirePermission(request, PermissionIds.Segments, async session =>
+            await PanePageService.FetchBinderPane(request));
+    }
+
+    public async Task<Response<CoursePane?>> PanePageFetchCoursePane(Request<CoursePane> request)
+    {
+        return await HubWrappers.RequirePermission(request, PermissionIds.Segments, async session =>
+            await PanePageService.FetchCoursePane(request));
+    }
+
+    public async Task<Response> PanePageSaveCoursePane(Request<CoursePane> request)
+    {
+        return await HubWrappers.RequirePermission(request, PermissionIds.Segments, async session =>
+            await PanePageService.SaveCoursePane(request));
+    }
+
     public async Task<Response<IList<Page>>> PanePageFetchPages(Request<PageForPane> request)
     {
         return await HubWrappers.RequirePermission(request, PermissionIds.Segments, async session =>

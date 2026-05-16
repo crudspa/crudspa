@@ -14,6 +14,15 @@ public partial class DesignHub
         });
     }
 
+    public async Task<Response<IList<Email>>> EmailSearchForPortal(Request<EmailSearch> request)
+    {
+        return await HubWrappers.RequirePermission(request, PermissionIds.Memberships, async session =>
+        {
+            request.Value.TimeZoneId = session.User?.Contact.TimeZoneId ?? Constants.DefaultTimeZone;
+            return await EmailService.SearchForPortal(request);
+        });
+    }
+
     public async Task<Response<Email?>> EmailFetch(Request<Email> request)
     {
         return await HubWrappers.RequirePermission(request, PermissionIds.Memberships, async session =>

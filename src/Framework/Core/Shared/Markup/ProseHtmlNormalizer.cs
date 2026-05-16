@@ -10,10 +10,19 @@ public static class ProseHtmlNormalizer
     private static readonly Regex FunctionalColorRegex = new("^(?:rgb|rgba|hsl|hsla)\\([^)]*\\)$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
     private static readonly Regex NamedColorRegex = new("^[a-z][a-z0-9-]*$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
     private static readonly Regex UnsafeProtocolWhitespaceRegex = new("[\\u0000-\\u0020]+", RegexOptions.Compiled);
+    private static readonly String[] CanonicalRelTokens = ["external", "nofollow", "noopener", "noreferrer"];
 
     public static String? Normalize(String? html, Boolean allowImages = false) => NormalizeForStorage(html, allowImages);
 
     public static String? NormalizeForPaste(String? html, Boolean allowImages = false) => NormalizeForStorage(html, allowImages);
+
+    public static String NormalizeEditorUrl(String value)
+    {
+        if (!value.StartsWith("about:/", StringComparison.OrdinalIgnoreCase))
+            return value;
+
+        return "/" + value["about:".Length..].TrimStart('/');
+    }
 
     public static String? NormalizeForStorage(String? html, Boolean allowImages = false)
     {
@@ -281,8 +290,34 @@ public static class ProseHtmlNormalizer
                     element.RemoveAttribute(attribute.Name);
                 else
                     element.SetAttribute(attribute.Name, sanitizedSrc);
+
+                continue;
+            }
+
+            if (name == "target")
+            {
+                var sanitizedTarget = SanitizeTarget(attribute.Value);
+
+                if (sanitizedTarget.HasNothing())
+                    element.RemoveAttribute(attribute.Name);
+                else
+                    element.SetAttribute(attribute.Name, sanitizedTarget);
+
+                continue;
+            }
+
+            if (name == "rel")
+            {
+                var sanitizedRel = SanitizeRel(attribute.Value);
+
+                if (sanitizedRel.HasNothing())
+                    element.RemoveAttribute(attribute.Name);
+                else
+                    element.SetAttribute(attribute.Name, sanitizedRel);
             }
         }
+
+        NormalizeLinkRel(element);
     }
 
     private static Boolean IsAllowedAttribute(IElement element, String name, HtmlOptions options)
@@ -291,7 +326,7 @@ public static class ProseHtmlNormalizer
             return element.LocalName is not "br";
 
         if (element.LocalName.IsBasically("a"))
-            return name == "href";
+            return name is "href" or "rel" or "target";
 
         if (options.AllowImages && element.LocalName.IsBasically("img"))
             return name is "alt" or "src" or "title";
@@ -454,7 +489,47 @@ public static class ProseHtmlNormalizer
             || compact.StartsWith("vbscript:", StringComparison.OrdinalIgnoreCase))
             return null;
 
-        return trimmed.RemoveFirst("about:///");
+        return NormalizeEditorUrl(trimmed);
+    }
+
+    private static String? SanitizeTarget(String? value)
+    {
+        if (value.HasNothing())
+            return null;
+
+        return value!.Trim().IsBasically("_blank") ? "_blank" : null;
+    }
+
+    private static String? SanitizeRel(String? value)
+    {
+        if (value.HasNothing())
+            return null;
+
+        var tokens = value!.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+        return String.Join(" ", CanonicalRelTokens.Where(tokens.Contains)) is { } rel && rel.HasSomething()
+            ? rel
+            : null;
+    }
+
+    private static void NormalizeLinkRel(IElement element)
+    {
+        if (!element.LocalName.IsBasically("a"))
+            return;
+
+        if (!element.GetAttribute("target").IsBasically("_blank"))
+            return;
+
+        var tokens = (element.GetAttribute("rel") ?? String.Empty)
+            .Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+        tokens.Add("noopener");
+        tokens.Add("noreferrer");
+
+        element.SetAttribute("rel", String.Join(" ", CanonicalRelTokens.Where(tokens.Contains)));
     }
 
     private static IElement PromoteSimpleSpanFormatting(IElement element)

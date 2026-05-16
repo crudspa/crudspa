@@ -1,0 +1,15 @@
+<ListOrderables Model="Model"
+                T="SurveyQuestionModel"
+                EntityName="Question"
+                UrlPrefix="@($"{Path}/survey-question")"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)"
+                ReadViewContainer="Card<SurveyQuestionModel>.Containers.None"
+                Tight="true">
+    <ReadView>
+        <div class="c-survey-question-preview">
+            <QuestionDisplay Model="context.Preview" />
+        </div>
+    </ReadView>
+</ListOrderables>

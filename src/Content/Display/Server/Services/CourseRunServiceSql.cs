@@ -14,6 +14,22 @@ public class CourseRunServiceSql(
             await CourseSelectRun.Execute(Connection, request.Value, request.SessionId));
     }
 
+    public async Task<Response<Course?>> FetchCourseForPane(Request<CoursePane> request)
+    {
+        return await wrappers.Try<Course?>(request, async response =>
+        {
+            var coursePane = await CoursePaneSelectForPane.Execute(Connection, request.SessionId, request.Value.PaneId);
+
+            var courseId = coursePane?.IdSource == 1
+                ? coursePane.CourseId
+                : request.Value.RouteCourseId;
+
+            return courseId.HasValue
+                ? await CourseSelectRun.Execute(Connection, new() { Id = courseId }, request.SessionId)
+                : null;
+        });
+    }
+
     public async Task<Response<Track?>> FetchTrack(Request<Track> request)
     {
         return await wrappers.Try<Track?>(request, async response =>

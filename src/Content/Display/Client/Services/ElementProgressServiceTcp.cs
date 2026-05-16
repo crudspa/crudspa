@@ -54,6 +54,9 @@ public class ElementProgressServiceTcp : IElementProgressService, IHandle<Elemen
         };
     }
 
+    public async Task<Response<QuestionReply?>> FetchQuestionReply(Request<Element> request) =>
+        await _proxyWrappers.Send<QuestionReply?>("ElementProgressFetchQuestionReply", request);
+
     public async Task<Response> AddCompleted(Request<ElementCompleted> request) =>
         await _proxyWrappers.Send("ElementProgressAddCompleted", request);
 

@@ -31,7 +31,11 @@ public partial class NoteElementDisplay : IElementDisplay, IDisposable
 
     private async Task HandleClicked()
     {
-        await EventBus.Publish(new AddNotepage { Note = Model.NoteElement });
+        if (Model.NoteElement.OpenOnly == true)
+            await EventBus.Publish(new OpenNotebook());
+        else
+            await EventBus.Publish(new AddNotepage { Note = Model.NoteElement });
+
         await Model.ElementModel.AddElementCompleted();
     }
 }

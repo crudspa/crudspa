@@ -16,12 +16,6 @@
         <PaneLink Href="@($"{Path}/membership-{context.Membership.Id:D}?pane=members")"
                   Text="Members"
                   Count="context.Membership.MemberCount" />
-        <PaneLink Href="@($"{Path}/membership-{context.Membership.Id:D}?pane=emails")"
-                  Text="Emails"
-                  Count="context.Membership.EmailCount" />
-        <PaneLink Href="@($"{Path}/membership-{context.Membership.Id:D}?pane=templates")"
-                  Text="Templates"
-                  Count="context.Membership.EmailTemplateCount" />
         <PaneLink Href="@($"{Path}/membership-{context.Membership.Id:D}?pane=tokens")"
                   Text="Tokens"
                   Count="context.Membership.TokenCount" />

@@ -1,4 +1,5 @@
 using Crudspa.Content.Display.Shared.Contracts.Ids;
+using Crudspa.Framework.Core.Shared.Markup;
 
 namespace Crudspa.Content.Display.Shared.Contracts.Config.ElementType;
 
@@ -244,13 +245,14 @@ public class ContactAnswer : Observable, IValidates
     });
 }
 
-public class DateAnswer : Observable
+public class DateAnswer : Observable, IValidates
 {
     public enum Kinds { Date, Time, DateTime }
 
     public Guid? Id { get; set => SetProperty(ref field, value); }
     public Guid? QuestionId { get; set => SetProperty(ref field, value); }
     public Kinds Kind { get; set => SetProperty(ref field, value); }
+    public String? Label { get; set => SetProperty(ref field, value); }
     public DateOnly? DateMin { get; set => SetProperty(ref field, value); }
     public DateOnly? DateMax { get; set => SetProperty(ref field, value); }
     public TimeOnly? TimeMin { get; set => SetProperty(ref field, value); }
@@ -259,6 +261,12 @@ public class DateAnswer : Observable
     public DateTimeOffset? DateTimeMax { get; set => SetProperty(ref field, value); }
 
     public void SetQuestionId(Guid? questionId) => QuestionId = questionId;
+
+    public List<Error> Validate() => ErrorsEx.Validate(errors =>
+    {
+        if (Label.HasSomething() && Label!.Length > 150)
+            errors.AddError("Label cannot be longer than 150 characters.", nameof(Label));
+    });
 }
 
 public class FileAnswer : Observable
@@ -272,13 +280,14 @@ public class FileAnswer : Observable
     public void SetQuestionId(Guid? questionId) => QuestionId = questionId;
 }
 
-public class NumberAnswer : Observable
+public class NumberAnswer : Observable, IValidates
 {
     public enum Kinds { Integer, Decimal, Currency, Percentage }
 
     public Guid? Id { get; set => SetProperty(ref field, value); }
     public Guid? QuestionId { get; set => SetProperty(ref field, value); }
     public Kinds Kind { get; set => SetProperty(ref field, value); }
+    public String? Label { get; set => SetProperty(ref field, value); }
     public Int32? IntegerMin { get; set => SetProperty(ref field, value); }
     public Int32? IntegerMax { get; set => SetProperty(ref field, value); }
     public Single? DecimalMin { get; set => SetProperty(ref field, value); }
@@ -287,6 +296,12 @@ public class NumberAnswer : Observable
     public Single? CurrencyMax { get; set => SetProperty(ref field, value); }
 
     public void SetQuestionId(Guid? questionId) => QuestionId = questionId;
+
+    public List<Error> Validate() => ErrorsEx.Validate(errors =>
+    {
+        if (Label.HasSomething() && Label!.Length > 150)
+            errors.AddError("Label cannot be longer than 150 characters.", nameof(Label));
+    });
 }
 
 public class OptionsAnswer : Observable, IValidates
@@ -339,7 +354,7 @@ public class OptionsAnswerChoice : Observable, IValidates, IOrderable, INamed
 
     public List<Error> Validate() => ErrorsEx.Validate(errors =>
     {
-        if (Text.HasNothing())
+        if (ProseHtmlNormalizer.IsEmpty(Text))
             errors.AddError("Choice Text is required.", nameof(Text));
     });
 }

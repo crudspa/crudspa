@@ -1,0 +1,41 @@
+<Modal Model="InsertTokenModel"
+       TopMargin="4em"
+       Width="24em"
+       Title="Insert Token">
+    <Content>
+        <select @bind="InsertTokenModel.SelectedToken"
+                class="c-input">
+            @foreach (var token in Tokens)
+            {
+                <option value="@token">@token</option>
+            }
+        </select>
+    </Content>
+    <Buttons>
+        <ButtonOk Clicked="InsertToken" />
+        <ButtonCancel Clicked="InsertTokenModel.Hide" />
+    </Buttons>
+</Modal>
+<Field Label="@Label"
+       Size="Size"
+       Container="Field.Containers.Div">
+    <LabelActions>
+        @if (!ReadOnly && Tokens.HasItems())
+        {
+            <ButtonCore Text="Insert Token"
+                        IconClass="c-icon-plus"
+                        ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                        Size="ButtonCore.Sizes.Small"
+                        Clicked="ShowInsertToken" />
+        }
+    </LabelActions>
+    <ChildContent>
+        <MultilineTextBox @ref="TextBox"
+                          ReadOnly="ReadOnly"
+                          Height="Height"
+                          MaxLength="MaxLength"
+                          Placeholder="@Placeholder"
+                          Value="@Value"
+                          ValueChanged="HandleValueChanged" />
+    </ChildContent>
+</Field>

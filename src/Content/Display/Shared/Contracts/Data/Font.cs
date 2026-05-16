@@ -20,11 +20,11 @@ public class Font : Observable, IValidates, INamed
         set => SetProperty(ref field, value);
     }
 
-    public FontFile FileFile
+    public List<FontFace> Faces
     {
         get;
         set => SetProperty(ref field, value);
-    } = new();
+    } = [];
 
     public List<Error> Validate()
     {
@@ -35,8 +35,8 @@ public class Font : Observable, IValidates, INamed
             else if (Name!.Length > 75)
                 errors.AddError("Name cannot be longer than 75 characters.", nameof(Name));
 
-            if (FileFile.Name.HasNothing() || (!FileFile.BlobId.HasValue && !FileFile.Id.HasValue))
-                errors.AddError("File is required.", nameof(FileFile));
+            if (Faces.IsEmpty())
+                errors.AddError("At least one font face is required.", nameof(Faces));
         });
     }
 }

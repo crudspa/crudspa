@@ -19,6 +19,16 @@
         <Padding Size="Padding.Sizes.Small"
                  Direction="Padding.Directions.Vertical">
             <Wrapped Alignment="Wrapped.Alignments.Top">
+                @if (Model.ShowMembership)
+                {
+                    <Field Label="Membership"
+                           Size="Field.Sizes.Large">
+                        <Dropdown ReadOnly="Model.ReadOnly"
+                                  LookupValues="Model.Memberships"
+                                  Value="Model.SelectedMembershipId"
+                                  ValueChanged="id => Model.HandleMembershipChanged(id)" />
+                    </Field>
+                }
                 <Field Label="Title"
                        Size="Field.Sizes.Wide">
                     <TextBox ReadOnly="Model.ReadOnly"

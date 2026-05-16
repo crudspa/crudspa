@@ -70,32 +70,9 @@
                         </Wrapped>
                     </Field>
                 }
-                <Field Label="Options"
-                       Container="Field.Containers.Div">
-                    <Wrapped NoWrap="true">
-                        <Checkbox Label="Show Notebook"
-                                  ReadOnly="Model.ReadOnly"
-                                  @bind-Value="Model.Entity.ShowNotebook" />
-                        <Checkbox Label="Show Guide"
-                                  ReadOnly="Model.ReadOnly"
-                                  @bind-Value="Model.Entity.ShowGuide" />
-                    </Wrapped>
-                </Field>
-                @if (Model.Entity.ShowGuide == true)
+                @if (AdditionalFields is not null)
                 {
-                    <Field Label="Guide Text"
-                           Size="Field.Sizes.Full">
-                        <MultilineTextBox ReadOnly="Model.ReadOnly"
-                                          Height="MultilineTextBox.Heights.Tall"
-                                          @bind-Value="Model.Entity.GuideText" />
-                    </Field>
-                    <Field Label="Guide Audio"
-                           Size="Field.Sizes.Larger"
-                           Container="Field.Containers.Div">
-                        <AudioUploader ReadOnly="Model.ReadOnly"
-                                       Required="false"
-                                       AudioFile="Model.Entity.GuideAudioFile" />
-                    </Field>
+                    @AdditionalFields(Model.Entity)
                 }
             </Wrapped>
         </Padding>

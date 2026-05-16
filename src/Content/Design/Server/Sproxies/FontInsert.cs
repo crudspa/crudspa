@@ -10,7 +10,6 @@ public static class FontInsert
         command.AddParameter("@SessionId", sessionId);
         command.AddParameter("@ContentPortalId", font.ContentPortalId);
         command.AddParameter("@Name", 75, font.Name);
-        command.AddParameter("@FileId", font.FileFile.Id);
 
         var output = command.AddOutputParameter("@Id");
         await command.Execute(connection, transaction);

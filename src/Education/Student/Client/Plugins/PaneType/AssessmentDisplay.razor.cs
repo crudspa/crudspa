@@ -149,36 +149,37 @@ public class AssessmentDisplayModel : ScreenModel
     {
         _eventBus.Publish(new SilenceRequested());
 
-        switch (State)
+        CurrentQuestion = State switch
         {
-            case AssessmentStates.VocabPreview:
-                CurrentQuestion = VocabPartModel!.PreviewQuestions[0].Number.GetValueOrDefault();
-                break;
-            case AssessmentStates.VocabQuestions:
-                CurrentQuestion = VocabPartModel!.QuestionCollection.Current[0].Number.GetValueOrDefault();
-                break;
-            case AssessmentStates.ListenPassage:
-                CurrentQuestion = VocabPartModel?.QuestionCollection.Current[0].Number.GetValueOrDefault() + 1 ?? 1;
-                break;
-            case AssessmentStates.ListenPreview:
-                CurrentQuestion = ListenPartModel!.PreviewQuestions[0].Number.GetValueOrDefault();
-                break;
-            case AssessmentStates.ListenQuestions:
-                CurrentQuestion = ListenPartModel!.QuestionCollection.Current[0].Number.GetValueOrDefault();
-                break;
-            case AssessmentStates.ReadPreview:
-                CurrentQuestion = ReadPartModel!.PreviewQuestions[0].Number.GetValueOrDefault();
-                break;
-            case AssessmentStates.ReadQuestions:
-                if (ReadPartModel!.QuestionCollection.Current.HasItems())
-                    CurrentQuestion = ReadPartModel!.QuestionCollection.Current[0].Number.GetValueOrDefault();
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+            AssessmentStates.VocabPreview => FirstQuestionNumber(VocabPartModel?.PreviewQuestions),
+            AssessmentStates.VocabQuestions => FirstQuestionNumber(VocabPartModel?.QuestionCollection.Current),
+            AssessmentStates.ListenPassage => NextQuestionNumber(VocabPartModel?.QuestionCollection.Current)
+                ?? FirstQuestionNumber(ListenPartModel?.PreviewQuestions)
+                ?? FirstQuestionNumber(ListenPartModel?.QuestionCollection.Current),
+            AssessmentStates.ListenPreview => FirstQuestionNumber(ListenPartModel?.PreviewQuestions),
+            AssessmentStates.ListenQuestions => FirstQuestionNumber(ListenPartModel?.QuestionCollection.Current),
+            AssessmentStates.ReadPreview => FirstQuestionNumber(ReadPartModel?.PreviewQuestions),
+            AssessmentStates.ReadQuestions => FirstQuestionNumber(ReadPartModel?.QuestionCollection.Current),
+            _ => throw new ArgumentOutOfRangeException(),
+        } ?? CurrentQuestion;
 
         RaisePropertyChanged(nameof(CurrentQuestion));
         CompletionPercentage = CurrentQuestion / (Double)QuestionCount * 100;
+    }
+
+    private static Int32? FirstQuestionNumber(IEnumerable<VocabQuestionModel>? questions) =>
+        questions?.FirstOrDefault()?.Number;
+
+    private static Int32? FirstQuestionNumber(IEnumerable<ListenQuestionModel>? questions) =>
+        questions?.FirstOrDefault()?.Number;
+
+    private static Int32? FirstQuestionNumber(IEnumerable<ReadQuestionModel>? questions) =>
+        questions?.FirstOrDefault()?.Number;
+
+    private static Int32? NextQuestionNumber(IEnumerable<VocabQuestionModel>? questions)
+    {
+        var number = questions?.LastOrDefault()?.Number;
+        return number.HasValue ? number + 1 : null;
     }
 
     private async Task MoveToNextPart()

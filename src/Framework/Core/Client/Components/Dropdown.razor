@@ -1,12 +1,22 @@
-﻿<select @onchange="HandleValueChanged"
+@{
+    var lookupValues = (LookupValues ?? Enumerable.Empty<INamed>()).Take(MaxOptionCount + 1).ToList();
+    var hasTooManyOptions = lookupValues.Count > MaxOptionCount;
+}
+<select @onchange="HandleValueChanged"
         disabled="@ReadOnly">
     @if (AllowNull)
     {
         <option value="">@NullText</option>
     }
-    @if (LookupValues.HasItems())
+    @if (hasTooManyOptions)
     {
-        @foreach (var named in LookupValues)
+        <option disabled="disabled">
+            Too many options to display.
+        </option>
+    }
+    else if (lookupValues.HasItems())
+    {
+        @foreach (var named in lookupValues)
         {
             <option value="@named.Id"
                     selected="@(named.Id == Value)">

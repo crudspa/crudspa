@@ -2,6 +2,7 @@ create proc [ContentDesign].[NumberAnswerInsert] (
      @SessionId uniqueidentifier
     ,@QuestionId uniqueidentifier
     ,@Kind int
+    ,@Label nvarchar(150)
     ,@IntegerMin int
     ,@IntegerMax int
     ,@DecimalMin real
@@ -19,10 +20,10 @@ set xact_abort on
 begin transaction
 
 insert [Content].[NumberAnswer] (
-     Id, VersionOf, Updated, UpdatedBy, QuestionId, Kind, IntegerMin, IntegerMax, DecimalMin, DecimalMax, CurrencyMin, CurrencyMax
+     Id, VersionOf, Updated, UpdatedBy, QuestionId, Kind, Label, IntegerMin, IntegerMax, DecimalMin, DecimalMax, CurrencyMin, CurrencyMax
 )
 values (
-     @Id, @Id, @now, @SessionId, @QuestionId, @Kind, @IntegerMin, @IntegerMax, @DecimalMin, @DecimalMax, @CurrencyMin, @CurrencyMax
+     @Id, @Id, @now, @SessionId, @QuestionId, @Kind, @Label, @IntegerMin, @IntegerMax, @DecimalMin, @DecimalMax, @CurrencyMin, @CurrencyMax
 )
 
 commit transaction

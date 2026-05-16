@@ -1,3 +1,5 @@
+using HtmlEditorMarkup = Crudspa.Framework.Core.Client.Components.HtmlEditorMarkup;
+
 namespace Crudspa.Content.Design.Client.Plugins.AnswerType;
 
 public partial class OptionsAnswerDesign : IAnswerDesign, IDisposable
@@ -33,6 +35,9 @@ public partial class OptionsAnswerDesign : IAnswerDesign, IDisposable
 
     public void PrepareForSave()
     {
+        foreach (var choice in ChoicesModel.Entities)
+            choice.Text = HtmlEditorMarkup.NormalizeForStorage(choice.Text);
+
         ChoicesModel.Entities.EnsureOrder();
         Answer.Choices = ChoicesModel.Entities.ToObservable();
     }

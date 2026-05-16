@@ -5,6 +5,7 @@ create proc [ContentDesign].[NoteUpdate] (
     ,@ImageFileId uniqueidentifier
     ,@RequireText bit
     ,@RequireImageSelection bit
+    ,@OpenOnly bit
 ) as
 
 declare @now datetimeoffset = sysdatetimeoffset()
@@ -22,6 +23,7 @@ set
     ,ImageFileId = @ImageFileId
     ,RequireText = @RequireText
     ,RequireImageSelection = @RequireImageSelection
+    ,OpenOnly = @OpenOnly
 from [Content].[NoteElement] note
 where note.Id = @Id
 

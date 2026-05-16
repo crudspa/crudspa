@@ -1,0 +1,47 @@
+@using Crudspa.Content.Design.Client.Plugins
+
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+            }
+            else
+            {
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            }
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null && Model.AnswerTypes.HasItems())
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Question"
+                       Size="Field.Sizes.Full">
+                    <HtmlEditor ReadOnly="Model.ReadOnly"
+                                @bind-Value="Model.Entity.Question.Text" />
+                </Field>
+                <Field Label="Answer Type"
+                       Size="Field.Sizes.Medium">
+                    <Dropdown LookupValues="Model.AnswerTypes"
+                              ReadOnly="Model.ReadOnly"
+                              @bind-Value="Model.Entity.Question.AnswerTypeId" />
+                </Field>
+            </Wrapped>
+
+            @if (Model.SelectedAnswerType?.DesignView.HasSomething() == true)
+            {
+                <AnswerDesignPlugin TypeName="@Model.SelectedAnswerType.DesignView"
+                                    Question="Model.Entity.Question"
+                                    ReadOnly="Model.ReadOnly"
+                                    @ref="Model.AnswerDesign"
+                                    @key="Model.Entity.Question.AnswerTypeId" />
+            }
+        </Padding>
+    }
+</Waiter>

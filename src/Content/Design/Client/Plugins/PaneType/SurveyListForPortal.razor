@@ -1,0 +1,29 @@
+<List Model="Model"
+      T="SurveyModel"
+      EntityName="Survey"
+      UrlPrefix="@($"{Path}/survey")"
+      DeleteRequested="id => Model.Delete(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Full">
+            <LabeledHtml Label="Description"
+                         HtmlValue="@context.Survey.Description" />
+        </Field>
+        <Field Size="Field.Sizes.Unspecified">
+            <Labeled CssClass="status"
+                     Width="6em"
+                     Label="Status">
+                <StatusDisplay Id="@context.Survey.StatusId"
+                               Name="@context.Survey.StatusName"
+                               ColorClassFrom="ContentStatusColors.For" />
+            </Labeled>
+            <Labeled Width="6em"
+                     Label="Assignment"
+                     StringValue="@context.Survey.AssignmentKind.ToString()" />
+        </Field>
+    </ReadView>
+    <PaneLinks>
+        <PaneLink Href="@($"{Path}/survey-{context.Survey.Id:D}?pane=parts")"
+                  Text="Parts"
+                  Count="context.Survey.PartCount" />
+    </PaneLinks>
+</List>

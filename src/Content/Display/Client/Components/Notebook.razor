@@ -29,7 +29,8 @@
                         <textarea class="input average"
                                       placeholder="Enter text..."
                                       disabled="@(!Model.CurrentPage.IsDirty)"
-                                      @bind="Model.CurrentPage.Notepage.Text"></textarea>
+                                      @bind="Model.CurrentPage.Notepage.Text"
+                                      @bind:event="oninput"></textarea>
                     }
 
                     @if (Model.CurrentPage.Notepage.Note.RequireImageSelection == true)

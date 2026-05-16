@@ -8,6 +8,9 @@ create proc [FrameworkCore].[SegmentUpdate] (
     ,@PermissionId uniqueidentifier
     ,@IconId uniqueidentifier
     ,@Fixed bit
+    ,@Routable bit
+    ,@Navigable bit
+    ,@Mapable bit
     ,@RequiresId bit
     ,@Recursive bit
     ,@AllLicenses bit
@@ -39,6 +42,9 @@ set
     ,PermissionId = @PermissionId
     ,IconId = @IconId
     ,Fixed = @Fixed
+    ,Routable = @Routable
+    ,Navigable = @Navigable
+    ,Mapable = @Mapable
     ,RequiresId = @RequiresId
     ,Recursive = @Recursive
     ,AllLicenses = @AllLicenses

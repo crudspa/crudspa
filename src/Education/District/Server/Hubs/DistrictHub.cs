@@ -40,6 +40,7 @@ public partial class DistrictHub : Crudspa.Content.Display.Server.Hubs.DisplayHu
         IElementProgressService elementProgressService,
         INotebookRunService notebookRunService,
         IPageRunService pageRunService,
+        ISurveyRunService surveyRunService,
         // DistrictHub (Education)
         IActivityMediaPlayService activityMediaPlayService,
         IActivityRunService activityRunService,
@@ -74,7 +75,8 @@ public partial class DistrictHub : Crudspa.Content.Display.Server.Hubs.DisplayHu
             courseRunService,
             elementProgressService,
             notebookRunService,
-            pageRunService)
+            pageRunService,
+            surveyRunService)
     {
         ActivityMediaPlayService = activityMediaPlayService;
         ActivityRunService = activityRunService;

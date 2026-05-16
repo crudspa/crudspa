@@ -30,7 +30,31 @@ from [Framework].[Pane-Active] pane
     inner join [Framework].[Portal-Active] portal on segment.PortalId = portal.Id
     inner join [Framework].[Organization-Active] organization on portal.OwnerId = organization.Id
     inner join [Framework].[PaneType-Active] type on pane.TypeId = type.Id
-where try_convert(uniqueidentifier, json_value(pane.ConfigJson, '$.BinderId')) = @BinderId
+where (
+        exists (
+            select 1
+            from [Content].[BinderPane-Active] binderPane
+            where binderPane.PaneId = pane.Id
+                and binderPane.BinderId = @BinderId
+        )
+        or exists (
+            select 1
+            from [Content].[CoursePane-Active] coursePane
+                inner join [Content].[Course-Active] course on course.Id = coursePane.CourseId
+            where coursePane.PaneId = pane.Id
+                and coursePane.IdSource = 1
+                and course.BinderId = @BinderId
+        )
+    )
     and organization.Id = @organizationId
-order by pane.Ordinal
+order by case
+        when exists (
+            select 1
+            from [Content].[BinderPane-Active] binderPane
+            where binderPane.PaneId = pane.Id
+                and binderPane.BinderId = @BinderId
+        ) then 0
+        else 1
+    end
+    ,pane.Ordinal
     ,pane.Id

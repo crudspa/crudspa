@@ -48,9 +48,22 @@ public class ObjectiveServiceSql(
 
             objective.TrophyImageFile.Id = trophyImageFileResponse.Value.Id;
 
+            var guideImageFileResponse = await fileService.SaveImage(new(request.SessionId, objective.GuideBinder.GuideImage));
+            if (!guideImageFileResponse.Ok)
+            {
+                response.AddErrors(guideImageFileResponse.Errors);
+                return null;
+            }
+
+            objective.GuideBinder.GuideImage.Id = guideImageFileResponse.Value.Id;
+
             return await sqlWrappers.WithConnection(async (connection, transaction) =>
             {
                 var id = await ObjectiveInsert.Execute(connection, transaction, request.SessionId, objective);
+                var inserted = await ObjectiveSelect.Execute(Connection, request.SessionId, new() { Id = id });
+
+                objective.GuideBinder.BinderId = inserted?.Binder.Id;
+                objective.GuideBinder.Id = await GuideBinderUpsert.Execute(connection, transaction, request.SessionId, objective.GuideBinder);
 
                 return new Objective
                 {
@@ -78,9 +91,20 @@ public class ObjectiveServiceSql(
 
             objective.TrophyImageFile.Id = trophyImageFileResponse.Value.Id;
 
+            var guideImageFileResponse = await fileService.SaveImage(new(request.SessionId, objective.GuideBinder.GuideImage), existing?.GuideBinder.GuideImage);
+            if (!guideImageFileResponse.Ok)
+            {
+                response.AddErrors(guideImageFileResponse.Errors);
+                return;
+            }
+
+            objective.GuideBinder.BinderId = existing?.Binder.Id;
+            objective.GuideBinder.GuideImage.Id = guideImageFileResponse.Value.Id;
+
             await sqlWrappers.WithConnection(async (connection, transaction) =>
             {
                 await ObjectiveUpdate.Execute(connection, transaction, request.SessionId, objective);
+                objective.GuideBinder.Id = await GuideBinderUpsert.Execute(connection, transaction, request.SessionId, objective.GuideBinder);
             });
         });
     }
@@ -149,11 +173,16 @@ public class ObjectiveServiceSql(
                 newObjective.LessonId = request.Value.ExistingParentId;
                 newObjective.Title = request.Value.NewName;
                 newObjective.TrophyImageFile.OptimizedBlobId = null;
+                newObjective.GuideBinder.GuideImage.OptimizedBlobId = null;
 
                 if (newObjective.TrophyImageFile.BlobId is not null)
                     newObjective.TrophyImageFile.BlobId = await blobService.Copy(newObjective.TrophyImageFile.BlobId.Value);
 
+                if (newObjective.GuideBinder.GuideImage.BlobId is not null)
+                    newObjective.GuideBinder.GuideImage.BlobId = await blobService.Copy(newObjective.GuideBinder.GuideImage.BlobId.Value);
+
                 newObjective.TrophyImageFile.Id = null;
+                newObjective.GuideBinder.GuideImage.Id = null;
 
                 var newObjectiveResponse = await Add(new(request.SessionId, newObjective));
 
@@ -216,6 +245,9 @@ public class ObjectiveServiceSql(
 
             var fetchResponse = await pagePartsService.FetchPage(request.SessionId, binderId, page);
             response.AddErrors(fetchResponse.Errors);
+            if (fetchResponse.Value is not null)
+                await ApplyGuidePage(request.SessionId, fetchResponse.Value);
+
             return fetchResponse.Value!;
         });
     }
@@ -232,6 +264,12 @@ public class ObjectiveServiceSql(
 
             var addResponse = await pagePartsService.AddPage(request.SessionId, binderId, page);
             response.AddErrors(addResponse.Errors);
+            if (addResponse.Ok && addResponse.Value?.Id is not null)
+            {
+                page.Id = addResponse.Value.Id;
+                await SaveGuidePage(request.SessionId, binderId, page);
+            }
+
             return addResponse.Value!;
         });
     }
@@ -245,6 +283,8 @@ public class ObjectiveServiceSql(
 
             if (page is null || binderId.HasNothing())
                 throw new("Objective page not found.");
+
+            await SaveGuidePage(request.SessionId, binderId, page);
 
             var saveResponse = await pagePartsService.SavePage(request.SessionId, binderId, page);
             response.AddErrors(saveResponse.Errors);
@@ -400,5 +440,43 @@ public class ObjectiveServiceSql(
     {
         var objective = await ObjectiveSelect.Execute(Connection, sessionId, new() { Id = objectiveId });
         return objective?.Binder?.Id;
+    }
+
+    private async Task ApplyGuidePage(Guid? sessionId, Page page)
+    {
+        var guidePage = await GuidePageSelectForPage.Execute(Connection, sessionId, page.Id);
+
+        page.ShowGuide = guidePage?.ShowGuide ?? false;
+        page.GuideText = guidePage?.GuideText;
+        page.GuideAudioFile = guidePage?.GuideAudioFile ?? new();
+        page.ShowNotebook = guidePage?.ShowNotebook ?? false;
+    }
+
+    private async Task SaveGuidePage(Guid? sessionId, Guid? binderId, Page page)
+    {
+        var guideBinder = await GuideBinderSelectForBinder.Execute(Connection, sessionId, binderId) ?? new() { BinderId = binderId };
+        var existing = await GuidePageSelectForPage.Execute(Connection, sessionId, page.Id);
+        var guideAudioFileResponse = await fileService.SaveAudio(new(sessionId, page.GuideAudioFile), existing?.GuideAudioFile);
+
+        if (!guideAudioFileResponse.Ok)
+            throw new("Call to IFileService.SaveAudio() failed. " + guideAudioFileResponse.ErrorMessages);
+
+        page.GuideAudioFile.Id = guideAudioFileResponse.Value.Id;
+
+        await sqlWrappers.WithConnection(async (connection, transaction) =>
+        {
+            if (!guideBinder.Id.HasValue)
+                guideBinder.Id = await GuideBinderUpsert.Execute(connection, transaction, sessionId, guideBinder);
+
+            await GuidePageUpsert.Execute(connection, transaction, sessionId, new()
+            {
+                GuideBinderId = guideBinder.Id,
+                PageId = page.Id,
+                ShowGuide = page.ShowGuide ?? false,
+                GuideText = page.GuideText,
+                GuideAudioFile = page.GuideAudioFile,
+                ShowNotebook = page.ShowNotebook ?? false,
+            });
+        });
     }
 }

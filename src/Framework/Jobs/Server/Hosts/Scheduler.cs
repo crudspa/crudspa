@@ -58,13 +58,6 @@ public class Scheduler : BackgroundService
 
             _logger.LogInformation("Started scheduler session {sessionId}.", _session.Id);
 
-            _logger.LogInformation("Updating 'Next Run' for all overdue schedules on device {deviceId}...", _jobsConfig.DeviceId);
-
-            var response = await _jobScheduleService.RescheduleOverdue(new(_session.Id, new() { Id = _jobsConfig.DeviceId }));
-
-            if (!response.Ok)
-                _logger.LogError("Error rescheduling overdue schedules for device {deviceId}. {message}", _jobsConfig.DeviceId, response.ErrorMessages);
-
             _logger.LogInformation("Beginning scheduler loop for device {deviceId} with polling interval {interval}...", _jobsConfig.DeviceId, _jobsConfig.SchedulingInterval);
 
             while (!stoppingToken.IsCancellationRequested)
@@ -105,7 +98,7 @@ public class Scheduler : BackgroundService
         if (jobSchedules.IsEmpty())
             return;
 
-        _logger.LogInformation("Found {jobCount} job schedules.", jobSchedules.Count);
+        _logger.LogInformation("Found {jobCount} due job schedules.", jobSchedules.Count);
 
         foreach (var schedule in jobSchedules)
         {
@@ -121,7 +114,7 @@ public class Scheduler : BackgroundService
                 _logger.LogError("Error creating job. {error}", createJobResponse.ErrorMessages);
             else if (createJobResponse.Value?.Id is Guid jobId)
             {
-                _logger.LogInformation("Created job for schedule {scheduleId}. The next scheduled run is: {nextRunDate}", updatedSchedule.Id, updatedSchedule.NextRun);
+                _logger.LogInformation("Scheduled {scheduleName}. Next run: {nextRunDate}", schedule.Name ?? updatedSchedule.Id?.ToString(), updatedSchedule.NextRun);
 
                 if (updatedSchedule.Id is not null)
                     await _gatewayService.Publish(new JobScheduleSaved { Id = updatedSchedule.Id });

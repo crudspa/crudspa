@@ -48,7 +48,7 @@ public partial class PaneEdit : IDisposable
             if (!saved)
                 return;
 
-            Model.Entity!.ConfigJson = design.GetConfigJson();
+            ApplyDesign(Model.Entity!, design);
         }
 
         await Model.Save();
@@ -57,9 +57,14 @@ public partial class PaneEdit : IDisposable
     private async Task HandleConfigUpdated()
     {
         if (DesignComponent?.Instance is IPaneDesign design)
-            Model.Entity!.ConfigJson = design.GetConfigJson();
+            ApplyDesign(Model.Entity!, design);
 
         await Model.Save();
+    }
+
+    private static void ApplyDesign(Pane pane, IPaneDesign design)
+    {
+        pane.ConfigJson = design.GetConfigJson();
     }
 
     private async Task HandleMoveClicked()

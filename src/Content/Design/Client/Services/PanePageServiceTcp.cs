@@ -5,6 +5,18 @@ public class PanePageServiceTcp(IProxyWrappers proxyWrappers) : IPanePageService
     public async Task<Response<IList<Orderable>>> FetchContentStatusNames(Request request) =>
         await proxyWrappers.SendAndCache<IList<Orderable>>("PanePageFetchContentStatusNames", request);
 
+    public async Task<Response<PagePane?>> FetchPagePane(Request<PagePane> request) =>
+        await proxyWrappers.Send<PagePane?>("PanePageFetchPagePane", request);
+
+    public async Task<Response<BinderPane?>> FetchBinderPane(Request<BinderPane> request) =>
+        await proxyWrappers.Send<BinderPane?>("PanePageFetchBinderPane", request);
+
+    public async Task<Response<CoursePane?>> FetchCoursePane(Request<CoursePane> request) =>
+        await proxyWrappers.Send<CoursePane?>("PanePageFetchCoursePane", request);
+
+    public async Task<Response> SaveCoursePane(Request<CoursePane> request) =>
+        await proxyWrappers.Send("PanePageSaveCoursePane", request);
+
     public async Task<Response<IList<Page>>> FetchPages(Request<PageForPane> request) =>
         await proxyWrappers.Send<IList<Page>>("PanePageFetchPages", request);
 

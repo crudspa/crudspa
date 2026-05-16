@@ -10,6 +10,7 @@ insert [Content].[DateAnswer] (
     ,IsDeleted
     ,QuestionId
     ,Kind
+    ,Label
     ,DateMin
     ,DateMax
     ,TimeMin
@@ -25,6 +26,7 @@ select
     ,deleted.IsDeleted
     ,deleted.QuestionId
     ,deleted.Kind
+    ,deleted.Label
     ,deleted.DateMin
     ,deleted.DateMax
     ,deleted.TimeMin

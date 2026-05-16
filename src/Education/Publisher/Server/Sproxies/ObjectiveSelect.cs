@@ -45,6 +45,7 @@ public static class ObjectiveSelect
                 TypeName = reader.ReadString(20),
             },
             PageCount = reader.ReadInt32(21),
+            GuideBinder = GuideDataReaders.ReadGuideBinder(reader, 22),
         };
     }
 }

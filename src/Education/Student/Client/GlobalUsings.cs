@@ -13,6 +13,7 @@ global using Crudspa.Education.Common.Shared.Contracts;
 global using Crudspa.Education.Common.Shared.Contracts.Behavior;
 global using Crudspa.Education.Common.Shared.Contracts.Data;
 global using Crudspa.Education.Common.Shared.Contracts.Ids;
+global using Crudspa.Education.Student.Client.Components;
 global using Crudspa.Education.Student.Client.Plugins.PaneType;
 global using Crudspa.Education.Student.Shared.Contracts.Behavior;
 global using Crudspa.Education.Student.Shared.Contracts.Data;

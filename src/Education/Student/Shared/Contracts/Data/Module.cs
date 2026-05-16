@@ -62,7 +62,7 @@ public class Module : Observable, IUnique, IValidates
         set => SetProperty(ref field, value);
     }
 
-    public ImageFile BookGuideImage
+    public GuideBinder GuideBinder
     {
         get;
         set => SetProperty(ref field, value);

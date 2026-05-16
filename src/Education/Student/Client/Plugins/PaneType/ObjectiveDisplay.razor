@@ -7,8 +7,12 @@
                                  Id="Model.Objective.BinderId"
                                  TypeName="@Model.Objective.BinderDisplayView"
                                  BinderCompleted="() => Model.HandleBinderCompleted()"
-                                 GuideImage="Model.Objective.LessonGuideImage"
-                                 Shadowed="true" />
+                                 Shadowed="true">
+                <PageHeader Context="page">
+                    <Guide GuideBinder="Model.Objective.GuideBinder"
+                           Page="page" />
+                </PageHeader>
+            </BinderDisplayPlugin>
         </Padding>
     }
 </Waiter>

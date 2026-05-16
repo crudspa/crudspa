@@ -5,6 +5,9 @@ public class PageRunServiceTcp(IProxyWrappers proxyWrappers) : IPageRunService
     public async Task<Response<Page?>> Fetch(Request<Page> request) =>
         await proxyWrappers.Send<Page?>("PageRunFetch", request);
 
+    public async Task<Response<Page?>> FetchForPane(Request<PagePane> request) =>
+        await proxyWrappers.Send<Page?>("PageRunFetchForPane", request);
+
     public async Task<Response> MarkViewed(Request<Page> request) =>
         await proxyWrappers.Send("PageRunMarkViewed", request);
 }

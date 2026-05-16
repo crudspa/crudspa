@@ -19,6 +19,16 @@ public class EmailTemplateServiceSql(
         });
     }
 
+    public async Task<Response<IList<EmailTemplate>>> SearchForPortal(Request<EmailTemplateSearch> request)
+    {
+        return await wrappers.Try<IList<EmailTemplate>>(request, async response =>
+        {
+            var emailTemplates = await EmailTemplateSelectWhereForPortal.Execute(Connection, request.SessionId, request.Value);
+
+            return emailTemplates;
+        });
+    }
+
     public async Task<Response<EmailTemplate?>> Fetch(Request<EmailTemplate> request)
     {
         return await wrappers.Try<EmailTemplate?>(request, async response =>

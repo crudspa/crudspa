@@ -1,8 +1,8 @@
 create view [Content].[QuestionReply-Active] as
 
 select questionReply.Id as Id
+    ,questionReply.SurveyReplyId as SurveyReplyId
     ,questionReply.QuestionId as QuestionId
-    ,questionReply.ContactId as ContactId
     ,questionReply.Submitted as Submitted
     ,questionReply.BoolValue as BoolValue
     ,questionReply.TextValue as TextValue

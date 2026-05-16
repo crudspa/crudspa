@@ -35,6 +35,8 @@ public static class JobSelectSingle
                 EditorView = reader.ReadString(12),
                 ActionClass = reader.ReadString(13),
             },
+            Description = reader.ReadString(14),
+            ScheduleName = reader.ReadString(15),
         };
     }
 }

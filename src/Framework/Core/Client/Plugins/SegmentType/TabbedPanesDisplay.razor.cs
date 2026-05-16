@@ -28,6 +28,7 @@ public partial class TabbedPanesDisplay : ISegmentDisplay
             Title = pane.Name!,
             Lazy = pane.Ordinal > 0,
             PaneTypeDisplayView = pane.TypeDisplayView,
+            PaneId = pane.Id,
             Id = Id ?? Path.Id(),
             IsNew = IsNew,
             ConfigJson = pane.ConfigJson,

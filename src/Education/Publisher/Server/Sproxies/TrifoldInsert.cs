@@ -9,6 +9,7 @@ public static class TrifoldInsert
 
         command.AddParameter("@SessionId", sessionId);
         command.AddParameter("@BookId", trifold.BookId);
+        command.AddParameter("@Title", 75, trifold.Title);
         command.AddParameter("@StatusId", trifold.StatusId);
         command.AddParameter("@RequiresAchievementId", trifold.RequiresAchievementId);
         command.AddParameter("@GeneratesAchievementId", trifold.GeneratesAchievementId);

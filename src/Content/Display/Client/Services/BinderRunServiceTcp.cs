@@ -2,6 +2,9 @@
 
 public class BinderRunServiceTcp(IProxyWrappers proxyWrappers) : IBinderRunService
 {
+    public async Task<Response<BinderPane?>> FetchBinderPane(Request<BinderPane> request) =>
+        await proxyWrappers.Send<BinderPane?>("BinderRunFetchBinderPane", request);
+
     public async Task<Response<BinderTypeFull?>> FetchBinderType(Request<Binder> request) =>
         await proxyWrappers.Send<BinderTypeFull?>("BinderRunFetchBinderType", request);
 

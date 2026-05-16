@@ -65,6 +65,42 @@ public class JsBridgeCore(IJSRuntime jsRuntime, NavigationManager navigationMana
         }
     }
 
+    public async Task<TextSelection?> GetTextSelection(ElementReference element)
+    {
+        try
+        {
+            return await jsRuntime.InvokeAsync<TextSelection?>("getTextSelection", element);
+        }
+        catch (JSException jsException)
+        {
+            logger.LogError(jsException, "JSException raised in GetTextSelection(). {message} {stackTrace}", jsException.Message, jsException.StackTrace);
+            return null;
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Exception raised in GetTextSelection(). {message} {stackTrace}", ex.Message, ex.StackTrace);
+            return null;
+        }
+    }
+
+    public async Task<String?> InsertTextAtSelection(ElementReference element, String text, TextSelection? selection = null)
+    {
+        try
+        {
+            return await jsRuntime.InvokeAsync<String?>("insertTextAtSelection", element, text, selection);
+        }
+        catch (JSException jsException)
+        {
+            logger.LogError(jsException, "JSException raised in InsertTextAtSelection(). {message} {stackTrace}", jsException.Message, jsException.StackTrace);
+            return null;
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Exception raised in InsertTextAtSelection(). {message} {stackTrace}", ex.Message, ex.StackTrace);
+            return null;
+        }
+    }
+
     public async Task ScrollToTop()
     {
         try
@@ -110,6 +146,22 @@ public class JsBridgeCore(IJSRuntime jsRuntime, NavigationManager navigationMana
         catch (Exception ex)
         {
             logger.LogError(ex, "Exception raised in ScrollToId(). {message} {stackTrace}", ex.Message, ex.StackTrace);
+        }
+    }
+
+    public async Task ScrollElementToBottom(String id)
+    {
+        try
+        {
+            await jsRuntime.InvokeVoidAsync("scrollElementToBottom", id);
+        }
+        catch (JSException jsException)
+        {
+            logger.LogError(jsException, "JSException raised in ScrollElementToBottom(). {message} {stackTrace}", jsException.Message, jsException.StackTrace);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Exception raised in ScrollElementToBottom(). {message} {stackTrace}", ex.Message, ex.StackTrace);
         }
     }
 

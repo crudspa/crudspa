@@ -152,7 +152,7 @@ public class SendEmails(
                 finally
                 {
                     logger.LogInformation("Updating status {status} of email {emailId}...", email.Status, email.Id);
-                    await contentActionService.UpdateStatus(new(_sessionId, email));
+                    await contentActionService.UpdateStatus(new Request<Email>(_sessionId, email));
                 }
             }
 

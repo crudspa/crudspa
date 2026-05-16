@@ -18,6 +18,19 @@ public partial class DisplayHub
         });
     }
 
+    public async Task<Response<Page?>> PageRunFetchForPane(Request<PagePane> request)
+    {
+        return await HubWrappers.RequireSession(request, async session =>
+        {
+            var fetchResponse = await PageRunService.FetchForPane(request);
+
+            if (fetchResponse.Ok && fetchResponse.Value?.Id is { } pageId)
+                _ = PageRunService.MarkViewed(new(session.Id, new() { Id = pageId }));
+
+            return fetchResponse;
+        });
+    }
+
     public async Task<Response> PageRunMarkViewed(Request<Page> request)
     {
         return await HubWrappers.RequireSession(request, async session =>

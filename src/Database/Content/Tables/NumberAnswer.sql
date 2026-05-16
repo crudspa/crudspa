@@ -6,6 +6,7 @@ create table [Content].[NumberAnswer] (
     [IsDeleted] bit default(0) not null,
     [QuestionId] uniqueidentifier not null,
     [Kind] int default(0) not null,
+    [Label] nvarchar(150) null,
     [IntegerMin] int null,
     [IntegerMax] int null,
     [DecimalMin] real null,

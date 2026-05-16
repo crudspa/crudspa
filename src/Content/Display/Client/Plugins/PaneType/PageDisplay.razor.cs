@@ -2,7 +2,7 @@ using Crudspa.Content.Display.Client.Components;
 
 namespace Crudspa.Content.Display.Client.Plugins.PaneType;
 
-public partial class PageDisplay : IPaneDisplay, IDisposable
+public partial class PageDisplay : IPaneDisplay, IHasPaneId, IDisposable
 {
     private void HandleModelChanged(Object? sender, PropertyChangedEventArgs args) => InvokeAsync(StateHasChanged);
 
@@ -10,7 +10,7 @@ public partial class PageDisplay : IPaneDisplay, IDisposable
     [Parameter] public Guid? Id { get; set; }
     [Parameter] public Boolean IsNew { get; set; }
     [Parameter] public String? ConfigJson { get; set; }
-    [Parameter] public ImageFile? GuideImage { get; set; }
+    [Parameter] public Guid? PaneId { get; set; }
     [Parameter] public Guid? PortalId { get; set; }
 
     [Inject] public IPageRunService PageRunService { get; set; } = null!;
@@ -20,12 +20,7 @@ public partial class PageDisplay : IPaneDisplay, IDisposable
 
     protected override async Task OnInitializedAsync()
     {
-        var config = ConfigJson.FromJson<PageConfig>();
-
-        if (config is not null && config.PageId.HasSomething())
-            Id = config.PageId;
-
-        Model = new(Id, PageRunService, GuideImage, EventBus);
+        Model = new(Id, PaneId, PageRunService, EventBus);
         Model.PropertyChanged += HandleModelChanged;
 
         await Model.Refresh();
@@ -41,25 +36,18 @@ public partial class PageDisplay : IPaneDisplay, IDisposable
 public class PageDisplayModel : ScreenModel, IHandle<PageContentChanged>
 {
     private readonly Guid? _id;
+    private readonly Guid? _paneId;
     private readonly IPageRunService _pageRunService;
-    private readonly ImageFile? _guideImage;
-
     public PageDisplayModel(Guid? id,
+        Guid? paneId,
         IPageRunService pageRunService,
-        ImageFile? guideImage,
         IEventBus eventBus)
     {
         _id = id;
+        _paneId = paneId;
         _pageRunService = pageRunService;
-        _guideImage = guideImage;
 
         eventBus.Subscribe(this);
-    }
-
-    public GuideModel? GuideModel
-    {
-        get;
-        set => SetProperty(ref field, value);
     }
 
     public Page? Page
@@ -70,15 +58,17 @@ public class PageDisplayModel : ScreenModel, IHandle<PageContentChanged>
 
     public async Task Handle(PageContentChanged payload)
     {
-        if (payload.Id.Equals(_id))
+        if (payload.Id.Equals(Page?.Id ?? _id))
             await Refresh();
     }
 
     public async Task Refresh()
     {
-        var response = await WithWaiting("Fetching...", () => _pageRunService.Fetch(new(new() { Id = _id })));
+        var response = _paneId.HasValue
+            ? await WithWaiting("Fetching...", () => _pageRunService.FetchForPane(new(new() { PaneId = _paneId })))
+            : await WithWaiting("Fetching...", () => _pageRunService.Fetch(new(new() { Id = _id })));
 
-        if (response.Ok)
+        if (response.Ok && response.Value is not null)
             SetPage(response.Value);
     }
 
@@ -90,11 +80,5 @@ public class PageDisplayModel : ScreenModel, IHandle<PageContentChanged>
         Page = null;
         Page = page;
 
-        GuideModel = new()
-        {
-            Image = _guideImage,
-            Text = page.GuideText,
-            Audio = page.GuideAudio,
-        };
     }
 }

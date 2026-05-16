@@ -17,6 +17,9 @@ public static class SegmentInsert
         command.AddParameter("@PermissionId", segment.PermissionId);
         command.AddParameter("@IconId", segment.IconId);
         command.AddParameter("@Fixed", segment.Fixed);
+        command.AddParameter("@Routable", segment.Routable);
+        command.AddParameter("@Navigable", segment.Navigable);
+        command.AddParameter("@Mapable", segment.Mapable);
         command.AddParameter("@RequiresId", segment.RequiresId);
         command.AddParameter("@Recursive", segment.Recursive ?? false);
         command.AddParameter("@TypeId", segment.TypeId);

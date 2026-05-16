@@ -38,12 +38,6 @@
                              MaxLength="150"
                              @bind-Value="Model.Entity.Title" />
                 </Field>
-                <Field Label="Seo Description"
-                       Size="Field.Sizes.Full">
-                    <TextBox ReadOnly="Model.ReadOnly"
-                             MaxLength="300"
-                             @bind-Value="Model.Entity.SeoDescription" />
-                </Field>
                 <Field Label="Permission"
                        Size="Field.Sizes.Medium">
                     <Dropdown ReadOnly="Model.ReadOnly"
@@ -67,6 +61,13 @@
                               Value="Model.Entity.TypeId"
                               ValueChanged="value => Model.SetSegmentType(value)" />
                 </Field>
+                <Field Label="SEO Description"
+                       Size="Field.Sizes.Full">
+                    <MultilineTextBox ReadOnly="Model.ReadOnly"
+                                      Height="MultilineTextBox.Heights.Short"
+                                      MaxLength="300"
+                                      @bind-Value="Model.Entity.SeoDescription" />
+                </Field>
             </Wrapped>
             <Wrapped>
                 <Field Label="Options"
@@ -75,6 +76,15 @@
                         <Checkbox Label="Fixed"
                                   ReadOnly="Model.ReadOnly"
                                   @bind-Value="Model.Entity.Fixed" />
+                        <Checkbox Label="Routable"
+                                  ReadOnly="Model.ReadOnly"
+                                  @bind-Value="Model.Entity.Routable" />
+                        <Checkbox Label="Navigable"
+                                  ReadOnly="Model.ReadOnly"
+                                  @bind-Value="Model.Entity.Navigable" />
+                        <Checkbox Label="Mapable"
+                                  ReadOnly="Model.ReadOnly"
+                                  @bind-Value="Model.Entity.Mapable" />
                         <Checkbox Label="Requires ID"
                                   ReadOnly="Model.ReadOnly"
                                   @bind-Value="Model.Entity.RequiresId" />

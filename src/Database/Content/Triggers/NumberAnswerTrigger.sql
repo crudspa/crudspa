@@ -10,6 +10,7 @@ insert [Content].[NumberAnswer] (
     ,IsDeleted
     ,QuestionId
     ,Kind
+    ,Label
     ,IntegerMin
     ,IntegerMax
     ,DecimalMin
@@ -25,6 +26,7 @@ select
     ,deleted.IsDeleted
     ,deleted.QuestionId
     ,deleted.Kind
+    ,deleted.Label
     ,deleted.IntegerMin
     ,deleted.IntegerMax
     ,deleted.DecimalMin

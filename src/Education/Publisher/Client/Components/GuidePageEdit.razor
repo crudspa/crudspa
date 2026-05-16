@@ -1,0 +1,29 @@
+@namespace Crudspa.Education.Publisher.Client.Components
+
+<Field Label="Guide"
+       Container="Field.Containers.Div">
+    <Wrapped NoWrap="true">
+        <Checkbox Label="Show Guide"
+                  ReadOnly="ReadOnly"
+                  @bind-Value="Page.ShowGuide" />
+        <Checkbox Label="Notebook Button"
+                  ReadOnly="ReadOnly"
+                  @bind-Value="Page.ShowNotebook" />
+    </Wrapped>
+</Field>
+@if (Page.ShowGuide == true)
+{
+    <Field Label="Guide Text"
+           Size="Field.Sizes.Full">
+        <MultilineTextBox ReadOnly="ReadOnly"
+                          Height="MultilineTextBox.Heights.Tall"
+                          @bind-Value="Page.GuideText" />
+    </Field>
+    <Field Label="Guide Audio"
+           Size="Field.Sizes.Larger"
+           Container="Field.Containers.Div">
+        <AudioUploader ReadOnly="ReadOnly"
+                       Required="false"
+                       AudioFile="Page.GuideAudioFile" />
+    </Field>
+}

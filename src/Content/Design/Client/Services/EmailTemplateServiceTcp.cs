@@ -5,6 +5,9 @@ public class EmailTemplateServiceTcp(IProxyWrappers proxyWrappers) : IEmailTempl
     public async Task<Response<IList<EmailTemplate>>> SearchForMembership(Request<EmailTemplateSearch> request) =>
         await proxyWrappers.Send<IList<EmailTemplate>>("EmailTemplateSearchForMembership", request);
 
+    public async Task<Response<IList<EmailTemplate>>> SearchForPortal(Request<EmailTemplateSearch> request) =>
+        await proxyWrappers.Send<IList<EmailTemplate>>("EmailTemplateSearchForPortal", request);
+
     public async Task<Response<EmailTemplate?>> Fetch(Request<EmailTemplate> request) =>
         await proxyWrappers.Send<EmailTemplate?>("EmailTemplateFetch", request);
 

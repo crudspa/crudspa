@@ -38,6 +38,12 @@ public class Screen : Observable
         set => SetProperty(ref field, value);
     }
 
+    public Boolean Navigable
+    {
+        get;
+        set => SetProperty(ref field, value);
+    } = true;
+
     public String? Permission
     {
         get;

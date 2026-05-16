@@ -12,6 +12,9 @@ insert [Framework].[Segment] (
     ,Title
     ,StatusId
     ,Fixed
+    ,Routable
+    ,Navigable
+    ,Mapable
     ,RequiresId
     ,PortalId
     ,TypeId
@@ -35,6 +38,9 @@ select
     ,deleted.Title
     ,deleted.StatusId
     ,deleted.Fixed
+    ,deleted.Routable
+    ,deleted.Navigable
+    ,deleted.Mapable
     ,deleted.RequiresId
     ,deleted.PortalId
     ,deleted.TypeId

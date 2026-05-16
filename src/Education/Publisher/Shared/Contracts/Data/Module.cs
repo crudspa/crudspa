@@ -88,6 +88,12 @@ public class Module : Observable, IValidates, IOrderable, INamed
         set => SetProperty(ref field, value);
     } = new();
 
+    public GuideBinder GuideBinder
+    {
+        get;
+        set => SetProperty(ref field, value);
+    } = new();
+
     public List<Error> Validate()
     {
         return ErrorsEx.Validate(errors =>

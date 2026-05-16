@@ -1,6 +1,7 @@
 create proc [EducationPublisher].[TrifoldInsert] (
      @SessionId uniqueidentifier
     ,@BookId uniqueidentifier
+    ,@Title nvarchar(75)
     ,@StatusId uniqueidentifier
     ,@RequiresAchievementId uniqueidentifier
     ,@GeneratesAchievementId uniqueidentifier
@@ -47,6 +48,7 @@ insert [Education].[Trifold] (
     ,Updated
     ,UpdatedBy
     ,BookId
+    ,Title
     ,StatusId
     ,RequiresAchievementId
     ,GeneratesAchievementId
@@ -59,6 +61,7 @@ values (
     ,@now
     ,@SessionId
     ,@BookId
+    ,@Title
     ,@StatusId
     ,@RequiresAchievementId
     ,@GeneratesAchievementId

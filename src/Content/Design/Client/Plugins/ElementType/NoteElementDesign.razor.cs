@@ -28,7 +28,16 @@ public partial class NoteElementDesign : IElementDesign, IDisposable
         ImageChoicesModel.Dispose();
     }
 
-    public void PrepareForSave() { }
+    public void PrepareForSave()
+    {
+        if (Note.OpenOnly == true)
+        {
+            Note.Instructions ??= String.Empty;
+            Note.RequireText = false;
+            Note.RequireImageSelection = false;
+            Note.NoteImages = [];
+        }
+    }
 
     private async Task AddImageChoice()
     {

@@ -10,7 +10,20 @@ public static class ObjectiveSelect
         command.AddParameter("@Id", objective.Id);
         command.AddParameter("@SessionId", sessionId);
 
-        return await command.ReadSingle(connection, ReadObjective);
+        return await command.ExecuteQuery(connection, async reader =>
+        {
+            if (!await reader.ReadAsync())
+                return null;
+
+            var objective = ReadObjective(reader);
+
+            await reader.NextResultAsync();
+
+            while (await reader.ReadAsync())
+                objective.GuideBinder.Pages.Add(GuideDataReaders.ReadGuidePage(reader));
+
+            return objective;
+        });
     }
 
     private static Objective ReadObjective(SqlDataReader reader)
@@ -26,28 +39,19 @@ public static class ObjectiveSelect
             Ordinal = reader.ReadInt32(6),
             LessonTitle = reader.ReadString(7),
             LessonUnitId = reader.ReadGuid(8),
-            LessonGuideImage = new()
-            {
-                Id = reader.ReadGuid(9),
-                BlobId = reader.ReadGuid(10),
-                Name = reader.ReadString(11),
-                Format = reader.ReadString(12),
-                Width = reader.ReadInt32(13),
-                Height = reader.ReadInt32(14),
-                Caption = reader.ReadString(15),
-            },
-            LessonUnitTitle = reader.ReadString(16),
+            GuideBinder = GuideDataReaders.ReadGuideBinder(reader, 9),
+            LessonUnitTitle = reader.ReadString(19),
             TrophyImage = new()
             {
-                Id = reader.ReadGuid(17),
-                BlobId = reader.ReadGuid(18),
-                Name = reader.ReadString(19),
-                Format = reader.ReadString(20),
-                Width = reader.ReadInt32(21),
-                Height = reader.ReadInt32(22),
-                Caption = reader.ReadString(23),
+                Id = reader.ReadGuid(20),
+                BlobId = reader.ReadGuid(21),
+                Name = reader.ReadString(22),
+                Format = reader.ReadString(23),
+                Width = reader.ReadInt32(24),
+                Height = reader.ReadInt32(25),
+                Caption = reader.ReadString(26),
             },
-            BinderDisplayView = reader.ReadString(24),
+            BinderDisplayView = reader.ReadString(27),
         };
     }
 }

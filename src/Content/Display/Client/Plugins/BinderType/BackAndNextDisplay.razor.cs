@@ -17,7 +17,7 @@ public partial class BackAndNextDisplay : IBinderDisplay, IDisposable, IHandle<V
     [Parameter] public Boolean IsNew { get; set; }
     [Parameter] public String? ConfigJson { get; set; }
     [Parameter] public EventCallback BinderCompleted { get; set; }
-    [Parameter] public ImageFile? GuideImage { get; set; }
+    [Parameter] public RenderFragment<Page>? PageHeader { get; set; }
     [Parameter] public Boolean Shadowed { get; set; }
 
     [Inject] public IEventBus EventBus { get; set; } = null!;
@@ -36,7 +36,7 @@ public partial class BackAndNextDisplay : IBinderDisplay, IDisposable, IHandle<V
         if (config is not null && config.BinderId.HasSomething())
             Id = config.BinderId;
 
-        Model = new(Id, BinderRunService, ElementProgressService, PageRunService, ScrollService, GuideImage, EventBus);
+        Model = new(Id, BinderRunService, ElementProgressService, PageRunService, ScrollService, EventBus);
         Model.PropertyChanged += HandleModelChanged;
 
         EventBus.Subscribe(this);
@@ -172,10 +172,8 @@ public class BackAndNextDisplayModel : ScreenModel, IHandle<PageContentChanged>
     private readonly IElementProgressService _elementProgressService;
     private readonly IPageRunService _pageRunService;
     private readonly IScrollService _scrollService;
-    private readonly ImageFile? _guideImage;
     private readonly Dictionary<Guid, Page> _pageCache = [];
     private readonly HashSet<Guid> _prefetchingPageIds = [];
-    private readonly HashSet<Guid> _viewedPageIds = [];
     private Task<Response<IList<ElementProgress>>>? _elementProgressFetchTask;
 
     public BackAndNextDisplayModel(Guid? id,
@@ -183,7 +181,6 @@ public class BackAndNextDisplayModel : ScreenModel, IHandle<PageContentChanged>
         IElementProgressService elementProgressService,
         IPageRunService pageRunService,
         IScrollService scrollService,
-        ImageFile? guideImage,
         IEventBus eventBus)
     {
         _id = id;
@@ -191,8 +188,6 @@ public class BackAndNextDisplayModel : ScreenModel, IHandle<PageContentChanged>
         _elementProgressService = elementProgressService;
         _pageRunService = pageRunService;
         _scrollService = scrollService;
-        _guideImage = guideImage;
-
         eventBus.Subscribe(this);
     }
 
@@ -250,12 +245,6 @@ public class BackAndNextDisplayModel : ScreenModel, IHandle<PageContentChanged>
         set => SetProperty(ref field, value);
     }
 
-    public GuideModel? GuideModel
-    {
-        get;
-        set => SetProperty(ref field, value);
-    }
-
     public async Task Handle(PageContentChanged payload)
     {
         if (payload.Id.HasValue)
@@ -278,7 +267,6 @@ public class BackAndNextDisplayModel : ScreenModel, IHandle<PageContentChanged>
     {
         _pageCache.Clear();
         _prefetchingPageIds.Clear();
-        _viewedPageIds.Clear();
 
         binder.Pages ??= [];
         binder.Pages = binder.Pages.OrderBy(x => x.Ordinal).ToObservable();
@@ -381,20 +369,13 @@ public class BackAndNextDisplayModel : ScreenModel, IHandle<PageContentChanged>
         Page = null;
         Page = page;
 
-        GuideModel = new()
-        {
-            Image = _guideImage,
-            Text = Page.GuideText,
-            Audio = Page.GuideAudioFile,
-        };
-
         if (!first)
             await _scrollService.ToId(_id.GetValueOrDefault());
 
         if (finished)
             Alerts.Add(new() { Type = Alert.AlertType.Success, Message = "You completed this binder!" });
 
-        if (page.Id is Guid pageId && _viewedPageIds.Add(pageId))
+        if (page.Id is Guid pageId)
             _ = _pageRunService.MarkViewed(new(new() { Id = pageId }));
     }
 

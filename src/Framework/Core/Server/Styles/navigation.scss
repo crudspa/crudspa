@@ -876,8 +876,9 @@
 
         a {
             color: $footerHyperlinkColor;
-            text-decoration: none;
+            text-decoration: $hyperlinkDecoration;
 
+            &:link,
             &:visited {
                 color: $footerHyperlinkColor;
             }
@@ -885,6 +886,7 @@
             &:hover,
             &:active {
                 color: $footerHyperlinkHoverColor;
+                text-decoration: underline;
             }
         }
 

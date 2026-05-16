@@ -1,0 +1,66 @@
+<Waiter Model="Model">
+    <Filters>
+        <Fields>
+            <Field Label="Search"
+                   Size="Field.Sizes.Medium">
+                <SearchTextBox @bind-Value="Model.Search.Text" />
+            </Field>
+            <Field Label="Occurred"
+                   Size="Field.Sizes.Medium">
+                <DateFilter Range="Model.Search.OccurredRange" />
+            </Field>
+            <Sorter Sorts="Model.Sorts"
+                    @bind-Selected="Model.Search.Sort.Field"
+                    @bind-Ascending="Model.Search.Sort.Ascending" />
+        </Fields>
+        <Buttons>
+            <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Create">
+                <MenuItem Type="MenuItem.Types.Reset"
+                          Clicked="() => Model.Reset()" />
+                <MenuItem Type="MenuItem.Types.Refresh"
+                          Clicked="() => Model.Refresh()" />
+            </ContextMenu>
+        </Buttons>
+    </Filters>
+</Waiter>
+@if (Model.Cards.IsEmpty())
+{
+    <NoRecords EntityName="text messages" />
+}
+else
+{
+    @foreach (var card in Model.Cards)
+    {
+        <Card Model="card"
+              Title="@(card.Entity.ConversationName ?? card.Entity.Body)">
+            <Values>
+                <Field Size="Field.Sizes.Unspecified">
+                    <Labeled Width="7em"
+                             Label="Direction"
+                             StringValue="@card.Entity.Direction.GetLabel()" />
+                    <Labeled Width="7em"
+                             Label="Occurred"
+                             DateTimeOffsetValue="@card.Entity.Occurred" />
+                    <Labeled Width="7em"
+                             Label="From"
+                             StringValue="@(card.Entity.ContactName ?? card.Entity.FromNumber)" />
+                    <Labeled Width="7em"
+                             Label="To"
+                             StringValue="@card.Entity.ToNumber" />
+                    <Labeled Width="7em"
+                             Label="Message"
+                             StringValue="@card.Entity.Body" />
+                    <Labeled Width="7em"
+                             Label="Status"
+                             StringValue="@card.Entity.Status.GetLabel()" />
+                </Field>
+            </Values>
+            <Buttons>
+                <ButtonView Href="@($"{Path}/sms-message-{card.Entity.Id:D}")" />
+            </Buttons>
+        </Card>
+    }
+
+    <Pager Paged="Model.Search.Paged"
+           PageNumberChanged="Model.HandlePageNumberChanged" />
+}

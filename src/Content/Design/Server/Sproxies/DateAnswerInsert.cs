@@ -10,6 +10,7 @@ public static class DateAnswerInsert
         command.AddParameter("@SessionId", sessionId);
         command.AddParameter("@QuestionId", answer.QuestionId);
         command.AddParameter("@Kind", answer.Kind);
+        command.AddParameter("@Label", 150, answer.Label);
         command.AddParameter("@DateMin", answer.DateMin);
         command.AddParameter("@DateMax", answer.DateMax);
         command.AddParameter("@TimeMin", answer.TimeMin?.ToTimeSpan());

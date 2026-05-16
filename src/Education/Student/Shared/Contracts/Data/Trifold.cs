@@ -88,11 +88,11 @@ public class Trifold : Observable, IValidates, INamed
         set => SetProperty(ref field, value);
     }
 
-    public ImageFile? GuideImage
+    public GuideBinder GuideBinder
     {
         get;
         set => SetProperty(ref field, value);
-    }
+    } = new();
 
     public Guid? UnitId
     {

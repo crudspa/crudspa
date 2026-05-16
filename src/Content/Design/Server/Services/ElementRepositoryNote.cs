@@ -30,6 +30,7 @@ public class ElementRepositoryNote(IServerConfigService configService, IFileServ
         {
             Id = noteElementId,
             ElementId = elementId,
+            OpenOnly = false,
         });
 
         return Task.FromResult(sectionElement);
@@ -64,12 +65,21 @@ public class ElementRepositoryNote(IServerConfigService configService, IFileServ
         element.ElementId = elementId;
         noteElement.ElementId = elementId;
 
-        var noteImageFileResponse = await fileService.SaveImage(new(sessionId, noteElement.ImageFileFile));
-        if (!noteImageFileResponse.Ok)
-            throw new("Call to IFileService.SaveImage() failed. " + noteImageFileResponse.ErrorMessages);
-        if (!noteImageFileResponse.Value!.Id.HasValue)
-            throw new("Image file is required.");
-        noteElement.ImageFileFile.Id = noteImageFileResponse.Value.Id;
+        if (noteElement.OpenOnly == true)
+        {
+            noteElement.Instructions ??= String.Empty;
+            noteElement.ImageFileFile.Id = null;
+            noteElement.RequireText = false;
+            noteElement.RequireImageSelection = false;
+            noteElement.NoteImages = [];
+        }
+        else
+        {
+            var noteImageFileResponse = await fileService.SaveImage(new(sessionId, noteElement.ImageFileFile));
+            if (!noteImageFileResponse.Ok)
+                throw new("Call to IFileService.SaveImage() failed. " + noteImageFileResponse.ErrorMessages);
+            noteElement.ImageFileFile.Id = noteImageFileResponse.Value!.Id;
+        }
 
         noteElement.Id = await NoteInsert.Execute(connection, transaction, sessionId, noteElement);
 
@@ -107,18 +117,26 @@ public class ElementRepositoryNote(IServerConfigService configService, IFileServ
 
         await ElementUpdate.Execute(connection, transaction, sessionId, element.Element);
 
-        var noteImageFileUpdateResponse = await fileService.SaveImage(new(sessionId, noteElement.ImageFileFile), noteElement.ImageFileFile.Id);
-        if (!noteImageFileUpdateResponse.Ok)
-            throw new("Call to IFileService.SaveImage() failed. " + noteImageFileUpdateResponse.ErrorMessages);
-        if (!noteImageFileUpdateResponse.Value!.Id.HasValue)
-            throw new("Image file is required.");
-        noteElement.ImageFileFile.Id = noteImageFileUpdateResponse.Value.Id;
+        if (noteElement.OpenOnly == true)
+        {
+            noteElement.Instructions ??= String.Empty;
+            noteElement.ImageFileFile.Id = null;
+            noteElement.RequireText = false;
+            noteElement.RequireImageSelection = false;
+        }
+        else
+        {
+            var noteImageFileUpdateResponse = await fileService.SaveImage(new(sessionId, noteElement.ImageFileFile), noteElement.ImageFileFile.Id);
+            if (!noteImageFileUpdateResponse.Ok)
+                throw new("Call to IFileService.SaveImage() failed. " + noteImageFileUpdateResponse.ErrorMessages);
+            noteElement.ImageFileFile.Id = noteImageFileUpdateResponse.Value!.Id;
+        }
 
         await NoteUpdate.Execute(connection, transaction, sessionId, noteElement);
 
         var existingNoteImages = await NoteImageSelectForNote.Execute(connection, transaction, noteElement.Id);
 
-        if (noteElement.RequireImageSelection != true)
+        if (noteElement.OpenOnly == true || noteElement.RequireImageSelection != true)
             noteElement.NoteImages = [];
         else
             foreach (var noteImage in noteElement.NoteImages)

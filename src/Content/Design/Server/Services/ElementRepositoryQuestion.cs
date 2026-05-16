@@ -224,7 +224,10 @@ public class ElementRepositoryQuestion(
     private async Task SaveOptionsChoices(SqlConnection connection, SqlTransaction? transaction, Guid? sessionId, OptionsAnswer optionsAnswer)
     {
         foreach (var choice in optionsAnswer.Choices)
+        {
             choice.OptionsAnswerId = optionsAnswer.Id;
+            choice.Text = htmlSanitizer.Sanitize(choice.Text);
+        }
 
         optionsAnswer.Choices.EnsureOrder();
 

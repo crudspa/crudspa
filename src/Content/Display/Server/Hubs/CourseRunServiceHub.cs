@@ -8,6 +8,12 @@ public partial class DisplayHub
             await CourseRunService.FetchCourse(request));
     }
 
+    public async Task<Response<Course?>> CourseRunFetchCourseForPane(Request<CoursePane> request)
+    {
+        return await HubWrappers.RequireUser(request, async session =>
+            await CourseRunService.FetchCourseForPane(request));
+    }
+
     public async Task<Response<Track?>> CourseRunFetchTrack(Request<Track> request)
     {
         return await HubWrappers.RequireUser(request, async session =>

@@ -3,21 +3,27 @@
     @if (Answer.Kind == ContactAnswer.Kinds.Postal)
     {
         <div class="question-postal">
+            @if (Answer.Label.HasSomething())
+            {
+                <div class="question-answer-label">@Answer.Label</div>
+            }
             <UsaPostalEdit UsaPostal="Model.Reply.Postal" />
         </div>
     }
     else if (Answer.Kind == ContactAnswer.Kinds.Signature)
     {
-        <Field Label="@Label"
-               Size="Field.Sizes.Wide">
+        <Field Label="@Answer.Label"
+               Size="Field.Sizes.Wide"
+               Padding="Field.Paddings.TightVert">
             <MultilineTextBox Height="MultilineTextBox.Heights.Short"
                               @bind-Value="Model.Reply.TextValue" />
         </Field>
     }
     else
     {
-        <Field Label="@Label"
-               Size="Field.Sizes.Medium">
+        <Field Label="@Answer.Label"
+               Size="Field.Sizes.Medium"
+               Padding="Field.Paddings.TightVert">
             <TextBox @bind-Value="Model.Reply.TextValue" />
         </Field>
     }

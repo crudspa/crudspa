@@ -10,7 +10,20 @@ public static class TrifoldSelect
         command.AddParameter("@Id", trifold.Id);
         command.AddParameter("@SessionId", sessionId);
 
-        return await command.ReadSingle(connection, ReadTrifold);
+        return await command.ExecuteQuery(connection, async reader =>
+        {
+            if (!await reader.ReadAsync())
+                return null;
+
+            var trifold = ReadTrifold(reader);
+
+            await reader.NextResultAsync();
+
+            while (await reader.ReadAsync())
+                trifold.GuideBinder.Pages.Add(GuideDataReaders.ReadGuidePage(reader));
+
+            return trifold;
+        });
     }
 
     private static Trifold ReadTrifold(SqlDataReader reader)
@@ -22,18 +35,9 @@ public static class TrifoldSelect
             BookId = reader.ReadGuid(2),
             BinderId = reader.ReadGuid(3),
             Ordinal = reader.ReadInt32(4),
-            GuideImage = new()
-            {
-                Id = reader.ReadGuid(5),
-                BlobId = reader.ReadGuid(6),
-                Name = reader.ReadString(7),
-                Format = reader.ReadString(8),
-                Width = reader.ReadInt32(9),
-                Height = reader.ReadInt32(10),
-                Caption = reader.ReadString(11),
-            },
-            UnitId = reader.ReadGuid(12),
-            BinderDisplayView = reader.ReadString(13),
+            GuideBinder = GuideDataReaders.ReadGuideBinder(reader, 5),
+            UnitId = reader.ReadGuid(15),
+            BinderDisplayView = reader.ReadString(16),
         };
     }
 }

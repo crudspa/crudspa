@@ -8,6 +8,8 @@ public static class QuestionReplyInsert
         command.CommandText = "ContentDisplay.QuestionReplyInsert";
 
         command.AddParameter("@SessionId", sessionId);
+        command.AddParameter("@ElementId", reply.ElementId);
+        command.AddParameter("@SurveyReplyId", reply.SurveyReplyId);
         command.AddParameter("@QuestionId", reply.QuestionId);
         command.AddParameter("@Submitted", reply.Submitted);
         command.AddParameter("@BoolValue", reply.BoolValue);

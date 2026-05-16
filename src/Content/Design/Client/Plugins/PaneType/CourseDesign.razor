@@ -7,14 +7,14 @@
                    Size="Field.Sizes.Large"
                    Container="Field.Containers.Div">
                 <EnumRadio TEnum="CourseConfig.IdSources"
-                           @bind-SelectedValue="@Model.Config.IdSource"
+                           @bind-SelectedValue="@Model.IdSource"
                            RadioCssClass="tight-bottom"
                            ReadOnly="@ReadOnly" />
-                @if (Model.Config.IdSource == CourseConfig.IdSources.SpecificCourse)
+                @if (Model.IdSource == CourseConfig.IdSources.SpecificCourse)
                 {
                     <Dropdown LookupValues="Model.Courses"
                               ReadOnly="@ReadOnly"
-                              @bind-Value="Model.Config.CourseId" />
+                              @bind-Value="Model.CourseId" />
                 }
             </Field>
         </Wrapped>

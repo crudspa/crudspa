@@ -61,6 +61,7 @@ public class SeoServiceSql(
         var baseUrl = ResolveBaseUrl(portal, requestBaseUrl);
         var ns = XNamespace.Get("http://www.sitemaps.org/schemas/sitemap/0.9");
         var urls = routes
+            .Where(x => x.Mapable)
             .Select(CanonicalPath)
             .DefaultIfEmpty("/")
             .Distinct(StringComparer.OrdinalIgnoreCase)
@@ -78,14 +79,14 @@ public class SeoServiceSql(
 
     private async Task<ContentPortal?> FetchPortal()
     {
-        var cacheKey = String.Format(CacheKeys.Portal, PortalId) + ":seo";
+        var cacheKey = String.Format(CacheKeys.PortalSeo, PortalId);
         return await cacheService.GetOrAdd<ContentPortal>(cacheKey, async () =>
             await ContentPortalSelect.Execute(Connection, PortalId));
     }
 
     private async Task<IList<SeoRoute>> FetchRoutes()
     {
-        var cacheKey = String.Format(CacheKeys.Portal, PortalId) + ":seo-routes";
+        var cacheKey = String.Format(CacheKeys.PortalSeoRoutes, PortalId);
         var routes = await cacheService.GetOrAdd<IList<SeoRoute>>(cacheKey, async () =>
             await SeoRouteSelect.Execute(Connection, PortalId));
 
@@ -99,7 +100,7 @@ public class SeoServiceSql(
         builder.Append("<main class=\"c-seo-page\" aria-hidden=\"true\">");
         builder.Append("<nav aria-label=\"Primary\">");
 
-        foreach (var navRoute in routes.Where(x => x.Path.Count(y => y == '/') == 1).OrderBy(x => x.Path))
+        foreach (var navRoute in routes.Where(x => x.Navigable && x.Path.Count(y => y == '/') == 1).OrderBy(x => x.Path))
             builder.Append("<a href=\"").Append(HtmlAttribute(CanonicalPath(navRoute))).Append("\">").Append(Html(navRoute.Title)).Append("</a>");
 
         builder.Append("</nav>");

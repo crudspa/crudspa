@@ -19,6 +19,9 @@ public class CourseRunServiceTcp : ICourseRunService, IHandle<CourseProgressUpda
     public async Task<Response<Course?>> FetchCourse(Request<Course> request) =>
         await _proxyWrappers.Send<Course?>("CourseRunFetchCourse", request);
 
+    public async Task<Response<Course?>> FetchCourseForPane(Request<CoursePane> request) =>
+        await _proxyWrappers.Send<Course?>("CourseRunFetchCourseForPane", request);
+
     public async Task<Response<Track?>> FetchTrack(Request<Track> request) =>
         await _proxyWrappers.Send<Track?>("CourseRunFetchTrack", request);
 

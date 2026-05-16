@@ -1,0 +1,15 @@
+@using Crudspa.Content.Display.Shared.Contracts.Config.PaneType
+
+<Waiter Model="Model">
+    @if (Model.Surveys.HasItems())
+    {
+        <Wrapped Alignment="Wrapped.Alignments.Top">
+            <Field Label="Survey"
+                   Size="Field.Sizes.Large">
+                <Dropdown LookupValues="Model.Surveys"
+                          ReadOnly="@ReadOnly"
+                          @bind-Value="Model.Config.SurveyId" />
+            </Field>
+        </Wrapped>
+    }
+</Waiter>

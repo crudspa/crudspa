@@ -28,8 +28,20 @@ select
     ,binder.Id as BinderId
     ,binder.TypeId as BinderTypeId
     ,type.Name as BinderTypeName
+    ,guideBinder.Id as GuideBinderId
+    ,guideBinder.BinderId as GuideBinderBinderId
+    ,guideBinder.GuideImageId as GuideBinderGuideImageId
+    ,guideImage.Id as GuideImageId
+    ,guideImage.BlobId as GuideImageBlobId
+    ,guideImage.Name as GuideImageName
+    ,guideImage.Format as GuideImageFormat
+    ,guideImage.Width as GuideImageWidth
+    ,guideImage.Height as GuideImageHeight
+    ,guideImage.Caption as GuideImageCaption
 from [Education].[Module-Active] module
     inner join [Content].[Binder-Active] binder on module.BinderId = binder.Id
+    left join [Education].[GuideBinder-Active] guideBinder on binder.Id = guideBinder.BinderId
+    left join [Framework].[ImageFile-Active] guideImage on guideBinder.GuideImageId = guideImage.Id
     inner join [Education].[Book-Active] book on module.BookId = book.Id
     left join [Education].[Achievement-Active] generatesAchievement on module.GeneratesAchievementId = generatesAchievement.Id
     left join [Framework].[Icon-Active] icon on module.IconId = icon.Id

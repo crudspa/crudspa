@@ -4,6 +4,9 @@ namespace Crudspa.Framework.Core.Client.Components;
 
 public partial class HtmlEditor
 {
+    private String? _currentValue;
+    private String? _editorValue;
+
     [Parameter, EditorRequired] public String? Value { get; set; }
     [Parameter] public EventCallback<String?> ValueChanged { get; set; }
     [Parameter] public Boolean ReadOnly { get; set; }
@@ -16,7 +19,7 @@ public partial class HtmlEditor
 
     public RadzenHtmlEditor EditorComponent { get; set; } = null!;
     public TokenModel InsertTokenModel { get; set; } = null!;
-    public String? EditorValue => HtmlEditorMarkup.NormalizeForStorage(Value, AllowImages);
+    public String? EditorValue => _editorValue;
 
     protected override Task OnInitializedAsync()
     {
@@ -26,6 +29,14 @@ public partial class HtmlEditor
 
     protected override Task OnParametersSetAsync()
     {
+        var value = HtmlEditorMarkup.NormalizeForStorage(Value, AllowImages);
+
+        if (!String.Equals(_currentValue, value, StringComparison.Ordinal))
+        {
+            _currentValue = value;
+            _editorValue = value;
+        }
+
         if (Tokens.HasItems() && InsertTokenModel.SelectedToken.HasNothing())
             InsertTokenModel.SelectedToken = Tokens.First();
 
@@ -50,8 +61,12 @@ public partial class HtmlEditor
 
     private async Task HandleValueChanged(String? value)
     {
-        value = HtmlEditorMarkup.NormalizeForStorage(value, AllowImages);
-        await ValueChanged.InvokeAsync(value);
+        _editorValue = value;
+
+        var normalized = HtmlEditorMarkup.NormalizeForStorage(value, AllowImages);
+        _currentValue = normalized;
+
+        await ValueChanged.InvokeAsync(normalized);
     }
 
     private void HandlePaste(HtmlEditorPasteEventArgs args)

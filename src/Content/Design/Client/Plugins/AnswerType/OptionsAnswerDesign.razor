@@ -62,9 +62,12 @@
                ReadOnly="ReadOnly">
             <EditView>
                 <Field Label="Choice"
-                       Size="Field.Sizes.Full">
-                    <TextBox ReadOnly="ReadOnly"
-                             @bind-Value="context.Text" />
+                       Size="Field.Sizes.Full"
+                       Container="Field.Containers.Div">
+                    <HtmlEditor ReadOnly="ReadOnly"
+                                EditorHeight="10em"
+                                DisplayHeight="10em"
+                                @bind-Value="context.Text" />
                 </Field>
             </EditView>
         </Batch>

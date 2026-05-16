@@ -27,6 +27,9 @@ select
     ,segment.IconId
     ,icon.CssClass as IconCssClass
     ,segment.Fixed
+    ,segment.Routable
+    ,segment.Navigable
+    ,segment.Mapable
     ,segment.RequiresId
     ,segment.Recursive
     ,segment.TypeId

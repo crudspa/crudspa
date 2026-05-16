@@ -9,16 +9,6 @@
                  class="c-page @(Model.Page.Box.BoxClasses())"
                  style="@(Model.Page.Box.BoxStyles())">
 
-                @if (Model.Page.ShowGuide == true || Model.Page.ShowNotebook == true)
-                {
-                    @if (Model.GuideModel is not null)
-                    {
-                        <Guide Model="Model.GuideModel"
-                               ShowGuideFields="Model.Page.ShowGuide == true"
-                               ShowNotebookButton="Model.Page.ShowNotebook == true"
-                               AutoPlay="true" />
-                    }
-                }
                 @foreach (var section in Model.Page.Sections)
                 {
                     <SectionDisplay Section="section"
@@ -34,16 +24,6 @@
              class="c-page @(Model.Page.Box.BoxClasses())"
              style="@(Model.Page.Box.BoxStyles())">
 
-            @if (Model.Page.ShowGuide == true || Model.Page.ShowNotebook == true)
-            {
-                @if (Model.GuideModel is not null)
-                {
-                    <Guide Model="Model.GuideModel"
-                           ShowGuideFields="Model.Page.ShowGuide == true"
-                           ShowNotebookButton="Model.Page.ShowNotebook == true"
-                           AutoPlay="true" />
-                }
-            }
             @foreach (var section in Model.Page.Sections)
             {
                 <SectionDisplay Section="section"

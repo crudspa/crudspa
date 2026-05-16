@@ -9,6 +9,7 @@ create table [Content].[NoteElement] (
     [ImageFileId] uniqueidentifier null,
     [RequireText] bit default(0) not null,
     [RequireImageSelection] bit default(0) not null,
+    [OpenOnly] bit default(0) not null,
     constraint [PK_Content_NoteElement] primary key clustered ([Id]),
     constraint [FK_Content_NoteElement_Element] foreign key ([ElementId]) references [Content].[Element] ([Id]),
     constraint [FK_Content_NoteElement_ImageFile] foreign key ([ImageFileId]) references [Framework].[ImageFile] ([Id]),

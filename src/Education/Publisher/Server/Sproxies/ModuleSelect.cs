@@ -36,6 +36,7 @@ public static class ModuleSelect
                 TypeId = reader.ReadGuid(14),
                 TypeName = reader.ReadString(15),
             },
+            GuideBinder = GuideDataReaders.ReadGuideBinder(reader, 16),
         };
     }
 }

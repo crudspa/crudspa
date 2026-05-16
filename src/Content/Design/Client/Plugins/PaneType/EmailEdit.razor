@@ -62,6 +62,16 @@
         <Padding Size="Padding.Sizes.Small"
                  Direction="Padding.Directions.Vertical">
             <Wrapped Alignment="Wrapped.Alignments.Top">
+                @if (Model.ShowMembership)
+                {
+                    <Field Label="Membership"
+                           Size="Field.Sizes.Large">
+                        <Dropdown ReadOnly="Model.ReadOnly"
+                                  LookupValues="Model.Memberships"
+                                  Value="Model.SelectedMembershipId"
+                                  ValueChanged="id => Model.HandleMembershipChanged(id)" />
+                    </Field>
+                }
                 <Field Label="From Name"
                        Size="Field.Sizes.Large">
                     <TextBox ReadOnly="Model.ReadOnly"
@@ -79,7 +89,7 @@
                     <Padding Direction="Padding.Directions.Top"
                              Size="Padding.Sizes.Tiny">
                         <ButtonCore Text="Load..."
-                                    Disabled="Model.ReadOnly"
+                                    Disabled="@(Model.ReadOnly || Model.Entity.MembershipId is null)"
                                     Clicked="() => Model.TemplateModalModel.Show()" />
                     </Padding>
                 </Field>

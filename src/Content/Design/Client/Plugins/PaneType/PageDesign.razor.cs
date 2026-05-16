@@ -5,7 +5,6 @@ namespace Crudspa.Content.Design.Client.Plugins.PaneType;
 public partial class PageDesign : IPaneDesign, IHasPaneId, IDisposable
 {
     private void HandleModelChanged(Object? sender, PropertyChangedEventArgs args) => InvokeAsync(StateHasChanged);
-    private void HandleConfigUpdated(Object? sender, EventArgs args) => ConfigUpdated.InvokeAsync();
 
     [Parameter] public String? Path { get; set; }
     [Parameter] public String? ConfigJson { get; set; }
@@ -21,11 +20,8 @@ public partial class PageDesign : IPaneDesign, IHasPaneId, IDisposable
 
     protected override async Task OnInitializedAsync()
     {
-        var config = ConfigJson.FromJson<PageConfig>() ?? new();
-
-        Model = new(config, PaneId, EventBus, ScrollService, PanePageService);
+        Model = new(PaneId, EventBus, ScrollService, PanePageService);
         Model.PropertyChanged += HandleModelChanged;
-        Model.ConfigUpdated += HandleConfigUpdated;
 
         await Model.Initialize();
     }
@@ -33,13 +29,16 @@ public partial class PageDesign : IPaneDesign, IHasPaneId, IDisposable
     public void Dispose()
     {
         Model.PropertyChanged -= HandleModelChanged;
-        Model.ConfigUpdated -= HandleConfigUpdated;
         Model.Dispose();
     }
 
-    public String? GetConfigJson() => Model.Config.ToJson();
+    public String? GetConfigJson() => null;
 
-    public Task<Boolean> PrepareForSave() => Model.PrepareForSave();
+    public async Task<Boolean> PrepareForSave()
+    {
+        var saved = await Model.PrepareForSave();
+        return saved;
+    }
 }
 
 public class PageDesignModel : EditModel<Page>, IHandle<PageSaved>
@@ -49,22 +48,18 @@ public class PageDesignModel : EditModel<Page>, IHandle<PageSaved>
     private readonly IScrollService _scrollService;
     private readonly Guid? _paneId;
     private readonly IPanePageService _panePageService;
-    private PageConfig _config;
 
-    public PageDesignModel(PageConfig config, Guid? paneId,
+    public PageDesignModel(Guid? paneId,
         IEventBus eventBus,
         IScrollService scrollService,
         IPanePageService panePageService) : base(false)
     {
-        _config = config;
         _paneId = paneId;
         _scrollService = scrollService;
         _panePageService = panePageService;
 
         eventBus.Subscribe(this);
     }
-
-    public event EventHandler? ConfigUpdated;
 
     public override void Dispose()
     {
@@ -79,14 +74,14 @@ public class PageDesignModel : EditModel<Page>, IHandle<PageSaved>
 
     public async Task Handle(PageSaved payload)
     {
-        if (payload.Id.Equals(_config.PageId))
+        if (payload.Id.Equals(PageId))
             await Refresh();
     }
 
-    public PageConfig Config
+    public Guid? PageId
     {
-        get => _config;
-        set => SetProperty(ref _config, value);
+        get;
+        set => SetProperty(ref field, value);
     }
 
     public BoxModel? BoxModel
@@ -97,7 +92,16 @@ public class PageDesignModel : EditModel<Page>, IHandle<PageSaved>
 
     public async Task Initialize()
     {
-        if (Config.PageId.HasNothing())
+        if (PageId.HasNothing())
+        {
+            var pagePaneResponse = await WithWaiting("Fetching...", () =>
+                _panePageService.FetchPagePane(new(new() { PaneId = _paneId })));
+
+            if (pagePaneResponse.Ok)
+                PageId = pagePaneResponse.Value?.PageId;
+        }
+
+        if (PageId.HasNothing())
         {
             var response = await WithWaiting("Adding...", () =>
             {
@@ -114,10 +118,7 @@ public class PageDesignModel : EditModel<Page>, IHandle<PageSaved>
             });
 
             if (response.Ok)
-            {
-                Config.PageId = response.Value.Id;
-                ConfigUpdated?.Invoke(this, EventArgs.Empty);
-            }
+                PageId = response.Value.Id;
         }
 
         await Refresh();
@@ -125,7 +126,7 @@ public class PageDesignModel : EditModel<Page>, IHandle<PageSaved>
 
     public async Task Refresh()
     {
-        var response = await WithWaiting("Fetching...", () => _panePageService.FetchPage(new(new() { Page = new() { Id = Config.PageId } })));
+        var response = await WithWaiting("Fetching...", () => _panePageService.FetchPage(new(new() { Page = new() { Id = PageId } })));
 
         if (response.Ok)
             SetPage(response.Value);

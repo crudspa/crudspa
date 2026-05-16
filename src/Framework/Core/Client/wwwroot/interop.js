@@ -214,6 +214,170 @@ async function readFromClipboard() {
     }
 }
 
+function dispatchNativeInput(element) {
+    if (!element || typeof element.dispatchEvent !== "function")
+        return;
+
+    if (typeof Event === "function") {
+        element.dispatchEvent(new Event("input", { bubbles: true }));
+        return;
+    }
+
+    if (typeof document !== "undefined" && typeof document.createEvent === "function") {
+        var event = document.createEvent("Event");
+        event.initEvent("input", true, false);
+        element.dispatchEvent(event);
+    }
+}
+
+function focusTextControl(element) {
+    if (!element || typeof element.focus !== "function")
+        return;
+
+    try {
+        element.focus({ preventScroll: true });
+    } catch (error) {
+        try {
+            element.focus();
+        } catch (fallbackError) {
+            // Leave focus unchanged if the browser refuses focus.
+        }
+    }
+}
+
+function getTextControlSelection(element) {
+    try {
+        if (typeof element.selectionStart === "number"
+            && typeof element.selectionEnd === "number")
+            return {
+                start: element.selectionStart,
+                end: element.selectionEnd
+            };
+    } catch (error) {
+        return null;
+    }
+
+    return null;
+}
+
+function setTextControlSelection(element, start, end) {
+    try {
+        if (typeof element.setSelectionRange === "function")
+            element.setSelectionRange(start, end);
+        else {
+            element.selectionStart = start;
+            element.selectionEnd = end;
+        }
+    } catch (error) {
+        // Some input types expose value but not selection. Keep the value change.
+    }
+}
+
+function normalizeTextControlSelection(element, value, savedSelection) {
+    var selection = savedSelection;
+
+    if (!selection
+        || !isFiniteNumber(selection.start)
+        || !isFiniteNumber(selection.end))
+        selection = getTextControlSelection(element);
+
+    if (!selection)
+        return {
+            start: value.length,
+            end: value.length,
+            supported: false
+        };
+
+    var start = Math.max(0, Math.min(selection.start, value.length));
+    var end = Math.max(start, Math.min(selection.end, value.length));
+
+    return {
+        start: start,
+        end: end,
+        supported: true
+    };
+}
+
+function clampTextInsertion(element, value, selection, text) {
+    var insertion = text == null ? "" : String(text);
+    var maxLength = typeof element.maxLength === "number" ? element.maxLength : -1;
+
+    if (maxLength < 0)
+        return insertion;
+
+    var retainedLength = value.length - (selection.end - selection.start);
+    var allowedLength = Math.max(0, maxLength - retainedLength);
+
+    return insertion.length > allowedLength
+        ? insertion.substring(0, allowedLength)
+        : insertion;
+}
+
+function getTextSelection(element) {
+    try {
+        if (typeof element === "string")
+            element = getElementById(element);
+
+        if (!element || typeof element.value !== "string")
+            return null;
+
+        var tagName = element.tagName ? element.tagName.toLowerCase() : "";
+
+        if (tagName !== "input" && tagName !== "textarea")
+            return null;
+
+        var value = element.value || "";
+        return normalizeTextControlSelection(element, value, null);
+    } catch (ex) {
+        logInteropError("getTextSelection", ex);
+        return null;
+    }
+}
+
+function insertTextAtSelection(element, text, savedSelection) {
+    try {
+        if (typeof element === "string")
+            element = getElementById(element);
+
+        if (!element || typeof element.value !== "string")
+            return null;
+
+        var tagName = element.tagName ? element.tagName.toLowerCase() : "";
+
+        if (tagName !== "input" && tagName !== "textarea")
+            return null;
+
+        if (element.disabled || element.readOnly)
+            return element.value;
+
+        var value = element.value || "";
+        var selection = normalizeTextControlSelection(element, value, savedSelection);
+        var insertion = clampTextInsertion(element, value, selection, text);
+        var caret = selection.start + insertion.length;
+        var updated = false;
+
+        if (selection.supported && typeof element.setRangeText === "function") {
+            try {
+                element.setRangeText(insertion, selection.start, selection.end, "end");
+                updated = true;
+            } catch (error) {
+                updated = false;
+            }
+        }
+
+        if (!updated)
+            element.value = value.substring(0, selection.start) + insertion + value.substring(selection.end);
+
+        setTextControlSelection(element, caret, caret);
+        dispatchNativeInput(element);
+        focusTextControl(element);
+        return element.value;
+    } catch (ex) {
+        logInteropError("insertTextAtSelection", ex);
+        return null;
+    }
+}
+
 // #endregion
 
 // #region Scrolling
@@ -259,6 +423,19 @@ function scrollToId(id) {
         }
     } catch (ex) {
         logInteropError("scrollToId", ex);
+    }
+}
+
+function scrollElementToBottom(id) {
+    try {
+        var element = getElementById(id);
+
+        if (!element)
+            return;
+
+        element.scrollTop = element.scrollHeight;
+    } catch (ex) {
+        logInteropError("scrollElementToBottom", ex);
     }
 }
 

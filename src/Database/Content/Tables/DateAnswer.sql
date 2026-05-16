@@ -6,6 +6,7 @@ create table [Content].[DateAnswer] (
     [IsDeleted] bit default(0) not null,
     [QuestionId] uniqueidentifier not null,
     [Kind] int default(0) not null,
+    [Label] nvarchar(150) null,
     [DateMin] date null,
     [DateMax] date null,
     [TimeMin] time null,

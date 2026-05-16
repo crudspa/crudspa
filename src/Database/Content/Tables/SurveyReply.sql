@@ -1,0 +1,17 @@
+create table [Content].[SurveyReply] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [SurveyId] uniqueidentifier null,
+    [BinderId] uniqueidentifier null,
+    [ContactId] uniqueidentifier not null,
+    [Started] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [Completed] datetimeoffset(7) null,
+    [Terminated] datetimeoffset(7) null,
+    constraint [PK_Content_SurveyReply] primary key clustered ([Id]),
+    constraint [FK_Content_SurveyReply_Survey] foreign key ([SurveyId]) references [Content].[Survey] ([Id]),
+    constraint [FK_Content_SurveyReply_Binder] foreign key ([BinderId]) references [Content].[Binder] ([Id]),
+    constraint [FK_Content_SurveyReply_Contact] foreign key ([ContactId]) references [Framework].[Contact] ([Id]),
+);

@@ -8,6 +8,7 @@
     [Parameter] public Guid? Id { get; set; }
     [Parameter] public Boolean IsNew { get; set; }
     [Parameter] public String? ConfigJson { get; set; }
+    [Parameter] public Guid? PaneId { get; set; }
 
     public Object? Instance { get; private set; }
 
@@ -23,7 +24,7 @@
             throw new($"Interface '{nameof(IPaneDisplay)}' is not implemented by the component '{TypeName}'.");
 
         builder.OpenComponent(0, pluginType);
-        builder.SetKey((TypeName, Path, Id, IsNew));
+        builder.SetKey((TypeName, Path, Id, IsNew, PaneId));
 
         if (Path.HasSomething())
             builder.AddAttribute(1, nameof(IPaneDisplay.Path), Path);
@@ -37,7 +38,10 @@
         if (ConfigJson.HasSomething())
             builder.AddAttribute(4, nameof(IPaneDisplay.ConfigJson), ConfigJson);
 
-        builder.AddComponentReferenceCapture(5, component => Instance = component);
+        if (PaneId.HasValue && typeof(IHasPaneId).IsAssignableFrom(pluginType))
+            builder.AddAttribute(5, nameof(IHasPaneId.PaneId), PaneId);
+
+        builder.AddComponentReferenceCapture(6, component => Instance = component);
 
         builder.CloseComponent();
     };

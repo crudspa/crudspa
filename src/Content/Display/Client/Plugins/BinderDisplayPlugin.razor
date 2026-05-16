@@ -8,7 +8,7 @@
     [Parameter] public Guid? Id { get; set; }
     [Parameter] public String? ConfigJson { get; set; }
     [Parameter] public EventCallback BinderCompleted { get; set; }
-    [Parameter] public ImageFile? GuideImage { get; set; }
+    [Parameter] public RenderFragment<Page>? PageHeader { get; set; }
     [Parameter] public Boolean Shadowed { get; set; }
 
     public Object? Instance { get; private set; }
@@ -38,8 +38,8 @@
         if (BinderCompleted.HasDelegate)
             builder.AddAttribute(4, nameof(IBinderDisplay.BinderCompleted), BinderCompleted);
 
-        if (GuideImage is not null)
-            builder.AddAttribute(5, nameof(IBinderDisplay.GuideImage), GuideImage);
+        if (PageHeader is not null)
+            builder.AddAttribute(5, nameof(IBinderDisplay.PageHeader), PageHeader);
 
         builder.AddAttribute(6, nameof(IBinderDisplay.Shadowed), Shadowed);
 

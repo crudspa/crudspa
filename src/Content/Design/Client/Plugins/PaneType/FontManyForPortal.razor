@@ -5,30 +5,81 @@
       CancelRequested="id => Model.Cancel(id)"
       DeleteRequested="id => Model.Delete(id)">
     <ReadView>
-        <Field Size="Field.Sizes.Unspecified">
+        <Field Size="Field.Sizes.Full">
             <style>
-                @@font-face {
-                    font-family: @($"'{context.Font.Name}'");
-                    src: url('@context.Font.FileFile.FetchUrl()');
-                }
+                @((MarkupString)context.ToFontFaceCss())
             </style>
-            <p style="font-size: 1.25em; font-family: @($"'{context.Font.Name}', system-ui, sans-serif;")">The quick brown fox jumps over the lazy dog.</p>
+            <p style="font-size: 1.25em; font-family: @($"'{context.Font.Name}', system-ui, sans-serif;")">
+                The <strong>quick</strong> brown fox jumps over the <em>lazy</em> dog.
+            </p>
+            <div class="c-muted">@context.FaceSummary</div>
         </Field>
     </ReadView>
     <EditView>
         <Wrapped>
-            <Field Label="Name"
+            <Field Label="Font Family Name"
                    Size="Field.Sizes.Medium">
                 <TextBox ReadOnly="@false"
                          MaxLength="75"
                          @bind-Value="context.Font.Name" />
             </Field>
-            <Field Label="File"
-                   Size="Field.Sizes.Larger"
+            <Field Size="Field.Sizes.Full"
                    Container="Field.Containers.Div">
-                <FontUploader ReadOnly="@false"
-                              Required="true"
-                              FontFile="context.Font.FileFile" />
+                <BatchSection Title="Font Faces">
+                    <HeadingPanel>
+                        <ButtonAdd EntityName="Face"
+                                   Clicked="context.AddFace"
+                                   Transparent="true" />
+                    </HeadingPanel>
+                    <ChildContent>
+                        @if (context.Font.Faces.Count == 0)
+                        {
+                            <Padding Size="Padding.Sizes.Medium"
+                                     Direction="Padding.Directions.All">
+                                <Stacked Alignment="Stacked.Alignments.Center">
+                                    <em>At least one font face is required.</em>
+                                </Stacked>
+                            </Padding>
+                        }
+
+                        @foreach (var face in context.Font.Faces)
+                        {
+                            <Border Direction="Border.Directions.Bottom">
+                                <Padding Direction="Padding.Directions.Vertical"
+                                         Size="Padding.Sizes.Small">
+                                    <Wrapped NoWrap="true"
+                                             Alignment="Wrapped.Alignments.Center">
+                                        <div class="star">
+                                            <Wrapped Alignment="Wrapped.Alignments.Top">
+                                                <Field Label="Style"
+                                                       Size="Field.Sizes.Small"
+                                                       Padding="Field.Paddings.TightVert"
+                                                       Container="Field.Containers.Div">
+                                                    <Radio LookupValues="context.StyleOptions"
+                                                           Value="context.StyleId(face)"
+                                                           ValueChanged="id => context.SetStyle(face, id)"
+                                                           RadioCssClass="tight-bottom" />
+                                                </Field>
+                                                <Field Label="File"
+                                                       Size="Field.Sizes.Larger"
+                                                       Padding="Field.Paddings.TightVert"
+                                                       Container="Field.Containers.Div">
+                                                    <FontUploader ReadOnly="@false"
+                                                                  Required="true"
+                                                                  FontFile="face.FileFile" />
+                                                </Field>
+                                            </Wrapped>
+                                        </div>
+                                        <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Transparent"
+                                                     HideBorder="true">
+                                            <BatchMenuItems RemoveClicked="() => context.RemoveFace(face)" />
+                                        </ContextMenu>
+                                    </Wrapped>
+                                </Padding>
+                            </Border>
+                        }
+                    </ChildContent>
+                </BatchSection>
             </Field>
         </Wrapped>
     </EditView>

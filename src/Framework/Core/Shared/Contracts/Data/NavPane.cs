@@ -69,4 +69,5 @@ public class NavPane : Observable, IOrderable, INamed
         get;
         set => SetProperty(ref field, value);
     }
+
 }

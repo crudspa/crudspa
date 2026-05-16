@@ -2,12 +2,13 @@ namespace Crudspa.Content.Jobs.Server.Sproxies;
 
 public static class MemberSelectForSending
 {
-    public static async Task<IList<Member>> Execute(String connection, Guid? sessionId, Guid? membershipId)
+    public static async Task<IList<Member>> Execute(String connection, Guid? sessionId, Guid? membershipId, String? smsChannelKey)
     {
         await using var command = new SqlCommand();
         command.CommandText = "ContentJobs.MemberSelectForSending";
 
         command.AddParameter("@MembershipId", membershipId);
+        command.AddParameter("@SmsChannelKey", 50, smsChannelKey);
 
         return await command.ExecuteQuery(connection, async reader =>
         {
@@ -43,6 +44,16 @@ public static class MemberSelectForSending
                 FirstName = reader.ReadString(4),
                 LastName = reader.ReadString(5),
                 Email = reader.ReadString(6),
+                Phones =
+                [
+                    new()
+                    {
+                        Id = reader.ReadGuid(7),
+                        ContactId = reader.ReadGuid(3),
+                        Phone = reader.ReadString(8),
+                        SupportsSms = reader.ReadBoolean(9),
+                    },
+                ],
             },
         };
     }

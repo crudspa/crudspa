@@ -1,0 +1,19 @@
+<ListOrderables Model="Model"
+                T="SurveyPartModel"
+                EntityName="Survey Part"
+                UrlPrefix="@($"{Path}/survey-part")"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Full">
+            <LabeledHtml Label="Instructions"
+                         HtmlValue="@context.Part.Instructions" />
+        </Field>
+    </ReadView>
+    <PaneLinks>
+        <PaneLink Href="@($"{Path}/survey-part-{context.Part.Id:D}?pane=questions")"
+                  Text="Questions"
+                  Count="context.Part.QuestionCount" />
+    </PaneLinks>
+</ListOrderables>

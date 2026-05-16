@@ -30,7 +30,8 @@ public partial class ConsumerHub : Crudspa.Content.Display.Server.Hubs.DisplayHu
         ICourseRunService courseRunService,
         IElementProgressService elementProgressService,
         INotebookRunService notebookRunService,
-        IPageRunService pageRunService
+        IPageRunService pageRunService,
+        ISurveyRunService surveyRunService
         )
         : base(loggerFactory,
             hubWrappers,
@@ -56,7 +57,8 @@ public partial class ConsumerHub : Crudspa.Content.Display.Server.Hubs.DisplayHu
             courseRunService,
             elementProgressService,
             notebookRunService,
-            pageRunService
+            pageRunService,
+            surveyRunService
             )
     {
     }

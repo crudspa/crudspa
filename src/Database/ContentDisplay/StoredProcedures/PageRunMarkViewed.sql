@@ -3,6 +3,9 @@ create proc [ContentDisplay].[PageRunMarkViewed] (
     ,@SessionId uniqueidentifier
 ) as
 
+if @Id is null or @Id = '00000000-0000-0000-0000-000000000000'
+    return
+
 declare @now datetimeoffset = sysdatetimeoffset()
 
 insert [Content].[PageViewed] (

@@ -3,6 +3,7 @@ create proc [ContentDesign].[NumberAnswerUpdate] (
     ,@Id uniqueidentifier
     ,@QuestionId uniqueidentifier
     ,@Kind int
+    ,@Label nvarchar(150)
     ,@IntegerMin int
     ,@IntegerMax int
     ,@DecimalMin real
@@ -23,6 +24,7 @@ set  Id = @Id
     ,UpdatedBy = @SessionId
     ,QuestionId = @QuestionId
     ,Kind = @Kind
+    ,Label = @Label
     ,IntegerMin = @IntegerMin
     ,IntegerMax = @IntegerMax
     ,DecimalMin = @DecimalMin

@@ -2,24 +2,27 @@
 {
     @if (Answer.Kind == DateAnswer.Kinds.Date)
     {
-        <Field Label="Date"
-               Size="Field.Sizes.Medium">
+        <Field Label="@Answer.Label"
+               Size="Field.Sizes.Medium"
+               Padding="Field.Paddings.TightVert">
             <DatePicker Format="d"
                         @bind-Value="Model.Reply.DateValue" />
         </Field>
     }
     else if (Answer.Kind == DateAnswer.Kinds.Time)
     {
-        <Field Label="Time"
-               Size="Field.Sizes.Small">
+        <Field Label="@Answer.Label"
+               Size="Field.Sizes.Small"
+               Padding="Field.Paddings.TightVert">
             <TextBox Placeholder="09:00"
                      @bind-Value="TimeText" />
         </Field>
     }
     else
     {
-        <Field Label="Date/Time"
-               Size="Field.Sizes.Medium">
+        <Field Label="@Answer.Label"
+               Size="Field.Sizes.Medium"
+               Padding="Field.Paddings.TightVert">
             <DateTimePicker @bind-Value="Model.Reply.DateTimeValue" />
         </Field>
     }

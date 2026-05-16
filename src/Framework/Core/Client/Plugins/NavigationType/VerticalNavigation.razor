@@ -22,7 +22,7 @@
             <div class="vertical-tree @(Navigator.NavigationVisible ? String.Empty : "hidden")"
                  role="navigation">
                 <ul>
-                    @foreach (var screen in Navigator.Screens)
+                    @foreach (var screen in Navigator.Screens.Where(x => x.Navigable))
                     {
                         <li class="level1">
                             <VerticalNode Screen="@screen"

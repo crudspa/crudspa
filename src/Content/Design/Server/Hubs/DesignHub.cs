@@ -10,6 +10,7 @@ public partial class DesignHub : Crudspa.Content.Display.Server.Hubs.DisplayHub
     protected ICourseService CourseService { get; }
     protected IEmailService EmailService { get; }
     protected IEmailTemplateService EmailTemplateService { get; }
+    protected IFontFaceService FontFaceService { get; }
     protected IFontService FontService { get; }
     protected IForumService ForumService { get; }
     protected IItemService ItemService { get; }
@@ -18,7 +19,14 @@ public partial class DesignHub : Crudspa.Content.Display.Server.Hubs.DisplayHub
     protected IPanePageService PanePageService { get; }
     protected IPostService PostService { get; }
     protected ISectionService SectionService { get; }
+    protected ISmsEventService SmsEventService { get; }
+    protected ISmsMessageMediaService SmsMessageMediaService { get; }
+    protected ISmsMessageService SmsMessageService { get; }
+    protected ISmsPreferenceService SmsPreferenceService { get; }
+    protected ISmsService SmsService { get; }
+    protected ISmsTemplateService SmsTemplateService { get; }
     protected IStyleService StyleService { get; }
+    protected ISurveyService SurveyService { get; }
     protected IThreadService ThreadService { get; }
     protected ITokenService TokenService { get; }
     protected ITrackService TrackService { get; }
@@ -51,6 +59,7 @@ public partial class DesignHub : Crudspa.Content.Display.Server.Hubs.DisplayHub
         IElementProgressService elementProgressService,
         INotebookRunService notebookRunService,
         IPageRunService pageRunService,
+        ISurveyRunService surveyRunService,
         // DesignHub (Content)
         IAchievementService achievementService,
         IBlogService blogService,
@@ -60,6 +69,7 @@ public partial class DesignHub : Crudspa.Content.Display.Server.Hubs.DisplayHub
         ICourseService courseService,
         IEmailService emailService,
         IEmailTemplateService emailTemplateService,
+        IFontFaceService fontFaceService,
         IFontService fontService,
         IForumService forumService,
         IItemService itemService,
@@ -68,7 +78,14 @@ public partial class DesignHub : Crudspa.Content.Display.Server.Hubs.DisplayHub
         IPanePageService panePageService,
         IPostService postService,
         ISectionService sectionService,
+        ISmsEventService smsEventService,
+        ISmsMessageMediaService smsMessageMediaService,
+        ISmsMessageService smsMessageService,
+        ISmsPreferenceService smsPreferenceService,
+        ISmsService smsService,
+        ISmsTemplateService smsTemplateService,
         IStyleService styleService,
+        ISurveyService surveyService,
         IThreadService threadService,
         ITokenService tokenService,
         ITrackService trackService)
@@ -96,7 +113,8 @@ public partial class DesignHub : Crudspa.Content.Display.Server.Hubs.DisplayHub
             courseRunService,
             elementProgressService,
             notebookRunService,
-            pageRunService)
+            pageRunService,
+            surveyRunService)
     {
         AchievementService = achievementService;
         BlogService = blogService;
@@ -106,6 +124,7 @@ public partial class DesignHub : Crudspa.Content.Display.Server.Hubs.DisplayHub
         CourseService = courseService;
         EmailService = emailService;
         EmailTemplateService = emailTemplateService;
+        FontFaceService = fontFaceService;
         FontService = fontService;
         ForumService = forumService;
         ItemService = itemService;
@@ -114,7 +133,14 @@ public partial class DesignHub : Crudspa.Content.Display.Server.Hubs.DisplayHub
         PanePageService = panePageService;
         PostService = postService;
         SectionService = sectionService;
+        SmsEventService = smsEventService;
+        SmsMessageMediaService = smsMessageMediaService;
+        SmsMessageService = smsMessageService;
+        SmsPreferenceService = smsPreferenceService;
+        SmsService = smsService;
+        SmsTemplateService = smsTemplateService;
         StyleService = styleService;
+        SurveyService = surveyService;
         ThreadService = threadService;
         TokenService = tokenService;
         TrackService = trackService;

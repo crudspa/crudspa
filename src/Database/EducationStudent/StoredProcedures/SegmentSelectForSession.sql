@@ -191,11 +191,18 @@ begin
         pane.TypeId,
         pane.ConfigJson,
         pane.Ordinal,
-        type.DisplayView as TypeDisplayView
+        type.DisplayView as TypeDisplayView,
+        pagePane.PageId,
+        binderPane.BinderId,
+        coursePane.CourseId,
+        coursePane.IdSource
     from [Framework].[Pane-Active] pane
         inner join [Framework].[PaneType-Active] type on pane.TypeId = type.Id
         inner join [Framework].[PortalPaneType-Active] portalPaneType on portalPaneType.TypeId = type.Id
         inner join #segmentsTable cte on cte.Id = pane.SegmentId
+        left join [Content].[PagePane-Active] pagePane on pagePane.PaneId = pane.Id
+        left join [Content].[BinderPane-Active] binderPane on binderPane.PaneId = pane.Id
+        left join [Content].[CoursePane-Active] coursePane on coursePane.PaneId = pane.Id
     where portalPaneType.PortalId = @PortalId
         and (
             pane.PermissionId is null

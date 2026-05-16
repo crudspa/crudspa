@@ -18,7 +18,7 @@ public partial class EmailFindForMembership : IPaneDisplay, IDisposable
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new(EventBus, ScrollService, EmailService, Id);
+        Model = new(EventBus, ScrollService, EmailService, Id, Path.Id("portal"));
         Model.PropertyChanged += HandleModelChanged;
 
         await Model.Reset();
@@ -41,14 +41,16 @@ public class EmailFindForMembershipModel : FindModel<EmailSearch, Email>,
 {
     private readonly IEmailService _emailService;
     private readonly Guid? _membershipId;
+    private readonly Guid? _portalId;
     private ObservableCollection<String> _sorts;
     private Boolean _resetting;
 
-    public EmailFindForMembershipModel(IEventBus eventBus, IScrollService scrollService, IEmailService emailService, Guid? membershipId)
+    public EmailFindForMembershipModel(IEventBus eventBus, IScrollService scrollService, IEmailService emailService, Guid? membershipId, Guid? portalId)
         : base(scrollService)
     {
         _emailService = emailService;
         _membershipId = membershipId;
+        _portalId = portalId;
         eventBus.Subscribe(this);
 
         _sorts =
@@ -74,7 +76,7 @@ public class EmailFindForMembershipModel : FindModel<EmailSearch, Email>,
     {
         _resetting = true;
 
-        Search.ParentId = _membershipId;
+        Search.ParentId = _membershipId ?? _portalId;
 
         Search.Text = String.Empty;
 
@@ -98,7 +100,9 @@ public class EmailFindForMembershipModel : FindModel<EmailSearch, Email>,
             return;
 
         var request = new Request<EmailSearch>(Search);
-        var response = await WithWaiting("Searching...", () => _emailService.SearchForMembership(request), resetAlerts);
+        var response = await WithWaiting("Searching...", () => _membershipId is not null
+            ? _emailService.SearchForMembership(request)
+            : _emailService.SearchForPortal(request), resetAlerts);
 
         if (response.Ok)
             SetCards(response.Value);

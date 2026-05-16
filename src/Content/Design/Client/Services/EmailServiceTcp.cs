@@ -7,6 +7,9 @@ public class EmailServiceTcp(IProxyWrappers proxyWrappers) : IEmailService
     public async Task<Response<IList<Email>>> SearchForMembership(Request<EmailSearch> request) =>
         await proxyWrappers.Send<IList<Email>>("EmailSearchForMembership", request);
 
+    public async Task<Response<IList<Email>>> SearchForPortal(Request<EmailSearch> request) =>
+        await proxyWrappers.Send<IList<Email>>("EmailSearchForPortal", request);
+
     public async Task<Response<Email?>> Fetch(Request<Email> request) =>
         await proxyWrappers.Send<Email?>("EmailFetch", request);
 

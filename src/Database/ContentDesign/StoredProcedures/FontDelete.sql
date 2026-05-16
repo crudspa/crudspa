@@ -16,6 +16,19 @@ set nocount on
 set xact_abort on
 begin transaction
 
+update fontFaceBase
+set  IsDeleted = 1
+    ,Updated = @now
+    ,UpdatedBy = @SessionId
+from [Content].[FontFace] fontFaceBase
+    inner join [Content].[FontFace-Active] fontFace on fontFace.Id = fontFaceBase.Id
+    inner join [Content].[Font-Active] font on fontFace.FontId = font.Id
+    inner join [Content].[ContentPortal-Active] contentPortal on font.ContentPortalId = contentPortal.Id
+    inner join [Framework].[Portal-Active] portal on contentPortal.PortalId = portal.Id
+    inner join [Framework].[Organization-Active] organization on portal.OwnerId = organization.Id
+where fontFace.FontId = @Id
+    and organization.Id = @organizationId
+
 update baseTable
 set  IsDeleted = 1
     ,Updated = @now

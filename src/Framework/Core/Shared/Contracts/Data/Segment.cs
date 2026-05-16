@@ -76,6 +76,24 @@ public class Segment : Observable, IValidates, INamed, IOrderable
         set => SetProperty(ref field, value);
     }
 
+    public Boolean? Routable
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    public Boolean? Navigable
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    public Boolean? Mapable
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
     public Boolean? RequiresId
     {
         get;
@@ -178,7 +196,7 @@ public class Segment : Observable, IValidates, INamed, IOrderable
                 errors.AddError("Key must be all lowercase letters, numbers, or hyphens.", nameof(Key));
 
             if (SeoDescription?.Length > 300)
-                errors.AddError("Seo Description cannot be longer than 300 characters.", nameof(SeoDescription));
+                errors.AddError("SEO Description cannot be longer than 300 characters.", nameof(SeoDescription));
 
             if (Title.HasNothing())
                 errors.AddError("Title is required.", nameof(Title));
@@ -190,9 +208,26 @@ public class Segment : Observable, IValidates, INamed, IOrderable
 
             if (!Fixed.HasValue)
                 errors.AddError("Fixed is required.", nameof(Fixed));
+            else if (Fixed == true && Routable == false)
+                errors.AddError("Fixed segments must be routable.", nameof(Fixed));
+
+            if (!Routable.HasValue)
+                errors.AddError("Routable is required.", nameof(Routable));
+
+            if (!Navigable.HasValue)
+                errors.AddError("Navigable is required.", nameof(Navigable));
+            else if (Navigable == true && Routable != true)
+                errors.AddError("Navigable segments must be routable.", nameof(Navigable));
+
+            if (!Mapable.HasValue)
+                errors.AddError("Mapable is required.", nameof(Mapable));
+            else if (Mapable == true && Routable != true)
+                errors.AddError("Mapable segments must be routable.", nameof(Mapable));
 
             if (!RequiresId.HasValue)
                 errors.AddError("Requires ID is required.", nameof(RequiresId));
+            else if (RequiresId == true && Mapable == true)
+                errors.AddError("Mapable segments cannot require IDs.", nameof(Mapable));
 
             if (!TypeId.HasValue)
                 errors.AddError("Type is required.", nameof(TypeId));

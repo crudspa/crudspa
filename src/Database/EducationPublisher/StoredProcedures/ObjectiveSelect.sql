@@ -34,8 +34,20 @@ select
     ,binder.TypeId as BinderTypeId
     ,type.Name as BinderTypeName
     ,(select count(1) from [Content].[Page-Active] where BinderId = objective.BinderId) as PageCount
+    ,guideBinder.Id as GuideBinderId
+    ,guideBinder.BinderId as GuideBinderBinderId
+    ,guideBinder.GuideImageId as GuideBinderGuideImageId
+    ,guideImage.Id as GuideImageId
+    ,guideImage.BlobId as GuideImageBlobId
+    ,guideImage.Name as GuideImageName
+    ,guideImage.Format as GuideImageFormat
+    ,guideImage.Width as GuideImageWidth
+    ,guideImage.Height as GuideImageHeight
+    ,guideImage.Caption as GuideImageCaption
 from [Education].[Objective-Active] objective
     inner join [Content].[Binder-Active] binder on objective.BinderId = binder.Id
+    left join [Education].[GuideBinder-Active] guideBinder on binder.Id = guideBinder.BinderId
+    left join [Framework].[ImageFile-Active] guideImage on guideBinder.GuideImageId = guideImage.Id
     left join [Education].[Achievement-Active] generatesAchievement on objective.GeneratesAchievementId = generatesAchievement.Id
     inner join [Education].[Lesson-Active] lesson on objective.LessonId = lesson.Id
     left join [Education].[Achievement-Active] requiresAchievement on objective.RequiresAchievementId = requiresAchievement.Id

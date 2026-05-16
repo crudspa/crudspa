@@ -13,6 +13,7 @@ public static class NoteInsert
         command.AddParameter("@ImageFileId", note.ImageFileFile.Id);
         command.AddParameter("@RequireText", note.RequireText ?? false);
         command.AddParameter("@RequireImageSelection", note.RequireImageSelection ?? false);
+        command.AddParameter("@OpenOnly", note.OpenOnly ?? false);
 
         var output = command.AddOutputParameter("@Id");
         await command.Execute(connection, transaction);

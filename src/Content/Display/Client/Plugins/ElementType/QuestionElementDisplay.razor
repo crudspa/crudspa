@@ -1,20 +1,4 @@
 @if (Model is not null)
 {
-    <div class="c-question-element">
-        @if (Model.Question.Text.HasSomething())
-        {
-            <div class="question-text">
-                @((MarkupString)Model.Question.Text!)
-            </div>
-        }
-
-        @if (Model.Question.AnswerType?.DisplayView.HasSomething() == true)
-        {
-            <AnswerDisplayPlugin TypeName="@Model.Question.AnswerType.DisplayView"
-                                 Model="Model"
-                                 @key="Model.Question.AnswerTypeId" />
-        }
-
-        <Alerts Items="Model.Alerts" />
-    </div>
+    <QuestionDisplay Model="Model" />
 }

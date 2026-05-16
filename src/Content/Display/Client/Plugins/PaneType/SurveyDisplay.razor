@@ -1,0 +1,96 @@
+<Modal Model="Model.CompletionModalModel"
+       TopMargin="8em"
+       Width="28em"
+       Title="Survey Complete">
+    <Content>
+        <Padding Size="Padding.Sizes.Medium">
+            <p>Thank you for completing this survey!</p>
+        </Padding>
+    </Content>
+    <Buttons>
+        <ButtonOk Clicked="() => Model.CompletionModalModel.Hide()" />
+    </Buttons>
+</Modal>
+<Waiter Model="Model">
+    @if (Model.Survey is not null)
+    {
+        <div class="c-survey-display">
+            @if (Model.Survey.Title.HasSomething())
+            {
+                <h2>@Model.Survey.Title</h2>
+            }
+            @if (Model.Survey.Description.HasSomething())
+            {
+                <UserHtml Html="@Model.Survey.Description" />
+            }
+
+            @if (Model.IsComplete)
+            {
+                <Border Direction="Border.Directions.Horizontal">
+                    <Padding Size="Padding.Sizes.Large">
+                        <h3>Thank you for completing this survey!</h3>
+                    </Padding>
+                </Border>
+            }
+            else if (Model.CurrentPart is not null)
+            {
+                <div class="c-survey-part">
+                    @if (Model.CurrentPart.Title.HasSomething())
+                    {
+                        <h3>@Model.CurrentPart.Title</h3>
+                    }
+                    @if (Model.CurrentPart.Instructions.HasSomething())
+                    {
+                        <UserHtml Html="@Model.CurrentPart.Instructions" />
+                    }
+
+                    <div class="c-survey-questions">
+                        @foreach (var surveyQuestion in Model.CurrentPart.Questions)
+                        {
+                            if (surveyQuestion.Question.Id is { } questionId && Model.QuestionModels.TryGetValue(questionId, out var questionModel))
+                            {
+                                <QuestionDisplay Model="questionModel"
+                                                 @key="questionModel" />
+                            }
+                        }
+                    </div>
+                </div>
+
+                <div class="c-survey-nav">
+                    <div class="back">
+                        @if (Model.Survey.Parts.Count > 1)
+                        {
+                            <ButtonCore Clicked="Model.Back"
+                                        Disabled="@(!Model.CanMoveBack)"
+                                        IconClass="c-icon-chevron-left"
+                                        Text="Back" />
+                        }
+                    </div>
+                    @if (Model.PositionText.HasSomething())
+                    {
+                        <div class="page-count">@Model.PositionText</div>
+                    }
+                    else
+                    {
+                        <div></div>
+                    }
+                    <div class="next">
+                        @if (Model.CanMoveNext)
+                        {
+                            <ButtonCore Clicked="Model.Next"
+                                        IconClass="c-icon-chevron-right"
+                                        IconPosition="ButtonCore.IconPositions.Right"
+                                        Text="Next" />
+                        }
+                        else
+                        {
+                            <ButtonCore Clicked="Model.Finish"
+                                        Text="Finish"
+                                        ButtonStyle="ButtonCore.ButtonStyles.Primary" />
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</Waiter>

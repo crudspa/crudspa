@@ -32,7 +32,20 @@ where contentPortal.PortalId = @PortalId
 select
      font.Id
     ,font.Name
-    ,font.FileId
 from [Content].[Font-Active] font
+    inner join [Content].[ContentPortal-Active] contentPortal on font.ContentPortalId = contentPortal.Id
+where contentPortal.PortalId = @PortalId
+
+select
+     fontFace.Id
+    ,fontFace.FontId
+    ,fontFace.FileId
+    ,fileTable.Format as FileFormat
+    ,fontFace.Style
+    ,fontFace.WeightMin
+    ,fontFace.WeightMax
+from [Content].[FontFace-Active] fontFace
+    inner join [Content].[Font-Active] font on fontFace.FontId = font.Id
+    inner join [Framework].[FontFile-Active] fileTable on fontFace.FileId = fileTable.Id
     inner join [Content].[ContentPortal-Active] contentPortal on font.ContentPortalId = contentPortal.Id
 where contentPortal.PortalId = @PortalId

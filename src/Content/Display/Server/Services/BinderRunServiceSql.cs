@@ -9,6 +9,12 @@ public class BinderRunServiceSql(
 {
     private String Connection => configService.Fetch().Database;
 
+    public async Task<Response<BinderPane?>> FetchBinderPane(Request<BinderPane> request)
+    {
+        return await wrappers.Try<BinderPane?>(request, async response =>
+            await BinderPaneSelectForPane.Execute(Connection, request.SessionId, request.Value.PaneId));
+    }
+
     public async Task<Response<BinderTypeFull?>> FetchBinderType(Request<Binder> request)
     {
         return await wrappers.Try<BinderTypeFull?>(request, async response =>

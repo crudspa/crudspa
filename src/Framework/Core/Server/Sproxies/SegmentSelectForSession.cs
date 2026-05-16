@@ -135,13 +135,16 @@ public static class SegmentSelectForSession
             Key = reader.ReadString(5),
             Title = reader.ReadString(6),
             Fixed = reader.ReadBoolean(7),
-            RequiresId = reader.ReadBoolean(8),
-            TypeId = reader.ReadGuid(9),
-            IconId = reader.ReadGuid(10),
-            Recursive = reader.ReadBoolean(11),
-            Ordinal = reader.ReadInt32(12),
-            TypeDisplayView = reader.ReadString(13),
-            IconName = reader.ReadString(14),
+            Routable = reader.ReadBoolean(8),
+            Navigable = reader.ReadBoolean(9),
+            Mapable = reader.ReadBoolean(10),
+            RequiresId = reader.ReadBoolean(11),
+            TypeId = reader.ReadGuid(12),
+            IconId = reader.ReadGuid(13),
+            Recursive = reader.ReadBoolean(14),
+            Ordinal = reader.ReadInt32(15),
+            TypeDisplayView = reader.ReadString(16),
+            IconName = reader.ReadString(17),
         };
     }
 

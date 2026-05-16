@@ -10,18 +10,10 @@ public partial class ContactAnswerDesign : IAnswerDesign
     public ContactAnswer.Kinds Kind
     {
         get => Answer.Kind;
-        set
-        {
-            Answer.Kind = value;
-            Answer.DefaultLabel();
-        }
+        set => Answer.Kind = value;
     }
 
-    protected override void OnInitialized()
-    {
-        Question.EnsureAnswer();
-        Answer.DefaultLabel();
-    }
+    protected override void OnInitialized() => Question.EnsureAnswer();
 
     public void PrepareForSave() { }
 }

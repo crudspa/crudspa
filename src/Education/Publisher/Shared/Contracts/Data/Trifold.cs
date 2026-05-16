@@ -76,10 +76,21 @@ public class Trifold : Observable, IValidates, IOrderable, INamed
         set => SetProperty(ref field, value);
     } = new();
 
+    public GuideBinder GuideBinder
+    {
+        get;
+        set => SetProperty(ref field, value);
+    } = new();
+
     public List<Error> Validate()
     {
         return ErrorsEx.Validate(errors =>
         {
+            if (Title.HasNothing())
+                errors.AddError("Title is required.", nameof(Title));
+            else if (Title!.Length > 75)
+                errors.AddError("Title cannot be longer than 75 characters.", nameof(Title));
+
             if (!StatusId.HasValue)
                 errors.AddError("Status is required.", nameof(StatusId));
 

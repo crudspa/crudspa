@@ -7,10 +7,7 @@
         @if (Font?.Name is not null)
         {
             <style>
-                @@font-face {
-                    font-family: @($"'{Font.Name}'");
-                    src: url('@Font.FileFile.FetchUrl()');
-                }
+                @((MarkupString)ToFontFaceCss())
             </style>
         }
         <div class="value"

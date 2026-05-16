@@ -116,12 +116,6 @@ public class Page : Observable, IValidates, IOrderable
             if (!StatusId.HasValue)
                 errors.AddError("Status is required.", nameof(StatusId));
 
-            if (!ShowNotebook.HasValue)
-                errors.AddError("Show Notebook is required.", nameof(ShowNotebook));
-
-            if (!ShowGuide.HasValue)
-                errors.AddError("Show Guide is required.", nameof(ShowGuide));
-
             errors.AddRange(Box.Validate());
         });
     }

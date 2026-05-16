@@ -22,7 +22,7 @@
 </div>
 
 <ul>
-    @foreach (var child in Screen.Children)
+    @foreach (var child in Screen.Children.Where(x => x.Navigable))
     {
         <li class="level@(Level)">
             <VerticalNode Screen="@child"

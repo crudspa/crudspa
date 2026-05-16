@@ -3,6 +3,7 @@ create proc [ContentDesign].[DateAnswerUpdate] (
     ,@Id uniqueidentifier
     ,@QuestionId uniqueidentifier
     ,@Kind int
+    ,@Label nvarchar(150)
     ,@DateMin date
     ,@DateMax date
     ,@TimeMin time
@@ -23,6 +24,7 @@ set  Id = @Id
     ,UpdatedBy = @SessionId
     ,QuestionId = @QuestionId
     ,Kind = @Kind
+    ,Label = @Label
     ,DateMin = @DateMin
     ,DateMax = @DateMax
     ,TimeMin = @TimeMin

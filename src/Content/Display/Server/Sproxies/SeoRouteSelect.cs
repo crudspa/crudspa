@@ -21,7 +21,9 @@ public static class SeoRouteSelect
             PageId = reader.ReadGuid(2),
             PageTitle = reader.ReadString(3),
             SeoDescription = reader.ReadString(4),
-            IsDefault = reader.ReadBoolean(5) ?? false,
+            Navigable = reader.ReadBoolean(5) ?? false,
+            Mapable = reader.ReadBoolean(6) ?? false,
+            IsDefault = reader.ReadBoolean(7) ?? false,
         };
     }
 }

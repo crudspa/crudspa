@@ -3,6 +3,7 @@ create view [Content].[NumberAnswer-Active] as
 select numberAnswer.Id as Id
     ,numberAnswer.QuestionId as QuestionId
     ,numberAnswer.Kind as Kind
+    ,numberAnswer.Label as Label
     ,numberAnswer.IntegerMin as IntegerMin
     ,numberAnswer.IntegerMax as IntegerMax
     ,numberAnswer.DecimalMin as DecimalMin

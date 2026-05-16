@@ -34,6 +34,7 @@ public static class TrifoldSelect
                 TypeId = reader.ReadGuid(12),
                 TypeName = reader.ReadString(13),
             },
+            GuideBinder = GuideDataReaders.ReadGuideBinder(reader, 14),
         };
     }
 }

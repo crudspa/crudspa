@@ -34,6 +34,24 @@ public class NavSegment : Observable, IOrderable, INamed
         set => SetProperty(ref field, value);
     }
 
+    public Boolean? Routable
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    public Boolean? Navigable
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    public Boolean? Mapable
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
     public Boolean? RequiresId
     {
         get;

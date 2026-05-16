@@ -3,7 +3,6 @@
 public partial class BinderDesign : IPaneDesign, IHasPaneId, IDisposable
 {
     private void HandleModelChanged(Object? sender, PropertyChangedEventArgs args) => InvokeAsync(StateHasChanged);
-    private void HandleConfigUpdated(Object? sender, EventArgs args) => ConfigUpdated.InvokeAsync();
 
     [Parameter] public String? ConfigJson { get; set; }
     [Parameter] public String? Path { get; set; }
@@ -17,11 +16,8 @@ public partial class BinderDesign : IPaneDesign, IHasPaneId, IDisposable
 
     protected override async Task OnInitializedAsync()
     {
-        var config = ConfigJson.FromJson<BinderConfig>() ?? new();
-
-        Model = new(config, PaneId, PanePageService);
+        Model = new(PaneId, PanePageService);
         Model.PropertyChanged += HandleModelChanged;
-        Model.ConfigUpdated += HandleConfigUpdated;
 
         await Model.Initialize();
     }
@@ -29,21 +25,20 @@ public partial class BinderDesign : IPaneDesign, IHasPaneId, IDisposable
     public void Dispose()
     {
         Model.PropertyChanged -= HandleModelChanged;
-        Model.ConfigUpdated -= HandleConfigUpdated;
         Model.Dispose();
     }
 
     public Task<Boolean> PrepareForSave() => Task.FromResult(true);
 
-    public String? GetConfigJson() => Model.Config.ToJson();
+    public String? GetConfigJson() => null;
 
     public Task<Response<IList<Page>>> FetchPages(Guid? binderId) =>
-        PanePageService.FetchPages(new(new() { BinderId = Model.Config.BinderId }));
+        PanePageService.FetchPages(new(new() { BinderId = Model.BinderId }));
 
     public Task<Response<Page?>> AddPage() =>
         PanePageService.AddPage(new(new()
         {
-            BinderId = Model.Config.BinderId,
+            BinderId = Model.BinderId,
             Page = new()
             {
                 TypeId = PageTypeIds.StackedSections,
@@ -63,43 +58,46 @@ public partial class BinderDesign : IPaneDesign, IHasPaneId, IDisposable
     public Task<Response> RemovePage(Guid? pageId) =>
         PanePageService.RemovePage(new(new()
         {
-            BinderId = Model.Config.BinderId,
+            BinderId = Model.BinderId,
             Page = new() { Id = pageId },
         }));
 
     public Task<Response> SavePageOrder(IList<Page> pages) =>
         PanePageService.SavePageOrder(new(new()
         {
-            BinderId = Model.Config.BinderId,
+            BinderId = Model.BinderId,
             Pages = pages,
         }));
 }
 
 public class BinderDesignModel(
-    BinderConfig config,
     Guid? paneId,
     IPanePageService panePageService) : EditModel<Binder>(false)
 {
-    public event EventHandler? ConfigUpdated;
-
-    public BinderConfig Config
+    public Guid? BinderId
     {
         get;
         set => SetProperty(ref field, value);
-    } = config;
+    }
 
     public async Task Initialize()
     {
-        if (Config.BinderId.HasNothing())
+        if (BinderId.HasNothing())
+        {
+            var binderPaneResponse = await WithWaiting("Fetching...", () =>
+                panePageService.FetchBinderPane(new(new() { PaneId = paneId })));
+
+            if (binderPaneResponse.Ok)
+                BinderId = binderPaneResponse.Value?.BinderId;
+        }
+
+        if (BinderId.HasNothing())
         {
             var binder = new Binder { TypeId = BinderTypeIds.BackAndNext };
             var response = await WithWaiting("Adding...", () => panePageService.AddBinder(new(new() { PaneId = paneId, Binder = binder })));
 
             if (response.Ok)
-            {
-                Config.BinderId = response.Value.Id;
-                ConfigUpdated?.Invoke(this, EventArgs.Empty);
-            }
+                BinderId = response.Value.Id;
         }
     }
 }

@@ -4,7 +4,6 @@ public class PagePartsServiceSql(
     IServerConfigService configService,
     ISqlWrappers sqlWrappers,
     IFileService fileService,
-    IBlobService blobService,
     ISectionService sectionService,
     IBinderRepository binderRepository,
     IPageRepository pageRepository)
@@ -43,13 +42,6 @@ public class PagePartsServiceSql(
 
         if (errors.HasItems())
             return new() { Errors = errors };
-
-        var guideAudioFileResponse = await fileService.SaveAudio(new(sessionId, page.GuideAudioFile));
-
-        if (!guideAudioFileResponse.Ok)
-            return new() { Errors = guideAudioFileResponse.Errors };
-
-        page.GuideAudioFile.Id = guideAudioFileResponse.Value.Id;
 
         var createdPage = await sqlWrappers.WithTransaction(async (connection, transaction) =>
         {
@@ -96,13 +88,7 @@ public class PagePartsServiceSql(
         {
             newPage.Id = Guid.NewGuid();
             newPage.Title = copy.NewName;
-            newPage.GuideAudioFile.OptimizedBlobId = null;
             newPage.BinderId = copy.ExistingParentId;
-
-            if (newPage.GuideAudioFile.BlobId is not null)
-                newPage.GuideAudioFile.BlobId = await blobService.Copy(newPage.GuideAudioFile.BlobId.Value);
-
-            newPage.GuideAudioFile.Id = null;
 
             var newPageResponse = await AddPage(sessionId, newPage);
 
@@ -141,13 +127,6 @@ public class PagePartsServiceSql(
 
         if (existing is null)
             return new("Page not found.");
-
-        var guideAudioFileResponse = await fileService.SaveAudio(new(sessionId, page.GuideAudioFile), existing.GuideAudioFile);
-
-        if (!guideAudioFileResponse.Ok)
-            return new() { Errors = guideAudioFileResponse.Errors };
-
-        page.GuideAudioFile.Id = guideAudioFileResponse.Value.Id;
 
         await sqlWrappers.WithTransaction(async (connection, transaction) =>
         {

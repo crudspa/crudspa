@@ -37,7 +37,10 @@ select
     ,jobType.Name as JobTypeName
     ,jobType.EditorView as JobTypeEditorView
     ,jobType.ActionClass as JobTypeActionClass
+    ,job.Description
+    ,jobSchedule.Name as ScheduleName
 from [Framework].[Job-Active] job
     inner join [Framework].[JobType-Active] jobType on job.TypeId = jobType.Id
+    left join [Framework].[JobSchedule-Active] jobSchedule on job.ScheduleId = jobSchedule.Id
 where job.BatchId = @batchId
 order by job.Added

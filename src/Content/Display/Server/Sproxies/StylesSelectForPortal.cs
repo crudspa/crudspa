@@ -26,6 +26,20 @@ public static class StylesSelectForPortal
             while (await reader.ReadAsync())
                 portalStyles.Fonts.Add(ReadFont(reader));
 
+            await reader.NextResultAsync();
+
+            var fontsById = portalStyles.Fonts
+                .Where(x => x.Id.HasValue)
+                .ToDictionary(x => x.Id!.Value);
+
+            while (await reader.ReadAsync())
+            {
+                var fontFace = ReadFontFace(reader);
+
+                if (fontFace.FontId.HasValue && fontsById.TryGetValue(fontFace.FontId.Value, out var font))
+                    font.Faces.Add(fontFace);
+            }
+
             return portalStyles;
         });
     }
@@ -72,10 +86,23 @@ public static class StylesSelectForPortal
         {
             Id = reader.ReadGuid(0),
             Name = reader.ReadString(1),
+        };
+    }
+
+    private static FontFace ReadFontFace(SqlDataReader reader)
+    {
+        return new()
+        {
+            Id = reader.ReadGuid(0),
+            FontId = reader.ReadGuid(1),
             FileFile = new()
             {
                 Id = reader.ReadGuid(2),
+                Format = reader.ReadString(3),
             },
+            Style = reader.ReadString(4),
+            WeightMin = reader.ReadInt32(5),
+            WeightMax = reader.ReadInt32(6),
         };
     }
 }

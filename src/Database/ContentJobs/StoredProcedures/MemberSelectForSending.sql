@@ -1,5 +1,6 @@
 create proc [ContentJobs].[MemberSelectForSending] (
      @MembershipId uniqueidentifier
+    ,@SmsChannelKey nvarchar(50) = null
 ) as
 
 set nocount on
@@ -12,6 +13,9 @@ select
     ,contact.FirstName as ContactFirstName
     ,contact.LastName as ContactLastName
     ,contactEmail.Email as ContactEmailEmail
+    ,contactPhone.Id as ContactPhoneId
+    ,contactPhone.Phone as ContactPhonePhone
+    ,contactPhone.SupportsSms as ContactPhoneSupportsSms
 from [Content].[Member-Active] member
     inner join [Content].[Membership-Active] membership on member.MembershipId = membership.Id
     inner join [Framework].[Contact-Active] contact on member.ContactId = contact.Id
@@ -21,6 +25,25 @@ from [Content].[Member-Active] member
         where email.ContactId = contact.Id
         order by email.Ordinal
     ) contactEmail
+    outer apply (
+        select top (1) phone.Id, phone.Phone, phone.SupportsSms
+        from [Framework].[ContactPhone-Active] phone
+        where phone.ContactId = contact.Id
+            and phone.SupportsSms = 1
+            and not exists (
+                select 1
+                from [Content].[SmsPreference-Active] preference
+                where preference.PortalId = membership.PortalId
+                    and preference.Status in (2, 3)
+                    and (preference.SmsChannelKey = @SmsChannelKey or preference.SmsChannelKey is null or @SmsChannelKey is null)
+                    and (
+                        preference.ContactPhoneId = phone.Id
+                        or right(replace(replace(replace(replace(replace(replace(preference.Number, '+', ''), ' ', ''), '-', ''), '.', ''), '(', ''), ')', ''), 10)
+                            = right(replace(replace(replace(replace(replace(replace(phone.Phone, '+', ''), ' ', ''), '-', ''), '.', ''), '(', ''), ')', ''), 10)
+                    )
+            )
+        order by phone.Ordinal
+    ) contactPhone
 where membership.Id = @MembershipId
     and (member.Status = 0 or member.Status = 1)
 

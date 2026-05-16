@@ -14,6 +14,12 @@ public class Membership : Observable, IValidates, INamed
         set => SetProperty(ref field, value);
     }
 
+    public String? SmsChannelKey
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
     public String? Name
     {
         get;

@@ -1,0 +1,15 @@
+create table [Content].[Survey] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [PortalId] uniqueidentifier not null,
+    [Title] nvarchar(75) not null,
+    [Description] nvarchar(max) null,
+    [StatusId] uniqueidentifier not null,
+    [AssignmentKind] int default(0) not null,
+    constraint [PK_Content_Survey] primary key clustered ([Id]),
+    constraint [FK_Content_Survey_Portal] foreign key ([PortalId]) references [Framework].[Portal] ([Id]),
+    constraint [FK_Content_Survey_Status] foreign key ([StatusId]) references [Framework].[ContentStatus] ([Id]),
+);

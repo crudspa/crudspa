@@ -12,6 +12,8 @@ public partial class SinglePaneDisplay : ISegmentDisplay
     [Inject] public INavigator Navigator { get; set; } = null!;
 
     public NavPane? Pane { get; set; }
+    public Guid? PaneId { get; set; }
+    public Guid? DisplayId { get; set; }
     public SinglePaneConfig Config { get; set; } = null!;
 
     protected override Task OnInitializedAsync()
@@ -21,7 +23,9 @@ public partial class SinglePaneDisplay : ISegmentDisplay
 
         var pane = Panes!.OrderBy(x => x.Ordinal).First();
 
-        pane.Id = Id ?? Path.Id();
+        PaneId = pane.Id;
+        DisplayId = Id ?? Path.Id();
+        pane.Id = DisplayId;
         pane.IsNew = hasState && state.IsBasically("new");
 
         Pane = pane;

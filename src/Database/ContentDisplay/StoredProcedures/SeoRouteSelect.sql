@@ -11,6 +11,8 @@ set nocount on
         ,cast('/' + segment.[Key] as nvarchar(2048)) as [Path]
         ,segment.Title
         ,segment.SeoDescription
+        ,segment.Navigable
+        ,segment.Mapable
         ,segment.Ordinal
     from [Framework].[Segment-Active] segment
         inner join [Framework].[ContentStatus-Active] status on segment.StatusId = status.Id
@@ -18,7 +20,7 @@ set nocount on
         and segment.ParentId is null
         and segment.PermissionId is null
         and segment.AllLicenses = 1
-        and segment.Fixed = 1
+        and segment.Routable = 1
         and segment.RequiresId = 0
         and status.Name = 'Complete'
 
@@ -30,6 +32,8 @@ set nocount on
         ,cast(route.[Path] + '/' + child.[Key] as nvarchar(2048)) as [Path]
         ,child.Title
         ,child.SeoDescription
+        ,child.Navigable
+        ,child.Mapable
         ,child.Ordinal
     from [Framework].[Segment-Active] child
         inner join route on child.ParentId = route.Id
@@ -37,7 +41,7 @@ set nocount on
     where child.PortalId = @PortalId
         and child.PermissionId is null
         and child.AllLicenses = 1
-        and child.Fixed = 1
+        and child.Routable = 1
         and child.RequiresId = 0
         and status.Name = 'Complete'
 )
@@ -49,10 +53,10 @@ set nocount on
         and segment.ParentId is null
         and segment.PermissionId is null
         and segment.AllLicenses = 1
-        and segment.Fixed = 1
+        and segment.Routable = 1
         and segment.RequiresId = 0
         and status.Name = 'Complete'
-    order by segment.Ordinal, segment.[Key]
+    order by iif(segment.Navigable = 1, 0, 1), segment.Ordinal, segment.[Key]
 )
 select
      route.[Path]
@@ -60,12 +64,15 @@ select
     ,pagePane.PageId
     ,page.Title as PageTitle
     ,route.SeoDescription
+    ,route.Navigable
+    ,route.Mapable
     ,convert(bit, iif(route.Id = defaultSegment.Id, 1, 0)) as IsDefault
 from route
     cross join defaultSegment
     outer apply (
-        select top 1 try_convert(uniqueidentifier, json_value(pane.ConfigJson, '$.PageId')) as PageId
+        select top 1 pagePane.PageId
         from [Framework].[Pane-Active] pane
+            inner join [Content].[PagePane-Active] pagePane on pagePane.PaneId = pane.Id
             inner join [Framework].[PaneType-Active] paneType on pane.TypeId = paneType.Id
         where pane.SegmentId = route.Id
             and pane.PermissionId is null

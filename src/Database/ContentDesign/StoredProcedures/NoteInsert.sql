@@ -5,6 +5,7 @@ create proc [ContentDesign].[NoteInsert] (
     ,@ImageFileId uniqueidentifier
     ,@RequireText bit
     ,@RequireImageSelection bit
+    ,@OpenOnly bit
     ,@Id uniqueidentifier output
 ) as
 
@@ -25,6 +26,7 @@ insert [Content].[NoteElement] (
     ,ImageFileId
     ,RequireText
     ,RequireImageSelection
+    ,OpenOnly
 )
 values (
      @Id
@@ -36,6 +38,7 @@ values (
     ,@ImageFileId
     ,@RequireText
     ,@RequireImageSelection
+    ,@OpenOnly
 )
 
 commit transaction

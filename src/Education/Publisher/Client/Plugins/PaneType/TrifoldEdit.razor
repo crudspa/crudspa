@@ -19,12 +19,26 @@
         <Padding Size="Padding.Sizes.Small"
                  Direction="Padding.Directions.Vertical">
             <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Title"
+                       Size="Field.Sizes.Medium">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="75"
+                             @bind-Value="Model.Entity.Title" />
+                </Field>
                 <Field Label="Status"
                        Size="Field.Sizes.Unspecified">
                     <StatusEdit ReadOnly="Model.ReadOnly"
                                 LookupValues="Model.ContentStatusNames"
                                 ColorClassFrom="ContentStatusColors.For"
                                 @bind-Value="Model.Entity.StatusId" />
+                </Field>
+                <Field Label="Guide Image"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <ImageUploader ReadOnly="Model.ReadOnly"
+                                   Required="false"
+                                   Width="480"
+                                   ImageFile="Model.Entity.GuideBinder.GuideImage" />
                 </Field>
                 <Field Label="Requires Achievement"
                        Size="Field.Sizes.Medium">

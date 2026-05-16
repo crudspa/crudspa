@@ -1,0 +1,15 @@
+create table [Content].[FontFace] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [FontId] uniqueidentifier not null,
+    [FileId] uniqueidentifier not null,
+    [Style] nvarchar(10) default('normal') not null,
+    [WeightMin] int default(400) not null,
+    [WeightMax] int default(400) not null,
+    constraint [PK_Content_FontFace] primary key clustered ([Id]),
+    constraint [FK_Content_FontFace_Font] foreign key ([FontId]) references [Content].[Font] ([Id]),
+    constraint [FK_Content_FontFace_File] foreign key ([FileId]) references [Framework].[FontFile] ([Id]),
+);

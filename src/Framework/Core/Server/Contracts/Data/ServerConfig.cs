@@ -17,6 +17,7 @@ public class ServerConfig
     public String SendGridApiKey { get; set; } = null!;
     public String SignalRAppName { get; set; } = null!;
     public Boolean SignalRUseAzure { get; set; } = false;
+    public List<SmsChannelConfig> SmsChannels { get; set; } = [];
     public String StorageAccount { get; set; } = null!;
     public String StorageContainer { get; set; } = null!;
 }

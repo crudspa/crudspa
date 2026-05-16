@@ -10,7 +10,6 @@ public static class FontUpdate
         command.AddParameter("@SessionId", sessionId);
         command.AddParameter("@Id", font.Id);
         command.AddParameter("@Name", 75, font.Name);
-        command.AddParameter("@FileId", font.FileFile.Id);
 
         await command.Execute(connection, transaction);
     }

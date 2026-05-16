@@ -133,7 +133,10 @@ public class CourseServiceSql(
             var page = request.Value.Page;
 
             if (page is null || binderId.HasNothing())
-                throw new("Course page not found.");
+            {
+                response.AddError("Course page not found.");
+                return null;
+            }
 
             var fetchResponse = await pagePartsService.FetchPage(request.SessionId, binderId, page);
             response.AddErrors(fetchResponse.Errors);
@@ -210,7 +213,10 @@ public class CourseServiceSql(
             var pageId = request.Value.PageId;
 
             if (pageId.HasNothing() || binderId.HasNothing())
-                throw new("Course page not found.");
+            {
+                response.AddError("Course page not found.");
+                return [];
+            }
 
             var fetchResponse = await pagePartsService.FetchSections(request.SessionId, binderId, pageId);
             response.AddErrors(fetchResponse.Errors);
@@ -294,7 +300,10 @@ public class CourseServiceSql(
             var section = request.Value.Section;
 
             if (section is null || pageId.HasNothing() || binderId.HasNothing())
-                throw new("Course section not found.");
+            {
+                response.AddError("Course section not found.");
+                return;
+            }
 
             var removeResponse = await pagePartsService.RemoveSection(request.SessionId, binderId, pageId, section);
             response.AddErrors(removeResponse.Errors);

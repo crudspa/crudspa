@@ -27,6 +27,17 @@ public partial class DisplayHub
         });
     }
 
+    public async Task<Response<QuestionReply?>> ElementProgressFetchQuestionReply(Request<Element> request)
+    {
+        return await HubWrappers.RequireSession(request, async session =>
+        {
+            if (session.User?.Contact.Id is null)
+                return new();
+
+            return await ElementProgressService.FetchQuestionReply(request);
+        });
+    }
+
     public async Task<Response> ElementProgressAddLink(Request<ElementLink> request)
     {
         return await HubWrappers.RequireSession(request, async session =>

@@ -13,6 +13,15 @@ public partial class DesignHub
         });
     }
 
+    public async Task<Response<IList<EmailTemplate>>> EmailTemplateSearchForPortal(Request<EmailTemplateSearch> request)
+    {
+        return await HubWrappers.RequirePermission(request, PermissionIds.Memberships, async session =>
+        {
+            request.Value.TimeZoneId = session.User?.Contact.TimeZoneId ?? Constants.DefaultTimeZone;
+            return await EmailTemplateService.SearchForPortal(request);
+        });
+    }
+
     public async Task<Response<EmailTemplate?>> EmailTemplateFetch(Request<EmailTemplate> request)
     {
         return await HubWrappers.RequirePermission(request, PermissionIds.Memberships, async session =>

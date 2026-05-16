@@ -8,5 +8,6 @@ public class PermissionIds
     public static readonly Guid Memberships = new("ced746f6-ea1e-4905-b636-0bcaf2c4a1d6");
     public static readonly Guid Pages = new("233c0886-6525-4f29-b21f-1a953a69fd01");
     public static readonly Guid Styles = new("8759c072-0f45-4e3d-a630-1412e12cde76");
+    public static readonly Guid Surveys = new("5a242f8e-2834-4b1b-8f75-4c09c423aac2");
     public static readonly Guid Tracks = new("0fbd1165-18be-44bc-8620-f0dc4d32d587");
 }

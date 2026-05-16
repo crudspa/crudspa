@@ -21,6 +21,12 @@ public class ElementProgressServiceSql(
         return await ElementProgressSelect.Execute(Connection, request.SessionId, request.Value.Id);
     }
 
+    public async Task<Response<QuestionReply?>> FetchQuestionReply(Request<Element> request)
+    {
+        return await wrappers.Try<QuestionReply?>(request, async response =>
+            await QuestionReplySelectForElement.Execute(Connection, request.SessionId, request.Value.Id));
+    }
+
     public async Task<Response> AddCompleted(Request<ElementCompleted> request)
     {
         return await wrappers.Try(request, async response =>
@@ -57,9 +63,9 @@ public class ElementProgressServiceSql(
                 return;
             }
 
-            if (!reply.ElementId.HasValue)
+            if (!reply.ElementId.HasValue && !reply.SurveyReplyId.HasValue)
             {
-                response.AddError("Element is required.", nameof(reply.ElementId));
+                response.AddError("Element or survey reply is required.", nameof(reply.ElementId));
                 return;
             }
 
@@ -103,6 +109,11 @@ public class ElementProgressServiceSql(
                     reply.PostalId = await UsaPostalInsert.Execute(connection, transaction, request.SessionId, reply.Postal);
 
                 reply.Id = await QuestionReplyInsert.Execute(connection, transaction, request.SessionId, reply);
+                if (!reply.Id.HasValue)
+                {
+                    response.AddError("Unable to save the question reply.");
+                    return;
+                }
 
                 foreach (var answerChoice in reply.AnswerChoices)
                 {
@@ -110,11 +121,14 @@ public class ElementProgressServiceSql(
                     await AnswerChoiceReplyInsertByBatch.Execute(connection, transaction, request.SessionId, answerChoice);
                 }
 
-                await ElementCompletedInsert.Execute(connection, transaction, request.SessionId, new()
+                if (reply.ElementId.HasValue)
                 {
-                    ElementId = reply.ElementId,
-                    DeviceTimestamp = reply.Submitted ?? DateTimeOffset.Now,
-                });
+                    await ElementCompletedInsert.Execute(connection, transaction, request.SessionId, new()
+                    {
+                        ElementId = reply.ElementId,
+                        DeviceTimestamp = reply.Submitted ?? DateTimeOffset.Now,
+                    });
+                }
             });
         });
     }

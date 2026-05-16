@@ -10,7 +10,20 @@ public static class ModuleSelect
         command.AddParameter("@Id", module.Id);
         command.AddParameter("@SessionId", sessionId);
 
-        return await command.ReadSingle(connection, ReadModule);
+        return await command.ExecuteQuery(connection, async reader =>
+        {
+            if (!await reader.ReadAsync())
+                return null;
+
+            var module = ReadModule(reader);
+
+            await reader.NextResultAsync();
+
+            while (await reader.ReadAsync())
+                module.GuideBinder.Pages.Add(GuideDataReaders.ReadGuidePage(reader));
+
+            return module;
+        });
     }
 
     private static Module ReadModule(SqlDataReader reader)
@@ -25,18 +38,9 @@ public static class ModuleSelect
             BinderId = reader.ReadGuid(5),
             Ordinal = reader.ReadInt32(6),
             BookTitle = reader.ReadString(7),
-            BookGuideImage = new()
-            {
-                Id = reader.ReadGuid(8),
-                BlobId = reader.ReadGuid(9),
-                Name = reader.ReadString(10),
-                Format = reader.ReadString(11),
-                Width = reader.ReadInt32(12),
-                Height = reader.ReadInt32(13),
-                Caption = reader.ReadString(14),
-            },
-            StatusName = reader.ReadString(15),
-            BinderDisplayView = reader.ReadString(16),
+            GuideBinder = GuideDataReaders.ReadGuideBinder(reader, 8),
+            StatusName = reader.ReadString(18),
+            BinderDisplayView = reader.ReadString(19),
         };
     }
 }

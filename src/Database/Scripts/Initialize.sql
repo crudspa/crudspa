@@ -26136,6 +26136,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -26146,6 +26149,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -26158,6 +26162,9 @@ begin
         ,'Page 1'
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,1
+        ,1
+        ,1
+        ,1
         ,0
         ,'73410fd3-3681-46d3-800e-a08670e291cf'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
@@ -26168,6 +26175,7 @@ begin
         ,0
         ,'{}'
         ,1
+        ,null
         ,0
     )
 
@@ -26212,6 +26220,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -26222,6 +26233,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -26235,6 +26247,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'73410fd3-3681-46d3-800e-a08670e291cf'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
         ,null
@@ -26244,6 +26259,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -26288,6 +26304,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -26298,6 +26317,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -26310,6 +26330,9 @@ begin
         ,'New Segment'
         ,'3d73efa4-302d-47b9-a956-4fb4577e0c54'
         ,1
+        ,1
+        ,1
+        ,1
         ,0
         ,'73410fd3-3681-46d3-800e-a08670e291cf'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
@@ -26320,6 +26343,7 @@ begin
         ,0
         ,'{}'
         ,1
+        ,null
         ,0
     )
 
@@ -26364,6 +26388,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -26374,6 +26401,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -26386,6 +26414,9 @@ begin
         ,'Books'
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,1
+        ,1
+        ,1
+        ,1
         ,0
         ,'651a367c-a7dd-4fe8-be5a-b70ef275a8ec'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
@@ -26396,6 +26427,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -26440,6 +26472,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -26450,6 +26485,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -26463,6 +26499,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'651a367c-a7dd-4fe8-be5a-b70ef275a8ec'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
         ,'1d8b8c58-74db-4115-8c58-4c9ea42f5beb'
@@ -26472,6 +26511,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -26516,6 +26556,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -26526,6 +26569,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -26538,6 +26582,9 @@ begin
         ,'Welcome!'
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,1
+        ,1
+        ,1
+        ,1
         ,0
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
@@ -26548,6 +26595,7 @@ begin
         ,0
         ,'{}'
         ,1
+        ,null
         ,0
     )
 
@@ -26592,6 +26640,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -26602,6 +26653,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -26615,6 +26667,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
         ,null
@@ -26624,6 +26679,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -26668,6 +26724,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -26678,6 +26737,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -26690,6 +26750,9 @@ begin
         ,'Portals'
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,1
+        ,1
+        ,1
+        ,1
         ,0
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
@@ -26700,6 +26763,7 @@ begin
         ,0
         ,'{"Orientation":0}'
         ,1
+        ,null
         ,1
     )
 
@@ -26744,6 +26808,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -26754,6 +26821,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -26767,6 +26835,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
         ,'55b87662-2b7d-4838-b3eb-ec15053d9ee5'
@@ -26776,6 +26847,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -26820,6 +26892,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -26830,6 +26905,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -26842,6 +26918,9 @@ begin
         ,'Achievements'
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
+        ,1
+        ,1
+        ,1
         ,0
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
@@ -26852,6 +26931,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -26896,6 +26976,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -26906,6 +26989,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -26918,6 +27002,9 @@ begin
         ,'Blogs'
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
+        ,1
+        ,1
+        ,1
         ,0
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
@@ -26928,6 +27015,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,1
     )
 
@@ -26972,6 +27060,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -26982,6 +27073,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -26995,6 +27087,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'e86d3ee2-22df-4cb1-bb66-ea417d34edeb'
         ,'b8b24c2e-b256-48cc-a5ae-43bcd2f78d80'
@@ -27004,6 +27099,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -27078,6 +27174,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -27088,6 +27187,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -27101,6 +27201,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'e86d3ee2-22df-4cb1-bb66-ea417d34edeb'
         ,'b8b24c2e-b256-48cc-a5ae-43bcd2f78d80'
@@ -27110,6 +27213,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -27184,6 +27288,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -27194,6 +27301,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -27207,6 +27315,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
         ,'b8b24c2e-b256-48cc-a5ae-43bcd2f78d80'
@@ -27216,6 +27327,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -27260,6 +27372,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -27270,6 +27385,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -27282,6 +27398,9 @@ begin
         ,'Page 2'
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,1
+        ,1
+        ,1
+        ,1
         ,0
         ,'73410fd3-3681-46d3-800e-a08670e291cf'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
@@ -27292,6 +27411,7 @@ begin
         ,0
         ,'{}'
         ,1
+        ,null
         ,1
     )
 
@@ -27336,6 +27456,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -27346,6 +27469,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -27358,6 +27482,9 @@ begin
         ,'Movies'
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,1
+        ,1
+        ,1
+        ,1
         ,0
         ,'651a367c-a7dd-4fe8-be5a-b70ef275a8ec'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
@@ -27368,6 +27495,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,1
     )
 
@@ -27412,6 +27540,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -27422,6 +27553,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -27435,6 +27567,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'651a367c-a7dd-4fe8-be5a-b70ef275a8ec'
         ,'e86d3ee2-22df-4cb1-bb66-ea417d34edeb'
         ,'26194feb-a467-47ff-9b46-038d69244763'
@@ -27444,6 +27579,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -27518,6 +27654,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -27528,6 +27667,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -27541,6 +27681,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'651a367c-a7dd-4fe8-be5a-b70ef275a8ec'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
         ,'26194feb-a467-47ff-9b46-038d69244763'
@@ -27550,6 +27693,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -27594,6 +27738,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -27604,6 +27751,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -27616,6 +27764,9 @@ begin
         ,'Shirts'
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,1
+        ,1
+        ,1
+        ,1
         ,0
         ,'651a367c-a7dd-4fe8-be5a-b70ef275a8ec'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
@@ -27626,6 +27777,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,2
     )
 
@@ -27670,6 +27822,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -27680,6 +27835,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -27693,6 +27849,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'651a367c-a7dd-4fe8-be5a-b70ef275a8ec'
         ,'e86d3ee2-22df-4cb1-bb66-ea417d34edeb'
         ,'1093e1a5-2914-464a-be08-a8d7cbf780b5'
@@ -27702,6 +27861,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -27776,6 +27936,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -27786,6 +27949,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -27798,6 +27962,9 @@ begin
         ,'Tracks'
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
+        ,1
+        ,1
+        ,1
         ,0
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
@@ -27808,6 +27975,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,2
     )
 
@@ -27852,6 +28020,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -27862,6 +28033,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -27875,6 +28047,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'e86d3ee2-22df-4cb1-bb66-ea417d34edeb'
         ,'0fbd1165-18be-44bc-8620-f0dc4d32d587'
@@ -27884,6 +28059,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -27958,6 +28134,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -27968,6 +28147,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -27981,6 +28161,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'e86d3ee2-22df-4cb1-bb66-ea417d34edeb'
         ,null
@@ -27990,6 +28173,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -28064,6 +28248,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -28074,6 +28261,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -28087,6 +28275,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'e86d3ee2-22df-4cb1-bb66-ea417d34edeb'
         ,null
@@ -28096,6 +28287,7 @@ begin
         ,0
         ,'{"Orientation":0}'
         ,1
+        ,null
         ,0
     )
 
@@ -28170,6 +28362,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -28180,6 +28375,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -28193,6 +28389,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
         ,null
@@ -28202,6 +28401,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -28246,6 +28446,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -28256,6 +28459,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -28268,6 +28472,9 @@ begin
         ,'Jobs'
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,1
+        ,1
+        ,1
+        ,1
         ,0
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
@@ -28278,6 +28485,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,2
     )
 
@@ -28352,6 +28560,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -28362,6 +28573,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -28375,6 +28587,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
         ,'f8066e13-ffad-4ee5-be65-78b3dfd9c6fb'
@@ -28384,6 +28599,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -28428,6 +28644,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -28438,6 +28657,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -28451,6 +28671,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
         ,'f8066e13-ffad-4ee5-be65-78b3dfd9c6fb'
@@ -28460,6 +28683,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,1
     )
 
@@ -28504,6 +28728,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -28514,6 +28741,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -28526,6 +28754,9 @@ begin
         ,'Segments'
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
+        ,1
+        ,1
+        ,1
         ,0
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
@@ -28536,6 +28767,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,3
     )
 
@@ -28580,6 +28812,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -28590,6 +28825,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -28603,6 +28839,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'e86d3ee2-22df-4cb1-bb66-ea417d34edeb'
         ,'55b87662-2b7d-4838-b3eb-ec15053d9ee5'
@@ -28612,6 +28851,7 @@ begin
         ,0
         ,'{"Orientation":0}'
         ,1
+        ,null
         ,0
     )
 
@@ -28716,6 +28956,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -28726,6 +28969,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -28739,6 +28983,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'e86d3ee2-22df-4cb1-bb66-ea417d34edeb'
         ,'55b87662-2b7d-4838-b3eb-ec15053d9ee5'
@@ -28748,6 +28995,7 @@ begin
         ,0
         ,'{"Orientation":0}'
         ,1
+        ,null
         ,0
     )
 
@@ -28822,6 +29070,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -28832,6 +29083,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -28845,6 +29097,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
         ,'55b87662-2b7d-4838-b3eb-ec15053d9ee5'
@@ -28854,6 +29109,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -28898,6 +29154,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -28908,6 +29167,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -28921,6 +29181,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
         ,'55b87662-2b7d-4838-b3eb-ec15053d9ee5'
@@ -28930,6 +29193,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,1
     )
 
@@ -28974,6 +29238,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -28984,6 +29251,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -28996,6 +29264,9 @@ begin
         ,'Jobs'
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,1
+        ,1
+        ,1
+        ,1
         ,0
         ,'651a367c-a7dd-4fe8-be5a-b70ef275a8ec'
         ,'e86d3ee2-22df-4cb1-bb66-ea417d34edeb'
@@ -29006,6 +29277,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,3
     )
 
@@ -29080,6 +29352,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -29090,6 +29365,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -29103,6 +29379,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'651a367c-a7dd-4fe8-be5a-b70ef275a8ec'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
         ,'f8066e13-ffad-4ee5-be65-78b3dfd9c6fb'
@@ -29112,6 +29391,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -29156,6 +29436,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -29166,6 +29449,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -29179,6 +29463,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'651a367c-a7dd-4fe8-be5a-b70ef275a8ec'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
         ,'f8066e13-ffad-4ee5-be65-78b3dfd9c6fb'
@@ -29188,6 +29475,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,1
     )
 
@@ -29232,6 +29520,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -29242,6 +29533,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -29254,6 +29546,9 @@ begin
         ,'Settings'
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,1
+        ,1
+        ,1
+        ,1
         ,0
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'e86d3ee2-22df-4cb1-bb66-ea417d34edeb'
@@ -29264,6 +29559,7 @@ begin
         ,0
         ,'{"Orientation":0}'
         ,1
+        ,null
         ,3
     )
 
@@ -29368,6 +29664,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -29378,6 +29677,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -29391,6 +29691,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
         ,'8615fc8d-2c8b-46c3-a586-8cc7319b889c'
@@ -29400,6 +29703,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -29444,6 +29748,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -29454,6 +29761,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -29466,6 +29774,9 @@ begin
         ,'Fonts'
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
+        ,1
+        ,1
+        ,1
         ,0
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
@@ -29476,6 +29787,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,4
     )
 
@@ -29520,6 +29832,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -29530,6 +29845,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -29542,6 +29858,9 @@ begin
         ,'Portals'
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,1
+        ,1
+        ,1
+        ,1
         ,0
         ,'651a367c-a7dd-4fe8-be5a-b70ef275a8ec'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
@@ -29552,6 +29871,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,4
     )
 
@@ -29596,6 +29916,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -29606,6 +29929,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -29619,6 +29943,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'651a367c-a7dd-4fe8-be5a-b70ef275a8ec'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
         ,'55b87662-2b7d-4838-b3eb-ec15053d9ee5'
@@ -29628,6 +29955,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,1
     )
 
@@ -29672,6 +30000,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -29682,6 +30013,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -29694,6 +30026,9 @@ begin
         ,'Segments'
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
+        ,1
+        ,1
+        ,1
         ,0
         ,'651a367c-a7dd-4fe8-be5a-b70ef275a8ec'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
@@ -29704,6 +30039,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -29748,6 +30084,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -29758,6 +30097,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -29771,6 +30111,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'651a367c-a7dd-4fe8-be5a-b70ef275a8ec'
         ,'e86d3ee2-22df-4cb1-bb66-ea417d34edeb'
         ,'c661300e-8c67-4613-b5ce-a6be80acac04'
@@ -29780,6 +30123,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -29884,6 +30228,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -29894,6 +30241,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -29906,6 +30254,9 @@ begin
         ,'Styles'
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
+        ,1
+        ,1
+        ,1
         ,0
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'e86d3ee2-22df-4cb1-bb66-ea417d34edeb'
@@ -29916,6 +30267,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,5
     )
 
@@ -29990,6 +30342,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -30000,6 +30355,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -30012,6 +30368,9 @@ begin
         ,'Settings'
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,1
+        ,1
+        ,1
+        ,1
         ,0
         ,'651a367c-a7dd-4fe8-be5a-b70ef275a8ec'
         ,'e86d3ee2-22df-4cb1-bb66-ea417d34edeb'
@@ -30022,6 +30381,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,5
     )
 
@@ -30126,6 +30486,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -30136,6 +30499,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -30149,6 +30513,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'651a367c-a7dd-4fe8-be5a-b70ef275a8ec'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
         ,'8615fc8d-2c8b-46c3-a586-8cc7319b889c'
@@ -30158,6 +30525,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -30202,6 +30570,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -30212,6 +30583,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -30224,6 +30596,9 @@ begin
         ,'Memberships'
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
+        ,1
+        ,1
+        ,1
         ,0
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
@@ -30234,6 +30609,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,7
     )
 
@@ -30278,6 +30654,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -30288,6 +30667,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -30301,6 +30681,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'e86d3ee2-22df-4cb1-bb66-ea417d34edeb'
         ,'ced746f6-ea1e-4905-b636-0bcaf2c4a1d6'
@@ -30310,6 +30693,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -30474,6 +30858,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -30484,6 +30871,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -30497,6 +30885,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
         ,'ced746f6-ea1e-4905-b636-0bcaf2c4a1d6'
@@ -30506,6 +30897,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,0
     )
 
@@ -30550,6 +30942,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -30560,6 +30955,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -30573,6 +30969,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
         ,'ced746f6-ea1e-4905-b636-0bcaf2c4a1d6'
@@ -30582,6 +30981,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,1
     )
 
@@ -30626,6 +31026,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -30636,6 +31039,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -30649,6 +31053,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
         ,'ced746f6-ea1e-4905-b636-0bcaf2c4a1d6'
@@ -30658,6 +31065,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,2
     )
 
@@ -30702,6 +31110,9 @@ begin
         ,Title
         ,StatusId
         ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
         ,RequiresId
         ,PortalId
         ,TypeId
@@ -30712,6 +31123,7 @@ begin
         ,Vertical
         ,ConfigJson
         ,AllLicenses
+        ,SeoDescription
         ,Ordinal
     )
     values (
@@ -30725,6 +31137,9 @@ begin
         ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
         ,0
         ,1
+        ,1
+        ,0
+        ,1
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
         ,'35f404f9-c08b-4c71-88c9-794b60741332'
         ,'55b87662-2b7d-4838-b3eb-ec15053d9ee5'
@@ -30734,6 +31149,7 @@ begin
         ,0
         ,null
         ,1
+        ,null
         ,8
     )
 

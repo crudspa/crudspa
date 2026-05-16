@@ -1,0 +1,27 @@
+<ListOrderables Model="Model"
+                T="SmsMessageMediaModel"
+                EntityName="Sms Message Media"
+                UrlPrefix="@($"{Path}/sms-message-media")"
+                ShowAdd="false"
+                ShowDelete="false"
+                ShowView="false"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Unspecified">
+            <Image ImageFile="context.SmsMessageMedia.ImageFile" />
+            <Labeled Width=""
+                     Label="Content Type"
+                     StringValue="@context.SmsMessageMedia.ContentType" />
+            <Labeled Width=""
+                     Label="File Name"
+                     StringValue="@context.SmsMessageMedia.FileName" />
+            <Labeled Width=""
+                     Label="Size Bytes"
+                     IntegerValue="@context.SmsMessageMedia.SizeBytes" />
+            <Labeled Width=""
+                     Label="Download Status"
+                     StringValue="@context.SmsMessageMedia.DownloadStatus.GetLabel()" />
+        </Field>
+    </ReadView>
+</ListOrderables>

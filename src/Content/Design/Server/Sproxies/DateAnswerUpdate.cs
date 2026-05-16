@@ -11,6 +11,7 @@ public static class DateAnswerUpdate
         command.AddParameter("@Id", answer.Id);
         command.AddParameter("@QuestionId", answer.QuestionId);
         command.AddParameter("@Kind", answer.Kind);
+        command.AddParameter("@Label", 150, answer.Label);
         command.AddParameter("@DateMin", answer.DateMin);
         command.AddParameter("@DateMax", answer.DateMax);
         command.AddParameter("@TimeMin", answer.TimeMin?.ToTimeSpan());

@@ -91,10 +91,14 @@ public class MembershipServiceSql(
             var membership = request.Value;
             var isMoreSignup = membership.Name?.Trim().Equals("MORE", StringComparison.OrdinalIgnoreCase) == true
                                || membership.Name?.Trim().Equals("MORE Signups", StringComparison.OrdinalIgnoreCase) == true;
+            var isCmsAiSurvey = membership.Name?.Trim().Equals("CMS AI Survey", StringComparison.OrdinalIgnoreCase) == true
+                                || membership.Name?.Trim().Equals("CMS AI Survey 2026", StringComparison.OrdinalIgnoreCase) == true;
             await sqlWrappers.WithConnection(async (connection, transaction) =>
             {
                 if (isMoreSignup)
                     await MembershipCreateMoreSignups.Execute(connection, transaction, request.SessionId, membership);
+                else if (isCmsAiSurvey)
+                    await MembershipCreateCmsAiSurvey.Execute(connection, transaction, request.SessionId, membership);
                 else
                     await MembershipCreate.Execute(connection, transaction, request.SessionId, membership);
             });
@@ -108,6 +112,12 @@ public class MembershipServiceSql(
             var membership = request.Value;
             var isMoreSignup = membership.Name?.Trim().Equals("MORE", StringComparison.OrdinalIgnoreCase) == true
                                || membership.Name?.Trim().Equals("MORE Signups", StringComparison.OrdinalIgnoreCase) == true;
+            var isCmsAiSurvey = membership.Name?.Trim().Equals("CMS AI Survey", StringComparison.OrdinalIgnoreCase) == true
+                                || membership.Name?.Trim().Equals("CMS AI Survey 2026", StringComparison.OrdinalIgnoreCase) == true;
+
+            if (isCmsAiSurvey)
+                return;
+
             await sqlWrappers.WithConnection(async (connection, transaction) =>
             {
                 if (isMoreSignup)

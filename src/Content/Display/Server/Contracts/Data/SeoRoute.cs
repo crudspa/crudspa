@@ -32,6 +32,18 @@ public class SeoRoute : Observable
         set => SetProperty(ref field, value);
     }
 
+    public Boolean Navigable
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    public Boolean Mapable
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
     public Boolean IsDefault
     {
         get;

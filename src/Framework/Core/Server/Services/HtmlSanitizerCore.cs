@@ -67,7 +67,7 @@ public class HtmlSanitizerCore : IHtmlSanitizer
                 anchor.Href = builder.Uri.ToString();
             }
 
-            var href = anchor.Href.RemoveFirst("about:///");
+            var href = ProseHtmlNormalizer.NormalizeEditorUrl(anchor.Href);
 
             if (href.EndsWith('?'))
                 href = href[..^1];

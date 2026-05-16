@@ -1,8 +1,8 @@
 ﻿<Waiter Model="Model">
-    @if (Model.Config.BinderId is not null)
+    @if (Model.BinderId is not null)
     {
         <PageListForBinder Path="@Path"
-                           Id="Model.Config.BinderId"
+                           Id="Model.BinderId"
                            AddPage="AddPage"
                            FetchPages="FetchPages"
                            FetchPage="FetchPage"

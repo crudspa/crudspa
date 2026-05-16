@@ -172,8 +172,7 @@ public class NavigatorCore(
         Registrations.AddRange(sessionState.Session.Segments);
         Screens.AddRange(sessionState.Session.Screens);
 
-        if (Screens.IsEmpty())
-            AddFixed();
+        AddFixed();
 
         WireScreens(Screens);
     }
@@ -201,7 +200,7 @@ public class NavigatorCore(
 
     public void GoToRoot()
     {
-        var firstScreen = Screens.FirstOrDefault();
+        var firstScreen = Screens.FirstOrDefault(x => x.Navigable) ?? Screens.FirstOrDefault();
 
         if (firstScreen is not null)
             GoTo(firstScreen.Path!);
@@ -399,6 +398,7 @@ public class NavigatorCore(
             View = screen.View,
             Icon = screen.Icon,
             Fixed = screen.Fixed,
+            Navigable = screen.Navigable,
             Panes = screen.Panes,
             ConfigJson = screen.ConfigJson,
         };
@@ -530,19 +530,25 @@ public class NavigatorCore(
         {
             var urlPath = path + "/" + registration.Key;
 
-            var screen = new Screen
-            {
-                Key = registration.Key,
-                Title = registration.RequiresId == true ? "..." : registration.Title,
-                Path = urlPath,
-                View = registration.TypeDisplayView,
-                Icon = registration.IconName,
-                Fixed = registration.Fixed ?? false,
-                Panes = registration.Panes.DeepClone(),
-                ConfigJson = registration.ConfigJson,
-            };
+            var screen = screens.FirstOrDefault(x => x.Path.IsBasically(urlPath));
 
-            screens.Add(screen);
+            if (screen is null)
+            {
+                screen = new Screen
+                {
+                    Key = registration.Key,
+                    Title = registration.RequiresId == true ? "..." : registration.Title,
+                    Path = urlPath,
+                    View = registration.TypeDisplayView,
+                    Icon = registration.IconName,
+                    Fixed = registration.Fixed ?? false,
+                    Navigable = registration.Navigable ?? true,
+                    Panes = registration.Panes.DeepClone(),
+                    ConfigJson = registration.ConfigJson,
+                };
+
+                screens.Add(screen);
+            }
 
             AddFixed(urlPath, registration.Segments, screen.Children);
         }
@@ -580,7 +586,7 @@ public class NavigatorCore(
             var registration = registrations.FirstOrDefault(x => x.Key.IsBasically(registrationKey)
                 && (x.RequiresId != true || x.RequiresId == true && id is not null));
 
-            if (registration is null)
+            if (registration is null || registration.Routable != true)
                 return null;
 
             // See if we have a screen in the tree already for this segment
@@ -599,6 +605,7 @@ public class NavigatorCore(
                     View = registration.TypeDisplayView,
                     Icon = registration.IconName,
                     Fixed = registration.Fixed ?? false,
+                    Navigable = registration.Navigable ?? true,
                     Panes = registration.Panes.DeepClone(),
                     ConfigJson = registration.ConfigJson,
                 };

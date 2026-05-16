@@ -12,6 +12,12 @@ public class ScrollServiceCore(IJsBridge jsBridge) : IScrollService
         await jsBridge.ScrollToBottom();
     }
 
+    public async Task ToElementBottom(String id)
+    {
+        await Task.Delay(100);
+        await jsBridge.ScrollElementToBottom(id);
+    }
+
     public async Task ToId(String id)
     {
         await Task.Delay(100);

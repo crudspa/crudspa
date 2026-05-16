@@ -6,6 +6,10 @@ public class QuestionDisplayModel : ScreenModel, IHandle<ValidateBinderElements>
 {
     private readonly IEventBus _eventBus;
     private readonly IElementProgressService _elementProgressService;
+    private readonly Guid? _surveyReplyId;
+    private readonly Question? _question;
+    private readonly QuestionReply? _initialReply;
+    private String? _submittedSnapshot;
 
     public QuestionDisplayModel(IEventBus eventBus,
         IElementProgressService elementProgressService,
@@ -19,9 +23,24 @@ public class QuestionDisplayModel : ScreenModel, IHandle<ValidateBinderElements>
         _eventBus.Subscribe(this);
     }
 
-    public ElementDisplayModel ElementModel { get; }
-    public QuestionElement QuestionElement { get; }
-    public Question Question => QuestionElement.Question;
+    public QuestionDisplayModel(IEventBus eventBus,
+        IElementProgressService elementProgressService,
+        Question question,
+        Guid? surveyReplyId,
+        QuestionReply? initialReply = null)
+    {
+        _eventBus = eventBus;
+        _elementProgressService = elementProgressService;
+        _question = question;
+        _surveyReplyId = surveyReplyId;
+        _initialReply = initialReply;
+
+        _eventBus.Subscribe(this);
+    }
+
+    public ElementDisplayModel? ElementModel { get; }
+    public QuestionElement? QuestionElement { get; }
+    public Question Question => QuestionElement?.Question ?? _question!;
 
     public QuestionReply Reply { get; set => SetProperty(ref field, value); } = new();
 
@@ -35,21 +54,30 @@ public class QuestionDisplayModel : ScreenModel, IHandle<ValidateBinderElements>
     {
         Question.EnsureAnswer();
 
-        Reply = new()
+        Reply = _initialReply?.DeepClone() ?? new();
+        PrepareReply();
+
+        if (ElementModel is null)
         {
-            ElementId = ElementModel.Element.Id,
-            QuestionId = Question.Id,
-            Question = Question,
-        };
+            CaptureSubmittedSnapshot();
+            return;
+        }
 
         await ElementModel.InitializeProgress();
+
+        var response = await _elementProgressService.FetchQuestionReply(new(new() { Id = ElementModel.Element.Id }));
+        if (response.Ok && response.Value is not null)
+            Reply = response.Value.DeepClone();
+
+        PrepareReply();
+        CaptureSubmittedSnapshot();
     }
 
     public async Task Handle(ValidateBinderElements payload)
     {
         if (Waiting
-            || IsSubmitted
-            || ElementModel.CompletionStatus == ElementDisplayModel.CompletionStatuses.Complete
+            || ElementModel is null
+            || IsSubmittedUnchanged()
             || (ElementModel.Element.RequireInteraction != true && !HasReplyContent()))
             return;
 
@@ -69,8 +97,12 @@ public class QuestionDisplayModel : ScreenModel, IHandle<ValidateBinderElements>
                 Errors = errors,
             });
 
-            ElementModel.MarkElementIncorrect();
-            await _eventBus.Publish(new ValidateBinder());
+            if (ElementModel is not null)
+            {
+                ElementModel.MarkElementIncorrect();
+                await _eventBus.Publish(new ValidateBinder());
+            }
+
             return;
         }
 
@@ -81,7 +113,10 @@ public class QuestionDisplayModel : ScreenModel, IHandle<ValidateBinderElements>
         if (response.Ok)
         {
             IsSubmitted = true;
-            await ElementModel.MarkElementCompleted();
+            _submittedSnapshot = CreateSubmittedSnapshot();
+
+            if (ElementModel is not null)
+                await ElementModel.MarkElementCompleted();
         }
     }
 
@@ -379,13 +414,72 @@ public class QuestionDisplayModel : ScreenModel, IHandle<ValidateBinderElements>
 
     private void PrepareReply()
     {
-        Reply.ElementId = ElementModel.Element.Id;
+        Reply.ElementId = ElementModel?.Element.Id;
+        Reply.SurveyReplyId = _surveyReplyId ?? Reply.SurveyReplyId;
         Reply.QuestionId = Question.Id;
         Reply.Question = Question;
         Reply.Submitted = DateTimeOffset.Now;
 
         if (Question.TextAnswer?.Kind == TextAnswer.Kinds.Rich)
             Reply.HtmlValue = HtmlEditorMarkup.NormalizeForStorage(Reply.HtmlValue);
+    }
+
+    private void CaptureSubmittedSnapshot()
+    {
+        IsSubmitted = HasReplyContent();
+        _submittedSnapshot = IsSubmitted ? CreateSubmittedSnapshot() : null;
+    }
+
+    private Boolean IsSubmittedUnchanged() =>
+        IsSubmitted && _submittedSnapshot.IsBasically(CreateSubmittedSnapshot());
+
+    private String CreateSubmittedSnapshot()
+    {
+        var postal = Reply.Postal;
+
+        return new
+        {
+            Reply.BoolValue,
+            Reply.TextValue,
+            HtmlValue = HtmlEditorMarkup.NormalizeForStorage(Reply.HtmlValue),
+            Reply.DateValue,
+            Reply.TimeValue,
+            Reply.DateTimeValue,
+            Reply.IntegerValue,
+            Reply.DecimalValue,
+            Reply.CurrencyValue,
+            Reply.OtherBoolValue,
+            Reply.OtherTextValue,
+            Reply.AudioId,
+            Reply.ImageId,
+            Reply.PdfId,
+            Reply.VideoId,
+            Reply.PostalId,
+            AudioFileId = Reply.AudioFile.Id,
+            AudioFileBlobId = Reply.AudioFile.BlobId,
+            ImageFileId = Reply.ImageFile.Id,
+            ImageFileBlobId = Reply.ImageFile.BlobId,
+            PdfFileId = Reply.PdfFile.Id,
+            PdfFileBlobId = Reply.PdfFile.BlobId,
+            VideoFileId = Reply.VideoFile.Id,
+            VideoFileBlobId = Reply.VideoFile.BlobId,
+            Postal = new
+            {
+                postal.Id,
+                postal.RecipientName,
+                postal.BusinessName,
+                postal.StreetAddress,
+                postal.City,
+                postal.StateId,
+                postal.PostalCode,
+            },
+            ChoiceIds = Reply.AnswerChoices
+                .Select(x => x.ChoiceId)
+                .Where(x => x.HasValue)
+                .Select(x => x!.Value)
+                .OrderBy(x => x)
+                .ToList(),
+        }.ToJson() ?? String.Empty;
     }
 
     private Boolean HasReplyContent() =>

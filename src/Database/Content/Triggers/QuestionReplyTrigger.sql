@@ -8,8 +8,8 @@ insert [Content].[QuestionReply] (
     ,Updated
     ,UpdatedBy
     ,IsDeleted
+    ,SurveyReplyId
     ,QuestionId
-    ,ContactId
     ,Submitted
     ,BoolValue
     ,TextValue
@@ -34,8 +34,8 @@ select
     ,deleted.Updated
     ,deleted.UpdatedBy
     ,deleted.IsDeleted
+    ,deleted.SurveyReplyId
     ,deleted.QuestionId
-    ,deleted.ContactId
     ,deleted.Submitted
     ,deleted.BoolValue
     ,deleted.TextValue

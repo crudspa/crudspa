@@ -1,0 +1,17 @@
+create table [Education].[GuidePage] (
+    [Id] uniqueidentifier not null,
+    [VersionOf] uniqueidentifier not null,
+    [Updated] datetimeoffset(7) default(sysdatetimeoffset()) not null,
+    [UpdatedBy] uniqueidentifier not null,
+    [IsDeleted] bit default(0) not null,
+    [GuideBinderId] uniqueidentifier not null,
+    [PageId] uniqueidentifier not null,
+    [ShowGuide] bit default(0) not null,
+    [GuideText] nvarchar(max) null,
+    [GuideAudioId] uniqueidentifier null,
+    [ShowNotebook] bit default(0) not null,
+    constraint [PK_Education_GuidePage] primary key clustered ([Id]),
+    constraint [FK_Education_GuidePage_GuideBinder] foreign key ([GuideBinderId]) references [Education].[GuideBinder] ([Id]),
+    constraint [FK_Education_GuidePage_Page] foreign key ([PageId]) references [Content].[Page] ([Id]),
+    constraint [FK_Education_GuidePage_GuideAudio] foreign key ([GuideAudioId]) references [Framework].[AudioFile] ([Id]),
+);

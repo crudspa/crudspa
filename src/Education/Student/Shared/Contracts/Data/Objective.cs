@@ -68,7 +68,7 @@ public class Objective : Observable, IUnique
         set => SetProperty(ref field, value);
     }
 
-    public ImageFile LessonGuideImage
+    public GuideBinder GuideBinder
     {
         get;
         set => SetProperty(ref field, value);

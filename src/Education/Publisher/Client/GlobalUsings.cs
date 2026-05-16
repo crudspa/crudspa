@@ -18,6 +18,7 @@ global using Crudspa.Education.Common.Shared.Contracts;
 global using Crudspa.Education.Common.Shared.Contracts.Behavior;
 global using Crudspa.Education.Common.Shared.Contracts.Data;
 global using Crudspa.Education.Common.Shared.Contracts.Ids;
+global using Crudspa.Education.Publisher.Client.Components;
 global using Crudspa.Education.Publisher.Client.Plugins.PaneType;
 global using Crudspa.Education.Publisher.Shared.Contracts.Behavior;
 global using Crudspa.Education.Publisher.Shared.Contracts.Data;

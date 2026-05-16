@@ -13,6 +13,7 @@ insert [Content].[NoteElement] (
     ,ImageFileId
     ,RequireText
     ,RequireImageSelection
+    ,OpenOnly
 )
 select
      newid()
@@ -25,4 +26,5 @@ select
     ,deleted.ImageFileId
     ,deleted.RequireText
     ,deleted.RequireImageSelection
+    ,deleted.OpenOnly
 from deleted

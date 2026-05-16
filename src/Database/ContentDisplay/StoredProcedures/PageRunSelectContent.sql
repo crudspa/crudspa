@@ -489,6 +489,7 @@ select
     ,imageFile.Caption as ImageFileCaption
     ,note.RequireText
     ,note.RequireImageSelection
+    ,note.OpenOnly
 from [Content].[NoteElement-Active] note
     left join [Framework].[ImageFile-Active] imageFile on note.ImageFileId = imageFile.Id
     inner join [Content].[Element-Active] element on note.ElementId = element.Id
@@ -607,6 +608,7 @@ select
      answer.Id
     ,answer.QuestionId
     ,answer.Kind
+    ,answer.Label
     ,answer.DateMin
     ,answer.DateMax
     ,answer.TimeMin
@@ -635,6 +637,7 @@ select
      answer.Id
     ,answer.QuestionId
     ,answer.Kind
+    ,answer.Label
     ,answer.IntegerMin
     ,answer.IntegerMax
     ,answer.DecimalMin

@@ -5,6 +5,7 @@ global using Crudspa.Content.Display.Shared.Contracts.Behavior;
 global using Crudspa.Content.Display.Shared.Contracts.Data;
 global using Crudspa.Content.Display.Shared.Contracts.Events;
 global using Crudspa.Content.Jobs.Shared.Contracts.Behavior;
+global using Crudspa.Content.Jobs.Shared.Contracts.Config;
 global using Crudspa.Content.Jobs.Shared.Contracts.Data;
 global using Crudspa.Content.Jobs.Shared.Contracts.Events;
 global using Crudspa.Framework.Core.Shared;

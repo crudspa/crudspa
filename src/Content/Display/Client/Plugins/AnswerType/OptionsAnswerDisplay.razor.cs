@@ -1,3 +1,5 @@
+using HtmlEditorMarkup = Crudspa.Framework.Core.Client.Components.HtmlEditorMarkup;
+
 namespace Crudspa.Content.Display.Client.Plugins.AnswerType;
 
 public partial class OptionsAnswerDisplay : IAnswerDisplay
@@ -35,6 +37,9 @@ public partial class OptionsAnswerDisplay : IAnswerDisplay
         Model.Reply.OtherTextValue = null;
         Model.SetSingleChoice(choice);
     }
+
+    private static String ChoiceHtml(OptionsAnswerChoice choice) =>
+        HtmlEditorMarkup.SanitizeEditorHtml(choice.Text) ?? String.Empty;
 
     private void Toggle(OptionsAnswerChoice choice, ChangeEventArgs args) =>
         Model.ToggleChoice(choice, args.Value is Boolean value && value);

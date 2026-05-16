@@ -40,6 +40,14 @@
                                    Width="480"
                                    ImageFile="Model.Entity.TrophyImageFile" />
                 </Field>
+                <Field Label="Guide Image"
+                       Size="Field.Sizes.Larger"
+                       Container="Field.Containers.Div">
+                    <ImageUploader ReadOnly="Model.ReadOnly"
+                                   Required="false"
+                                   Width="480"
+                                   ImageFile="Model.Entity.GuideBinder.GuideImage" />
+                </Field>
                 <Field Label="Requires Achievement"
                        Size="Field.Sizes.Medium">
                     <Dropdown ReadOnly="Model.ReadOnly"

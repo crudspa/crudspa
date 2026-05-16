@@ -5,6 +5,6 @@ public interface IBinderDisplay : IConfigDisplay
     String? Path { get; set; }
     Guid? Id { get; set; }
     EventCallback BinderCompleted { get; set; }
-    ImageFile? GuideImage { get; set; }
+    RenderFragment<Page>? PageHeader { get; set; }
     Boolean Shadowed { get; set; }
 }

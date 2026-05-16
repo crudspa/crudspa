@@ -147,29 +147,47 @@ $htmlMaxFontSize: 1.05em;
             var css = new StringBuilder();
 
             foreach (var font in portalStyles.Fonts
-                         .Where(x => x.FileFile.Id.HasValue && x.Name.HasSomething())
+                         .Where(x => x.Name.HasSomething())
                          .OrderBy(x => x.Name))
             {
-                var fontUrl = font.FileFile.FetchUrl();
-                if (fontUrl.HasNothing())
-                    continue;
-
-                css.Append("@font-face{font-family:'");
-                css.Append(font.Name!.Replace("'", "\\'"));
-                css.Append("';src:url('");
-                css.Append(fontUrl);
-                css.Append("')");
-
-                var fontFormat = ToCssFontFormat(font.FileFile.Format);
-                if (fontFormat.HasSomething())
+                foreach (var face in font.Faces
+                             .Where(x => x.FileFile.Id.HasValue)
+                             .OrderBy(x => x.Style)
+                             .ThenBy(x => x.WeightMin)
+                             .ThenBy(x => x.WeightMax))
                 {
-                    css.Append(" format('");
-                    css.Append(fontFormat);
-                    css.Append("')");
-                }
+                    var fontUrl = face.FileFile.FetchUrl();
+                    if (fontUrl.HasNothing())
+                        continue;
 
-                css.Append(";}");
-                css.Append(Environment.NewLine);
+                    css.Append("@font-face{font-family:'");
+                    css.Append(font.Name!.Replace("'", "\\'"));
+                    css.Append("';src:url('");
+                    css.Append(fontUrl);
+                    css.Append("')");
+
+                    var fontFormat = ToCssFontFormat(face.FileFile.Format);
+                    if (fontFormat.HasSomething())
+                    {
+                        css.Append(" format('");
+                        css.Append(fontFormat);
+                        css.Append("')");
+                    }
+
+                    css.Append(";font-style:");
+                    css.Append(face.Style.HasSomething() ? face.Style : "normal");
+                    css.Append(";font-weight:");
+                    css.Append(face.WeightMin ?? 400);
+
+                    if (face.WeightMax.HasValue && face.WeightMax != face.WeightMin)
+                    {
+                        css.Append(' ');
+                        css.Append(face.WeightMax.Value);
+                    }
+
+                    css.Append(";font-display:swap;}");
+                    css.Append(Environment.NewLine);
+                }
             }
 
             return css.ToString();

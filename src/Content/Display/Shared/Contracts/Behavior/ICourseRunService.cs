@@ -3,6 +3,7 @@
 public interface ICourseRunService
 {
     Task<Response<Course?>> FetchCourse(Request<Course> request);
+    Task<Response<Course?>> FetchCourseForPane(Request<CoursePane> request);
     Task<Response<Track?>> FetchTrack(Request<Track> request);
     Task<Response<PortalTracks?>> FetchPortalTracks(Request request);
     Task<Response<IList<CourseProgress>>> FetchAllProgress(Request request);

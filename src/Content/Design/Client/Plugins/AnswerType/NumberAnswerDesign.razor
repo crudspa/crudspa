@@ -6,6 +6,12 @@
                    ReadOnly="ReadOnly"
                    @bind-SelectedValue="Answer.Kind" />
     </Field>
+    <Field Label="Label"
+           Size="Field.Sizes.Medium">
+        <TextBox ReadOnly="ReadOnly"
+                 MaxLength="150"
+                 @bind-Value="Answer.Label" />
+    </Field>
     @if (Answer.Kind == NumberAnswer.Kinds.Integer)
     {
         <Field Label="Minimum"

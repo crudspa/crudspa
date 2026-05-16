@@ -29,12 +29,16 @@ public partial class CoreHub
             var response = await SegmentService.Add(request);
 
             if (response.Ok)
+            {
                 await Notify(request.SessionId, PermissionIds.Segments, new SegmentAdded
                 {
-                    Id = response.Value.Id,
-                    PortalId = request.Value.PortalId,
-                    ParentId = request.Value.ParentId,
+                    Id = response.Value?.Id,
+                    PortalId = response.Value?.PortalId ?? request.Value.PortalId,
+                    ParentId = response.Value?.ParentId ?? request.Value.ParentId,
                 });
+
+                await PublishSegmentPortalRunChanged(response.Value?.PortalId ?? request.Value.PortalId);
+            }
 
             return response;
         });
@@ -47,12 +51,16 @@ public partial class CoreHub
             var response = await SegmentService.Save(request);
 
             if (response.Ok)
+            {
                 await Notify(request.SessionId, PermissionIds.Segments, new SegmentSaved
                 {
                     Id = request.Value.Id,
                     PortalId = request.Value.PortalId,
                     ParentId = request.Value.ParentId,
                 });
+
+                await PublishSegmentPortalRunChanged(request.Value.PortalId);
+            }
 
             return response;
         });
@@ -62,15 +70,22 @@ public partial class CoreHub
     {
         return await HubWrappers.RequirePermission(request, PermissionIds.Segments, async session =>
         {
+            var fetchResponse = await SegmentService.Fetch(request);
+            var existing = fetchResponse.Ok ? fetchResponse.Value : null;
+
             var response = await SegmentService.Remove(request);
 
             if (response.Ok)
+            {
                 await Notify(request.SessionId, PermissionIds.Segments, new SegmentRemoved
                 {
                     Id = request.Value.Id,
-                    PortalId = request.Value.PortalId,
-                    ParentId = request.Value.ParentId,
+                    PortalId = existing?.PortalId ?? request.Value.PortalId,
+                    ParentId = existing?.ParentId ?? request.Value.ParentId,
                 });
+
+                await PublishSegmentPortalRunChanged(existing?.PortalId ?? request.Value.PortalId);
+            }
 
             return response;
         });
@@ -82,12 +97,18 @@ public partial class CoreHub
         {
             var response = await SegmentService.SaveOrder(request);
 
-            if (response.Ok)
+            var first = request.Value.FirstOrDefault();
+
+            if (response.Ok && first is not null)
+            {
                 await Notify(request.SessionId, PermissionIds.Segments, new SegmentsReordered
                 {
-                    PortalId = request.Value.First().PortalId,
-                    ParentId = request.Value.First().ParentId,
+                    PortalId = first.PortalId,
+                    ParentId = first.ParentId,
                 });
+
+                await PublishSegmentPortalRunChanged(first.PortalId);
+            }
 
             return response;
         });
@@ -136,12 +157,16 @@ public partial class CoreHub
             var response = await SegmentService.SaveStructure(request);
 
             if (response.Ok)
+            {
                 await Notify(request.SessionId, PermissionIds.Segments, new SegmentSaved
                 {
                     Id = request.Value.Id,
                     PortalId = request.Value.PortalId,
                     ParentId = request.Value.ParentId,
                 });
+
+                await PublishSegmentPortalRunChanged(request.Value.PortalId);
+            }
 
             return response;
         });
@@ -181,9 +206,20 @@ public partial class CoreHub
                     NewPortalId = request.Value.PortalId,
                     NewParentId = request.Value.ParentId,
                 });
+
+                await PublishSegmentPortalRunChanged(existing.PortalId);
+
+                if (!existing.PortalId.Equals(request.Value.PortalId))
+                    await PublishSegmentPortalRunChanged(request.Value.PortalId);
             }
 
             return response;
         });
+    }
+
+    private async Task PublishSegmentPortalRunChanged(Guid? portalId)
+    {
+        if (portalId.HasValue)
+            await GatewayService.Publish(new PortalRunChanged { Id = portalId.Value });
     }
 }

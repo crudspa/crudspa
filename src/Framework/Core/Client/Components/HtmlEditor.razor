@@ -19,7 +19,7 @@
 }
 else
 {
-    <div class="c-overlay-parent c-user-content c-html-editor">
+    <div class="c-overlay-parent c-html-editor">
         <Modal Model="InsertTokenModel"
                TopMargin="4em"
                Width="24em"
@@ -64,7 +64,9 @@ else
             <RadzenHtmlEditorUnorderedList />
             <RadzenHtmlEditorOrderedList />
             <RadzenHtmlEditorSeparator />
-            <RadzenHtmlEditorLink />
+            <RadzenHtmlEditorLink Title="Add Hyperlink"
+                                  UrlText="URL or Route"
+                                  OkText="Add Hyperlink" />
             <RadzenHtmlEditorUnlink />
             @if (Tokens.HasItems())
             {

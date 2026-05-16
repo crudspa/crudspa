@@ -765,6 +765,7 @@ public static class PageDataReaders
             },
             RequireText = reader.ReadBoolean(10),
             RequireImageSelection = reader.ReadBoolean(11),
+            OpenOnly = reader.ReadBoolean(12),
         };
     }
 
@@ -895,12 +896,13 @@ public static class PageDataReaders
             Id = reader.ReadGuid(0),
             QuestionId = reader.ReadGuid(1),
             Kind = reader.ReadEnum<DateAnswer.Kinds>(2),
-            DateMin = reader.ReadDateOnly(3),
-            DateMax = reader.ReadDateOnly(4),
-            TimeMin = reader.ReadTimeOnly(5),
-            TimeMax = reader.ReadTimeOnly(6),
-            DateTimeMin = reader.ReadDateTimeOffset(7),
-            DateTimeMax = reader.ReadDateTimeOffset(8),
+            Label = reader.ReadString(3),
+            DateMin = reader.ReadDateOnly(4),
+            DateMax = reader.ReadDateOnly(5),
+            TimeMin = reader.ReadTimeOnly(6),
+            TimeMax = reader.ReadTimeOnly(7),
+            DateTimeMin = reader.ReadDateTimeOffset(8),
+            DateTimeMax = reader.ReadDateTimeOffset(9),
         };
     }
 
@@ -921,12 +923,13 @@ public static class PageDataReaders
             Id = reader.ReadGuid(0),
             QuestionId = reader.ReadGuid(1),
             Kind = reader.ReadEnum<NumberAnswer.Kinds>(2),
-            IntegerMin = reader.ReadInt32(3),
-            IntegerMax = reader.ReadInt32(4),
-            DecimalMin = reader.ReadSingle(5),
-            DecimalMax = reader.ReadSingle(6),
-            CurrencyMin = reader.ReadSingle(7),
-            CurrencyMax = reader.ReadSingle(8),
+            Label = reader.ReadString(3),
+            IntegerMin = reader.ReadInt32(4),
+            IntegerMax = reader.ReadInt32(5),
+            DecimalMin = reader.ReadSingle(6),
+            DecimalMax = reader.ReadSingle(7),
+            CurrencyMin = reader.ReadSingle(8),
+            CurrencyMax = reader.ReadSingle(9),
         };
     }
 

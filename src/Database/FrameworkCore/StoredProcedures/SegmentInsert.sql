@@ -9,6 +9,9 @@ create proc [FrameworkCore].[SegmentInsert] (
     ,@PermissionId uniqueidentifier
     ,@IconId uniqueidentifier
     ,@Fixed bit
+    ,@Routable bit
+    ,@Navigable bit
+    ,@Mapable bit
     ,@RequiresId bit
     ,@Recursive bit
     ,@TypeId uniqueidentifier
@@ -56,6 +59,9 @@ insert [Framework].[Segment] (
     ,PermissionId
     ,IconId
     ,Fixed
+    ,Routable
+    ,Navigable
+    ,Mapable
     ,RequiresId
     ,Recursive
     ,TypeId
@@ -76,6 +82,9 @@ values (
     ,@PermissionId
     ,@IconId
     ,@Fixed
+    ,@Routable
+    ,@Navigable
+    ,@Mapable
     ,@RequiresId
     ,@Recursive
     ,@TypeId

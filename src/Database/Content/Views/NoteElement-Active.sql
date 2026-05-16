@@ -6,6 +6,7 @@ select noteElement.Id as Id
     ,noteElement.ImageFileId as ImageFileId
     ,noteElement.RequireText as RequireText
     ,noteElement.RequireImageSelection as RequireImageSelection
+    ,noteElement.OpenOnly as OpenOnly
 from [Content].[NoteElement] noteElement
 where 1=1
     and noteElement.IsDeleted = 0

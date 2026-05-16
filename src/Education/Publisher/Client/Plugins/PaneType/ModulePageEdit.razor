@@ -1,2 +1,7 @@
 <PageEdit Model="Model"
-          CancelClicked="HandleCancelClicked" />
+          CancelClicked="HandleCancelClicked">
+    <AdditionalFields Context="page">
+        <GuidePageEdit Page="page"
+                       ReadOnly="Model.ReadOnly" />
+    </AdditionalFields>
+</PageEdit>

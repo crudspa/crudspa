@@ -102,14 +102,14 @@ public class Worker : BackgroundService
         if (jobs.IsEmpty())
             return;
 
-        _logger.LogInformation("Found {jobCount} jobs.", jobs.Count);
+        _logger.LogInformation("Running {jobCount} queued jobs.", jobs.Count);
 
         await PublishStatusChanges(jobs.Select(ToJobStatusChanged));
 
         var batchId = jobs.First().BatchId;
         using (_logger.BeginScope(new Dictionary<String, Object> { ["BatchId"] = batchId! }))
         {
-            _logger.LogDebug("Starting batch {batchId}...", batchId);
+            _logger.LogTrace("Starting batch {batchId}...", batchId);
 
             var running = jobs
                 .Select(RunJob)
@@ -124,7 +124,7 @@ public class Worker : BackgroundService
                 _logger.LogError(ex, "One or more jobs failed in batch {batchId}.", batchId);
             }
 
-            _logger.LogDebug("Completed batch {batchId}.", batchId);
+            _logger.LogTrace("Completed batch {batchId}.", batchId);
         }
     }
 
@@ -132,11 +132,11 @@ public class Worker : BackgroundService
     {
         using (_logger.BeginScope(new Dictionary<String, Object> { ["JobId"] = job.Id! }))
         {
-            _logger.LogInformation("Starting job {jobId}: {description}", job.Id, job.Description);
+            _logger.LogInformation("Starting {jobName}.", JobLabel(job));
 
             try
             {
-                _logger.LogDebug("Instantiating type {jobTypeActionClass}...", job.Type!.ActionClass);
+                _logger.LogTrace("Instantiating type {jobTypeActionClass}...", job.Type!.ActionClass);
 
                 var type = Type.GetType(job.Type.ActionClass!);
 
@@ -145,18 +145,18 @@ public class Worker : BackgroundService
 
                 var action = (IJobAction)ActivatorUtilities.CreateInstance(_serviceProvider, type);
 
-                _logger.LogDebug("Configuring {typeName}...", type.FullName);
+                _logger.LogTrace("Configuring {typeName}...", type.FullName);
 
                 action.Configure(_session.Id, job.Config!);
 
-                _logger.LogDebug("Running {typeName}...", type.FullName);
+                _logger.LogTrace("Running {typeName}...", type.FullName);
 
                 var success = await action.Run(job.Id);
 
                 job.Ended = DateTimeOffset.Now;
                 job.StatusId = success ? JobStatusIds.Completed : JobStatusIds.Failed;
 
-                _logger.LogInformation("Job {jobId} ended.", job.Id);
+                _logger.LogInformation("Finished {jobName}.", JobLabel(job));
             }
             catch (Exception ex)
             {
@@ -211,5 +211,16 @@ public class Worker : BackgroundService
             StatusId = job.StatusId,
             DeviceId = job.DeviceId,
         };
+    }
+
+    private static String JobLabel(Job job)
+    {
+        if (job.ScheduleName.HasSomething())
+            return job.ScheduleName!;
+
+        if (job.Description.HasSomething())
+            return $"{job.Type?.Name ?? "job"}: {job.Description}";
+
+        return job.Type?.Name ?? job.Id?.ToString() ?? "job";
     }
 }

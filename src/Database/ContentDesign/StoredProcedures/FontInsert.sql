@@ -1,8 +1,7 @@
 create proc [ContentDesign].[FontInsert] (
-     @SessionId uniqueidentifier
+    @SessionId uniqueidentifier
     ,@ContentPortalId uniqueidentifier
     ,@Name nvarchar(75)
-    ,@FileId uniqueidentifier
     ,@Id uniqueidentifier output
 ) as
 
@@ -27,7 +26,6 @@ insert [Content].[Font] (
     ,UpdatedBy
     ,ContentPortalId
     ,Name
-    ,FileId
 )
 values (
      @Id
@@ -36,7 +34,6 @@ values (
     ,@SessionId
     ,@ContentPortalId
     ,@Name
-    ,@FileId
 )
 
 if not exists (

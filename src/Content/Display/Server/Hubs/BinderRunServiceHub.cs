@@ -4,6 +4,12 @@ namespace Crudspa.Content.Display.Server.Hubs;
 
 public partial class DisplayHub
 {
+    public async Task<Response<BinderPane?>> BinderRunFetchBinderPane(Request<BinderPane> request)
+    {
+        return await HubWrappers.RequireSession(request, async session =>
+            await BinderRunService.FetchBinderPane(request));
+    }
+
     public async Task<Response<BinderTypeFull?>> BinderRunFetchBinderType(Request<Binder> request)
     {
         return await HubWrappers.RequireSession(request, async session =>

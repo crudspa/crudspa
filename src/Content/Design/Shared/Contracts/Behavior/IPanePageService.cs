@@ -3,6 +3,10 @@ namespace Crudspa.Content.Design.Shared.Contracts.Behavior;
 public interface IPanePageService
 {
     Task<Response<IList<Orderable>>> FetchContentStatusNames(Request request);
+    Task<Response<PagePane?>> FetchPagePane(Request<PagePane> request);
+    Task<Response<BinderPane?>> FetchBinderPane(Request<BinderPane> request);
+    Task<Response<CoursePane?>> FetchCoursePane(Request<CoursePane> request);
+    Task<Response> SaveCoursePane(Request<CoursePane> request);
     Task<Response<IList<Page>>> FetchPages(Request<PageForPane> request);
     Task<Response<Page?>> FetchPage(Request<PageForPane> request);
     Task<Response<Page?>> AddPage(Request<PageForPane> request);

@@ -46,6 +46,8 @@ public abstract class GatewayController<THub>(
             return;
 
         CacheService.Invalidate(String.Format(CacheKeys.Portal, portalPayload.Id.Value));
+        CacheService.Invalidate(String.Format(CacheKeys.PortalSeo, portalPayload.Id.Value));
+        CacheService.Invalidate(String.Format(CacheKeys.PortalSeoRoutes, portalPayload.Id.Value));
 
         if (PublishPortalRun)
             await Publish(portalPayload);

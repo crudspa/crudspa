@@ -55,42 +55,43 @@
                                    ImageFile="Model.Entity.BrandingImageFile" />
                 </Field>
             </Wrapped>
-            <BatchSection Title="Search">
-                <Wrapped Alignment="Wrapped.Alignments.Top">
-                    <Field Label="SEO Title"
-                           Size="Field.Sizes.Wide">
-                        <TextBox ReadOnly="Model.ReadOnly"
-                                 MaxLength="100"
-                                 @bind-Value="Model.Entity.SeoTitle" />
-                    </Field>
-                    <Field Label="Canonical Base URL"
-                           Size="Field.Sizes.Wide">
-                        <TextBox ReadOnly="Model.ReadOnly"
-                                 MaxLength="250"
-                                 @bind-Value="Model.Entity.CanonicalBaseUrl" />
-                    </Field>
-                </Wrapped>
-                <Wrapped Alignment="Wrapped.Alignments.Top">
-                    <Field Label="SEO Description"
-                           Size="Field.Sizes.Wide">
-                        <MultilineTextBox ReadOnly="Model.ReadOnly"
-                                          Height="MultilineTextBox.Heights.Short"
-                                          @bind-Value="Model.Entity.SeoDescription" />
-                    </Field>
-                    <Field Label="SEO Keywords"
-                           Size="Field.Sizes.Wide">
-                        <MultilineTextBox ReadOnly="Model.ReadOnly"
-                                          Height="MultilineTextBox.Heights.Short"
-                                          @bind-Value="Model.Entity.SeoKeywords" />
-                    </Field>
-                    <Field Label="SEO Image"
-                           Size="Field.Sizes.Larger"
-                           Container="Field.Containers.Div">
-                        <ImageUploader ReadOnly="Model.ReadOnly"
-                                       Required="false"
-                                       ImageFile="Model.Entity.SeoImageFile" />
-                    </Field>
-                </Wrapped>
+            <BatchSection Title="Search Engine Optimization (SEO)">
+                <Padding Size="Padding.Sizes.Small"
+                         Direction="Padding.Directions.Vertical">
+                    <Wrapped Alignment="Wrapped.Alignments.Top">
+                        <Field Label="SEO Title"
+                               Size="Field.Sizes.Full">
+                            <TextBox ReadOnly="Model.ReadOnly"
+                                     MaxLength="100"
+                                     @bind-Value="Model.Entity.SeoTitle" />
+                        </Field>
+                        <Field Label="SEO Description"
+                               Size="Field.Sizes.Full">
+                            <MultilineTextBox ReadOnly="Model.ReadOnly"
+                                              Height="MultilineTextBox.Heights.Short"
+                                              @bind-Value="Model.Entity.SeoDescription" />
+                        </Field>
+                        <Field Label="SEO Keywords"
+                               Size="Field.Sizes.Full">
+                            <MultilineTextBox ReadOnly="Model.ReadOnly"
+                                              Height="MultilineTextBox.Heights.Short"
+                                              @bind-Value="Model.Entity.SeoKeywords" />
+                        </Field>
+                        <Field Label="SEO Image"
+                               Size="Field.Sizes.Larger"
+                               Container="Field.Containers.Div">
+                            <ImageUploader ReadOnly="Model.ReadOnly"
+                                           Required="false"
+                                           ImageFile="Model.Entity.SeoImageFile" />
+                        </Field>
+                        <Field Label="Canonical Base URL"
+                               Size="Field.Sizes.Wide">
+                            <TextBox ReadOnly="Model.ReadOnly"
+                                     MaxLength="250"
+                                     @bind-Value="Model.Entity.CanonicalBaseUrl" />
+                        </Field>
+                    </Wrapped>
+                </Padding>
             </BatchSection>
             @if (Features.Count > 0)
             {
@@ -118,8 +119,8 @@
                 <BatchSection Title="Footer">
                     <Padding Size="Padding.Sizes.Small">
                         <ContentPortalSections Path="@Path"
-                                              ContentPortalId="Model.Entity.Portal.Id"
-                                              PageId="Model.Entity.FooterPageId" />
+                                               ContentPortalId="Model.Entity.Portal.Id"
+                                               PageId="Model.Entity.FooterPageId" />
                     </Padding>
                 </BatchSection>
             }

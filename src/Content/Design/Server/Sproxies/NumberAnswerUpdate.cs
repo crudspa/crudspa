@@ -11,6 +11,7 @@ public static class NumberAnswerUpdate
         command.AddParameter("@Id", answer.Id);
         command.AddParameter("@QuestionId", answer.QuestionId);
         command.AddParameter("@Kind", answer.Kind);
+        command.AddParameter("@Label", 150, answer.Label);
         command.AddParameter("@IntegerMin", answer.IntegerMin);
         command.AddParameter("@IntegerMax", answer.IntegerMax);
         command.AddParameter("@DecimalMin", answer.DecimalMin);

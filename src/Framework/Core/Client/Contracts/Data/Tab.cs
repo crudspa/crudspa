@@ -8,6 +8,7 @@ public class Tab
     public Boolean Loaded { get; set; }
     public RenderFragment? Content { get; init; }
     public String? PaneTypeDisplayView { get; init; }
+    public Guid? PaneId { get; init; }
     public Guid? Id { get; set; }
     public Boolean IsNew { get; init; }
     public String? ConfigJson { get; init; }

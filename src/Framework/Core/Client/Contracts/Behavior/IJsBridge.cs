@@ -9,9 +9,12 @@ public interface IJsBridge
     Task RefreshBrowser(Int32 secondsToWait = 0);
     Task CopyToClipboard(String text);
     Task<String?> ReadFromClipboard();
+    Task<TextSelection?> GetTextSelection(ElementReference element);
+    Task<String?> InsertTextAtSelection(ElementReference element, String text, TextSelection? selection = null);
     Task ScrollToTop();
     Task ScrollToBottom();
     Task ScrollToId(String id);
+    Task ScrollElementToBottom(String id);
     Task PlaySound(String key);
     Task AddAudioListeners<T>(String id, DotNetObjectReference<T> reference) where T : class;
     Task PlayAudio(String id);

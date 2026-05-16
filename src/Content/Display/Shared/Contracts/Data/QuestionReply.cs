@@ -6,9 +6,9 @@ public class QuestionReply : Observable
 {
     public Guid? Id { get; set => SetProperty(ref field, value); }
     public Guid? ElementId { get; set => SetProperty(ref field, value); }
+    public Guid? SurveyReplyId { get; set => SetProperty(ref field, value); }
     public Guid? QuestionId { get; set => SetProperty(ref field, value); }
     public Question? Question { get; set => SetProperty(ref field, value); }
-    public Guid? ContactId { get; set => SetProperty(ref field, value); }
     public DateTimeOffset? Submitted { get; set => SetProperty(ref field, value); }
     public Boolean? BoolValue { get; set => SetProperty(ref field, value); }
     public String? TextValue { get; set => SetProperty(ref field, value); }
