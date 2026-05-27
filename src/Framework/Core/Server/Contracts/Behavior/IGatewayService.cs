@@ -2,5 +2,5 @@
 
 public interface IGatewayService
 {
-    Task Publish<T>(T eventObject) where T : class;
+    Task Publish<T>(T eventObject, String eventRoute = GatewayEventRoutes.Broadcast) where T : class;
 }

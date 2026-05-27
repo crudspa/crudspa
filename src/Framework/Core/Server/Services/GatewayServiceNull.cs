@@ -2,5 +2,5 @@
 
 public class GatewayServiceNull : IGatewayService
 {
-    public Task Publish<T>(T eventObject) where T : class => Task.CompletedTask;
+    public Task Publish<T>(T eventObject, String eventRoute = GatewayEventRoutes.Broadcast) where T : class => Task.CompletedTask;
 }

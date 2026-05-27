@@ -7,5 +7,10 @@
                               Height="MultilineTextBox.Heights.Short"
                               @bind-Value="Config.Urls" />
         </Field>
+        <Field Label="Expected Max Latency (ms)"
+               Size="Field.Sizes.Small">
+            <NumericTextBox ReadOnly="ReadOnly"
+                            @bind-Value="Config.ExpectedMaxLatencyMs" />
+        </Field>
     </Wrapped>
 }

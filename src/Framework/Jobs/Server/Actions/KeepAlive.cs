@@ -29,15 +29,29 @@ public class KeepAlive(ILogger<KeepAlive> logger)
     {
         try
         {
-            using var response = await HttpClient.GetAsync(url);
+            var started = DateTimeOffset.UtcNow;
+            using var response = await HttpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+            var elapsed = DateTimeOffset.UtcNow - started;
+            var elapsedMs = (Int32)Math.Ceiling(elapsed.TotalMilliseconds);
 
             if (response.IsSuccessStatusCode)
             {
-                logger.LogInformation("Keep Alive fetched {url} with status {statusCode}.", url, (Int32)response.StatusCode);
-                return true;
+                if (elapsedMs <= Config.ExpectedMaxLatencyMs)
+                {
+                    logger.LogInformation("Keep Alive fetched {url} with status {statusCode} in {elapsedMs} ms.", url, (Int32)response.StatusCode, elapsedMs);
+                    return true;
+                }
+
+                logger.LogWarning("Keep Alive fetched {url} with status {statusCode} in {elapsedMs} ms, exceeding the {expectedMaxLatencyMs} ms limit.",
+                    url,
+                    (Int32)response.StatusCode,
+                    elapsedMs,
+                    Config.ExpectedMaxLatencyMs);
+
+                return false;
             }
 
-            logger.LogError("Keep Alive fetch failed for {url} with status {statusCode}.", url, (Int32)response.StatusCode);
+            logger.LogError("Keep Alive fetch failed for {url} with status {statusCode} in {elapsedMs} ms.", url, (Int32)response.StatusCode, elapsedMs);
             return false;
         }
         catch (Exception ex)

@@ -9,6 +9,7 @@ public class GatewayServiceEventGrid : IGatewayService
     private readonly ILogger<GatewayServiceEventGrid> _logger;
     private readonly EventGridPublisherClient? _client;
     private readonly IReadOnlyList<Uri> _receiverUrls;
+    private readonly IReadOnlyDictionary<String, IReadOnlyList<Uri>> _receiverRoutes;
     private static readonly HttpClient HttpClient = new() { Timeout = TimeSpan.FromSeconds(10) };
     private const String Version = "1.0";
 
@@ -17,6 +18,7 @@ public class GatewayServiceEventGrid : IGatewayService
         _logger = logger;
         var config = configService.Fetch();
         _receiverUrls = ParseReceiverUrls(config.EventReceiverUrls);
+        _receiverRoutes = config.EventReceiverRoutes.ToDictionary(x => x.Key, x => (IReadOnlyList<Uri>)ParseReceiverUrls(x.Value), StringComparer.OrdinalIgnoreCase);
 
         if (config.EventTopicKey.HasSomething() && config.EventTopicEndpoint.HasSomething())
         {
@@ -27,19 +29,19 @@ public class GatewayServiceEventGrid : IGatewayService
             _logger.LogWarning("Config did not have values for EventTopicKey, EventTopicEndpoint, or EventReceiverUrls.");
     }
 
-    public Task Publish<T>(T eventObject) where T : class
+    public Task Publish<T>(T eventObject, String eventRoute = GatewayEventRoutes.Broadcast) where T : class
     {
-        _ = PublishCore(eventObject);
+        _ = PublishCore(eventObject, NormalizeEventRoute(eventRoute));
         return Task.CompletedTask;
     }
 
-    private async Task PublishCore<T>(T eventObject) where T : class
+    private async Task PublishCore<T>(T eventObject, String eventRoute) where T : class
     {
         var subject = $"{typeof(T).Namespace}.{typeof(T).Name}";
 
         try
         {
-            var gridEvent = new EventGridEvent(subject, typeof(T).Name, Version, eventObject);
+            var gridEvent = new EventGridEvent(subject, eventRoute, Version, eventObject);
 
             if (_client is not null)
             {
@@ -47,7 +49,7 @@ public class GatewayServiceEventGrid : IGatewayService
                 return;
             }
 
-            if (await PublishToReceivers(gridEvent))
+            if (await PublishToReceivers(gridEvent, eventRoute))
                 return;
 
             _logger.LogWarning("No event publisher accepted the event '{subject}'.", subject);
@@ -70,17 +72,26 @@ public class GatewayServiceEventGrid : IGatewayService
         }
     }
 
-    private async Task<Boolean> PublishToReceivers(EventGridEvent gridEvent)
+    private async Task<Boolean> PublishToReceivers(EventGridEvent gridEvent, String eventRoute)
     {
-        if (_receiverUrls.IsEmpty())
+        var receiverUrls = ReceiverUrls(eventRoute);
+        if (receiverUrls.IsEmpty())
             return false;
 
         var payload = new[] { gridEvent }.ToJson();
         if (payload.HasNothing())
             return false;
 
-        var results = await Task.WhenAll(_receiverUrls.Select(uri => PublishToReceiver(uri, payload!, gridEvent.Subject)));
+        var results = await Task.WhenAll(receiverUrls.Select(uri => PublishToReceiver(uri, payload!, gridEvent.Subject)));
         return results.Any(x => x);
+    }
+
+    private IReadOnlyList<Uri> ReceiverUrls(String eventRoute)
+    {
+        if (_receiverRoutes.TryGetValue(eventRoute, out var routeUrls) && routeUrls.HasItems())
+            return routeUrls;
+
+        return _receiverUrls;
     }
 
     private async Task<Boolean> PublishToReceiver(Uri uri, String payload, String subject)
@@ -120,4 +131,7 @@ public class GatewayServiceEventGrid : IGatewayService
             .OfType<Uri>()
             .ToList();
     }
+
+    private static String NormalizeEventRoute(String? eventRoute) =>
+        eventRoute.HasSomething() ? eventRoute! : GatewayEventRoutes.Broadcast;
 }

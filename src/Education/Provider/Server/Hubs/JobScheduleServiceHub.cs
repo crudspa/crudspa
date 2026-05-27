@@ -31,7 +31,7 @@ public partial class ProviderHub
                     Id = response.Value.Id,
                 };
 
-                await GatewayService.Publish(jobScheduleAdded);
+                await GatewayService.Publish(jobScheduleAdded, GatewayEventRoutes.Jobs);
             }
 
             return response;
@@ -51,7 +51,7 @@ public partial class ProviderHub
                     Id = request.Value.Id,
                 };
 
-                await GatewayService.Publish(jobScheduleSaved);
+                await GatewayService.Publish(jobScheduleSaved, GatewayEventRoutes.Jobs);
             }
 
             return response;
@@ -71,7 +71,7 @@ public partial class ProviderHub
                     Id = request.Value.Id,
                 };
 
-                await GatewayService.Publish(jobScheduleRemoved);
+                await GatewayService.Publish(jobScheduleRemoved, GatewayEventRoutes.Jobs);
             }
 
             return response;

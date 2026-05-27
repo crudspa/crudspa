@@ -110,19 +110,19 @@ public class Scheduler : BackgroundService
 
             var createJobResponse = await _jobScheduleService.CreateJob(new(_session.Id, updatedSchedule));
 
-            if (!createJobResponse.Ok)
+            if (createJobResponse.Errors.HasItems())
                 _logger.LogError("Error creating job. {error}", createJobResponse.ErrorMessages);
             else if (createJobResponse.Value?.Id is Guid jobId)
             {
                 _logger.LogInformation("Scheduled {scheduleName}. Next run: {nextRunDate}", schedule.Name ?? updatedSchedule.Id?.ToString(), updatedSchedule.NextRun);
 
                 if (updatedSchedule.Id is not null)
-                    await _gatewayService.Publish(new JobScheduleSaved { Id = updatedSchedule.Id });
+                    await _gatewayService.Publish(new JobScheduleSaved { Id = updatedSchedule.Id }, GatewayEventRoutes.Jobs);
 
-                await _gatewayService.Publish(new JobAdded { Id = jobId });
+                await _gatewayService.Publish(new JobAdded { Id = jobId }, GatewayEventRoutes.Jobs);
             }
             else
-                _logger.LogDebug("Skipped creating job for schedule {scheduleId} because another scheduler already claimed it.", updatedSchedule.Id);
+                _logger.LogDebug("Skipped creating job for schedule {scheduleId}; it may already be claimed, queued, running, or satisfied by a recent run.", updatedSchedule.Id);
         }
     }
 }

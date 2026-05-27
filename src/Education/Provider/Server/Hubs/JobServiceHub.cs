@@ -29,7 +29,7 @@ public partial class ProviderHub
             if (response.Ok)
             {
                 var jobAdded = new JobAdded { Id = response.Value.Id };
-                await GatewayService.Publish(jobAdded);
+                await GatewayService.Publish(jobAdded, GatewayEventRoutes.Jobs);
             }
 
             return response;
@@ -45,7 +45,7 @@ public partial class ProviderHub
             if (response.Ok)
             {
                 var jobRemoved = new JobRemoved { Id = request.Value.Id };
-                await GatewayService.Publish(jobRemoved);
+                await GatewayService.Publish(jobRemoved, GatewayEventRoutes.Jobs);
             }
 
             return response;
@@ -64,7 +64,7 @@ public partial class ProviderHub
                 Id = request.Value.Id,
             };
 
-            await GatewayService.Publish(jobSaved);
+            await GatewayService.Publish(jobSaved, GatewayEventRoutes.Jobs);
 
             return new();
         });

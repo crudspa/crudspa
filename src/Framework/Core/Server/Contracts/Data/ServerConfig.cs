@@ -9,6 +9,7 @@ public class ServerConfig
     public String EmailFromAddress { get; set; } = null!;
     public String EmailFromName { get; set; } = null!;
     public String EmailSender { get; set; } = null!;
+    public Dictionary<String, String> EventReceiverRoutes { get; set; } = new(StringComparer.OrdinalIgnoreCase);
     public String EventReceiverUrls { get; set; } = String.Empty;
     public String EventTopicEndpoint { get; set; } = null!;
     public String EventTopicKey { get; set; } = null!;
@@ -20,4 +21,5 @@ public class ServerConfig
     public List<SmsChannelConfig> SmsChannels { get; set; } = [];
     public String StorageAccount { get; set; } = null!;
     public String StorageContainer { get; set; } = null!;
+    public String TelemetryRoleName { get; set; } = null!;
 }

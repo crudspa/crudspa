@@ -8,6 +8,12 @@ public class KeepAliveConfig : Observable
         set => SetProperty(ref field, value);
     }
 
+    public Int32 ExpectedMaxLatencyMs
+    {
+        get;
+        set => SetProperty(ref field, value);
+    } = 5000;
+
     public List<String> GetUrls()
     {
         return Urls?
@@ -23,6 +29,9 @@ public class KeepAliveConfig : Observable
 
             if (urls.IsEmpty())
                 errors.AddError("At least one URL is required.", nameof(Urls));
+
+            if (ExpectedMaxLatencyMs < 100 || ExpectedMaxLatencyMs > 120000)
+                errors.AddError("Expected Max Latency must be between 100 and 120000 milliseconds.", nameof(ExpectedMaxLatencyMs));
 
             foreach (var url in urls)
             {

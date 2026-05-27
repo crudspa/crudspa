@@ -14,6 +14,6 @@ public static class JobScheduleCreateJob
 
         await command.Execute(connection, transaction);
 
-        return (Guid?)output.Value;
+        return output.Value is DBNull ? null : (Guid?)output.Value;
     }
 }

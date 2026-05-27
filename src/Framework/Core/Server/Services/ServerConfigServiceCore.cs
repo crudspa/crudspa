@@ -15,6 +15,7 @@ public class ServerConfigServiceCore(IConfiguration configuration) : IServerConf
             EmailFromAddress = configuration.ReadString("Crudspa.Framework.Core.Server.EmailFromAddress"),
             EmailFromName = configuration.ReadString("Crudspa.Framework.Core.Server.EmailFromName"),
             EmailSender = configuration.ReadString("Crudspa.Framework.Core.Server.EmailSender"),
+            EventReceiverRoutes = ReadEventReceiverRoutes(),
             EventReceiverUrls = configuration.ReadString("Crudspa.Framework.Core.Server.EventReceiverUrls", false),
             EventTopicEndpoint = configuration.ReadString("Crudspa.Framework.Core.Server.EventTopicEndpoint", false),
             EventTopicKey = configuration.ReadString("Crudspa.Framework.Core.Server.EventTopicKey", false),
@@ -26,7 +27,19 @@ public class ServerConfigServiceCore(IConfiguration configuration) : IServerConf
             SmsChannels = ReadSmsChannels(),
             StorageAccount = configuration.ReadString("Crudspa.Framework.Core.Server.StorageAccount"),
             StorageContainer = configuration.ReadString("Crudspa.Framework.Core.Server.StorageContainer"),
+            TelemetryRoleName = configuration.ReadString("Crudspa.Framework.Core.Server.TelemetryRoleName", false),
         };
+    }
+
+    private Dictionary<String, String> ReadEventReceiverRoutes()
+    {
+        var json = configuration.ReadString("Crudspa.Framework.Core.Server.EventReceiverRoutesJson", false);
+
+        if (json.HasNothing())
+            return new(StringComparer.OrdinalIgnoreCase);
+
+        var routes = json.FromJson<Dictionary<String, String>>() ?? [];
+        return new(routes, StringComparer.OrdinalIgnoreCase);
     }
 
     private List<SmsChannelConfig> ReadSmsChannels()

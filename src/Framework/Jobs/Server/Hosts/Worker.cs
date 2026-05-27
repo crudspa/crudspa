@@ -198,7 +198,7 @@ public class Worker : BackgroundService
         if (change.Id is null)
             return;
 
-        await _gatewayService.Publish(change);
+        await _gatewayService.Publish(change, GatewayEventRoutes.Jobs);
     }
 
     private static JobStatusChanged ToJobStatusChanged(Job job)
