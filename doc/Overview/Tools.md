@@ -8,13 +8,15 @@ The good news is that Crudspa works best with a very practical toolchain. Nothin
 
 ### .NET SDK And CLI
 
-You need a current .NET SDK that can build the `net10.0` projects in this repository. The `dotnet` CLI is the quickest way to validate the managed projects:
+You need a current .NET SDK that can build the `net10.0` projects in this repository. The `dotnet` CLI is the quickest way to validate the managed sample compositions:
 
 ```powershell
-dotnet build src/Crudspa.slnx
+dotnet build src/Samples/Catalog/Server/Server.csproj
+dotnet build src/Samples/Composer/Server/Server.csproj
+dotnet build src/Samples/Consumer/Server/Server.csproj
 ```
 
-Use the CLI for fast feedback, restore, build validation, and publish steps that belong to the managed project graph.
+Building each server also builds its client and referenced reusable libraries. Use the CLI for fast feedback, restore, build validation, and publish steps that belong to the managed project graph. The full [src/Crudspa.slnx](../../src/Crudspa.slnx) includes a SQL Database Project, so building the whole solution requires Visual Studio or MSBuild with SQL Server Data Tools.
 
 ### Visual Studio And SSDT
 

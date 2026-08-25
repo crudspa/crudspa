@@ -29,12 +29,12 @@ If you want the sample scenarios to work exactly as documented, use Visual Studi
 [src/Crudspa.slnx](../src/Crudspa.slnx) is the best entry point for this repository. It groups the source into the main library families, plus the sample applications that demonstrate how those families are composed:
 
 * [Framework](../src/Framework) is the foundation. `Core` contains navigation, contracts, wrappers, components, client models, and server boundaries. `Jobs` adds background scheduling and worker support.
-* [Content](../src/Content) builds higher-level authoring, display, and content-job features on top of the framework.
+* [Content](../src/Content) builds higher-level authoring, runtime display and forums, messaging, and content-job features on top of the framework.
 * [Education](../src/Education) shows domain-shaped modules built with the same client, shared, and server layering used everywhere else.
 * [Database](../src/Database) contains the shared SQL Database Project.
 * the sample applications show the framework in progressively richer shapes: `Catalog`, `Composer`, `Consumer`, and the `Jobs Engine`.
 
-There are really two shapes to keep in your head here. The source tree is organized into the reusable families: `Framework`, `Content`, `Education`, and `Database`. The learning path cuts across that tree through the sample track: `Catalog` is the focused `Framework.Core` story, `Composer` and `Consumer` show the two content sides, and `Samples/Jobs/Engine` shows how the jobs stack executes work while the web hosts keep the administration surfaces.
+There are really two shapes to keep in your head here. The source tree is organized into the reusable families: `Framework`, `Content`, `Education`, and `Database`. Inside `Content`, `Design` owns authoring, `Display` owns runtime delivery and forums, `Messaging` owns campaigns and message orchestration, and `Jobs` owns background delivery actions. The learning path cuts across that tree through the sample track: `Catalog` is the focused `Framework.Core` story, `Composer` combines authoring and messaging, `Consumer` shows runtime delivery, and `Samples/Jobs/Engine` executes background work while the web hosts keep the administration surfaces.
 
 ## First Build
 
@@ -89,7 +89,7 @@ Open `https://localhost:42100`, enter a name, and use that session to trace one 
 
 ### Composer And Consumer
 
-Run `Composer` and `Consumer` together when you want to study `Content.Design` and `Content.Display` as one story instead of two isolated projects.
+Run `Composer` and `Consumer` together when you want to study `Content.Design`, `Content.Messaging`, and `Content.Display` as one story instead of isolated projects.
 
 Open `Composer` at `https://localhost:42200` and sign in with `sample@example.com`. Use the built-in `Reset password` flow, read the access-code email from `C:\data\temp\email`, set a password, and finish signing in. Under the seeded `Consumer` portal, the `Forums` area demonstrates forum and thread authoring, while `Campaigns` demonstrates populations, staged campaigns, and email or SMS message definitions.
 
@@ -112,6 +112,8 @@ Once you have a successful build or a running host, read in this order:
 * [Concepts | Services](Concepts/Services.md)
 * [Concepts | Plugins](Concepts/Plugins.md)
 * [Concepts | Models](Concepts/Models.md)
+* [Concepts | Forums](Concepts/Forums.md)
+* [Concepts | Messaging](Concepts/Messaging.md)
 
 Then walk the source in roughly this order:
 

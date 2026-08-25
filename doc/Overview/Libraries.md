@@ -10,9 +10,10 @@ Once you read the repo in those families, the structure becomes much easier to n
 | --- | --- | --- |
 | `Framework.Core` | shell, navigation, contracts, wrappers, components, client models, sessions, security hooks, and the main client or server boundary | [src/Framework/Core](../../src/Framework/Core) |
 | `Framework.Jobs` | job records, schedules, worker and scheduler infrastructure, client admin surfaces, and job contracts | [src/Framework/Jobs](../../src/Framework/Jobs) |
-| `Content.Design` | editor-facing content administration for portals, tracks, courses, pages, sections, styles, fonts, and related assets | [src/Content/Design](../../src/Content/Design) |
-| `Content.Display` | runtime delivery of authored content, including binders, pages, sections, elements, progress, and media-aware display behavior | [src/Content/Display](../../src/Content/Display) |
-| `Content.Jobs` | content-specific background work layered on top of the jobs framework, such as operational email workflows | [src/Content/Jobs](../../src/Content/Jobs) |
+| `Content.Design` | editor-facing administration for portals, tracks, courses, pages, sections, blogs, forums, styles, fonts, and related assets | [src/Content/Design](../../src/Content/Design) |
+| `Content.Display` | runtime delivery of authored content, including binders, pages, sections, elements, progress, media, and interactive forums | [src/Content/Display](../../src/Content/Display) |
+| `Content.Messaging` | populations, campaigns, ordered stages, email or SMS message definitions, activations, and provider extension contracts | [src/Content/Messaging](../../src/Content/Messaging) |
+| `Content.Jobs` | content-specific job actions for population refresh and email or SMS delivery | [src/Content/Jobs](../../src/Content/Jobs) |
 | `Education.Common` | shared domain helpers and contracts that support multiple education-focused modules | [src/Education/Common](../../src/Education/Common) |
 | `Education.*` modules | realistic domain modules such as district, provider, publisher, school, and student, each built with the same client, shared, and server split | [src/Education](../../src/Education) |
 
@@ -23,8 +24,8 @@ Crudspa is easier to understand when you separate reusable libraries from the ap
 | Shape | What It Shows |
 | --- | --- |
 | `Catalog` | a focused `Framework.Core` application with a public shopping cart, private catalog and order-management surfaces, and sample jobs administration panes |
-| `Composer` | how `Content.Design` adds editor-facing authoring workflows, pane metadata, content administration, and sample jobs administration panes |
-| `Consumer` | how `Content.Display` adds runtime content, pages, elements, media, and theming on the same foundation |
+| `Composer` | how `Content.Design` and `Content.Messaging` add authoring, forums, campaigns, populations, message definitions, and jobs administration panes |
+| `Consumer` | how `Content.Display` adds runtime content, media, theming, and interactive forums on the same foundation |
 | `Jobs Engine` | how the jobs stack schedules and executes operational work while publishing updates back into the web hosts |
 | `Education` modules | how the same libraries scale into broader compositions with richer feature sets |
 
@@ -36,7 +37,7 @@ Crudspa is easier to understand when you separate reusable libraries from the ap
 
 In the shipped samples, that jobs story spans multiple hosts on purpose. `Catalog` and `Composer` provide the admin panes where users create and inspect jobs or schedules. `src/Samples/Jobs/Engine` is the focused scheduler and worker host that makes those records move.
 
-`Content.Design` and `Content.Display` sit one layer higher. They reuse the framework fundamentals and apply them to authoring and runtime content. `Content.Jobs` then applies the jobs infrastructure to content-specific operational needs.
+`Content.Design`, `Content.Display`, and `Content.Messaging` sit one layer higher. They reuse the framework fundamentals and apply them to authoring, runtime content and forums, and campaign orchestration. `Content.Jobs` then applies the jobs infrastructure to population refresh and channel delivery.
 
 The education modules show what this looks like in a domain. They aren't a separate platform. They are proof that the same approach holds up in real business features.
 
@@ -63,7 +64,7 @@ If you are new, this order works well:
 1. Read `Framework.Core` first.
 2. Open `Catalog` to see how that foundation becomes a working application.
 3. Read `Framework.Jobs` only if background work is part of your current task.
-4. Choose `Composer`, `Consumer`, or run `Samples/Jobs/Engine` alongside `Catalog` or `Composer` depending on whether you care more about authoring, runtime delivery, or background work.
+4. Choose `Composer`, `Consumer`, or run `Samples/Jobs/Engine` alongside `Catalog` or `Composer` depending on whether you care more about authoring and messaging, runtime delivery and forums, or background work.
 5. Read `Education.Common` and one domain module to see the patterns in a realistic slice.
 6. Finally, move into the larger domain modules if you want to see how the libraries compose into broader feature sets.
 

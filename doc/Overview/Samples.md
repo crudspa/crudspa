@@ -60,7 +60,7 @@ The most useful sample loop is:
 7. To post, sign in to `Consumer` with `sample@example.com` by repeating its local reset-password flow.
 8. Edit content, forum details, styles, or portal settings in `Composer`, then watch the runtime host refresh.
 
-This is the shortest path to understanding `Content.Design`, `Content.Display`, portal invalidation, themed runtime output, and the cross-host gateway flow.
+This is the shortest path to understanding `Content.Design`, `Content.Messaging`, `Content.Display`, portal invalidation, themed runtime output, and the cross-host gateway flow.
 
 ## Jobs Engine
 
@@ -95,6 +95,8 @@ Once you have the relevant sample running:
 * read [Libraries](Libraries.md) for the repo family map
 * read [Concepts | Notices](../Concepts/Notices.md) for cross-host and real-time refresh
 * read [Concepts | Jobs](../Concepts/Jobs.md) when the engine host is in play
+* read [Concepts | Forums](../Concepts/Forums.md) for the authoring-to-runtime forum boundary
+* read [Concepts | Messaging](../Concepts/Messaging.md) for campaigns, populations, activations, and delivery
 
 ## Next Steps
 
@@ -102,4 +104,6 @@ Once you have the relevant sample running:
 * [Overview | Applications](Applications.md)
 * [Overview | Architecture](Architecture.md)
 * [Concepts | Jobs](../Concepts/Jobs.md)
+* [Concepts | Forums](../Concepts/Forums.md)
+* [Concepts | Messaging](../Concepts/Messaging.md)
 * [Documentation Index](../ReadMe.md)

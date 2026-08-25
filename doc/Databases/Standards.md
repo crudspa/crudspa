@@ -179,11 +179,11 @@ We think that cost is minor. Once the reader adapts, the queries become calmer, 
 
 Most SQL editors ship with defaults that don't match Crudspa SQL. The settings below bring each tool closer to the conventions in this page, especially lowercase keywords, leading commas, readable multi-line lists, and consistent indentation.
 
-The menu names below were checked against current vendor docs on March 6, 2026. At that time this meant Visual Studio 2026, ReSharper 2025.3, SSMS 21, Rider 2025.3, and the current Visual Studio Code SQL tooling.
+Tool menus move between releases. Treat the paths below as the intent of the configuration and use the equivalent SQL formatting option in the version you have installed.
 
 ### Visual Studio Community
 
-For this repository, Visual Studio Community 2026 plus SSDT fits the existing `Database.sqlproj` workflow well.
+For this repository, a current Visual Studio release plus SSDT fits the existing `Database.sqlproj` workflow well.
 
 * Install `SQL Server Data Tools` from the Visual Studio Installer under `Data storage and processing`.
 * In `Tools > Options > Text Editor > All Languages > Tabs`, choose `Insert spaces`, `Tab Size = 4`, and `Indent Size = 4`.
@@ -201,7 +201,7 @@ ReSharper adds the SQL formatting controls that help most with this style.
 
 ### SSMS
 
-SSMS 21 works well for ad hoc queries, debugging, and production support.
+SQL Server Management Studio works well for ad hoc queries, debugging, and production support.
 
 * In `Tools > Options > Text Editor > All Languages > Tabs`, choose `Insert spaces`, `Tab Size = 4`, and `Indent Size = 4`.
 * In `Tools > Options > Text Editor > Transact-SQL > IntelliSense`, set `Casing for built-in function names` to lowercase.
@@ -244,7 +244,7 @@ Azure Data Studio uses the same style of SQL settings as Visual Studio Code for 
 
 ### JetBrains Rider
 
-Rider 2025.3 gives you the same helpful SQL style controls in a standalone JetBrains IDE.
+JetBrains Rider gives you the same helpful SQL style controls in a standalone JetBrains IDE.
 
 * Confirm that the bundled `Database Tools and SQL` plugin is enabled.
 * Go to `Settings > Editor > Code Style > SQL`.

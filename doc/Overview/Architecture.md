@@ -4,7 +4,7 @@ CRUD+SPA applications ask teams to solve the same platform problems again and ag
 
 Crudspa gives .NET developers a strong starting architecture for that class of software. It provides a coherent default shape for Blazor WebAssembly clients, SignalR-based service boundaries, shared C# contracts, and SQL Server-backed data work so teams can focus on domain behavior instead of rebuilding the same foundation for each solution.
 
-The repository teaches that architecture in layers. `Framework.Core` establishes the shell, contracts, wrappers, and service boundary. `Content.Design` and `Content.Display` show how authored content layers onto that foundation. `Framework.Jobs` adds scheduling and worker-host patterns for background work. The larger domain modules show how those ideas hold up in broader solutions.
+The repository teaches that architecture in layers. `Framework.Core` establishes the shell, contracts, wrappers, and service boundary. `Content.Design`, `Content.Display`, and `Content.Messaging` show how authored content, runtime experiences, forums, campaigns, and message delivery layer onto that foundation. `Framework.Jobs` and `Content.Jobs` add scheduling, worker-host patterns, population refresh, and message delivery actions. The larger domain modules show how those ideas hold up in broader solutions.
 
 The architecture is organized along two axes:
 
@@ -50,7 +50,7 @@ The vertical axis is about runtime responsibility:
 
 The horizontal axis is about feature structure.
 
-An `Area` is a top-level source family such as `Framework`, `Content`, or `Education`. A `Module` is a cohesive slice inside an `Area` such as `Design`, `Display`, or `District`. A `Node` is Crudspa's bounded feature slice around one root entity and the queries, mutations, contracts, related `Pane` work surfaces, and notices that belong to it.
+An `Area` is a top-level source family such as `Framework`, `Content`, or `Education`. A `Module` is a cohesive slice inside an `Area` such as `Design`, `Display`, `Messaging`, or `District`. A `Node` is Crudspa's bounded feature slice around one root entity and the queries, mutations, contracts, related `Pane` work surfaces, and notices that belong to it.
 
 That two-axis structure looks like this:
 
@@ -98,6 +98,8 @@ A typical Crudspa request flow looks like this:
 8. After a successful mutation, the host can publish a typed notice so other clients refresh or reconcile local state, and it can publish a typed gateway event when another host needs to react.
 
 This isn't just a request pipeline. It's the platform's consistency loop. Navigation, service calls, SQL enforcement, and real-time refresh all follow the same architecture instead of competing with it.
+
+Forums and messaging follow that same shape. A runtime forum request crosses the shared `IForumRunService` contract and is enforced again by the display server and SQL layer before threads, comments, reactions, or media are returned. A campaign is authored as populations, ordered stages, and channel-specific message definitions; an activation turns that definition into scheduled work that `Content.Jobs` can refresh and deliver.
 
 In practice, one pane action usually moves from model to proxy, through hub wrappers, into a server service, down to repositories or sproxies and SQL, then back as a `Response<T>`. If the mutation succeeds, that same feature can publish a typed notice so other models refresh or reconcile local state. When another host also needs to react, the same feature can publish a typed gateway event so the other host can invalidate caches and rebroadcast its own notice. Requests and notices therefore live inside one architectural loop instead of two unrelated systems.
 
@@ -171,4 +173,6 @@ The payoff is coherence. Navigation, services, real-time behavior, and SQL all r
 * [Concepts | Navigation](../Concepts/Navigation.md)
 * [Concepts | Services](../Concepts/Services.md)
 * [Concepts | Notices](../Concepts/Notices.md)
+* [Concepts | Forums](../Concepts/Forums.md)
+* [Concepts | Messaging](../Concepts/Messaging.md)
 * [Documentation Index](../ReadMe.md)

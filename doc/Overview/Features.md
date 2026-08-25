@@ -49,6 +49,9 @@ Pick your next stop based on the question you are trying to answer:
 * If you want runtime updates, read [Concepts | Notices](../Concepts/Notices.md).
 * If you want higher-level module guidance, read [Overview | Libraries](Libraries.md) and [Concepts | Plugins](../Concepts/Plugins.md).
 * If you want operations and background work, read [Concepts | Jobs](../Concepts/Jobs.md).
+* If you want community features, read [Concepts | Forums](../Concepts/Forums.md).
+* If you want campaign delivery, read [Concepts | Messaging](../Concepts/Messaging.md).
+* If you want licensed content boundaries, read [Concepts | Licensing](../Concepts/Licensing.md).
 
 ## Next Steps
 

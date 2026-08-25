@@ -36,6 +36,20 @@ This isn't meant to be a giant glossary. It's the short list of terms that unloc
 | `element` | A typed content block rendered and often edited through a plugin contract |
 | `rule` | A typed styling instruction whose configuration shapes how authored content is presented |
 
+### Community And Messaging Terms
+
+| Term | Meaning |
+| --- | --- |
+| `forum` | A portal-scoped discussion surface whose authoring policy controls status, access mode, licenses, and tag bundles |
+| `thread` | A top-level discussion inside a forum; runtime users add comments and reactions beneath it |
+| `comment` | A forum message that can be nested beneath another comment, carry media, and receive reactions |
+| `population` | A named, resolver-backed audience definition used by campaign messages |
+| `campaign` | A portal-scoped messaging definition composed of ordered stages and licensed for intended use |
+| `stage` | A scheduled point in a campaign, positioned from an anchor date with an offset, send time, and weekend rule |
+| `message` | An email or SMS definition assigned to a stage and population |
+| `activation` | A campaign instance for an organization and start date that turns the definition into scheduled delivery work |
+| `license` | A reusable entitlement identifier used to scope content such as forums, campaigns, assessments, blogs, surveys, and tracks |
+
 ## Related Groups
 
 Several of these terms make the most sense as families.
@@ -47,6 +61,9 @@ Several of these terms make the most sense as families.
 * A `page` contains `sections`.
 * A `section` contains ordered `elements`.
 * A `rule` helps determine how those elements ultimately look at runtime.
+* A `forum` contains `threads`, and a thread contains nested `comments` and reactions.
+* A `campaign` contains ordered `stages`; each stage contains `messages` aimed at a `population`.
+* An `activation` applies a campaign schedule to an organization and start date.
 
 The key idea is that Crudspa tries to keep structure visible. Navigation structure, content structure, and service structure each have names, and those names are reused consistently.
 
@@ -54,7 +71,7 @@ The key idea is that Crudspa tries to keep structure visible. Navigation structu
 
 If a page uses one of these terms heavily, it should use it in this sense.
 
-When you are reading about shell behavior, keep `portal`, `segment`, `pane`, and `path` in mind. When you are reading about CRUD patterns, keep `node`, `predicate`, and `sibling` in mind. When you are reading about authored experiences, keep `binder`, `page`, `section`, `element`, and `rule` in mind.
+When you are reading about shell behavior, keep `portal`, `segment`, `pane`, and `path` in mind. When you are reading about CRUD patterns, keep `node`, `predicate`, and `sibling` in mind. When you are reading about authored experiences, keep `binder`, `page`, `section`, `element`, and `rule` in mind. When you are reading about community and outreach, keep `forum`, `campaign`, `population`, `stage`, `message`, and `activation` in mind.
 
 You don't need to memorize the whole list up front. Just return here whenever a term feels more specific than everyday English.
 
@@ -63,4 +80,6 @@ You don't need to memorize the whole list up front. Just return here whenever a 
 * [Overview | Architecture](Architecture.md)
 * [Concepts | Navigation](../Concepts/Navigation.md)
 * [Concepts | Plugins](../Concepts/Plugins.md)
+* [Concepts | Forums](../Concepts/Forums.md)
+* [Concepts | Messaging](../Concepts/Messaging.md)
 * [Documentation Index](../ReadMe.md)

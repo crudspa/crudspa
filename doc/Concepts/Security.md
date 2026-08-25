@@ -44,6 +44,12 @@ At the service boundary, Crudspa expects explicit permission checks. At the data
 
 You'll hit cases where the browser is wrong, stale, or bypassed in real applications. Security still has to hold.
 
+## Public And Licensed Forums
+
+Forums demonstrate why those layers must stay separate. An `Everyone` forum may be read without signing in when it belongs to the current portal and has no additional permission requirement. A `LicensedUsers` forum is visible only when the server resolves a matching license for the current session.
+
+Participation is stricter than reading. Thread, comment, reaction, and media mutations require a signed-in session. Edit and delete capabilities are calculated for the current user and checked again by the server, while forum and media SQL calls receive the same session and license scope. The runtime service also sanitizes submitted HTML before persistence.
+
 ## Auditing
 
 Denied access isn't just a UX event. It's an operational event.
@@ -59,6 +65,8 @@ When building with Crudspa:
 * enforce permission checks at the application boundary
 * keep the final row-level rule close to the data
 * treat denied access as security-relevant even when it's expected
+* test public reads separately from authenticated mutations
+* provide an explicit session-license resolver when licensed content is enabled
 
 ## Tradeoffs
 
@@ -69,4 +77,6 @@ This model is more deliberate than relying only on UI hiding or only on middlewa
 * [Concepts | Sessions](Sessions.md)
 * [Concepts | Tenancy](Tenancy.md)
 * [Concepts | Exceptions](Exceptions.md)
+* [Concepts | Forums](Forums.md)
+* [Concepts | Licensing](Licensing.md)
 * [Documentation Index](../ReadMe.md)

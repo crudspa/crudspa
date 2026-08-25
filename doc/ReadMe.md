@@ -34,8 +34,8 @@ Crudspa is easiest to learn when you match the sample to the question in front o
 | Sample | Start Here When You Want To... |
 | --- | --- |
 | `Catalog` | See the smallest complete `Framework.Core` application, including a public-facing flow, private admin panes, and the simplest jobs administration surface. |
-| `Composer` | Study CMS authoring, metadata-driven pane composition, content administration workflows, and the authoring half of the live content preview loop. |
-| `Consumer` | Study authored runtime pages, binders, elements, media, and theme-aware delivery while `Composer` is changing content. |
+| `Composer` | Study CMS and forum authoring, campaigns, populations, staged email or SMS message definitions, and the authoring half of the live content preview loop. |
+| `Consumer` | Study authored runtime pages, binders, elements, media, theming, and public-read or signed-in forum participation while `Composer` is changing content. |
 | `Jobs Engine` | Study scheduling and operational background-work patterns by running it beside `Catalog` or `Composer`. |
 | `Education` modules | See how the same libraries and patterns scale into larger domain-shaped feature sets. |
 
@@ -88,6 +88,9 @@ The concepts pages explain the platform's core mechanics. This section is where 
 | [Notices](Concepts/Notices.md) | The SignalR notice patterns that keep multi-user lists, edit panes, and runtime content fresh. |
 | [Repositories](Concepts/Repositories.md) | How real saves coordinate root entities, siblings, children, and SQL work without collapsing into one giant service method. |
 | [Jobs](Concepts/Jobs.md) | The background scheduling and worker model, kept inside the same architecture rather than pushed into a side system. |
+| [Forums](Concepts/Forums.md) | How authored forum configuration becomes a runtime thread, comment, reaction, and media experience. |
+| [Messaging](Concepts/Messaging.md) | How populations, campaigns, stages, messages, activations, channels, and background delivery fit together. |
+| [Licensing](Concepts/Licensing.md) | How reusable license services and runtime session-license resolution protect licensed content without coupling modules to one product model. |
 
 ## Patterns
 

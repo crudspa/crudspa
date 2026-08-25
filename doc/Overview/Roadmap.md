@@ -24,14 +24,15 @@ The most likely next steps in this area are:
 
 ## Content
 
-The `Content` roadmap is to grow the current design and display modules into a complete open-source CMS, not just a set of content helpers. Crudspa already has the core vocabulary and many of the moving parts: binders, pages, sections, elements, rules, blogs, forums, threads, posts, authoring panes, and runtime delivery. The work ahead is mostly about making those pieces feel more complete, more coherent, and easier to understand as one system.
+The `Content` roadmap is to grow the current design, display, messaging, and jobs modules into a complete open-source CMS and communications stack, not just a set of content helpers. Crudspa already has the core vocabulary and many of the moving parts: binders, pages, sections, elements, rules, blogs, forums, threads, comments, populations, campaigns, stages, message definitions, activations, authoring panes, runtime delivery, and background channel actions. The work ahead is mostly about making those pieces feel more complete, more coherent, and easier to understand as one system.
 
 The most likely next steps in this area are:
 
 * Simplify authoring by consolidating page-editing flows that already share base models and component patterns.
 * Strengthen the public story around authored runtime delivery so binder, page, section, element, and rule composition is easier to follow.
-* Make community and publishing features such as blogs, forums, threads, and posts feel more first-class in the docs and sample track.
-* Keep `Content.Design` and `Content.Display` aligned so authored experiences and runtime rendering continue to read as one architecture instead of two separate stacks.
+* Deepen community and publishing behavior around forum moderation, media, reactions, and public or licensed participation.
+* Expand campaign activation and provider examples so population resolution, email, SMS, and delivery operations are easier to adapt in real hosts.
+* Keep `Content.Design`, `Content.Display`, `Content.Messaging`, and `Content.Jobs` aligned so authoring, runtime delivery, campaign orchestration, and background work continue to read as one architecture instead of separate stacks.
 
 ## Education
 

@@ -81,6 +81,10 @@ In practice, adding a new job type usually means:
 
 Try to keep job actions focused and safe to rerun. Background work is easier to operate when each action is explicit about what it reads, what it writes, and how it reports failure.
 
+`Content.Jobs` is the concrete higher-level example in this repository. It adds typed actions for refreshing messaging populations and sending queued email or SMS work. Those actions reuse `Framework.Jobs` for scheduling, batching, status, and notices while depending on the messaging contracts and the host's registered channel providers for content-specific behavior.
+
+Run `Samples/Jobs/Engine` beside `Composer` to study this split. Composer owns the campaign, population, message, job, and schedule administration surfaces; the engine owns execution. Local email and SMS providers write output under `C:\data\temp\email` and `C:\data\temp\sms` so the sample stays safe to run without production credentials.
+
 ## Tradeoffs
 
 Crudspa's jobs model is more structured than handing work to a script folder or an external task runner. That structure is intentional. It keeps jobs observable, configurable, and aligned with the rest of the platform.
@@ -92,4 +96,5 @@ The tradeoff is that even a simple operational task may deserve contracts, UI, s
 * [Overview | Libraries](../Overview/Libraries.md)
 * [Overview | Architecture](../Overview/Architecture.md)
 * [Concepts | Services](Services.md)
+* [Concepts | Messaging](Messaging.md)
 * [Documentation Index](../ReadMe.md)

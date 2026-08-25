@@ -167,7 +167,7 @@ A healthy Crudspa module keeps contracts near the top of the dependency graph:
 * `Server` depends on `Shared`
 * models, hubs, services, and repositories all build on those same shared definitions
 
-Some modules also reuse canonical contracts from adjacent modules when the vocabulary is already shared. `Content.Design`, for example, works with `Track` and `Portal` contracts that already live in the display-side shared layer.
+Some modules also reuse canonical contracts from adjacent modules when the vocabulary is already shared. `Content.Design`, for example, authors `Track`, `Portal`, and `Forum` data whose canonical runtime contracts live in `Content.Display.Shared`. Campaign, stage, population, message, and activation contracts live in `Content.Messaging.Shared`, where both authoring panes and background delivery work can depend on them without taking a client or server dependency.
 
 ## Tradeoffs
 
@@ -180,4 +180,6 @@ In exchange, the system becomes easier to extend, easier to reason about, and mu
 * [Concepts | Services](Services.md)
 * [Concepts | Plugins](Plugins.md)
 * [Concepts | Sessions](Sessions.md)
+* [Concepts | Forums](Forums.md)
+* [Concepts | Messaging](Messaging.md)
 * [Documentation Index](../ReadMe.md)

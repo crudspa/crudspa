@@ -42,7 +42,7 @@ This repository is organized into a few major areas, each with a different job:
 | Area | Purpose |
 | --- | --- |
 | [src/Framework](src/Framework) | Core platform libraries for navigation, contracts, models, wrappers, components, sessions, security hooks, and background jobs. |
-| [src/Content](src/Content) | Higher-level modules for content authoring, runtime content delivery, and content-specific jobs. |
+| [src/Content](src/Content) | Higher-level modules for content authoring, runtime delivery and forums, campaigns and messaging, and content-specific jobs. |
 | [src/Education](src/Education) | Larger domain-shaped modules that show the same architecture applied to real business features. |
 | [src/Samples](src/Samples) | Focused sample hosts for `Catalog`, `Composer`, `Consumer`, and the `Jobs Engine`. |
 | [src/Database](src/Database) | The shared SQL Database Project, including schema, views, functions, triggers, and stored procedures. |
@@ -93,6 +93,7 @@ The documentation is meant to teach both the platform's shape and the reasoning 
 | Learn the guiding principles | [doc/Overview/Philosophy.md](doc/Overview/Philosophy.md) |
 | See the project's likely direction | [doc/Overview/Roadmap.md](doc/Overview/Roadmap.md) |
 | Learn the core terms | [doc/Overview/Vocabulary.md](doc/Overview/Vocabulary.md) |
+| Understand forums, messaging, and licenses | [doc/Concepts/Forums.md](doc/Concepts/Forums.md), [doc/Concepts/Messaging.md](doc/Concepts/Messaging.md), and [doc/Concepts/Licensing.md](doc/Concepts/Licensing.md) |
 | Browse the full documentation set | [doc/ReadMe.md](doc/ReadMe.md) |
 | Review SQL conventions | [doc/Databases/Standards.md](doc/Databases/Standards.md) |
 

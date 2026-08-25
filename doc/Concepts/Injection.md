@@ -30,6 +30,8 @@ services.AddSingleton<ISegmentService, SegmentServiceTcp>();
 
 The same idea holds on the server side, where applications choose wrappers, repositories, infrastructure providers, and service implementations in one place.
 
+The newer Content modules use the same composition model. A runtime forum host registers `IForumRunService` on both sides and selects one server-side `ISessionLicenseResolver`. A messaging host registers one or more keyed `IPopulationResolver` implementations, portal-specific `IActivationTargetProvider` implementations, and its chosen email or SMS channel services. The reusable modules own orchestration; the host owns product-specific audience and provider choices.
+
 ## Why This Helps Consumers
 
 That helps because Crudspa isn't trying to own your whole application. It's trying to give your application a strong default shape.
@@ -57,6 +59,8 @@ When composing your own application:
 * prefer interface-based replacement over conditionals spread through feature code
 * keep request-specific mutable state out of singleton services
 * treat registration as part of the architecture, not as startup noise
+* make resolver and provider keys unique so configuration errors fail at startup
+* register a deliberate no-op implementation only when the host truly does not support that capability
 
 If you want the broader application picture, read [Overview | Applications](../Overview/Applications.md).
 
@@ -71,4 +75,6 @@ The result is a codebase that stays easier to reshape as the application grows.
 * [Overview | Applications](../Overview/Applications.md)
 * [Concepts | Services](Services.md)
 * [Concepts | Wrappers](Wrappers.md)
+* [Concepts | Forums](Forums.md)
+* [Concepts | Messaging](Messaging.md)
 * [Documentation Index](../ReadMe.md)
