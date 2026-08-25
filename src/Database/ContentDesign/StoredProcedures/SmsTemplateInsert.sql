@@ -1,6 +1,6 @@
 create proc [ContentDesign].[SmsTemplateInsert] (
      @SessionId uniqueidentifier
-    ,@MembershipId uniqueidentifier
+    ,@PortalId uniqueidentifier
     ,@Title nvarchar(75)
     ,@Body nvarchar(max)
     ,@Id uniqueidentifier output
@@ -18,7 +18,7 @@ insert [Content].[SmsTemplate] (
     ,VersionOf
     ,Updated
     ,UpdatedBy
-    ,MembershipId
+    ,PortalId
     ,Title
     ,Body
 )
@@ -27,7 +27,7 @@ values (
     ,@Id
     ,@now
     ,@SessionId
-    ,@MembershipId
+    ,@PortalId
     ,@Title
     ,@Body
 )

@@ -1,0 +1,22 @@
+<List Model="Model"
+      T="PopulationModel"
+      EntityName="Population"
+      UrlPrefix="@($"{Path}/population")"
+      ShowAdd="false"
+      ShowDelete="false">
+    <ReadView>
+        <Field Size="Field.Sizes.Unspecified">
+            <Labeled Width="8em"
+                     Label="Key"
+                     StringValue="@context.Population.Key" />
+            <Labeled Width="8em"
+                     Label="Resolver"
+                     StringValue="@context.Population.ResolverKey" />
+            <Labeled Width="8em"
+                     Label="Opt Out"
+                     BooleanValue="@context.Population.SupportsOptOut" />
+            <LabeledHtml Label="Description"
+                         HtmlValue="@context.Population.Description" />
+        </Field>
+    </ReadView>
+</List>

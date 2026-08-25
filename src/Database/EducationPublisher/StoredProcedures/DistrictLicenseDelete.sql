@@ -25,8 +25,11 @@ set  IsDeleted = 1
 from [Education].[DistrictLicense] baseTable
     inner join [Education].[DistrictLicense-Active] districtLicense on districtLicense.Id = baseTable.Id
     inner join [Education].[District-Active] district on districtLicense.DistrictId = district.Id
+    inner join [Education].[Publisher-Active] publisher on publisher.Id = district.PublisherId
+    inner join [Framework].[License-Active] license on license.Id = districtLicense.LicenseId
 where baseTable.Id = @Id
     and district.PublisherId = @publisherId
+    and license.OwnerId = publisher.OrganizationId
 
 if @@rowcount = 0
 begin

@@ -7,7 +7,7 @@
     <RootNamespace>Crudspa.Content.Jobs.Shared</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Design\Shared\Shared.csproj" />
+    <ProjectReference Include="..\..\Messaging\Shared\Shared.csproj" />
     <ProjectReference Include="..\..\..\Framework\Jobs\Shared\Shared.csproj" />
   </ItemGroup>
 </Project>

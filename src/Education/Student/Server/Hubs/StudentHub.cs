@@ -40,6 +40,7 @@ public partial class StudentHub : Crudspa.Content.Display.Server.Hubs.DisplayHub
         IContentPortalRunService contentPortalRunService,
         ICourseRunService courseRunService,
         IElementProgressService elementProgressService,
+        IForumRunService forumRunService,
         INotebookRunService notebookRunService,
         IPageRunService pageRunService,
         ISurveyRunService surveyRunService,
@@ -78,6 +79,7 @@ public partial class StudentHub : Crudspa.Content.Display.Server.Hubs.DisplayHub
             contentPortalRunService,
             courseRunService,
             elementProgressService,
+            forumRunService,
             notebookRunService,
             pageRunService,
             surveyRunService)

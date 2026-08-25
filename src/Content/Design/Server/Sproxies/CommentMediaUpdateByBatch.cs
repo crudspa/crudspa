@@ -11,10 +11,10 @@ public static class CommentMediaUpdateByBatch
         command.AddParameter("@Id", commentMedia.Id);
         command.AddParameter("@CommentId", commentMedia.CommentId);
         command.AddParameter("@Type", (Int32?)commentMedia.Type);
-        command.AddParameter("@AudioId", commentMedia.AudioFile.Id);
-        command.AddParameter("@ImageId", commentMedia.ImageFile.Id);
-        command.AddParameter("@PdfId", commentMedia.PdfFile.Id);
-        command.AddParameter("@VideoId", commentMedia.VideoFile.Id);
+        command.AddParameter("@AudioId", commentMedia.Type == CommentMedia.Types.Audio ? commentMedia.AudioFile.Id : null);
+        command.AddParameter("@ImageId", commentMedia.Type == CommentMedia.Types.Image ? commentMedia.ImageFile.Id : null);
+        command.AddParameter("@PdfId", commentMedia.Type == CommentMedia.Types.Pdf ? commentMedia.PdfFile.Id : null);
+        command.AddParameter("@VideoId", commentMedia.Type == CommentMedia.Types.Video ? commentMedia.VideoFile.Id : null);
         command.AddParameter("@Ordinal", commentMedia.Ordinal);
 
         await command.Execute(connection, transaction);

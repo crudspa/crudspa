@@ -10,10 +10,10 @@
     <SupportedPlatform Include="browser" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.9" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Content\Display\Client\Client.csproj" />
+    <ProjectReference Include="..\..\..\Content\Messaging\Client\Client.csproj" />
     <ProjectReference Include="..\..\Common\Client\Client.csproj" />
     <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>

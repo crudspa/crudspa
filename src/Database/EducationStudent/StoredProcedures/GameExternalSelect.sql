@@ -12,11 +12,16 @@ insert [Education].[GameViewed] (
     ,UpdatedBy
     ,GameId
 )
-values (
+select
      newid()
     ,@now
     ,@SessionId
     ,@Id
+where exists (
+    select 1
+    from [Education].[Game-Active] game
+        inner join [EducationStudent].[LicensedBooks](@SessionId, null) licensedBook on licensedBook.BookId = game.BookId
+    where game.Id = @Id
 )
 
 select
@@ -30,3 +35,7 @@ from [Education].[Game-Active] game
     inner join [Education].[Book-Active] book on game.BookId = book.Id
 where game.Id = @Id
     and game.StatusId = @ContentStatusComplete
+    and exists (
+        select 1
+        from [EducationStudent].[LicensedBooks](@SessionId, game.BookId) licensedBook
+    )

@@ -19,6 +19,13 @@ set nocount on
 set xact_abort on
 begin transaction
 
+if @CommentBody is null or len(@CommentBody) = 0 or datalength(@CommentBody) > 20000
+begin
+    rollback transaction
+    raiserror('Thread body is required and cannot exceed 10,000 characters.', 16, 1)
+    return
+end
+
 if not exists (
     select 1
     from [Content].[Thread-Active] thread

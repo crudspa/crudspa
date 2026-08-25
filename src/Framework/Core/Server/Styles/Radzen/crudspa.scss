@@ -421,6 +421,14 @@ $scrollbar-color: $scrollbarColor !default;
     @extend %rz-vertical-margin;
 }
 
+.rz-datepicker.c-date-picker {
+    width: 11em;
+}
+
+.rz-datepicker.c-date-time-picker {
+    width: 18em;
+}
+
 .rz-checkbox-list-vertical,
 .rz-checkbox-list-horizontal {
     display: flex;

@@ -1,0 +1,16 @@
+<div id="@Id"
+     class="c-forum-message @(Opening ? "opening" : String.Empty)"
+     style="@DepthStyle">
+    <ForumCommentHeader Comment="Comment"
+                        Title="@Title"
+                        Pinned="Pinned" />
+    <div class="body">
+        @Body
+    </div>
+    @if (ShowFooter && Footer is not null)
+    {
+        <div class="footer">
+            @Footer
+        </div>
+    }
+</div>

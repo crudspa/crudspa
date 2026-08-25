@@ -49,6 +49,19 @@ $steps-button-color: var(--rz-text-secondary-color) !default;
       text-decoration: none;
       color: var(--rz-steps-title-selected-color) !important;
     }
+
+    &:focus {
+      outline: var(--rz-outline-normal);
+    }
+
+    &:focus-visible {
+      outline: var(--rz-outline-normal);
+
+      .rz-steps-number {
+        outline: var(--rz-steps-number-focus-outline);
+        outline-offset: var(--rz-steps-number-focus-outline-offset);
+      }
+    }
   }
 
   .rz-state-disabled {
@@ -76,19 +89,6 @@ $steps-button-color: var(--rz-text-secondary-color) !default;
 
 .rz-steps-item {
   display: inline-block;
-
-  &:focus {
-    outline: var(--rz-outline-normal);
-  }
-
-  &:focus-visible {
-    outline: var(--rz-outline-normal);
-
-    .rz-steps-number {
-      outline: var(--rz-steps-number-focus-outline);
-      outline-offset: var(--rz-steps-number-focus-outline-offset);
-    }
-  }
 }
 
 .rz-steps-title {
@@ -156,6 +156,34 @@ $steps-button-color: var(--rz-text-secondary-color) !default;
 }
 
 
+@keyframes rz-steps-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rz-steps-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.rz-steps-fade {
+  animation: rz-steps-fade-in var(--rz-steps-transition-duration, 300ms) ease-out;
+}
+
+.rz-steps-slide {
+  animation: rz-steps-slide-in var(--rz-steps-transition-duration, 300ms) ease-out;
+}
+
 *[dir="rtl"] {
   .rz-steps-prev {
     .rzi:before {
@@ -169,4 +197,14 @@ $steps-button-color: var(--rz-text-secondary-color) !default;
     }
   }
 
+  @keyframes rz-steps-slide-in {
+    from {
+      opacity: 0;
+      transform: translateX(-1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
 }

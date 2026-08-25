@@ -8,6 +8,7 @@ set nocount on
 select
      sms.Id
     ,sms.MembershipId
+    ,membership.Name as MembershipName
     ,sms.Body
     ,sms.TemplateId
     ,template.Title as TemplateTitle

@@ -12,11 +12,14 @@ insert [Education].[ContentViewed] (
     ,UpdatedBy
     ,BookId
 )
-values (
+select
     newid()
     ,@now
     ,@SessionId
     ,@BookId
+where exists (
+    select 1
+    from [EducationStudent].[LicensedBooks](@SessionId, @BookId) licensedBook
 )
 
 select
@@ -31,5 +34,9 @@ from [Education].[Chapter-Active] chapter
     inner join [Content].[Binder-Active] binder on chapter.BinderId = binder.Id
     inner join [Content].[BinderType-Active] binderType on binder.TypeId = binderType.Id
 where chapter.BookId = @BookId
+    and exists (
+        select 1
+        from [EducationStudent].[LicensedBooks](@SessionId, chapter.BookId) licensedBook
+    )
     and (select count(1) from [Content].[Page-Active] page where page.BinderId = chapter.BinderId and page.StatusId = @ContentStatusComplete) > 0
 order by chapter.Ordinal asc

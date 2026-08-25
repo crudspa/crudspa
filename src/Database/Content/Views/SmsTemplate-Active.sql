@@ -4,6 +4,8 @@ select smsTemplate.Id as Id
     ,smsTemplate.MembershipId as MembershipId
     ,smsTemplate.Title as Title
     ,smsTemplate.Body as Body
+    ,smsTemplate.PortalId as PortalId
+    ,smsTemplate.OrganizationId as OrganizationId
 from [Content].[SmsTemplate] smsTemplate
 where 1=1
     and smsTemplate.IsDeleted = 0

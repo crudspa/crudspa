@@ -18,8 +18,11 @@ declare @existingDistrictId uniqueidentifier = (
     select top 1 districtLicense.DistrictId
     from [Education].[DistrictLicense-Active] districtLicense
         inner join [Education].[District-Active] district on districtLicense.DistrictId = district.Id
+        inner join [Education].[Publisher-Active] publisher on publisher.Id = district.PublisherId
+        inner join [Framework].[License-Active] license on license.Id = districtLicense.LicenseId
     where districtLicense.Id = @Id
         and district.PublisherId = @publisherId
+        and license.OwnerId = publisher.OrganizationId
 )
 
 set nocount on
@@ -34,8 +37,11 @@ set
 from [Education].[DistrictLicense] baseTable
     inner join [Education].[DistrictLicense-Active] districtLicense on districtLicense.Id = baseTable.Id
     inner join [Education].[District-Active] district on districtLicense.DistrictId = district.Id
+    inner join [Education].[Publisher-Active] publisher on publisher.Id = district.PublisherId
+    inner join [Framework].[License-Active] license on license.Id = districtLicense.LicenseId
 where baseTable.Id = @Id
     and district.PublisherId = @publisherId
+    and license.OwnerId = publisher.OrganizationId
 
 if @@rowcount = 0
 begin
@@ -47,6 +53,20 @@ end
 if (@existingDistrictId != @DistrictId)
 begin
 
+    if exists (
+        select 1
+        from [Education].[DistrictLicense-Active] existing with (updlock, holdlock)
+            inner join [Education].[DistrictLicense-Active] updating on updating.Id = @Id
+        where existing.LicenseId = updating.LicenseId
+            and existing.DistrictId = @DistrictId
+            and existing.Id != @Id
+    )
+    begin
+        rollback transaction
+        raiserror('The district is already related to this license', 16, 1)
+        return
+    end
+
     update baseTable
     set
          Id = @Id
@@ -57,8 +77,11 @@ begin
     from [Education].[DistrictLicense] baseTable
         inner join [Education].[DistrictLicense-Active] districtLicense on districtLicense.Id = baseTable.Id
         inner join [Education].[District-Active] targetDistrict on targetDistrict.Id = @DistrictId
+        inner join [Education].[Publisher-Active] publisher on publisher.Id = targetDistrict.PublisherId
+        inner join [Framework].[License-Active] license on license.Id = districtLicense.LicenseId
     where baseTable.Id = @Id
         and targetDistrict.PublisherId = @publisherId
+        and license.OwnerId = publisher.OrganizationId
 
     if @@rowcount = 0
     begin

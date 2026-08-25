@@ -30,10 +30,11 @@ public static class ThreadSelect
                 Body = reader.ReadString(6),
                 ById = reader.ReadGuid(7),
                 ByName = reader.ReadString(8),
-                Posted = reader.ReadDateTimeOffset(9),
-                Edited = reader.ReadDateTimeOffset(10),
+                ByOrganizationName = reader.ReadString(9),
+                Posted = reader.ReadDateTimeOffset(10),
+                Edited = reader.ReadDateTimeOffset(11),
             },
-            CommentCount = reader.ReadInt32(11),
+            CommentCount = reader.ReadInt32(12),
         };
     }
 }

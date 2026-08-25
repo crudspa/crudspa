@@ -26,13 +26,15 @@
                                         <input type="text"
                                                class="c-input"
                                                maxlength="75"
-                                               @bind="Model.Username" />
+                                               @bind="Model.Username"
+                                               @bind:event="oninput" />
                                     </label>
                                     <label class="c-field medium-large">
                                         <div class="label">Password</div>
-                                        <input type="password"
+                                       <input type="password"
                                                class="c-input"
-                                               @bind="Model.Password" />
+                                               @bind="Model.Password"
+                                               @bind:event="oninput" />
                                     </label>
                                     <div class="c-stack">
                                         <label class="c-field c-checkbox tight-top tight-bottom">
@@ -97,12 +99,14 @@
                                     <input type="text"
                                            class="c-input"
                                            maxlength="75"
-                                           @bind="Model.Username" />
+                                           @bind="Model.Username"
+                                           @bind:event="oninput" />
                                 </label>
                                 <label class="c-field medium-large">
                                     <div class="label">Access Code</div>
                                     <input class="c-input"
-                                           @bind="Model.AccessCode" />
+                                           @bind="Model.AccessCode"
+                                           @bind:event="oninput" />
                                 </label>
                             </div>
                             <div class="c-stack">
@@ -164,7 +168,8 @@
                                     <input type="text"
                                            class="c-input"
                                            maxlength="75"
-                                           @bind="Model.Username" />
+                                           @bind="Model.Username"
+                                           @bind:event="oninput" />
                                 </label>
                             </div>
 
@@ -213,14 +218,16 @@
                                     <input type="password"
                                            class="c-input"
                                            autocomplete="new-password"
-                                           @bind="Model.NewPassword" />
+                                           @bind="Model.NewPassword"
+                                           @bind:event="oninput" />
                                 </label>
                                 <label class="c-field medium-large">
                                     <div class="label">Confirm</div>
                                     <input type="password"
                                            class="c-input"
                                            autocomplete="new-password"
-                                           @bind="Model.ConfirmPassword" />
+                                           @bind="Model.ConfirmPassword"
+                                           @bind:event="oninput" />
                                 </label>
                             </div>
                             <div class="well center">

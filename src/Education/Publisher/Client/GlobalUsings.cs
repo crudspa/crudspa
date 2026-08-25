@@ -39,3 +39,7 @@ global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Logging;
 global using System.Collections.ObjectModel;
 global using System.ComponentModel;
+global using Crudspa.Content.Messaging.Client.Services;
+global using Crudspa.Content.Messaging.Shared.Contracts.Behavior;
+global using Crudspa.Content.Messaging.Shared.Contracts.Data;
+global using Crudspa.Content.Messaging.Shared.Contracts.Events;

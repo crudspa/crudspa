@@ -74,7 +74,13 @@ public class ClassRecordingServiceSql(
 
             var existing = await ClassRecordingSelect.Execute(Connection, request.SessionId, classRecording);
 
-            var audioFileFileResponse = await fileService.SaveAudio(new(request.SessionId, classRecording.AudioFileFile), existing?.AudioFileFile);
+            if (existing is null)
+            {
+                response.AddError("Recording not found.");
+                return;
+            }
+
+            var audioFileFileResponse = await fileService.SaveAudio(new(request.SessionId, classRecording.AudioFileFile), existing.AudioFileFile);
             if (!audioFileFileResponse.Ok)
             {
                 response.AddErrors(audioFileFileResponse.Errors);
@@ -83,7 +89,7 @@ public class ClassRecordingServiceSql(
 
             classRecording.AudioFileFile.Id = audioFileFileResponse.Value.Id;
 
-            var imageFileResponse = await fileService.SaveImage(new(request.SessionId, classRecording.ImageFile), existing?.ImageFile);
+            var imageFileResponse = await fileService.SaveImage(new(request.SessionId, classRecording.ImageFile), existing.ImageFile);
             if (!imageFileResponse.Ok)
             {
                 response.AddErrors(imageFileResponse.Errors);

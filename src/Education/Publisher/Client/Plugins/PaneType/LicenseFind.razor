@@ -46,6 +46,27 @@ else
                 <PaneLink Href="@($"{Path}/license-{card.Entity.Id:D}?pane=units")"
                           Text="Units"
                           Count="card.Entity.UnitLicenseCount" />
+                <PaneLink Href="@($"{Path}/license-{card.Entity.Id:D}?pane=segments")"
+                          Text="Segments"
+                          Count="card.Entity.SegmentLicenseCount" />
+                <PaneLink Href="@($"{Path}/license-{card.Entity.Id:D}?pane=assessments")"
+                          Text="Assessments"
+                          Count="card.Entity.AssessmentLicenseCount" />
+                <PaneLink Href="@($"{Path}/license-{card.Entity.Id:D}?pane=blogs")"
+                          Text="Blogs"
+                          Count="card.Entity.BlogLicenseCount" />
+                <PaneLink Href="@($"{Path}/license-{card.Entity.Id:D}?pane=forums")"
+                          Text="Forums"
+                          Count="card.Entity.ForumLicenseCount" />
+                <PaneLink Href="@($"{Path}/license-{card.Entity.Id:D}?pane=campaigns")"
+                          Text="Campaigns"
+                          Count="card.Entity.CampaignLicenseCount" />
+                <PaneLink Href="@($"{Path}/license-{card.Entity.Id:D}?pane=tracks")"
+                          Text="Tracks"
+                          Count="card.Entity.TrackLicenseCount" />
+                <PaneLink Href="@($"{Path}/license-{card.Entity.Id:D}?pane=surveys")"
+                          Text="Surveys"
+                          Count="card.Entity.SurveyLicenseCount" />
             </PaneLinks>
             <Buttons>
                 <ButtonView Href="@($"{Path}/license-{card.Entity.Id:D}")" />

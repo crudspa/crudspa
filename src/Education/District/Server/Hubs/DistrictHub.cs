@@ -1,6 +1,7 @@
+
 namespace Crudspa.Education.District.Server.Hubs;
 
-public partial class DistrictHub : Crudspa.Content.Display.Server.Hubs.DisplayHub
+public partial class DistrictHub : Crudspa.Content.Messaging.Server.Hubs.MessagingHub
 {
     protected IActivityMediaPlayService ActivityMediaPlayService { get; }
     protected IActivityRunService ActivityRunService { get; }
@@ -38,9 +39,27 @@ public partial class DistrictHub : Crudspa.Content.Display.Server.Hubs.DisplayHu
         IContentPortalRunService contentPortalRunService,
         ICourseRunService courseRunService,
         IElementProgressService elementProgressService,
+        IForumRunService forumRunService,
         INotebookRunService notebookRunService,
         IPageRunService pageRunService,
         ISurveyRunService surveyRunService,
+        // MessagingHub (Content)
+        IActivationService activationService,
+        ICampaignService campaignService,
+        IEmailService emailService,
+        IEmailTemplateService emailTemplateService,
+        IMemberService memberService,
+        IMembershipService membershipService,
+        IMessageService messageService,
+        IPopulationService populationService,
+        ISmsEventService smsEventService,
+        ISmsMessageMediaService smsMessageMediaService,
+        ISmsMessageService smsMessageService,
+        ISmsPreferenceService smsPreferenceService,
+        ISmsService smsService,
+        ISmsTemplateService smsTemplateService,
+        IStageService stageService,
+        ITokenService tokenService,
         // DistrictHub (Education)
         IActivityMediaPlayService activityMediaPlayService,
         IActivityRunService activityRunService,
@@ -50,7 +69,8 @@ public partial class DistrictHub : Crudspa.Content.Display.Server.Hubs.DisplayHu
         IDistrictService districtService,
         IReportService reportService,
         ISchoolContactService schoolContactService,
-        ISchoolService schoolService)
+        ISchoolService schoolService
+        )
         : base(loggerFactory,
             hubWrappers,
             accessDeniedService,
@@ -74,9 +94,27 @@ public partial class DistrictHub : Crudspa.Content.Display.Server.Hubs.DisplayHu
             contentPortalRunService,
             courseRunService,
             elementProgressService,
+            forumRunService,
             notebookRunService,
             pageRunService,
-            surveyRunService)
+            surveyRunService,
+            activationService,
+            campaignService,
+            emailService,
+            emailTemplateService,
+            memberService,
+            membershipService,
+            messageService,
+            populationService,
+            smsEventService,
+            smsMessageMediaService,
+            smsMessageService,
+            smsPreferenceService,
+            smsService,
+            smsTemplateService,
+            stageService,
+            tokenService
+            )
     {
         ActivityMediaPlayService = activityMediaPlayService;
         ActivityRunService = activityRunService;

@@ -5,6 +5,8 @@ select emailTemplate.Id as Id
     ,emailTemplate.Title as Title
     ,emailTemplate.Subject as Subject
     ,emailTemplate.Body as Body
+    ,emailTemplate.PortalId as PortalId
+    ,emailTemplate.OrganizationId as OrganizationId
 from [Content].[EmailTemplate] emailTemplate
 where 1=1
     and emailTemplate.IsDeleted = 0

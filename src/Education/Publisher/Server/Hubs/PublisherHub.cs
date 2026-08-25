@@ -1,4 +1,4 @@
-﻿using IAchievementService = Crudspa.Content.Design.Shared.Contracts.Behavior.IAchievementService;
+using IAchievementService = Crudspa.Content.Design.Shared.Contracts.Behavior.IAchievementService;
 using IForumService = Crudspa.Content.Design.Shared.Contracts.Behavior.IForumService;
 using IPostService = Crudspa.Content.Design.Shared.Contracts.Behavior.IPostService;
 
@@ -6,20 +6,23 @@ namespace Crudspa.Education.Publisher.Server.Hubs;
 
 public partial class PublisherHub : Crudspa.Content.Design.Server.Hubs.DesignHub
 {
-    protected Shared.Contracts.Behavior.IAchievementService EducationAchievementService { get; }
+    protected Crudspa.Education.Publisher.Shared.Contracts.Behavior.IAchievementService EducationAchievementService { get; }
     protected IActivityElementService ActivityElementService { get; }
     protected IActivityMediaPlayService ActivityMediaPlayService { get; }
     protected IActivityRunService ActivityRunService { get; }
     protected IActivityService ActivityService { get; }
+    protected IAssessmentLicenseService AssessmentLicenseService { get; }
     protected IAssessmentService AssessmentService { get; }
+    protected IBlogLicenseService BlogLicenseService { get; }
     protected IBookService BookService { get; }
     protected IChapterService ChapterService { get; }
+    protected ICampaignLicenseService CampaignLicenseService { get; }
     protected IClassRecordingService ClassRecordingService { get; }
     protected ICommunityService CommunityService { get; }
     protected IDistrictContactService DistrictContactService { get; }
     protected IDistrictLicenseService DistrictLicenseService { get; }
     protected IDistrictService DistrictService { get; }
-    protected Shared.Contracts.Behavior.IForumService PublisherForumService { get; }
+    protected IForumLicenseService ForumLicenseService { get; }
     protected IGameActivityService GameActivityService { get; }
     protected IGameSectionService GameSectionService { get; }
     protected IGameService GameService { get; }
@@ -29,7 +32,6 @@ public partial class PublisherHub : Crudspa.Content.Design.Server.Hubs.DesignHub
     protected IListenQuestionService ListenQuestionService { get; }
     protected IModuleService ModuleService { get; }
     protected IObjectiveService ObjectiveService { get; }
-    protected Shared.Contracts.Behavior.IPostService PublisherPostService { get; }
     protected IPublisherContactService PublisherContactService { get; }
     protected IPublisherService PublisherService { get; }
     protected IReadParagraphService ReadParagraphService { get; }
@@ -38,6 +40,9 @@ public partial class PublisherHub : Crudspa.Content.Design.Server.Hubs.DesignHub
     protected ISchoolContactService SchoolContactService { get; }
     protected ISchoolService SchoolService { get; }
     protected ISchoolYearService SchoolYearService { get; }
+    protected ISegmentLicenseService SegmentLicenseService { get; }
+    protected ISurveyLicenseService SurveyLicenseService { get; }
+    protected ITrackLicenseService TrackLicenseService { get; }
     protected ITrifoldService TrifoldService { get; }
     protected IUnitBookService UnitBookService { get; }
     protected IUnitLicenseService UnitLicenseService { get; }
@@ -71,53 +76,63 @@ public partial class PublisherHub : Crudspa.Content.Design.Server.Hubs.DesignHub
         IContentPortalRunService contentPortalRunService,
         ICourseRunService courseRunService,
         IElementProgressService elementProgressService,
+        IForumRunService forumRunService,
         INotebookRunService notebookRunService,
         IPageRunService pageRunService,
         ISurveyRunService surveyRunService,
-        // DesignHub (Content)
-        IAchievementService achievementService,
-        IBlogService blogService,
-        IContainerService containerService,
-        ICommentService commentService,
-        IContentPortalService contentPortalService,
-        ICourseService courseService,
+        // MessagingHub (Content)
+        IActivationService activationService,
+        ICampaignService campaignService,
         IEmailService emailService,
         IEmailTemplateService emailTemplateService,
-        IFontFaceService fontFaceService,
-        IFontService fontService,
-        IForumService forumService,
-        IItemService itemService,
         IMemberService memberService,
         IMembershipService membershipService,
-        IPanePageService panePageService,
-        IPostService postService,
-        ISectionService sectionService,
+        IMessageService messageService,
+        IPopulationService populationService,
         ISmsEventService smsEventService,
         ISmsMessageMediaService smsMessageMediaService,
         ISmsMessageService smsMessageService,
         ISmsPreferenceService smsPreferenceService,
         ISmsService smsService,
         ISmsTemplateService smsTemplateService,
+        IStageService stageService,
+        ITokenService tokenService,
+        // DesignHub (Content)
+        IAchievementService achievementService,
+        IBlogService blogService,
+        ICommentService commentService,
+        IContainerService containerService,
+        IContentPortalService contentPortalService,
+        ICourseService courseService,
+        IFontFaceService fontFaceService,
+        IFontService fontService,
+        IForumService forumService,
+        IItemService itemService,
+        IPanePageService panePageService,
+        IPostService postService,
+        ISectionService sectionService,
         IStyleService styleService,
         ISurveyService surveyService,
         IThreadService threadService,
-        ITokenService tokenService,
         ITrackService trackService,
         // PublisherHub (Education)
-        Shared.Contracts.Behavior.IAchievementService educationAchievementService,
+        Crudspa.Education.Publisher.Shared.Contracts.Behavior.IAchievementService publisherAchievementService,
         IActivityElementService activityElementService,
         IActivityMediaPlayService activityMediaPlayService,
         IActivityRunService activityRunService,
         IActivityService activityService,
+        IAssessmentLicenseService assessmentLicenseService,
         IAssessmentService assessmentService,
+        IBlogLicenseService blogLicenseService,
         IBookService bookService,
         IChapterService chapterService,
+        ICampaignLicenseService campaignLicenseService,
         IClassRecordingService classRecordingService,
         ICommunityService communityService,
         IDistrictContactService districtContactService,
         IDistrictLicenseService districtLicenseService,
         IDistrictService districtService,
-        Shared.Contracts.Behavior.IForumService publisherForumService,
+        IForumLicenseService forumLicenseService,
         IGameActivityService gameActivityService,
         IGameSectionService gameSectionService,
         IGameService gameService,
@@ -127,7 +142,6 @@ public partial class PublisherHub : Crudspa.Content.Design.Server.Hubs.DesignHub
         IListenQuestionService listenQuestionService,
         IModuleService moduleService,
         IObjectiveService objectiveService,
-        Shared.Contracts.Behavior.IPostService publisherPostService,
         IPublisherContactService publisherContactService,
         IPublisherService publisherService,
         IReadParagraphService readParagraphService,
@@ -136,12 +150,16 @@ public partial class PublisherHub : Crudspa.Content.Design.Server.Hubs.DesignHub
         ISchoolContactService schoolContactService,
         ISchoolService schoolService,
         ISchoolYearService schoolYearService,
+        ISegmentLicenseService segmentLicenseService,
+        ISurveyLicenseService surveyLicenseService,
+        ITrackLicenseService trackLicenseService,
         ITrifoldService trifoldService,
         IUnitBookService unitBookService,
         IUnitLicenseService unitLicenseService,
         IUnitService unitService,
         IVocabPartService vocabPartService,
-        IVocabQuestionService vocabQuestionService)
+        IVocabQuestionService vocabQuestionService
+        )
         : base(loggerFactory,
             hubWrappers,
             accessDeniedService,
@@ -165,52 +183,62 @@ public partial class PublisherHub : Crudspa.Content.Design.Server.Hubs.DesignHub
             contentPortalRunService,
             courseRunService,
             elementProgressService,
+            forumRunService,
             notebookRunService,
             pageRunService,
             surveyRunService,
-            achievementService,
-            blogService,
-            containerService,
-            commentService,
-            contentPortalService,
-            courseService,
+            activationService,
+            campaignService,
             emailService,
             emailTemplateService,
-            fontFaceService,
-            fontService,
-            forumService,
-            itemService,
             memberService,
             membershipService,
-            panePageService,
-            postService,
-            sectionService,
+            messageService,
+            populationService,
             smsEventService,
             smsMessageMediaService,
             smsMessageService,
             smsPreferenceService,
             smsService,
             smsTemplateService,
+            stageService,
+            tokenService,
+            achievementService,
+            blogService,
+            commentService,
+            containerService,
+            contentPortalService,
+            courseService,
+            fontFaceService,
+            fontService,
+            forumService,
+            itemService,
+            panePageService,
+            postService,
+            sectionService,
             styleService,
             surveyService,
             threadService,
-            tokenService,
-            trackService)
+            trackService
+            )
     {
-        EducationAchievementService = educationAchievementService;
+        EducationAchievementService = publisherAchievementService;
         ActivityElementService = activityElementService;
         ActivityMediaPlayService = activityMediaPlayService;
         ActivityRunService = activityRunService;
         ActivityService = activityService;
+        AssessmentLicenseService = assessmentLicenseService;
         AssessmentService = assessmentService;
+        BlogLicenseService = blogLicenseService;
         BookService = bookService;
         ChapterService = chapterService;
+        CampaignLicenseService = campaignLicenseService;
         ClassRecordingService = classRecordingService;
         CommunityService = communityService;
         DistrictContactService = districtContactService;
         DistrictLicenseService = districtLicenseService;
         DistrictService = districtService;
-        PublisherForumService = publisherForumService;
+        ForumLicenseService = forumLicenseService;
         GameActivityService = gameActivityService;
         GameSectionService = gameSectionService;
         GameService = gameService;
@@ -220,7 +248,6 @@ public partial class PublisherHub : Crudspa.Content.Design.Server.Hubs.DesignHub
         ListenQuestionService = listenQuestionService;
         ModuleService = moduleService;
         ObjectiveService = objectiveService;
-        PublisherPostService = publisherPostService;
         PublisherContactService = publisherContactService;
         PublisherService = publisherService;
         ReadParagraphService = readParagraphService;
@@ -229,6 +256,9 @@ public partial class PublisherHub : Crudspa.Content.Design.Server.Hubs.DesignHub
         SchoolContactService = schoolContactService;
         SchoolService = schoolService;
         SchoolYearService = schoolYearService;
+        SegmentLicenseService = segmentLicenseService;
+        SurveyLicenseService = surveyLicenseService;
+        TrackLicenseService = trackLicenseService;
         TrifoldService = trifoldService;
         UnitBookService = unitBookService;
         UnitLicenseService = unitLicenseService;

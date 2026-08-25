@@ -15,11 +15,7 @@ public class CryptographyServiceCore : ICryptographyService
 
     public Int32 GetRandomInt(Int32 min, Int32 max)
     {
-        var generator = RandomNumberGenerator.Create();
-        var bytes = new Byte[4];
-        generator.GetBytes(bytes);
-        var seed = BitConverter.ToInt32(bytes, 0);
-        return new Random(seed).Next(min, max);
+        return RandomNumberGenerator.GetInt32(min, max);
     }
 
     public Byte[] GetRandomSalt()

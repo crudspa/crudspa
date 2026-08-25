@@ -10,7 +10,34 @@ public static class ForumSelect
         command.AddParameter("@SessionId", sessionId);
         command.AddParameter("@Id", forum.Id);
 
-        return await command.ReadSingle(connection, ReadForum);
+        return await command.ExecuteQuery(connection, async reader =>
+        {
+            if (!await reader.ReadAsync())
+                return null;
+
+            forum = ReadForum(reader);
+
+            await reader.NextResultAsync();
+
+            while (await reader.ReadAsync())
+                forum.Licenses.Add(reader.ReadSelectable());
+
+            await reader.NextResultAsync();
+
+            while (await reader.ReadAsync())
+            {
+                forum.ForumBundles.Add(new()
+                {
+                    ForumId = reader.ReadGuid(0),
+                    BundleId = reader.ReadGuid(1),
+                    BundleName = reader.ReadString(2),
+                    ThreadRule = reader.ReadEnum<ForumBundle.Rules>(3),
+                    CommentRule = reader.ReadEnum<ForumBundle.Rules>(4),
+                });
+            }
+
+            return forum;
+        });
     }
 
     private static Forum ReadForum(SqlDataReader reader)
@@ -34,7 +61,10 @@ public static class ForumSelect
                 Height = reader.ReadInt32(12),
                 Caption = reader.ReadString(13),
             },
-            Ordinal = reader.ReadInt32(14),
+            PermissionId = reader.ReadGuid(14),
+            PermissionName = reader.ReadString(15),
+            AccessMode = reader.ReadEnum<Forum.AccessModes>(16),
+            Ordinal = reader.ReadInt32(17),
         };
     }
 }

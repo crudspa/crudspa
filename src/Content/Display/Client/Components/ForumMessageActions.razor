@@ -1,0 +1,47 @@
+<div class="c-forum-actions">
+    @if (CanReply)
+    {
+        <ButtonCore Clicked="ReplyClicked"
+                    Text="Reply"
+                    IconClass="c-icon-reply"
+                    ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                    Size="ButtonCore.Sizes.Small"
+                    Disabled="Busy" />
+    }
+    @if (CanEdit)
+    {
+        <ButtonCore Clicked="EditClicked"
+                    Text="Edit"
+                    IconClass="c-icon-pencil"
+                    ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                    Size="ButtonCore.Sizes.Small"
+                    Disabled="Busy" />
+    }
+    @if (CanDelete)
+    {
+        @if (ConfirmingDelete)
+        {
+            <span class="delete-confirmation">Delete this message?</span>
+            <ButtonCore Clicked="DeleteConfirmed"
+                        Text="Delete"
+                        IconClass="c-icon-trash2"
+                        ButtonStyle="ButtonCore.ButtonStyles.Destroy"
+                        Size="ButtonCore.Sizes.Small"
+                        Disabled="Busy" />
+            <ButtonCore Clicked="DeleteCanceled"
+                        Text="Cancel"
+                        ButtonStyle="ButtonCore.ButtonStyles.Cancel"
+                        Size="ButtonCore.Sizes.Small"
+                        Disabled="Busy" />
+        }
+        else
+        {
+            <ButtonCore Clicked="DeleteRequested"
+                        Text="Delete"
+                        IconClass="c-icon-trash2"
+                        ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                        Size="ButtonCore.Sizes.Small"
+                        Disabled="Busy" />
+        }
+    }
+</div>

@@ -8,7 +8,7 @@
     <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Content\Display\Server\Server.csproj" />
+    <ProjectReference Include="..\..\..\Content\Messaging\Server\Server.csproj" />
     <ProjectReference Include="..\..\Common\Server\Server.csproj" />
     <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>

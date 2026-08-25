@@ -1,0 +1,17 @@
+@if (Model is not null)
+{
+    <Wrapped>
+        <Field Label="Population ID"
+               Size="Field.Sizes.Large">
+            <TextBox ReadOnly="ReadOnly"
+                     @bind-Value="Model.PopulationId" />
+        </Field>
+        <Field Label="Organization IDs"
+               Size="Field.Sizes.Full">
+            <MultilineTextBox ReadOnly="ReadOnly"
+                              Height="MultilineTextBox.Heights.Short"
+                              Placeholder="One ID per line"
+                              @bind-Value="Model.OrganizationIds" />
+        </Field>
+    </Wrapped>
+}

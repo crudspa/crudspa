@@ -5,7 +5,8 @@ public class ElementProgressServiceSql(
     ISqlWrappers sqlWrappers,
     IServerConfigService configService,
     IFileService fileService,
-    IHtmlSanitizer htmlSanitizer)
+    IHtmlSanitizer htmlSanitizer,
+    ISessionLicenseResolver sessionLicenseResolver)
     : IElementProgressService
 {
     private String Connection => configService.Fetch().Database;
@@ -13,24 +14,49 @@ public class ElementProgressServiceSql(
     public async Task<Response<IList<ElementProgress>>> FetchAll(Request request)
     {
         return await wrappers.Try<IList<ElementProgress>>(request, async response =>
-            await ElementProgressSelectAll.Execute(Connection, request.SessionId));
+        {
+            var progress = await ElementProgressSelectAll.Execute(Connection, request.SessionId);
+            var licenseIds = await sessionLicenseResolver.Fetch(request.SessionId);
+            foreach (var item in progress.ToList())
+            {
+                if (!await TrackContentIsAccessible.Execute(Connection, licenseIds, elementId: item.ElementId))
+                    progress.Remove(item);
+            }
+
+            return progress;
+        });
     }
 
     public async Task<ElementProgress> Fetch(Request<Element> request)
     {
-        return await ElementProgressSelect.Execute(Connection, request.SessionId, request.Value.Id);
+        var licenseIds = await sessionLicenseResolver.Fetch(request.SessionId);
+        return await TrackContentIsAccessible.Execute(Connection, licenseIds, elementId: request.Value.Id)
+            ? await ElementProgressSelect.Execute(Connection, request.SessionId, request.Value.Id)
+            : new();
     }
 
     public async Task<Response<QuestionReply?>> FetchQuestionReply(Request<Element> request)
     {
         return await wrappers.Try<QuestionReply?>(request, async response =>
-            await QuestionReplySelectForElement.Execute(Connection, request.SessionId, request.Value.Id));
+        {
+            var licenseIds = await sessionLicenseResolver.Fetch(request.SessionId);
+            return await TrackContentIsAccessible.Execute(Connection, licenseIds, elementId: request.Value.Id)
+                ? await QuestionReplySelectForElement.Execute(Connection, request.SessionId, request.Value.Id)
+                : null;
+        });
     }
 
     public async Task<Response> AddCompleted(Request<ElementCompleted> request)
     {
         return await wrappers.Try(request, async response =>
         {
+            var licenseIds = await sessionLicenseResolver.Fetch(request.SessionId);
+            if (!await TrackContentIsAccessible.Execute(Connection, licenseIds, elementId: request.Value.ElementId))
+            {
+                response.AddError("Element is not accessible.");
+                return;
+            }
+
             await sqlWrappers.WithConnection(async (connection, transaction) =>
             {
                 await ElementCompletedInsert.Execute(connection, transaction, request.SessionId, request.Value);
@@ -43,6 +69,12 @@ public class ElementProgressServiceSql(
         return await wrappers.Try(request, async response =>
         {
             var elementLink = request.Value;
+            var licenseIds = await sessionLicenseResolver.Fetch(request.SessionId);
+            if (!await TrackContentIsAccessible.Execute(Connection, licenseIds, elementId: elementLink.ElementId))
+            {
+                response.AddError("Element is not accessible.");
+                return;
+            }
 
             await sqlWrappers.WithConnection(async (connection, transaction) =>
             {
@@ -66,6 +98,17 @@ public class ElementProgressServiceSql(
             if (!reply.ElementId.HasValue && !reply.SurveyReplyId.HasValue)
             {
                 response.AddError("Element or survey reply is required.", nameof(reply.ElementId));
+                return;
+            }
+
+            var licenseIds = await sessionLicenseResolver.Fetch(request.SessionId);
+            var accessible = reply.ElementId.HasValue
+                ? await TrackContentIsAccessible.Execute(Connection, licenseIds, elementId: reply.ElementId)
+                : await SurveyIsAccessible.Execute(Connection, licenseIds, surveyReplyId: reply.SurveyReplyId);
+
+            if (!accessible)
+            {
+                response.AddError("Content is not accessible.");
                 return;
             }
 

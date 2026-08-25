@@ -10,3 +10,9 @@ create table [Education].[SchoolContactSchoolYear] (
     constraint [FK_Education_SchoolContactSchoolYear_SchoolContact] foreign key ([SchoolContactId]) references [Education].[SchoolContact] ([Id]),
     constraint [FK_Education_SchoolContactSchoolYear_SchoolYear] foreign key ([SchoolYearId]) references [Education].[SchoolYear] ([Id]),
 );
+
+go
+
+create nonclustered index [IX_Education_SchoolContactSchoolYear_ContactYear]
+    on [Education].[SchoolContactSchoolYear] ([SchoolContactId], [SchoolYearId])
+    include ([VersionOf], [IsDeleted]);

@@ -2,7 +2,7 @@ namespace Crudspa.Content.Jobs.Server.Sproxies;
 
 public static class SmsMessageInsert
 {
-    public static async Task Execute(SqlConnection connection, SqlTransaction? transaction, Guid? sessionId, SmsMessage smsMessage)
+    public static async Task<Guid?> Execute(SqlConnection connection, SqlTransaction? transaction, Guid? sessionId, SmsMessage smsMessage)
     {
         await using var command = new SqlCommand();
         command.CommandText = "ContentJobs.SmsMessageInsert";
@@ -22,6 +22,10 @@ public static class SmsMessageInsert
         command.AddParameter("@ProviderMessageId", smsMessage.ProviderMessageId);
         command.AddParameter("@ApiResponse", smsMessage.ApiResponse);
 
+        var id = command.AddOutputParameter("@Id");
+
         await command.Execute(connection, transaction);
+
+        return (Guid?)id.Value;
     }
 }

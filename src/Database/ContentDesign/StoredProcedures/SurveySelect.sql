@@ -15,16 +15,20 @@ set nocount on
 select
      survey.Id
     ,survey.PortalId
-    ,portal.[Key] as PortalKey
     ,survey.Title
-    ,survey.Description
-    ,survey.StatusId
-    ,status.Name as StatusName
-    ,survey.AssignmentKind
-    ,(select count(1) from [Content].[SurveyPart-Active] where SurveyId = survey.Id) as PartCount
 from [Content].[Survey-Active] survey
     inner join [Framework].[Portal-Active] portal on survey.PortalId = portal.Id
     inner join [Framework].[Organization-Active] organization on portal.OwnerId = organization.Id
-    inner join [Framework].[ContentStatus-Active] status on survey.StatusId = status.Id
 where survey.Id = @Id
     and organization.Id = @organizationId
+
+select distinct
+     @Id as SurveyId
+    ,license.Id as LicenseId
+    ,license.Name as LicenseName
+    ,convert(bit, iif(surveyLicense.Id is null, 0, 1)) as Selected
+from [Framework].[License-Active] license
+    left join [Content].[SurveyLicense-Active] surveyLicense on surveyLicense.LicenseId = license.Id
+        and surveyLicense.SurveyId = @Id
+where license.OwnerId = @organizationId
+order by license.Name

@@ -1,0 +1,115 @@
+<Waiter Model="Model">
+    @if (Model.Forum is not null)
+    {
+        <div class="c-forum-shell">
+            <div class="c-forum-heading">
+                @if (Model.Forum.ImageFile.Name.HasSomething())
+                {
+                    <img src="/api/content/display/forum-media/forum-image?id=@Model.Forum.Id"
+                         alt="@Model.Forum.Title" />
+                }
+                <h2>@Model.Forum.Title</h2>
+                @if (Model.Forum.Description.HasSomething())
+                {
+                    <UserHtml Html="@Model.Forum.Description" />
+                }
+            </div>
+
+            <Filters>
+                <Fields>
+                    <Field Label="Search" Size="Field.Sizes.Medium">
+                        <SearchTextBox @bind-Value="Model.Search.Text" />
+                    </Field>
+                </Fields>
+                <Buttons>
+                    <ButtonCore Clicked="Model.RefreshThreads"
+                                Text="Search"
+                                IconClass="c-icon-magnifier" />
+                    @if (SessionState.IsSignedIn)
+                    {
+                        <ButtonAdd Clicked="Model.BeginThread"
+                                   Text="Start a"
+                                   EntityName="discussion" />
+                    }
+                </Buttons>
+            </Filters>
+
+            @if (Model.CreatingThread && Model.DraftThread is not null)
+            {
+                <div class="c-forum-composer">
+                    <h3>Start a discussion</h3>
+                    <Field Label="Title" Size="Field.Sizes.Wide">
+                        <TextBox ReadOnly="false" MaxLength="150" @bind-Value="Model.DraftThread.Title" />
+                    </Field>
+                    <Field Label="Message" Size="Field.Sizes.Full" Container="Field.Containers.Div">
+                        <HtmlEditor ReadOnly="false" @bind-Value="Model.DraftThread.Comment.Body" />
+                    </Field>
+                    <ForumTagEditor Bundles="Model.DraftThread.ForumBundles"
+                                    Tags="Model.DraftThread.Tags" />
+                    <ForumMediaEditor Medias="Model.DraftThread.Comment.CommentMedias"
+                                      ForumId="Model.Forum.Id" />
+                    <ButtonGroup>
+                        <ButtonCore Clicked="Model.AddThread"
+                                    Text="Post discussion"
+                                    IconClass="c-icon-bubble-text"
+                                    ButtonStyle="ButtonCore.ButtonStyles.Create" />
+                        <ButtonCancel Clicked="Model.CancelThread" />
+                    </ButtonGroup>
+                </div>
+            }
+
+            @if (Model.Threads.IsEmpty())
+            {
+                <NoRecords EntityName="threads" />
+            }
+            else
+            {
+                @foreach (var thread in Model.Threads)
+                {
+                    <ForumMessage Comment="thread.Comment"
+                                  Title="@thread.Title"
+                                  Pinned="thread.Pinned == true">
+                        <Body>
+                            <UserHtml Html="@thread.Comment.Body" />
+                            @if (thread.Tags.HasItems())
+                            {
+                                <div class="c-forum-tags">
+                                    @foreach (var tag in thread.Tags)
+                                    {
+                                        <span>@tag.Name</span>
+                                    }
+                                </div>
+                            }
+                        </Body>
+                        <Footer>
+                            <div class="c-forum-topic-footer">
+                                <a href="@Model.ThreadPath(thread.Id)"
+                                   @onclick="() => Model.GoToThread(thread.Id)"
+                                   @onclick:preventDefault="true">
+                                    @thread.CommentCount @(thread.CommentCount == 1 ? "reply" : "replies")
+                                </a>
+                                @if (thread.LastActivity.HasValue)
+                                {
+                                    <span>Last activity @thread.LastActivity.Value.ToString("MMM d, yyyy 'at' h:mm tt")</span>
+                                }
+                            </div>
+                            <ButtonView Href="@Model.ThreadPath(thread.Id)" Text="Open discussion" />
+                        </Footer>
+                    </ForumMessage>
+                }
+
+                <Pager Paged="Model.Search.Paged" PageNumberChanged="Model.HandlePageNumberChanged" />
+            }
+        </div>
+    }
+    else if (Model.Unavailable)
+    {
+        <div class="c-card c-padding-medium c-margin-small-vert">
+            <div class="values">
+                <h2>Forum unavailable</h2>
+                <p>This forum does not exist or is not available to your account.</p>
+                <a href="/forums">Back to forums</a>
+            </div>
+        </div>
+    }
+</Waiter>

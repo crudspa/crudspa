@@ -49,6 +49,8 @@ public static class SegmentSelectNest
             {
                 Id = x.Id,
                 Name = x.Title,
+                Key = x.Key,
+                ReadOnly = x.AllLicenses,
                 IconCssClass = x.IconCssClass,
                 Children = AddChildren(x.Segments),
             })
@@ -91,6 +93,7 @@ public static class SegmentSelectNest
             ParentId = reader.ReadGuid(4),
             Ordinal = reader.ReadInt32(5),
             IconCssClass = reader.ReadString(6),
+            AllLicenses = reader.ReadBoolean(7),
         };
     }
 }

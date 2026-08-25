@@ -9,12 +9,18 @@ create proc [ContentDesign].[ThreadInsert] (
 
 set @Id = newid()
 declare @now datetimeoffset = sysdatetimeoffset()
-declare @byId uniqueidentifier = (
-    select top 1 userTable.ContactId
-    from [Framework].[User-Active] userTable
-        inner join [Framework].[Session-Active] session on session.UserId = userTable.Id
-    where session.Id = @SessionId
-)
+declare @byId uniqueidentifier
+declare @organizationId uniqueidentifier
+declare @organizationName nvarchar(75)
+
+select top 1
+     @byId = userTable.ContactId
+    ,@organizationId = userTable.OrganizationId
+    ,@organizationName = organization.Name
+from [Framework].[User-Active] userTable
+    inner join [Framework].[Session-Active] session on session.UserId = userTable.Id
+    inner join [Framework].[Organization-Active] organization on organization.Id = userTable.OrganizationId
+where session.Id = @SessionId
 
 set nocount on
 set xact_abort on
@@ -27,6 +33,13 @@ begin
     return
 end
 
+if @CommentBody is null or len(@CommentBody) = 0 or datalength(@CommentBody) > 20000
+begin
+    rollback transaction
+    raiserror('Thread body is required and cannot exceed 10,000 characters.', 16, 1)
+    return
+end
+
 declare @commentId uniqueidentifier = newid()
 
 insert [Content].[Comment] (
@@ -35,6 +48,7 @@ insert [Content].[Comment] (
     ,Updated
     ,UpdatedBy
     ,ById
+    ,ByOrganizationName
     ,Body
 )
 values (
@@ -43,6 +57,7 @@ values (
     ,@now
     ,@SessionId
     ,@byId
+    ,@organizationName
     ,@CommentBody
 )
 
@@ -67,13 +82,6 @@ values (
     ,@commentId
 )
 
-declare @organizationId uniqueidentifier = (
-    select top 1 userTable.OrganizationId
-    from [Framework].[User-Active] userTable
-        inner join [Framework].[Session-Active] session on session.UserId = userTable.Id
-    where session.Id = @SessionId
-)
-
 if not exists (
     select 1
     from [Content].[Thread-Active] thread
@@ -86,6 +94,17 @@ if not exists (
 begin
     rollback transaction
     raiserror('Tenancy check failed', 16, 1)
+    return
+end
+
+if exists (
+    select 1
+    from [Content].[ForumBundle-Active] forumBundle
+    where forumBundle.ForumId = @ForumId and forumBundle.ThreadRule = 2
+)
+begin
+    rollback transaction
+    raiserror('Create threads with required tags from the destination portal.', 16, 1)
     return
 end
 

@@ -43,10 +43,11 @@ public static class CommentSelectTreeForThread
             ParentBody = reader.ReadString(3),
             Body = reader.ReadString(4),
             ById = reader.ReadGuid(5),
-            ByFirstName = reader.ReadString(6),
-            Posted = reader.ReadDateTimeOffset(7),
-            Edited = reader.ReadDateTimeOffset(8),
-            ThreadId = reader.ReadGuid(9),
+            ByName = reader.ReadString(6),
+            ByOrganizationName = reader.ReadString(7),
+            Posted = reader.ReadDateTimeOffset(8),
+            Edited = reader.ReadDateTimeOffset(9),
+            ThreadId = reader.ReadGuid(10),
         };
     }
 

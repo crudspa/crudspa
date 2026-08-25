@@ -12,8 +12,10 @@ insert [Content].[Comment] (
     ,PostId
     ,ThreadId
     ,ById
+    ,ByOrganizationName
     ,Posted
     ,Edited
+    ,Removed
     ,Body
 )
 select
@@ -26,7 +28,9 @@ select
     ,deleted.PostId
     ,deleted.ThreadId
     ,deleted.ById
+    ,deleted.ByOrganizationName
     ,deleted.Posted
     ,deleted.Edited
+    ,deleted.Removed
     ,deleted.Body
 from deleted

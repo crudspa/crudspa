@@ -13,6 +13,7 @@ public static class BlogUpdate
         command.AddParameter("@StatusId", blog.StatusId);
         command.AddParameter("@Author", 150, blog.Author);
         command.AddParameter("@Description", blog.Description);
+        command.AddParameter("@AccessMode", blog.AccessMode);
         command.AddParameter("@ImageId", blog.ImageFile.Id);
 
         await command.Execute(connection, transaction);

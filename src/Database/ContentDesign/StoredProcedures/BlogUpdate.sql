@@ -5,6 +5,7 @@ create proc [ContentDesign].[BlogUpdate] (
     ,@StatusId uniqueidentifier
     ,@Author nvarchar(150)
     ,@Description nvarchar(max)
+    ,@AccessMode int
     ,@ImageId uniqueidentifier
 ) as
 
@@ -30,6 +31,7 @@ set
     ,StatusId = @StatusId
     ,Author = @Author
     ,Description = @Description
+    ,AccessMode = @AccessMode
     ,ImageId = @ImageId
 from [Content].[Blog] baseTable
     inner join [Content].[Blog-Active] blog on blog.Id = baseTable.Id

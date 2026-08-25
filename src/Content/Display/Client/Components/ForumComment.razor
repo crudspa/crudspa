@@ -1,0 +1,88 @@
+<ForumMessage Id="@($"{Comment.Id:D}")"
+              Comment="Comment"
+              ShowFooter="@(!Comment.Removed && !Editing)"
+              Depth="Depth">
+    <Body>
+        @if (Comment.Removed)
+        {
+            <div class="c-forum-removed">This reply was removed.</div>
+        }
+        else if (Editing && Draft is not null)
+        {
+            <HtmlEditor ReadOnly="false" @bind-Value="Draft.Body" />
+            <ForumMediaEditor Medias="Draft.CommentMedias" ForumId="ForumId" />
+            <ButtonGroup>
+                <ButtonSave Clicked="Save" />
+                <ButtonCancel Clicked="CancelEdit" />
+            </ButtonGroup>
+        }
+        else
+        {
+            <UserHtml Html="@Comment.Body" />
+            @if (Comment.Tags.HasItems())
+            {
+                <div class="c-forum-tags">
+                    @foreach (var tag in Comment.Tags)
+                    {
+                        <span>@tag.Name</span>
+                    }
+                </div>
+            }
+            @foreach (var media in Comment.CommentMedias.OrderBy(x => x.Ordinal))
+            {
+                <ForumMediaDisplay Media="media" />
+            }
+        }
+
+        @if (ErrorMessage.HasSomething())
+        {
+            <div class="c-error c-padding-small-top">@ErrorMessage</div>
+        }
+    </Body>
+    <Footer>
+        @if (!Comment.Removed && !Editing && SessionState.IsSignedIn)
+        {
+            <ForumReactionBar Reactions="Comment.Reactions"
+                              Options="ReactionOptions"
+                              Reacted="React"
+                              Busy="Busy" />
+            <ForumMessageActions CanReply="Comment.CanReply"
+                                 CanEdit="Comment.CanEdit"
+                                 CanDelete="Comment.CanDelete"
+                                 ConfirmingDelete="ConfirmingDelete"
+                                 Busy="Busy"
+                                 ReplyClicked="BeginReply"
+                                 EditClicked="BeginEdit"
+                                 DeleteRequested="RequestDelete"
+                                 DeleteConfirmed="Delete"
+                                 DeleteCanceled="CancelDelete" />
+        }
+    </Footer>
+</ForumMessage>
+
+@if (Replying && Reply is not null)
+{
+    <div class="c-forum-composer nested" style="--forum-depth: @(Depth + 1)">
+        <h3>Reply to @(Comment.ByName ?? "this participant")</h3>
+        <HtmlEditor ReadOnly="false" @bind-Value="Reply.Body" />
+        <ForumMediaEditor Medias="Reply.CommentMedias" ForumId="ForumId" />
+        <ButtonGroup>
+            <ButtonCore Clicked="AddReply"
+                        Text="Post reply"
+                        IconClass="c-icon-reply"
+                        ButtonStyle="ButtonCore.ButtonStyles.Create"
+                        Disabled="Busy" />
+            <ButtonCancel Clicked="CancelReply" />
+        </ButtonGroup>
+    </div>
+}
+
+@foreach (var child in Comment.Children)
+{
+    <ForumComment Comment="child"
+                  ThreadId="ThreadId"
+                  ForumId="ForumId"
+                  ForumBundles="ForumBundles"
+                  Depth="Depth + 1"
+                  Changed="Changed" />
+}

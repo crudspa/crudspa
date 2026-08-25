@@ -22,19 +22,16 @@ public class Registry
         services.AddSingleton<ICommentService, CommentServiceSql>();
         services.AddSingleton<IContentPortalService, ContentPortalServiceSql>();
         services.AddSingleton<ICourseService, CourseServiceSql>();
-        services.AddSingleton<IEmailService, EmailServiceSql>();
-        services.AddSingleton<IEmailTemplateService, EmailTemplateServiceSql>();
+        services.AddSingleton<IFontFaceService, FontFaceServiceSql>();
         services.AddSingleton<IFontService, FontServiceSql>();
         services.AddSingleton<IForumService, ForumServiceSql>();
         services.AddSingleton<IItemService, ItemServiceSql>();
-        services.AddSingleton<IMemberService, MemberServiceSql>();
-        services.AddSingleton<IMembershipService, MembershipServiceSql>();
         services.AddSingleton<IPanePageService, PanePageServiceSql>();
         services.AddSingleton<IPostService, PostServiceSql>();
         services.AddSingleton<ISectionService, SectionServiceSql>();
         services.AddSingleton<IStyleService, StyleServiceSql>();
         services.AddSingleton<IThreadService, ThreadServiceSql>();
-        services.AddSingleton<ITokenService, TokenServiceSql>();
+        services.AddSingleton<ISurveyService, SurveyServiceSql>();
         services.AddSingleton<ITrackService, TrackServiceSql>();
 
         // Crudspa.Content.Display.Shared
@@ -44,10 +41,34 @@ public class Registry
         services.AddSingleton<IContentPortalRunService, ContentPortalRunServiceSql>();
         services.AddSingleton<ICourseRunService, CourseRunServiceSql>();
         services.AddSingleton<IElementProgressService, ElementProgressServiceSql>();
+        services.AddSingleton<IForumMediaService, ForumMediaServiceSql>();
+        services.AddSingleton<IForumRunService, ForumRunServiceSql>();
+        services.AddSingleton<ISessionLicenseResolver, SessionLicenseResolverNone>();
         services.AddSingleton<INotebookRunService, NotebookRunServiceSql>();
         services.AddSingleton<IPageRunService, PageRunServiceContent>();
+        services.AddSingleton<ISurveyRunService, SurveyRunServiceSql>();
         services.AddSingleton<IStylesRunService, StylesRunServiceSql>();
         services.AddSingleton<IThemeRunService, ThemeRunServiceSql>();
+
+        // Crudspa.Content.Messaging.Shared
+        services.AddSingleton<IActivationService, ActivationServiceSql>();
+        services.AddSingleton<ICampaignService, CampaignServiceSql>();
+        services.AddSingleton<IEmailService, EmailServiceSql>();
+        services.AddSingleton<IEmailTemplateService, EmailTemplateServiceSql>();
+        services.AddSingleton<IMemberService, MemberServiceSql>();
+        services.AddSingleton<IMembershipService, MembershipServiceSql>();
+        services.AddSingleton<IMessageService, MessageServiceSql>();
+        services.AddSingleton<IPopulationResolver, OrganizationUsersPopulationResolver>();
+        services.AddSingleton<IPopulationResolver, StaticMembershipPopulationResolver>();
+        services.AddSingleton<IPopulationService, PopulationServiceSql>();
+        services.AddSingleton<ISmsEventService, SmsEventServiceSql>();
+        services.AddSingleton<ISmsMessageMediaService, SmsMessageMediaServiceSql>();
+        services.AddSingleton<ISmsMessageService, SmsMessageServiceSql>();
+        services.AddSingleton<ISmsPreferenceService, SmsPreferenceServiceSql>();
+        services.AddSingleton<ISmsService, SmsServiceSql>();
+        services.AddSingleton<ISmsTemplateService, SmsTemplateServiceSql>();
+        services.AddSingleton<IStageService, StageServiceSql>();
+        services.AddSingleton<ITokenService, TokenServiceSql>();
 
         // Crudspa.Samples.Composer.Shared
         services.AddSingleton<IComposerContactService, ComposerContactServiceSql>();
@@ -79,8 +100,18 @@ public class Registry
         services.AddSingleton<ISessionFetcher, SessionFetcherCache>();
         services.AddSingleton<ISessionService, SessionServiceSql>();
         services.AddSingleton<ISessionWrappers, SessionWrappersCore>();
+        services.AddSingleton<ISmsChannelService, SmsChannelServiceCore>();
+        services.AddSingleton<ISmsSender, SmsSenderChannel>();
+        services.AddSingleton<ISmsWebhookNotificationService, SmsWebhookNotificationServiceGateway>();
+        services.AddSingleton<ISmsWebhookService, SmsWebhookServiceChannel>();
         services.AddSingleton<ISqlWrappers, SqlWrappersCore>();
         services.AddSingleton<IVideoFileService, VideoFileServiceSql>();
+        services.AddSingleton<SmsSenderTwilio>();
+        services.AddSingleton<SmsSenderNull>();
+        services.AddSingleton<SmsSenderLocalFile>();
+        services.AddSingleton<SmsWebhookServiceNull>();
+        services.AddSingleton<SmsWebhookServiceLocalFile>();
+        services.AddSingleton<TwilioSmsWebhookService>();
 
         // Crudspa.Framework.Core.Shared
         services.AddSingleton<IAccountSettingsService, AccountSettingsServiceSql>();

@@ -1,0 +1,181 @@
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            <ButtonSave Clicked="Model.Save" />
+            <ButtonCancel Clicked="() => Model.Fetch()" />
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Configuration is not null && Model.Root is not null)
+    {
+        <Modal Model="Model.AddSchedulesModel"
+               Title="Add Overrides"
+               Width="36em"
+               TopMargin="2em">
+            <Content>
+                <CheckedList Selectables="Model.SelectableScheduleOptions"
+                             Height="CheckedList.Heights.Tall" />
+            </Content>
+            <Buttons>
+                <ButtonOk Clicked="Model.AddSelectedSchedules" />
+                <ButtonCancel Clicked="() => Model.AddSchedulesModel.Hide()" />
+            </Buttons>
+        </Modal>
+        <CampaignScheduleLayout>
+            <div class="campaign-schedule-summary">
+                <div class="campaign-schedule-summary-item">
+                    <span class="campaign-schedule-summary-label">District</span>
+                    <span>@Model.Configuration.OrganizationName</span>
+                </div>
+                <div class="campaign-schedule-summary-item">
+                    <span class="campaign-schedule-summary-label">Status</span>
+                    <span>@Model.Configuration.StatusName</span>
+                </div>
+            </div>
+
+            <BatchSection Title="Milestones">
+                <div class="campaign-schedule-section-body campaign-schedule-milestones">
+                    <CampaignScheduleDateField Label="Campaign Start"
+                                               Value="Model.Root.Start"
+                                               ValueChanged="date => Model.SetStart(Model.Root, date)" />
+                    <CampaignScheduleDateField Label="MORE Lessons Start"
+                                               Value="Model.Root.LessonStart"
+                                               ValueChanged="date => Model.SetLessonStart(Model.Root, date)" />
+                    <CampaignScheduleDateField Label="MORE Assessments Start"
+                                               Value="Model.Root.AssessmentStart"
+                                               ValueChanged="date => Model.SetAssessmentStart(Model.Root, date)" />
+                </div>
+            </BatchSection>
+
+            <BatchSection Title="Stages">
+                <div class="campaign-schedule-section-body">
+                    <div class="campaign-schedule-stage-header" aria-hidden="true">
+                        <span>Stage</span>
+                        <span>Date</span>
+                        <span>Send time</span>
+                        <span>Weekend rule</span>
+                    </div>
+                    @foreach (var stage in Model.Configuration.Stages)
+                    {
+                        var schedule = Model.Root.StageSchedules.Single(x => x.StageId == stage.StageId);
+                        <div class="campaign-schedule-stage-row" @key="stage.StageId">
+                            <div class="campaign-schedule-stage-name">@stage.Name</div>
+                            <div class="campaign-schedule-stage-date campaign-schedule-date-with-action">
+                                <DatePicker Format="d"
+                                            Value="@(schedule.Send.HasValue ? DateOnly.FromDateTime(schedule.Send.Value) : null)"
+                                            ValueChanged="date => Model.SetStage(Model.Root, schedule, stage, date)" />
+                                <ButtonCore Text="Reset"
+                                            ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                                            Disabled="@(!schedule.Overridden)"
+                                            Clicked="() => Model.SetStageState(Model.Root, schedule, stage, OverrideState.Default)" />
+                            </div>
+                            <div>
+                                <span class="campaign-schedule-cell-label">Send time</span>
+                                @stage.SendTime?.ToString("t")
+                            </div>
+                            <div>
+                                <span class="campaign-schedule-cell-label">Weekend rule</span>
+                                @stage.WeekendAdjustment.GetLabel()
+                            </div>
+                        </div>
+                    }
+                </div>
+            </BatchSection>
+
+            <BatchSection Title="Overrides">
+                <HeadingPanel>
+                    <ButtonAdd EntityName="Overrides"
+                               Disabled="@(!Model.AvailableOptions.HasItems())"
+                               Transparent="true"
+                               Clicked="Model.ShowAddSchedules" />
+                </HeadingPanel>
+                <ChildContent>
+                    @if (Model.Overrides.IsEmpty())
+                    {
+                        <Padding Size="Padding.Sizes.Medium"
+                                 Direction="Padding.Directions.All">
+                            <Stacked Alignment="Stacked.Alignments.Center">
+                                <em>None</em>
+                            </Stacked>
+                        </Padding>
+                    }
+                    @foreach (var scope in Model.Overrides)
+                    {
+                        <Padding Direction="Padding.Directions.Horizontal"
+                                 Size="Padding.Sizes.Small">
+                            <Border Direction="Border.Directions.Bottom">
+                                    <Padding Direction="Padding.Directions.Vertical"
+                                             Size="Padding.Sizes.Small">
+                                        <Wrapped NoWrap="true">
+                                            <div class="star">
+                                                <h3>@Model.ScopeName(scope)</h3>
+                                                <div class="campaign-schedule-section-body campaign-schedule-milestones campaign-schedule-override-body">
+                                                    <CampaignScheduleDateField Label="Campaign Start"
+                                                                               Value="scope.Start"
+                                                                               ValueChanged="date => Model.SetStart(scope, date)"
+                                                                               CanInherit="true"
+                                                                               State="Model.StartState(scope)"
+                                                                               StateChanged="state => Model.SetStartState(scope, state)" />
+                                                    <CampaignScheduleDateField Label="MORE Lessons Start"
+                                                                               Value="scope.LessonStart"
+                                                                               ValueChanged="date => Model.SetLessonStart(scope, date)"
+                                                                               CanInherit="true"
+                                                                               State="Model.LessonStartState(scope)"
+                                                                               StateChanged="state => Model.SetLessonStartState(scope, state)" />
+                                                    <CampaignScheduleDateField Label="MORE Assessments Start"
+                                                                               Value="scope.AssessmentStart"
+                                                                               ValueChanged="date => Model.SetAssessmentStart(scope, date)"
+                                                                               CanInherit="true"
+                                                                               State="Model.AssessmentStartState(scope)"
+                                                                               StateChanged="state => Model.SetAssessmentStartState(scope, state)" />
+                                                </div>
+                                                <div class="campaign-schedule-section-body campaign-schedule-override-body">
+                                                    <div class="campaign-schedule-stage-header" aria-hidden="true">
+                                                        <span>Stage</span>
+                                                        <span>Date</span>
+                                                        <span>Send time</span>
+                                                        <span>Weekend rule</span>
+                                                    </div>
+                                                    @foreach (var stage in Model.Configuration.Stages)
+                                                    {
+                                                        var schedule = scope.StageSchedules.Single(x => x.StageId == stage.StageId);
+                                                        <div class="campaign-schedule-stage-row" @key="stage.StageId">
+                                                            <div class="campaign-schedule-stage-name">@stage.Name</div>
+                                                            <div class="campaign-schedule-stage-date">
+                                                                <DefaultOverride State="Model.StageState(scope, schedule)"
+                                                                                 StateChanged="state => Model.SetStageState(scope, schedule, stage, state)"
+                                                                                 Orientation="DefaultOverride.Orientations.Horizontal"
+                                                                                 Behavior="DefaultOverride.Behaviors.Disable">
+                                                                    <DatePicker Format="d"
+                                                                                Value="@(schedule.Send.HasValue ? DateOnly.FromDateTime(schedule.Send.Value) : null)"
+                                                                                ValueChanged="date => Model.SetStage(scope, schedule, stage, date)" />
+                                                                </DefaultOverride>
+                                                            </div>
+                                                            <div>
+                                                                <span class="campaign-schedule-cell-label">Send time</span>
+                                                                @stage.SendTime?.ToString("t")
+                                                            </div>
+                                                            <div>
+                                                                <span class="campaign-schedule-cell-label">Weekend rule</span>
+                                                                @stage.WeekendAdjustment.GetLabel()
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="c-padding-tiny-right">
+                                                <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Transparent">
+                                                    <BatchMenuItems RemoveClicked="() => Model.RemoveScope(scope.Id)" />
+                                                </ContextMenu>
+                                            </div>
+                                        </Wrapped>
+                                </Padding>
+                            </Border>
+                        </Padding>
+                    }
+                </ChildContent>
+            </BatchSection>
+        </CampaignScheduleLayout>
+    }
+</Waiter>

@@ -24,17 +24,18 @@ public static class BlogSelectForPortal
             StatusName = reader.ReadString(4),
             Author = reader.ReadString(5),
             Description = reader.ReadString(6),
+            AccessMode = reader.ReadEnum<Blog.AccessModes>(7),
             ImageFile = new()
             {
-                Id = reader.ReadGuid(7),
-                BlobId = reader.ReadGuid(8),
-                Name = reader.ReadString(9),
-                Format = reader.ReadString(10),
-                Width = reader.ReadInt32(11),
-                Height = reader.ReadInt32(12),
-                Caption = reader.ReadString(13),
+                Id = reader.ReadGuid(8),
+                BlobId = reader.ReadGuid(9),
+                Name = reader.ReadString(10),
+                Format = reader.ReadString(11),
+                Width = reader.ReadInt32(12),
+                Height = reader.ReadInt32(13),
+                Caption = reader.ReadString(14),
             },
-            PostCount = reader.ReadInt32(14),
+            PostCount = reader.ReadInt32(15),
         };
     }
 }

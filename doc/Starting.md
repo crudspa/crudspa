@@ -38,13 +38,15 @@ There are really two shapes to keep in your head here. The source tree is organi
 
 ## First Build
 
-Start by proving the managed projects build cleanly:
+Start by proving the three sample compositions build cleanly. Building each server also builds its client, WebAssembly host, and referenced reusable libraries:
 
 ```powershell
-dotnet build src/Crudspa.slnx
+dotnet build src/Samples/Catalog/Server/Server.csproj
+dotnet build src/Samples/Composer/Server/Server.csproj
+dotnet build src/Samples/Consumer/Server/Server.csproj
 ```
 
-That validates the reusable client, shared, and server projects. It's the right first check after cloning.
+That is the portable `dotnet` check after cloning. A full build of [src/Crudspa.slnx](../src/Crudspa.slnx) also includes the SQL project and therefore requires Visual Studio or MSBuild with SQL Server Data Tools.
 
 The database follows a different workflow. [src/Database/Database.sqlproj](../src/Database/Database.sqlproj) is a SQL Database Project, so treat it like one: build and publish it with the normal Visual Studio or MSBuild plus SSDT path instead of expecting `dotnet build` to cover everything.
 
@@ -67,7 +69,7 @@ Before you launch the samples, do this once:
 1. Open [src/Crudspa.slnx](../src/Crudspa.slnx) in Visual Studio.
 2. Publish [src/Database/Database.sqlproj](../src/Database/Database.sqlproj) to your local SQL Server instance by using [src/Database/Deploy-LocalMachine.publish.xml](../src/Database/Deploy-LocalMachine.publish.xml). That creates or updates the `Crudspa-Local` database used by all of the samples.
 3. Run `.\art\SeedSampleBlobs.ps1` from the repo root. Sample media files live under `art/Blobs`, and this script copies them into the local `BlobServiceLocal` store used by the sample hosts.
-4. If you plan to sign in to `Composer`, keep an eye on `C:\data\temp\email`. The sample servers use `EmailSenderLocalFile`, so password-reset and access-code messages are written there instead of being sent to a real mailbox.
+4. If you plan to sign in to `Composer` or post in `Consumer`, keep an eye on `C:\data\temp\email`. The sample servers use `EmailSenderLocalFile`, so password-reset and access-code messages are written there instead of being sent to a real mailbox. Local SMS output is similarly written under `C:\data\temp\sms`.
 
 The checked-in sample configuration assumes these HTTPS launch URLs:
 
@@ -89,7 +91,9 @@ Open `https://localhost:42100`, enter a name, and use that session to trace one 
 
 Run `Composer` and `Consumer` together when you want to study `Content.Design` and `Content.Display` as one story instead of two isolated projects.
 
-Open `Composer` at `https://localhost:42200` and sign in with `sample@example.com`. Use the built-in `Reset password` flow, read the access-code email from `C:\data\temp\email`, set a password, and finish signing in. Then keep `Consumer` open at `https://localhost:42300` while you edit pages, duplicate sections, reuse page, section, element, or button settings, styles, or portal content in `Composer`. That's the shortest path to seeing authored changes invalidate caches and appear in the runtime host in real time.
+Open `Composer` at `https://localhost:42200` and sign in with `sample@example.com`. Use the built-in `Reset password` flow, read the access-code email from `C:\data\temp\email`, set a password, and finish signing in. Under the seeded `Consumer` portal, the `Forums` area demonstrates forum and thread authoring, while `Campaigns` demonstrates populations, staged campaigns, and email or SMS message definitions.
+
+Keep `Consumer` open at `https://localhost:42300` while you edit pages, styles, forums, or portal content in `Composer`. The runtime `Forums` area starts with seeded forums, threads, posts, and nested comments. Reading is public; use `sample@example.com` and repeat the local reset-password flow in `Consumer` when you want to add a post or comment. This pairing is the shortest path to seeing authored changes invalidate caches and appear in the runtime host in real time.
 
 ### Jobs Engine
 

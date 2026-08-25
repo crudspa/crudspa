@@ -61,7 +61,7 @@ public class StudentAppServiceSql(
         {
             var book = request.Value;
 
-            var titleTask = BookTitleSelect.Execute(Connection, book.Id);
+            var titleTask = BookTitleSelect.Execute(Connection, book.Id, request.SessionId);
             var chaptersTask = ChapterSelectForBook.Execute(Connection, book.Id, request.SessionId);
 
             await Task.WhenAll(titleTask, chaptersTask);
@@ -124,7 +124,7 @@ public class StudentAppServiceSql(
         {
             var book = request.Value;
 
-            var titleTask = BookTitleSelect.Execute(Connection, book.Id);
+            var titleTask = BookTitleSelect.Execute(Connection, book.Id, request.SessionId);
             var trifoldsTask = TrifoldSelectForBook.Execute(Connection, book.Id, request.SessionId);
 
             await Task.WhenAll(titleTask, trifoldsTask);
@@ -210,7 +210,7 @@ public class StudentAppServiceSql(
 
     private async Task<Game> AssignNewActivities(Request<Game> request, Student student)
     {
-        var gameTask = GameSelect.Execute(Connection, request.Value);
+        var gameTask = GameSelect.Execute(Connection, request.Value, request.SessionId);
         var gameSectionsTask = SelectGameSectionsForGame(request);
 
         await Task.WhenAll(gameTask, gameSectionsTask);

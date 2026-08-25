@@ -12,11 +12,16 @@ insert [Education].[ModuleViewed] (
     ,UpdatedBy
     ,ModuleId
 )
-values (
+select
      newid()
     ,@now
     ,@SessionId
     ,@Id
+where exists (
+    select 1
+    from [Education].[Module-Active] module
+        inner join [EducationStudent].[LicensedBooks](@SessionId, null) licensedBook on licensedBook.BookId = module.BookId
+    where module.Id = @Id
 )
 
 select
@@ -50,6 +55,10 @@ from [Education].[Module-Active] module
     inner join [Content].[BinderType-Active] binderType on binder.TypeId = binderType.Id
 where module.Id = @Id
     and module.StatusId = @ContentStatusComplete
+    and exists (
+        select 1
+        from [EducationStudent].[LicensedBooks](@SessionId, module.BookId) licensedBook
+    )
 
 select
      guidePage.Id
@@ -72,3 +81,7 @@ from [Education].[Module-Active] module
     left join [Framework].[AudioFile-Active] guideAudio on guidePage.GuideAudioId = guideAudio.Id
 where module.Id = @Id
     and module.StatusId = @ContentStatusComplete
+    and exists (
+        select 1
+        from [EducationStudent].[LicensedBooks](@SessionId, module.BookId) licensedBook
+    )

@@ -1,0 +1,45 @@
+<div class="c-default-override @(Orientation == Orientations.Horizontal ? "horizontal" : "vertical")">
+    @if (Selector == Selectors.Checkbox)
+    {
+        <Checkbox Label="@DefaultLabel"
+                  ReadOnly="ReadOnly"
+                  Value="@(State == OverrideState.Default)"
+                  ValueChanged="SetDefault"
+                  ModifierClass="@ModifierClass" />
+    }
+    else
+    {
+        <BoolRadio SelectedValue="@(State == OverrideState.Default)"
+                   SelectedValueChanged="SetDefault"
+                   TrueLabel="@DefaultLabel"
+                   FalseLabel="@CustomLabel"
+                   ReadOnly="ReadOnly" />
+    }
+    @if (ChildContent is not null)
+    {
+        <fieldset class="children @(State == OverrideState.Default && Behavior == Behaviors.Hide ? "c-hide" : String.Empty)"
+                  disabled="@(State == OverrideState.Default && Behavior == Behaviors.Disable)">
+            @ChildContent
+        </fieldset>
+    }
+</div>
+
+@code {
+    public enum Behaviors { Hide, Disable }
+    public enum Orientations { Vertical, Horizontal }
+    public enum Selectors { Checkbox, Radio }
+
+    [Parameter] public OverrideState State { get; set; } = OverrideState.Custom;
+    [Parameter] public EventCallback<OverrideState> StateChanged { get; set; }
+    [Parameter] public Selectors Selector { get; set; }
+    [Parameter] public Orientations Orientation { get; set; }
+    [Parameter] public Behaviors Behavior { get; set; }
+    [Parameter] public String DefaultLabel { get; set; } = "Default";
+    [Parameter] public String CustomLabel { get; set; } = "Custom";
+    [Parameter] public Boolean ReadOnly { get; set; }
+    [Parameter] public String? ModifierClass { get; set; } = "tight-bottom";
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    private Task SetDefault(Boolean? value) =>
+        StateChanged.InvokeAsync(value == true ? OverrideState.Default : OverrideState.Custom);
+}

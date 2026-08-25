@@ -13,3 +13,5 @@ public class CommentAdded : CommentPayload;
 public class CommentSaved : CommentPayload;
 
 public class CommentRemoved : CommentPayload;
+
+public class CommentReactionChanged : CommentPayload;

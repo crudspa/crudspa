@@ -2,6 +2,12 @@ namespace Crudspa.Content.Display.Shared.Contracts.Data;
 
 public class Blog : Observable, IValidates
 {
+    public enum AccessModes
+    {
+        Everyone,
+        LicensedUsers,
+    }
+
     public Guid? Id
     {
         get;
@@ -50,6 +56,12 @@ public class Blog : Observable, IValidates
         set => SetProperty(ref field, value);
     }
 
+    public AccessModes AccessMode
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
     public ImageFile ImageFile
     {
         get;
@@ -74,6 +86,9 @@ public class Blog : Observable, IValidates
         {
             if (!StatusId.HasValue)
                 errors.AddError("Status is required.", nameof(StatusId));
+
+            if (!Enum.IsDefined(AccessMode))
+                errors.AddError("Access mode is invalid.", nameof(AccessMode));
 
             if (Title.HasNothing())
                 errors.AddError("Title is required.", nameof(Title));

@@ -1,0 +1,62 @@
+<div class="c-license-segment-tree">
+    <Toolbar>
+        <Left>
+            <div class="filters">
+                <SearchTextBox Placeholder="Search title or key"
+                               @bind-Value="Model.SearchText" />
+                <Checkbox Label="Selected only"
+                          @bind-Value="Model.SelectedOnly" />
+            </div>
+        </Left>
+        <Right>
+            <ButtonGroup>
+                <ButtonCore Text="Expand selected"
+                            IconClass="c-icon-chevron-down"
+                            Clicked="Model.ExpandSelected" />
+                <ButtonCore Text="Collapse all"
+                            IconClass="c-icon-chevron-up"
+                            Clicked="Model.CollapseAll" />
+            </ButtonGroup>
+        </Right>
+    </Toolbar>
+
+    <Waiter Model="Model">
+        <div class="summary">
+            <span><strong>@Model.SelectedCount</strong> explicitly included</span>
+            <span><strong>@Model.UniversalCount</strong> available to all licenses</span>
+            @if (Model.RemovedSegmentCount > 0)
+            {
+                <span><strong>@Model.RemovedSegmentCount</strong> relationships to removed segments preserved</span>
+            }
+            @if (Model.ChangeCount > 0)
+            {
+                <span class="changes"><strong>@Model.ChangeCount</strong> unsaved changes</span>
+            }
+        </div>
+
+        <div class="tree" role="tree" aria-label="Segments included in this license">
+            @foreach (var portal in Model.Portals)
+            {
+                <SegmentLicenseTreeNode Node="portal"
+                                        Visible="Model.IsVisible"
+                                        Indeterminate="Model.IsIndeterminate"
+                                        SelectionChanged="Model.ChangeSelection"
+                                        IncludeBranch="Model.IncludeBranch"
+                                        ExcludeBranch="Model.ExcludeBranch" />
+            }
+
+            @if (!Model.HasVisibleSegments)
+            {
+                <div class="empty">No segments match these filters.</div>
+            }
+        </div>
+
+        <div class="save-bar">
+            <div class="hint">Selecting a child also includes its restricted ancestors. Excluding a branch removes its restricted descendants.</div>
+            <ButtonGroup>
+                <ButtonSave Clicked="Model.Save" />
+                <ButtonCancel Clicked="Model.Refresh" />
+            </ButtonGroup>
+        </div>
+    </Waiter>
+</div>

@@ -22,9 +22,9 @@ select
 from [Education].[UnitLicense-Active] unitLicense
     inner join [Framework].[License-Active] license on unitLicense.LicenseId = license.Id
     inner join [Education].[Unit-Active] unit on unitLicense.UnitId = unit.Id
-    inner join [Framework].[Organization-Active] organization on unit.OwnerId = organization.Id
 where unitLicense.LicenseId = @LicenseId
-    and organization.Id = @organizationId
+    and unit.OwnerId = @organizationId
+    and license.OwnerId = @organizationId
 
 select distinct
      unitLicense.Id as RootId
@@ -33,11 +33,14 @@ select distinct
     ,convert(bit, case when unitLicense.AllBooks = 1 or unitLicenseBook.Id is not null then 1 else 0 end) as Selected
 from [Education].[UnitLicense-Active] unitLicense
     inner join [Education].[Unit-Active] unit on unit.Id = unitLicense.UnitId
+    inner join [Framework].[License-Active] license on license.Id = unitLicense.LicenseId
     inner join [Education].[UnitBook-Active] unitBook on unitBook.UnitId = unit.Id
     inner join [Education].[Book-Active] book on book.Id = unitBook.BookId
     left join [Education].[UnitLicenseBook-Active] unitLicenseBook on unitLicenseBook.UnitLicenseId = unitLicense.Id
         and unitLicenseBook.BookId = book.Id
 where unitLicense.LicenseId = @LicenseId
+    and unit.OwnerId = @organizationId
+    and license.OwnerId = @organizationId
 order by book.Title
 
 select distinct
@@ -48,8 +51,11 @@ select distinct
     ,lesson.Ordinal
 from [Education].[UnitLicense-Active] unitLicense
     inner join [Education].[Unit-Active] unit on unit.Id = unitLicense.UnitId
+    inner join [Framework].[License-Active] license on license.Id = unitLicense.LicenseId
     inner join [Education].[Lesson-Active] lesson on lesson.UnitId = unit.Id
     left join [Education].[UnitLicenseLesson-Active] unitLicenseLesson on unitLicenseLesson.UnitLicenseId = unitLicense.Id
         and unitLicenseLesson.LessonId = lesson.Id
 where unitLicense.LicenseId = @LicenseId
+    and unit.OwnerId = @organizationId
+    and license.OwnerId = @organizationId
 order by lesson.Ordinal

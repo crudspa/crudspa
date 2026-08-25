@@ -1,0 +1,90 @@
+create proc [ContentMessaging].[SmsSelectWhereForMembership] (
+     @SessionId uniqueidentifier
+    ,@MembershipId uniqueidentifier
+    ,@PageNumber int
+    ,@PageSize int
+    ,@SearchText nvarchar(50)
+    ,@SortField nvarchar(50)
+    ,@SortAscending bit
+    ,@SendStart datetimeoffset(7)
+    ,@SendEnd datetimeoffset(7)
+    ,@ProcessedStart datetimeoffset(7)
+    ,@ProcessedEnd datetimeoffset(7)
+) as
+
+set nocount on
+
+declare @firstRecord int = (@PageSize * (@PageNumber - 1)) + 1
+declare @lastRecord int = @firstRecord + @PageSize - 1
+
+;with SmsCte
+as (
+    select
+        row_number() over (
+            order by
+                case when (@SortField = 'Send' and @SortAscending = 1)
+                    then sms.Send
+                end asc,
+                case when (@SortField = 'Send' and @SortAscending = 0)
+                    then sms.Send
+                end desc,
+                case when (@SortField = 'Status' and @SortAscending = 1)
+                    then sms.Status
+                end asc,
+                case when (@SortField = 'Status' and @SortAscending = 0)
+                    then sms.Status
+                end desc,
+                case when (@SortField = 'Send' and @SortAscending = 1)
+                    then sms.Status
+                end asc,
+                case when (@SortField = 'Send' and @SortAscending = 0)
+                    then sms.Status
+                end desc,
+                case when (@SortField = 'Status' and @SortAscending = 1)
+                    then sms.Send
+                end asc,
+                case when (@SortField = 'Status' and @SortAscending = 0)
+                    then sms.Send
+                end desc,
+                case when (@SortAscending = 1)
+                    then sms.Id
+                end asc,
+                case when (@SortAscending = 0)
+                    then sms.Id
+                end desc
+        ) as RowNumber
+        ,count(*) over () as TotalCount
+        ,sms.Id
+    from [Content].[Sms-Active] sms
+        inner join [Content].[Membership-Active] membership on sms.MembershipId = membership.Id
+        cross apply [ContentMessaging].[SessionCanReadOrganization](@SessionId, membership.PortalId, membership.OrganizationId)
+        left join [Content].[SmsTemplate-Active] template on sms.TemplateId = template.Id
+    where 1 = 1
+        and sms.MembershipId = @MembershipId
+
+        and (@SearchText is null
+            or sms.Body like '%' + @SearchText + '%'
+        )
+        and (@SendStart is null or sms.Send >= @SendStart)
+        and (@SendEnd is null or sms.Send < @SendEnd)
+        and (@ProcessedStart is null or sms.Processed >= @ProcessedStart)
+        and (@ProcessedEnd is null or sms.Processed < @ProcessedEnd)
+)
+
+select
+     cte.RowNumber
+    ,cte.TotalCount
+    ,sms.Id
+    ,sms.MembershipId
+    ,sms.Body
+    ,sms.Send
+    ,sms.Status
+    ,sms.Processed
+from SmsCte cte
+    inner join [Content].[Sms-Active] sms on cte.Id = sms.Id
+    inner join [Content].[Membership-Active] membership on sms.MembershipId = membership.Id
+    cross apply [ContentMessaging].[SessionCanReadOrganization](@SessionId, membership.PortalId, membership.OrganizationId)
+    left join [Content].[SmsTemplate-Active] template on sms.TemplateId = template.Id
+where cte.RowNumber >= @firstRecord and cte.RowNumber <= @lastRecord
+order by cte.RowNumber asc
+option (recompile)

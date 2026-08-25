@@ -93,6 +93,19 @@ public partial class CoreHub : Hub
         await Clients.Group($"{organizationId.Value:D}|{groupId.Value:D}").SendAsync("NoticePosted", new Notice<T>(eventObject));
     }
 
+    /// <summary>
+    /// Notifies an Organization other than the initiating session's Organization.
+    /// The caller must use an Organization ID that its server-side service has already authorized.
+    /// Client-posted Organization IDs are not notification authority on their own.
+    /// </summary>
+    protected async Task NotifyOrganization<T>(Guid? organizationId, Guid? groupId, T eventObject) where T : class
+    {
+        if (organizationId is null || groupId is null)
+            return;
+
+        await Clients.Group($"{organizationId.Value:D}|{groupId.Value:D}").SendAsync("NoticePosted", new Notice<T>(eventObject));
+    }
+
     public Task<Response> Log(Request<ClientLogEntry> request)
     {
         return HubWrappers.AllowAnonymous(request, () =>

@@ -1,3 +1,4 @@
+global using Crudspa.Content.Display.Server.Contracts.Behavior;
 global using Crudspa.Content.Display.Server.Services;
 global using Crudspa.Content.Display.Server.Sproxies;
 global using Crudspa.Content.Display.Shared.Contracts.Behavior;

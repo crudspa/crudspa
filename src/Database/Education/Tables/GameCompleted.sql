@@ -14,3 +14,15 @@ create table [Education].[GameCompleted] (
     constraint [FK_Education_GameCompleted_Game] foreign key ([GameId]) references [Education].[Game] ([Id]),
     constraint [FK_Education_GameCompleted_GameRun] foreign key ([GameRunId]) references [Education].[AssignmentBatch] ([Id]),
 );
+
+go
+
+create nonclustered index [IX_Education_GameCompleted_UpdatedStudent]
+    on [Education].[GameCompleted] ([Updated], [StudentId])
+    where [IsDeleted] = 0;
+
+go
+
+create nonclustered index [IX_Education_GameCompleted_StudentUpdated]
+    on [Education].[GameCompleted] ([StudentId], [Updated])
+    where [IsDeleted] = 0;

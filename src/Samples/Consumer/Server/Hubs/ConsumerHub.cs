@@ -29,6 +29,7 @@ public partial class ConsumerHub : Crudspa.Content.Display.Server.Hubs.DisplayHu
         IContentPortalRunService contentPortalRunService,
         ICourseRunService courseRunService,
         IElementProgressService elementProgressService,
+        IForumRunService forumRunService,
         INotebookRunService notebookRunService,
         IPageRunService pageRunService,
         ISurveyRunService surveyRunService
@@ -56,6 +57,7 @@ public partial class ConsumerHub : Crudspa.Content.Display.Server.Hubs.DisplayHu
             contentPortalRunService,
             courseRunService,
             elementProgressService,
+            forumRunService,
             notebookRunService,
             pageRunService,
             surveyRunService

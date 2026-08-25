@@ -1,0 +1,107 @@
+<Waiter Model="Model">
+    @if (Model.Thread is not null)
+    {
+        <div class="c-forum-shell">
+            @if (Model.EditingThread && Model.DraftThread is not null)
+            {
+                <div class="c-forum-composer">
+                    <h3>Edit discussion</h3>
+                    <Field Label="Title" Size="Field.Sizes.Wide">
+                        <TextBox ReadOnly="false" MaxLength="150" @bind-Value="Model.DraftThread.Title" />
+                    </Field>
+                    <Field Label="Message" Size="Field.Sizes.Full" Container="Field.Containers.Div">
+                        <HtmlEditor ReadOnly="false" @bind-Value="Model.DraftThread.Comment.Body" />
+                    </Field>
+                    <ForumTagEditor Bundles="Model.DraftThread.ForumBundles"
+                                    Tags="Model.DraftThread.Tags" />
+                    <ForumMediaEditor Medias="Model.DraftThread.Comment.CommentMedias"
+                                      ForumId="Model.Thread.ForumId" />
+                    @if (Model.Thread.CanModerate)
+                    {
+                        <Checkbox Label="Pinned" ReadOnly="false" @bind-Value="Model.DraftThread.Pinned" />
+                    }
+                    <ButtonGroup>
+                        <ButtonSave Clicked="Model.SaveThread" />
+                        <ButtonCancel Clicked="Model.CancelThread" />
+                    </ButtonGroup>
+                </div>
+            }
+            else
+            {
+                <ForumMessage Comment="Model.Thread.Comment"
+                              Title="@Model.Thread.Title"
+                              Pinned="Model.Thread.Pinned == true"
+                              Opening="true">
+                    <Body>
+                        <UserHtml Html="@Model.Thread.Comment.Body" />
+                        @if (Model.Thread.Tags.HasItems())
+                        {
+                            <div class="c-forum-tags">
+                                @foreach (var tag in Model.Thread.Tags)
+                                {
+                                    <span>@tag.Name</span>
+                                }
+                            </div>
+                        }
+                        @foreach (var media in Model.Thread.Comment.CommentMedias.OrderBy(x => x.Ordinal))
+                        {
+                            <ForumMediaDisplay Media="media" />
+                        }
+                    </Body>
+                    <Footer>
+                        @if (SessionState.IsSignedIn)
+                        {
+                            <ForumReactionBar Reactions="Model.Thread.Comment.Reactions"
+                                              Options="Model.ReactionOptions"
+                                              Reacted="Model.React" />
+                            <ForumMessageActions CanReply="true"
+                                                 CanEdit="Model.Thread.CanEdit"
+                                                 CanDelete="Model.Thread.CanDelete"
+                                                 ConfirmingDelete="Model.ConfirmingThreadDelete"
+                                                 ReplyClicked="Model.BeginReply"
+                                                 EditClicked="Model.BeginThreadEdit"
+                                                 DeleteRequested="Model.RequestThreadDelete"
+                                                 DeleteConfirmed="Model.DeleteThread"
+                                                 DeleteCanceled="Model.CancelThreadDelete" />
+                        }
+                    </Footer>
+                </ForumMessage>
+            }
+
+            @if (Model.Replying && Model.Reply is not null)
+            {
+                <div class="c-forum-composer">
+                    <h3>Write a reply</h3>
+                    <HtmlEditor ReadOnly="false" @bind-Value="Model.Reply.Body" />
+                    <ForumMediaEditor Medias="Model.Reply.CommentMedias" ForumId="Model.Thread.ForumId" />
+                    <ButtonGroup>
+                        <ButtonCore Clicked="Model.AddReply"
+                                    Text="Post reply"
+                                    IconClass="c-icon-reply"
+                                    ButtonStyle="ButtonCore.ButtonStyles.Create" />
+                        <ButtonCancel Clicked="Model.CancelReply" />
+                    </ButtonGroup>
+                </div>
+            }
+
+            @foreach (var comment in Model.Comments)
+            {
+                <ForumComment Comment="comment"
+                              ThreadId="Model.Thread.Id"
+                              ForumId="Model.Thread.ForumId"
+                              ForumBundles="Model.Thread.ForumBundles"
+                              Changed="Model.Refresh" />
+            }
+        </div>
+    }
+    else if (Model.Unavailable)
+    {
+        <div class="c-card c-padding-medium c-margin-small-vert">
+            <div class="values">
+                <h2>Thread unavailable</h2>
+                <p>This thread does not exist or is not available to your account.</p>
+                <a href="/forums">Back to forums</a>
+            </div>
+        </div>
+    }
+</Waiter>

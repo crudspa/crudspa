@@ -1,0 +1,30 @@
+<Field Label="@Label"
+       Padding="Field.Paddings.None"
+       Container="Field.Containers.Div">
+    @if (CanInherit)
+    {
+        <DefaultOverride State="State"
+                         StateChanged="StateChanged"
+                         Orientation="DefaultOverride.Orientations.Horizontal"
+                         Behavior="DefaultOverride.Behaviors.Disable">
+            <DatePicker Format="d"
+                        Value="Value"
+                        ValueChanged="ValueChanged" />
+        </DefaultOverride>
+    }
+    else
+    {
+        <DatePicker Format="d"
+                    Value="Value"
+                    ValueChanged="ValueChanged" />
+    }
+</Field>
+
+@code {
+    [Parameter, EditorRequired] public String Label { get; set; } = null!;
+    [Parameter] public DateOnly? Value { get; set; }
+    [Parameter] public EventCallback<DateOnly?> ValueChanged { get; set; }
+    [Parameter] public Boolean CanInherit { get; set; }
+    [Parameter] public OverrideState State { get; set; } = OverrideState.Custom;
+    [Parameter] public EventCallback<OverrideState> StateChanged { get; set; }
+}

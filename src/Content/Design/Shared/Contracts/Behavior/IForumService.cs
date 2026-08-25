@@ -9,4 +9,7 @@ public interface IForumService
     Task<Response> Remove(Request<Forum> request);
     Task<Response> SaveOrder(Request<IList<Forum>> request);
     Task<Response<IList<Orderable>>> FetchContentStatusNames(Request request);
+    Task<Response<IList<Named>>> FetchPermissionNames(Request<Portal> request);
+    Task<Response<IList<Named>>> FetchLicenseNames(Request request);
+    Task<Response<IList<Named>>> FetchBundleNames(Request request);
 }

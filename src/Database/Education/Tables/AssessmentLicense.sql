@@ -10,3 +10,13 @@ create table [Education].[AssessmentLicense] (
     constraint [FK_Education_AssessmentLicense_Assessment] foreign key ([AssessmentId]) references [Education].[Assessment] ([Id]),
     constraint [FK_Education_AssessmentLicense_License] foreign key ([LicenseId]) references [Framework].[License] ([Id]),
 );
+
+go
+
+create nonclustered index [IX_Education_AssessmentLicense_AssessmentId_LicenseId]
+on [Education].[AssessmentLicense] ([AssessmentId], [LicenseId])
+
+go
+
+create nonclustered index [IX_Education_AssessmentLicense_LicenseId_AssessmentId]
+on [Education].[AssessmentLicense] ([LicenseId], [AssessmentId])

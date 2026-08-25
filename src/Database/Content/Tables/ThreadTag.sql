@@ -10,3 +10,9 @@ create table [Content].[ThreadTag] (
     constraint [FK_Content_ThreadTag_Thread] foreign key ([ThreadId]) references [Content].[Thread] ([Id]),
     constraint [FK_Content_ThreadTag_Tag] foreign key ([TagId]) references [Content].[Tag] ([Id]),
 );
+
+go
+
+create nonclustered index [IX_Content_ThreadTag_ThreadId_TagId]
+    on [Content].[ThreadTag] ([ThreadId], [TagId])
+    include ([Id], [VersionOf], [IsDeleted]);

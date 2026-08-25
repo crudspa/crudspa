@@ -1,0 +1,16 @@
+<List Model="Model"
+      T="CampaignModel"
+      EntityName="Campaign"
+      UrlPrefix="@($"{Path}/campaign")"
+      DeleteRequested="id => Model.Delete(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Unspecified">
+            <LabeledHtml Label="Description"
+                         HtmlValue="@context.Campaign.Description" />
+        </Field>
+    </ReadView>
+    <PaneLinks>
+        <PaneLink Href="@($"{Path}/campaign-{context.Campaign.Id:D}?pane=stages")"
+                  Text="Stages" />
+    </PaneLinks>
+</List>

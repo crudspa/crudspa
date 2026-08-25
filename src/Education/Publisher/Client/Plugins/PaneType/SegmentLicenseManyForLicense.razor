@@ -1,0 +1,20 @@
+<Many Model="Model"
+      T="SegmentLicenseModel"
+      EntityName="Segment License"
+      SaveRequested="id => Model.Save(id)"
+      CancelRequested="id => Model.Cancel(id)"
+      DeleteRequested="id => Model.Delete(id)">
+    <ReadView>
+        <div></div>
+    </ReadView>
+    <EditView>
+        <Wrapped Alignment="Wrapped.Alignments.Top">
+            <Field Label="Segment"
+                   Size="Field.Sizes.Medium">
+                <Dropdown ReadOnly="@false"
+                          LookupValues="Model.SegmentNames"
+                          @bind-Value="context.SegmentLicense.SegmentId" />
+            </Field>
+        </Wrapped>
+    </EditView>
+</Many>

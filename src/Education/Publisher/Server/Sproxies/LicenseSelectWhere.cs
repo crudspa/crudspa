@@ -27,6 +27,13 @@ public static class LicenseSelectWhere
             Description = reader.ReadString(4),
             DistrictLicenseCount = reader.ReadInt32(5),
             UnitLicenseCount = reader.ReadInt32(6),
+            SegmentLicenseCount = reader.ReadInt32(7),
+            AssessmentLicenseCount = reader.ReadInt32(8),
+            BlogLicenseCount = reader.ReadInt32(9),
+            ForumLicenseCount = reader.ReadInt32(10),
+            CampaignLicenseCount = reader.ReadInt32(11),
+            TrackLicenseCount = reader.ReadInt32(12),
+            SurveyLicenseCount = reader.ReadInt32(13),
         };
     }
 }

@@ -34,7 +34,10 @@ public static class ForumSelectForPortal
                 Height = reader.ReadInt32(12),
                 Caption = reader.ReadString(13),
             },
-            Ordinal = reader.ReadInt32(14),
+            PermissionId = reader.ReadGuid(14),
+            PermissionName = reader.ReadString(15),
+            AccessMode = reader.ReadEnum<Forum.AccessModes>(16),
+            Ordinal = reader.ReadInt32(17),
         };
     }
 }

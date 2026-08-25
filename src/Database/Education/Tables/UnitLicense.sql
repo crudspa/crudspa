@@ -12,3 +12,13 @@ create table [Education].[UnitLicense] (
     constraint [FK_Education_UnitLicense_Unit] foreign key ([UnitId]) references [Education].[Unit] ([Id]),
     constraint [FK_Education_UnitLicense_License] foreign key ([LicenseId]) references [Framework].[License] ([Id]),
 );
+
+go
+
+create nonclustered index [IX_Education_UnitLicense_UnitId_LicenseId]
+on [Education].[UnitLicense] ([UnitId], [LicenseId])
+
+go
+
+create nonclustered index [IX_Education_UnitLicense_LicenseId_UnitId]
+on [Education].[UnitLicense] ([LicenseId], [UnitId])

@@ -11,7 +11,7 @@ public static class AccessCodeInsert
         command.AddParameter("@UserId", userId);
         command.AddParameter("@PortalId", accessCode.PortalId);
         command.AddParameter("@Code", accessCode.Code);
-        command.AddParameter("@Expires", DateTimeOffset.Now.AddMinutes(10));
+        command.AddParameter("@Expires", DateTimeOffset.Now.AddMinutes(Constants.AccessCodeLifetimeMinutes));
 
         await command.Execute(connection);
     }

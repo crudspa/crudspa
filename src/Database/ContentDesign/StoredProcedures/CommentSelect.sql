@@ -3,6 +3,41 @@ create proc [ContentDesign].[CommentSelect] (
     ,@Id uniqueidentifier
 ) as
 
+declare @organizationId uniqueidentifier = (
+    select top 1 userTable.OrganizationId
+    from [Framework].[User-Active] userTable
+        inner join [Framework].[Session-Active] session on session.UserId = userTable.Id
+    where session.Id = @SessionId
+)
+
+declare @postId uniqueidentifier
+declare @threadId uniqueidentifier
+
+select
+     @postId = comment.PostId
+    ,@threadId = coalesce(comment.ThreadId, openingThread.Id)
+from [Content].[Comment-Active] comment
+    left join [Content].[Thread-Active] openingThread on openingThread.CommentId = comment.Id
+where comment.Id = @Id
+
+if not exists (
+    select 1
+    from [Content].[Post-Active] post
+        inner join [Content].[Blog-Active] blog on post.BlogId = blog.Id
+        inner join [Framework].[Portal-Active] portal on blog.PortalId = portal.Id
+    where post.Id = @postId
+        and portal.OwnerId = @organizationId
+)
+and not exists (
+    select 1
+    from [Content].[Thread-Active] thread
+        inner join [Content].[Forum-Active] forum on thread.ForumId = forum.Id
+        inner join [Framework].[Portal-Active] portal on forum.PortalId = portal.Id
+    where thread.Id = @threadId
+        and portal.OwnerId = @organizationId
+)
+return
+
 set nocount on
 
 select
@@ -15,14 +50,12 @@ select
     ,byTable.FirstName as ByFirstName
     ,comment.Posted
     ,comment.Edited
-    ,comment.ThreadId
+    ,coalesce(comment.ThreadId, openingThread.Id) as ThreadId
 from [Content].[Comment-Active] comment
     inner join [Framework].[Contact-Active] byTable on comment.ById = byTable.Id
     left join [Content].[Comment-Active] parent on comment.ParentId = parent.Id
-    left join [Content].[Post-Active] post on comment.PostId = post.Id
-    left join [Content].[Thread-Active] thread on comment.ThreadId = thread.Id
+    left join [Content].[Thread-Active] openingThread on openingThread.CommentId = comment.Id
 where comment.Id = @Id
-
 
 select
      commentMedia.Id

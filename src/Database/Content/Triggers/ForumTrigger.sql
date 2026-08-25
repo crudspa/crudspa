@@ -10,6 +10,7 @@ insert [Content].[Forum] (
     ,IsDeleted
     ,PortalId
     ,StatusId
+    ,PermissionId
     ,Title
     ,Description
     ,ImageId
@@ -24,6 +25,7 @@ select
     ,deleted.IsDeleted
     ,deleted.PortalId
     ,deleted.StatusId
+    ,deleted.PermissionId
     ,deleted.Title
     ,deleted.Description
     ,deleted.ImageId

@@ -4,7 +4,8 @@ public class BinderRunServiceSql(
     IServiceWrappers wrappers,
     ISqlWrappers sqlWrappers,
     IServerConfigService configService,
-    IPageRunService pageRunService)
+    IPageRunService pageRunService,
+    ISessionLicenseResolver sessionLicenseResolver)
     : IBinderRunService
 {
     private String Connection => configService.Fetch().Database;
@@ -19,7 +20,10 @@ public class BinderRunServiceSql(
     {
         return await wrappers.Try<BinderTypeFull?>(request, async response =>
         {
-            return await BinderSelectType.Execute(Connection, request.Value.Id);
+            var licenseIds = await sessionLicenseResolver.Fetch(request.SessionId);
+            return await TrackContentIsAccessible.Execute(Connection, licenseIds, binderId: request.Value.Id)
+                ? await BinderSelectType.Execute(Connection, request.Value.Id)
+                : null;
         });
     }
 
@@ -28,6 +32,9 @@ public class BinderRunServiceSql(
         return await wrappers.Try<Binder?>(request, async response =>
         {
             var binder = request.Value;
+            var licenseIds = await sessionLicenseResolver.Fetch(request.SessionId);
+            if (!await TrackContentIsAccessible.Execute(Connection, licenseIds, binderId: binder.Id))
+                return null;
 
             var lastPageViewedTask = BinderSelectLastPageViewed.Execute(Connection, binder.Id, request.SessionId);
             var pagesTask = PageSelectForBinder.Execute(Connection, binder.Id);
@@ -60,13 +67,25 @@ public class BinderRunServiceSql(
     public async Task<Response<BinderProgress>> FetchProgress(Request<Binder> request)
     {
         return await wrappers.Try<BinderProgress>(request, async response =>
-            await BinderProgressSelect.Execute(Connection, request.SessionId, request.Value.Id));
+        {
+            var licenseIds = await sessionLicenseResolver.Fetch(request.SessionId);
+            return await TrackContentIsAccessible.Execute(Connection, licenseIds, binderId: request.Value.Id)
+                ? await BinderProgressSelect.Execute(Connection, request.SessionId, request.Value.Id)
+                : new();
+        });
     }
 
     public async Task<Response> AddCompleted(Request<BinderCompleted> request)
     {
         return await wrappers.Try(request, async response =>
         {
+            var licenseIds = await sessionLicenseResolver.Fetch(request.SessionId);
+            if (!await TrackContentIsAccessible.Execute(Connection, licenseIds, binderId: request.Value.BinderId))
+            {
+                response.AddError("Binder is not accessible.");
+                return;
+            }
+
             await sqlWrappers.WithConnection(async (connection, transaction) =>
             {
                 await BinderCompletedInsert.Execute(connection, transaction, request.SessionId, request.Value);

@@ -1,0 +1,32 @@
+<div class="header">
+    @if (Title.HasSomething())
+    {
+        <div class="subject">
+            @if (Pinned)
+            {
+                <span class="pin" title="Pinned">📌</span>
+            }
+            @Title
+        </div>
+    }
+    <div class="author">
+        <div class="avatar" aria-hidden="true">@Initials</div>
+        <div class="identity">
+            <div class="name">@(Comment.ByName ?? "Forum participant")</div>
+            <div class="metadata">
+                @if (Comment.ByOrganizationName.HasSomething())
+                {
+                    <span>@Comment.ByOrganizationName</span>
+                }
+                @if (Comment.Posted.HasValue)
+                {
+                    <span>Posted @Comment.Posted.Value.ToString("MMM d, yyyy 'at' h:mm tt")</span>
+                }
+                @if (Comment.Edited.HasValue)
+                {
+                    <span>Edited @Comment.Edited.Value.ToString("MMM d, yyyy 'at' h:mm tt")</span>
+                }
+            </div>
+        </div>
+    </div>
+</div>

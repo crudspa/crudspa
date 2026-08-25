@@ -1,0 +1,55 @@
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+            }
+            else
+            {
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="() => Model.Cancel()" />
+            }
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small" Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Name" Size="Field.Sizes.Large">
+                    <TextBox ReadOnly="Model.ReadOnly" MaxLength="75" @bind-Value="Model.Entity.Name" />
+                </Field>
+                <Field Label="Population" Size="Field.Sizes.Large">
+                    <Dropdown ReadOnly="Model.ReadOnly" LookupValues="Model.PopulationNames"
+                              Value="Model.Entity.PopulationId" ValueChanged="Model.SetPopulation" />
+                </Field>
+                <Field Label="Channel" Size="Field.Sizes.Medium">
+                    <EnumRadio ReadOnly="Model.ReadOnly" TEnum="MessageEditModel.Channels"
+                               SelectedValue="Model.Channel" SelectedValueChanged="Model.SetChannel" />
+                </Field>
+                <Field Label="Template" Size="Field.Sizes.Large">
+                    <Dropdown ReadOnly="Model.ReadOnly" LookupValues="Model.TemplateNames"
+                              Value="Model.TemplateId" ValueChanged="Model.SetTemplate" />
+                </Field>
+
+                @if (Model.Channel == MessageEditModel.Channels.Email && Model.EmailTemplate is not null)
+                {
+                    <Field Label="Subject" Size="Field.Sizes.Full">
+                        <TextBox ReadOnly="Model.ReadOnly" MaxLength="150" @bind-Value="Model.EmailTemplate.Subject" />
+                    </Field>
+                    <Field Label="Body" Size="Field.Sizes.Full" Container="Field.Containers.Div">
+                        <HtmlEditor ReadOnly="Model.ReadOnly" Tokens="Model.Tokens" @bind-Value="Model.EmailTemplate.Body" />
+                    </Field>
+                }
+                else if (Model.SmsTemplate is not null)
+                {
+                    <TokenMultilineTextBox Label="Body" Size="Field.Sizes.Full" ReadOnly="Model.ReadOnly"
+                                           Height="MultilineTextBox.Heights.Tall" @bind-Value="Model.SmsTemplate.Body" />
+                }
+            </Wrapped>
+        </Padding>
+    }
+</Waiter>

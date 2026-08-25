@@ -14,11 +14,19 @@ insert [Content].[CourseViewed] (
     ,UpdatedBy
     ,CourseId
 )
-values (
+select
      newid()
     ,@now
     ,@SessionId
     ,@Id
+where exists (
+    select 1
+    from [Content].[Course-Active] course
+        inner join [Content].[Track-Active] track on course.TrackId = track.Id
+        inner join [Framework].[Portal-Active] portal on track.PortalId = portal.Id
+    where course.Id = @Id
+        and course.StatusId = @ContentStatusComplete
+        and portal.Id = @portalId
 )
 
 select

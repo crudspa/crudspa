@@ -10,6 +10,7 @@ public static class LicenseInsert
         command.AddParameter("@SessionId", sessionId);
         command.AddParameter("@Name", 50, license.Name);
         command.AddParameter("@Description", license.Description);
+        command.AddParameter("@Segments", license.Segments);
 
         var output = command.AddOutputParameter("@Id");
         await command.Execute(connection, transaction);

@@ -1,0 +1,20 @@
+<Many Model="Model"
+      T="TrackLicenseModel"
+      EntityName="Track License"
+      SaveRequested="id => Model.Save(id)"
+      CancelRequested="id => Model.Cancel(id)"
+      DeleteRequested="id => Model.Delete(id)">
+    <ReadView>
+        <div></div>
+    </ReadView>
+    <EditView>
+        <Wrapped Alignment="Wrapped.Alignments.Top">
+            <Field Label="Track"
+                   Size="Field.Sizes.Medium">
+                <Dropdown ReadOnly="@false"
+                          LookupValues="Model.TrackNames"
+                          @bind-Value="context.TrackLicense.TrackId" />
+            </Field>
+        </Wrapped>
+    </EditView>
+</Many>

@@ -11,6 +11,7 @@ public static class LicenseUpdate
         command.AddParameter("@Id", license.Id);
         command.AddParameter("@Name", 50, license.Name);
         command.AddParameter("@Description", license.Description);
+        command.AddParameter("@Segments", license.Segments);
 
         await command.Execute(connection, transaction);
     }

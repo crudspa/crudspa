@@ -11,8 +11,12 @@ public class Registry
         services.AddSingleton<IContentPortalRunService, ContentPortalRunServiceSql>();
         services.AddSingleton<ICourseRunService, CourseRunServiceSql>();
         services.AddSingleton<IElementProgressService, ElementProgressServiceSql>();
+        services.AddSingleton<IForumMediaService, ForumMediaServiceSql>();
+        services.AddSingleton<IForumRunService, ForumRunServiceSql>();
+        services.AddSingleton<ISessionLicenseResolver, SessionLicenseResolverNone>();
         services.AddSingleton<INotebookRunService, NotebookRunServiceSql>();
         services.AddSingleton<IPageRunService, PageRunServiceContent>();
+        services.AddSingleton<ISurveyRunService, SurveyRunServiceSql>();
         services.AddSingleton<IStylesRunService, StylesRunServiceSql>();
         services.AddSingleton<IThemeRunService, ThemeRunServiceSql>();
         // Crudspa.Framework.Core.Server

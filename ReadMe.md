@@ -21,7 +21,7 @@ The fastest way to understand this repo is to run the shipped samples in the ord
 2. Publish [src/Database/Database.sqlproj](src/Database/Database.sqlproj) to your local SQL Server instance by using [src/Database/Deploy-LocalMachine.publish.xml](src/Database/Deploy-LocalMachine.publish.xml). That creates or updates the `Crudspa-Local` database used by the samples.
 3. Run `.\art\SeedSampleBlobs.ps1` from the repo root to seed the sample media files into the local blob store.
 4. Start `Catalog` at `https://localhost:42100` and enter any name to simulate signing in. This is the fastest path to the `Framework.Core` shell, model, service, notice, and SQL story.
-5. Start `Composer` and `Consumer` together at `https://localhost:42200` and `https://localhost:42300`. In `Composer`, use `sample@example.com`, choose `Reset password`, read the local access-code email from `C:\data\temp\email`, set a password, and sign in. Keep `Consumer` open while you edit content in `Composer` to watch runtime updates land live.
+5. Start `Composer` and `Consumer` together at `https://localhost:42200` and `https://localhost:42300`. In `Composer`, use `sample@example.com`, choose `Reset password`, read the local access-code email from `C:\data\temp\email`, set a password, and sign in. Use the same reset flow in `Consumer` when you want to post to a forum. Keep both hosts open while you edit authored content in `Composer` and explore the runtime result in `Consumer`.
 6. Start [src/Samples/Jobs/Engine/Engine.csproj](src/Samples/Jobs/Engine/Engine.csproj) alongside `Catalog` or `Composer` when you want to study jobs. The UI hosts expose `Jobs` and `Schedules` panes, and the engine creates, runs, and publishes job updates back into those panes.
 
 ## Why Crudspa
@@ -57,8 +57,8 @@ The sample track is meant to give new readers a short path from clone to underst
 | Sample | What It Shows |
 | --- | --- |
 | `Catalog` | A focused `Framework.Core` application with a public shopping cart, private catalog and order-management surfaces, and sample jobs administration panes. |
-| `Composer` | How `Content.Design` adds editor-facing CMS workflows, metadata-driven panes, authoring services, and sample jobs administration panes. |
-| `Consumer` | How `Content.Display` layers authored runtime experiences onto the same base architecture and reacts to content changes from `Composer`. |
+| `Composer` | How `Content.Design` and `Content.Messaging` add editor-facing CMS, forum, campaign, population, message, and sample jobs workflows. |
+| `Consumer` | How `Content.Display` layers authored pages and interactive forums onto the same base architecture and reacts to changes from `Composer`. |
 | `Jobs Engine` | The scheduler and worker host that completes the jobs story by running background work and publishing job events back into the sample UIs. |
 
 When you want the smallest complete story, start with `Catalog`. Then run `Composer` and `Consumer` together for the content story, and add `Samples/Jobs/Engine` when you want to see background work move through the same architecture.

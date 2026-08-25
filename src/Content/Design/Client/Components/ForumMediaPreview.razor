@@ -1,0 +1,45 @@
+@if (Url is { } url)
+{
+    <div class="c-forum-media">
+        @switch (Media.Type)
+        {
+            case CommentMedia.Types.Audio:
+                <audio controls preload="none" src="@url"></audio>
+                break;
+            case CommentMedia.Types.Image:
+                <img src="@url" alt="@(Media.ImageFile.Caption ?? Media.ImageFile.Name)" />
+                break;
+            case CommentMedia.Types.Pdf:
+                <object data="@url" type="application/pdf">
+                    <a href="@url" target="_blank" rel="noopener">@(Media.PdfFile.Name ?? "Open PDF")</a>
+                </object>
+                break;
+            case CommentMedia.Types.Video:
+                <video controls preload="metadata" src="@url"></video>
+                break;
+        }
+    </div>
+}
+
+@code {
+    [Parameter, EditorRequired] public CommentMedia Media { get; set; } = null!;
+
+    private String? Url
+    {
+        get
+        {
+            var (typePath, id) = Media.Type switch
+            {
+                CommentMedia.Types.Audio => ("audio-file", Media.AudioFile.Id),
+                CommentMedia.Types.Image => ("image-file", Media.ImageFile.Id),
+                CommentMedia.Types.Pdf => ("pdf-file", Media.PdfFile.Id),
+                CommentMedia.Types.Video => ("video-file", Media.VideoFile.Id),
+                _ => (null, null),
+            };
+
+            return typePath is null || !id.HasValue
+                ? null
+                : $"/api/framework/core/{typePath}/fetch?id={id:D}";
+        }
+    }
+}

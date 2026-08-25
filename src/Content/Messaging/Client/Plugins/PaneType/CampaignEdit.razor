@@ -1,0 +1,57 @@
+<Toolbar>
+    <Left>
+        @if (Model.ReadOnly)
+        {
+            <Wrapped NoWrap="true">
+                <Margin Direction="Margin.Directions.Right">
+                <ButtonEdit Clicked="() => Model.Edit()" />
+                </Margin>
+                @if (!Model.IsNew)
+                {
+                    <ButtonCore Text="Activate..."
+                                ButtonStyle="ButtonCore.ButtonStyles.Create"
+                                Clicked="Model.StartActivation" />
+                }
+            </Wrapped>
+        }
+        else
+        {
+            <ButtonGroup>
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            </ButtonGroup>
+        }
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Name"
+                       Size="Field.Sizes.Large">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="75"
+                             @bind-Value="Model.Entity.Name" />
+                </Field>
+                <Field Label="Description"
+                       Size="Field.Sizes.Full"
+                       Container="Field.Containers.Div">
+                    <div class="campaign-description">
+                        <HtmlEditor ReadOnly="Model.ReadOnly"
+                                    EditorHeight="12em"
+                                    @bind-Value="Model.Entity.Description" />
+                    </div>
+                </Field>
+                <Field Label="Licenses"
+                       Size="Field.Sizes.Large"
+                       Container="Field.Containers.Div">
+                    <CheckedList ReadOnly="Model.ReadOnly"
+                                 Selectables="Model.Entity.Licenses"
+                                 Height="CheckedList.Heights.Average" />
+                </Field>
+            </Wrapped>
+        </Padding>
+    }
+</Waiter>

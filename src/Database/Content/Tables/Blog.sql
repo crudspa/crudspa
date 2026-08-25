@@ -15,4 +15,5 @@ create table [Content].[Blog] (
     constraint [FK_Content_Blog_Portal] foreign key ([PortalId]) references [Framework].[Portal] ([Id]),
     constraint [FK_Content_Blog_Status] foreign key ([StatusId]) references [Framework].[ContentStatus] ([Id]),
     constraint [FK_Content_Blog_Image] foreign key ([ImageId]) references [Framework].[ImageFile] ([Id]),
+    constraint [CK_Content_Blog_AccessMode] check ([AccessMode] in (0, 1)),
 );

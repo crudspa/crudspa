@@ -1,0 +1,70 @@
+<BatchSection Title="Media">
+    <HeadingPanel>
+        <ButtonAdd EntityName="Media"
+                   Transparent="true"
+                   Clicked="() => Model.AddCommentMedia(CommentId)" />
+    </HeadingPanel>
+    <ChildContent>
+        <Batch Model="Model.GetCommentMediasModel(CommentId)" NoRecordsText="No media added.">
+            <EditView Context="media">
+                <Wrapped Alignment="Wrapped.Alignments.Top" @key="media">
+                    <Field Label="Type" Size="Field.Sizes.Large">
+                        <EnumRadio ReadOnly="false"
+                                   TEnum="CommentMedia.Types"
+                                   SelectedValue="media.Type"
+                                   SelectedValueChanged="type => Model.SetCommentMediaType(CommentId, media, type)" />
+                    </Field>
+                    @switch (media.Type)
+                    {
+                        case CommentMedia.Types.Audio:
+                            <Field Label="Audio" Size="Field.Sizes.Larger" Container="Field.Containers.Div">
+                                <AudioUploader ReadOnly="false" Required="true" AudioFile="media.AudioFile"
+                                               MaxFileSize="ForumMediaPolicy.AudioMaxBytes" Accept="AudioAccept"
+                                               AllowedExtensions="AudioExtensions" UploadPath="@UploadPath(media.Type)" />
+                            </Field>
+                            break;
+                        case CommentMedia.Types.Image:
+                            <Field Label="Image" Size="Field.Sizes.Larger" Container="Field.Containers.Div">
+                                <ImageUploader ReadOnly="false" Required="true" ImageFile="media.ImageFile"
+                                               MaxFileSize="ForumMediaPolicy.ImageMaxBytes" Accept="ImageAccept"
+                                               AllowedExtensions="ImageExtensions" UploadPath="@UploadPath(media.Type)" />
+                            </Field>
+                            break;
+                        case CommentMedia.Types.Pdf:
+                            <Field Label="PDF" Size="Field.Sizes.Larger" Container="Field.Containers.Div">
+                                <PdfUploader ReadOnly="false" Required="true" PdfFile="media.PdfFile"
+                                             MaxFileSize="ForumMediaPolicy.PdfMaxBytes" Accept="PdfAccept"
+                                             AllowedExtensions="PdfExtensions" UploadPath="@UploadPath(media.Type)" />
+                            </Field>
+                            break;
+                        case CommentMedia.Types.Video:
+                            <Field Label="Video" Size="Field.Sizes.Larger" Container="Field.Containers.Div">
+                                <VideoUploader ReadOnly="false" Required="true" VideoFile="media.VideoFile"
+                                               MaxFileSize="ForumMediaPolicy.VideoMaxBytes" Accept="VideoAccept"
+                                               AllowedExtensions="VideoExtensions" UploadPath="@UploadPath(media.Type)" />
+                            </Field>
+                            break;
+                    }
+                </Wrapped>
+            </EditView>
+        </Batch>
+    </ChildContent>
+</BatchSection>
+
+@code {
+    [Parameter, EditorRequired] public CommentTreeForThreadModel Model { get; set; } = null!;
+    [Parameter, EditorRequired] public Guid? CommentId { get; set; }
+    [Parameter, EditorRequired] public Guid? ThreadId { get; set; }
+
+    private static readonly System.Collections.Generic.List<String> AudioExtensions = [.. ForumMediaPolicy.AudioExtensions];
+    private static readonly System.Collections.Generic.List<String> ImageExtensions = [.. ForumMediaPolicy.ImageExtensions];
+    private static readonly System.Collections.Generic.List<String> PdfExtensions = [.. ForumMediaPolicy.PdfExtensions];
+    private static readonly System.Collections.Generic.List<String> VideoExtensions = [.. ForumMediaPolicy.VideoExtensions];
+    private static readonly String AudioAccept = Constants.Join(ForumMediaPolicy.AudioExtensions, ForumMediaPolicy.AudioContentTypes);
+    private static readonly String ImageAccept = Constants.Join(ForumMediaPolicy.ImageExtensions, ForumMediaPolicy.ImageContentTypes);
+    private static readonly String PdfAccept = Constants.Join(ForumMediaPolicy.PdfExtensions, ForumMediaPolicy.PdfContentTypes);
+    private static readonly String VideoAccept = Constants.Join(ForumMediaPolicy.VideoExtensions, ForumMediaPolicy.VideoContentTypes);
+
+    private String UploadPath(CommentMedia.Types type) =>
+        $"/api/content/design/forum-comment-media/upload?threadId={ThreadId:D}&type={(Int32)type}";
+}

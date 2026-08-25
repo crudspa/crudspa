@@ -40,10 +40,11 @@ public static class ThreadSelectWhereForForum
                 Body = reader.ReadString(8),
                 ById = reader.ReadGuid(9),
                 ByName = reader.ReadString(10),
-                Posted = reader.ReadDateTimeOffset(11),
-                Edited = reader.ReadDateTimeOffset(12),
+                ByOrganizationName = reader.ReadString(11),
+                Posted = reader.ReadDateTimeOffset(12),
+                Edited = reader.ReadDateTimeOffset(13),
             },
-            CommentCount = reader.ReadInt32(13),
+            CommentCount = reader.ReadInt32(14),
         };
     }
 }

@@ -41,7 +41,7 @@ public class AccessCodeServiceSql(
                 PortalId = user.PortalId,
                 Contact = user.Contact,
                 Username = user.Username,
-                Code = cryptographyService.GetRandomInt(0, 999999).ToString("000000"),
+                Code = cryptographyService.GetRandomInt(0, 1_000_000).ToString("000000"),
                 PortalName = portal!.Title,
                 EmailAddress = address,
             };
@@ -71,7 +71,7 @@ public class AccessCodeServiceSql(
                     <p>Username: <strong>{accessCode.Username}</strong></p>
                     <p>Access Code: <strong>{accessCode.Code}</strong></p>
                     <p><br></p>
-                    <p>This code can only be used once and expires in 10 minutes.</p>
+                    <p>This code expires in {Constants.AccessCodeLifetimeMinutes} minutes.</p>
                     """;
 
         return new()

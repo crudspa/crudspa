@@ -5,8 +5,10 @@ select comment.Id as Id
     ,comment.PostId as PostId
     ,comment.ThreadId as ThreadId
     ,comment.ById as ById
+    ,comment.ByOrganizationName as ByOrganizationName
     ,comment.Posted as Posted
     ,comment.Edited as Edited
+    ,comment.Removed as Removed
     ,comment.Body as Body
 from [Content].[Comment] comment
 where 1=1

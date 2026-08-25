@@ -12,11 +12,16 @@ insert [Education].[TrifoldViewed] (
     ,UpdatedBy
     ,TrifoldId
 )
-values (
+select
      newid()
     ,@now
     ,@SessionId
     ,@Id
+where exists (
+    select 1
+    from [Education].[Trifold-Active] trifold
+        inner join [EducationStudent].[LicensedBooks](@SessionId, null) licensedBook on licensedBook.BookId = trifold.BookId
+    where trifold.Id = @Id
 )
 
 select
@@ -46,6 +51,10 @@ from [Education].[Trifold-Active] trifold
     inner join [Content].[BinderType-Active] binderType on binder.TypeId = binderType.Id
 where trifold.Id = @Id
     and trifold.StatusId = @ContentStatusComplete
+    and exists (
+        select 1
+        from [EducationStudent].[LicensedBooks](@SessionId, trifold.BookId) licensedBook
+    )
 
 select
      guidePage.Id
@@ -68,3 +77,7 @@ from [Education].[Trifold-Active] trifold
     left join [Framework].[AudioFile-Active] guideAudio on guidePage.GuideAudioId = guideAudio.Id
 where trifold.Id = @Id
     and trifold.StatusId = @ContentStatusComplete
+    and exists (
+        select 1
+        from [EducationStudent].[LicensedBooks](@SessionId, trifold.BookId) licensedBook
+    )

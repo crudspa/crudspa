@@ -1,0 +1,62 @@
+namespace Crudspa.Content.Messaging.Shared.Contracts.Data;
+
+public class SmsTemplate : Observable, IValidates, INamed, ICountable
+{
+    public String? Name => Title;
+
+    public Guid? Id
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    public Guid? MembershipId
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    public Guid? PortalId
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    public Guid? OrganizationId
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    public String? Title
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    public String? Body
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    public Int32? TotalCount
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    public List<Error> Validate()
+    {
+        return ErrorsEx.Validate(errors =>
+        {
+            if (Title.HasNothing())
+                errors.AddError("Title is required.", nameof(Title));
+            else if (Title!.Length > 75)
+                errors.AddError("Title cannot be longer than 75 characters.", nameof(Title));
+
+            if (Body.HasNothing())
+                errors.AddError("Body is required.", nameof(Body));
+        });
+    }
+}

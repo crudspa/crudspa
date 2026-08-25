@@ -12,6 +12,9 @@ insert [Content].[Membership] (
     ,Name
     ,Description
     ,SupportsOptOut
+    ,PopulationId
+    ,OrganizationId
+    ,ActivationScopeId
 )
 select
      newid()
@@ -23,4 +26,7 @@ select
     ,deleted.Name
     ,deleted.Description
     ,deleted.SupportsOptOut
+    ,deleted.PopulationId
+    ,deleted.OrganizationId
+    ,deleted.ActivationScopeId
 from deleted

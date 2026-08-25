@@ -60,11 +60,17 @@ GO
 print format(getdate(), 'yyyy-MM-dd HH:mm:ss.fff ') + 'Running MergeAnswerType.sql...'
 :r .\..\Content\Scripts\MergeAnswerType.sql
 GO
+print format(getdate(), 'yyyy-MM-dd HH:mm:ss.fff ') + 'Running MergeActivationStatus.sql...'
+:r .\..\Content\Scripts\MergeActivationStatus.sql
+GO
 print format(getdate(), 'yyyy-MM-dd HH:mm:ss.fff ') + 'Running MergeJustifyContent.sql...'
 :r .\..\Content\Scripts\MergeJustifyContent.sql
 GO
 print format(getdate(), 'yyyy-MM-dd HH:mm:ss.fff ') + 'Running MergePageType.sql...'
 :r .\..\Content\Scripts\MergePageType.sql
+GO
+print format(getdate(), 'yyyy-MM-dd HH:mm:ss.fff ') + 'Running MergeMessageType.sql...'
+:r .\..\Content\Scripts\MergeMessageType.sql
 GO
 print format(getdate(), 'yyyy-MM-dd HH:mm:ss.fff ') + 'Running MergeRuleType.sql...'
 :r .\..\Content\Scripts\MergeRuleType.sql
@@ -206,6 +212,9 @@ print format(getdate(), 'yyyy-MM-dd HH:mm:ss.fff ') + 'Running InitializeOwners.
 GO
 print format(getdate(), 'yyyy-MM-dd HH:mm:ss.fff ') + 'Running MergePortal.sql...'
 :r .\..\Framework\Scripts\MergePortal.sql
+GO
+print format(getdate(), 'yyyy-MM-dd HH:mm:ss.fff ') + 'Running MergePopulation.sql...'
+:r .\..\Content\Scripts\MergePopulation.sql
 GO
 print format(getdate(), 'yyyy-MM-dd HH:mm:ss.fff ') + 'Running MergePortalFeature.sql...'
 :r .\..\Framework\Scripts\MergePortalFeature.sql

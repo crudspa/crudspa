@@ -1,0 +1,24 @@
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Field Size="Field.Sizes.Unspecified">
+                <Labeled Width="8em"
+                         Label="Name"
+                         StringValue="@Model.Entity.Name" />
+                <Labeled Width="8em"
+                         Label="Key"
+                         StringValue="@Model.Entity.Key" />
+                <Labeled Width="8em"
+                         Label="Resolver"
+                         StringValue="@Model.Entity.ResolverKey" />
+                <Labeled Width="8em"
+                         Label="Supports Opt Out"
+                         BooleanValue="@Model.Entity.SupportsOptOut" />
+                <LabeledHtml Label="Description"
+                             HtmlValue="@Model.Entity.Description" />
+            </Field>
+        </Padding>
+    }
+</Waiter>

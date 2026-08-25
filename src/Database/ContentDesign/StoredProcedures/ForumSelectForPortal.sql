@@ -26,9 +26,13 @@ select
     ,image.Width as ImageWidth
     ,image.Height as ImageHeight
     ,image.Caption as ImageCaption
+    ,forum.PermissionId
+    ,permission.Name as PermissionName
+    ,forum.AccessMode
     ,forum.Ordinal
 from [Content].[Forum-Active] forum
     left join [Framework].[ImageFile-Active] image on forum.ImageId = image.Id
+    left join [Framework].[Permission-Active] permission on forum.PermissionId = permission.Id
     inner join [Framework].[Portal-Active] portal on forum.PortalId = portal.Id
     inner join [Framework].[Organization-Active] organization on portal.OwnerId = organization.Id
     inner join [Framework].[ContentStatus-Active] status on forum.StatusId = status.Id

@@ -26,6 +26,7 @@ where portal.OwnerId = @organizationId
         ,segment.ParentId
         ,segment.IconId
         ,segment.Ordinal
+        ,segment.AllLicenses
     from [Framework].[Segment-Active] segment
         inner join [Framework].[Portal-Active] portal on segment.PortalId = portal.Id
     where segment.PortalId is not null
@@ -42,6 +43,7 @@ where portal.OwnerId = @organizationId
         ,segment.ParentId
         ,segment.IconId
         ,segment.Ordinal
+        ,segment.AllLicenses
     from [Framework].[Segment-Active] segment
         inner join [Framework].[Portal-Active] portal on segment.PortalId = portal.Id
         inner join SegmentCte cte on segment.ParentId = cte.Id
@@ -56,5 +58,6 @@ select distinct
     ,cte.ParentId
     ,cte.Ordinal
     ,icon.CssClass
+    ,cte.AllLicenses
 from SegmentCte cte
     left join [Framework].[Icon-Active] icon on cte.IconId = icon.Id

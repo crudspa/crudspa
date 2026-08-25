@@ -14,6 +14,7 @@ public partial class ThreadEdit : IPaneDisplay, IDisposable
     [Inject] public IEventBus EventBus { get; set; } = null!;
     [Inject] public INavigator Navigator { get; set; } = null!;
     [Inject] public IThreadService ThreadService { get; set; } = null!;
+    [Inject] public ICommentService CommentService { get; set; } = null!;
 
     public ThreadEditModel Model { get; set; } = null!;
 
@@ -21,7 +22,7 @@ public partial class ThreadEdit : IPaneDisplay, IDisposable
     {
         var forumId = Path!.Id("forum");
 
-        Model = new(Path, Id, IsNew, forumId, EventBus, Navigator, ThreadService);
+        Model = new(Path, Id, IsNew, forumId, EventBus, Navigator, ThreadService, CommentService);
         Model.PropertyChanged += HandleModelChanged;
 
         await Model.Initialize();
@@ -49,17 +50,20 @@ public class ThreadEditModel : EditModel<Thread>, IHandle<ThreadSaved>, IHandle<
     private readonly Guid? _forumId;
     private readonly INavigator _navigator;
     private readonly IThreadService _threadService;
+    private readonly ICommentService _commentService;
 
     public ThreadEditModel(String? path, Guid? id, Boolean isNew, Guid? forumId,
         IEventBus eventBus,
         INavigator navigator,
-        IThreadService threadService) : base(isNew)
+        IThreadService threadService,
+        ICommentService commentService) : base(isNew)
     {
         _path = path;
         _id = id;
         _forumId = forumId;
         _navigator = navigator;
         _threadService = threadService;
+        _commentService = commentService;
 
         eventBus.Subscribe(this);
     }
@@ -106,8 +110,17 @@ public class ThreadEditModel : EditModel<Thread>, IHandle<ThreadSaved>, IHandle<
 
             var response = await WithWaiting("Fetching...", () => _threadService.Fetch(new(new() { Id = _id })));
 
-            if (response.Ok)
-                SetThread(response.Value);
+            if (response.Ok && response.Value is { } thread)
+            {
+                if (thread.Comment.Id.HasValue)
+                {
+                    var commentResponse = await _commentService.Fetch(new(new() { Id = thread.Comment.Id }));
+                    if (commentResponse.Ok && commentResponse.Value is { } comment)
+                        thread.Comment.CommentMedias = comment.CommentMedias;
+                }
+
+                SetThread(thread);
+            }
         }
     }
 

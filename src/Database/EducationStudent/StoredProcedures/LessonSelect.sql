@@ -26,32 +26,23 @@ insert [Education].[LessonViewed] (
     ,UpdatedBy
     ,LessonId
 )
-values (
+select
      newid()
     ,@now
     ,@SessionId
     ,@Id
+where exists (
+    select 1
+    from [EducationStudent].[LicensedLessons](@SessionId, @Id) licensedLesson
 )
 
 create table #LicensedLessons (
-    Id uniqueidentifier not null
+    Id uniqueidentifier not null primary key
 )
 
 insert #LicensedLessons (Id)
-select lesson.Id
-from [Education].[Lesson-Active] lesson
-where lesson.Id = @Id
-    and exists (
-        select 1
-        from [EducationStudent].[UnitLicenses](@SessionId, lesson.UnitId) unitLicense
-        where unitLicense.AllLessons = 1
-            or exists (
-                select 1
-                from [Education].[UnitLicenseLesson-Active] unitLicenseLesson
-                where unitLicenseLesson.UnitLicenseId = unitLicense.Id
-                    and unitLicenseLesson.LessonId = lesson.Id
-            )
-    )
+select licensedLesson.LessonId
+from [EducationStudent].[LicensedLessons](@SessionId, @Id) licensedLesson
 
 select
      lesson.Id as Id

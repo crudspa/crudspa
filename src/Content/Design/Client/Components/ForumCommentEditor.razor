@@ -1,0 +1,80 @@
+<Modal Model="Node.Form.ConfirmationModel">
+    <Content>
+        <Padding Direction="Padding.Directions.Top" Size="Padding.Sizes.Small">
+            Are you sure you want to delete this reply?
+        </Padding>
+    </Content>
+    <Buttons>
+        <ButtonDelete Clicked="() => Model.Delete(Node.Entity.Id)" />
+        <ButtonCancel Clicked="() => Node.Form.ConfirmationModel.Hide()" />
+    </Buttons>
+</Modal>
+
+@if (!Node.Form.IsNew)
+{
+    <ForumMessage Id="@($"{Node.Entity.Id:D}")"
+                  Comment="Node.Entity.Comment"
+                  ShowFooter="Node.Form.ReadOnly"
+                  Depth="Node.Depth">
+        <Body>
+            @if (Node.Form.ReadOnly)
+            {
+                <UserHtml Html="@Node.Entity.Comment.Body" />
+                @foreach (var media in Node.Entity.Comment.CommentMedias.OrderBy(x => x.Ordinal))
+                {
+                    <ForumMediaPreview Media="media" />
+                }
+            }
+            else
+            {
+                <HtmlEditor ReadOnly="false" @bind-Value="Node.Entity.Comment.Body" />
+                <ForumCommentMediaEditor Model="Model"
+                                         CommentId="Node.Entity.Id"
+                                         ThreadId="ThreadId" />
+                <ButtonGroup>
+                    <ButtonSave Clicked="() => Model.Save(Node.Entity.Id)" />
+                    <ButtonCancel Clicked="() => Model.Cancel(Node.Entity.Id)" />
+                </ButtonGroup>
+            }
+        </Body>
+        <Footer>
+            @if (Node.Form.ReadOnly)
+            {
+                <ForumMessageActions CanReply="true"
+                                     CanEdit="true"
+                                     CanDelete="true"
+                                     ReplyClicked="() => Model.Create(Node.Entity.Id)"
+                                     EditClicked="() => Node.Form.ReadOnly = false"
+                                     DeleteRequested="() => Node.Form.ConfirmationModel.Show()" />
+            }
+        </Footer>
+    </ForumMessage>
+}
+else
+{
+    <div class="c-forum-composer nested" style="--forum-depth: @Node.Depth">
+        <h3>Write a reply</h3>
+        <HtmlEditor ReadOnly="false" @bind-Value="Node.Entity.Comment.Body" />
+        <ForumCommentMediaEditor Model="Model"
+                                 CommentId="Node.Entity.Id"
+                                 ThreadId="ThreadId" />
+        <ButtonGroup>
+            <ButtonCore Clicked="() => Model.Save(Node.Entity.Id)"
+                        Text="Post reply"
+                        IconClass="c-icon-reply"
+                        ButtonStyle="ButtonCore.ButtonStyles.Create" />
+            <ButtonCancel Clicked="() => Model.Cancel(Node.Entity.Id)" />
+        </ButtonGroup>
+    </div>
+}
+
+@foreach (var child in Node.Children)
+{
+    <ForumCommentEditor Node="child" Model="Model" ThreadId="ThreadId" />
+}
+
+@code {
+    [Parameter, EditorRequired] public TreeNodeModel<CommentTreeForThreadItem> Node { get; set; } = null!;
+    [Parameter, EditorRequired] public CommentTreeForThreadModel Model { get; set; } = null!;
+    [Parameter, EditorRequired] public Guid? ThreadId { get; set; }
+}

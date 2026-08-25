@@ -18,6 +18,7 @@ public partial class List<T> : IDisposable
     [Parameter] public Boolean ShowAdd { get; set; } = true;
     [Parameter] public Boolean ShowDelete { get; set; } = true;
     [Parameter] public Boolean ShowView { get; set; } = true;
+    [Parameter] public EventCallback AddClicked { get; set; }
     [Parameter] public EventCallback<Guid?> DeleteRequested { get; set; }
 
     [Inject] public INavigator Navigator { get; set; } = null!;
@@ -34,8 +35,14 @@ public partial class List<T> : IDisposable
         Model.Dispose();
     }
 
-    public void AddNew()
+    public async Task AddNew()
     {
+        if (AddClicked.HasDelegate)
+        {
+            await AddClicked.InvokeAsync();
+            return;
+        }
+
         var suffix = UrlSuffix.HasSomething() ? UrlSuffix + "&state=new" : "?state=new";
         Navigator.GoTo($"{UrlPrefix}-{Guid.NewGuid():D}{suffix}");
     }

@@ -15,25 +15,60 @@ declare @organizationId uniqueidentifier = (
 )
 
 declare @now datetimeoffset = sysdatetimeoffset()
+declare @unitId uniqueidentifier = (
+    select unitLicense.UnitId
+    from [Education].[UnitLicense-Active] unitLicense
+        inner join [Education].[Unit-Active] unit on unitLicense.UnitId = unit.Id
+        inner join [Framework].[License-Active] license on license.Id = unitLicense.LicenseId
+    where unitLicense.Id = @Id
+        and unit.OwnerId = @organizationId
+        and license.OwnerId = @organizationId
+)
 
 set nocount on
 set xact_abort on
 begin transaction
 
 
-if not exists (
-    select 1
-    from [Education].[UnitLicense-Active] unitLicense
-        inner join [Education].[Unit-Active] unit on unitLicense.UnitId = unit.Id
-        inner join [Framework].[Organization-Active] organization on unit.OwnerId = organization.Id
-    where unitLicense.Id = @Id
-        and organization.Id = @organizationId
-)
+if @unitId is null
 begin
     rollback transaction
     raiserror('Tenancy check failed', 16, 1)
     return
 end
+
+if exists (
+    select 1
+    from @Books requestedBook
+    where not exists (
+        select 1
+        from [Education].[UnitBook-Active] unitBook
+        where unitBook.UnitId = @unitId
+            and unitBook.BookId = requestedBook.Id
+    )
+)
+begin
+    rollback transaction
+    raiserror('Every selected book must belong to the licensed unit', 16, 1)
+    return
+end
+
+if exists (
+    select 1
+    from @Lessons requestedLesson
+    where not exists (
+        select 1
+        from [Education].[Lesson-Active] lesson
+        where lesson.UnitId = @unitId
+            and lesson.Id = requestedLesson.Id
+    )
+)
+begin
+    rollback transaction
+    raiserror('Every selected lesson must belong to the licensed unit', 16, 1)
+    return
+end
+
 update [Education].[UnitLicense]
 set  Id = @Id
     ,Updated = @now

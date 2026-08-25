@@ -5,6 +5,7 @@ create proc [ContentDesign].[BlogInsert] (
     ,@StatusId uniqueidentifier
     ,@Author nvarchar(150)
     ,@Description nvarchar(max)
+    ,@AccessMode int
     ,@ImageId uniqueidentifier
     ,@Id uniqueidentifier output
 ) as
@@ -33,6 +34,7 @@ insert [Content].[Blog] (
     ,StatusId
     ,Author
     ,Description
+    ,AccessMode
     ,ImageId
 )
 values (
@@ -45,6 +47,7 @@ values (
     ,@StatusId
     ,@Author
     ,@Description
+    ,@AccessMode
     ,@ImageId
 )
 

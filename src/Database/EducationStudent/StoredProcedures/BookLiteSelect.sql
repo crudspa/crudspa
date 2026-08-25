@@ -10,10 +10,13 @@ insert [Education].[BookViewed] (
     ,BookId
     ,UpdatedBy
 )
-values (
+select
      newid()
     ,@Id
     ,@SessionId
+where exists (
+    select 1
+    from [EducationStudent].[LicensedBooks](@SessionId, @Id) licensedBook
 )
 
 declare @studentId uniqueidentifier
@@ -70,6 +73,10 @@ from [Education].[Book-Active] book
     left join [Framework].[ImageFile-Active] coverImage on book.CoverImageId = coverImage.Id
 where book.Id = @Id
     and book.StatusId = @ContentStatusComplete
+    and exists (
+        select 1
+        from [EducationStudent].[LicensedBooks](@SessionId, book.Id) licensedBook
+    )
 
 select
      game.Id as Id
@@ -81,6 +88,10 @@ from [Education].[Game-Active] game
     left join [Framework].[Icon-Active] icon on game.IconId = icon.Id
 where game.BookId = @Id
     and game.StatusId = @ContentStatusComplete
+    and exists (
+        select 1
+        from [EducationStudent].[LicensedBooks](@SessionId, game.BookId) licensedBook
+    )
     and game.GradeId = @studentGradeId
     and game.AssessmentLevelId = @studentAssessmentLevelId
     and (game.RequiresAchievementId is null
@@ -105,6 +116,10 @@ from [Education].[Module-Active] module
     left join [Framework].[Icon-Active] icon on module.IconId = icon.Id
 where module.BookId = @Id
     and module.StatusId = @ContentStatusComplete
+    and exists (
+        select 1
+        from [EducationStudent].[LicensedBooks](@SessionId, module.BookId) licensedBook
+    )
     and (module.RequiresAchievementId is null
         or exists (
             select Id

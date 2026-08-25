@@ -23,11 +23,18 @@ insert [Content].[TrackViewed] (
     ,UpdatedBy
     ,TrackId
 )
-values (
+select
      newid()
     ,@now
     ,@SessionId
     ,@Id
+where exists (
+    select 1
+    from [Content].[Track-Active] track
+        inner join [Framework].[Portal-Active] portal on track.PortalId = portal.Id
+    where track.Id = @Id
+        and track.StatusId = @ContentStatusComplete
+        and portal.Id = @portalId
 )
 
 select

@@ -1,13 +1,13 @@
 $selectbar-background-color: var(--rz-base-backgorund-color) !default;
 $selectbar-color: var(--rz-text-color) !default;
 $selectbar-border: var(--rz-border-normal) !default;
-$selectbar-selected-background-color: var(--rz-secondary) !default;
-$selectbar-selected-color: var(--rz-on-secondary) !default;
-$selectbar-selected-border: var(--rz-border-secondary) !default;
+$selectbar-selected-background-color: var(--rz-primary-lighter) !default;
+$selectbar-selected-color: var(--rz-on-primary-lighter) !default;
+$selectbar-selected-border: var(--rz-border-primary-lighter) !default;
 $selectbar-border-radius: var(--rz-border-radius) !default;
 $selectbar-focus-outline: var(--rz-outline-focus) !default;
 $selectbar-focus-outline-offset: var(--rz-outline-offset) !default;
-$selectbar-button-focus-outline: var(--rz-outline-width) solid var(--rz-text-color) !default;
+$selectbar-button-focus-outline: var(--rz-outline-focus) !default;
 $selectbar-button-focus-outline-offset: calc(-1 * var(--rz-outline-width)) !default;
 $selectbar-sizes: xs, sm, md, lg;
 
@@ -35,13 +35,24 @@ $selectbar-sizes: xs, sm, md, lg;
     display: inline-block;
     background-color: var(--rz-selectbar-background-color);
     color: var(--rz-selectbar-color);
-    border: var(--rz-selectbar-border);
+    border: none;
+    outline: var(--rz-selectbar-border);
+    outline-offset: -1px;
     border-radius: 0;
+    box-shadow: none;
+
+    &:not(.rz-state-active):not(.rz-state-disabled) {
+      @include rz-hover-state {
+        @include variant-hover-bg('base');
+        background-image: none;
+        box-shadow: none;
+      }
+    }
 
     &.rz-state-active {
       background-color: var(--rz-selectbar-selected-background-color);
       color: var(--rz-selectbar-selected-color);
-      border: var(--rz-selectbar-selected-border);
+      outline: var(--rz-selectbar-selected-border);
     }
   }
 
@@ -55,7 +66,7 @@ $selectbar-sizes: xs, sm, md, lg;
       }
 
       &:not(:first-child) {
-        border-inline-start: none;
+        margin-inline-start: -1px;
       }
 
       &:last-child {
@@ -77,7 +88,7 @@ $selectbar-sizes: xs, sm, md, lg;
       }
 
       &:not(:first-child) {
-        border-top: none;
+        margin-top: -1px;
       }
 
       &:last-child {

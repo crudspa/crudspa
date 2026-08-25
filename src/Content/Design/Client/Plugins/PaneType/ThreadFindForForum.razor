@@ -14,8 +14,6 @@
                     @bind-Ascending="Model.Search.Sort.Ascending" />
         </Fields>
         <Buttons>
-            <ButtonAdd EntityName="Thread"
-                       Clicked="AddNew" />
             <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Create">
                 <MenuItem Type="MenuItem.Types.Reset"
                           Clicked="() => Model.Reset()" />
@@ -25,49 +23,50 @@
         </Buttons>
     </Filters>
 </Waiter>
-@if (Model.Cards.IsEmpty())
-{
-    <NoRecords EntityName="threads" />
-}
-else
-{
-    @foreach (var card in Model.Cards)
+<div class="c-forum-shell">
+    @if (Model.Cards.IsEmpty())
     {
-        <Card Model="card"
-              Title="@card.Entity.Title"
-              SupportsDelete="true"
-              DeleteRequested="() => Model.Delete(card.Entity.Id)">
-            <Values>
-                <Field Size="Field.Sizes.Unspecified">
-                    <Labeled Width="6em"
-                             Label="By"
-                             StringValue="@card.Entity.Comment.ByName" />
-                    <Labeled Width="6em"
-                             Label="Posted"
-                             DateTimeOffsetValue="@card.Entity.Comment.Posted" />
-                    <Labeled Width="6em"
-                             Label="Edited"
-                             DateTimeOffsetValue="@card.Entity.Comment.Edited" />
-                    <Labeled Width="6em"
-                             Label="Pinned"
-                             BooleanValue="@card.Entity.Pinned" />
-                </Field>
-            </Values>
-            <PaneLinks>
-                <PaneLink Href="@($"{Path}/thread-{card.Entity.Id:D}?pane=comments")"
-                          Text="Comments"
-                          Count="card.Entity.CommentCount" />
-            </PaneLinks>
-            <Buttons>
-                <ButtonView Href="@($"{Path}/thread-{card.Entity.Id:D}")" />
-                <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.View">
-                    <MenuItem Type="MenuItem.Types.Delete"
-                              Clicked="() => Model.ShowConfirmation(card.Entity.Id)" />
-                </ContextMenu>
-            </Buttons>
-        </Card>
+        <NoRecords EntityName="threads" />
     }
+    else
+    {
+        @foreach (var card in Model.Cards)
+        {
+            <Modal Model="card.ConfirmationModel">
+                <Content>
+                    <Padding Direction="Padding.Directions.Top" Size="Padding.Sizes.Small">
+                        Are you sure you want to delete '@card.Entity.Title'?
+                    </Padding>
+                </Content>
+                <Buttons>
+                    <ButtonDelete Clicked="() => Model.Delete(card.Entity.Id)" />
+                    <ButtonCancel Clicked="() => card.ConfirmationModel.Hide()" />
+                </Buttons>
+            </Modal>
+            <ForumMessage Comment="card.Entity.Comment"
+                          Title="@card.Entity.Title"
+                          Pinned="card.Entity.Pinned == true">
+                <Body>
+                    <UserHtml Html="@card.Entity.Comment.Body" />
+                </Body>
+                <Footer>
+                    <div class="c-forum-topic-footer">
+                        <a href="@($"{Path}/thread-{card.Entity.Id:D}")">
+                            @card.Entity.CommentCount @(card.Entity.CommentCount == 1 ? "reply" : "replies")
+                        </a>
+                    </div>
+                    <div class="c-forum-actions">
+                        <ButtonView Href="@($"{Path}/thread-{card.Entity.Id:D}")" Text="Open discussion" />
+                        <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.View">
+                            <MenuItem Type="MenuItem.Types.Delete"
+                                      Clicked="() => Model.ShowConfirmation(card.Entity.Id)" />
+                        </ContextMenu>
+                    </div>
+                </Footer>
+            </ForumMessage>
+        }
 
-    <Pager Paged="Model.Search.Paged"
-           PageNumberChanged="Model.HandlePageNumberChanged" />
-}
+        <Pager Paged="Model.Search.Paged"
+               PageNumberChanged="Model.HandlePageNumberChanged" />
+    }
+</div>

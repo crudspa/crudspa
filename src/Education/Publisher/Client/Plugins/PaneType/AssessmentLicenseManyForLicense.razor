@@ -1,0 +1,20 @@
+<Many Model="Model"
+      T="AssessmentLicenseModel"
+      EntityName="Assessment License"
+      SaveRequested="id => Model.Save(id)"
+      CancelRequested="id => Model.Cancel(id)"
+      DeleteRequested="id => Model.Delete(id)">
+    <ReadView>
+        <div></div>
+    </ReadView>
+    <EditView>
+        <Wrapped Alignment="Wrapped.Alignments.Top">
+            <Field Label="Assessment"
+                   Size="Field.Sizes.Medium">
+                <Dropdown ReadOnly="@false"
+                          LookupValues="Model.AssessmentNames"
+                          @bind-Value="context.AssessmentLicense.AssessmentId" />
+            </Field>
+        </Wrapped>
+    </EditView>
+</Many>

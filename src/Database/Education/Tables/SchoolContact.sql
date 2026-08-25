@@ -19,3 +19,9 @@ create table [Education].[SchoolContact] (
     constraint [FK_Education_SchoolContact_Title] foreign key ([TitleId]) references [Education].[Title] ([Id]),
     constraint [FK_Education_SchoolContact_ResearchGroup] foreign key ([ResearchGroupId]) references [Education].[ResearchGroup] ([Id]),
 );
+
+go
+
+create nonclustered index [IX_Education_SchoolContact_School]
+    on [Education].[SchoolContact] ([SchoolId], [UserId])
+    include ([VersionOf], [IsDeleted], [ContactId]);

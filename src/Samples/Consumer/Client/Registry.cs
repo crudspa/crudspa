@@ -14,8 +14,10 @@ public class Registry
         services.AddSingleton<IContentPortalRunService, ContentPortalRunServiceTcp>();
         services.AddSingleton<ICourseRunService, CourseRunServiceTcp>();
         services.AddSingleton<IElementProgressService, ElementProgressServiceTcp>();
+        services.AddSingleton<IForumRunService, ForumRunServiceTcp>();
         services.AddSingleton<INotebookRunService, NotebookRunServiceTcp>();
         services.AddSingleton<IPageRunService, PageRunServiceTcp>();
+        services.AddSingleton<ISurveyRunService, SurveyRunServiceTcp>();
 
         // Crudspa.Framework.Core.Client
         services.AddSingleton<IClickService, ClickServiceCore>();

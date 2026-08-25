@@ -12,3 +12,9 @@ create table [Content].[Thread] (
     constraint [FK_Content_Thread_Forum] foreign key ([ForumId]) references [Content].[Forum] ([Id]),
     constraint [FK_Content_Thread_Comment] foreign key ([CommentId]) references [Content].[Comment] ([Id]),
 );
+
+go
+
+create nonclustered index [IX_Content_Thread_Forum_Pinned]
+    on [Content].[Thread] ([ForumId], [Pinned])
+    include ([Id], [VersionOf], [IsDeleted], [CommentId], [Title]);

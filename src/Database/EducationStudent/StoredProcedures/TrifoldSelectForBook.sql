@@ -21,11 +21,14 @@ insert [Education].[MapViewed] (
     ,UpdatedBy
     ,BookId
 )
-values (
+select
      newid()
     ,@now
     ,@SessionId
     ,@BookId
+where exists (
+    select 1
+    from [EducationStudent].[LicensedBooks](@SessionId, @BookId) licensedBook
 )
 
 select
@@ -38,6 +41,10 @@ select
 from [Education].[Trifold-Active] trifold
 where trifold.BookId = @BookId
     and trifold.StatusId = @ContentStatusComplete
+    and exists (
+        select 1
+        from [EducationStudent].[LicensedBooks](@SessionId, trifold.BookId) licensedBook
+    )
     and (trifold.RequiresAchievementId is null
         or exists (
             select Id

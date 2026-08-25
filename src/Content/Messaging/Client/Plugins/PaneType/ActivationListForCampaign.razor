@@ -1,0 +1,24 @@
+<List Model="Model"
+      T="ActivationModel"
+      EntityName="Activation"
+      UrlPrefix="@($"{Path}/activation")"
+      AddClicked="StartActivation"
+      ShowDelete="false">
+    <ReadView>
+        <Field Size="Field.Sizes.Unspecified">
+            <Labeled Width="8em"
+                     Label="Start"
+                     DateOnlyValue="@context.Activation.Start" />
+            <Labeled Width="8em"
+                     Label="Activated"
+                     DateTimeOffsetValue="@context.Activation.Activated" />
+            <Labeled Width="8em"
+                     Label="Organization"
+                     StringValue="@context.Activation.OrganizationName" />
+        </Field>
+    </ReadView>
+    <PaneLinks>
+        <PaneLink Href="@($"{Path}/activation-{context.Activation.Id:D}?pane=messages")"
+                  Text="Messages" />
+    </PaneLinks>
+</List>

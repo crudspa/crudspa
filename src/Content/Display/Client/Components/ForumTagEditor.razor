@@ -1,0 +1,46 @@
+@foreach (var bundle in Bundles.Where(IsEnabled))
+{
+    <div class="c-padding-small-vertical">
+        <strong>@bundle.BundleName@if (IsRequired(bundle)) {<text> (required)</text>}</strong>
+        @if (bundle.Tags.IsEmpty())
+        {
+            <div><small>No tags are available in this bundle.</small></div>
+        }
+        else
+        {
+            <div class="c-flex c-gap-small">
+                @foreach (var tag in bundle.Tags)
+                {
+                    <Checkbox Label="@tag.Name"
+                              Value="IsSelected(tag.Id)"
+                              ValueChanged="value => SetSelected(tag, value)" />
+                }
+            </div>
+        }
+    </div>
+}
+
+@code {
+    [Parameter, EditorRequired] public IEnumerable<ForumBundle> Bundles { get; set; } = [];
+    [Parameter, EditorRequired] public ObservableCollection<Selectable> Tags { get; set; } = [];
+    private static Boolean IsEnabled(ForumBundle bundle) => bundle.ThreadRule != ForumBundle.Rules.NotUsed;
+    private static Boolean IsRequired(ForumBundle bundle) => bundle.ThreadRule == ForumBundle.Rules.Required;
+
+    private Boolean IsSelected(Guid? id) => Tags.Any(x => x.Id == id && x.Selected == true);
+
+    private void SetSelected(Selectable tag, Boolean? selected)
+    {
+        foreach (var existing in Tags.Where(x => x.Id == tag.Id).ToList())
+            Tags.Remove(existing);
+
+        if (selected == true)
+        {
+            Tags.Add(new()
+            {
+                Id = tag.Id,
+                Name = tag.Name,
+                Selected = true,
+            });
+        }
+    }
+}

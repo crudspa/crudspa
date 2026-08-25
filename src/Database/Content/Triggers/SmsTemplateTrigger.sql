@@ -9,6 +9,7 @@ insert [Content].[SmsTemplate] (
     ,UpdatedBy
     ,IsDeleted
     ,MembershipId
+    ,PortalId
     ,Title
     ,Body
 )
@@ -19,6 +20,7 @@ select
     ,deleted.UpdatedBy
     ,deleted.IsDeleted
     ,deleted.MembershipId
+    ,deleted.PortalId
     ,deleted.Title
     ,deleted.Body
 from deleted

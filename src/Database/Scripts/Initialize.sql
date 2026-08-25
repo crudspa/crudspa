@@ -17219,6 +17219,28 @@ begin
         ,null
     )
 
+    -- Campaign: Consumer.Contributor Welcome Series
+    insert [Content].[Campaign] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,PortalId
+        ,Name
+        ,Description
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef402'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef402'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'73410fd3-3681-46d3-800e-a08670e291cf'
+        ,'Contributor Welcome Series'
+        ,'A two-stage sample campaign showing reusable populations, templates, and message definitions.'
+    )
+
     -- Container: 0.75em [67edc9e8]
     insert [Content].[Container] (
          Id
@@ -18169,6 +18191,122 @@ begin
         ,'e2a5a254-c698-4bbe-9ac3-a1d75598aeb2'
         ,'c05f8e57-be1a-449d-b99d-10e1b2a7c754'
         ,'1.5em'
+    )
+
+    -- EmailTemplate: Consumer.Sample Follow-Up
+    insert [Content].[EmailTemplate] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,MembershipId
+        ,Title
+        ,Subject
+        ,Body
+        ,PortalId
+        ,OrganizationId
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef404'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef404'
+        ,@now
+        ,@sessionId
+        ,0
+        ,null
+        ,'Sample Follow-Up'
+        ,'What did you build?'
+        ,'<p>Hi {{FirstName}},</p><p>Now that the samples are running, try authoring a forum or editing a content page and watch Consumer refresh.</p>'
+        ,'73410fd3-3681-46d3-800e-a08670e291cf'
+        ,null
+    )
+
+    -- EmailTemplate: Consumer.Welcome to Crudspa
+    insert [Content].[EmailTemplate] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,MembershipId
+        ,Title
+        ,Subject
+        ,Body
+        ,PortalId
+        ,OrganizationId
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef403'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef403'
+        ,@now
+        ,@sessionId
+        ,0
+        ,null
+        ,'Welcome to Crudspa'
+        ,'Welcome to the Crudspa sample'
+        ,'<p>Hi {{FirstName}},</p><p>Welcome to the sample project. Start with Catalog, then open Composer and Consumer together.</p>'
+        ,'73410fd3-3681-46d3-800e-a08670e291cf'
+        ,null
+    )
+
+    -- Forum: Consumer.Open Source Builders
+    insert [Content].[Forum] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,PortalId
+        ,StatusId
+        ,Title
+        ,Description
+        ,ImageId
+        ,AccessMode
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef301'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef301'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'73410fd3-3681-46d3-800e-a08670e291cf'
+        ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
+        ,'Open Source Builders'
+        ,'<p>Share patterns, extensions, and lessons learned while building with Crudspa.</p>'
+        ,null
+        ,0
+        ,0
+    )
+
+    -- Forum: Consumer.Sample Support Desk
+    insert [Content].[Forum] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,PortalId
+        ,StatusId
+        ,Title
+        ,Description
+        ,ImageId
+        ,AccessMode
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef302'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef302'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'73410fd3-3681-46d3-800e-a08670e291cf'
+        ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
+        ,'Sample Support Desk'
+        ,'<p>Questions and answers about cloning, configuring, and running the sample applications.</p>'
+        ,null
+        ,0
+        ,1
     )
 
     -- Item: 0 1 [0f9fb9fc]
@@ -19814,6 +19952,9 @@ begin
         ,Name
         ,Description
         ,SupportsOptOut
+        ,PopulationId
+        ,OrganizationId
+        ,ActivationScopeId
     )
     values (
          'e664dcdb-d143-4d59-82f7-bb5cdd1164e7'
@@ -19825,6 +19966,9 @@ begin
         ,'Sample Membership'
         ,null
         ,0
+        ,null
+        ,null
+        ,null
     )
 
     -- Page: Consumer Footer
@@ -20891,6 +21035,150 @@ begin
         ,0
         ,'0f459a03-b0ef-49a2-a359-7e5cd0f2c861'
         ,'129e30f3-2267-4571-a890-ff566cb4bb09'
+    )
+
+    -- Stage: Consumer.Contributor Welcome Series.Welcome
+    insert [Content].[Stage] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,CampaignId
+        ,Name
+        ,Offset
+        ,Anchor
+        ,WeekendAdjustment
+        ,SendTime
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef405'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef405'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'87b8c9da-1e2f-4031-9456-789abcdef402'
+        ,'Welcome'
+        ,0
+        ,0
+        ,2
+        ,'09:00:00'
+        ,0
+    )
+
+    -- Message: Consumer.Contributor Welcome Series.Welcome.Welcome Email
+    insert [Content].[Message] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,StageId
+        ,Name
+        ,PopulationId
+        ,MessageTypeId
+        ,EmailTemplateId
+        ,SmsTemplateId
+        ,Ordinal
+        ,ActivationId
+        ,DefinitionId
+        ,MembershipId
+        ,EmailId
+        ,SmsId
+        ,ActivationStageId
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef407'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef407'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'87b8c9da-1e2f-4031-9456-789abcdef405'
+        ,'Welcome Email'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef401'
+        ,'893356f5-0baa-4b66-8b72-798285c6a4db'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef403'
+        ,null
+        ,0
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+    )
+
+    -- Stage: Consumer.Contributor Welcome Series.Follow-Up
+    insert [Content].[Stage] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,CampaignId
+        ,Name
+        ,Offset
+        ,Anchor
+        ,WeekendAdjustment
+        ,SendTime
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef406'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef406'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'87b8c9da-1e2f-4031-9456-789abcdef402'
+        ,'Follow-Up'
+        ,3
+        ,0
+        ,2
+        ,'09:00:00'
+        ,1
+    )
+
+    -- Message: Consumer.Contributor Welcome Series.Follow-Up.Follow-Up Email
+    insert [Content].[Message] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,StageId
+        ,Name
+        ,PopulationId
+        ,MessageTypeId
+        ,EmailTemplateId
+        ,SmsTemplateId
+        ,Ordinal
+        ,ActivationId
+        ,DefinitionId
+        ,MembershipId
+        ,EmailId
+        ,SmsId
+        ,ActivationStageId
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef408'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef408'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'87b8c9da-1e2f-4031-9456-789abcdef406'
+        ,'Follow-Up Email'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef401'
+        ,'893356f5-0baa-4b66-8b72-798285c6a4db'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef404'
+        ,null
+        ,0
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
     )
 
     -- Style: Consumer.84em.{"Background":"#94090d","Foreground":"#f6f6f6"} [bea9d3a6]
@@ -25621,6 +25909,280 @@ begin
         ,'<h2>Section Heading</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sagittis, massa ut placerat dictum, ipsum nulla tempus justo, non auctor lectus ligula ac est. Duis non diam varius sem vestibulum lacinia eu nec lacus. Quisque et neque sed lacus facilisis sagittis. Nunc dictum felis id sapien dignissim feugiat. Vivamus id ex elit. Aenean suscipit nulla accumsan lacus molestie, sit amet suscipit mi molestie. Fusce elementum vehicula hendrerit.</p>'
     )
 
+    -- Contact: Sample Reader
+    insert [Framework].[Contact] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,FirstName
+        ,LastName
+        ,TimeZoneId
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef201'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef201'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'Sample'
+        ,'Reader'
+        ,'America/Denver'
+    )
+
+    -- Comment: Sample Reader.<p>Welcome! This thread shows the forum runtime, nested replies, editing control...
+    insert [Content].[Comment] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,ParentId
+        ,PostId
+        ,ThreadId
+        ,ById
+        ,Posted
+        ,Edited
+        ,Body
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef321'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef321'
+        ,@now
+        ,@sessionId
+        ,0
+        ,null
+        ,null
+        ,null
+        ,'87b8c9da-1e2f-4031-9456-789abcdef201'
+        ,'2026-08-20T09:00:00.0000000-06:00'
+        ,null
+        ,'<p>Welcome! This thread shows the forum runtime, nested replies, editing controls, and live updates from a small but realistic data set.</p>'
+    )
+
+    -- Comment: Sample Reader.<p>Which Catalog workflow helped you understand the framework fastest: books, mo...
+    insert [Content].[Comment] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,ParentId
+        ,PostId
+        ,ThreadId
+        ,ById
+        ,Posted
+        ,Edited
+        ,Body
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef322'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef322'
+        ,@now
+        ,@sessionId
+        ,0
+        ,null
+        ,null
+        ,null
+        ,'87b8c9da-1e2f-4031-9456-789abcdef201'
+        ,'2026-08-21T10:30:00.0000000-06:00'
+        ,null
+        ,'<p>Which Catalog workflow helped you understand the framework fastest: books, movies, shirts, or the navigation metadata?</p>'
+    )
+
+    -- Comment: Sample Reader.<p>Publish the database project first, then seed sample blobs, then start Consum...
+    insert [Content].[Comment] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,ParentId
+        ,PostId
+        ,ThreadId
+        ,ById
+        ,Posted
+        ,Edited
+        ,Body
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef323'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef323'
+        ,@now
+        ,@sessionId
+        ,0
+        ,null
+        ,null
+        ,null
+        ,'87b8c9da-1e2f-4031-9456-789abcdef201'
+        ,'2026-08-22T14:15:00.0000000-06:00'
+        ,null
+        ,'<p>Publish the database project first, then seed sample blobs, then start Consumer and Composer together. Post the exact error and the project you launched if something still fails.</p>'
+    )
+
+    -- Thread: Consumer.Open Source Builders.Welcome to the Crudspa community sample
+    insert [Content].[Thread] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,ForumId
+        ,Title
+        ,CommentId
+        ,Pinned
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef311'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef311'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'87b8c9da-1e2f-4031-9456-789abcdef301'
+        ,'Welcome to the Crudspa community sample'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef321'
+        ,1
+    )
+
+    -- Comment: Consumer.Open Source Builders.Welcome to the Crudspa community sample.<p>Try opening this thread in two browser tabs. A reply in one tab is published ...
+    insert [Content].[Comment] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,ParentId
+        ,PostId
+        ,ThreadId
+        ,ById
+        ,Posted
+        ,Edited
+        ,Body
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef324'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef324'
+        ,@now
+        ,@sessionId
+        ,0
+        ,null
+        ,null
+        ,'87b8c9da-1e2f-4031-9456-789abcdef311'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef201'
+        ,'2026-08-20T09:20:00.0000000-06:00'
+        ,null
+        ,'<p>Try opening this thread in two browser tabs. A reply in one tab is published through the same typed notice flow used by the rest of the platform.</p>'
+    )
+
+    -- Comment: Consumer.Open Source Builders.Welcome to the Crudspa community sample.<p>Try opening this thread in two browser tabs. A reply in one tab is published ....<p>The nested layout is intentional too: replies keep their context without turn...
+    insert [Content].[Comment] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,ParentId
+        ,PostId
+        ,ThreadId
+        ,ById
+        ,Posted
+        ,Edited
+        ,Body
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef325'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef325'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'87b8c9da-1e2f-4031-9456-789abcdef324'
+        ,null
+        ,'87b8c9da-1e2f-4031-9456-789abcdef311'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef201'
+        ,'2026-08-20T09:35:00.0000000-06:00'
+        ,null
+        ,'<p>The nested layout is intentional too: replies keep their context without turning the whole discussion into a flat timeline.</p>'
+    )
+
+    -- Thread: Consumer.Open Source Builders.What should a new developer explore first?
+    insert [Content].[Thread] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,ForumId
+        ,Title
+        ,CommentId
+        ,Pinned
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef312'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef312'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'87b8c9da-1e2f-4031-9456-789abcdef301'
+        ,'What should a new developer explore first?'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef322'
+        ,0
+    )
+
+    -- Thread: Consumer.Sample Support Desk.Local setup checklist and common fixes
+    insert [Content].[Thread] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,ForumId
+        ,Title
+        ,CommentId
+        ,Pinned
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef313'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef313'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'87b8c9da-1e2f-4031-9456-789abcdef302'
+        ,'Local setup checklist and common fixes'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef323'
+        ,1
+    )
+
+    -- Comment: Consumer.Sample Support Desk.Local setup checklist and common fixes.<p>The checked-in HTTPS ports are part of the sample contract because cross-host...
+    insert [Content].[Comment] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,ParentId
+        ,PostId
+        ,ThreadId
+        ,ById
+        ,Posted
+        ,Edited
+        ,Body
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef326'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef326'
+        ,@now
+        ,@sessionId
+        ,0
+        ,null
+        ,null
+        ,'87b8c9da-1e2f-4031-9456-789abcdef313'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef201'
+        ,'2026-08-22T14:30:00.0000000-06:00'
+        ,null
+        ,'<p>The checked-in HTTPS ports are part of the sample contract because cross-host invalidation uses those receiver URLs.</p>'
+    )
+
     -- Contact: Sample User
     insert [Framework].[Contact] (
          Id
@@ -25661,6 +26223,28 @@ begin
         ,@sessionId
         ,0
         ,'7e8b9ecf-2ec6-4e2d-9cf3-5cf18e8d8a8d'
+        ,'sample@example.com'
+        ,0
+    )
+
+    -- ContactEmail: Sample Reader.sample@example.com
+    insert [Framework].[ContactEmail] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,ContactId
+        ,Email
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef202'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef202'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'87b8c9da-1e2f-4031-9456-789abcdef201'
         ,'sample@example.com'
         ,0
     )
@@ -25743,6 +26327,26 @@ begin
         ,0
         ,'4252d9f8-37c5-4e32-9c20-6b86d612a530'
         ,'55b87662-2b7d-4838-b3eb-ec15053d9ee5'
+    )
+
+    -- RolePermission: Crudspa Samples.Admin | Forums
+    insert [Framework].[RolePermission] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,RoleId
+        ,PermissionId
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef003'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef003'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'4252d9f8-37c5-4e32-9c20-6b86d612a530'
+        ,'7e4b7332-0f6f-429a-a95e-d8a21a08e4b5'
     )
 
     -- RolePermission: Crudspa Samples.Admin | Settings | Contacts
@@ -25883,6 +26487,26 @@ begin
         ,0
         ,'4252d9f8-37c5-4e32-9c20-6b86d612a530'
         ,'e1935697-f5c4-467a-9dea-f90470172a94'
+    )
+
+    -- RolePermission: Crudspa Samples.Admin | Campaigns
+    insert [Framework].[RolePermission] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,RoleId
+        ,PermissionId
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef004'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef004'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'4252d9f8-37c5-4e32-9c20-6b86d612a530'
+        ,'e5f2a25d-1a79-41af-9964-fcdafa1f4725'
     )
 
     -- RolePermission: Crudspa Samples.Admin | Jobs
@@ -28430,6 +29054,258 @@ begin
         ,'Details'
         ,'6bbd4fc8-d5e8-43d9-9b17-e9234c3c96fb'
         ,'e96f9f9f-8c79-46a9-9b5a-07f721b9ba21'
+        ,null
+        ,null
+        ,0
+    )
+
+    -- Segment: Consumer.Forums
+    insert [Framework].[Segment] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,StatusId
+        ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
+        ,RequiresId
+        ,PortalId
+        ,TypeId
+        ,PermissionId
+        ,IconId
+        ,ParentId
+        ,Recursive
+        ,Vertical
+        ,ConfigJson
+        ,AllLicenses
+        ,SeoDescription
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef020'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef020'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'forums'
+        ,'Forums'
+        ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
+        ,1
+        ,1
+        ,1
+        ,1
+        ,0
+        ,'73410fd3-3681-46d3-800e-a08670e291cf'
+        ,'35f404f9-c08b-4c71-88c9-794b60741332'
+        ,null
+        ,null
+        ,null
+        ,0
+        ,0
+        ,'{}'
+        ,1
+        ,'Sample community discussions.'
+        ,2
+    )
+
+    -- Pane: Consumer.Forums.Forums
+    insert [Framework].[Pane] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,SegmentId
+        ,TypeId
+        ,PermissionId
+        ,ConfigJson
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef113'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef113'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'forums'
+        ,'Forums'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef020'
+        ,'730eb0d1-2e7d-47dc-8b50-7434bfb25b64'
+        ,null
+        ,null
+        ,0
+    )
+
+    -- Segment: Consumer.Forums.Forum
+    insert [Framework].[Segment] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,StatusId
+        ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
+        ,RequiresId
+        ,PortalId
+        ,TypeId
+        ,PermissionId
+        ,IconId
+        ,ParentId
+        ,Recursive
+        ,Vertical
+        ,ConfigJson
+        ,AllLicenses
+        ,SeoDescription
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef021'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef021'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'forum'
+        ,'Forum'
+        ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
+        ,0
+        ,1
+        ,1
+        ,0
+        ,1
+        ,'73410fd3-3681-46d3-800e-a08670e291cf'
+        ,'e86d3ee2-22df-4cb1-bb66-ea417d34edeb'
+        ,null
+        ,null
+        ,'87b8c9da-1e2f-4031-9456-789abcdef020'
+        ,0
+        ,0
+        ,'{}'
+        ,1
+        ,'Browse and start discussion threads.'
+        ,0
+    )
+
+    -- Pane: Consumer.Forums.Forum.Details
+    insert [Framework].[Pane] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,SegmentId
+        ,TypeId
+        ,PermissionId
+        ,ConfigJson
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef114'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef114'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'details'
+        ,'Details'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef021'
+        ,'b678e353-c9f0-4f70-bd65-f816c500fe5d'
+        ,null
+        ,null
+        ,0
+    )
+
+    -- Segment: Consumer.Forums.Forum.Thread
+    insert [Framework].[Segment] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,StatusId
+        ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
+        ,RequiresId
+        ,PortalId
+        ,TypeId
+        ,PermissionId
+        ,IconId
+        ,ParentId
+        ,Recursive
+        ,Vertical
+        ,ConfigJson
+        ,AllLicenses
+        ,SeoDescription
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef022'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef022'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'thread'
+        ,'Thread'
+        ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
+        ,0
+        ,1
+        ,1
+        ,0
+        ,1
+        ,'73410fd3-3681-46d3-800e-a08670e291cf'
+        ,'35f404f9-c08b-4c71-88c9-794b60741332'
+        ,null
+        ,null
+        ,'87b8c9da-1e2f-4031-9456-789abcdef021'
+        ,0
+        ,0
+        ,'{}'
+        ,1
+        ,'Read and reply to a discussion.'
+        ,0
+    )
+
+    -- Pane: Consumer.Forums.Forum.Thread.Details
+    insert [Framework].[Pane] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,SegmentId
+        ,TypeId
+        ,PermissionId
+        ,ConfigJson
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef115'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef115'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'details'
+        ,'Details'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef022'
+        ,'096f2408-25c7-47c0-ba48-8adfaf293632'
         ,null
         ,null
         ,0
@@ -31183,6 +32059,798 @@ begin
         ,0
     )
 
+    -- Segment: Composer.Portals.Portal.Campaigns
+    insert [Framework].[Segment] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,StatusId
+        ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
+        ,RequiresId
+        ,PortalId
+        ,TypeId
+        ,PermissionId
+        ,IconId
+        ,ParentId
+        ,Recursive
+        ,Vertical
+        ,ConfigJson
+        ,AllLicenses
+        ,SeoDescription
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef010'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef010'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'campaigns'
+        ,'Campaigns'
+        ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
+        ,0
+        ,1
+        ,1
+        ,1
+        ,0
+        ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
+        ,'e86d3ee2-22df-4cb1-bb66-ea417d34edeb'
+        ,'e5f2a25d-1a79-41af-9964-fcdafa1f4725'
+        ,null
+        ,'0b8f600a-e74c-4788-ad5e-e35ac5d37e41'
+        ,0
+        ,0
+        ,'{"Orientation":0}'
+        ,1
+        ,null
+        ,8
+    )
+
+    -- Pane: Composer.Portals.Portal.Campaigns.Campaigns
+    insert [Framework].[Pane] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,SegmentId
+        ,TypeId
+        ,PermissionId
+        ,ConfigJson
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef101'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef101'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'campaigns'
+        ,'Campaigns'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef010'
+        ,'17578595-4c26-4c93-815c-0b8a15212c25'
+        ,'e5f2a25d-1a79-41af-9964-fcdafa1f4725'
+        ,null
+        ,0
+    )
+
+    -- Pane: Composer.Portals.Portal.Campaigns.Populations
+    insert [Framework].[Pane] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,SegmentId
+        ,TypeId
+        ,PermissionId
+        ,ConfigJson
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef102'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef102'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'populations'
+        ,'Populations'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef010'
+        ,'7211f5ea-035d-45ad-b53a-6c681c536cce'
+        ,'e5f2a25d-1a79-41af-9964-fcdafa1f4725'
+        ,null
+        ,1
+    )
+
+    -- Segment: Composer.Portals.Portal.Campaigns.Campaign
+    insert [Framework].[Segment] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,StatusId
+        ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
+        ,RequiresId
+        ,PortalId
+        ,TypeId
+        ,PermissionId
+        ,IconId
+        ,ParentId
+        ,Recursive
+        ,Vertical
+        ,ConfigJson
+        ,AllLicenses
+        ,SeoDescription
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef011'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef011'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'campaign'
+        ,'Campaign'
+        ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
+        ,0
+        ,1
+        ,1
+        ,1
+        ,1
+        ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
+        ,'e86d3ee2-22df-4cb1-bb66-ea417d34edeb'
+        ,'e5f2a25d-1a79-41af-9964-fcdafa1f4725'
+        ,null
+        ,'87b8c9da-1e2f-4031-9456-789abcdef010'
+        ,0
+        ,0
+        ,'{"Orientation":0}'
+        ,1
+        ,null
+        ,0
+    )
+
+    -- Pane: Composer.Portals.Portal.Campaigns.Campaign.Details
+    insert [Framework].[Pane] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,SegmentId
+        ,TypeId
+        ,PermissionId
+        ,ConfigJson
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef103'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef103'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'details'
+        ,'Details'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef011'
+        ,'dfae9089-b128-4df8-ab40-34359c062733'
+        ,'e5f2a25d-1a79-41af-9964-fcdafa1f4725'
+        ,null
+        ,0
+    )
+
+    -- Pane: Composer.Portals.Portal.Campaigns.Campaign.Stages
+    insert [Framework].[Pane] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,SegmentId
+        ,TypeId
+        ,PermissionId
+        ,ConfigJson
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef104'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef104'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'stages'
+        ,'Stages'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef011'
+        ,'653e5d55-1c30-40d5-9377-54b7c78ef2fe'
+        ,'e5f2a25d-1a79-41af-9964-fcdafa1f4725'
+        ,null
+        ,1
+    )
+
+    -- Segment: Composer.Portals.Portal.Campaigns.Campaign.Stage
+    insert [Framework].[Segment] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,StatusId
+        ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
+        ,RequiresId
+        ,PortalId
+        ,TypeId
+        ,PermissionId
+        ,IconId
+        ,ParentId
+        ,Recursive
+        ,Vertical
+        ,ConfigJson
+        ,AllLicenses
+        ,SeoDescription
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef012'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef012'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'stage'
+        ,'Stage'
+        ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
+        ,0
+        ,1
+        ,1
+        ,1
+        ,1
+        ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
+        ,'e86d3ee2-22df-4cb1-bb66-ea417d34edeb'
+        ,'e5f2a25d-1a79-41af-9964-fcdafa1f4725'
+        ,null
+        ,'87b8c9da-1e2f-4031-9456-789abcdef011'
+        ,0
+        ,0
+        ,'{"Orientation":0}'
+        ,1
+        ,null
+        ,0
+    )
+
+    -- Pane: Composer.Portals.Portal.Campaigns.Campaign.Stage.Details
+    insert [Framework].[Pane] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,SegmentId
+        ,TypeId
+        ,PermissionId
+        ,ConfigJson
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef105'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef105'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'details'
+        ,'Details'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef012'
+        ,'18302677-85d9-4aca-9d8b-b952e459d676'
+        ,'e5f2a25d-1a79-41af-9964-fcdafa1f4725'
+        ,null
+        ,0
+    )
+
+    -- Pane: Composer.Portals.Portal.Campaigns.Campaign.Stage.Messages
+    insert [Framework].[Pane] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,SegmentId
+        ,TypeId
+        ,PermissionId
+        ,ConfigJson
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef106'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef106'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'messages'
+        ,'Messages'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef012'
+        ,'c82aed8f-38cb-471f-88ab-2a7077bcee8c'
+        ,'e5f2a25d-1a79-41af-9964-fcdafa1f4725'
+        ,null
+        ,1
+    )
+
+    -- Segment: Composer.Portals.Portal.Campaigns.Campaign.Stage.Message
+    insert [Framework].[Segment] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,StatusId
+        ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
+        ,RequiresId
+        ,PortalId
+        ,TypeId
+        ,PermissionId
+        ,IconId
+        ,ParentId
+        ,Recursive
+        ,Vertical
+        ,ConfigJson
+        ,AllLicenses
+        ,SeoDescription
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef013'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef013'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'message'
+        ,'Message'
+        ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
+        ,0
+        ,1
+        ,1
+        ,1
+        ,1
+        ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
+        ,'35f404f9-c08b-4c71-88c9-794b60741332'
+        ,'e5f2a25d-1a79-41af-9964-fcdafa1f4725'
+        ,null
+        ,'87b8c9da-1e2f-4031-9456-789abcdef012'
+        ,0
+        ,0
+        ,null
+        ,1
+        ,null
+        ,0
+    )
+
+    -- Pane: Composer.Portals.Portal.Campaigns.Campaign.Stage.Message.Details
+    insert [Framework].[Pane] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,SegmentId
+        ,TypeId
+        ,PermissionId
+        ,ConfigJson
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef107'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef107'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'details'
+        ,'Details'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef013'
+        ,'cd937c21-f224-4edb-948b-25135d411ee9'
+        ,'e5f2a25d-1a79-41af-9964-fcdafa1f4725'
+        ,null
+        ,0
+    )
+
+    -- Segment: Composer.Portals.Portal.Campaigns.Population
+    insert [Framework].[Segment] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,StatusId
+        ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
+        ,RequiresId
+        ,PortalId
+        ,TypeId
+        ,PermissionId
+        ,IconId
+        ,ParentId
+        ,Recursive
+        ,Vertical
+        ,ConfigJson
+        ,AllLicenses
+        ,SeoDescription
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef014'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef014'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'population'
+        ,'Population'
+        ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
+        ,0
+        ,1
+        ,1
+        ,1
+        ,1
+        ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
+        ,'35f404f9-c08b-4c71-88c9-794b60741332'
+        ,'e5f2a25d-1a79-41af-9964-fcdafa1f4725'
+        ,null
+        ,'87b8c9da-1e2f-4031-9456-789abcdef010'
+        ,0
+        ,0
+        ,null
+        ,1
+        ,null
+        ,1
+    )
+
+    -- Pane: Composer.Portals.Portal.Campaigns.Population.Details
+    insert [Framework].[Pane] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,SegmentId
+        ,TypeId
+        ,PermissionId
+        ,ConfigJson
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef108'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef108'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'details'
+        ,'Details'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef014'
+        ,'a0a6f313-4dc7-4c09-8d72-ec31ada4372c'
+        ,'e5f2a25d-1a79-41af-9964-fcdafa1f4725'
+        ,null
+        ,0
+    )
+
+    -- Segment: Composer.Portals.Portal.Forums
+    insert [Framework].[Segment] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,StatusId
+        ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
+        ,RequiresId
+        ,PortalId
+        ,TypeId
+        ,PermissionId
+        ,IconId
+        ,ParentId
+        ,Recursive
+        ,Vertical
+        ,ConfigJson
+        ,AllLicenses
+        ,SeoDescription
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef015'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef015'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'forums'
+        ,'Forums'
+        ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
+        ,1
+        ,1
+        ,1
+        ,1
+        ,0
+        ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
+        ,'35f404f9-c08b-4c71-88c9-794b60741332'
+        ,'7e4b7332-0f6f-429a-a95e-d8a21a08e4b5'
+        ,null
+        ,'0b8f600a-e74c-4788-ad5e-e35ac5d37e41'
+        ,0
+        ,0
+        ,'{}'
+        ,1
+        ,null
+        ,9
+    )
+
+    -- Pane: Composer.Portals.Portal.Forums.Details
+    insert [Framework].[Pane] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,SegmentId
+        ,TypeId
+        ,PermissionId
+        ,ConfigJson
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef109'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef109'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'details'
+        ,'Details'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef015'
+        ,'2e761f90-b02d-4332-910e-4bdcb097af64'
+        ,'7e4b7332-0f6f-429a-a95e-d8a21a08e4b5'
+        ,null
+        ,0
+    )
+
+    -- Segment: Composer.Portals.Portal.Forums.Forum
+    insert [Framework].[Segment] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,StatusId
+        ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
+        ,RequiresId
+        ,PortalId
+        ,TypeId
+        ,PermissionId
+        ,IconId
+        ,ParentId
+        ,Recursive
+        ,Vertical
+        ,ConfigJson
+        ,AllLicenses
+        ,SeoDescription
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef016'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef016'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'forum'
+        ,'Forum'
+        ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
+        ,0
+        ,1
+        ,1
+        ,0
+        ,1
+        ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
+        ,'e86d3ee2-22df-4cb1-bb66-ea417d34edeb'
+        ,'7e4b7332-0f6f-429a-a95e-d8a21a08e4b5'
+        ,null
+        ,'87b8c9da-1e2f-4031-9456-789abcdef015'
+        ,0
+        ,0
+        ,'{}'
+        ,1
+        ,null
+        ,0
+    )
+
+    -- Pane: Composer.Portals.Portal.Forums.Forum.Details
+    insert [Framework].[Pane] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,SegmentId
+        ,TypeId
+        ,PermissionId
+        ,ConfigJson
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef110'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef110'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'details'
+        ,'Details'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef016'
+        ,'84a6ea22-c7bb-4ec7-9fc0-670beede1cd4'
+        ,'7e4b7332-0f6f-429a-a95e-d8a21a08e4b5'
+        ,null
+        ,0
+    )
+
+    -- Pane: Composer.Portals.Portal.Forums.Forum.Threads
+    insert [Framework].[Pane] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,SegmentId
+        ,TypeId
+        ,PermissionId
+        ,ConfigJson
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef111'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef111'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'threads'
+        ,'Threads'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef016'
+        ,'023272ff-2e38-49eb-a061-5dcfa5f4b06f'
+        ,'7e4b7332-0f6f-429a-a95e-d8a21a08e4b5'
+        ,null
+        ,1
+    )
+
+    -- Segment: Composer.Portals.Portal.Forums.Forum.Thread
+    insert [Framework].[Segment] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,StatusId
+        ,Fixed
+        ,Routable
+        ,Navigable
+        ,Mapable
+        ,RequiresId
+        ,PortalId
+        ,TypeId
+        ,PermissionId
+        ,IconId
+        ,ParentId
+        ,Recursive
+        ,Vertical
+        ,ConfigJson
+        ,AllLicenses
+        ,SeoDescription
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef017'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef017'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'thread'
+        ,'Thread'
+        ,'0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
+        ,0
+        ,1
+        ,1
+        ,0
+        ,1
+        ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
+        ,'35f404f9-c08b-4c71-88c9-794b60741332'
+        ,'7e4b7332-0f6f-429a-a95e-d8a21a08e4b5'
+        ,null
+        ,'87b8c9da-1e2f-4031-9456-789abcdef016'
+        ,0
+        ,0
+        ,'{}'
+        ,1
+        ,null
+        ,0
+    )
+
+    -- Pane: Composer.Portals.Portal.Forums.Forum.Thread.Details
+    insert [Framework].[Pane] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,[Key]
+        ,Title
+        ,SegmentId
+        ,TypeId
+        ,PermissionId
+        ,ConfigJson
+        ,Ordinal
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef112'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef112'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'details'
+        ,'Details'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef017'
+        ,'4442ce04-42d0-4b6c-8408-a70c3799219c'
+        ,'7e4b7332-0f6f-429a-a95e-d8a21a08e4b5'
+        ,null
+        ,0
+    )
+
     -- User: Sample User.sample@example.com
     insert [Framework].[User] (
          Id
@@ -31206,6 +32874,36 @@ begin
         ,0
         ,'7e8b9ecf-2ec6-4e2d-9cf3-5cf18e8d8a8d'
         ,'aea2c861-459a-490c-b7c3-30e5156fec9f'
+        ,'7eaa4a2d-5a80-4c2a-8fc0-5fa5b70d55c1'
+        ,'sample@example.com'
+        ,null
+        ,null
+        ,1
+    )
+
+    -- User: Sample Reader.sample@example.com
+    insert [Framework].[User] (
+         Id
+        ,VersionOf
+        ,Updated
+        ,UpdatedBy
+        ,IsDeleted
+        ,ContactId
+        ,PortalId
+        ,OrganizationId
+        ,Username
+        ,PasswordSalt
+        ,PasswordHash
+        ,ResetPassword
+    )
+    values (
+         '87b8c9da-1e2f-4031-9456-789abcdef203'
+        ,'87b8c9da-1e2f-4031-9456-789abcdef203'
+        ,@now
+        ,@sessionId
+        ,0
+        ,'87b8c9da-1e2f-4031-9456-789abcdef201'
+        ,'73410fd3-3681-46d3-800e-a08670e291cf'
         ,'7eaa4a2d-5a80-4c2a-8fc0-5fa5b70d55c1'
         ,'sample@example.com'
         ,null

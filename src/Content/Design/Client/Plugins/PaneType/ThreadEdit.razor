@@ -2,12 +2,12 @@
     <Left>
         @if (Model.ReadOnly)
         {
-            <ButtonEdit Clicked="() => Model.Edit()" />
+            <ButtonEdit Clicked="Model.Edit" />
         }
         else
         {
             <ButtonGroup>
-                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonSave Clicked="Model.Save" />
                 <ButtonCancel Clicked="HandleCancelClicked" />
             </ButtonGroup>
         }
@@ -16,32 +16,41 @@
 <Waiter Model="Model">
     @if (Model.Entity is not null)
     {
-        <Padding Size="Padding.Sizes.Small"
-                 Direction="Padding.Directions.Vertical">
-            <Wrapped Alignment="Wrapped.Alignments.Top">
-                <Field Label="Title"
-                       Size="Field.Sizes.Wide">
-                    <TextBox ReadOnly="Model.ReadOnly"
-                             MaxLength="150"
-                             @bind-Value="Model.Entity.Title" />
-                </Field>
-                <Field Label="Body"
-                       Size="Field.Sizes.Full"
-                       Container="Field.Containers.Div">
-                    <HtmlEditor ReadOnly="Model.ReadOnly"
-                                @bind-Value="Model.Entity.Comment.Body" />
-                </Field>
-            </Wrapped>
-            <Wrapped>
-                <Field Label="Options"
-                       Container="Field.Containers.Div">
-                    <Wrapped NoWrap="true">
-                        <Checkbox Label="Pinned"
-                                  ReadOnly="Model.ReadOnly"
-                                  @bind-Value="Model.Entity.Pinned" />
-                    </Wrapped>
-                </Field>
-            </Wrapped>
-        </Padding>
+        <div class="c-forum-shell">
+            @if (Model.ReadOnly)
+            {
+                <ForumMessage Comment="Model.Entity.Comment"
+                              Title="@Model.Entity.Title"
+                              Pinned="Model.Entity.Pinned == true"
+                              Opening="true">
+                    <Body>
+                        <UserHtml Html="@Model.Entity.Comment.Body" />
+                        @foreach (var media in Model.Entity.Comment.CommentMedias.OrderBy(x => x.Ordinal))
+                        {
+                            <ForumMediaPreview Media="media" />
+                        }
+                    </Body>
+                </ForumMessage>
+            }
+            else
+            {
+                <div class="c-forum-composer">
+                    <Field Label="Title" Size="Field.Sizes.Wide">
+                        <TextBox ReadOnly="false" MaxLength="150" @bind-Value="Model.Entity.Title" />
+                    </Field>
+                    <Field Label="Message" Size="Field.Sizes.Full" Container="Field.Containers.Div">
+                        <HtmlEditor ReadOnly="false" @bind-Value="Model.Entity.Comment.Body" />
+                    </Field>
+                    <Field Label="Options" Container="Field.Containers.Div">
+                        <Checkbox Label="Pinned" ReadOnly="false" @bind-Value="Model.Entity.Pinned" />
+                    </Field>
+                </div>
+            }
+
+            @if (!IsNew)
+            {
+                <CommentTreeForThread Path="Path" Id="Id" IsNew="false" />
+            }
+        </div>
     }
 </Waiter>

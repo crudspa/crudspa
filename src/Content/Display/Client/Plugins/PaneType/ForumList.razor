@@ -1,0 +1,38 @@
+<Waiter Model="Model">
+    @if (Model.Forums is not null)
+    {
+        <div class="c-forum-shell">
+            @if (Model.Forums.IsEmpty())
+            {
+                <NoRecords EntityName="forums" />
+            }
+            else
+            {
+                <div class="c-forum-list">
+                    @foreach (var forum in Model.Forums)
+                    {
+                        <div class="c-forum-card @(forum.ImageFile.Name.HasSomething() ? String.Empty : "without-image")">
+                            @if (forum.ImageFile.Name.HasSomething())
+                            {
+                                <img src="/api/content/display/forum-media/forum-image?id=@forum.Id"
+                                     alt="@forum.Title" />
+                            }
+                            <div class="values">
+                                <div class="title">
+                                    <a href="@Model.ForumPath(forum.Id)"
+                                       @onclick="() => Model.GoToForum(forum.Id)"
+                                       @onclick:preventDefault="true">@forum.Title</a>
+                                </div>
+                                @if (forum.Description.HasSomething())
+                                {
+                                    <UserHtml Html="@forum.Description" />
+                                }
+                                <ButtonView Href="@Model.ForumPath(forum.Id)" Text="Open forum" />
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    }
+</Waiter>

@@ -1,0 +1,65 @@
+<Waiter Model="Model">
+    <Filters>
+        <Fields>
+            <Field Label="Search"
+                   Size="Field.Sizes.Medium">
+                <SearchTextBox @bind-Value="Model.Search.Text" />
+            </Field>
+            <Field Label="Sent"
+                   Size="Field.Sizes.Medium">
+                <DateFilter Range="Model.Search.ProcessedRange" />
+            </Field>
+            <Field Label="Status"
+                   Size="Field.Sizes.Medium">
+                <EnumMultiSelect TEnum="EmailSent.Statuses"
+                                 @bind-SelectedValues="Model.Search.Statuses" />
+            </Field>
+            <Sorter Sorts="Model.Sorts"
+                    @bind-Selected="Model.Search.Sort.Field"
+                    @bind-Ascending="Model.Search.Sort.Ascending" />
+        </Fields>
+        <Buttons>
+            <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Create">
+                <MenuItem Type="MenuItem.Types.Reset"
+                          Clicked="() => Model.Reset()" />
+                <MenuItem Type="MenuItem.Types.Refresh"
+                          Clicked="() => Model.Refresh()" />
+            </ContextMenu>
+        </Buttons>
+    </Filters>
+</Waiter>
+@if (Model.Cards.IsEmpty())
+{
+    <NoRecords EntityName="sent emails" />
+}
+else
+{
+    @foreach (var card in Model.Cards)
+    {
+        <Card Model="card"
+              Title="@card.Entity.Name">
+            <Values>
+                <Field Size="Field.Sizes.Unspecified">
+                    <Labeled Width="6em"
+                             Label="Email"
+                             StringValue="@card.Entity.RecipientEmail" />
+                    <Labeled Width="6em"
+                             Label="Sent"
+                             DateTimeOffsetValue="@card.Entity.Processed" />
+                    <Labeled Width="6em"
+                             Label="Status"
+                             StringValue="@card.Entity.Status.GetLabel()" />
+                    @if (card.Entity.ApiResponse.HasSomething())
+                    {
+                        <Labeled Width="6em"
+                                 Label="Response"
+                                 StringValue="@card.Entity.ApiResponse" />
+                    }
+                </Field>
+            </Values>
+        </Card>
+    }
+
+    <Pager Paged="Model.Search.Paged"
+           PageNumberChanged="Model.HandlePageNumberChanged" />
+}

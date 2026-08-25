@@ -1,0 +1,11 @@
+@using G = System.Collections.Generic
+@typeparam TEnum
+<RadzenDropDown AllowClear="false"
+                AllowSelectAll="false"
+                Chips="true"
+                Data="Options"
+                Multiple="true"
+                TextProperty="Name"
+                Value="SelectedValues"
+                ValueChanged="(G.List<TEnum> list) => SelectedValuesChanged.InvokeAsync(list)"
+                ValueProperty="Value" />

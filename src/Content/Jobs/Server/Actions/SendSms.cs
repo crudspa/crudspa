@@ -75,6 +75,7 @@ public class SendSms(
                         }
 
                         var body = ReplaceTokens(sms.Body, member.TokenValues);
+                        var smsMessageMedias = new List<SmsMessageMedia>();
                         var outboundMessage = new SmsOutboundMessage
                         {
                             Id = Guid.NewGuid(),
@@ -90,13 +91,29 @@ public class SendSms(
                             var blob = await blobService.Fetch(new() { Id = attachment.ImageFile.BlobId });
 
                             if (blob?.Data is not null)
+                            {
+                                var contentType = ContentType(attachment.ImageFile.Format);
+                                var mediaUrl = BuildMediaUrl(channel, attachment.ImageFile);
+
                                 outboundMessage.Media.Add(new()
                                 {
                                     Name = attachment.ImageFile.Name,
-                                    ContentType = ContentType(attachment.ImageFile.Format),
-                                    Url = BuildMediaUrl(channel, attachment.ImageFile),
+                                    ContentType = contentType,
+                                    Url = mediaUrl,
                                     Data = blob.Data,
                                 });
+
+                                smsMessageMedias.Add(new()
+                                {
+                                    ImageFile = attachment.ImageFile,
+                                    ProviderMediaUrl = mediaUrl,
+                                    ContentType = contentType,
+                                    FileName = attachment.ImageFile.Name,
+                                    SizeBytes = blob.Data.Length,
+                                    DownloadStatus = SmsMessageMedia.DownloadStatuses.Downloaded,
+                                    Ordinal = attachment.Ordinal ?? smsMessageMedias.Count,
+                                });
+                            }
                         }
 
                         logger.LogInformation("Sending SMS to {contactName} ({contactPhone})...", member.Contact.Name, outboundMessage.To);
@@ -119,6 +136,7 @@ public class SendSms(
                             Provider = ResolveProvider(channel),
                             ProviderMessageId = outboundMessage.ProviderMessageId,
                             ApiResponse = sendResponse.ErrorMessages,
+                            SmsMessageMedias = smsMessageMedias.ToObservable(),
                         };
 
                         if (sendResponse.Ok)

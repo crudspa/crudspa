@@ -27,11 +27,19 @@ public partial class DesignHub
             var response = await ThreadService.Add(request);
 
             if (response.Ok)
+            {
                 await Notify(request.SessionId, PermissionIds.Forums, new ThreadAdded
                 {
                     Id = response.Value.Id,
                     ForumId = request.Value.ForumId,
                 });
+
+                await GatewayService.Publish(new ForumRunChanged
+                {
+                    ForumId = request.Value.ForumId,
+                    ThreadId = response.Value.Id,
+                });
+            }
 
             return response;
         });
@@ -44,11 +52,19 @@ public partial class DesignHub
             var response = await ThreadService.Save(request);
 
             if (response.Ok)
+            {
                 await Notify(request.SessionId, PermissionIds.Forums, new ThreadSaved
                 {
                     Id = request.Value.Id,
                     ForumId = request.Value.ForumId,
                 });
+
+                await GatewayService.Publish(new ForumRunChanged
+                {
+                    ForumId = request.Value.ForumId,
+                    ThreadId = request.Value.Id,
+                });
+            }
 
             return response;
         });
@@ -61,11 +77,19 @@ public partial class DesignHub
             var response = await ThreadService.Remove(request);
 
             if (response.Ok)
+            {
                 await Notify(request.SessionId, PermissionIds.Forums, new ThreadRemoved
                 {
                     Id = request.Value.Id,
                     ForumId = request.Value.ForumId,
                 });
+
+                await GatewayService.Publish(new ForumRunChanged
+                {
+                    ForumId = request.Value.ForumId,
+                    ThreadId = request.Value.Id,
+                });
+            }
 
             return response;
         });

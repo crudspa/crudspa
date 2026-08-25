@@ -75,6 +75,7 @@ select
     ,cte.TotalCount
     ,sms.Id
     ,sms.MembershipId
+    ,membership.Name as MembershipName
     ,sms.Body
     ,sms.Send
     ,sms.Status

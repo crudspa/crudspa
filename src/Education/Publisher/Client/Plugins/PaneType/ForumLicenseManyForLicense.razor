@@ -1,0 +1,20 @@
+<Many Model="Model"
+      T="ForumLicenseModel"
+      EntityName="Forum License"
+      SaveRequested="id => Model.Save(id)"
+      CancelRequested="id => Model.Cancel(id)"
+      DeleteRequested="id => Model.Delete(id)">
+    <ReadView>
+        <div></div>
+    </ReadView>
+    <EditView>
+        <Wrapped Alignment="Wrapped.Alignments.Top">
+            <Field Label="Forum"
+                   Size="Field.Sizes.Medium">
+                <Dropdown ReadOnly="@false"
+                          LookupValues="Model.ForumNames"
+                          @bind-Value="context.ForumLicense.ForumId" />
+            </Field>
+        </Wrapped>
+    </EditView>
+</Many>

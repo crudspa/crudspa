@@ -18,8 +18,11 @@ declare @districtId uniqueidentifier = (
     select top 1 districtLicense.DistrictId
     from [Education].[DistrictLicense-Active] districtLicense
         inner join [Education].[District-Active] district on districtLicense.DistrictId = district.Id
+        inner join [Education].[Publisher-Active] publisher on publisher.Id = district.PublisherId
+        inner join [Framework].[License-Active] license on license.Id = districtLicense.LicenseId
     where districtLicense.Id = @Id
         and district.PublisherId = @publisherId
+        and license.OwnerId = publisher.OrganizationId
 )
 
 declare @now datetimeoffset = sysdatetimeoffset()
@@ -32,6 +35,22 @@ if @districtId is null
 begin
     rollback transaction
     raiserror('Tenancy check failed', 16, 1)
+    return
+end
+
+if exists (
+    select 1
+    from @Schools requestedSchool
+    where not exists (
+        select 1
+        from [Education].[School-Active] school
+        where school.DistrictId = @districtId
+            and school.Id = requestedSchool.Id
+    )
+)
+begin
+    rollback transaction
+    raiserror('Every selected school must belong to the licensed district', 16, 1)
     return
 end
 

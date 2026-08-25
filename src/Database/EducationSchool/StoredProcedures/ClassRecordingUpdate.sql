@@ -15,7 +15,10 @@ declare @schoolContactId uniqueidentifier = (
         inner join [Framework].[User-Active] userTable on session.UserId = userTable.Id
         inner join [Framework].[Contact-Active] contact on userTable.ContactId = contact.Id
         inner join [Education].[SchoolContact-Active] schoolContact on schoolContact.ContactId = contact.Id
+        inner join [Education].[School-Active] school on school.Id = schoolContact.SchoolId
+            and school.OrganizationId = userTable.OrganizationId
     where session.Id = @SessionId
+    order by schoolContact.Id
 )
 
 declare @now datetimeoffset = sysdatetimeoffset()

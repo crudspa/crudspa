@@ -45,6 +45,35 @@ public static class ProseHtmlNormalizer
             || normalized.IsBasically(ProseHtmlContract.EmptyParagraphHtml);
     }
 
+    public static String? ToPlainTextSummary(String? html, Int32 maxLength = 160)
+    {
+        if (html.HasNothing())
+            return html;
+
+        ArgumentOutOfRangeException.ThrowIfLessThan(maxLength, 2);
+
+        var body = ParseBody(html!);
+        NormalizeContainer(body, new(false));
+
+        var builder = new StringBuilder();
+        AppendPlainText(body, builder);
+
+        var value = Regex.Replace(builder.ToString(), "\\s+", " ").Trim();
+
+        if (value.HasNothing())
+            return null;
+
+        if (value.Length <= maxLength)
+            return value;
+
+        var end = maxLength - 1;
+
+        if (end > 0 && Char.IsHighSurrogate(value[end - 1]))
+            end--;
+
+        return value[..end].TrimEnd() + "…";
+    }
+
     private static IElement ParseBody(String html)
     {
         var parser = new HtmlParser();
@@ -97,6 +126,38 @@ public static class ProseHtmlNormalizer
                 RemoveNode(node);
                 return;
         }
+    }
+
+    private static void AppendPlainText(INode node, StringBuilder builder)
+    {
+        if (node is IText text)
+        {
+            builder.Append(text.Data);
+            return;
+        }
+
+        if (node is not IElement element)
+            return;
+
+        var separate = element.LocalName == "br" || IsBlockLike(element.LocalName);
+
+        if (separate)
+            AppendPlainTextSeparator(builder);
+
+        if (element.LocalName != "br")
+        {
+            foreach (var child in element.ChildNodes)
+                AppendPlainText(child, builder);
+        }
+
+        if (separate)
+            AppendPlainTextSeparator(builder);
+    }
+
+    private static void AppendPlainTextSeparator(StringBuilder builder)
+    {
+        if (builder.Length > 0 && !Char.IsWhiteSpace(builder[^1]))
+            builder.Append(' ');
     }
 
     private static void NormalizeText(IText text)

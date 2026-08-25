@@ -32,8 +32,10 @@ select distinct
     ,sessionStudent.DistrictId as DistrictId
 from SessionStudent sessionStudent
     cross join [Education].[UnitLicense-Active] unitLicense
-    inner join [Education].[DistrictLicense-Active] districtLicense on districtLicense.LicenseId = unitLicense.LicenseId
-        and districtLicense.DistrictId = sessionStudent.DistrictId
-    left join [Education].[DistrictLicenseSchool-Active] districtLicenseSchool on districtLicenseSchool.DistrictLicenseId = districtLicense.Id
+    inner join [EducationCommon].[SessionLicenses](@SessionId) sessionLicense on sessionLicense.LicenseId = unitLicense.LicenseId
 where (@UnitId is null or unitLicense.UnitId = @UnitId)
-    and (districtLicense.AllSchools = 1 or districtLicenseSchool.SchoolId = sessionStudent.SchoolId)
+    and exists (
+        select 1
+        from [Framework].[License-Active] license
+        where license.Id = unitLicense.LicenseId
+    )

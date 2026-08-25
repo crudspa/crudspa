@@ -341,6 +341,10 @@ public static class SqlCommandEx
             command.Parameters.Add(new(name, SqlDbType.Int)).Value = sqlValue;
         }
 
+        public void AddParameter<TEnum>(String name, IEnumerable<TEnum> values)
+            where TEnum : struct, Enum =>
+            command.AddStructuredParameter(name, "[Framework].[IntList]", values.ToIntTable());
+
         public void AddParameter(String name, IEnumerable<Guid?> ids) =>
             command.AddStructuredParameter(name, "[Framework].[IdList]", ids.ToIdTable());
 
@@ -486,6 +490,21 @@ public static class SqlCommandEx
 
             foreach (var id in ids)
                 dataTable.Rows.Add(id);
+
+            return dataTable;
+        }
+    }
+
+    extension<TEnum>(IEnumerable<TEnum> values)
+        where TEnum : struct, Enum
+    {
+        public DataTable ToIntTable()
+        {
+            var dataTable = new DataTable();
+            dataTable.Columns.Add("Id", typeof(Int32));
+
+            foreach (var value in values)
+                dataTable.Rows.Add((Int32)(Object)value);
 
             return dataTable;
         }

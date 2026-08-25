@@ -1,6 +1,9 @@
-using License = Crudspa.Education.Publisher.Shared.Contracts.Data.License;
-
 namespace Crudspa.Education.Publisher.Client.Plugins.PaneType;
+
+using License = Shared.Contracts.Data.License;
+using LicenseAdded = Crudspa.Education.Publisher.Shared.Contracts.Events.LicenseAdded;
+using LicenseSaved = Crudspa.Education.Publisher.Shared.Contracts.Events.LicenseSaved;
+using LicenseRemoved = Crudspa.Education.Publisher.Shared.Contracts.Events.LicenseRemoved;
 
 public partial class LicenseFind : IPaneDisplay, IDisposable
 {
@@ -41,7 +44,14 @@ public partial class LicenseFind : IPaneDisplay, IDisposable
 public class LicenseFindModel : FindModel<LicenseSearch, License>,
     IHandle<LicenseAdded>, IHandle<LicenseSaved>, IHandle<LicenseRemoved>,
     IHandle<DistrictLicenseAdded>, IHandle<DistrictLicenseRemoved>,
-    IHandle<UnitLicenseAdded>, IHandle<UnitLicenseRemoved>
+    IHandle<UnitLicenseAdded>, IHandle<UnitLicenseRemoved>,
+    IHandle<SegmentLicenseAdded>, IHandle<SegmentLicenseRemoved>,
+    IHandle<AssessmentLicenseAdded>, IHandle<AssessmentLicenseRemoved>,
+    IHandle<BlogLicenseAdded>, IHandle<BlogLicenseRemoved>,
+    IHandle<ForumLicenseAdded>, IHandle<ForumLicenseRemoved>,
+    IHandle<CampaignLicenseAdded>, IHandle<CampaignLicenseRemoved>,
+    IHandle<TrackLicenseAdded>, IHandle<TrackLicenseRemoved>,
+    IHandle<SurveyLicenseAdded>, IHandle<SurveyLicenseRemoved>
 {
     private readonly ILicenseService _licenseService;
     private ObservableCollection<String> _sorts;
@@ -60,12 +70,46 @@ public class LicenseFindModel : FindModel<LicenseSearch, License>,
     }
 
     public async Task Handle(LicenseAdded payload) => await Refresh();
+
     public async Task Handle(LicenseSaved payload) => await Refresh();
+
     public async Task Handle(LicenseRemoved payload) => await Refresh();
+
     public async Task Handle(DistrictLicenseAdded payload) => await Refresh();
+
     public async Task Handle(DistrictLicenseRemoved payload) => await Refresh();
+
     public async Task Handle(UnitLicenseAdded payload) => await Refresh();
+
     public async Task Handle(UnitLicenseRemoved payload) => await Refresh();
+
+    public async Task Handle(SegmentLicenseAdded payload) => await Refresh();
+
+    public async Task Handle(SegmentLicenseRemoved payload) => await Refresh();
+
+    public async Task Handle(AssessmentLicenseAdded payload) => await Refresh();
+
+    public async Task Handle(AssessmentLicenseRemoved payload) => await Refresh();
+
+    public async Task Handle(BlogLicenseAdded payload) => await Refresh();
+
+    public async Task Handle(BlogLicenseRemoved payload) => await Refresh();
+
+    public async Task Handle(ForumLicenseAdded payload) => await Refresh();
+
+    public async Task Handle(ForumLicenseRemoved payload) => await Refresh();
+
+    public async Task Handle(CampaignLicenseAdded payload) => await Refresh();
+
+    public async Task Handle(CampaignLicenseRemoved payload) => await Refresh();
+
+    public async Task Handle(TrackLicenseAdded payload) => await Refresh();
+
+    public async Task Handle(TrackLicenseRemoved payload) => await Refresh();
+
+    public async Task Handle(SurveyLicenseAdded payload) => await Refresh();
+
+    public async Task Handle(SurveyLicenseRemoved payload) => await Refresh();
 
     public ObservableCollection<String> Sorts
     {

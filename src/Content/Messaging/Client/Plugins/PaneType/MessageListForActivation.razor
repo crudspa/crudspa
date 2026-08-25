@@ -1,0 +1,20 @@
+<List Model="Model"
+      T="MessageModel"
+      EntityName="Email"
+      UrlPrefix="@($"{Path}/email")"
+      ShowAdd="true"
+      ShowDelete="true"
+      ShowView="false"
+      DeleteRequested="id => Model.Delete(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Unspecified">
+            <Labeled Width="10em"
+                     Label="Stage"
+                     StringValue="@context.Message.StageName" />
+        </Field>
+    </ReadView>
+    <PaneLinks>
+        <PaneLink Href="@($"{Path}/email-{context.Message.EmailId:D}")"
+                  Text="Email" />
+    </PaneLinks>
+</List>

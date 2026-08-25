@@ -3,6 +3,23 @@ create proc [ContentDesign].[CommentSelectTreeForPost] (
     ,@PostId uniqueidentifier
 ) as
 
+declare @organizationId uniqueidentifier = (
+    select top 1 userTable.OrganizationId
+    from [Framework].[User-Active] userTable
+        inner join [Framework].[Session-Active] session on session.UserId = userTable.Id
+    where session.Id = @SessionId
+)
+
+if not exists (
+    select 1
+    from [Content].[Post-Active] post
+        inner join [Content].[Blog-Active] blog on post.BlogId = blog.Id
+        inner join [Framework].[Portal-Active] portal on blog.PortalId = portal.Id
+    where post.Id = @PostId
+        and portal.OwnerId = @organizationId
+)
+return
+
 set nocount on
 
 select
@@ -19,13 +36,8 @@ select
 from [Content].[Comment-Active] comment
     inner join [Framework].[Contact-Active] byTable on comment.ById = byTable.Id
     left join [Content].[Comment-Active] parent on comment.ParentId = parent.Id
-    left join [Content].[Post-Active] post on comment.PostId = post.Id
-    left join [Content].[Thread-Active] thread on comment.ThreadId = thread.Id
-where 1 = 1
-    and comment.PostId = @PostId
-
+where comment.PostId = @PostId
 order by comment.Posted
-
 
 select
      commentMedia.Id
@@ -67,6 +79,5 @@ from [Content].[CommentMedia-Active] commentMedia
     left join [Framework].[ImageFile-Active] image on commentMedia.ImageId = image.Id
     left join [Framework].[PdfFile-Active] pdf on commentMedia.PdfId = pdf.Id
     left join [Framework].[VideoFile-Active] video on commentMedia.VideoId = video.Id
-where 1 = 1
-    and comment.PostId = @PostId
+where comment.PostId = @PostId
 order by commentMedia.Ordinal

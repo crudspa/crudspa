@@ -1,6 +1,9 @@
 global using Crudspa.Content.Display.Shared.Contracts.Behavior;
 global using Crudspa.Content.Display.Shared.Contracts.Data;
 global using Crudspa.Content.Display.Shared.Contracts.Events;
+global using Crudspa.Content.Messaging.Shared.Contracts.Behavior;
+global using Crudspa.Content.Messaging.Shared.Contracts.Data;
+global using Crudspa.Content.Messaging.Shared.Contracts.Events;
 global using Crudspa.Education.Common.Shared.Contracts.Behavior;
 global using Crudspa.Education.Common.Shared.Contracts.Data;
 global using Crudspa.Education.Common.Shared.Contracts.Events;

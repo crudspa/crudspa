@@ -1,0 +1,28 @@
+<div class="c-forum-reactions">
+    @foreach (var reaction in Reactions.Where(x => x.Count > 0))
+    {
+        <div class="reaction @(reaction.Selected ? "selected" : String.Empty)">
+            <ButtonCore Clicked="() => Reacted.InvokeAsync(reaction.Emoji)"
+                        Text="@($"{reaction.Emoji} {reaction.Count}")"
+                        Title="@($"{reaction.Count} reaction{(reaction.Count == 1 ? String.Empty : "s")}")"
+                        AriaLabel="@($"{reaction.Emoji}: {reaction.Count} reaction{(reaction.Count == 1 ? String.Empty : "s")}")"
+                        ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                        Size="ButtonCore.Sizes.Small"
+                        Disabled="Busy" />
+        </div>
+    }
+    <div class="picker">
+        <EmojiMenu SelectedEmoji="😀">
+            @foreach (var emoji in Options)
+            {
+                <ButtonCore Clicked="() => Reacted.InvokeAsync(emoji.Character)"
+                            Text="@emoji.Character"
+                            Title="@emoji.Name"
+                            AriaLabel="@($"React with {emoji.Name}")"
+                            ButtonStyle="ButtonCore.ButtonStyles.Transparent"
+                            Size="ButtonCore.Sizes.Large"
+                            Disabled="Busy" />
+            }
+        </EmojiMenu>
+    </div>
+</div>

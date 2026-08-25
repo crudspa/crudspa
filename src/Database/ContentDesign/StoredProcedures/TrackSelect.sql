@@ -11,10 +11,10 @@ declare @organizationId uniqueidentifier = (
 )
 
 set nocount on
+
 select
      track.Id
     ,track.PortalId
-    ,portal.[Key] as PortalKey
     ,track.Title
     ,track.StatusId
     ,status.Name as StatusName
@@ -34,3 +34,14 @@ from [Content].[Track-Active] track
     inner join [Framework].[ContentStatus-Active] status on track.StatusId = status.Id
 where track.Id = @Id
     and organization.Id = @organizationId
+
+select distinct
+     @Id as TrackId
+    ,license.Id as LicenseId
+    ,license.Name as LicenseName
+    ,convert(bit, iif(trackLicense.Id is null, 0, 1)) as Selected
+from [Framework].[License-Active] license
+    left join [Content].[TrackLicense-Active] trackLicense on trackLicense.LicenseId = license.Id
+        and trackLicense.TrackId = @Id
+where license.OwnerId = @organizationId
+order by license.Name

@@ -13,7 +13,10 @@ create proc [ContentJobs].[SmsMessageInsert] (
     ,@Provider int
     ,@ProviderMessageId nvarchar(75)
     ,@ApiResponse nvarchar(max)
+    ,@Id uniqueidentifier output
 ) as
+
+set @Id = newid()
 
 insert [Content].[SmsMessage] (
      Id
@@ -35,7 +38,7 @@ insert [Content].[SmsMessage] (
     ,ProviderMessageId
     ,ApiResponse
 ) values (
-     newid()
+     @Id
     ,@SessionId
     ,@SmsId
     ,@SmsChannelKey

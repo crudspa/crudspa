@@ -23,9 +23,10 @@ set  IsDeleted = 1
 from [Education].[UnitLicense] baseTable
     inner join [Education].[UnitLicense-Active] unitLicense on unitLicense.Id = baseTable.Id
     inner join [Education].[Unit-Active] unit on unitLicense.UnitId = unit.Id
-    inner join [Framework].[Organization-Active] organization on unit.OwnerId = organization.Id
+    inner join [Framework].[License-Active] license on license.Id = unitLicense.LicenseId
 where baseTable.Id = @Id
-    and organization.Id = @organizationId
+    and unit.OwnerId = @organizationId
+    and license.OwnerId = @organizationId
 
 if @@rowcount = 0
 begin

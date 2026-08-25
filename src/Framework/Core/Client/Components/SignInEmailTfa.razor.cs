@@ -269,7 +269,11 @@ public class SignInEmailTfaModel(
         if (response.Ok)
         {
             await ShowEnterCode();
-            Alerts.Add(new() { Type = Alert.AlertType.Success, Message = "Access code sent." });
+            Alerts.Add(new()
+            {
+                Type = Alert.AlertType.Success,
+                Message = "Please check your email. If the address is registered, your access code should arrive shortly.",
+            });
         }
     }
 

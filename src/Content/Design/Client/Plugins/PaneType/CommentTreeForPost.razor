@@ -20,7 +20,7 @@
                      DateTimeOffsetValue="@context.Comment.Edited" />
         </Field>
         <Field Size="Field.Sizes.Unspecified">
-            <LabeledBatch Label="Comment Medias"
+            <LabeledBatch Label="Media"
                           Width="5em"
                           Items="context.Comment.CommentMedias.OrderBy(x => x.Ordinal)"
                           Context="item">
@@ -39,9 +39,9 @@
                             @bind-Value="context.Comment.Body" />
             </Field>
         </Wrapped>
-        <BatchSection Title="Comment Medias">
+        <BatchSection Title="Media">
             <HeadingPanel>
-                <ButtonAdd EntityName="Comment Media"
+                <ButtonAdd EntityName="Media"
                            Disabled="false"
                            Transparent="true"
                            Clicked="() => Model.AddCommentMedia(context.Id)">
@@ -56,36 +56,48 @@
                                    Size="Field.Sizes.Large">
                                 <EnumDropdown ReadOnly="@false"
                                               TEnum="CommentMedia.Types"
-                                              @bind-SelectedValue="batchContext.Type" />
+                                              SelectedValue="batchContext.Type"
+                                              SelectedValueChanged="type => Model.SetCommentMediaType(context.Id, batchContext, type)" />
                             </Field>
-                            <Field Label="Audio"
-                                   Size="Field.Sizes.Larger"
-                                   Container="Field.Containers.Div">
-                                <AudioUploader ReadOnly="@false"
-                                               Required="false"
-                                               AudioFile="batchContext.AudioFile" />
-                            </Field>
-                            <Field Label="Image"
-                                   Size="Field.Sizes.Larger"
-                                   Container="Field.Containers.Div">
-                                <ImageUploader ReadOnly="@false"
-                                               Required="false"
-                                               ImageFile="batchContext.ImageFile" />
-                            </Field>
-                            <Field Label="Pdf"
-                                   Size="Field.Sizes.Larger"
-                                   Container="Field.Containers.Div">
-                                <PdfUploader ReadOnly="@false"
-                                             Required="false"
-                                             PdfFile="batchContext.PdfFile" />
-                            </Field>
-                            <Field Label="Video"
-                                   Size="Field.Sizes.Larger"
-                                   Container="Field.Containers.Div">
-                                <VideoUploader ReadOnly="@false"
-                                               Required="false"
-                                               VideoFile="batchContext.VideoFile" />
-                            </Field>
+                            @switch (batchContext.Type)
+                            {
+                                case CommentMedia.Types.Audio:
+                                    <Field Label="Audio"
+                                           Size="Field.Sizes.Larger"
+                                           Container="Field.Containers.Div">
+                                        <AudioUploader ReadOnly="@false"
+                                                       Required="true"
+                                                       AudioFile="batchContext.AudioFile" />
+                                    </Field>
+                                    break;
+                                case CommentMedia.Types.Image:
+                                    <Field Label="Image"
+                                           Size="Field.Sizes.Larger"
+                                           Container="Field.Containers.Div">
+                                        <ImageUploader ReadOnly="@false"
+                                                       Required="true"
+                                                       ImageFile="batchContext.ImageFile" />
+                                    </Field>
+                                    break;
+                                case CommentMedia.Types.Pdf:
+                                    <Field Label="Pdf"
+                                           Size="Field.Sizes.Larger"
+                                           Container="Field.Containers.Div">
+                                        <PdfUploader ReadOnly="@false"
+                                                     Required="true"
+                                                     PdfFile="batchContext.PdfFile" />
+                                    </Field>
+                                    break;
+                                case CommentMedia.Types.Video:
+                                    <Field Label="Video"
+                                           Size="Field.Sizes.Larger"
+                                           Container="Field.Containers.Div">
+                                        <VideoUploader ReadOnly="@false"
+                                                       Required="true"
+                                                       VideoFile="batchContext.VideoFile" />
+                                    </Field>
+                                    break;
+                            }
                         </Wrapped>
                     </EditView>
                 </Batch>

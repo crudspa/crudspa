@@ -2,6 +2,18 @@
 
 public class Expandable : Selectable
 {
+    public String? Key
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    public Boolean? ReadOnly
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
     public Boolean? Expanded
     {
         get;

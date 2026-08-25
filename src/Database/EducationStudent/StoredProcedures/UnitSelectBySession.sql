@@ -13,10 +13,13 @@ insert [Education].[CurriculumViewed] (
     ,Updated
     ,UpdatedBy
 )
-values (
+select
      newid()
     ,@now
     ,@SessionId
+where exists (
+    select 1
+    from [EducationStudent].[UnitLicenses](@SessionId, null) unitLicense
 )
 
 declare @studentId uniqueidentifier

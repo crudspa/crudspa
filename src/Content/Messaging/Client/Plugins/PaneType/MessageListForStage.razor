@@ -1,0 +1,8 @@
+<List Model="Model" T="MessageModel" EntityName="Message" UrlPrefix="@($"{Path}/message")" DeleteRequested="id => Model.Delete(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Unspecified">
+            <Labeled Width="8em" Label="Channel" StringValue="@(context.Message.MessageTypeId == MessageTypeIds.Email ? "Email" : "SMS")" />
+            <Labeled Width="8em" Label="Population" StringValue="@context.PopulationName" />
+        </Field>
+    </ReadView>
+</List>

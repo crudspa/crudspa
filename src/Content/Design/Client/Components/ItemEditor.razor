@@ -1,4 +1,4 @@
-﻿@{
+@{
     const String flex = "Flex";
     const String width = "Width";
 }
@@ -61,38 +61,35 @@
                     <Field Label="Max Width"
                            Size="Field.Sizes.Medium"
                            Container="Field.Containers.Div">
-                        <EnumRadio TEnum="OverrideState"
-                                   @bind-SelectedValue="@Model.MaxWidthState"
-                                   RadioCssClass="tight-bottom" />
-                        <div class="c-min @(Model.MaxWidthState == OverrideState.Custom ? String.Empty : "c-hide")">
-                            <TextBox MaxLength="10"
-                                     Placeholder="36em"
-                                     @bind-Value="Model.Item.MaxWidth" />
-                        </div>
+                        <DefaultOverride @bind-State="Model.MaxWidthState">
+                            <div class="c-min">
+                                <TextBox MaxLength="10"
+                                         Placeholder="36em"
+                                         @bind-Value="Model.Item.MaxWidth" />
+                            </div>
+                        </DefaultOverride>
                     </Field>
                     <Field Label="Min Width"
                            Size="Field.Sizes.Medium"
                            Container="Field.Containers.Div">
-                        <EnumRadio TEnum="OverrideState"
-                                   @bind-SelectedValue="@Model.MinWidthState"
-                                   RadioCssClass="tight-bottom" />
-                        <div class="c-min @(Model.MinWidthState == OverrideState.Custom ? String.Empty : "c-hide")">
-                            <TextBox MaxLength="10"
-                                     Placeholder="24em"
-                                     @bind-Value="Model.Item.MinWidth" />
-                        </div>
+                        <DefaultOverride @bind-State="Model.MinWidthState">
+                            <div class="c-min">
+                                <TextBox MaxLength="10"
+                                         Placeholder="24em"
+                                         @bind-Value="Model.Item.MinWidth" />
+                            </div>
+                        </DefaultOverride>
                     </Field>
                     <Field Label="Width"
                            Size="Field.Sizes.Medium"
                            Container="Field.Containers.Div">
-                        <EnumRadio TEnum="OverrideState"
-                                   @bind-SelectedValue="@Model.WidthState"
-                                   RadioCssClass="tight-bottom" />
-                        <div class="c-min @(Model.WidthState == OverrideState.Custom ? String.Empty : "c-hide")">
-                            <TextBox MaxLength="10"
-                                     Placeholder="24em"
-                                     @bind-Value="Model.Item.Width" />
-                        </div>
+                        <DefaultOverride @bind-State="Model.WidthState">
+                            <div class="c-min">
+                                <TextBox MaxLength="10"
+                                         Placeholder="24em"
+                                         @bind-Value="Model.Item.Width" />
+                            </div>
+                        </DefaultOverride>
                     </Field>
                 </Wrapped>
             </Padding>

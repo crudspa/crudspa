@@ -12,11 +12,16 @@ insert [Education].[ObjectiveViewed] (
     ,UpdatedBy
     ,ObjectiveId
 )
-values (
+select
      newid()
     ,@now
     ,@SessionId
     ,@Id
+where exists (
+    select 1
+    from [Education].[Objective-Active] objective
+        inner join [EducationStudent].[LicensedLessons](@SessionId, null) licensedLesson on licensedLesson.LessonId = objective.LessonId
+    where objective.Id = @Id
 )
 
 select
@@ -58,6 +63,10 @@ from [Education].[Objective-Active] objective
     inner join [Content].[BinderType-Active] binderType on binder.TypeId = binderType.Id
 where objective.Id = @Id
     and objective.StatusId = @ContentStatusComplete
+    and exists (
+        select 1
+        from [EducationStudent].[LicensedLessons](@SessionId, objective.LessonId) licensedLesson
+    )
 
 select
      guidePage.Id
@@ -80,3 +89,7 @@ from [Education].[Objective-Active] objective
     left join [Framework].[AudioFile-Active] guideAudio on guidePage.GuideAudioId = guideAudio.Id
 where objective.Id = @Id
     and objective.StatusId = @ContentStatusComplete
+    and exists (
+        select 1
+        from [EducationStudent].[LicensedLessons](@SessionId, objective.LessonId) licensedLesson
+    )

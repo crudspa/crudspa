@@ -1,0 +1,26 @@
+<ListOrderables Model="Model"
+                T="StageModel"
+                EntityName="Stage"
+                UrlPrefix="@($"{Path}/stage")"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Unspecified">
+            <Labeled Width="8em"
+                     Label="Schedule"
+                     StringValue="@CampaignScheduleCalculator.Describe(context.Stage.Anchor, context.Stage.Offset)" />
+            <Labeled Width="8em"
+                     Label="Weekend"
+                     StringValue="@context.Stage.WeekendAdjustment.GetLabel()" />
+            <Labeled Width="8em"
+                     Label="Send Time"
+                     StringValue="@context.Stage.SendTime?.ToString("t")" />
+        </Field>
+    </ReadView>
+    <PaneLinks>
+        <PaneLink Href="@($"{Path}/stage-{context.Stage.Id:D}?pane=messages")"
+                  Text="Messages"
+                  Count="context.Stage.MessageCount" />
+    </PaneLinks>
+</ListOrderables>

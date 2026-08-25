@@ -6,7 +6,8 @@ public class SmsWebhookServiceLocalFile(
     IServerConfigService configService,
     ISmsChannelService smsChannelService,
     IBlobService blobService,
-    IFileService fileService)
+    IFileService fileService,
+    ISmsWebhookNotificationService notificationService)
     : ISmsWebhookService
 {
     private const Int32 ProviderLocalFile = 1;
@@ -104,6 +105,10 @@ public class SmsWebhookServiceLocalFile(
             finally
             {
                 await SmsWebhookEventComplete.Execute(Config.Database, SystemSessionId, eventStart.Id, smsMessageId, finalStatus, errorMessage);
+                await notificationService.SmsEventSaved(eventStart.Id, smsMessageId);
+
+                if (finalStatus == EventStatusProcessed)
+                    await notificationService.SmsMessageAdded(smsMessageId);
             }
         });
     }
@@ -168,6 +173,8 @@ public class SmsWebhookServiceLocalFile(
             finally
             {
                 await SmsWebhookEventComplete.Execute(Config.Database, SystemSessionId, eventStart.Id, smsMessageId, finalStatus, errorMessage);
+                await notificationService.SmsEventSaved(eventStart.Id, smsMessageId);
+                await notificationService.SmsMessageSaved(smsMessageId);
             }
         });
     }

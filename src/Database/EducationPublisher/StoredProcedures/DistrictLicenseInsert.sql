@@ -21,6 +21,33 @@ set nocount on
 set xact_abort on
 begin transaction
 
+if not exists (
+    select 1
+    from [Education].[District-Active] district
+        inner join [Education].[Publisher-Active] publisher on publisher.Id = district.PublisherId
+        inner join [Framework].[License-Active] license on license.Id = @LicenseId
+    where district.Id = @DistrictId
+        and publisher.Id = @publisherId
+        and license.OwnerId = publisher.OrganizationId
+)
+begin
+    rollback transaction
+    raiserror('Tenancy check failed', 16, 1)
+    return
+end
+
+if exists (
+    select 1
+    from [Education].[DistrictLicense-Active] districtLicense with (updlock, holdlock)
+    where districtLicense.LicenseId = @LicenseId
+        and districtLicense.DistrictId = @DistrictId
+)
+begin
+    rollback transaction
+    raiserror('The district is already related to this license', 16, 1)
+    return
+end
+
 insert [Education].[DistrictLicense] (
      Id
     ,VersionOf
@@ -39,18 +66,5 @@ values (
     ,@DistrictId
     ,1
 )
-
-if not exists (
-    select 1
-    from [Education].[DistrictLicense-Active] districtLicense
-        inner join [Education].[District-Active] district on districtLicense.DistrictId = district.Id
-    where districtLicense.Id = @Id
-        and district.PublisherId = @publisherId
-)
-begin
-    rollback transaction
-    raiserror('Tenancy check failed', 16, 1)
-    return
-end
 
 commit transaction

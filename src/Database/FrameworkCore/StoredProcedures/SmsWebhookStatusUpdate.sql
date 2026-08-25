@@ -22,6 +22,7 @@ where smsMessage.Provider = @Provider
 if @Id is null
     return
 
+-- Twilio can deliver status callbacks out of order. Keep the latest-progress status.
 update [Content].[SmsMessage]
 set Updated = @now
     ,UpdatedBy = @SessionId
@@ -31,3 +32,4 @@ set Updated = @now
     ,ProviderErrorCode = @ProviderErrorCode
     ,ProviderErrorMessage = @ProviderErrorMessage
 where Id = @Id
+    and @Status >= Status

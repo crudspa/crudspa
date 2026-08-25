@@ -7,11 +7,9 @@ begin
 
     declare @contentStatusComplete uniqueidentifier = '0296c1f0-7d72-42d3-b7c2-377f077e7b9c';
     declare @sessionUserId uniqueidentifier = null;
-    declare @sessionContactId uniqueidentifier = null;
 
     select
-        @sessionUserId = session.UserId,
-        @sessionContactId = userTable.ContactId
+        @sessionUserId = session.UserId
     from [Framework].[Session-Active] session
         left join [Framework].[User-Active] userTable on userTable.Id = session.UserId
     where session.Id = @SessionId
@@ -30,99 +28,13 @@ begin
     where userRole.UserId = @sessionUserId
         and portalPermission.PortalId = @PortalId;
 
-    create table #districtContactDistricts (
-        Id uniqueidentifier not null primary key
-    );
-
-    insert into #districtContactDistricts (Id)
-    select districtIds.DistrictId
-    from (
-        select districtContact.DistrictId
-        from [Education].[DistrictContact-Active] districtContact
-        where @sessionUserId is not null
-            and districtContact.UserId = @sessionUserId
-
-        union
-
-        select districtContact.DistrictId
-        from [Education].[DistrictContact-Active] districtContact
-        where @sessionContactId is not null
-            and districtContact.ContactId = @sessionContactId
-    ) districtIds
-    where districtIds.DistrictId is not null;
-
-    create table #sessionSchools (
-        Id uniqueidentifier not null primary key
-    );
-
-    insert into #sessionSchools (Id)
-    select schoolIds.SchoolId
-    from (
-        select schoolContact.SchoolId
-        from [Education].[SchoolContact-Active] schoolContact
-        where @sessionUserId is not null
-            and schoolContact.UserId = @sessionUserId
-
-        union
-
-        select schoolContact.SchoolId
-        from [Education].[SchoolContact-Active] schoolContact
-        where @sessionContactId is not null
-            and schoolContact.ContactId = @sessionContactId
-
-        union
-
-        select family.SchoolId
-        from [Education].[Student-Active] student
-            inner join [Education].[Family-Active] family on family.Id = student.FamilyId
-        where @sessionContactId is not null
-            and student.ContactId = @sessionContactId
-    ) schoolIds
-    where schoolIds.SchoolId is not null;
-
-    create table #sessionDistricts (
-        Id uniqueidentifier not null primary key
-    );
-
-    insert into #sessionDistricts (Id)
-    select districtIdSource.Id
-    from (
-        select districtContactDistrict.Id
-        from #districtContactDistricts districtContactDistrict
-        union
-        select school.DistrictId
-        from [Education].[School-Active] school
-            inner join #sessionSchools sessionSchool on sessionSchool.Id = school.Id
-    ) districtIdSource
-    where districtIdSource.Id is not null;
-
     create table #sessionLicenses (
         LicenseId uniqueidentifier not null primary key
     );
 
     insert into #sessionLicenses (LicenseId)
-    select distinct districtLicense.LicenseId
-    from [Education].[DistrictLicense-Active] districtLicense
-    where districtLicense.LicenseId is not null
-        and exists (
-            select 1
-            from #sessionDistricts sessionDistrict
-            where sessionDistrict.Id = districtLicense.DistrictId
-        )
-        and (
-            districtLicense.AllSchools = 1
-            or exists (
-                select 1
-                from #districtContactDistricts districtContactDistrict
-                where districtContactDistrict.Id = districtLicense.DistrictId
-            )
-            or exists (
-                select 1
-                from [Education].[DistrictLicenseSchool-Active] districtLicenseSchool
-                    inner join #sessionSchools sessionSchool on sessionSchool.Id = districtLicenseSchool.SchoolId
-                where districtLicenseSchool.DistrictLicenseId = districtLicense.Id
-            )
-        );
+    select sessionLicense.LicenseId
+    from [EducationCommon].[SessionLicenses](@SessionId) sessionLicense;
 
     create table #licensedSegments (
         Id uniqueidentifier not null primary key

@@ -20,6 +20,7 @@ public partial class HtmlEditor
     public RadzenHtmlEditor EditorComponent { get; set; } = null!;
     public TokenModel InsertTokenModel { get; set; } = null!;
     public String? EditorValue => _editorValue;
+    public G.IReadOnlyList<String> SortedTokens => Tokens.OrderBy(x => x, StringComparer.OrdinalIgnoreCase).ToList();
 
     protected override Task OnInitializedAsync()
     {
@@ -37,8 +38,8 @@ public partial class HtmlEditor
             _editorValue = value;
         }
 
-        if (Tokens.HasItems() && InsertTokenModel.SelectedToken.HasNothing())
-            InsertTokenModel.SelectedToken = Tokens.First();
+        if (SortedTokens.HasItems() && InsertTokenModel.SelectedToken.HasNothing())
+            InsertTokenModel.SelectedToken = SortedTokens.First();
 
         return base.OnParametersSetAsync();
     }

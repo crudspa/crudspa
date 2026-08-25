@@ -15,6 +15,11 @@
     <Project Path="Content/Jobs/Server/Server.csproj" />
     <Project Path="Content/Jobs/Shared/Shared.csproj" />
   </Folder>
+  <Folder Name="/Content/Messaging/">
+    <Project Path="Content/Messaging/Client/Client.csproj" />
+    <Project Path="Content/Messaging/Server/Server.csproj" />
+    <Project Path="Content/Messaging/Shared/Shared.csproj" />
+  </Folder>
   <Folder Name="/Education/" />
   <Folder Name="/Education/Common/">
     <Project Path="Education/Common/Client/Client.csproj" />

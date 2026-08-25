@@ -28,7 +28,7 @@ where sms.IsDeleted = 0
     and sms.BatchId is null
     and sms.Status = 0
     and sms.Send <= @now
-    and portal.OwnerId = @organizationId
+    and (@organizationId is null or portal.OwnerId = @organizationId)
 
 select
      sms.Id

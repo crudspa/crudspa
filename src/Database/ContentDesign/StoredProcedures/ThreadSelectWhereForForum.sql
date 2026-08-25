@@ -52,6 +52,7 @@ as (
         and organization.Id = @organizationId
         and (@SearchText is null
             or thread.Title like '%' + @SearchText + '%'
+            or comment.Body like '%' + @SearchText + '%'
         )
         and (@PostedStart is null or comment.Posted >= @PostedStart)
         and (@PostedEnd is null or comment.Posted < @PostedEnd)
@@ -68,7 +69,8 @@ select
     ,comment.Id as CommentId
     ,comment.Body as CommentBody
     ,comment.ById as CommentById
-    ,byTable.FirstName as ContactFirstName
+    ,concat(trim(byTable.FirstName), case when trim(byTable.LastName) = N'' then N'' else N' ' + trim(byTable.LastName) end) as ContactName
+    ,comment.ByOrganizationName
     ,comment.Posted as CommentPosted
     ,comment.Edited as CommentEdited
     ,(select count(1) from [Content].[Comment-Active] where ThreadId = thread.Id) as CommentCount

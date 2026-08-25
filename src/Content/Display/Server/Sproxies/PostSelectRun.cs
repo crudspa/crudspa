@@ -2,13 +2,14 @@ namespace Crudspa.Content.Display.Server.Sproxies;
 
 public static class PostSelectRun
 {
-    public static async Task<Post?> Execute(String connection, Post post, Guid? sessionId)
+    public static async Task<Post?> Execute(String connection, Post post, Guid? sessionId, IEnumerable<Guid?> licenseIds)
     {
         await using var command = new SqlCommand();
         command.CommandText = "ContentDisplay.PostSelectRun";
 
         command.AddParameter("@Id", post.Id);
         command.AddParameter("@SessionId", sessionId);
+        command.AddParameter("@LicenseIds", licenseIds);
 
         return await command.ReadSingle(connection, ReadPost);
     }

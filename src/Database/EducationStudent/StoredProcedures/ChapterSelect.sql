@@ -4,7 +4,6 @@ create proc [EducationStudent].[ChapterSelect] (
 ) as
 
 declare @now datetimeoffset = sysdatetimeoffset()
-declare @ContentStatusComplete uniqueidentifier = '0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
 
 begin transaction
     declare @ChapterViewedId uniqueidentifier
@@ -15,11 +14,16 @@ begin transaction
         ,UpdatedBy
         ,ChapterId
     )
-    values (
+    select
         @ChapterViewedId
         ,@now
         ,@SessionId
         ,@Id
+    where exists (
+        select 1
+        from [Education].[Chapter-Active] chapter
+            inner join [EducationStudent].[LicensedBooks](@SessionId, null) licensedBook on licensedBook.BookId = chapter.BookId
+        where chapter.Id = @Id
     )
 commit transaction
 
@@ -34,3 +38,7 @@ from [Education].[Chapter-Active] chapter
     inner join [Content].[Binder-Active] binder on chapter.BinderId = binder.Id
     inner join [Content].[BinderType-Active] binderType on binder.TypeId = binderType.Id
 where chapter.Id = @Id
+    and exists (
+        select 1
+        from [EducationStudent].[LicensedBooks](@SessionId, chapter.BookId) licensedBook
+    )

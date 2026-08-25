@@ -17,7 +17,7 @@
     <PackageReference Include="PDFsharp-MigraDoc" Version="6.2.4" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Content\Display\Server\Server.csproj" />
+    <ProjectReference Include="..\..\..\Content\Messaging\Server\Server.csproj" />
     <ProjectReference Include="..\..\Common\Server\Server.csproj" />
     <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>

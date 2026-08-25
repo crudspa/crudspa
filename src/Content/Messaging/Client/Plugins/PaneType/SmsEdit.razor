@@ -1,0 +1,117 @@
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+            }
+            else
+            {
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            }
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Modal Model="Model.TemplateModalModel"
+               Title="Load Template"
+               Width="32em"
+               TopMargin="2em">
+            <Content>
+                <Padding Size="Padding.Sizes.Small"
+                         Direction="Padding.Directions.Vertical">
+                    <Wrapped Alignment="Wrapped.Alignments.Top">
+                        <Field Label="Template"
+                               Size="Field.Sizes.Full">
+                            <Dropdown ReadOnly="Model.ReadOnly"
+                                      LookupValues="Model.SmsTemplates"
+                                      Value="Model.SelectedTemplateId"
+                                      ValueChanged="id => Model.HandleTemplateChanged(id)" />
+                        </Field>
+                        @if (Model.SelectedTemplate is not null)
+                        {
+                            <Field Label="Body"
+                                   Size="Field.Sizes.Full"
+                                   Container="Field.Containers.Div">
+                                <MultilineTextBox ReadOnly="true"
+                                                  Height="MultilineTextBox.Heights.Tall"
+                                                  @bind-Value="Model.SelectedTemplate.Body" />
+                            </Field>
+                        }
+                    </Wrapped>
+                </Padding>
+            </Content>
+            <Buttons>
+                <ButtonOk Clicked="() => Model.LoadTemplate()" />
+                <ButtonCancel Clicked="() => Model.TemplateModalModel.Hide()" />
+            </Buttons>
+        </Modal>
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                @if (Model.ShowMembership)
+                {
+                    <Field Label="Membership"
+                           Size="Field.Sizes.Large">
+                        <Dropdown ReadOnly="Model.ReadOnly"
+                                  LookupValues="Model.Memberships"
+                                  Value="Model.SelectedMembershipId"
+                                  ValueChanged="id => Model.HandleMembershipChanged(id)" />
+                    </Field>
+                }
+                <Field Label="Template"
+                       Container="Field.Containers.Div">
+                    <Padding Direction="Padding.Directions.Top"
+                             Size="Padding.Sizes.Tiny">
+                        <ButtonCore Text="Load..."
+                                    Disabled="@(Model.ReadOnly || Model.Entity.MembershipId is null)"
+                                    Clicked="() => Model.TemplateModalModel.Show()" />
+                    </Padding>
+                </Field>
+                <Field Label="Send"
+                       Size="Field.Sizes.Small">
+                    <DateTimePicker ReadOnly="Model.ReadOnly"
+                                    @bind-Value="Model.Entity.Send" />
+                </Field>
+                <TokenMultilineTextBox Label="Body"
+                                       Size="Field.Sizes.Full"
+                                       ReadOnly="Model.ReadOnly"
+                                       Tokens="Model.Tokens"
+                                       Height="MultilineTextBox.Heights.Tall"
+                                       @bind-Value="Model.Entity.Body" />
+            </Wrapped>
+        </Padding>
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <BatchSection Title="Images">
+                <HeadingPanel>
+                    <ButtonAdd EntityName="Image"
+                               Disabled="Model.ReadOnly"
+                               Transparent="true"
+                               Clicked="() => Model.AddSmsAttachment()">
+                    </ButtonAdd>
+                </HeadingPanel>
+                <ChildContent>
+                    <Batch Model="Model.SmsAttachmentsModel"
+                           ReadOnly="Model.ReadOnly">
+                        <EditView>
+                            <Wrapped Alignment="Wrapped.Alignments.Top"
+                                     @key="context">
+                                <Field Label="Image"
+                                       Size="Field.Sizes.Larger"
+                                       Container="Field.Containers.Div">
+                                    <ImageUploader ReadOnly="Model.ReadOnly"
+                                                   Required="true"
+                                                   ImageFile="context.ImageFile" />
+                                </Field>
+                            </Wrapped>
+                        </EditView>
+                    </Batch>
+                </ChildContent>
+            </BatchSection>
+        </Padding>
+    }
+</Waiter>

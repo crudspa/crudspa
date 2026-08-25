@@ -1,6 +1,9 @@
-using License = Crudspa.Education.Publisher.Shared.Contracts.Data.License;
-
 namespace Crudspa.Education.Publisher.Client.Plugins.PaneType;
+
+using License = Shared.Contracts.Data.License;
+using LicenseAdded = Crudspa.Education.Publisher.Shared.Contracts.Events.LicenseAdded;
+using LicenseSaved = Crudspa.Education.Publisher.Shared.Contracts.Events.LicenseSaved;
+using LicenseRemoved = Crudspa.Education.Publisher.Shared.Contracts.Events.LicenseRemoved;
 
 public partial class LicenseEdit : IPaneDisplay, IDisposable
 {
@@ -124,6 +127,7 @@ public class LicenseEditModel : EditModel<License>,
                 ReadOnly = true;
         }
     }
+
 
     private void SetLicense(License license)
     {

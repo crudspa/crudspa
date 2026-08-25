@@ -23,11 +23,15 @@ public partial class DesignHub
             var response = await ForumService.Add(request);
 
             if (response.Ok)
+            {
                 await Notify(request.SessionId, PermissionIds.Forums, new ForumAdded
                 {
                     Id = response.Value.Id,
                     PortalId = request.Value.PortalId,
                 });
+
+                await GatewayService.Publish(new ForumRunChanged { ForumId = response.Value.Id });
+            }
 
             return response;
         });
@@ -40,11 +44,15 @@ public partial class DesignHub
             var response = await ForumService.Save(request);
 
             if (response.Ok)
+            {
                 await Notify(request.SessionId, PermissionIds.Forums, new ForumSaved
                 {
                     Id = request.Value.Id,
                     PortalId = request.Value.PortalId,
                 });
+
+                await GatewayService.Publish(new ForumRunChanged { ForumId = request.Value.Id });
+            }
 
             return response;
         });
@@ -57,11 +65,15 @@ public partial class DesignHub
             var response = await ForumService.Remove(request);
 
             if (response.Ok)
+            {
                 await Notify(request.SessionId, PermissionIds.Forums, new ForumRemoved
                 {
                     Id = request.Value.Id,
                     PortalId = request.Value.PortalId,
                 });
+
+                await GatewayService.Publish(new ForumRunChanged { ForumId = request.Value.Id });
+            }
 
             return response;
         });
@@ -74,10 +86,14 @@ public partial class DesignHub
             var response = await ForumService.SaveOrder(request);
 
             if (response.Ok)
+            {
                 await Notify(request.SessionId, PermissionIds.Forums, new ForumsReordered
                 {
                     PortalId = request.Value.First().PortalId,
                 });
+
+                await GatewayService.Publish(new ForumRunChanged());
+            }
 
             return response;
         });
@@ -87,5 +103,23 @@ public partial class DesignHub
     {
         return await HubWrappers.RequirePermission(request, PermissionIds.Forums, async session =>
             await ForumService.FetchContentStatusNames(request));
+    }
+
+    public async Task<Response<IList<Named>>> ForumFetchPermissionNames(Request<Portal> request)
+    {
+        return await HubWrappers.RequirePermission(request, PermissionIds.Forums, async session =>
+            await ForumService.FetchPermissionNames(request));
+    }
+
+    public async Task<Response<IList<Named>>> ForumFetchLicenseNames(Request request)
+    {
+        return await HubWrappers.RequirePermission(request, PermissionIds.Forums, async session =>
+            await ForumService.FetchLicenseNames(request));
+    }
+
+    public async Task<Response<IList<Named>>> ForumFetchBundleNames(Request request)
+    {
+        return await HubWrappers.RequirePermission(request, PermissionIds.Forums, async session =>
+            await ForumService.FetchBundleNames(request));
     }
 }

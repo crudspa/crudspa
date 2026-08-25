@@ -1,0 +1,28 @@
+@if (Media.Id.HasValue)
+{
+    var url = $"/api/content/display/forum-media/fetch?id={Media.Id:D}";
+
+    <div class="c-forum-media">
+        @switch (Media.Type)
+        {
+            case CommentMedia.Types.Audio:
+                <audio controls preload="none" src="@url"></audio>
+                break;
+            case CommentMedia.Types.Image:
+                <img src="@url" alt="@(Media.ImageFile.Caption ?? Media.ImageFile.Name)" />
+                break;
+            case CommentMedia.Types.Pdf:
+                <object data="@url" type="application/pdf">
+                    <a href="@url" target="_blank" rel="noopener">@(Media.PdfFile.Name ?? "Open PDF")</a>
+                </object>
+                break;
+            case CommentMedia.Types.Video:
+                <video controls preload="metadata" src="@url"></video>
+                break;
+        }
+    </div>
+}
+
+@code {
+    [Parameter, EditorRequired] public CommentMedia Media { get; set; } = null!;
+}

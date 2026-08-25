@@ -19,6 +19,9 @@ public class AssessmentRunServiceSql(
 
     public async Task<Response<Assessment?>> FetchAssessment(Request<AssessmentAssignment> request)
     {
+        if (!await IsAccessible(request.SessionId, request.Value.Id))
+            return new("Assessment assignment was not found or is not licensed for this student.");
+
         await sqlWrappers.WithConnection(async (connection, transaction) =>
         {
             await AssessmentAssignmentMarkStarted.Execute(connection, transaction, request.SessionId, request.Value.Id);
@@ -55,6 +58,8 @@ public class AssessmentRunServiceSql(
         {
             var selection = request.Value;
 
+            if (!await RequireAccessible(response, request.SessionId, selection.AssignmentId)) return;
+
             await sqlWrappers.WithTransaction(async (connection, transaction) =>
             {
                 await VocabChoiceSelectionInsert.Execute(connection, transaction, request.SessionId, selection);
@@ -67,6 +72,8 @@ public class AssessmentRunServiceSql(
         return await wrappers.Try(request, async response =>
         {
             var selection = request.Value;
+
+            if (!await RequireAccessible(response, request.SessionId, selection.AssignmentId)) return;
 
             await sqlWrappers.WithTransaction(async (connection, transaction) =>
             {
@@ -81,6 +88,8 @@ public class AssessmentRunServiceSql(
         {
             var selection = request.Value;
 
+            if (!await RequireAccessible(response, request.SessionId, selection.AssignmentId)) return;
+
             await sqlWrappers.WithTransaction(async (connection, transaction) =>
             {
                 await ReadChoiceSelectionInsert.Execute(connection, transaction, request.SessionId, selection);
@@ -94,6 +103,8 @@ public class AssessmentRunServiceSql(
         {
             var vocabPartCompleted = request.Value;
 
+            if (!await RequireAccessible(response, request.SessionId, vocabPartCompleted.AssignmentId)) return;
+
             await sqlWrappers.WithTransaction(async (connection, transaction) =>
             {
                 await VocabPartCompletedInsert.Execute(connection, transaction, request.SessionId, vocabPartCompleted);
@@ -106,6 +117,8 @@ public class AssessmentRunServiceSql(
         return await wrappers.Try(request, async response =>
         {
             var listenPartCompleted = request.Value;
+
+            if (!await RequireAccessible(response, request.SessionId, listenPartCompleted.AssignmentId)) return;
 
             await sqlWrappers.WithTransaction(async (connection, transaction) =>
             {
@@ -123,6 +136,8 @@ public class AssessmentRunServiceSql(
         {
             var readPartCompleted = request.Value;
 
+            if (!await RequireAccessible(response, request.SessionId, readPartCompleted.AssignmentId)) return;
+
             await sqlWrappers.WithTransaction(async (connection, transaction) =>
             {
                 await ReadPartCompletedInsert.Execute(connection, transaction, request.SessionId, readPartCompleted);
@@ -139,10 +154,23 @@ public class AssessmentRunServiceSql(
         {
             var assessmentAssignment = request.Value;
 
+            if (!await RequireAccessible(response, request.SessionId, assessmentAssignment.Id)) return;
+
             await sqlWrappers.WithConnection(async (connection, transaction) =>
             {
                 await AssessmentAssignmentMarkCompleted.Execute(connection, transaction, request.SessionId, assessmentAssignment.Id);
             });
         });
+    }
+
+    private async Task<Boolean> IsAccessible(Guid? sessionId, Guid? assignmentId) =>
+        assignmentId.HasValue && await AssessmentAssignmentIsAccessible.Execute(Connection, sessionId, assignmentId);
+
+    private async Task<Boolean> RequireAccessible(Response response, Guid? sessionId, Guid? assignmentId)
+    {
+        if (await IsAccessible(sessionId, assignmentId)) return true;
+
+        response.AddError("Assessment assignment was not found or is not licensed for this student.");
+        return false;
     }
 }

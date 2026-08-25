@@ -11,8 +11,12 @@ public static class ForumUpdate
         command.AddParameter("@Id", forum.Id);
         command.AddParameter("@Title", 150, forum.Title);
         command.AddParameter("@StatusId", forum.StatusId);
+        command.AddParameter("@PermissionId", forum.PermissionId);
+        command.AddParameter("@AccessMode", forum.AccessMode);
         command.AddParameter("@Description", forum.Description);
         command.AddParameter("@ImageId", forum.ImageFile.Id);
+        command.AddParameter("@Licenses", forum.Licenses);
+        command.AddStructuredParameter("@ForumBundles", "[Content].[ForumBundleList]", forum.ForumBundles.ToForumBundleTable());
 
         await command.Execute(connection, transaction);
     }

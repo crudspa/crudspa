@@ -33,11 +33,14 @@ insert [Education].[UnitViewed] (
     ,UpdatedBy
     ,UnitId
 )
-values (
+select
      newid()
     ,@now
     ,@SessionId
     ,@Id
+where exists (
+    select 1
+    from [EducationStudent].[UnitLicenses](@SessionId, @Id) unitLicense
 )
 
 create table #StudentAchievements (
@@ -183,6 +186,7 @@ select
 from [Education].[Unit-Active] unit
     inner join [Framework].[ImageFile-Active] image on unit.ImageId = image.Id
 where unit.Id = @Id
+    and exists (select 1 from #ApplicableUnitLicense)
 
 select
      lesson.Id

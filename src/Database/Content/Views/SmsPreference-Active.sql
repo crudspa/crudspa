@@ -2,6 +2,7 @@ create view [Content].[SmsPreference-Active] as
 
 select smsPreference.Id as Id
     ,smsPreference.PortalId as PortalId
+    ,smsPreference.OrganizationId as OrganizationId
     ,smsPreference.SmsChannelKey as SmsChannelKey
     ,smsPreference.ContactId as ContactId
     ,smsPreference.ContactPhoneId as ContactPhoneId

@@ -10,3 +10,9 @@ create table [Content].[TagBundle] (
     constraint [FK_Content_TagBundle_Tag] foreign key ([TagId]) references [Content].[Tag] ([Id]),
     constraint [FK_Content_TagBundle_Bundle] foreign key ([BundleId]) references [Content].[Bundle] ([Id]),
 );
+
+go
+
+create nonclustered index [IX_Content_TagBundle_BundleId_TagId]
+    on [Content].[TagBundle] ([BundleId], [TagId])
+    include ([Id], [VersionOf], [IsDeleted]);

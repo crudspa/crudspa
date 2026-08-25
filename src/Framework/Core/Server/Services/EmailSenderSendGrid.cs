@@ -41,7 +41,11 @@ public class EmailSenderSendGrid : IEmailSender
             var apiResponse = await _apiClient.SendEmailAsync(mail);
 
             if (apiResponse.StatusCode != HttpStatusCode.Accepted)
-                response.AddError($"Call to SendGrid API failed. StatusCode: {apiResponse.StatusCode}. Response: {await apiResponse.Body.ReadAsStringAsync()}");
+            {
+                var responseBody = await apiResponse.Body.ReadAsStringAsync();
+                throw new InvalidOperationException(
+                    $"Call to SendGrid API failed. StatusCode: {apiResponse.StatusCode}. Response: {responseBody}");
+            }
         });
     }
 

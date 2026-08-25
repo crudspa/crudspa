@@ -1,13 +1,13 @@
+
 namespace Crudspa.Education.School.Server.Hubs;
 
-public partial class SchoolHub : Crudspa.Content.Display.Server.Hubs.DisplayHub
+public partial class SchoolHub : Crudspa.Content.Messaging.Server.Hubs.MessagingHub
 {
     protected IActivityMediaPlayService ActivityMediaPlayService { get; }
     protected IActivityRunService ActivityRunService { get; }
     protected IAssessmentAssignmentService AssessmentAssignmentService { get; }
     protected IClassRecordingService ClassRecordingService { get; }
     protected IClassroomService ClassroomService { get; }
-    protected Shared.Contracts.Behavior.IPostService SchoolPostService { get; }
     protected IReportService ReportService { get; }
     protected ISchoolContactService SchoolContactService { get; }
     protected ISchoolService SchoolService { get; }
@@ -40,21 +40,39 @@ public partial class SchoolHub : Crudspa.Content.Display.Server.Hubs.DisplayHub
         IContentPortalRunService contentPortalRunService,
         ICourseRunService courseRunService,
         IElementProgressService elementProgressService,
+        IForumRunService forumRunService,
         INotebookRunService notebookRunService,
         IPageRunService pageRunService,
         ISurveyRunService surveyRunService,
+        // MessagingHub (Content)
+        IActivationService activationService,
+        ICampaignService campaignService,
+        IEmailService emailService,
+        IEmailTemplateService emailTemplateService,
+        IMemberService memberService,
+        IMembershipService membershipService,
+        IMessageService messageService,
+        IPopulationService populationService,
+        ISmsEventService smsEventService,
+        ISmsMessageMediaService smsMessageMediaService,
+        ISmsMessageService smsMessageService,
+        ISmsPreferenceService smsPreferenceService,
+        ISmsService smsService,
+        ISmsTemplateService smsTemplateService,
+        IStageService stageService,
+        ITokenService tokenService,
         // SchoolHub (Education)
         IActivityMediaPlayService activityMediaPlayService,
         IActivityRunService activityRunService,
         IAssessmentAssignmentService assessmentAssignmentService,
         IClassRecordingService classRecordingService,
         IClassroomService classroomService,
-        Shared.Contracts.Behavior.IPostService schoolPostService,
         IReportService reportService,
         ISchoolContactService schoolContactService,
         ISchoolService schoolService,
         ISchoolYearService schoolYearService,
-        IStudentService studentService)
+        IStudentService studentService
+        )
         : base(loggerFactory,
             hubWrappers,
             accessDeniedService,
@@ -78,16 +96,33 @@ public partial class SchoolHub : Crudspa.Content.Display.Server.Hubs.DisplayHub
             contentPortalRunService,
             courseRunService,
             elementProgressService,
+            forumRunService,
             notebookRunService,
             pageRunService,
-            surveyRunService)
+            surveyRunService,
+            activationService,
+            campaignService,
+            emailService,
+            emailTemplateService,
+            memberService,
+            membershipService,
+            messageService,
+            populationService,
+            smsEventService,
+            smsMessageMediaService,
+            smsMessageService,
+            smsPreferenceService,
+            smsService,
+            smsTemplateService,
+            stageService,
+            tokenService
+            )
     {
         ActivityMediaPlayService = activityMediaPlayService;
         ActivityRunService = activityRunService;
         AssessmentAssignmentService = assessmentAssignmentService;
         ClassRecordingService = classRecordingService;
         ClassroomService = classroomService;
-        SchoolPostService = schoolPostService;
         ReportService = reportService;
         SchoolContactService = schoolContactService;
         SchoolService = schoolService;

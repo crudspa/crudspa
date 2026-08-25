@@ -22,4 +22,13 @@ public class ForumServiceTcp(IProxyWrappers proxyWrappers) : IForumService
 
     public async Task<Response<IList<Orderable>>> FetchContentStatusNames(Request request) =>
         await proxyWrappers.SendAndCache<IList<Orderable>>("ForumFetchContentStatusNames", request);
+
+    public async Task<Response<IList<Named>>> FetchPermissionNames(Request<Portal> request) =>
+        await proxyWrappers.Send<IList<Named>>("ForumFetchPermissionNames", request);
+
+    public async Task<Response<IList<Named>>> FetchLicenseNames(Request request) =>
+        await proxyWrappers.Send<IList<Named>>("ForumFetchLicenseNames", request);
+
+    public async Task<Response<IList<Named>>> FetchBundleNames(Request request) =>
+        await proxyWrappers.Send<IList<Named>>("ForumFetchBundleNames", request);
 }

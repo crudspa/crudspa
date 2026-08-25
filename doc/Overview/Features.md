@@ -17,7 +17,7 @@ At a high level, Crudspa stacks four feature families. The shell and UX layer co
 | Typed model and component layer | reusable components plus client models for alerts, waiting states, forms, lists, tabs, modals, and navigation workflows |
 | Data-layer patterns | a SQL Database Project plus the default stored procedure and repository patterns for validation, scope, and transactions |
 | Styling and theme support | a broad styling foundation plus typed content styles, fonts, and brand settings that can flow into runtime hosts |
-| Reports, jobs, and content modules | higher-level capabilities for read-heavy views, background operations, content authoring, and content delivery |
+| Reports, jobs, content, and messaging modules | higher-level capabilities for read-heavy views, background operations, content authoring and delivery, forums, populations, campaigns, and message definitions |
 
 ## Why These Features Fit Together
 
@@ -34,8 +34,8 @@ This is also why Crudspa is designed for interactive, stateful, data-heavy surfa
 The feature list lands faster when you pair it with the right sample:
 
 * `Catalog` is the shortest path to the `Framework.Core` story: shell, models, services, notices, the core data-layer patterns, and the simplest jobs administration surface.
-* `Composer` shows editor workflows, metadata-driven panes, and authoring services layered on the same contracts, and it's the authoring half of the live `Composer`-to-`Consumer` loop.
-* `Consumer` shows binders, pages, elements, media, and theme-aware runtime delivery, and it's best studied while `Composer` is changing content.
+* `Composer` shows editor workflows, metadata-driven panes, forum administration, campaigns, populations, and message definitions layered on the same contracts. It is the authoring half of the live `Composer`-to-`Consumer` loop.
+* `Consumer` shows binders, pages, elements, media, theme-aware runtime delivery, and interactive forums. It is best studied while `Composer` is changing content and forum configuration.
 * `Jobs Engine` handles scheduling and operational processing while `Catalog` and `Composer` expose the `Jobs` and `Schedules` panes.
 * The larger domain modules show how the same feature families scale into broader application shapes.
 

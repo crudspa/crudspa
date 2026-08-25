@@ -32,6 +32,13 @@
                                 ColorClassFrom="ContentStatusColors.For"
                                 @bind-Value="Model.Entity.StatusId" />
                 </Field>
+                <Field Label="Access"
+                       Size="Field.Sizes.Medium"
+                       Container="Field.Containers.Div">
+                    <EnumRadio TEnum="Blog.AccessModes"
+                               ReadOnly="Model.ReadOnly"
+                               @bind-SelectedValue="Model.Entity.AccessMode" />
+                </Field>
                 <Field Label="Author"
                        Size="Field.Sizes.Wide">
                     <TextBox ReadOnly="Model.ReadOnly"

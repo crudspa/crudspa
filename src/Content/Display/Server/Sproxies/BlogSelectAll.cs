@@ -2,12 +2,13 @@ namespace Crudspa.Content.Display.Server.Sproxies;
 
 public static class BlogSelectAll
 {
-    public static async Task<IList<Blog>> Execute(String connection, Guid? sessionId)
+    public static async Task<IList<Blog>> Execute(String connection, Guid? sessionId, IEnumerable<Guid?> licenseIds)
     {
         await using var command = new SqlCommand();
         command.CommandText = "ContentDisplay.BlogSelectAll";
 
         command.AddParameter("@SessionId", sessionId);
+        command.AddParameter("@LicenseIds", licenseIds);
 
         return await command.ReadAll(connection, ReadBlog);
     }

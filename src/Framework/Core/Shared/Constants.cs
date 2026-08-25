@@ -4,6 +4,8 @@ namespace Crudspa.Framework.Core.Shared;
 
 public static class Constants
 {
+    public const Int32 AccessCodeLifetimeMinutes = 10;
+
     public static class ErrorMessages
     {
         public const String GenericError = "An unexpected error occurred.";

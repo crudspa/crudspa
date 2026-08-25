@@ -1,4 +1,5 @@
 using Crudspa.Content.Design.Client.Services;
+using Crudspa.Content.Messaging.Client.Services;
 using Crudspa.Framework.Jobs.Client.Services;
 using Crudspa.Samples.Composer.Client.Services;
 
@@ -18,19 +19,16 @@ public class Registry
         services.AddSingleton<ICommentService, CommentServiceTcp>();
         services.AddSingleton<IContentPortalService, ContentPortalServiceTcp>();
         services.AddSingleton<ICourseService, CourseServiceTcp>();
-        services.AddSingleton<IEmailService, EmailServiceTcp>();
-        services.AddSingleton<IEmailTemplateService, EmailTemplateServiceTcp>();
+        services.AddSingleton<IFontFaceService, FontFaceServiceTcp>();
         services.AddSingleton<IFontService, FontServiceTcp>();
         services.AddSingleton<IForumService, ForumServiceTcp>();
         services.AddSingleton<IItemService, ItemServiceTcp>();
-        services.AddSingleton<IMemberService, MemberServiceTcp>();
-        services.AddSingleton<IMembershipService, MembershipServiceTcp>();
         services.AddSingleton<IPanePageService, PanePageServiceTcp>();
         services.AddSingleton<IPostService, PostServiceTcp>();
         services.AddSingleton<ISectionService, SectionServiceTcp>();
         services.AddSingleton<IStyleService, StyleServiceTcp>();
         services.AddSingleton<IThreadService, ThreadServiceTcp>();
-        services.AddSingleton<ITokenService, TokenServiceTcp>();
+        services.AddSingleton<ISurveyService, SurveyServiceTcp>();
         services.AddSingleton<ITrackService, TrackServiceTcp>();
 
         // Crudspa.Content.Display.Shared
@@ -40,8 +38,28 @@ public class Registry
         services.AddSingleton<IContentPortalRunService, ContentPortalRunServiceTcp>();
         services.AddSingleton<ICourseRunService, CourseRunServiceTcp>();
         services.AddSingleton<IElementProgressService, ElementProgressServiceTcp>();
+        services.AddSingleton<IForumRunService, ForumRunServiceTcp>();
         services.AddSingleton<INotebookRunService, NotebookRunServiceTcp>();
         services.AddSingleton<IPageRunService, PageRunServiceTcp>();
+        services.AddSingleton<ISurveyRunService, SurveyRunServiceTcp>();
+
+        // Crudspa.Content.Messaging.Shared
+        services.AddSingleton<IActivationService, ActivationServiceTcp>();
+        services.AddSingleton<ICampaignService, CampaignServiceTcp>();
+        services.AddSingleton<IEmailService, EmailServiceTcp>();
+        services.AddSingleton<IEmailTemplateService, EmailTemplateServiceTcp>();
+        services.AddSingleton<IMemberService, MemberServiceTcp>();
+        services.AddSingleton<IMembershipService, MembershipServiceTcp>();
+        services.AddSingleton<IMessageService, MessageServiceTcp>();
+        services.AddSingleton<IPopulationService, PopulationServiceTcp>();
+        services.AddSingleton<ISmsEventService, SmsEventServiceTcp>();
+        services.AddSingleton<ISmsMessageMediaService, SmsMessageMediaServiceTcp>();
+        services.AddSingleton<ISmsMessageService, SmsMessageServiceTcp>();
+        services.AddSingleton<ISmsPreferenceService, SmsPreferenceServiceTcp>();
+        services.AddSingleton<ISmsService, SmsServiceTcp>();
+        services.AddSingleton<ISmsTemplateService, SmsTemplateServiceTcp>();
+        services.AddSingleton<IStageService, StageServiceTcp>();
+        services.AddSingleton<ITokenService, TokenServiceTcp>();
 
         // Crudspa.Framework.Core.Client
         services.AddSingleton<IClickService, ClickServiceCore>();

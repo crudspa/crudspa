@@ -3,6 +3,7 @@ create view [Content].[Forum-Active] as
 select forum.Id as Id
     ,forum.PortalId as PortalId
     ,forum.StatusId as StatusId
+    ,forum.PermissionId as PermissionId
     ,forum.Title as Title
     ,forum.Description as Description
     ,forum.ImageId as ImageId

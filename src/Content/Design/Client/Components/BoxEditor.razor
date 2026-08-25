@@ -1,4 +1,4 @@
-﻿@{
+@{
     const String border = "Border";
     const String font = "Font";
     const String frame = "Frame";
@@ -46,24 +46,22 @@
             <Field Label="Color"
                    Size="Field.Sizes.Medium"
                    Container="Field.Containers.Div">
-                <EnumRadio TEnum="OverrideState"
-                           @bind-SelectedValue="@Model.BorderColorState"
-                           RadioCssClass="tight-bottom" />
-                <div class="@(Model.BorderColorState == OverrideState.Custom ? String.Empty : "c-hide")">
-                    <ColorPicker @bind-Value="Model.Box.BorderColor" />
-                </div>
+                <DefaultOverride @bind-State="Model.BorderColorState">
+                    <div>
+                        <ColorPicker @bind-Value="Model.Box.BorderColor" />
+                    </div>
+                </DefaultOverride>
             </Field>
             <Field Label="Radius"
                    Size="Field.Sizes.Medium"
                    Container="Field.Containers.Div">
-                <EnumRadio TEnum="OverrideState"
-                           @bind-SelectedValue="@Model.BorderRadiusState"
-                           RadioCssClass="tight-bottom" />
-                <div class="c-min @(Model.BorderRadiusState == OverrideState.Custom ? String.Empty : "c-hide")">
-                    <TextBox MaxLength="10"
-                             Placeholder="0.5em"
-                             @bind-Value="Model.Box.BorderRadius" />
-                </div>
+                <DefaultOverride @bind-State="Model.BorderRadiusState">
+                    <div class="c-min">
+                        <TextBox MaxLength="10"
+                                 Placeholder="0.5em"
+                                 @bind-Value="Model.Box.BorderRadius" />
+                    </div>
+                </DefaultOverride>
             </Field>
         </Wrapped>
         <BatchSection Title="Thickness">
@@ -73,62 +71,57 @@
                     <Field Label="All"
                            Size="Field.Sizes.Medium"
                            Container="Field.Containers.Div">
-                        <EnumRadio TEnum="OverrideState"
-                                   @bind-SelectedValue="@Model.BorderThicknessState"
-                                   RadioCssClass="tight-bottom" />
-                        <div class="c-min @(Model.BorderThicknessState == OverrideState.Custom ? String.Empty : "c-hide")">
-                            <TextBox MaxLength="10"
-                                     Placeholder="1px"
-                                     @bind-Value="Model.Box.BorderThickness" />
-                        </div>
+                        <DefaultOverride @bind-State="Model.BorderThicknessState">
+                            <div class="c-min">
+                                <TextBox MaxLength="10"
+                                         Placeholder="1px"
+                                         @bind-Value="Model.Box.BorderThickness" />
+                            </div>
+                        </DefaultOverride>
                     </Field>
                     <Field Label="Top"
                            Size="Field.Sizes.Medium"
                            Container="Field.Containers.Div">
-                        <EnumRadio TEnum="OverrideState"
-                                   @bind-SelectedValue="@Model.BorderThicknessTopState"
-                                   RadioCssClass="tight-bottom" />
-                        <div class="c-min @(Model.BorderThicknessTopState == OverrideState.Custom ? String.Empty : "c-hide")">
-                            <TextBox MaxLength="10"
-                                     Placeholder="1px"
-                                     @bind-Value="Model.Box.BorderThicknessTop" />
-                        </div>
+                        <DefaultOverride @bind-State="Model.BorderThicknessTopState">
+                            <div class="c-min">
+                                <TextBox MaxLength="10"
+                                         Placeholder="1px"
+                                         @bind-Value="Model.Box.BorderThicknessTop" />
+                            </div>
+                        </DefaultOverride>
                     </Field>
                     <Field Label="Left"
                            Size="Field.Sizes.Medium"
                            Container="Field.Containers.Div">
-                        <EnumRadio TEnum="OverrideState"
-                                   @bind-SelectedValue="@Model.BorderThicknessLeftState"
-                                   RadioCssClass="tight-bottom" />
-                        <div class="c-min @(Model.BorderThicknessLeftState == OverrideState.Custom ? String.Empty : "c-hide")">
-                            <TextBox MaxLength="10"
-                                     Placeholder="1px"
-                                     @bind-Value="Model.Box.BorderThicknessLeft" />
-                        </div>
+                        <DefaultOverride @bind-State="Model.BorderThicknessLeftState">
+                            <div class="c-min">
+                                <TextBox MaxLength="10"
+                                         Placeholder="1px"
+                                         @bind-Value="Model.Box.BorderThicknessLeft" />
+                            </div>
+                        </DefaultOverride>
                     </Field>
                     <Field Label="Right"
                            Size="Field.Sizes.Medium"
                            Container="Field.Containers.Div">
-                        <EnumRadio TEnum="OverrideState"
-                                   @bind-SelectedValue="@Model.BorderThicknessRightState"
-                                   RadioCssClass="tight-bottom" />
-                        <div class="c-min @(Model.BorderThicknessRightState == OverrideState.Custom ? String.Empty : "c-hide")">
-                            <TextBox MaxLength="10"
-                                     Placeholder="1px"
-                                     @bind-Value="Model.Box.BorderThicknessRight" />
-                        </div>
+                        <DefaultOverride @bind-State="Model.BorderThicknessRightState">
+                            <div class="c-min">
+                                <TextBox MaxLength="10"
+                                         Placeholder="1px"
+                                         @bind-Value="Model.Box.BorderThicknessRight" />
+                            </div>
+                        </DefaultOverride>
                     </Field>
                     <Field Label="Bottom"
                            Size="Field.Sizes.Medium"
                            Container="Field.Containers.Div">
-                        <EnumRadio TEnum="OverrideState"
-                                   @bind-SelectedValue="@Model.BorderThicknessBottomState"
-                                   RadioCssClass="tight-bottom" />
-                        <div class="c-min @(Model.BorderThicknessBottomState == OverrideState.Custom ? String.Empty : "c-hide")">
-                            <TextBox MaxLength="10"
-                                     Placeholder="1px"
-                                     @bind-Value="Model.Box.BorderThicknessBottom" />
-                        </div>
+                        <DefaultOverride @bind-State="Model.BorderThicknessBottomState">
+                            <div class="c-min">
+                                <TextBox MaxLength="10"
+                                         Placeholder="1px"
+                                         @bind-Value="Model.Box.BorderThicknessBottom" />
+                            </div>
+                        </DefaultOverride>
                     </Field>
                 </Wrapped>
             </Padding>
@@ -149,35 +142,33 @@
             <Field Label="Size"
                    Size="Field.Sizes.Medium"
                    Container="Field.Containers.Div">
-                <EnumRadio TEnum="OverrideState"
-                           @bind-SelectedValue="@Model.FontSizeState"
-                           RadioCssClass="tight-bottom" />
-                <div class="c-min @(Model.FontSizeState == OverrideState.Custom ? String.Empty : "c-hide")">
-                    <TextBox MaxLength="10"
-                             Placeholder="1em"
-                             @bind-Value="Model.Box.FontSize" />
-                </div>
+                <DefaultOverride @bind-State="Model.FontSizeState">
+                    <div class="c-min">
+                        <TextBox MaxLength="10"
+                                 Placeholder="1em"
+                                 @bind-Value="Model.Box.FontSize" />
+                    </div>
+                </DefaultOverride>
             </Field>
             <Field Label="Weight"
                    Size="Field.Sizes.Medium"
                    Container="Field.Containers.Div">
-                <EnumRadio TEnum="OverrideState"
-                           @bind-SelectedValue="@Model.FontWeightState"
-                           RadioCssClass="tight-bottom" />
-                <div class="c-min @(Model.FontWeightState == OverrideState.Custom ? String.Empty : "c-hide")">
-                    <select class="input"
-                            @bind="Model.Box.FontWeight">
-                        <option value="100">100</option>
-                        <option value="200">200</option>
-                        <option value="300">300</option>
-                        <option value="400">400</option>
-                        <option value="500">500</option>
-                        <option value="600">600</option>
-                        <option value="700">700</option>
-                        <option value="800">800</option>
-                        <option value="900">900</option>
-                    </select>
-                </div>
+                <DefaultOverride @bind-State="Model.FontWeightState">
+                    <div class="c-min">
+                        <select class="input"
+                                @bind="Model.Box.FontWeight">
+                            <option value="100">100</option>
+                            <option value="200">200</option>
+                            <option value="300">300</option>
+                            <option value="400">400</option>
+                            <option value="500">500</option>
+                            <option value="600">600</option>
+                            <option value="700">700</option>
+                            <option value="800">800</option>
+                            <option value="900">900</option>
+                        </select>
+                    </div>
+                </DefaultOverride>
             </Field>
         </Wrapped>
     </Padding>
@@ -195,22 +186,20 @@
             <Field Label="Background Color"
                    Size="Field.Sizes.Medium"
                    Container="Field.Containers.Div">
-                <EnumRadio TEnum="OverrideState"
-                           @bind-SelectedValue="@Model.BackgroundColorState"
-                           RadioCssClass="tight-bottom" />
-                <div class="@(Model.BackgroundColorState == OverrideState.Custom ? String.Empty : "c-hide")">
-                    <ColorPicker @bind-Value="Model.Box.BackgroundColor" />
-                </div>
+                <DefaultOverride @bind-State="Model.BackgroundColorState">
+                    <div>
+                        <ColorPicker @bind-Value="Model.Box.BackgroundColor" />
+                    </div>
+                </DefaultOverride>
             </Field>
             <Field Label="Foreground Color"
                    Size="Field.Sizes.Medium"
                    Container="Field.Containers.Div">
-                <EnumRadio TEnum="OverrideState"
-                           @bind-SelectedValue="@Model.ForegroundColorState"
-                           RadioCssClass="tight-bottom" />
-                <div class="@(Model.ForegroundColorState == OverrideState.Custom ? String.Empty : "c-hide")">
-                    <ColorPicker @bind-Value="Model.Box.ForegroundColor" />
-                </div>
+                <DefaultOverride @bind-State="Model.ForegroundColorState">
+                    <div>
+                        <ColorPicker @bind-Value="Model.Box.ForegroundColor" />
+                    </div>
+                </DefaultOverride>
             </Field>
         </Wrapped>
     </Padding>
@@ -222,50 +211,46 @@
             <Field Label="Top"
                    Size="Field.Sizes.Medium"
                    Container="Field.Containers.Div">
-                <EnumRadio TEnum="OverrideState"
-                           @bind-SelectedValue="@Model.MarginTopState"
-                           RadioCssClass="tight-bottom" />
-                <div class="c-min @(Model.MarginTopState == OverrideState.Custom ? String.Empty : "c-hide")">
-                    <TextBox MaxLength="10"
-                             Placeholder="2em"
-                             @bind-Value="Model.Box.MarginTop" />
-                </div>
+                <DefaultOverride @bind-State="Model.MarginTopState">
+                    <div class="c-min">
+                        <TextBox MaxLength="10"
+                                 Placeholder="2em"
+                                 @bind-Value="Model.Box.MarginTop" />
+                    </div>
+                </DefaultOverride>
             </Field>
             <Field Label="Left"
                    Size="Field.Sizes.Medium"
                    Container="Field.Containers.Div">
-                <EnumRadio TEnum="OverrideState"
-                           @bind-SelectedValue="@Model.MarginLeftState"
-                           RadioCssClass="tight-bottom" />
-                <div class="c-min @(Model.MarginLeftState == OverrideState.Custom ? String.Empty : "c-hide")">
-                    <TextBox MaxLength="10"
-                             Placeholder="2em"
-                             @bind-Value="Model.Box.MarginLeft" />
-                </div>
+                <DefaultOverride @bind-State="Model.MarginLeftState">
+                    <div class="c-min">
+                        <TextBox MaxLength="10"
+                                 Placeholder="2em"
+                                 @bind-Value="Model.Box.MarginLeft" />
+                    </div>
+                </DefaultOverride>
             </Field>
             <Field Label="Right"
                    Size="Field.Sizes.Medium"
                    Container="Field.Containers.Div">
-                <EnumRadio TEnum="OverrideState"
-                           @bind-SelectedValue="@Model.MarginRightState"
-                           RadioCssClass="tight-bottom" />
-                <div class="c-min @(Model.MarginRightState == OverrideState.Custom ? String.Empty : "c-hide")">
-                    <TextBox MaxLength="10"
-                             Placeholder="2em"
-                             @bind-Value="Model.Box.MarginRight" />
-                </div>
+                <DefaultOverride @bind-State="Model.MarginRightState">
+                    <div class="c-min">
+                        <TextBox MaxLength="10"
+                                 Placeholder="2em"
+                                 @bind-Value="Model.Box.MarginRight" />
+                    </div>
+                </DefaultOverride>
             </Field>
             <Field Label="Bottom"
                    Size="Field.Sizes.Medium"
                    Container="Field.Containers.Div">
-                <EnumRadio TEnum="OverrideState"
-                           @bind-SelectedValue="@Model.MarginBottomState"
-                           RadioCssClass="tight-bottom" />
-                <div class="c-min @(Model.MarginBottomState == OverrideState.Custom ? String.Empty : "c-hide")">
-                    <TextBox MaxLength="10"
-                             Placeholder="2em"
-                             @bind-Value="Model.Box.MarginBottom" />
-                </div>
+                <DefaultOverride @bind-State="Model.MarginBottomState">
+                    <div class="c-min">
+                        <TextBox MaxLength="10"
+                                 Placeholder="2em"
+                                 @bind-Value="Model.Box.MarginBottom" />
+                    </div>
+                </DefaultOverride>
             </Field>
         </Wrapped>
     </Padding>
@@ -277,50 +262,46 @@
             <Field Label="Top"
                    Size="Field.Sizes.Medium"
                    Container="Field.Containers.Div">
-                <EnumRadio TEnum="OverrideState"
-                           @bind-SelectedValue="@Model.PaddingTopState"
-                           RadioCssClass="tight-bottom" />
-                <div class="c-min @(Model.PaddingTopState == OverrideState.Custom ? String.Empty : "c-hide")">
-                    <TextBox MaxLength="10"
-                             Placeholder="2em"
-                             @bind-Value="Model.Box.PaddingTop" />
-                </div>
+                <DefaultOverride @bind-State="Model.PaddingTopState">
+                    <div class="c-min">
+                        <TextBox MaxLength="10"
+                                 Placeholder="2em"
+                                 @bind-Value="Model.Box.PaddingTop" />
+                    </div>
+                </DefaultOverride>
             </Field>
             <Field Label="Left"
                    Size="Field.Sizes.Medium"
                    Container="Field.Containers.Div">
-                <EnumRadio TEnum="OverrideState"
-                           @bind-SelectedValue="@Model.PaddingLeftState"
-                           RadioCssClass="tight-bottom" />
-                <div class="c-min @(Model.PaddingLeftState == OverrideState.Custom ? String.Empty : "c-hide")">
-                    <TextBox MaxLength="10"
-                             Placeholder="2em"
-                             @bind-Value="Model.Box.PaddingLeft" />
-                </div>
+                <DefaultOverride @bind-State="Model.PaddingLeftState">
+                    <div class="c-min">
+                        <TextBox MaxLength="10"
+                                 Placeholder="2em"
+                                 @bind-Value="Model.Box.PaddingLeft" />
+                    </div>
+                </DefaultOverride>
             </Field>
             <Field Label="Right"
                    Size="Field.Sizes.Medium"
                    Container="Field.Containers.Div">
-                <EnumRadio TEnum="OverrideState"
-                           @bind-SelectedValue="@Model.PaddingRightState"
-                           RadioCssClass="tight-bottom" />
-                <div class="c-min @(Model.PaddingRightState == OverrideState.Custom ? String.Empty : "c-hide")">
-                    <TextBox MaxLength="10"
-                             Placeholder="2em"
-                             @bind-Value="Model.Box.PaddingRight" />
-                </div>
+                <DefaultOverride @bind-State="Model.PaddingRightState">
+                    <div class="c-min">
+                        <TextBox MaxLength="10"
+                                 Placeholder="2em"
+                                 @bind-Value="Model.Box.PaddingRight" />
+                    </div>
+                </DefaultOverride>
             </Field>
             <Field Label="Bottom"
                    Size="Field.Sizes.Medium"
                    Container="Field.Containers.Div">
-                <EnumRadio TEnum="OverrideState"
-                           @bind-SelectedValue="@Model.PaddingBottomState"
-                           RadioCssClass="tight-bottom" />
-                <div class="c-min @(Model.PaddingBottomState == OverrideState.Custom ? String.Empty : "c-hide")">
-                    <TextBox MaxLength="10"
-                             Placeholder="2em"
-                             @bind-Value="Model.Box.PaddingBottom" />
-                </div>
+                <DefaultOverride @bind-State="Model.PaddingBottomState">
+                    <div class="c-min">
+                        <TextBox MaxLength="10"
+                                 Placeholder="2em"
+                                 @bind-Value="Model.Box.PaddingBottom" />
+                    </div>
+                </DefaultOverride>
             </Field>
         </Wrapped>
     </Padding>
@@ -332,60 +313,55 @@
             <Field Label="Blur Radius"
                    Size="Field.Sizes.Medium"
                    Container="Field.Containers.Div">
-                <EnumRadio TEnum="OverrideState"
-                           @bind-SelectedValue="@Model.ShadowBlurRadiusState"
-                           RadioCssClass="tight-bottom" />
-                <div class="c-min @(Model.ShadowBlurRadiusState == OverrideState.Custom ? String.Empty : "c-hide")">
-                    <TextBox MaxLength="10"
-                             Placeholder=".5em"
-                             @bind-Value="Model.Box.ShadowBlurRadius" />
-                </div>
+                <DefaultOverride @bind-State="Model.ShadowBlurRadiusState">
+                    <div class="c-min">
+                        <TextBox MaxLength="10"
+                                 Placeholder=".5em"
+                                 @bind-Value="Model.Box.ShadowBlurRadius" />
+                    </div>
+                </DefaultOverride>
             </Field>
             <Field Label="Color"
                    Size="Field.Sizes.Medium"
                    Container="Field.Containers.Div">
-                <EnumRadio TEnum="OverrideState"
-                           @bind-SelectedValue="@Model.ShadowColorState"
-                           RadioCssClass="tight-bottom" />
-                <div class="@(Model.ShadowColorState == OverrideState.Custom ? String.Empty : "c-hide")">
-                    <ColorPicker @bind-Value="Model.Box.ShadowColor" />
-                </div>
+                <DefaultOverride @bind-State="Model.ShadowColorState">
+                    <div>
+                        <ColorPicker @bind-Value="Model.Box.ShadowColor" />
+                    </div>
+                </DefaultOverride>
             </Field>
             <Field Label="Offset X"
                    Size="Field.Sizes.Medium"
                    Container="Field.Containers.Div">
-                <EnumRadio TEnum="OverrideState"
-                           @bind-SelectedValue="@Model.ShadowOffsetXState"
-                           RadioCssClass="tight-bottom" />
-                <div class="c-min @(Model.ShadowOffsetXState == OverrideState.Custom ? String.Empty : "c-hide")">
-                    <TextBox MaxLength="10"
-                             Placeholder=".2em"
-                             @bind-Value="Model.Box.ShadowOffsetX" />
-                </div>
+                <DefaultOverride @bind-State="Model.ShadowOffsetXState">
+                    <div class="c-min">
+                        <TextBox MaxLength="10"
+                                 Placeholder=".2em"
+                                 @bind-Value="Model.Box.ShadowOffsetX" />
+                    </div>
+                </DefaultOverride>
             </Field>
             <Field Label="Offset Y"
                    Size="Field.Sizes.Medium"
                    Container="Field.Containers.Div">
-                <EnumRadio TEnum="OverrideState"
-                           @bind-SelectedValue="@Model.ShadowOffsetYState"
-                           RadioCssClass="tight-bottom" />
-                <div class="c-min @(Model.ShadowOffsetYState == OverrideState.Custom ? String.Empty : "c-hide")">
-                    <TextBox MaxLength="10"
-                             Placeholder=".2em"
-                             @bind-Value="Model.Box.ShadowOffsetY" />
-                </div>
+                <DefaultOverride @bind-State="Model.ShadowOffsetYState">
+                    <div class="c-min">
+                        <TextBox MaxLength="10"
+                                 Placeholder=".2em"
+                                 @bind-Value="Model.Box.ShadowOffsetY" />
+                    </div>
+                </DefaultOverride>
             </Field>
             <Field Label="Spread Radius"
                    Size="Field.Sizes.Medium"
                    Container="Field.Containers.Div">
-                <EnumRadio TEnum="OverrideState"
-                           @bind-SelectedValue="@Model.ShadowSpreadRadiusState"
-                           RadioCssClass="tight-bottom" />
-                <div class="c-min @(Model.ShadowSpreadRadiusState == OverrideState.Custom ? String.Empty : "c-hide")">
-                    <TextBox MaxLength="10"
-                             Placeholder=".5em"
-                             @bind-Value="Model.Box.ShadowSpreadRadius" />
-                </div>
+                <DefaultOverride @bind-State="Model.ShadowSpreadRadiusState">
+                    <div class="c-min">
+                        <TextBox MaxLength="10"
+                                 Placeholder=".5em"
+                                 @bind-Value="Model.Box.ShadowSpreadRadius" />
+                    </div>
+                </DefaultOverride>
             </Field>
         </Wrapped>
     </Padding>
@@ -397,26 +373,24 @@
             <Field Label="Heading Line Height"
                    Size="Field.Sizes.Medium"
                    Container="Field.Containers.Div">
-                <EnumRadio TEnum="OverrideState"
-                           @bind-SelectedValue="@Model.HeadingLineHeightState"
-                           RadioCssClass="tight-bottom" />
-                <div class="c-min @(Model.HeadingLineHeightState == OverrideState.Custom ? String.Empty : "c-hide")">
-                    <TextBox MaxLength="10"
-                             Placeholder="1.125"
-                             @bind-Value="Model.Box.HeadingLineHeight" />
-                </div>
+                <DefaultOverride @bind-State="Model.HeadingLineHeightState">
+                    <div class="c-min">
+                        <TextBox MaxLength="10"
+                                 Placeholder="1.125"
+                                 @bind-Value="Model.Box.HeadingLineHeight" />
+                    </div>
+                </DefaultOverride>
             </Field>
             <Field Label="Paragraph Line Height"
                    Size="Field.Sizes.Medium"
                    Container="Field.Containers.Div">
-                <EnumRadio TEnum="OverrideState"
-                           @bind-SelectedValue="@Model.ParagraphLineHeightState"
-                           RadioCssClass="tight-bottom" />
-                <div class="c-min @(Model.ParagraphLineHeightState == OverrideState.Custom ? String.Empty : "c-hide")">
-                    <TextBox MaxLength="10"
-                             Placeholder="1.5"
-                             @bind-Value="Model.Box.ParagraphLineHeight" />
-                </div>
+                <DefaultOverride @bind-State="Model.ParagraphLineHeightState">
+                    <div class="c-min">
+                        <TextBox MaxLength="10"
+                                 Placeholder="1.5"
+                                 @bind-Value="Model.Box.ParagraphLineHeight" />
+                    </div>
+                </DefaultOverride>
             </Field>
         </Wrapped>
         <BatchSection Title="Text Shadow">
@@ -426,48 +400,44 @@
                     <Field Label="Blur Radius"
                            Size="Field.Sizes.Medium"
                            Container="Field.Containers.Div">
-                        <EnumRadio TEnum="OverrideState"
-                                   @bind-SelectedValue="@Model.TextShadowBlurRadiusState"
-                                   RadioCssClass="tight-bottom" />
-                        <div class="c-min @(Model.TextShadowBlurRadiusState == OverrideState.Custom ? String.Empty : "c-hide")">
-                            <TextBox MaxLength="10"
-                                     Placeholder="5px"
-                                     @bind-Value="Model.Box.TextShadowBlurRadius" />
-                        </div>
+                        <DefaultOverride @bind-State="Model.TextShadowBlurRadiusState">
+                            <div class="c-min">
+                                <TextBox MaxLength="10"
+                                         Placeholder="5px"
+                                         @bind-Value="Model.Box.TextShadowBlurRadius" />
+                            </div>
+                        </DefaultOverride>
                     </Field>
                     <Field Label="Color"
                            Size="Field.Sizes.Medium"
                            Container="Field.Containers.Div">
-                        <EnumRadio TEnum="OverrideState"
-                                   @bind-SelectedValue="@Model.TextShadowColorState"
-                                   RadioCssClass="tight-bottom" />
-                        <div class="@(Model.TextShadowColorState == OverrideState.Custom ? String.Empty : "c-hide")">
-                            <ColorPicker @bind-Value="Model.Box.TextShadowColor" />
-                        </div>
+                        <DefaultOverride @bind-State="Model.TextShadowColorState">
+                            <div>
+                                <ColorPicker @bind-Value="Model.Box.TextShadowColor" />
+                            </div>
+                        </DefaultOverride>
                     </Field>
                     <Field Label="Offset X"
                            Size="Field.Sizes.Medium"
                            Container="Field.Containers.Div">
-                        <EnumRadio TEnum="OverrideState"
-                                   @bind-SelectedValue="@Model.TextShadowOffsetXState"
-                                   RadioCssClass="tight-bottom" />
-                        <div class="c-min @(Model.TextShadowOffsetXState == OverrideState.Custom ? String.Empty : "c-hide")">
-                            <TextBox MaxLength="10"
-                                     Placeholder="2px"
-                                     @bind-Value="Model.Box.TextShadowOffsetX" />
-                        </div>
+                        <DefaultOverride @bind-State="Model.TextShadowOffsetXState">
+                            <div class="c-min">
+                                <TextBox MaxLength="10"
+                                         Placeholder="2px"
+                                         @bind-Value="Model.Box.TextShadowOffsetX" />
+                            </div>
+                        </DefaultOverride>
                     </Field>
                     <Field Label="Offset Y"
                            Size="Field.Sizes.Medium"
                            Container="Field.Containers.Div">
-                        <EnumRadio TEnum="OverrideState"
-                                   @bind-SelectedValue="@Model.TextShadowOffsetYState"
-                                   RadioCssClass="tight-bottom" />
-                        <div class="c-min @(Model.TextShadowOffsetYState == OverrideState.Custom ? String.Empty : "c-hide")">
-                            <TextBox MaxLength="10"
-                                     Placeholder="2px"
-                                     @bind-Value="Model.Box.TextShadowOffsetY" />
-                        </div>
+                        <DefaultOverride @bind-State="Model.TextShadowOffsetYState">
+                            <div class="c-min">
+                                <TextBox MaxLength="10"
+                                         Placeholder="2px"
+                                         @bind-Value="Model.Box.TextShadowOffsetY" />
+                            </div>
+                        </DefaultOverride>
                     </Field>
                 </Wrapped>
             </Padding>

@@ -3,7 +3,8 @@
 public class ContentActionServiceSql(
     IServiceWrappers wrappers,
     IServerConfigService configService,
-    ISqlWrappers sqlWrappers)
+    ISqlWrappers sqlWrappers,
+    IGatewayService gatewayService)
     : IContentActionService
 {
     private String Connection => configService.Fetch().Database;
@@ -43,7 +44,22 @@ public class ContentActionServiceSql(
         {
             await sqlWrappers.WithConnection(async (connection, transaction) =>
             {
-                await SmsMessageInsert.Execute(connection, transaction, request.SessionId, request.Value);
+                var smsMessage = request.Value;
+                smsMessage.Id = await SmsMessageInsert.Execute(connection, transaction, request.SessionId, smsMessage);
+
+                foreach (var smsMessageMedia in smsMessage.SmsMessageMedias)
+                {
+                    smsMessageMedia.SmsMessageId = smsMessage.Id;
+                    await SmsMessageMediaInsert.Execute(connection, transaction, request.SessionId, smsMessageMedia);
+                }
+
+                await gatewayService.Publish(new SmsMessageAdded
+                {
+                    Id = smsMessage.Id,
+                    MembershipId = smsMessage.MembershipId,
+                    ContactId = smsMessage.ContactId,
+                    ContactPhoneId = smsMessage.ContactPhoneId,
+                });
             });
         });
     }
@@ -70,6 +86,12 @@ public class ContentActionServiceSql(
             await sqlWrappers.WithConnection(async (connection, transaction) =>
             {
                 await SmsUpdateStatus.Execute(connection, transaction, request.SessionId, sms.Id!.Value, sms.Status);
+
+                await gatewayService.Publish(new SmsSaved
+                {
+                    Id = sms.Id,
+                    MembershipId = sms.MembershipId,
+                });
             });
         });
     }

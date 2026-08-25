@@ -1,3 +1,4 @@
+@use 'sass:map';
 @mixin rz-color-css($property, $map) {
   @each $token,
   $value in $map {
@@ -59,7 +60,7 @@
       opacity: 0;
       background-position: center;
       background: radial-gradient(circle, currentColor 1%, transparent 1%) center/15000%;
-      transition: background-size 0.8s, opacity 0.8s;
+      transition: background-size var(--rz-ripple-duration, 0.8s), opacity var(--rz-ripple-duration, 0.8s);
       pointer-events: none;
     }
 
@@ -78,7 +79,7 @@
   } @else {
 
     background-position: center;
-    transition: background-size 0.8s;
+    transition: background-size var(--rz-ripple-duration, 0.8s);
     background: radial-gradient(circle, transparent 1%, $ripple-background 1%)  center/15000%;
 
     &:active {
@@ -118,14 +119,14 @@
 
 @mixin outlined-shades($style, $map, $border-prop: 'box-shadow') {
   $use-bc: $border-prop == 'border-color';
-  $bg: map-get($map, background-color);
+  $bg: map.get($map, background-color);
 
   @if $style == 'dark' {
     &.rz-shade-default { #{$border-prop}: rz-outlined-border-val($bg, $use-bc); color: #{$bg}; }
   }
   @else if $style == 'light' {
     @if $theme-dark == true {
-      $c: map-get($map, color);
+      $c: map.get($map, color);
       &.rz-shade-default { #{$border-prop}: rz-outlined-border-val($c, $use-bc); color: #{$c}; }
     }
     @else {
@@ -135,7 +136,7 @@
   @else if $style == 'base' {
     &.rz-shade-lighter { #{$border-prop}: rz-outlined-border-val(var(--rz-#{$style}-lighter), $use-bc); color: var(--rz-#{$style}-light); }
     &.rz-shade-light { #{$border-prop}: rz-outlined-border-val(var(--rz-#{$style}-light), $use-bc); color: var(--rz-#{$style}-light); }
-    &.rz-shade-default { #{$border-prop}: rz-outlined-border-val(var(--rz-text-color), $use-bc); color: var(--rz-text-color); }
+    &.rz-shade-default { #{$border-prop}: rz-outlined-border-val($button-base-outlined-border-color, $use-bc); color: var(--rz-text-color); }
     &.rz-shade-dark { #{$border-prop}: rz-outlined-border-val(var(--rz-#{$style}-dark), $use-bc); color: var(--rz-#{$style}-dark); }
     &.rz-shade-darker { #{$border-prop}: rz-outlined-border-val(var(--rz-#{$style}-darker), $use-bc); color: var(--rz-#{$style}-darker); }
   }
@@ -158,10 +159,10 @@
 }
 
 @mixin text-color-shades($style, $map) {
-  @if $style == 'dark' { color: #{map-get($map, background-color)}; }
+  @if $style == 'dark' { color: #{map.get($map, background-color)}; }
   @else if $style == 'light' {
-    @if $theme-dark == true { color: #{map-get($map, color)}; }
-    @else { color: #{map-get($map, background-color)}; }
+    @if $theme-dark == true { color: #{map.get($map, color)}; }
+    @else { color: #{map.get($map, background-color)}; }
   } @else if $style == 'base' {
     &.rz-shade-lighter { color: var(--rz-#{$style}-lighter); }
     &.rz-shade-light { color: var(--rz-#{$style}-light); }
@@ -190,8 +191,8 @@
   @if $style == 'light' { background-color: rgba(255, 255, 255, .12); }
   @else if $style == 'dark' { background-color: rgba(0, 0, 0, .12); }
   @else if $style == 'base' {
-    @if $theme-dark == true { background-color: var(--rz-#{$style}-darker); color: var(--rz-on-#{$style}-darker); }
-    @else { background-color: var(--rz-#{$style}-lighter); color: var(--rz-on-#{$style}-lighter); }
+    @if $theme-dark == true { background-color: var(--rz-base-600); color: var(--rz-on-#{$style}-darker); }
+    @else { background-color: var(--rz-base-200); color: var(--rz-on-#{$style}-lighter); }
   }
   @else { background-color: var(--rz-#{$style}-lighter); color: var(--rz-on-#{$style}-lighter); }
 }

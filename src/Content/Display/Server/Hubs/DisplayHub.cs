@@ -9,6 +9,7 @@ public partial class DisplayHub : Crudspa.Framework.Core.Server.Hubs.CoreHub
     protected IContentPortalRunService ContentPortalRunService { get; }
     protected ICourseRunService CourseRunService { get; }
     protected IElementProgressService ElementProgressService { get; }
+    protected IForumRunService ForumRunService { get; }
     protected INotebookRunService NotebookRunService { get; }
     protected IPageRunService PageRunService { get; }
     protected ISurveyRunService SurveyRunService { get; }
@@ -39,6 +40,7 @@ public partial class DisplayHub : Crudspa.Framework.Core.Server.Hubs.CoreHub
         IContentPortalRunService contentPortalRunService,
         ICourseRunService courseRunService,
         IElementProgressService elementProgressService,
+        IForumRunService forumRunService,
         INotebookRunService notebookRunService,
         IPageRunService pageRunService,
         ISurveyRunService surveyRunService)
@@ -66,6 +68,7 @@ public partial class DisplayHub : Crudspa.Framework.Core.Server.Hubs.CoreHub
         ContentPortalRunService = contentPortalRunService;
         CourseRunService = courseRunService;
         ElementProgressService = elementProgressService;
+        ForumRunService = forumRunService;
         NotebookRunService = notebookRunService;
         PageRunService = pageRunService;
         SurveyRunService = surveyRunService;

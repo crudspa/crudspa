@@ -43,9 +43,66 @@
                        Container="Field.Containers.Div">
                     <ImageUploader ReadOnly="Model.ReadOnly"
                                    Required="false"
+                                   MaxFileSize="ForumMediaPolicy.ImageMaxBytes"
+                                   Accept="ForumCoverAccept"
+                                   AllowedExtensions="ForumCoverExtensions"
+                                   UploadPath="Model.CoverUploadPath"
                                    ImageFile="Model.Entity.ImageFile" />
                 </Field>
             </Wrapped>
+            <BatchSection Title="Visibility">
+                <Padding Size="Padding.Sizes.Small"
+                         Direction="Padding.Directions.Vertical">
+                    <Wrapped Alignment="Wrapped.Alignments.Top">
+                        <Field Label="Access"
+                               Size="Field.Sizes.Medium"
+                               Container="Field.Containers.Div">
+                            <EnumRadio TEnum="Forum.AccessModes"
+                                       ReadOnly="Model.ReadOnly"
+                                       @bind-SelectedValue="Model.Entity.AccessMode" />
+                        </Field>
+                        <Field Label="Permission"
+                               Size="Field.Sizes.Medium">
+                            <Dropdown ReadOnly="Model.ReadOnly"
+                                      AllowNull="true"
+                                      NullText="[All matching users]"
+                                      LookupValues="Model.PermissionNames"
+                                      @bind-Value="Model.Entity.PermissionId" />
+                        </Field>
+                    </Wrapped>
+                    @if (Model.Entity.AccessMode == Forum.AccessModes.LicensedUsers)
+                    {
+                        <Wrapped>
+                            <Field Label="Licenses"
+                                   Size="Field.Sizes.Large"
+                                   Container="Field.Containers.Div">
+                                <CheckedList ReadOnly="Model.ReadOnly"
+                                             Selectables="Model.Entity.Licenses"
+                                             Height="CheckedList.Heights.Average" />
+                            </Field>
+                        </Wrapped>
+                    }
+                </Padding>
+            </BatchSection>
+            @if (Model.Entity.ForumBundles.HasItems())
+            {
+                <BatchSection Title="Topics">
+                    <Padding Size="Padding.Sizes.Small"
+                             Direction="Padding.Directions.Vertical">
+                        @foreach (var forumBundle in Model.Entity.ForumBundles)
+                        {
+                            <Field Label="@forumBundle.BundleName"
+                                   Size="Field.Sizes.Full"
+                                   Container="Field.Containers.Div">
+                                <EnumRadio TEnum="ForumBundle.Rules"
+                                           ReadOnly="Model.ReadOnly"
+                                           SelectedValue="Model.TopicRule(forumBundle)"
+                                           SelectedValueChanged="rule => Model.SetTopicRule(forumBundle, rule)" />
+                            </Field>
+                        }
+                    </Padding>
+                </BatchSection>
+            }
         </Padding>
     }
 </Waiter>

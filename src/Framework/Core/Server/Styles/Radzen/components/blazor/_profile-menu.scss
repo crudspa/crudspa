@@ -26,12 +26,15 @@ ul.rz-profile-menu {
   position: relative;
   z-index: 3;
 
-  &:focus {
+  > .rz-navigation-item > [role="button"]:focus {
     outline: var(--rz-outline-normal);
   }
 
-  &:focus-visible {
+  > .rz-navigation-item > [role="button"]:focus-visible {
     outline: var(--rz-menu-item-focus-outline);
+  }
+
+  &:focus-within {
 
     .rz-navigation-item {
 
@@ -43,6 +46,10 @@ ul.rz-profile-menu {
         }
       }
     }
+  }
+
+  .rz-navigation-menu:focus {
+    outline: none;
   }
 
   .rz-navigation-item-icon-children {

@@ -59,4 +59,5 @@ from [Content].[TokenValue-Active] tokenValue
     inner join [Content].[Member-Active] member on member.ContactId = contact.Id
     inner join [Content].[Membership-Active] membership on member.MembershipId = membership.Id
 where membership.Id = @MembershipId
+    and token.MembershipId = @MembershipId
     and (member.Status = 0 or member.Status = 1)

@@ -26,9 +26,10 @@ set
 from [Education].[UnitLicense] baseTable
     inner join [Education].[UnitLicense-Active] unitLicense on unitLicense.Id = baseTable.Id
     inner join [Education].[Unit-Active] unit on unitLicense.UnitId = unit.Id
-    inner join [Framework].[Organization-Active] organization on unit.OwnerId = organization.Id
+    inner join [Framework].[License-Active] license on license.Id = unitLicense.LicenseId
 where baseTable.Id = @Id
-    and organization.Id = @organizationId
+    and unit.OwnerId = @organizationId
+    and license.OwnerId = @organizationId
 
 if @@rowcount = 0
 begin
@@ -40,6 +41,20 @@ end
 if (@existingUnitId != @UnitId)
 begin
 
+    if exists (
+        select 1
+        from [Education].[UnitLicense-Active] existing with (updlock, holdlock)
+            inner join [Education].[UnitLicense-Active] updating on updating.Id = @Id
+        where existing.LicenseId = updating.LicenseId
+            and existing.UnitId = @UnitId
+            and existing.Id != @Id
+    )
+    begin
+        rollback transaction
+        raiserror('The unit is already related to this license', 16, 1)
+        return
+    end
+
     update baseTable
     set
          Id = @Id
@@ -50,10 +65,11 @@ begin
         ,AllLessons = 1
     from [Education].[UnitLicense] baseTable
         inner join [Education].[UnitLicense-Active] unitLicense on unitLicense.Id = baseTable.Id
-        inner join [Education].[Unit-Active] unit on unitLicense.UnitId = unit.Id
-        inner join [Framework].[Organization-Active] organization on unit.OwnerId = organization.Id
+        inner join [Education].[Unit-Active] unit on unit.Id = @UnitId
+        inner join [Framework].[License-Active] license on license.Id = unitLicense.LicenseId
     where baseTable.Id = @Id
-        and organization.Id = @organizationId
+        and unit.OwnerId = @organizationId
+        and license.OwnerId = @organizationId
 
 if @@rowcount = 0
 begin

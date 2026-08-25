@@ -40,13 +40,14 @@ If you want one end-to-end code tour, start here and trace a book, movie, or shi
 * segments and pane content
 * tracks, courses, pages, and sections
 * blogs, posts, and post sections
+* forums, threads, posts, and comments
 * styles and fonts
-* memberships, members, emails, and templates
+* campaigns, stages, populations, email templates, and email or SMS message definitions
 * jobs and schedules
 
 Those authoring surfaces now support a faster editing loop than they used to. You can duplicate a section from its card menu, and you can copy and paste settings across page, section, element, media item, and button editors when you want to reuse a layout or visual treatment instead of rebuilding it by hand.
 
-`Consumer` is the runtime host. It shows the content-side result of those authoring changes through a smaller runtime portal.
+`Consumer` is the runtime host. It shows the content-side result of those authoring changes through a smaller runtime portal. Its seeded forums make the split concrete: `Composer` owns forum and thread configuration, while `Consumer` owns reading threads and adding posts or nested comments.
 
 The most useful sample loop is:
 
@@ -54,8 +55,10 @@ The most useful sample loop is:
 2. Sign in with `sample@example.com`.
 3. Use `Reset password`, read the access-code message from `C:\data\temp\email`, set a password, and finish signing in.
 4. Open `Consumer` at the same time.
-5. Edit content, duplicate sections, reuse settings, styles, or portal settings in `Composer`.
-6. Watch the changes show up in `Consumer`.
+5. In `Composer`, open `Portals`, choose `Consumer`, then explore `Forums` and `Campaigns`.
+6. In `Consumer`, open `Forums` and browse the seeded forums, threads, posts, and comments.
+7. To post, sign in to `Consumer` with `sample@example.com` by repeating its local reset-password flow.
+8. Edit content, forum details, styles, or portal settings in `Composer`, then watch the runtime host refresh.
 
 This is the shortest path to understanding `Content.Design`, `Content.Display`, portal invalidation, themed runtime output, and the cross-host gateway flow.
 

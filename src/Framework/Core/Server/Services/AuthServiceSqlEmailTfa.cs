@@ -43,10 +43,7 @@ public class AuthServiceSqlEmailTfa(
                 return new() { Result = AuthResult.Results.CredentialsIncorrect };
 
             if (user.PasswordHash is null || user.PasswordSalt is null)
-            {
-                await accessCodeService.Generate(new(request.SessionId, user));
-                return new() { Result = AuthResult.Results.PasswordNotSet };
-            }
+                return new() { Result = AuthResult.Results.CredentialsIncorrect };
 
             var hash = cryptographyService.ComputeHash(credentials.Password!, user.PasswordSalt);
 
@@ -122,10 +119,7 @@ public class AuthServiceSqlEmailTfa(
             var user = await UserSelectByUsername.Execute(Connection, accessCode.PortalId, accessCode.Username!);
 
             if (user is null)
-            {
-                response.AddError("Account not found.");
                 return;
-            }
 
             await UserUpdateResetPassword.Execute(Connection, request.SessionId, user.Id);
 

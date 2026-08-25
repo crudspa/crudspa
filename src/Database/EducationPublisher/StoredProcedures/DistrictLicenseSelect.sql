@@ -24,8 +24,10 @@ from [Education].[DistrictLicense-Active] districtLicense
     inner join [Education].[District-Active] district on districtLicense.DistrictId = district.Id
     inner join [Framework].[Organization-Active] organization on district.OrganizationId = organization.Id
     inner join [Framework].[License-Active] license on districtLicense.LicenseId = license.Id
+    inner join [Education].[Publisher-Active] publisher on publisher.Id = district.PublisherId
 where districtLicense.Id = @Id
     and district.PublisherId = @publisherId
+    and license.OwnerId = publisher.OrganizationId
 
 
 select distinct
@@ -35,10 +37,13 @@ select distinct
     ,convert(bit, case when districtLicense.AllSchools = 1 or districtLicenseSchool.Id is not null then 1 else 0 end) as Selected
 from [Education].[DistrictLicense-Active] districtLicense
     inner join [Education].[District-Active] district on district.Id = districtLicense.DistrictId
+    inner join [Education].[Publisher-Active] publisher on publisher.Id = district.PublisherId
+    inner join [Framework].[License-Active] license on license.Id = districtLicense.LicenseId
     inner join [Education].[School-Active] school on school.DistrictId = district.Id
     inner join [Framework].[Organization-Active] organization on school.OrganizationId = organization.Id
     left join [Education].[DistrictLicenseSchool-Active] districtLicenseSchool on districtLicenseSchool.DistrictLicenseId = districtLicense.Id
         and districtLicenseSchool.SchoolId = school.Id
 where districtLicense.Id = @Id
     and district.PublisherId = @publisherId
+    and license.OwnerId = publisher.OrganizationId
 order by organization.Name

@@ -10,3 +10,9 @@ create table [Framework].[ContactEmail] (
     constraint [PK_Framework_ContactEmail] primary key clustered ([Id]),
     constraint [FK_Framework_ContactEmail_Contact] foreign key ([ContactId]) references [Framework].[Contact] ([Id]),
 );
+
+go
+
+create nonclustered index [IX_Framework_ContactEmail_ContactOrdinal]
+    on [Framework].[ContactEmail] ([ContactId], [Ordinal])
+    include ([VersionOf], [IsDeleted], [Email]);

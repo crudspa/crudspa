@@ -8,8 +8,8 @@
     <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CliWrap" Version="3.10.1" />
-    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.13.1" />
+    <PackageReference Include="CliWrap" Version="3.10.2" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.15.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Server\Server.csproj" />

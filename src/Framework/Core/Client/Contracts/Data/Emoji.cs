@@ -17,42 +17,6 @@ public class Emoji
 
             new()
             {
-                Character = Char.ConvertFromUtf32(0x1F642),
-                Name = "Slightly Smiling Face",
-            },
-
-            new()
-            {
-                Character = Char.ConvertFromUtf32(0x1F614),
-                Name = "Pensive Face",
-            },
-
-            new()
-            {
-                Character = Char.ConvertFromUtf32(0x1F620),
-                Name = "Angry Face",
-            },
-
-            new()
-            {
-                Character = Char.ConvertFromUtf32(0x1F632),
-                Name = "Astonished Face",
-            },
-
-            new()
-            {
-                Character = Char.ConvertFromUtf32(0x1F62D),
-                Name = "Loudly Crying Face",
-            },
-
-            new()
-            {
-                Character = Char.ConvertFromUtf32(0x1F602),
-                Name = "Face with Tears of Joy",
-            },
-
-            new()
-            {
                 Character = Char.ConvertFromUtf32(0x1F44D),
                 Name = "Thumbs Up",
             },
@@ -71,32 +35,158 @@ public class Emoji
 
             new()
             {
-                Character = Char.ConvertFromUtf32(0x270B),
-                Name = "Raised Hand",
+                Character = Char.ConvertFromUtf32(0x1F64C),
+                Name = "Celebrate",
+            },
+
+            new()
+            {
+                Character = Char.ConvertFromUtf32(0x1F91D),
+                Name = "Collaboration",
+            },
+
+            new()
+            {
+                Character = Char.ConvertFromUtf32(0x1F4AA),
+                Name = "Strong Work",
+            },
+
+            new()
+            {
+                Character = Char.ConvertFromUtf32(0x1F64F),
+                Name = "Thank You",
             },
 
             new()
             {
                 Character = Char.ConvertFromUtf32(0x1F4A1),
-                Name = "Light Bulb",
+                Name = "Idea",
             },
 
             new()
             {
-                Character = Char.ConvertFromUtf32(0x2714),
-                Name = "Check Mark",
+                Character = Char.ConvertFromUtf32(0x2705),
+                Name = "Complete",
             },
 
             new()
             {
                 Character = Char.ConvertFromUtf32(0x2753),
-                Name = "Question Mark",
+                Name = "Question",
             },
 
             new()
             {
                 Character = Char.ConvertFromUtf32(0x2757),
-                Name = "Exclamation Mark",
+                Name = "Important",
+            },
+
+            new()
+            {
+                Character = Char.ConvertFromUtf32(0x1F440),
+                Name = "Looking",
+            },
+
+            new()
+            {
+                Character = Char.ConvertFromUtf32(0x1F914),
+                Name = "Thinking",
+            },
+
+            new()
+            {
+                Character = Char.ConvertFromUtf32(0x1F642),
+                Name = "Smile",
+            },
+
+            new()
+            {
+                Character = Char.ConvertFromUtf32(0x1F60A),
+                Name = "Happy",
+            },
+
+            new()
+            {
+                Character = Char.ConvertFromUtf32(0x1F604),
+                Name = "Excited",
+            },
+
+            new()
+            {
+                Character = Char.ConvertFromUtf32(0x1F602),
+                Name = "Funny",
+            },
+
+            new()
+            {
+                Character = Char.ConvertFromUtf32(0x1F62E),
+                Name = "Surprised",
+            },
+
+            new()
+            {
+                Character = Char.ConvertFromUtf32(0x1F622),
+                Name = "Sad",
+            },
+
+            new()
+            {
+                Character = Char.ConvertFromUtf32(0x1F615),
+                Name = "Confused",
+            },
+
+            new()
+            {
+                Character = Char.ConvertFromUtf32(0x1F614),
+                Name = "Pensive",
+            },
+
+            new()
+            {
+                Character = Char.ConvertFromUtf32(0x1F620),
+                Name = "Frustrated",
+            },
+
+            new()
+            {
+                Character = Char.ConvertFromUtf32(0x2B50),
+                Name = "Star",
+            },
+
+            new()
+            {
+                Character = Char.ConvertFromUtf32(0x2728),
+                Name = "Sparkles",
+            },
+
+            new()
+            {
+                Character = Char.ConvertFromUtf32(0x1F389),
+                Name = "Celebration",
+            },
+
+            new()
+            {
+                Character = Char.ConvertFromUtf32(0x1F680),
+                Name = "Great Progress",
+            },
+
+            new()
+            {
+                Character = Char.ConvertFromUtf32(0x1F4DA),
+                Name = "Learning",
+            },
+
+            new()
+            {
+                Character = Char.ConvertFromUtf32(0x1F9E0),
+                Name = "Smart Thinking",
+            },
+
+            new()
+            {
+                Character = Char.ConvertFromUtf32(0x1F3C6),
+                Name = "Achievement",
             },
         ];
     }

@@ -10,3 +10,13 @@ create table [Framework].[SegmentLicense] (
     constraint [FK_Framework_SegmentLicense_Segment] foreign key ([SegmentId]) references [Framework].[Segment] ([Id]),
     constraint [FK_Framework_SegmentLicense_License] foreign key ([LicenseId]) references [Framework].[License] ([Id]),
 );
+
+go
+
+create nonclustered index [IX_Framework_SegmentLicense_SegmentId_LicenseId]
+on [Framework].[SegmentLicense] ([SegmentId], [LicenseId])
+
+go
+
+create nonclustered index [IX_Framework_SegmentLicense_LicenseId_SegmentId]
+on [Framework].[SegmentLicense] ([LicenseId], [SegmentId])

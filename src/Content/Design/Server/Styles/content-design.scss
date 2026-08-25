@@ -12,7 +12,7 @@
 .c-sms-message-thread {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 8.875rem);
+    height: calc(100vh - 12.25rem);
     min-height: 24rem;
     overflow: hidden;
     width: 100%;
@@ -228,7 +228,7 @@
 
 @media (max-width: $screenTiny) {
     .c-sms-message-thread {
-        height: calc(100vh - 6.125rem);
+        height: calc(100vh - 9.5rem);
 
         .c-text-messages {
             padding-left: .5rem;

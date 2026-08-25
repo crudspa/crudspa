@@ -3,6 +3,7 @@ create proc [EducationPublisher].[LicenseUpdate] (
     ,@Id uniqueidentifier
     ,@Name nvarchar(50)
     ,@Description nvarchar(max)
+    ,@Segments Framework.IdList readonly
 ) as
 
 declare @organizationId uniqueidentifier = (
@@ -38,4 +39,40 @@ begin
     return
 end
 
+update segmentLicense
+set  IsDeleted = 1
+    ,Updated = @now
+    ,UpdatedBy = @SessionId
+from [Framework].[SegmentLicense] segmentLicense
+    inner join [Framework].[Segment-Active] segment on segment.Id = segmentLicense.SegmentId
+    inner join [Framework].[Portal-Active] portal on portal.Id = segment.PortalId
+        and portal.OwnerId = @organizationId
+    left join @Segments ids on ids.Id = segmentLicense.SegmentId
+where segmentLicense.LicenseId = @Id
+    and segmentLicense.IsDeleted = 0
+    and ids.Id is null
+
+insert [Framework].[SegmentLicense] (
+     Id
+    ,VersionOf
+    ,Updated
+    ,UpdatedBy
+    ,LicenseId
+    ,SegmentId
+)
+select
+     newRow.JunctionId
+    ,newRow.JunctionId
+    ,@now
+    ,@SessionId
+    ,@Id
+    ,ids.Id
+from (select distinct Id from @Segments) ids
+    inner join [Framework].[Segment-Active] segment on segment.Id = ids.Id
+    inner join [Framework].[Portal-Active] portal on portal.Id = segment.PortalId
+        and portal.OwnerId = @organizationId
+    left join [Framework].[SegmentLicense-Active] existingJunction on existingJunction.LicenseId = @Id
+        and existingJunction.SegmentId = ids.Id
+    cross apply (select newid() as JunctionId) newRow
+where existingJunction.Id is null
 commit transaction

@@ -10,3 +10,9 @@ create table [Framework].[Session] (
     constraint [FK_Framework_Session_Portal] foreign key ([PortalId]) references [Framework].[Portal] ([Id]),
     constraint [FK_Framework_Session_User] foreign key ([UserId]) references [Framework].[User] ([Id]),
 );
+
+go
+
+create nonclustered index [IX_Framework_Session_StartedUser]
+    on [Framework].[Session] ([Started], [UserId])
+    where [UserId] is not null;

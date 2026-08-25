@@ -27,7 +27,7 @@ else
             <Content>
                 <select @bind="InsertTokenModel.SelectedToken"
                         class="rz-input">
-                    @foreach (var token in Tokens)
+                    @foreach (var token in SortedTokens)
                     {
                         <option value="@token">@token</option>
                     }

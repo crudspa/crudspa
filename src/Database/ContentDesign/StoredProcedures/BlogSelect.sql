@@ -20,6 +20,7 @@ select
     ,status.Name as StatusName
     ,blog.Author
     ,blog.Description
+    ,blog.AccessMode
     ,image.Id as ImageId
     ,image.BlobId as ImageBlobId
     ,image.Name as ImageName

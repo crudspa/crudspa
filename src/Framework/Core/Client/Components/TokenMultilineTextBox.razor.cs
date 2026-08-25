@@ -18,6 +18,7 @@ public partial class TokenMultilineTextBox
 
     public TokenModel InsertTokenModel { get; set; } = null!;
     public MultilineTextBox TextBox { get; set; } = null!;
+    public G.IReadOnlyList<String> SortedTokens => Tokens.OrderBy(x => x, StringComparer.OrdinalIgnoreCase).ToList();
 
     protected override Task OnInitializedAsync()
     {
@@ -27,8 +28,8 @@ public partial class TokenMultilineTextBox
 
     protected override Task OnParametersSetAsync()
     {
-        if (Tokens.HasItems() && InsertTokenModel.SelectedToken.HasNothing())
-            InsertTokenModel.SelectedToken = Tokens.First();
+        if (SortedTokens.HasItems() && InsertTokenModel.SelectedToken.HasNothing())
+            InsertTokenModel.SelectedToken = SortedTokens.First();
 
         return base.OnParametersSetAsync();
     }

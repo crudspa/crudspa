@@ -2,6 +2,10 @@ using PermissionIds = Crudspa.Framework.Core.Shared.Contracts.Ids.PermissionIds;
 
 namespace Crudspa.Education.Publisher.Server.Hubs;
 
+using LicenseAdded = Crudspa.Education.Publisher.Shared.Contracts.Events.LicenseAdded;
+using LicenseSaved = Crudspa.Education.Publisher.Shared.Contracts.Events.LicenseSaved;
+using LicenseRemoved = Crudspa.Education.Publisher.Shared.Contracts.Events.LicenseRemoved;
+
 public partial class PublisherHub
 {
     public async Task<Response<IList<License>>> LicenseSearch(Request<LicenseSearch> request)

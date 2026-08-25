@@ -1,10 +1,8 @@
 create proc [ContentDesign].[SurveyInsert] (
      @SessionId uniqueidentifier
     ,@PortalId uniqueidentifier
-    ,@Title nvarchar(75)
-    ,@Description nvarchar(max)
-    ,@StatusId uniqueidentifier
-    ,@AssignmentKind int
+
+    ,@Licenses Framework.IdList readonly
     ,@Id uniqueidentifier output
 ) as
 
@@ -28,10 +26,6 @@ insert [Content].[Survey] (
     ,Updated
     ,UpdatedBy
     ,PortalId
-    ,Title
-    ,Description
-    ,StatusId
-    ,AssignmentKind
 )
 values (
      @Id
@@ -39,10 +33,6 @@ values (
     ,@now
     ,@SessionId
     ,@PortalId
-    ,@Title
-    ,@Description
-    ,@StatusId
-    ,@AssignmentKind
 )
 
 if not exists (
@@ -58,5 +48,25 @@ begin
     raiserror('Tenancy check failed', 16, 1)
     return
 end
+
+insert [Content].[SurveyLicense] (
+     Id
+    ,VersionOf
+    ,Updated
+    ,UpdatedBy
+    ,SurveyId
+    ,LicenseId
+)
+select
+     newRow.JunctionId
+    ,newRow.JunctionId
+    ,@now
+    ,@SessionId
+    ,@Id
+    ,ids.Id
+from (select distinct Id from @Licenses) ids
+    inner join [Framework].[License-Active] license on license.Id = ids.Id
+        and license.OwnerId = @organizationId
+    cross apply (select newid() as JunctionId) newRow
 
 commit transaction

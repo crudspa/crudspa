@@ -42,6 +42,15 @@ public abstract class GatewayDisplayController<THub>(
 
                 return true;
 
+            case "Crudspa.Content.Display.Shared.Contracts.Events.ForumRunChanged":
+
+                var forumPayload = gridEvent.Data.ToString().FromJson<ForumRunChanged>();
+
+                if (forumPayload is not null)
+                    await Publish(forumPayload);
+
+                return true;
+
             default:
                 return await base.TryHandle(gridEvent);
         }

@@ -1,0 +1,173 @@
+/// <reference path="../../../Framework/Core/Server/Styles/defaults.scss" />
+
+.campaign-schedule-layout {
+    max-width: 70rem;
+    width: 100%;
+
+    .campaign-schedule-summary {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .5rem 3rem;
+        padding: .75rem 1rem 1rem;
+    }
+
+    .campaign-schedule-summary-item {
+        display: flex;
+        gap: .75rem;
+
+        > :first-child {
+            flex: 0 0 5rem;
+        }
+
+        > :last-child {
+            flex: 1 1 10rem;
+        }
+    }
+
+    .campaign-schedule-summary-label,
+    .campaign-schedule-cell-label {
+        color: rgba(0, 0, 0, .55);
+        font-weight: 600;
+    }
+
+    .campaign-schedule-section-body {
+        padding: 1rem 1rem 1.25rem;
+    }
+
+    .campaign-schedule-override-body {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .campaign-schedule-milestones {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem 1.5rem;
+
+        .c-field {
+            flex: 0 1 var(--field-small);
+            min-width: 0;
+        }
+    }
+
+    .campaign-schedule-stage-header,
+    .campaign-schedule-stage-row {
+        align-items: center;
+        display: flex;
+        gap: 1rem;
+
+        > :nth-child(1) {
+            flex: 1.25 1 12rem;
+        }
+
+        > :nth-child(2) {
+            flex: 0 1 18rem;
+        }
+
+        > :nth-child(3) {
+            flex: .5 1 7rem;
+        }
+
+        > :nth-child(4) {
+            flex: .75 1 9rem;
+        }
+    }
+
+    .campaign-schedule-stage-header {
+        border-bottom: 1px solid rgba(0, 0, 0, .14);
+        color: rgba(0, 0, 0, .55);
+        font-size: .9rem;
+        font-weight: 600;
+        padding: 0 0 .5rem;
+    }
+
+    .campaign-schedule-stage-row {
+        border-bottom: 1px solid rgba(0, 0, 0, .14);
+        min-height: 3.75rem;
+        padding: .65rem 0;
+
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
+
+    .campaign-schedule-stage-name {
+        font-weight: 600;
+    }
+
+    .campaign-schedule-stage-date {
+        min-width: 0;
+
+        .c-default-override.horizontal {
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+
+        .c-field {
+            min-width: 0;
+            width: 100%;
+        }
+    }
+
+    .campaign-schedule-date-with-action {
+        align-items: center;
+        display: flex;
+        gap: .4rem;
+
+        > :first-child {
+            flex: 1 1 7rem;
+        }
+    }
+
+    .campaign-schedule-cell-label {
+        display: none;
+        font-size: .85rem;
+    }
+
+    @media (max-width: 760px) {
+        .campaign-schedule-milestones {
+            flex-direction: column;
+
+            .c-field {
+                flex: 0 0 auto;
+                width: 100%;
+            }
+        }
+
+        .campaign-schedule-stage-header {
+            display: none;
+        }
+
+        .campaign-schedule-stage-row {
+            align-items: start;
+            flex-wrap: wrap;
+
+            > :nth-child(1),
+            > :nth-child(2) {
+                flex: 1 1 100%;
+            }
+
+            > :nth-child(3),
+            > :nth-child(4) {
+                flex: 1 1 9rem;
+            }
+        }
+
+        .campaign-schedule-stage-name {
+            flex-basis: 100%;
+        }
+
+        .campaign-schedule-cell-label {
+            display: block;
+            margin-bottom: .25rem;
+        }
+    }
+}
+
+.campaign-description {
+    width: 100%;
+
+    .c-html-editor-read-only .content {
+        min-height: 4.5rem;
+    }
+}

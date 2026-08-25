@@ -6,7 +6,18 @@
     ,@Expires datetimeoffset(7)
 ) as
 
+set xact_abort on
+
+begin transaction
+
 declare @now datetimeoffset = sysdatetimeoffset()
+
+update [Framework].[AccessCode]
+set Used = @now
+where UserId = @UserId
+    and PortalId = @PortalId
+    and Used is null
+    and Expires > @now
 
 insert [Framework].[AccessCode] (
     Id
@@ -24,3 +35,5 @@ values (
     ,@Code
     ,@Expires
 )
+
+commit transaction

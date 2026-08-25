@@ -34,6 +34,7 @@ select
     ,imageFile.Caption as ImageFileCaption
 from [Education].[AssessmentAssignment-Active] assessmentAssignment
     inner join [Education].[Assessment-Active] assessment on assessmentAssignment.AssessmentId = assessment.Id
+    inner join [EducationStudent].[LicensedAssessments](@SessionId) licensedAssessment on licensedAssessment.AssessmentId = assessment.Id
     left join [Framework].[ImageFile-Active] imageFile on assessment.ImageFileId = imageFile.Id
 where assessmentAssignment.StudentId = @StudentId
     and assessmentAssignment.Terminated is null

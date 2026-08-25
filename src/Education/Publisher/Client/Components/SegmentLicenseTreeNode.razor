@@ -1,0 +1,75 @@
+@namespace Crudspa.Education.Publisher.Client.Components
+
+@if (Visible(Node))
+{
+    <div class="c-license-segment-node">
+        <div class="row" style="--license-tree-depth: @Depth">
+            <button class="expander"
+                    type="button"
+                    disabled="@Node.Children.IsEmpty()"
+                    title="@(Node.Expanded == true ? "Collapse" : "Expand")"
+                    aria-label="@(Node.Expanded == true ? "Collapse" : "Expand")"
+                    @onclick="ToggleExpanded">
+                <span class="@(Node.Children.IsEmpty() ? "nothing c-icon-chevron-right" : Node.Expanded == true ? "c-icon-chevron-down" : "c-icon-chevron-right")"></span>
+            </button>
+
+            @if (Node.Key.HasSomething())
+            {
+                <label class="selector @(Indeterminate(Node) ? "partial" : String.Empty)">
+                    <input type="checkbox"
+                           checked="@(Node.Selected == true || Node.ReadOnly == true)"
+                           disabled="@(Node.ReadOnly == true)"
+                           aria-label="Include @Node.Name"
+                           @onchange="HandleSelectionChanged">
+                </label>
+            }
+
+            <button class="identity"
+                    type="button"
+                    @onclick="ToggleExpanded">
+                <span class="name">@Node.Name</span>
+                @if (Node.Key.HasSomething())
+                {
+                    <span class="key">@Node.Key</span>
+                }
+                @if (Node.ReadOnly == true)
+                {
+                    <span class="availability">All licenses</span>
+                }
+            </button>
+
+            @if (Node.Children.HasItems())
+            {
+                <div class="branch-actions">
+                    <ButtonCore IconClass="c-icon-check"
+                                Title="Include this branch"
+                                AriaLabel="Include this branch"
+                                Size="ButtonCore.Sizes.Small"
+                                Clicked="() => IncludeBranch.InvokeAsync(Node)" />
+                    <ButtonCore IconClass="c-icon-cross"
+                                Title="Exclude this branch"
+                                AriaLabel="Exclude this branch"
+                                Size="ButtonCore.Sizes.Small"
+                                ButtonStyle="ButtonCore.ButtonStyles.Cancel"
+                                Clicked="() => ExcludeBranch.InvokeAsync(Node)" />
+                </div>
+            }
+        </div>
+
+        @if (Node.Children.HasItems() && Node.Expanded == true)
+        {
+            <div class="children">
+                @foreach (var child in Node.Children)
+                {
+                    <SegmentLicenseTreeNode Node="child"
+                                            Depth="@(Depth + 1)"
+                                            Visible="Visible"
+                                            Indeterminate="Indeterminate"
+                                            SelectionChanged="SelectionChanged"
+                                            IncludeBranch="IncludeBranch"
+                                            ExcludeBranch="ExcludeBranch" />
+                }
+            </div>
+        }
+    </div>
+}

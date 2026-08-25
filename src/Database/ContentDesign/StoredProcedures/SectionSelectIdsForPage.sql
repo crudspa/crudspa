@@ -27,6 +27,14 @@ where section.PageId = @PageId
         )
         or exists (
             select 1
+            from [Content].[Post-Active] post
+                inner join [Content].[Blog-Active] blog on post.BlogId = blog.Id
+                inner join [Framework].[Portal-Active] portal on blog.PortalId = portal.Id
+            where post.PageId = page.Id
+                and portal.OwnerId = @organizationId
+        )
+        or exists (
+            select 1
             from [Content].[ContentPortal-Active] contentPortal
                 inner join [Framework].[Portal-Active] portal on contentPortal.PortalId = portal.Id
             where contentPortal.FooterPageId = page.Id

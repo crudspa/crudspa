@@ -20,6 +20,12 @@ public class License : Observable, IValidates, INamed, ICountable
         set => SetProperty(ref field, value);
     }
 
+    public ObservableCollection<Selectable> Segments
+    {
+        get;
+        set => SetProperty(ref field, value);
+    } = [];
+
     public Int32? DistrictLicenseCount
     {
         get;
@@ -27,6 +33,48 @@ public class License : Observable, IValidates, INamed, ICountable
     }
 
     public Int32? UnitLicenseCount
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    public Int32? SegmentLicenseCount
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    public Int32? AssessmentLicenseCount
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    public Int32? BlogLicenseCount
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    public Int32? ForumLicenseCount
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    public Int32? CampaignLicenseCount
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    public Int32? TrackLicenseCount
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    public Int32? SurveyLicenseCount
     {
         get;
         set => SetProperty(ref field, value);

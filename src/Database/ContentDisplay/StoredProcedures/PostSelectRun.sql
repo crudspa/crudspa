@@ -1,6 +1,7 @@
 create proc [ContentDisplay].[PostSelectRun] (
      @Id uniqueidentifier
     ,@SessionId uniqueidentifier
+    ,@LicenseIds [Framework].[IdList] readonly
 ) as
 
 declare @portalId uniqueidentifier = (select top 1 PortalId from [Framework].[Session-Active] where Id = @SessionId)
@@ -8,18 +9,39 @@ declare @portalId uniqueidentifier = (select top 1 PortalId from [Framework].[Se
 declare @now datetimeoffset = sysdatetimeoffset()
 declare @ContentStatusComplete uniqueidentifier = '0296c1f0-7d72-42d3-b7c2-377f077e7b9c'
 
-insert [Content].[PostViewed] (
-    Id
-    ,Updated
-    ,UpdatedBy
-    ,PostId
+if exists (
+    select 1
+    from [Content].[Post-Active] post
+        inner join [Content].[Blog-Active] blog on blog.Id = post.BlogId
+        inner join [Framework].[Portal-Active] portal on portal.Id = blog.PortalId
+    where post.Id = @Id
+        and post.StatusId = @ContentStatusComplete
+        and blog.StatusId = @ContentStatusComplete
+        and (
+            (portal.Id = @portalId and blog.AccessMode = 0)
+            or (blog.AccessMode = 1 and exists (
+                select 1
+                from [Content].[BlogLicense-Active] blogLicense
+                    inner join @LicenseIds licenseId on licenseId.Id = blogLicense.LicenseId
+                    inner join [Framework].[License-Active] license on license.Id = licenseId.Id
+                where blogLicense.BlogId = blog.Id
+            ))
+        )
 )
-values (
-    newid()
-    ,@now
-    ,@SessionId
-    ,@Id
-)
+begin
+    insert [Content].[PostViewed] (
+        Id
+        ,Updated
+        ,UpdatedBy
+        ,PostId
+    )
+    values (
+        newid()
+        ,@now
+        ,@SessionId
+        ,@Id
+    )
+end
 
 select
     post.Id
@@ -42,4 +64,14 @@ from [Content].[Post-Active] post
     inner join [Framework].[Portal-Active] portal on blog.PortalId = portal.Id
 where post.Id = @Id
     and post.StatusId = @ContentStatusComplete
-    and portal.Id = @portalId
+    and blog.StatusId = @ContentStatusComplete
+    and (
+        (portal.Id = @portalId and blog.AccessMode = 0)
+        or (blog.AccessMode = 1 and exists (
+            select 1
+            from [Content].[BlogLicense-Active] blogLicense
+                inner join @LicenseIds licenseId on licenseId.Id = blogLicense.LicenseId
+                inner join [Framework].[License-Active] license on license.Id = licenseId.Id
+            where blogLicense.BlogId = blog.Id
+        ))
+    )

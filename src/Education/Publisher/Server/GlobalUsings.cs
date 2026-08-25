@@ -35,3 +35,8 @@ global using Crudspa.Framework.Core.Shared.Contracts.Data;
 global using Crudspa.Framework.Core.Shared.Contracts.Events;
 global using Crudspa.Framework.Core.Shared.Extensions;
 global using Microsoft.Data.SqlClient;
+global using Crudspa.Content.Messaging.Server.Services;
+global using Crudspa.Content.Messaging.Server.Sproxies;
+global using Crudspa.Content.Messaging.Shared.Contracts.Behavior;
+global using Crudspa.Content.Messaging.Shared.Contracts.Data;
+global using Crudspa.Content.Messaging.Shared.Contracts.Events;

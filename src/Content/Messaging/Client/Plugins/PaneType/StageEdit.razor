@@ -1,0 +1,56 @@
+<Toolbar>
+    <Left>
+        <ButtonGroup>
+            @if (Model.ReadOnly)
+            {
+                <ButtonEdit Clicked="() => Model.Edit()" />
+            }
+            else
+            {
+                <ButtonSave Clicked="() => Model.Save()" />
+                <ButtonCancel Clicked="HandleCancelClicked" />
+            }
+        </ButtonGroup>
+    </Left>
+</Toolbar>
+<Waiter Model="Model">
+    @if (Model.Entity is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Name"
+                       Size="Field.Sizes.Large">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="75"
+                             @bind-Value="Model.Entity.Name" />
+                </Field>
+                <Field Label="Relative To"
+                       Size="Field.Sizes.Medium">
+                    <EnumDropdown ReadOnly="Model.ReadOnly"
+                                  TEnum="Stage.Anchors"
+                                  @bind-SelectedValue="Model.Entity.Anchor" />
+                </Field>
+                <Field Label="Days From"
+                       Size="Field.Sizes.Tiny">
+                    <NumericTextBox T="Int32?"
+                                    ReadOnly="Model.ReadOnly"
+                                    @bind-Value="Model.Entity.Offset" />
+                </Field>
+                <Field Label="Weekend Rule"
+                       Size="Field.Sizes.Medium">
+                    <EnumDropdown ReadOnly="Model.ReadOnly"
+                                  TEnum="Stage.WeekendAdjustments"
+                                  @bind-SelectedValue="Model.Entity.WeekendAdjustment" />
+                </Field>
+                <Field Label="Local Send Time"
+                       Size="Field.Sizes.Small">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             Placeholder="9:00 AM"
+                             MaxLength="20"
+                             @bind-Value="Model.SendTimeText" />
+                </Field>
+            </Wrapped>
+        </Padding>
+    }
+</Waiter>

@@ -6,6 +6,11 @@ public class ThreadServiceSql(
     IServiceWrappers wrappers,
     ISqlWrappers sqlWrappers,
     IServerConfigService configService,
+    IAudioFileService audioFileService,
+    IImageFileService imageFileService,
+    IPdfFileService pdfFileService,
+    IVideoFileService videoFileService,
+    IBlobService blobService,
     IHtmlSanitizer htmlSanitizer)
     : IThreadService
 {
@@ -69,11 +74,27 @@ public class ThreadServiceSql(
         return await wrappers.Try(request, async response =>
         {
             var thread = request.Value;
+            var existing = await ThreadSelect.Execute(Connection, request.SessionId, thread);
+
+            if (existing is null)
+                return;
+
+            var openingComment = await CommentSelect.Execute(Connection, request.SessionId,
+                new() { Id = existing.Comment.Id });
+            var replies = await CommentSelectTreeForThread.Execute(Connection, request.SessionId, existing.Id);
+            var mediaFiles = replies.SelectMany(x => x.CommentMedias).ToList();
+            if (openingComment is not null)
+                mediaFiles.AddRange(openingComment.CommentMedias);
 
             await sqlWrappers.WithConnection(async (connection, transaction) =>
             {
                 await ThreadDelete.Execute(connection, transaction, request.SessionId, thread);
             });
+
+            await FileCleanup().Cleanup(request.SessionId, mediaFiles);
         });
     }
+
+    private CommentMediaFileCleanup FileCleanup() =>
+        new(Connection, audioFileService, imageFileService, pdfFileService, videoFileService, blobService);
 }

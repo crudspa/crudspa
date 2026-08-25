@@ -10,3 +10,9 @@ create table [Content].[CommentReaction] (
     constraint [FK_Content_CommentReaction_Comment] foreign key ([CommentId]) references [Content].[Comment] ([Id]),
     constraint [FK_Content_CommentReaction_Reaction] foreign key ([ReactionId]) references [Content].[Reaction] ([Id]),
 );
+
+go
+
+create nonclustered index [IX_Content_CommentReaction_Comment_Reaction]
+    on [Content].[CommentReaction] ([CommentId], [ReactionId])
+    include ([Id], [VersionOf], [IsDeleted]);

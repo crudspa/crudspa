@@ -18,3 +18,6 @@ global using Crudspa.Framework.Core.Shared.Contracts.Events;
 global using Crudspa.Framework.Core.Shared.Extensions;
 global using System.Collections.ObjectModel;
 global using System.ComponentModel;
+global using Crudspa.Content.Messaging.Shared.Contracts.Behavior;
+global using Crudspa.Content.Messaging.Shared.Contracts.Data;
+global using Crudspa.Content.Messaging.Shared.Contracts.Events;

@@ -1,5 +1,6 @@
 create proc [ContentDesign].[SmsTemplateSelectFull]  (
      @SessionId uniqueidentifier
+    ,@PortalId uniqueidentifier
 ) as
 
 declare @organizationId uniqueidentifier = (
@@ -13,13 +14,12 @@ set nocount on
 
 select
      smsTemplate.Id
-    ,smsTemplate.MembershipId
-    ,membership.Name as MembershipName
+    ,smsTemplate.PortalId
     ,smsTemplate.Title
     ,smsTemplate.Body
 from [Content].[SmsTemplate-Active] smsTemplate
-    inner join [Content].[Membership-Active] membership on smsTemplate.MembershipId = membership.Id
-    inner join [Framework].[Portal-Active] portal on membership.PortalId = portal.Id
+    inner join [Framework].[Portal-Active] portal on smsTemplate.PortalId = portal.Id
     inner join [Framework].[Organization-Active] organization on portal.OwnerId = organization.Id
-where organization.Id = @organizationId
+where smsTemplate.PortalId = @PortalId
+    and organization.Id = @organizationId
 order by smsTemplate.Title

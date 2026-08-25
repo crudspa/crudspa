@@ -9,6 +9,7 @@ create proc [ContentDesign].[SmsMessageSelectWhereForPortal] (
     ,@OccurredStart datetimeoffset(7)
     ,@OccurredEnd datetimeoffset(7)
     ,@Direction int
+    ,@LatestForConversation bit = 0
 ) as
 
 set nocount on
@@ -16,38 +17,23 @@ set nocount on
 declare @firstRecord int = (@PageSize * (@PageNumber - 1)) + 1
 declare @lastRecord int = @firstRecord + @PageSize - 1
 
-;with SmsMessageCte
+;with FilteredSmsMessageCte
 as (
     select
-        row_number() over (
-            order by
-                case when (@SortField = 'Occurred' and @SortAscending = 1)
-                    then smsMessage.Occurred
-                end asc,
-                case when (@SortField = 'Occurred' and @SortAscending = 0)
-                    then smsMessage.Occurred
-                end desc,
-                case when (@SortField = 'Status' and @SortAscending = 1)
-                    then smsMessage.Status
-                end asc,
-                case when (@SortField = 'Status' and @SortAscending = 0)
-                    then smsMessage.Status
-                end desc,
-                case when (@SortField = 'Direction' and @SortAscending = 1)
-                    then smsMessage.Direction
-                end asc,
-                case when (@SortField = 'Direction' and @SortAscending = 0)
-                    then smsMessage.Direction
-                end desc,
-                case when (@SortAscending = 1)
-                    then smsMessage.Id
-                end asc,
-                case when (@SortAscending = 0)
-                    then smsMessage.Id
-                end desc
-        ) as RowNumber
-        ,count(*) over () as TotalCount
-        ,smsMessage.Id
+         smsMessage.Id
+        ,smsMessage.Occurred
+        ,smsMessage.Status
+        ,smsMessage.Direction
+        ,case
+            when smsMessage.ContactPhoneId is not null then convert(nvarchar(36), smsMessage.ContactPhoneId)
+            else concat(
+                 isnull(smsMessage.SmsChannelKey, N'')
+                ,N'|'
+                ,isnull(case when smsMessage.Direction = 0 then smsMessage.FromNumber else smsMessage.ToNumber end, N'')
+                ,N'|'
+                ,isnull(case when smsMessage.Direction = 0 then smsMessage.ToNumber else smsMessage.FromNumber end, N'')
+            )
+        end as ConversationKey
     from [Content].[SmsMessage-Active] smsMessage
         left join [Content].[Membership-Active] membership on smsMessage.MembershipId = membership.Id
         left join [Content].[Sms-Active] sms on smsMessage.SmsId = sms.Id
@@ -72,6 +58,64 @@ as (
         )
         and (@OccurredStart is null or smsMessage.Occurred >= @OccurredStart)
         and (@OccurredEnd is null or smsMessage.Occurred < @OccurredEnd)
+),
+ConversationSmsMessageCte
+as (
+    select
+         filtered.Id
+        ,filtered.Occurred
+        ,filtered.Status
+        ,filtered.Direction
+        ,row_number() over (
+            partition by filtered.ConversationKey
+            order by filtered.Occurred desc, filtered.Id desc
+        ) as ConversationRowNumber
+    from FilteredSmsMessageCte filtered
+),
+ResultSmsMessageCte
+as (
+    select
+         conversation.Id
+        ,conversation.Occurred
+        ,conversation.Status
+        ,conversation.Direction
+    from ConversationSmsMessageCte conversation
+    where @LatestForConversation = 0
+        or conversation.ConversationRowNumber = 1
+),
+SmsMessageCte
+as (
+    select
+        row_number() over (
+            order by
+                case when (@SortField = 'Occurred' and @SortAscending = 1)
+                    then result.Occurred
+                end asc,
+                case when (@SortField = 'Occurred' and @SortAscending = 0)
+                    then result.Occurred
+                end desc,
+                case when (@SortField = 'Status' and @SortAscending = 1)
+                    then result.Status
+                end asc,
+                case when (@SortField = 'Status' and @SortAscending = 0)
+                    then result.Status
+                end desc,
+                case when (@SortField = 'Direction' and @SortAscending = 1)
+                    then result.Direction
+                end asc,
+                case when (@SortField = 'Direction' and @SortAscending = 0)
+                    then result.Direction
+                end desc,
+                case when (@SortAscending = 1)
+                    then result.Id
+                end asc,
+                case when (@SortAscending = 0)
+                    then result.Id
+                end desc
+        ) as RowNumber
+        ,count(*) over () as TotalCount
+        ,result.Id
+    from ResultSmsMessageCte result
 )
 
 select

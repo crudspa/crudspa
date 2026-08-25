@@ -169,7 +169,7 @@ public class RearrangeModel : Observable
         destination.PlacedPiece = selectedOption;
         destination.State = DestinationModel.States.Filled;
 
-        RecordSelection(selectedOption.Id!.Value, destination.TargetPiece!.Id!.Value);
+        RecordSelection(selectedOption, destination.TargetPiece!);
 
         Options.Remove(selectedOption);
 
@@ -198,7 +198,7 @@ public class RearrangeModel : Observable
         {
             foreach (var destination in Destinations)
             {
-                destination.State = destination.PlacedPiece!.Id.Equals(destination.TargetPiece!.Id)
+                destination.State = PiecesMatch(destination.PlacedPiece, destination.TargetPiece)
                     ? DestinationModel.States.Valid
                     : DestinationModel.States.Invalid;
             }
@@ -239,21 +239,31 @@ public class RearrangeModel : Observable
         }
     }
 
-    private void RecordSelection(Guid choiceId, Guid targetChoiceId)
+    private void RecordSelection(PieceModel choice, PieceModel target)
     {
-        // Red herrings use an empty guid for the ID that gets saved
-        var safeChoiceId = Options.Any(x => x.Id == choiceId)
-            ? choiceId
-            : Guid.Empty;
+        // Equivalent duplicate pieces save against the target so reports match the visible answer.
+        var safeChoiceId = PiecesMatch(choice, target)
+            ? target.Id
+            : Options.Any(x => x.Id == choice.Id)
+                ? choice.Id
+                : Guid.Empty;
 
         Activity.Assignment.ActivityChoiceSelections.Add(new()
         {
             Id = Guid.NewGuid(),
             AssignmentId = Activity.Assignment.Id,
             ChoiceId = safeChoiceId,
-            TargetChoiceId = targetChoiceId,
+            TargetChoiceId = target.Id,
             Made = DateTime.Now,
         });
+    }
+
+    private static Boolean PiecesMatch(PieceModel? choice, PieceModel? target)
+    {
+        if (choice is null || target is null) return false;
+
+        return choice.Id.Equals(target.Id)
+            || String.Equals(choice.Text, target.Text, StringComparison.Ordinal);
     }
 
     private void RaiseCompleted(Guid status)

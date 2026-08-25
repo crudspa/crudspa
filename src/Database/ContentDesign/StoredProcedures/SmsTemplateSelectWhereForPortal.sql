@@ -33,11 +33,10 @@ as (
         ,count(*) over () as TotalCount
         ,smsTemplate.Id
     from [Content].[SmsTemplate-Active] smsTemplate
-        inner join [Content].[Membership-Active] membership on smsTemplate.MembershipId = membership.Id
-        inner join [Framework].[Portal-Active] portal on membership.PortalId = portal.Id
+        inner join [Framework].[Portal-Active] portal on smsTemplate.PortalId = portal.Id
         inner join [Framework].[Organization-Active] organization on portal.OwnerId = organization.Id
     where 1 = 1
-        and membership.PortalId = @PortalId
+        and smsTemplate.PortalId = @PortalId
         and organization.Id = @organizationId
         and (@SearchText is null
             or smsTemplate.Title like '%' + @SearchText + '%'
@@ -49,7 +48,7 @@ select
      cte.RowNumber
     ,cte.TotalCount
     ,smsTemplate.Id
-    ,smsTemplate.MembershipId
+    ,smsTemplate.PortalId
     ,smsTemplate.Title
     ,smsTemplate.Body
 from SmsTemplateCte cte

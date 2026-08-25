@@ -2,6 +2,7 @@ create proc [EducationPublisher].[LicenseInsert] (
      @SessionId uniqueidentifier
     ,@Name nvarchar(50)
     ,@Description nvarchar(max)
+    ,@Segments Framework.IdList readonly
     ,@Id uniqueidentifier output
 ) as
 
@@ -50,5 +51,26 @@ begin
     raiserror('Tenancy check failed', 16, 1)
     return
 end
+
+insert [Framework].[SegmentLicense] (
+     Id
+    ,VersionOf
+    ,Updated
+    ,UpdatedBy
+    ,LicenseId
+    ,SegmentId
+)
+select
+     newRow.JunctionId
+    ,newRow.JunctionId
+    ,@now
+    ,@SessionId
+    ,@Id
+    ,ids.Id
+from (select distinct Id from @Segments) ids
+    inner join [Framework].[Segment-Active] segment on segment.Id = ids.Id
+    inner join [Framework].[Portal-Active] portal on portal.Id = segment.PortalId
+        and portal.OwnerId = @organizationId
+    cross apply (select newid() as JunctionId) newRow
 
 commit transaction

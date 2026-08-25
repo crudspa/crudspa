@@ -3,6 +3,8 @@ using ( values
      ('e1935697-f5c4-467a-9dea-f90470172a94', 'Achievements')
     ,('b8b24c2e-b256-48cc-a5ae-43bcd2f78d80', 'Blogs')
     ,('1d8b8c58-74db-4115-8c58-4c9ea42f5beb', 'Books')
+    ,('e5f2a25d-1a79-41af-9964-fcdafa1f4725', 'Campaigns')
+    ,('7e4b7332-0f6f-429a-a95e-d8a21a08e4b5', 'Forums')
     ,('f8066e13-ffad-4ee5-be65-78b3dfd9c6fb', 'Jobs')
     ,('ced746f6-ea1e-4905-b636-0bcaf2c4a1d6', 'Memberships')
     ,('26194feb-a467-47ff-9b46-038d69244763', 'Movies')

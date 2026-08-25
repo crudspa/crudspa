@@ -1,0 +1,100 @@
+<div class="c-padding-small-vertical">
+    <div class="c-flex c-gap-small c-padding-small-bottom">
+        <ButtonCore Clicked="() => Add(CommentMedia.Types.Image)"
+                    Text="Add image"
+                    IconClass="c-icon-file-image"
+                    ButtonStyle="ButtonCore.ButtonStyles.Media"
+                    Disabled="AtMediaLimit" />
+        <ButtonCore Clicked="() => Add(CommentMedia.Types.Audio)"
+                    Text="Add audio"
+                    IconClass="c-icon-volume-high"
+                    ButtonStyle="ButtonCore.ButtonStyles.Media"
+                    Disabled="AtMediaLimit" />
+        <ButtonCore Clicked="() => Add(CommentMedia.Types.Video)"
+                    Text="Add video"
+                    IconClass="c-icon-video"
+                    ButtonStyle="ButtonCore.ButtonStyles.Media"
+                    Disabled="AtMediaLimit" />
+        <ButtonCore Clicked="() => Add(CommentMedia.Types.Pdf)"
+                    Text="Add PDF"
+                    IconClass="c-icon-file-pdf"
+                    ButtonStyle="ButtonCore.ButtonStyles.Media"
+                    Disabled="AtMediaLimit" />
+    </div>
+
+    @foreach (var media in Medias.OrderBy(x => x.Ordinal).ToList())
+    {
+        <div class="c-card c-padding-small" @key="media">
+            <div class="values">
+            @switch (media.Type)
+            {
+                case CommentMedia.Types.Audio:
+                    <AudioUploader ReadOnly="false" Required="true" AudioFile="media.AudioFile"
+                                   MaxFileSize="ForumMediaPolicy.AudioMaxBytes"
+                                   Accept="AudioAccept" AllowedExtensions="AudioExtensions"
+                                   UploadPath="@UploadPath(media.Type)" />
+                    break;
+                case CommentMedia.Types.Image:
+                    <ImageUploader ReadOnly="false" Required="true" ImageFile="media.ImageFile"
+                                   MaxFileSize="ForumMediaPolicy.ImageMaxBytes"
+                                   Accept="ImageAccept" AllowedExtensions="ImageExtensions"
+                                   UploadPath="@UploadPath(media.Type)" />
+                    break;
+                case CommentMedia.Types.Pdf:
+                    <PdfUploader ReadOnly="false" Required="true" PdfFile="media.PdfFile"
+                                 MaxFileSize="ForumMediaPolicy.PdfMaxBytes"
+                                 Accept="PdfAccept" AllowedExtensions="PdfExtensions"
+                                 UploadPath="@UploadPath(media.Type)" />
+                    break;
+                case CommentMedia.Types.Video:
+                    <VideoUploader ReadOnly="false" Required="true" VideoFile="media.VideoFile"
+                                   MaxFileSize="ForumMediaPolicy.VideoMaxBytes"
+                                   Accept="VideoAccept" AllowedExtensions="VideoExtensions"
+                                   UploadPath="@UploadPath(media.Type)" />
+                    break;
+            }
+            <ButtonCore Clicked="() => Remove(media)"
+                        Text="Remove"
+                        IconClass="c-icon-trash2"
+                        ButtonStyle="ButtonCore.ButtonStyles.Transparent" />
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter, EditorRequired] public ObservableCollection<CommentMedia> Medias { get; set; } = null!;
+    [Parameter, EditorRequired] public Guid? ForumId { get; set; }
+
+    private static readonly System.Collections.Generic.List<String> AudioExtensions = [.. ForumMediaPolicy.AudioExtensions];
+    private static readonly System.Collections.Generic.List<String> ImageExtensions = [.. ForumMediaPolicy.ImageExtensions];
+    private static readonly System.Collections.Generic.List<String> PdfExtensions = [.. ForumMediaPolicy.PdfExtensions];
+    private static readonly System.Collections.Generic.List<String> VideoExtensions = [.. ForumMediaPolicy.VideoExtensions];
+
+    private static readonly String AudioAccept = Constants.Join(ForumMediaPolicy.AudioExtensions, ForumMediaPolicy.AudioContentTypes);
+    private static readonly String ImageAccept = Constants.Join(ForumMediaPolicy.ImageExtensions, ForumMediaPolicy.ImageContentTypes);
+    private static readonly String PdfAccept = Constants.Join(ForumMediaPolicy.PdfExtensions, ForumMediaPolicy.PdfContentTypes);
+    private static readonly String VideoAccept = Constants.Join(ForumMediaPolicy.VideoExtensions, ForumMediaPolicy.VideoContentTypes);
+
+    private Boolean AtMediaLimit => Medias.Count >= ForumMediaPolicy.MaxAttachmentsPerComment;
+
+    private String UploadPath(CommentMedia.Types type) =>
+        $"/api/content/display/forum-media/upload?forumId={ForumId:D}&type={(Int32)type}";
+
+    private void Add(CommentMedia.Types type)
+    {
+        if (AtMediaLimit) return;
+
+        Medias.Add(new()
+        {
+            Type = type,
+            Ordinal = Medias.Count,
+        });
+    }
+
+    private void Remove(CommentMedia media)
+    {
+        Medias.Remove(media);
+        Medias.EnsureOrder();
+    }
+}

@@ -123,6 +123,7 @@ select
     ,ids.Id
 from (select distinct Id from @Licenses) ids
     inner join [Framework].[License-Active] license on license.Id = ids.Id
+        and license.OwnerId = @organizationId
     cross apply (select newid() as JunctionId) newRow
 
 commit transaction

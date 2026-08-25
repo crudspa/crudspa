@@ -90,6 +90,7 @@ select
     ,ids.Id
 from (select distinct Id from @Licenses) ids
     inner join [Framework].[License-Active] license on license.Id = ids.Id
+        and license.OwnerId = @organizationId
     left join [Framework].[SegmentLicense-Active] existingJunction on existingJunction.SegmentId = @Id
         and existingJunction.LicenseId = ids.Id
     cross apply (select newid() as JunctionId) newRow

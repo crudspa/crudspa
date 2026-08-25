@@ -59,12 +59,14 @@ select
     ,cte.TotalCount
     ,sms.Id
     ,sms.MembershipId
+    ,membership.Name as MembershipName
     ,sms.Body
     ,sms.Send
     ,sms.Status
     ,sms.Processed
 from SmsCte cte
     inner join [Content].[Sms-Active] sms on cte.Id = sms.Id
+    inner join [Content].[Membership-Active] membership on sms.MembershipId = membership.Id
 where cte.RowNumber >= @firstRecord and cte.RowNumber <= @lastRecord
 order by cte.RowNumber asc
 option (recompile)

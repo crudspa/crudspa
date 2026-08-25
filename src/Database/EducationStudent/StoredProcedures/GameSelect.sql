@@ -1,5 +1,6 @@
 create proc [EducationStudent].[GameSelect] (
      @Id uniqueidentifier
+    ,@SessionId uniqueidentifier
 ) as
 
 select
@@ -16,3 +17,7 @@ select
 from [Education].[Game-Active] game
     left join [Framework].[Icon-Active] icon on game.IconId = icon.Id
 where game.Id = @Id
+    and exists (
+        select 1
+        from [EducationStudent].[LicensedBooks](@SessionId, game.BookId) licensedBook
+    )

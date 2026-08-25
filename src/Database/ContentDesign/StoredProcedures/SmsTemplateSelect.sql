@@ -7,9 +7,9 @@ set nocount on
 
 select
      smsTemplate.Id
-    ,smsTemplate.MembershipId
+    ,smsTemplate.PortalId
     ,smsTemplate.Title
     ,smsTemplate.Body
 from [Content].[SmsTemplate-Active] smsTemplate
-    inner join [Content].[Membership-Active] membership on smsTemplate.MembershipId = membership.Id
+    inner join [Framework].[Portal-Active] portal on smsTemplate.PortalId = portal.Id
 where smsTemplate.Id = @Id

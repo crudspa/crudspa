@@ -7,6 +7,6 @@
     <RootNamespace>Crudspa.Framework.Core.Shared</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AngleSharp" Version="1.4.0" />
+    <PackageReference Include="AngleSharp" Version="1.5.2" />
   </ItemGroup>
 </Project>

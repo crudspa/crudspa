@@ -122,6 +122,19 @@ public class CommentTreeForPostModel : TreeModel<CommentTreeForPostItem>,
         });
     }
 
+    public void SetCommentMediaType(Guid? id, CommentMedia media, CommentMedia.Types type)
+    {
+        BindCommentMediasModel(id);
+
+        media.AudioFile = new();
+        media.ImageFile = new();
+        media.PdfFile = new();
+        media.VideoFile = new();
+        media.Type = type;
+
+        RaisePropertyChanged(nameof(CommentMediasModel));
+    }
+
     private void BindCommentMediasModel(Guid? id)
     {
         var node = FindNode(id);
@@ -170,11 +183,15 @@ public class CommentTreeForPostModel : TreeModel<CommentTreeForPostItem>,
 
 public class CommentTreeForPostItem : Observable, IDisposable, INamed
 {
-    private void HandleCommentChanged(Object? sender, PropertyChangedEventArgs args) => RaisePropertyChanged(nameof(Comment));
+    private void HandleCommentChanged(Object? sender, PropertyChangedEventArgs args)
+    {
+        RaisePropertyChanged(nameof(Comment));
+        RaisePropertyChanged(nameof(Name));
+    }
 
     private Comment _comment;
 
-    public String? Name => Comment.Body;
+    public String? Name => Crudspa.Framework.Core.Shared.Markup.ProseHtmlNormalizer.ToPlainTextSummary(Comment.Body);
 
     public CommentTreeForPostItem(Comment comment)
     {
