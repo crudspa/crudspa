@@ -86,6 +86,12 @@ That means:
 
 If you keep the default ports `42100`, `42200`, and `42300`, the local gateway flow works with no extra editing.
 
+## Authentication Sample Flow
+
+`Samples/Auth/Server` is the shared local Auth host on port `42400`. Catalog, Composer, and Consumer use the provider-policy and portal-session middleware, while preserving their native sign-in experience as the default. The sample configuration intentionally disables Clever and supplies no provider credentials.
+
+To exercise an external provider, configure its client credentials through user secrets, environment variables, or another protected host-configuration mechanism; create the related connection and policy; and preprovision the external identity link for the local user. Do not add credentials, provider tokens, or real roster exports to the repository. The Jobs sample is a worker rather than a browser host, so it participates through the shared session and roster contracts instead of presenting sign-in UI.
+
 ## Reading Path
 
 Once you have the relevant sample running:

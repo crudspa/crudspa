@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Crudspa.Framework.Core.Shared.Contracts.Ids;
 using Microsoft.AspNetCore.SignalR;
 
 namespace Crudspa.Framework.Core.Server.Hubs;
@@ -77,6 +78,8 @@ public partial class CoreHub : Hub
             return new();
         });
     }
+
+    public Response SessionCheck(Request request) => new();
 
     protected async Task Notify<T>(Guid? sessionId, Guid? groupId, T eventObject) where T : class
     {

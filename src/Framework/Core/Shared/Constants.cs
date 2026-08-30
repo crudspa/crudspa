@@ -31,6 +31,7 @@ public static class Constants
     public static class CookieKeys
     {
         public const String SessionId = "SessionId";
+        public const String District = "District";
         public const String Username = "Username";
 
         public static String Resolve(String key, Uri uri) =>
@@ -56,6 +57,11 @@ public static class Constants
 
             return IPAddress.TryParse(normalized, out var address) && IPAddress.IsLoopback(address);
         }
+    }
+
+    public static class HeaderKeys
+    {
+        public const String RequestVerificationToken = "X-Request-Verification-Token";
     }
 
     public const String DefaultTimeZone = "America/New_York";

@@ -11,7 +11,7 @@ public interface INavigator : IObservable
     ObservableCollection<Screen> Screens { get; }
     ObservableCollection<Screen> OpenViews { get; }
     Task Initialize(IScrollService scrollService, String appTitlePrefix, Boolean sessionsPersist);
-    void Bounce();
+    void Bounce(String? path = null);
     void GoTo(String path);
     void GoToRoot();
     void Close(String? path = null);

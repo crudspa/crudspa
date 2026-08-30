@@ -1,0 +1,1 @@
+create schema [EducationRostering] authorization [dbo]

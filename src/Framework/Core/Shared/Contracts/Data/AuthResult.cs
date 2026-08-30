@@ -5,10 +5,10 @@ public class AuthResult : Observable
     public enum Results
     {
         SessionNotStarted,
-        PasswordNotSet,
-        CredentialsInvalid,
         CredentialsIncorrect,
+        PasswordRequired,
         CredentialsCorrect,
+        External,
         AccessCodeAccepted,
         AccessCodeDenied,
     }
@@ -20,6 +20,18 @@ public class AuthResult : Observable
     }
 
     public Guid? SessionId
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    public String? RedirectUrl
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    public Boolean ResetPassword
     {
         get;
         set => SetProperty(ref field, value);

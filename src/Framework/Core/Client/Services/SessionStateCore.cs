@@ -23,9 +23,13 @@ public class SessionStateCore(
 
         await Refresh(sessionId);
 
-        await proxyWrappers.SetSessionId(Session.Id);
+        await proxyWrappers.SetSessionId(Session.Id, IsSignedIn, Session.ServerAuthenticated == true);
 
-        if (persistSession)
+        if (Session.ServerAuthenticated == true)
+        {
+            await cookieService.Set(Constants.CookieKeys.SessionId, String.Empty, DateTimeOffset.Now.AddDays(-1));
+        }
+        else if (persistSession)
         {
             if (sessionPersists)
                 await cookieService.Set(Constants.CookieKeys.SessionId, $"{Session.Id:D}", DateTimeOffset.Now.AddDays(90));

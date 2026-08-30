@@ -1,4 +1,5 @@
 using Crudspa.Content.Design.Server.Repositories;
+using Crudspa.Framework.Auth.Server.Services;
 using Crudspa.Framework.Jobs.Server.Services;
 using Crudspa.Samples.Composer.Server.Services;
 
@@ -92,6 +93,7 @@ public class Registry
         services.AddSingleton<IHtmlSanitizer, HtmlSanitizerCore>();
         services.AddSingleton<IHubWrappers, HubWrappersCore>();
         services.AddSingleton<IImageFileService, ImageFileServiceSql>();
+        services.AddSingleton<INativeAuthPolicy, NativeAuthPolicySql>();
         services.AddSingleton<IPdfFileService, PdfFileServiceSql>();
         services.AddSingleton<ISassCompiler, SassCompilerDartSass>();
         services.AddSingleton<ISegmentFetcher, SegmentFetcherSql>();

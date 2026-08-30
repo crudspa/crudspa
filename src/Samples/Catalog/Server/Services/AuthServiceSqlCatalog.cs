@@ -7,7 +7,8 @@ public class AuthServiceSqlCatalog(
     ISessionService sessionService,
     ISessionFetcher sessionFetcher,
     IUserRepository userRepository,
-    IContactRepository contactRepository)
+    IContactRepository contactRepository,
+    IEnumerable<ISessionAuthService> sessionAuthServices)
     : IAuthService
 {
     private String Connection => configService.Fetch().Database;
@@ -22,13 +23,13 @@ public class AuthServiceSqlCatalog(
             if (name.HasNothing())
             {
                 response.AddError("Name is required.");
-                return new() { Result = AuthResult.Results.CredentialsInvalid };
+                return new() { Result = AuthResult.Results.CredentialsIncorrect };
             }
 
             if (name!.Length > 75)
             {
                 response.AddError("Name cannot be longer than 75 characters.");
-                return new() { Result = AuthResult.Results.CredentialsInvalid };
+                return new() { Result = AuthResult.Results.CredentialsIncorrect };
             }
 
             if (request.SessionId is not { } sessionId)
@@ -44,7 +45,7 @@ public class AuthServiceSqlCatalog(
             if (organizationId is null)
             {
                 response.AddError("Catalog sample organization not found.");
-                return new() { Result = AuthResult.Results.CredentialsInvalid };
+                return new() { Result = AuthResult.Results.CredentialsIncorrect };
             }
 
             var roles = (await CatalogSelectRoleNames.Execute(Connection, sessionId))
@@ -59,10 +60,11 @@ public class AuthServiceSqlCatalog(
             if (roles.IsEmpty())
             {
                 response.AddError("Catalog sample roles not found.");
-                return new() { Result = AuthResult.Results.CredentialsInvalid };
+                return new() { Result = AuthResult.Results.CredentialsIncorrect };
             }
 
             var (firstName, lastName) = SplitName(name);
+            Guid? userId = null;
 
             var contact = new Contact
             {
@@ -85,14 +87,14 @@ public class AuthServiceSqlCatalog(
             response.AddErrors(await userRepository.Validate(Connection, user, PortalId));
 
             if (response.Errors.HasItems())
-                return new() { Result = AuthResult.Results.CredentialsInvalid };
+                return new() { Result = AuthResult.Results.CredentialsIncorrect };
 
             await sqlWrappers.WithTransaction(async (connection, transaction) =>
             {
                 var contactId = await contactRepository.Insert(connection, transaction, sessionId, contact, PortalId);
                 contact.Id = contactId;
 
-                var userId = await userRepository.Insert(connection, transaction, sessionId, user, PortalId);
+                userId = await userRepository.Insert(connection, transaction, sessionId, user, PortalId);
 
                 await CatalogContactInsert.Execute(connection, transaction, sessionId, new()
                 {
@@ -102,6 +104,11 @@ public class AuthServiceSqlCatalog(
 
                 await SessionUpdateUser.Execute(connection, transaction, sessionId, userId);
             });
+
+            var sessionAuth = sessionAuthServices.SingleOrDefault();
+            if (userId is null
+                || sessionAuth is not null && !await sessionAuth.Start(sessionId, userId.Value, NativeAuthMethod.PasswordEmailCode))
+                return new() { Result = AuthResult.Results.CredentialsIncorrect };
 
             sessionFetcher.Invalidate(sessionId);
 

@@ -1,0 +1,68 @@
+@namespace Crudspa.Framework.Auth.Client.Components
+
+<BatchSection Title="@Title">
+    @if (Policy is not null && Connection is not null)
+    {
+        <Padding Size="Padding.Sizes.Small"
+                 Direction="Padding.Directions.Vertical">
+            <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Sign-in Method"
+                       Size="Field.Sizes.Large">
+                    <KeyDropdown LookupValues="AuthProviders.Names"
+                                 ReadOnly="ReadOnly"
+                                 Value="Connection.Provider"
+                                 ValueChanged="HandleProviderChanged" />
+                </Field>
+                @if (AuthProviders.IsExternal(Connection.Provider))
+                {
+                    <Field Label="@DistrictIdLabel"
+                           Size="Field.Sizes.Large">
+                        <TextBox ReadOnly="ReadOnly"
+                                 MaxLength="255"
+                                 @bind-Value="Connection.Tenant" />
+                    </Field>
+                }
+                @if (Audience == AuthAudiences.Student)
+                {
+                    <Field Label="District Link"
+                           Size="Field.Sizes.Large">
+                        <TextBox ReadOnly="ReadOnly"
+                                 MaxLength="75"
+                                 @bind-Value="Policy.Key" />
+                    </Field>
+                }
+                <Field Label="Inactivity Limit (Minutes)"
+                       Size="Field.Sizes.Small">
+                    <NumericTextBox ReadOnly="ReadOnly"
+                                    @bind-Value="Policy.IdleTimeoutMinutes" />
+                </Field>
+                <Field Label="Overall Limit (Minutes)"
+                       Size="Field.Sizes.Small">
+                    <NumericTextBox ReadOnly="ReadOnly"
+                                    @bind-Value="Policy.AbsoluteTimeoutMinutes" />
+                </Field>
+                <Field Label="Options"
+                       Container="Field.Containers.Div">
+                    <Wrapped NoWrap="true">
+                        <Checkbox Label="Keep Signed In"
+                                  ReadOnly="ReadOnly"
+                                  Value="Policy.Persist"
+                                  ValueChanged="value => Policy.Persist = value == true" />
+                        <Checkbox Label="Automatic Redirect"
+                                  ReadOnly="ReadOnly"
+                                  Value="Policy.AutoRedirect"
+                                  ValueChanged="value => Policy.AutoRedirect = value == true" />
+                        <Checkbox Label="Allow Fallback"
+                                  ReadOnly="ReadOnly"
+                                  Value="Policy.Fallback"
+                                  ValueChanged="value => Policy.Fallback = value == true" />
+                        <Checkbox Label="Enabled"
+                                  ReadOnly="ReadOnly"
+                                  Value="Policy.Enabled"
+                                  ValueChanged="value => Policy.Enabled = value == true" />
+                    </Wrapped>
+                </Field>
+            </Wrapped>
+        </Padding>
+    }
+</BatchSection>

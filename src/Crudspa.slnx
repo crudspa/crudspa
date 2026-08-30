@@ -41,6 +41,11 @@
     <Project Path="Education/Publisher/Server/Server.csproj" />
     <Project Path="Education/Publisher/Shared/Shared.csproj" />
   </Folder>
+  <Folder Name="/Education/Rostering/">
+    <Project Path="Education/Rostering/Client/Client.csproj" />
+    <Project Path="Education/Rostering/Server/Server.csproj" />
+    <Project Path="Education/Rostering/Shared/Shared.csproj" />
+  </Folder>
   <Folder Name="/Education/School/">
     <Project Path="Education/School/Client/Client.csproj" />
     <Project Path="Education/School/Server/Server.csproj" />
@@ -57,12 +62,24 @@
     <Project Path="Framework/Core/Server/Server.csproj" />
     <Project Path="Framework/Core/Shared/Shared.csproj" />
   </Folder>
+  <Folder Name="/Framework/Auth/">
+    <Project Path="Framework/Auth/Client/Client.csproj" />
+    <Project Path="Framework/Auth/Server/Server.csproj" />
+    <Project Path="Framework/Auth/Shared/Shared.csproj" />
+  </Folder>
+  <Folder Name="/Integrations/" />
+  <Folder Name="/Integrations/Clever/">
+    <Project Path="Integrations/Clever/Server/Server.csproj" />
+  </Folder>
   <Folder Name="/Framework/Jobs/">
     <Project Path="Framework/Jobs/Client/Client.csproj" />
     <Project Path="Framework/Jobs/Server/Server.csproj" />
     <Project Path="Framework/Jobs/Shared/Shared.csproj" />
   </Folder>
   <Folder Name="/Samples/" />
+  <Folder Name="/Samples/Auth/">
+    <Project Path="Samples/Auth/Server/Server.csproj" />
+  </Folder>
   <Folder Name="/Samples/Catalog/">
     <Project Path="Samples/Catalog/Client/Client.csproj" />
     <Project Path="Samples/Catalog/Server/Server.csproj" />

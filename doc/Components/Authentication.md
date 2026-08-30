@@ -68,6 +68,20 @@ Inside the component, the auth modal and the bar stay together on purpose. The m
 
 That's why auth should stay centralized. The shell needs one place that understands both the modal workflow and the session refresh that follows it.
 
+## Provider Policies
+
+`Framework.Auth` adds a provider-neutral policy layer above the familiar native flows. A portal policy selects one enabled connection for an audience, such as a staff, student, or application-specific portal key. An audience is a lowercase portal key, so production portals use their runtime keys and the samples use `catalog`, `composer`, and `consumer`. The policy holds the session limits and fallback behavior; the connection holds the provider and tenant or district identifier. Authentication and roster provisioning remain independent concerns that meet only at the local user record.
+
+The built-in native choices are Password + Email Code, Email Code, and Student Code. External connections are extensible. The repository includes the `Crudspa.Integrations.Clever` adapter as a concrete OAuth/OIDC example, while ClassLink is represented by the same provider contract and policy vocabulary. A connection is enabled only when its host has valid server-side configuration; client IDs, client secrets, access tokens, and connection strings do not belong in source, seed data, or browser code.
+
+For external sign-in, an application host delegates to a shared Auth host. The Auth host validates a short-lived transaction, normalizes the provider identity, verifies its preprovisioned local-user link and the selected policy, and creates a short-lived, one-time handoff for the destination portal. The destination host redeems that handoff and creates its own server-authenticated session. This keeps provider callbacks, credentials, and cross-host redirects out of the application UI.
+
+## Host Setup
+
+An interactive portal opts into secure authentication with `AddPortalAuth` and `UsePortalAuth`. The host registers `SessionAuthHubFilter` with SignalR and exposes the framework's portal-auth controller. The shared Auth host uses `AddAuth` and registers the chosen external adapters. The public `Samples/Auth` host shows that boundary on local port 42400; its Clever adapter is disabled unless an operator supplies the required private configuration outside source control.
+
+The existing `SignInEmailTfa` component remains the native compatibility UI. Its result contract can redirect to an enabled external policy, while the same component continues the native code flow when policy selects a native method.
+
 ## Practical Guidance
 
 * Keep one `SignInEmailTfa` instance per shell, not per page.
@@ -84,4 +98,6 @@ The built-in auth flow is opinionated. You get consistent behavior and less main
 * [Components | Dialogs](Dialogs.md)
 * [Components | Feedback](Feedback.md)
 * [Concepts | Security](../Concepts/Security.md)
+* [Concepts | Sessions](../Concepts/Sessions.md)
+* [Concepts | Rostering](../Concepts/Rostering.md)
 * [Documentation Index](../ReadMe.md)

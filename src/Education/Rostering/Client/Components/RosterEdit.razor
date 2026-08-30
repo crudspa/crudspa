@@ -1,0 +1,101 @@
+@namespace Crudspa.Education.Rostering.Client.Components
+
+<BatchSection Title="Roster">
+    <HeadingPanel>
+        <ButtonAdd EntityName="Roster Source"
+                   Disabled="ReadOnly"
+                   Transparent="true"
+                   Clicked="Add" />
+    </HeadingPanel>
+    <ChildContent>
+        @if (Config.Sources.Count == 0)
+        {
+            <Padding Size="Padding.Sizes.Medium"
+                     Direction="Padding.Directions.All">
+                <Stacked Alignment="Stacked.Alignments.Center">
+                    <em>None</em>
+                </Stacked>
+            </Padding>
+        }
+        @foreach (var source in Config.Sources)
+        {
+            <div class="c-element-child"
+                 @key="source.Id">
+                <div class="child-title">Roster Source</div>
+                <div class="child-fields">
+                    <Wrapped Alignment="Wrapped.Alignments.Top">
+                        <Field Label="Provider"
+                               Size="Field.Sizes.Large">
+                            <KeyDropdown LookupValues="RosterProviders.Names"
+                                         ReadOnly="ReadOnly"
+                                         Value="source.Provider"
+                                         ValueChanged="value => SetProvider(source, value)" />
+                        </Field>
+                        @if (RosterProviders.UsesTenant(source.Provider))
+                        {
+                            <Field Label="@(source.Provider == RosterProviders.Clever ? "Clever District ID" : "ClassLink Tenant ID")"
+                                   Size="Field.Sizes.Large">
+                                <TextBox ReadOnly="ReadOnly"
+                                         MaxLength="255"
+                                         @bind-Value="source.Tenant" />
+                            </Field>
+                        }
+                        @if (source.Provider == RosterProviders.OneRoster)
+                        {
+                            <Field Label="Client ID" Size="Field.Sizes.Large">
+                                <TextBox ReadOnly="ReadOnly" MaxLength="255" @bind-Value="source.ClientId" />
+                            </Field>
+                            <Field Label="Client Secret" Size="Field.Sizes.Large">
+                                <TextBox ReadOnly="ReadOnly" MaxLength="500" @bind-Value="source.ClientSecret" />
+                            </Field>
+                            <Field Label="Token URL" Size="Field.Sizes.Full">
+                                <TextBox ReadOnly="ReadOnly" MaxLength="500" @bind-Value="source.TokenUrl" />
+                            </Field>
+                            <Field Label="Base URL" Size="Field.Sizes.Full">
+                                <TextBox ReadOnly="ReadOnly" MaxLength="500" @bind-Value="source.BaseUrl" />
+                            </Field>
+                        }
+                        <Field Label="Mode"
+                               Size="Field.Sizes.Medium">
+                            <KeyDropdown LookupValues="@Modes(source)"
+                                         ReadOnly="ReadOnly"
+                                         Value="source.Mode"
+                                         ValueChanged="value => SetMode(source, value)" />
+                        </Field>
+                        <Field Label="Options"
+                               Container="Field.Containers.Div">
+                            <Wrapped NoWrap="true">
+                                <Checkbox Label="Recurring Sync"
+                                          ReadOnly="ReadOnly"
+                                          Value="source.Recurring"
+                                          ValueChanged="value => SetRecurring(source, value == true)" />
+                            </Wrapped>
+                        </Field>
+                        @if (source.Recurring)
+                        {
+                            <Field Label="Hour"
+                                   Size="Field.Sizes.Min">
+                                <NumericTextBox ReadOnly="ReadOnly"
+                                                @bind-Value="source.ScheduleHour" />
+                            </Field>
+                            <Field Label="Minute"
+                                   Size="Field.Sizes.Min">
+                                <NumericTextBox ReadOnly="ReadOnly"
+                                                @bind-Value="source.ScheduleMinute" />
+                            </Field>
+                            <Field Label="Time Zone"
+                                   Size="Field.Sizes.MediumLarge">
+                                <TimeZonePicker ReadOnly="ReadOnly"
+                                                @bind-Value="source.ScheduleTimeZoneId" />
+                            </Field>
+                        }
+                        <ContextMenu ButtonStyle="ContextMenu.ButtonStyles.Transparent"
+                                     Disabled="ReadOnly">
+                            <BatchMenuItems RemoveClicked="() => Remove(source)" />
+                        </ContextMenu>
+                    </Wrapped>
+                </div>
+            </div>
+        }
+    </ChildContent>
+</BatchSection>

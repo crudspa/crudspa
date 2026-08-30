@@ -9,6 +9,7 @@ public partial class SignInEmailTfa : IDisposable
     [Parameter] public RenderFragment? MenuItems { get; set; }
 
     [Inject] public ICookieService CookieService { get; set; } = null!;
+    [Inject] public HttpClient Http { get; set; } = null!;
     [Inject] public INavigator Navigator { get; set; } = null!;
     [Inject] public IScrollService ScrollService { get; set; } = null!;
     [Inject] public ISessionState SessionState { get; set; } = null!;
@@ -18,7 +19,7 @@ public partial class SignInEmailTfa : IDisposable
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new(ScrollService, AuthService, CookieService, Navigator, SessionState, Portal.AllowSignIn);
+        Model = new(ScrollService, AuthService, new SessionSignOutServiceHttp(Http), CookieService, Navigator, SessionState, Portal.AllowSignIn);
         Model.PropertyChanged += HandleChanged;
         SessionState.SessionInitialized += HandleChanged;
         SessionState.SessionRefreshed += HandleChanged;
@@ -42,6 +43,7 @@ public partial class SignInEmailTfa : IDisposable
 public class SignInEmailTfaModel(
     IScrollService scrollService,
     IAuthService authService,
+    SessionSignOutServiceHttp sessionSignOutService,
     ICookieService cookieService,
     INavigator navigator,
     ISessionState sessionState,
@@ -50,7 +52,8 @@ public class SignInEmailTfaModel(
 {
     public enum States
     {
-        EnterCredentials,
+        EnterUsername,
+        EnterPassword,
         EnterCode,
         ResetPassword,
         ChangePassword,
@@ -138,13 +141,27 @@ public class SignInEmailTfaModel(
 
     public async Task ShowEnterCredentials()
     {
-        State = States.EnterCredentials;
+        State = States.EnterUsername;
         Alerts.Clear();
 
         Username = await cookieService.Get(Constants.CookieKeys.Username, String.Empty);
         Password = String.Empty;
 
         await Show();
+    }
+
+    public async Task ShowEnterPassword()
+    {
+        State = States.EnterPassword;
+        Password = String.Empty;
+        Alerts.Clear();
+        await Show();
+    }
+
+    public async Task FindAccount()
+    {
+        Password = String.Empty;
+        await CheckCredentials();
     }
 
     public async Task ShowEnterCode()
@@ -200,17 +217,21 @@ public class SignInEmailTfaModel(
             case AuthResult.Results.SessionNotStarted:
                 Alerts.Add(new() { Type = Alert.AlertType.Error, Message = "Session could not be started. Please refresh.", Dismissible = false });
                 break;
-            case AuthResult.Results.PasswordNotSet:
-                await ShowEnterCode();
-                Alerts.Add(new() { Type = Alert.AlertType.Warning, Message = "An access code was sent to your email address.", Dismissible = false });
-                break;
-            case AuthResult.Results.CredentialsInvalid:
             case AuthResult.Results.CredentialsIncorrect:
                 Alerts.Add(new() { Type = Alert.AlertType.Error, Message = "Sign in failed.", Dismissible = false });
+                break;
+            case AuthResult.Results.PasswordRequired:
+                await ShowEnterPassword();
                 break;
             case AuthResult.Results.CredentialsCorrect:
                 await ShowEnterCode();
                 Alerts.Add(new() { Type = Alert.AlertType.Success, Message = "An access code was sent to your email address.", Dismissible = false });
+                break;
+            case AuthResult.Results.External:
+                if (response.Value.RedirectUrl.HasNothing())
+                    throw new InvalidOperationException("External sign-in URL was not provided.");
+
+                navigator.GoTo(response.Value.RedirectUrl!);
                 break;
             case AuthResult.Results.AccessCodeAccepted:
             case AuthResult.Results.AccessCodeDenied:
@@ -235,6 +256,12 @@ public class SignInEmailTfaModel(
             return;
         }
 
+        if (response.Value.ResetPassword)
+        {
+            ResetOnEntry = true;
+            await ShowChangePassword();
+        }
+
         Waiting = true;
         WaitingOn = "Initializing...";
 
@@ -247,10 +274,8 @@ public class SignInEmailTfaModel(
         else
             await cookieService.Set(Constants.CookieKeys.Username, String.Empty, expires: null);
 
-        if (sessionState.Session.User?.ResetPassword == true)
+        if (response.Value.ResetPassword)
         {
-            ResetOnEntry = true;
-            await ShowChangePassword();
             Alerts.Add(new() { Type = Alert.AlertType.Tip, Message = "Please establish a new password." });
         }
         else
@@ -302,7 +327,16 @@ public class SignInEmailTfaModel(
         WaitingOn = "Signing out...";
         Waiting = true;
 
-        await authService.SignOut(new());
+        var signedOut = sessionState.Session.ServerAuthenticated == true
+            ? await sessionSignOutService.SignOut()
+            : (await authService.SignOut(new())).Ok;
+
+        if (!signedOut)
+        {
+            Waiting = false;
+            Alerts.Add(new() { Type = Alert.AlertType.Error, Message = "Sign out failed. Please try again." });
+            return;
+        }
 
         await cookieService.Set(Constants.CookieKeys.SessionId, String.Empty, DateTimeOffset.Now.AddDays(-1));
 

@@ -7,14 +7,23 @@ public class ProxyWrappersCore : IProxyWrappers
     private static readonly String CategoryName = typeof(ProxyWrappersCore).FullName ?? nameof(ProxyWrappersCore);
     private readonly IEventBus _eventBus;
     private readonly ICacheService _cacheService;
+    private readonly NavigationManager _navigationManager;
+    private CancellationTokenSource? _sessionMonitor;
+    private Int32 _endingSession;
+    private Boolean _serverAuthenticated;
 
     public HubConnection Connection { get; set; }
     public Guid? SessionId { get; private set; }
 
-    public ProxyWrappersCore(IUriProvider uriProvider, IEventBus eventBus, ICacheService cacheService)
+    public ProxyWrappersCore(
+        IUriProvider uriProvider,
+        IEventBus eventBus,
+        ICacheService cacheService,
+        NavigationManager navigationManager)
     {
         _eventBus = eventBus;
         _cacheService = cacheService;
+        _navigationManager = navigationManager;
 
         Connection = new HubConnectionBuilder()
             .AddJsonProtocol()
@@ -22,14 +31,17 @@ public class ProxyWrappersCore : IProxyWrappers
             .WithAutomaticReconnect([TimeSpan.Zero, TimeSpan.Zero, TimeSpan.FromMilliseconds(100), TimeSpan.FromMilliseconds(500), TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(10), TimeSpan.FromSeconds(15), TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(25), TimeSpan.FromSeconds(30), TimeSpan.FromSeconds(45), TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(2), TimeSpan.FromMinutes(5)])
             .Build();
 
-        Connection.On<Notice>("NoticePosted", notice =>
+        Connection.On<Notice>("NoticePosted", async notice =>
         {
             if (notice.Payload.HasSomething() && notice.Type.HasSomething())
             {
                 var eventObject = notice.Payload.FromJson(notice.Type!);
-                if (eventObject is not null) eventBus.Publish(eventObject);
+
+                if (eventObject is not null)
+                    await eventBus.Publish(eventObject);
             }
         });
+        Connection.On("AuthSessionEnded", EndSession);
 
         Connection.Reconnected += HandleReconnected;
     }
@@ -37,17 +49,72 @@ public class ProxyWrappersCore : IProxyWrappers
     private async Task HandleReconnected(String? arg)
     {
         if (await EnsureConnection())
+        {
             await Connection.InvokeAsync("Subscribe", new Request { SessionId = SessionId });
+
+            if (_serverAuthenticated)
+                await CheckSession();
+        }
 
         await _eventBus.Publish(new Reconnected());
     }
 
-    public async Task SetSessionId(Guid? sessionId)
+    public async Task SetSessionId(Guid? sessionId, Boolean authenticated = false, Boolean serverAuthenticated = false)
     {
         SessionId = sessionId;
+        _serverAuthenticated = serverAuthenticated;
+        _sessionMonitor?.Cancel();
+        _sessionMonitor = null;
 
         if (await EnsureConnection())
             await Connection.InvokeAsync("Subscribe", new Request { SessionId = SessionId });
+
+        if (authenticated && sessionId is not null)
+        {
+            _sessionMonitor = new();
+            _ = MonitorSession(_sessionMonitor.Token);
+        }
+    }
+
+    private async Task MonitorSession(CancellationToken cancellationToken)
+    {
+        using var timer = new PeriodicTimer(TimeSpan.FromMinutes(5));
+
+        try
+        {
+            while (await timer.WaitForNextTickAsync(cancellationToken))
+            {
+                if (Connection.State == HubConnectionState.Connected)
+                    await CheckSession(cancellationToken);
+            }
+        }
+        catch (OperationCanceledException) { }
+    }
+
+    private async Task CheckSession(CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            var response = await Connection.InvokeAsync<Response>("SessionCheck", new Request { SessionId = SessionId }, cancellationToken);
+
+            if (!response.Ok)
+                await EndSession();
+        }
+        catch (Exception ex) when (IsTransientError(ex)) { }
+        catch (Exception)
+        {
+            await EndSession();
+        }
+    }
+
+    private Task EndSession()
+    {
+        if (Interlocked.Exchange(ref _endingSession, 1) != 0)
+            return Task.CompletedTask;
+
+        _sessionMonitor?.Cancel();
+        _navigationManager.NavigateTo(_navigationManager.BaseUri, true);
+        return Task.CompletedTask;
     }
 
     public Task Log(ClientLogEntry entry)

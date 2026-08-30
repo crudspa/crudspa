@@ -7,7 +7,9 @@ public partial class CoreHub
         {
             var response = await AuthService.CheckCredentials(request);
 
-            if (!response.Ok || response.Value.Result != AuthResult.Results.CredentialsCorrect)
+            if (!response.Ok || response.Value.Result is not (AuthResult.Results.CredentialsCorrect
+                or AuthResult.Results.PasswordRequired
+                or AuthResult.Results.External))
                 await AccessDeniedService.Add(new()
                 {
                     SessionId = session.Id,

@@ -84,6 +84,7 @@ The concepts pages explain the platform's core mechanics. This section is where 
 | --- | --- |
 | [Sessions](Concepts/Sessions.md) | Crudspa's session model and how it differs from ad-hoc per-request or per-server state storage. |
 | [Security](Concepts/Security.md) | How authentication, permissions, shell filtering, file access, SignalR groups, and SQL enforcement work together. |
+| [Rostering](Concepts/Rostering.md) | Provider-neutral roster staging, validation, review, and authoritative-source controls. |
 | [Tenancy](Concepts/Tenancy.md) | The patterns Crudspa uses to enforce scope when ownership rules are simple, layered, or relationship-driven. |
 | [Notices](Concepts/Notices.md) | The SignalR notice patterns that keep multi-user lists, edit panes, and runtime content fresh. |
 | [Repositories](Concepts/Repositories.md) | How real saves coordinate root entities, siblings, children, and SQL work without collapsing into one giant service method. |

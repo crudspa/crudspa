@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>Crudspa.Integrations.Clever.Server</AssemblyName>
+    <RootNamespace>Crudspa.Integrations.Clever.Server</RootNamespace>
+    <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Education\Rostering\Shared\Shared.csproj" />
+    <ProjectReference Include="..\..\..\Framework\Auth\Server\Server.csproj" />
+  </ItemGroup>
+</Project>

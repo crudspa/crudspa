@@ -3,7 +3,7 @@
 public interface IProxyWrappers
 {
     Guid? SessionId { get; }
-    Task SetSessionId(Guid? sessionId);
+    Task SetSessionId(Guid? sessionId, Boolean authenticated = false, Boolean serverAuthenticated = false);
     Task Log(ClientLogEntry entry);
     Task<Response> Send(String methodName, Request request);
     Task<Response<T>> Send<T>(String methodName, Request request) where T : class?;

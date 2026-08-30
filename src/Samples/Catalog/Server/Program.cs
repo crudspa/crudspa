@@ -1,12 +1,16 @@
 using Crudspa.Framework.Core.Server.Controllers;
 using Crudspa.Framework.Core.Server.Filters;
 using Crudspa.Framework.Core.Shared.Services;
+using Crudspa.Framework.Auth.Server.Controllers;
+using Crudspa.Framework.Auth.Server.Extensions;
+using Crudspa.Framework.Auth.Server.Filters;
 using Crudspa.Samples.Catalog.Server.Hubs;
 using Microsoft.ApplicationInsights;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Azure.SignalR;
 using Serilog;
 using Serilog.Exceptions;
@@ -77,6 +81,7 @@ public class Program
             builder.Services.AddHttpContextAccessor();
 
             Registry.RegisterServices(builder.Services, config);
+            builder.Services.AddPortalAuth(configuration);
 
             builder.Services.AddMemoryCache(options =>
             {
@@ -100,12 +105,14 @@ public class Program
                 });
 
             mvcBuilder.PartManager.ApplicationParts.Add(new AssemblyPart(typeof(AudioFileController).Assembly));
+            mvcBuilder.PartManager.ApplicationParts.Add(new AssemblyPart(typeof(PortalAuthController).Assembly));
 
             var signalR = builder.Services.AddSignalR(options =>
                 {
                     options.MaximumReceiveMessageSize = Int64.MaxValue;
                     options.EnableDetailedErrors = !config.SignalRUseAzure;
                     options.MaximumParallelInvocationsPerClient = 8;
+                    options.AddFilter<SessionAuthHubFilter>();
                 })
                 .AddJsonProtocol(options =>
                 {
@@ -175,6 +182,8 @@ public class Program
             webApp.UseRouting();
             webApp.UseSerilogRequestLogging();
             webApp.UseStaticFiles();
+            webApp.UsePortalAuth();
+            webApp.UseAuthorization();
 
             webApp.Use(async (context, next) =>
             {

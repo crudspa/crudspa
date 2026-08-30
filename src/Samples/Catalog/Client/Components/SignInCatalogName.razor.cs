@@ -129,9 +129,7 @@ public class SignInCatalogNameModel(
             case AuthResult.Results.SessionNotStarted:
                 Alerts.Add(new() { Type = Alert.AlertType.Error, Message = "Session could not be started. Please refresh." });
                 break;
-            case AuthResult.Results.CredentialsInvalid:
             case AuthResult.Results.CredentialsIncorrect:
-            case AuthResult.Results.PasswordNotSet:
             case AuthResult.Results.AccessCodeAccepted:
             case AuthResult.Results.AccessCodeDenied:
             case AuthResult.Results.CredentialsCorrect:

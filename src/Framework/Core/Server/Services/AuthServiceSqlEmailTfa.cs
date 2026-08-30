@@ -7,7 +7,10 @@ public class AuthServiceSqlEmailTfa(
     IAccessCodeService accessCodeService,
     ISessionService sessionService,
     ICryptographyService cryptographyService,
-    ISessionFetcher sessionFetcher)
+    ISessionFetcher sessionFetcher,
+    INativeAuthPolicy authPolicy,
+    IEnumerable<ISessionAuthService> sessionAuthServices,
+    IConfiguration configuration)
     : IAuthService
 {
     private String Connection => configService.Fetch().Database;
@@ -19,41 +22,79 @@ public class AuthServiceSqlEmailTfa(
         {
             var credentials = request.Value;
 
-            response.Errors = credentials.Validate();
-
-            if (response.Errors.HasItems())
-                return new() { Result = AuthResult.Results.CredentialsInvalid };
-
-            var session = new Session { Id = request.SessionId };
-            var sessionResponse = await sessionService.IsValidForSignIn(new(session));
-
-            if (!sessionResponse.Ok)
-            {
-                var sessionCreateResponse = await sessionService.FetchOrCreate(new(new()));
-
-                if (!sessionCreateResponse.Ok)
-                    return new() { Result = AuthResult.Results.SessionNotStarted };
-
-                session.Id = sessionCreateResponse.Value.Id;
-            }
+            if (credentials.Username.HasNothing() || credentials.Username!.Length > 75)
+                return new() { Result = AuthResult.Results.CredentialsIncorrect };
 
             var user = await UserSelectByUsername.Execute(Connection, PortalId, credentials.Username!);
 
             if (user is null)
+                return new()
+                {
+                    Result = credentials.Password.HasNothing()
+                        ? AuthResult.Results.PasswordRequired
+                        : AuthResult.Results.CredentialsIncorrect,
+                };
+
+            var method = await authPolicy.Resolve(user.Id!.Value);
+
+            if (method is null)
+            {
+                var route = await authPolicy.ResolveExternal(user.Id.Value);
+                if (route is not null)
+                    return new()
+                    {
+                        Result = AuthResult.Results.External,
+                        RedirectUrl = BuildRedirectUrl(route),
+                    };
+            }
+
+            if (method == NativeAuthMethod.PasswordEmailCode)
+            {
+                if (credentials.Password.HasNothing())
+                    return new() { Result = AuthResult.Results.PasswordRequired };
+
+                if (user.PasswordHash is null || user.PasswordSalt is null)
+                    return new() { Result = AuthResult.Results.CredentialsIncorrect };
+
+                var hash = cryptographyService.ComputeHash(credentials.Password!, user.PasswordSalt);
+
+                if (!hash.SequenceEqual(user.PasswordHash))
+                    return new() { Result = AuthResult.Results.CredentialsIncorrect };
+            }
+            else if (method != NativeAuthMethod.EmailCode)
                 return new() { Result = AuthResult.Results.CredentialsIncorrect };
 
-            if (user.PasswordHash is null || user.PasswordSalt is null)
+            var accessCodeResponse = await accessCodeService.Generate(new(request.SessionId, user));
+
+            if (!accessCodeResponse.Ok)
+            {
+                response.AddErrors(accessCodeResponse.Errors);
                 return new() { Result = AuthResult.Results.CredentialsIncorrect };
-
-            var hash = cryptographyService.ComputeHash(credentials.Password!, user.PasswordSalt);
-
-            if (!hash.SequenceEqual(user.PasswordHash))
-                return new() { Result = AuthResult.Results.CredentialsIncorrect };
-
-            await accessCodeService.Generate(new(request.SessionId, user));
+            }
 
             return new() { Result = AuthResult.Results.CredentialsCorrect };
         });
+    }
+
+    private String BuildRedirectUrl(ExternalAuthRoute route)
+    {
+        var authUrl = configuration["Crudspa.Framework.Core.Server.AuthUrl"];
+        if (!Uri.TryCreate(authUrl, UriKind.Absolute, out var authority)
+            || authority.Scheme != Uri.UriSchemeHttps
+            || authority.UserInfo.HasSomething()
+            || authority.Query.HasSomething()
+            || authority.Fragment.HasSomething())
+            throw new InvalidOperationException("Auth URL must be an absolute HTTPS URL without user information, query, or fragment.");
+
+        var path = $"auth/{Uri.EscapeDataString(route.Provider)}/start";
+        var query = QueryString.Create(new KeyValuePair<String, String?>[]
+        {
+            new("audience", route.Audience),
+            new("tenant", route.Tenant),
+            new("returnPath", "/"),
+        });
+
+        return new Uri(authority, path + query).ToString();
     }
 
     public async Task<Response<AuthResult?>> CheckAccessCode(Request<AccessCode> request)
@@ -63,7 +104,7 @@ public class AuthServiceSqlEmailTfa(
             var accessCode = request.Value;
 
             if (accessCode.Username.HasNothing())
-                return new() { Result = AuthResult.Results.CredentialsInvalid };
+                return new() { Result = AuthResult.Results.CredentialsIncorrect };
 
             var session = new Session { Id = request.SessionId };
             var sessionValidResponse = await sessionService.IsValidForSignIn(new(session));
@@ -83,6 +124,11 @@ public class AuthServiceSqlEmailTfa(
             if (user is null)
                 return new() { Result = AuthResult.Results.CredentialsIncorrect };
 
+            var method = await authPolicy.Resolve(user.Id!.Value);
+
+            if (method is not NativeAuthMethod.PasswordEmailCode and not NativeAuthMethod.EmailCode)
+                return new() { Result = AuthResult.Results.AccessCodeDenied };
+
             var success = await AccessCodeUpdate.Execute(Connection, user.Id, accessCode);
 
             if (!success)
@@ -94,12 +140,21 @@ public class AuthServiceSqlEmailTfa(
             });
 
             var sessionId = session.Id!.Value;
+
+            var sessionAuth = sessionAuthServices.SingleOrDefault();
+            if (sessionAuth is not null && !await sessionAuth.Start(sessionId, user.Id!.Value, method.Value))
+            {
+                await sessionService.End(new(sessionId));
+                return new() { Result = AuthResult.Results.AccessCodeDenied };
+            }
+
             sessionFetcher.Invalidate(sessionId);
 
             return new()
             {
                 Result = AuthResult.Results.AccessCodeAccepted,
                 SessionId = sessionId,
+                ResetPassword = method == NativeAuthMethod.PasswordEmailCode && user.ResetPassword == true,
             };
         });
     }
@@ -121,7 +176,13 @@ public class AuthServiceSqlEmailTfa(
             if (user is null)
                 return;
 
-            await UserUpdateResetPassword.Execute(Connection, request.SessionId, user.Id);
+            var method = await authPolicy.Resolve(user.Id!.Value);
+
+            if (method is not NativeAuthMethod.PasswordEmailCode and not NativeAuthMethod.EmailCode)
+                return;
+
+            if (method == NativeAuthMethod.PasswordEmailCode)
+                await UserUpdateResetPassword.Execute(Connection, request.SessionId, user.Id);
 
             var accessCodeResponse = await accessCodeService.Generate(new(request.SessionId, user));
 
@@ -143,6 +204,12 @@ public class AuthServiceSqlEmailTfa(
                 return;
             }
 
+            if (await authPolicy.Resolve(user.Id!.Value) != NativeAuthMethod.PasswordEmailCode)
+            {
+                response.AddError("Password changes are not available for this account.");
+                return;
+            }
+
             user.PasswordSalt = cryptographyService.GetRandomSalt();
             user.PasswordHash = cryptographyService.ComputeHash(passwordChange.NewPassword!, user.PasswordSalt);
 
@@ -152,6 +219,12 @@ public class AuthServiceSqlEmailTfa(
 
     public async Task<Response> SignOut(Request request)
     {
+        var sessionAuth = sessionAuthServices.SingleOrDefault();
+        if (sessionAuth is not null
+            && request.SessionId is Guid sessionId
+            && await sessionAuth.Revoke(sessionId, "signed-out"))
+            return new();
+
         return await sessionService.End(request);
     }
 

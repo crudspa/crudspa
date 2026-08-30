@@ -22,6 +22,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework\Core\Server\Server.csproj" />
+    <ProjectReference Include="..\..\..\Framework\Auth\Server\Server.csproj" />
     <ProjectReference Include="..\..\..\Framework\Jobs\Server\Server.csproj" />
     <ProjectReference Include="..\Shared\Shared.csproj" />
     <ProjectReference Include="..\Wasm\Wasm.csproj" />

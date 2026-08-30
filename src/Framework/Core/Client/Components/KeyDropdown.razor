@@ -1,0 +1,14 @@
+<select @onchange="HandleValueChanged"
+        disabled="@ReadOnly">
+    @if (AllowNull)
+    {
+        <option value="">@NullText</option>
+    }
+    @foreach (var item in LookupValues)
+    {
+        <option value="@item.Key"
+                selected="@(item.Key == Value)">
+            @item.Value
+        </option>
+    }
+</select>

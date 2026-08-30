@@ -187,10 +187,10 @@ public class NavigatorCore(
             Open(path);
     }
 
-    public void Bounce()
+    public void Bounce(String? path = null)
     {
         _isBouncing = true;
-        navigationManager.NavigateTo(navigationManager.BaseUri, true);
+        navigationManager.NavigateTo(path ?? navigationManager.BaseUri, true);
     }
 
     public void GoTo(String path)

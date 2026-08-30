@@ -57,6 +57,12 @@ In larger Crudspa solutions, those host layers often live under `Portals` or `Si
 If you want to see that application story directly, read [Overview | Applications](Applications.md).
 If you want the concrete host walkthrough, read [Overview | Samples](Samples.md).
 
+## Authentication And Rostering Libraries
+
+`Framework.Auth` contains provider policies, external-identity linking, transaction and handoff services, secure portal-session support, and the policy editor component. `Integrations.Clever` is an optional server-side adapter that implements the external-provider seam without putting provider credentials in a client project.
+
+`Education.Rostering` contains the provider, stage sink, run, schedule, validation, and apply contracts for roster synchronization. It is intentionally adapter-neutral. Solutions add provider-specific data retrieval behind `IRosterProvider`, then use the same stage, validate, diff, review, and apply pipeline.
+
 ## Practical Reading Order
 
 If you are new, this order works well:
@@ -66,7 +72,8 @@ If you are new, this order works well:
 3. Read `Framework.Jobs` only if background work is part of your current task.
 4. Choose `Composer`, `Consumer`, or run `Samples/Jobs/Engine` alongside `Catalog` or `Composer` depending on whether you care more about authoring and messaging, runtime delivery and forums, or background work.
 5. Read `Education.Common` and one domain module to see the patterns in a realistic slice.
-6. Finally, move into the larger domain modules if you want to see how the libraries compose into broader feature sets.
+6. Read `Framework.Auth` or `Education.Rostering` when the application needs provider-backed authentication or roster synchronization.
+7. Finally, move into the larger domain modules if you want to see how the libraries compose into broader feature sets.
 
 That order preserves the framework's layering instead of flattening it into one big tree.
 

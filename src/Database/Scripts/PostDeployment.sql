@@ -234,6 +234,9 @@ GO
 print format(getdate(), 'yyyy-MM-dd HH:mm:ss.fff ') + 'Running Initialize.sql...'
 :r .\Initialize.sql
 GO
+print format(getdate(), 'yyyy-MM-dd HH:mm:ss.fff ') + 'Running InitializeAuth.sql...'
+:r .\InitializeAuth.sql
+GO
 print format(getdate(), 'yyyy-MM-dd HH:mm:ss.fff ') + 'Running AfterUpgrade.sql...'
 :r .\AfterUpgrade.sql
 GO

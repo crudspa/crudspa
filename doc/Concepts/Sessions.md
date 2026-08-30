@@ -114,6 +114,12 @@ where Id = @Id
 
 Background jobs can also expire sessions in bulk, and the session cache can be invalidated across the host when shared security data changes.
 
+### Secure Portal Sessions
+
+When a host enables `Framework.Auth`, a successful provider handoff creates a portal-bound session with explicit idle and absolute expiry. The browser receives a host-only, secure, HTTP-only cookie. Each HTTP request and SignalR invocation revalidates the session and its policy; a caller cannot replace that server-authenticated identity with a client-supplied session ID.
+
+Native flows remain compatible with the existing session model while teams migrate. They can be recorded against the same session-authentication boundary, and a sign-out or policy revocation invalidates that boundary immediately. Interactive clients request an antiforgery token before the secure sign-out endpoint, while ordinary heartbeat and reconnect behavior does not extend idle time by itself.
+
 ## Session-Driven Navigation
 
 One of the most distinctive parts of Crudspa is that the session drives the navigation tree.
@@ -171,4 +177,5 @@ The payoff is coherence. One durable concept ties together the browser, the hub,
 * [Concepts | Security](Security.md)
 * [Concepts | Tenancy](Tenancy.md)
 * [Concepts | Services](Services.md)
+* [Components | Authentication](../Components/Authentication.md)
 * [Documentation Index](../ReadMe.md)

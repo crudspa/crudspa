@@ -1,3 +1,5 @@
+using Crudspa.Framework.Auth.Server.Services;
+
 namespace Crudspa.Samples.Consumer.Server;
 
 public class Registry
@@ -37,6 +39,7 @@ public class Registry
         services.AddSingleton<IHtmlSanitizer, HtmlSanitizerCore>();
         services.AddSingleton<IHubWrappers, HubWrappersCore>();
         services.AddSingleton<IImageFileService, ImageFileServiceSql>();
+        services.AddSingleton<INativeAuthPolicy, NativeAuthPolicySql>();
         services.AddSingleton<IPdfFileService, PdfFileServiceSql>();
         services.AddSingleton<ISassCompiler, SassCompilerDartSass>();
         services.AddSingleton<ISegmentFetcher, SegmentFetcherSql>();

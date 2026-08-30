@@ -147,6 +147,14 @@ When the reacting client lives in another host, Crudspa keeps the same event voc
 
 That keeps lists, edit panes, and runtime content from going stale in multi-user scenarios. Just as important, it keeps real-time behavior inside the same service architecture instead of creating a second, hidden synchronization system.
 
+## Authentication And Rostering
+
+`Framework.Auth` supplies a provider-neutral authentication boundary: policies select permitted native or external methods per audience, an Auth host handles provider callbacks, and portal hosts redeem short-lived handoffs into portal-bound sessions. `Integrations.Clever` demonstrates a server-only external adapter; its credentials are intentionally supplied only through protected host configuration.
+
+`Education.Rostering` supplies a separate provider-neutral synchronization boundary. A roster provider stages a run, validation and matching identify reviewable differences, and application applies an approved run through a local mapping layer. Multiple sources can be retained for comparison, but each organization should designate at most one authoritative source at a time. Provider adapters write staged data; they do not write application tables directly.
+
+Those modules deliberately share the local user and organization model without coupling provider login to roster ownership. That lets a solution evolve authentication, roster synchronization, and application authorization independently.
+
 ## Where It Shines
 
 Crudspa is at its best when you are building:

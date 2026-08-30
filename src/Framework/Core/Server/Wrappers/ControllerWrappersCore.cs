@@ -7,9 +7,9 @@ public class ControllerWrappersCore(ISessionWrappers sessionWrappers, ILogger<Co
 {
     public async Task<ActionResult> RequireSession(HttpRequest request, Func<Session, Task<ActionResult>> func)
     {
-        if (!ReadSessionId(request, out var sessionId))
+        if (!request.TryReadSessionId(out var sessionId))
         {
-            logger.LogWarning("Invalid or missing SessionId cookie.");
+            logger.LogWarning("Invalid or missing session.");
             return new StatusCodeResult(StatusCodes.Status403Forbidden);
         }
 
@@ -26,9 +26,9 @@ public class ControllerWrappersCore(ISessionWrappers sessionWrappers, ILogger<Co
 
     public async Task<ActionResult> RequirePermission(HttpRequest request, Guid permissionId, Func<Session, Task<ActionResult>> func, [CallerMemberName] String callingMethod = "")
     {
-        if (!ReadSessionId(request, out var sessionId))
+        if (!request.TryReadSessionId(out var sessionId))
         {
-            logger.LogWarning("Invalid or missing SessionId cookie.");
+            logger.LogWarning("Invalid or missing session.");
             return new StatusCodeResult(StatusCodes.Status403Forbidden);
         }
 
@@ -41,13 +41,5 @@ public class ControllerWrappersCore(ISessionWrappers sessionWrappers, ILogger<Co
         }
 
         return await func.Invoke(permissionResponse.Value);
-    }
-
-    private static Boolean ReadSessionId(HttpRequest request, out Guid sessionId)
-    {
-        sessionId = Guid.Empty;
-        var key = Constants.CookieKeys.Resolve(Constants.CookieKeys.SessionId, request.Host.Host, request.Host.Port);
-        var cookie = request.Cookies[key];
-        return cookie.HasSomething() && Guid.TryParse(cookie, out sessionId);
     }
 }

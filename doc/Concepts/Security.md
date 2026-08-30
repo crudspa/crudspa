@@ -32,6 +32,14 @@ Crudspa authentication is session-first. A session can start anonymously, pick u
 
 That gives the application one consistent security anchor instead of a pile of unrelated checks.
 
+## Provider And Credential Boundaries
+
+Authentication policy is separate from identity provisioning and roster synchronization. A provider may authenticate a user without being the source of roster data, and a roster source may update a local user without being allowed to start a session. Application code should make that relationship explicit through local policies and linked external identities rather than inferring it from an email address or a browser-supplied district value.
+
+External provider credentials belong in protected server configuration. A provider callback carries a short-lived transaction, not a local session ID or reusable provider token. The shared Auth host validates the provider response and issues a one-time handoff to an allowlisted portal destination. Destination portals rotate or revoke their own local session; they do not trust query-string identity data.
+
+For the same reason, external identities are preprovisioned and linked to local users before sign-in. The framework keys a provider identity by its provider, issuer, and immutable subject, then rechecks those values on completion. This avoids treating mutable profile data such as email as authentication authority.
+
 ## Permissions And Navigation
 
 Crudspa doesn't wait until a user clicks something to think about permissions. Navigation can already be filtered by the current session, so users are guided toward the parts of the application that actually belong to them.
@@ -79,4 +87,5 @@ This model is more deliberate than relying only on UI hiding or only on middlewa
 * [Concepts | Exceptions](Exceptions.md)
 * [Concepts | Forums](Forums.md)
 * [Concepts | Licensing](Licensing.md)
+* [Concepts | Rostering](Rostering.md)
 * [Documentation Index](../ReadMe.md)
