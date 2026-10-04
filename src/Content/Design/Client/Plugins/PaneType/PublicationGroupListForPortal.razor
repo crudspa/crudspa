@@ -1,0 +1,15 @@
+<ListOrderables Model="Model"
+                T="PublicationGroupModel"
+                EntityName="Publication Group"
+                UrlPrefix="@($"{Path}/publication-group")"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        <Field Size="Field.Sizes.Full">
+            <Labeled Width="8em"
+                     Label="Name"
+                     StringValue="@context.PublicationGroup.Name" />
+        </Field>
+    </ReadView>
+</ListOrderables>

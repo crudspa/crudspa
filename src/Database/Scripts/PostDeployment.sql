@@ -231,6 +231,9 @@ GO
 print format(getdate(), 'yyyy-MM-dd HH:mm:ss.fff ') + 'Running MergeReport.sql...'
 :r .\..\Education\Scripts\MergeReport.sql
 GO
+print format(getdate(), 'yyyy-MM-dd HH:mm:ss.fff ') + 'Running MergePublicationResourceType.sql...'
+:r .\..\Content\Scripts\MergePublicationResourceType.sql
+GO
 print format(getdate(), 'yyyy-MM-dd HH:mm:ss.fff ') + 'Running Initialize.sql...'
 :r .\Initialize.sql
 GO

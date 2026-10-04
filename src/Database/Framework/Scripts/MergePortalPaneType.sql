@@ -105,6 +105,12 @@ using ( values
     ,('5ee2ffd5-3c0f-4721-a512-16bbc039ad6b', 'aea2c861-459a-490c-b7c3-30e5156fec9f', 'f4e8247b-a01d-4f98-bf7c-3e5b483a65d7')
     ,('9c830c2c-2ec5-4924-a45c-43744b634aaa', 'aea2c861-459a-490c-b7c3-30e5156fec9f', 'f6d92688-f316-47b0-a4df-e1ca2a88553a')
     ,('438122ee-3643-48f0-8f27-fb2b4982ff70', 'aea2c861-459a-490c-b7c3-30e5156fec9f', 'f7ce9bf5-9771-4fce-bc03-512663c23561')
+    ,('7bb13612-2382-4a9b-a76c-2da66b45b3bb', '73410fd3-3681-46d3-800e-a08670e291cf', '17963cb5-fdea-5d4a-bea6-3abe465f4d3c')
+    ,('3fcbf580-b90a-4149-bb8a-6b660955c214', 'aea2c861-459a-490c-b7c3-30e5156fec9f', '17963cb5-fdea-5d4a-bea6-3abe465f4d3c')
+    ,('9c5f7e28-c17b-413c-9017-8f1f49d040b6', 'aea2c861-459a-490c-b7c3-30e5156fec9f', '6bc4d2fb-b68d-54e0-9c77-d9795a333b6e')
+    ,('1267dd31-1cc2-4b60-8bb9-4dce4d16bfaa', 'aea2c861-459a-490c-b7c3-30e5156fec9f', '9a2e0ab2-4b36-5f2e-901b-4268f1728e98')
+    ,('a7aa0851-f1fb-4a99-aa47-bb358dd6b53d', 'aea2c861-459a-490c-b7c3-30e5156fec9f', 'b6390fce-177a-5f21-aed2-e427fc9b65fa')
+    ,('8c83ad39-dec4-43de-9c92-579827c0fc26', 'aea2c861-459a-490c-b7c3-30e5156fec9f', 'b8a53b27-9442-54da-9b31-885cc99edd3c')
 ) as Source
     (Id, PortalId, TypeId)
 on Target.Id = Source.Id

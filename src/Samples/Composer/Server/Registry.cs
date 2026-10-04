@@ -9,6 +9,11 @@ public class Registry
 {
     public static void RegisterServices(IServiceCollection services, ServerConfig config)
     {
+        // Shared publication authoring and delivery.
+        services.AddSingleton<Crudspa.Content.Design.Shared.Contracts.Behavior.IPublicationService, Crudspa.Content.Design.Server.Services.PublicationServiceSql>();
+        services.AddSingleton<Crudspa.Content.Design.Shared.Contracts.Behavior.IPublicationGroupService, Crudspa.Content.Design.Server.Services.PublicationGroupServiceSql>();
+        services.AddSingleton<Crudspa.Content.Display.Shared.Contracts.Behavior.IPublicationRunService, Crudspa.Content.Display.Server.Services.PublicationRunServiceSql>();
+
         // Crudspa.Content.Design.Server
         services.AddSingleton<IBinderRepository, BinderRepositorySql>();
         services.AddSingleton<IElementRepositoryFactory, ElementRepositoryFactoryContent>();

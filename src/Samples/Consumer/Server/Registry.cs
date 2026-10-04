@@ -6,6 +6,9 @@ public class Registry
 {
     public static void RegisterServices(IServiceCollection services, ServerConfig config)
     {
+        // Shared publication authoring and delivery.
+        services.AddSingleton<Crudspa.Content.Display.Shared.Contracts.Behavior.IPublicationRunService, Crudspa.Content.Display.Server.Services.PublicationRunServiceSql>();
+
         // Crudspa.Content.Display.Shared
         services.AddSingleton<IBinderRunService, BinderRunServiceSql>();
         services.AddSingleton<IBlogRunService, BlogRunServiceSql>();

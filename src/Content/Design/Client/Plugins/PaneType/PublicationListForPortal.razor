@@ -1,0 +1,38 @@
+<ListOrderables Model="Model"
+                T="PublicationModel"
+                EntityName="Publication"
+                UrlPrefix="@($"{Path}/publication")"
+                DeleteRequested="id => Model.Delete(id)"
+                MoveUpRequested="id => Model.MoveUp(id)"
+                MoveDownRequested="id => Model.MoveDown(id)">
+    <ReadView>
+        @if (context.Publication.ImageFile.Id.HasValue)
+        {
+            <img src="@context.Publication.ImageFile.FetchUrl(120)" width="90" loading="lazy"
+                 alt="@(context.Publication.ImageAlt ?? String.Empty)" />
+        }
+        <Field Size="Field.Sizes.Full">
+            <Labeled Width="8em"
+                     Label="Venue"
+                     StringValue="@context.Publication.Venue" />
+            <Labeled Width="8em"
+                     Label="Status"
+                     StringValue="@context.Publication.StatusName" />
+            <Labeled Width="8em"
+                     Label="Group"
+                     StringValue="@context.Publication.GroupName" />
+            <Labeled Width="8em" Label="Year" StringValue="@context.Publication.Year?.ToString()" />
+            <Labeled Width="8em" Label="Resources" StringValue="@context.Publication.PublicationResources.Count.ToString()" />
+        </Field>
+        <Field Size="Field.Sizes.Unspecified">
+            <LabeledBatch Label="Publication Resources"
+                          Width="5em"
+                          Items="context.Publication.PublicationResources.OrderBy(x => x.Ordinal)"
+                          Context="item">
+                <ReadView>
+                    @(item.Name)
+                </ReadView>
+            </LabeledBatch>
+        </Field>
+    </ReadView>
+</ListOrderables>

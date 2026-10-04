@@ -97,6 +97,14 @@ The documentation is meant to teach both the platform's shape and the reasoning 
 | Browse the full documentation set | [doc/ReadMe.md](doc/ReadMe.md) |
 | Review SQL conventions | [doc/Databases/Standards.md](doc/Databases/Standards.md) |
 
+## Publication Catalogs
+
+The shared Content area supports structured research publications with portal-owned groups, citations and study metadata, optional covers, and ordered PDF, image or external-link resources. Content.Design provides the editor and an authenticated catalog preview; Content.Display provides a responsive, searchable publications pane. Public catalogs show Complete entries. Draft and Retired entries remain available to authorized editors.
+
+Composer and Consumer compose these services. Other hosts can opt in by registering the publication authoring/group services and public run service in their client/server registries and enabling the corresponding pane types. Pane configuration controls grouping, a fixed research area, and manual or year ordering; publication records stay outside page-builder JSON. The SQL seeds and sample upgrade include the catalog definitions, grants and editor navigation.
+
+Run the [publication integration checks](tests/Content.Publications/ReadMe.md) against `Crudspa-Local` to verify atomic resource batches, content visibility and tenancy.
+
 ## Open Source
 
 Crudspa welcomes focused contributions that solve real problems while fitting the platform's existing structure. If you are considering a pull request, start with the contribution guide and keep documentation in sync with behavior changes.

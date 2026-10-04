@@ -1,0 +1,20 @@
+@using Crudspa.Content.Display.Shared.Contracts.Config.PaneType
+<Wrapped>
+    <Field Label="Research area" Size="Field.Sizes.Wide">
+        <Dropdown LookupValues="Groups.Select(x => new Named { Id = x.Id, Name = x.Name }).ToList()"
+                  ReadOnly="ReadOnly" AllowNull="true" NullText="All research areas" @bind-Value="Config.GroupId" />
+    </Field>
+    <Field Label="Default order" Size="Field.Sizes.Wide" Container="Field.Containers.Div">
+        <EnumRadio TEnum="PublicationsConfig.SortOrders" ReadOnly="ReadOnly" @bind-SelectedValue="Config.SortOrder" />
+    </Field>
+    <Field Label="Options" Size="Field.Sizes.Wide" Container="Field.Containers.Div">
+        <Checkbox ReadOnly="ReadOnly" Label="Group publications by research area" Value="Config.Grouped" ValueChanged="value => Config.Grouped = value == true" />
+    </Field>
+</Wrapped>
+<button type="button" class="c-button" @onclick="LoadPreview">Preview catalog</button>
+@if (Preview is not null)
+{
+    <p>This editor preview includes Draft, Complete, and Retired entries. Only Complete entries appear publicly.</p>
+    <Crudspa.Content.Display.Client.Plugins.PaneType.Publications ConfigJson="@GetConfigJson()" PreviewPublications="Preview" />
+}
+@if (PreviewError is not null) { <p role="alert">@PreviewError</p> }

@@ -4,6 +4,9 @@ public class Registry
 {
     public static void RegisterServices(IServiceCollection services)
     {
+        // Shared publication authoring and delivery.
+        services.AddSingleton<Crudspa.Content.Display.Shared.Contracts.Behavior.IPublicationRunService, Crudspa.Content.Display.Client.Services.PublicationRunServiceTcp>();
+
         // Logging
         services.AddSingleton<ILoggerProvider, ClientLoggerProviderCore>();
 

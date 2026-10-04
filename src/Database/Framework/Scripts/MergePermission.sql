@@ -18,6 +18,7 @@ using ( values
     ,('8759c072-0f45-4e3d-a630-1412e12cde76', 'Styles')
     ,('4458062f-6894-4561-aeb1-43bef71dc825', 'Templates')
     ,('0fbd1165-18be-44bc-8620-f0dc4d32d587', 'Tracks')
+    ,('d80bf2bd-a021-5516-a69d-fdc907a5b4fb', 'Publications')
 ) as Source
     (Id, Name)
 on Target.Id = Source.Id
