@@ -1,30 +1,20 @@
 <Waiter Model="Model">
-    <div class="c-publications">
-        <div class="c-publications-tools">
-            <label>
-                <span>Search publications</span>
-                <input type="search" placeholder="Title, author, or research topic" @bind="Model.Search" @bind:event="oninput" />
-            </label>
+    <div class="c-publications c-page c-padding-medium-all">
+        <div class="c-filters c-publications-tools">
+            <Field Label="Search publications" Size="Field.Sizes.Full">
+                <TextBox Placeholder="Title, author, or research topic" Value="@Model.Search" ValueChanged="value => Model.Search = value ?? String.Empty" />
+            </Field>
             @if (!Model.Config.GroupId.HasValue)
             {
-                <label>
-                    <span>Research area</span>
-                    <select @bind="Model.GroupFilter">
-                        <option value="">All research areas</option>
-                        @foreach (var group in Model.Available.Where(x => x.GroupId.HasValue).GroupBy(x => x.GroupId).OrderBy(x => x.First().GroupOrdinal))
-                        {
-                            <option value="@(group.Key?.ToString("D"))">@group.First().GroupName</option>
-                        }
-                    </select>
-                </label>
+                <Field Label="Research area" Size="Field.Sizes.Full">
+                    <KeyDropdown LookupValues="Model.GroupOptions" AllowNull="true" NullText="All research areas"
+                                 Value="@Model.GroupFilter" ValueChanged="value => Model.GroupFilter = value ?? String.Empty" />
+                </Field>
             }
-            <label>
-                <span>Order</span>
-                <select @bind="Model.Config.SortOrder">
-                    <option value="@Crudspa.Content.Display.Shared.Contracts.Config.PaneType.PublicationsConfig.SortOrders.Manual">Selected order</option>
-                    <option value="@Crudspa.Content.Display.Shared.Contracts.Config.PaneType.PublicationsConfig.SortOrders.Newest">Newest first</option>
-                </select>
-            </label>
+            <Field Label="Order" Size="Field.Sizes.Full">
+                <KeyDropdown LookupValues="Model.OrderOptions" Value="@Model.Config.SortOrder.ToString()"
+                             ValueChanged="value => Model.Config.SortOrder = Enum.Parse<Crudspa.Content.Display.Shared.Contracts.Config.PaneType.PublicationsConfig.SortOrders>(value!)" />
+            </Field>
         </div>
         <p class="c-publications-count" role="status">@Model.Results.Count() @(Model.Results.Count() == 1 ? "publication" : "publications")</p>
         @if (!Model.Results.Any())
@@ -37,7 +27,7 @@
             <div class="c-publications-grid">
                 @foreach (var publication in section)
                 {
-                    <article class="c-publication" @key="publication.Id">
+                    <article class="c-card c-publication @(publication.ImageFile.Id.HasValue ? "with-cover" : String.Empty)" @key="publication.Id">
                         @if (publication.ImageFile.Id.HasValue)
                         {
                             <div class="c-publication-cover">
@@ -58,8 +48,8 @@
                                 {
                                     <a href="@PublicationsModel.ResourceUrl(resource)" target="_blank" rel="noopener noreferrer">
                                         @PublicationsModel.ResourceLabel(resource)
-                                        @if (resource.PdfFile.Id.HasValue) { <span class="c-publication-format">PDF</span> }
-                                        @if (resource.ImageFile.Id.HasValue) { <span class="c-publication-format">Image</span> }
+                                        @if (resource.PdfFile.Id.HasValue) { <span>(PDF)</span> }
+                                        @if (resource.ImageFile.Id.HasValue) { <span>(Image)</span> }
                                     </a>
                                 }
                             </div>
@@ -67,12 +57,12 @@
                             {
                                 <details class="c-publication-details">
                                     <summary>Study details</summary>
-                                    <dl>
-                                        @if (publication.Sample.HasSomething()) { <dt>Sample</dt><dd>@publication.Sample</dd> }
-                                        @if (publication.Timeline.HasSomething()) { <dt>Timeline</dt><dd>@publication.Timeline</dd> }
-                                        @if (publication.Outcome.HasSomething()) { <dt>Outcome of interest</dt><dd>@publication.Outcome</dd> }
-                                        @if (publication.Intervention.HasSomething()) { <dt>Intervention</dt><dd>@publication.Intervention</dd> }
-                                    </dl>
+                                    <div class="c-publication-study">
+                                        <Labeled Label="Sample" Width="10em" StringValue="@publication.Sample" />
+                                        <Labeled Label="Timeline" Width="10em" StringValue="@publication.Timeline" />
+                                        <Labeled Label="Outcome of interest" Width="10em" StringValue="@publication.Outcome" />
+                                        <Labeled Label="Intervention" Width="10em" StringValue="@publication.Intervention" />
+                                    </div>
                                 </details>
                             }
                         </div>

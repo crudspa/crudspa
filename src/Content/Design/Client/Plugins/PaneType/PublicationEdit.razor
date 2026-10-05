@@ -13,13 +13,25 @@
         </ButtonGroup>
     </Left>
 </Toolbar>
-<p class="c-publication-editor-note">Complete publications appear on the public site. Saving a Complete publication updates its public content.</p>
 <Waiter Model="Model">
     @if (Model.Entity is not null)
     {
         <Padding Size="Padding.Sizes.Small"
                  Direction="Padding.Directions.Vertical">
             <Wrapped Alignment="Wrapped.Alignments.Top">
+                <Field Label="Title"
+                       Size="Field.Sizes.Wide">
+                    <TextBox ReadOnly="Model.ReadOnly"
+                             MaxLength="300"
+                             @bind-Value="Model.Entity.Title" />
+                </Field>
+                <Field Label="Status"
+                       Size="Field.Sizes.Unspecified">
+                    <StatusEdit ReadOnly="Model.ReadOnly"
+                                LookupValues="Model.ContentStatusNames"
+                                ColorClassFrom="ContentStatusColors.For"
+                                @bind-Value="Model.Entity.StatusId" />
+                </Field>
                 <Field Label="Group"
                        Size="Field.Sizes.Wide">
                     <Dropdown ReadOnly="Model.ReadOnly"
@@ -28,29 +40,22 @@
                               LookupValues="Model.PublicationGroupNames"
                               @bind-Value="Model.Entity.GroupId" />
                 </Field>
-                <Field Label="Status"
-                       Size="Field.Sizes.Wide">
-                    <Dropdown ReadOnly="Model.ReadOnly"
-                              LookupValues="Model.ContentStatusNames"
-                              @bind-Value="Model.Entity.StatusId" />
-                </Field>
-                <Field Label="Title"
+                <Field Label="Venue"
                        Size="Field.Sizes.Wide">
                     <TextBox ReadOnly="Model.ReadOnly"
-                             MaxLength="300"
-                             @bind-Value="Model.Entity.Title" />
+                             MaxLength="250"
+                             @bind-Value="Model.Entity.Venue" />
+                </Field>
+                <Field Label="Year"
+                       Size="Field.Sizes.Tiny">
+                    <NumericTextBox ReadOnly="Model.ReadOnly"
+                                    @bind-Value="Model.Entity.Year" />
                 </Field>
                 <Field Label="Citation"
                        Size="Field.Sizes.Full">
                     <MultilineTextBox ReadOnly="Model.ReadOnly"
                                       Height="MultilineTextBox.Heights.Tall"
                                       @bind-Value="Model.Entity.Citation" />
-                </Field>
-                <Field Label="Venue"
-                       Size="Field.Sizes.Wide">
-                    <TextBox ReadOnly="Model.ReadOnly"
-                             MaxLength="250"
-                             @bind-Value="Model.Entity.Venue" />
                 </Field>
                 <Field Label="Sample"
                        Size="Field.Sizes.Wide">
@@ -77,7 +82,7 @@
                              @bind-Value="Model.Entity.Intervention" />
                 </Field>
                 <Field Label="Image"
-                       Size="Field.Sizes.Wide"
+                       Size="Field.Sizes.Larger"
                        Container="Field.Containers.Div">
                     <ImageUploader ReadOnly="Model.ReadOnly"
                                    Required="false"
@@ -88,11 +93,6 @@
                     <TextBox ReadOnly="Model.ReadOnly"
                              MaxLength="300"
                              @bind-Value="Model.Entity.ImageAlt" />
-                </Field>
-                <Field Label="Year"
-                       Size="Field.Sizes.Wide">
-                    <NumericTextBox ReadOnly="Model.ReadOnly"
-                                    @bind-Value="Model.Entity.Year" />
                 </Field>
             </Wrapped>
         </Padding>
@@ -124,21 +124,26 @@
                                              MaxLength="150"
                                              @bind-Value="context.Label" />
                                 </Field>
-                                <Field Label="Destination" Size="Field.Sizes.Full" Container="Field.Containers.Div">
-                                    <EnumRadio TEnum="PublicationResource.Destinations" ReadOnly="Model.ReadOnly" @bind-SelectedValue="context.SelectedDestination" />
+                                <Field Label="Url"
+                                       Size="Field.Sizes.Larger">
+                                    <TextBox ReadOnly="Model.ReadOnly"
+                                             MaxLength="2000"
+                                             @bind-Value="context.Url" />
                                 </Field>
-                                @switch (context.SelectedDestination)
-                                {
-                                    case PublicationResource.Destinations.Link:
-                                        <Field Label="Link" Size="Field.Sizes.Full"><TextBox ReadOnly="Model.ReadOnly" MaxLength="2000" @bind-Value="context.Url" /></Field>
-                                        break;
-                                    case PublicationResource.Destinations.Pdf:
-                                        <Field Label="PDF" Size="Field.Sizes.Full"><PdfUploader ReadOnly="Model.ReadOnly" Required="true" PdfFile="context.PdfFile" /></Field>
-                                        break;
-                                    case PublicationResource.Destinations.Image:
-                                        <Field Label="Image" Size="Field.Sizes.Full"><ImageUploader ReadOnly="Model.ReadOnly" Required="true" ImageFile="context.ImageFile" /></Field>
-                                        break;
-                                }
+                                <Field Label="Pdf"
+                                       Size="Field.Sizes.Larger"
+                                       Container="Field.Containers.Div">
+                                    <PdfUploader ReadOnly="Model.ReadOnly"
+                                                 Required="false"
+                                                 PdfFile="context.PdfFile" />
+                                </Field>
+                                <Field Label="Image"
+                                       Size="Field.Sizes.Larger"
+                                       Container="Field.Containers.Div">
+                                    <ImageUploader ReadOnly="Model.ReadOnly"
+                                                   Required="false"
+                                                   ImageFile="context.ImageFile" />
+                                </Field>
                             </Wrapped>
                         </EditView>
                     </Batch>

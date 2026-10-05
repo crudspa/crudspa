@@ -127,3 +127,41 @@ end
 print format(getdate(), 'yyyy-MM-dd HH:mm:ss.fff ') + 'Updating statistics...';
 exec sp_updatestats
 print format(getdate(), 'yyyy-MM-dd HH:mm:ss.fff ') + 'Statistics updated.';
+if (@major = 1 and @minor = 0 and @build = 102)
+begin
+    set xact_abort on
+    begin transaction
+    -- Shared publication services do not opt every portal into authoring buttons.
+    delete from Framework.PortalFeature
+    where PermissionId = 'd80bf2bd-a021-5516-a69d-fdc907a5b4fb'
+        and [Key] in (N'publications',N'publication-groups');-- Rehearsal body; use the corresponding version-gated migration for deployment.
+-- Keep group management in the standard tabbed Publications screen.
+declare @publicationUi table (ListId uniqueidentifier, GroupsId uniqueidentifier);
+insert @publicationUi
+select publications.Id, groups.Id
+from Framework.[Segment-Active] publications
+join Framework.[Segment-Active] groups on groups.ParentId = publications.ParentId
+    and groups.PortalId = publications.PortalId and groups.[Key] = N'publication-groups'
+where publications.[Key] = N'publications'
+    and publications.PermissionId = 'd80bf2bd-a021-5516-a69d-fdc907a5b4fb';
+
+update segment set TypeId = 'e86d3ee2-22df-4cb1-bb66-ea417d34edeb'
+from Framework.Segment segment join @publicationUi ui on ui.ListId = segment.Id;
+update pane set Title = N'Publications'
+from Framework.Pane pane join @publicationUi ui on ui.ListId = pane.SegmentId
+where pane.Id = pane.VersionOf and pane.TypeId = 'b6390fce-177a-5f21-aed2-e427fc9b65fa';
+update pane set SegmentId = ui.ListId, [Key] = N'groups', Title = N'Groups', Ordinal = 1
+from Framework.Pane pane join @publicationUi ui on ui.GroupsId = pane.SegmentId
+where pane.Id = pane.VersionOf and pane.TypeId = '6bc4d2fb-b68d-54e0-9c77-d9795a333b6e';
+update segment set ParentId = ui.ListId
+from Framework.Segment segment join @publicationUi ui on ui.GroupsId = segment.ParentId
+where segment.Id = segment.VersionOf and segment.[Key] = N'publication-group';
+update segment set IsDeleted = 1
+from Framework.Segment segment join @publicationUi ui on ui.GroupsId = segment.Id;
+
+    set @build = 103
+    set @notes = 'Consolidated standard publication authoring tabs and explicit portal feature opt-in.'
+    insert Framework.Version(Id,Created,Major,Minor,Build,Revision,Notes)
+    values(newid(),@now,@major,@minor,@build,@revision,@notes)
+    commit transaction
+end

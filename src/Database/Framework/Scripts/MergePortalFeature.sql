@@ -18,10 +18,6 @@ using ( values
     ,('4a59cbde-e382-4612-b893-e3264fba3c2d', 'aea2c861-459a-490c-b7c3-30e5156fec9f', 'segments',     'Segments',     '9b1e06ee-d42b-5120-a377-8d76ca28632c', 'c661300e-8c67-4613-b5ce-a6be80acac04')
     ,('7d12670f-91d3-4172-932c-b09e4e4d9ee8', 'aea2c861-459a-490c-b7c3-30e5156fec9f', 'styles',       'Styles',       'cfa17a64-9a0d-4722-a839-c895007ae812', '8759c072-0f45-4e3d-a630-1412e12cde76')
     ,('4b11c7b5-e259-40fe-97a3-77ee7ec2ce70', 'aea2c861-459a-490c-b7c3-30e5156fec9f', 'tracks',       'Tracks',       'ce78b660-6929-5a74-b7be-bafa3b4912ab', '0fbd1165-18be-44bc-8620-f0dc4d32d587')
-    ,('fb7a8552-5724-46e7-8e9f-7a52e3e83957', '73410fd3-3681-46d3-800e-a08670e291cf', 'publication-groups', 'Publication groups', 'd0b01720-40fd-5c57-838a-1dce77a9b6b8', 'd80bf2bd-a021-5516-a69d-fdc907a5b4fb')
-    ,('dfb86b45-6550-43a9-8b65-916628e57b93', '73410fd3-3681-46d3-800e-a08670e291cf', 'publications',       'Publications',       'd0b01720-40fd-5c57-838a-1dce77a9b6b8', 'd80bf2bd-a021-5516-a69d-fdc907a5b4fb')
-    ,('be0568ad-67d4-4ee0-b917-9fa2b915f84d', 'aea2c861-459a-490c-b7c3-30e5156fec9f', 'publication-groups', 'Publication groups', 'd0b01720-40fd-5c57-838a-1dce77a9b6b8', 'd80bf2bd-a021-5516-a69d-fdc907a5b4fb')
-    ,('ff8dc16d-0497-4b44-92f2-0cbf7efbb157', 'aea2c861-459a-490c-b7c3-30e5156fec9f', 'publications',       'Publications',       'd0b01720-40fd-5c57-838a-1dce77a9b6b8', 'd80bf2bd-a021-5516-a69d-fdc907a5b4fb')
 ) as Source
     (Id, PortalId, [Key], Title, IconId, PermissionId)
 on Target.Id = Source.Id

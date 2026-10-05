@@ -6,27 +6,6 @@ public class PublicationResource : Observable, IValidates, IOrderable
 
     public String? Name => Label ?? TypeName ?? "Resource";
 
-    public enum Destinations { Link, Pdf, Image }
-    public Destinations Destination
-    {
-        get => PdfFile.Id.HasValue || PdfFile.BlobId.HasValue || PdfFile.Name.HasSomething() ? Destinations.Pdf
-            : ImageFile.Id.HasValue || ImageFile.BlobId.HasValue || ImageFile.Name.HasSomething() ? Destinations.Image : Destinations.Link;
-        set
-        {
-            if (value != Destinations.Link) Url = null;
-            if (value != Destinations.Pdf) PdfFile = new();
-            if (value != Destinations.Image) ImageFile = new();
-            _destination = value;
-            RaisePropertyChanged(nameof(Destination));
-        }
-    }
-    private Destinations? _destination;
-    public Destinations SelectedDestination
-    {
-        get => _destination ?? Destination;
-        set => Destination = value;
-    }
-
     public Guid? Id
     {
         get;

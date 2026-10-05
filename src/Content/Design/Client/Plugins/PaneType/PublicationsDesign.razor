@@ -11,10 +11,16 @@
         <Checkbox ReadOnly="ReadOnly" Label="Group publications by research area" Value="Config.Grouped" ValueChanged="value => Config.Grouped = value == true" />
     </Field>
 </Wrapped>
-<button type="button" class="c-button" @onclick="LoadPreview">Preview catalog</button>
+<Padding Size="Padding.Sizes.Small" Direction="Padding.Directions.Vertical">
+    <ButtonCore Text="Preview catalog" IconClass="c-icon-eye" ButtonStyle="ButtonCore.ButtonStyles.View" Clicked="LoadPreview" />
+</Padding>
 @if (Preview is not null)
 {
-    <p>This editor preview includes Draft, Complete, and Retired entries. Only Complete entries appear publicly.</p>
-    <Crudspa.Content.Display.Client.Plugins.PaneType.Publications ConfigJson="@GetConfigJson()" PreviewPublications="Preview" />
+    <Padding Size="Padding.Sizes.Small" Direction="Padding.Directions.Vertical">
+        <div class="parenthetical">Preview includes Draft, Complete, and Retired entries. Only Complete entries appear publicly.</div>
+    </Padding>
+    <ThemePreview PortalId="@(Path!.Id("portal"))" Surface="ThemePreview.Surfaces.Page">
+        <Crudspa.Content.Display.Client.Plugins.PaneType.Publications ConfigJson="@GetConfigJson()" PreviewPublications="Preview" />
+    </ThemePreview>
 }
 @if (PreviewError is not null) { <p role="alert">@PreviewError</p> }

@@ -57,6 +57,16 @@ public class PublicationsModel(IPublicationRunService service, PublicationsConfi
 
     public IEnumerable<PublicationSummary> Available => Publications.Where(x => !Config.GroupId.HasValue || x.GroupId == Config.GroupId);
 
+    public IReadOnlyDictionary<String, String> GroupOptions => Available.Where(x => x.GroupId.HasValue)
+        .GroupBy(x => x.GroupId).OrderBy(x => x.First().GroupOrdinal)
+        .ToDictionary(x => x.Key!.Value.ToString("D"), x => x.First().GroupName ?? String.Empty);
+
+    public IReadOnlyDictionary<String, String> OrderOptions { get; } = new Dictionary<String, String>
+    {
+        [nameof(PublicationsConfig.SortOrders.Manual)] = "Selected order",
+        [nameof(PublicationsConfig.SortOrders.Newest)] = "Newest first",
+    };
+
     public IEnumerable<PublicationSummary> Results
     {
         get
